@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { Loader2, Send, CheckCircle2, AlertCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 const leadSchema = z.object({
   name: z.string().trim().min(2, "Please enter your full name").max(100),
@@ -58,23 +57,28 @@ export function LeadCaptureForm({
 
     setStatus({ kind: "submitting" });
     const message = `Company: ${parsed.data.company}\n\nRequirements:\n${parsed.data.requirements}`;
-    const { error } = await supabase.from("contact_messages").insert({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      subject: `Lead — ${source}`,
-      message,
-    });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: parsed.data.name,
+          email: parsed.data.email,
+          subject: `Lead — ${source}`,
+          message,
+        }),
+      });
 
-    if (error) {
+      if (!res.ok) throw new Error("Submission failed");
+      setStatus({ kind: "success" });
+      (e.target as HTMLFormElement).reset();
+    } catch {
       setStatus({
         kind: "error",
         message:
           "We couldn't submit your enquiry. Please try again or email yessbangla.bd@gmail.com.",
       });
-      return;
     }
-    setStatus({ kind: "success" });
-    (e.target as HTMLFormElement).reset();
   };
 
   const onPrimary = variant === "onPrimary";

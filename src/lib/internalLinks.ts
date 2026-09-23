@@ -29,12 +29,12 @@ export function useInternalLinkOptions(): LinkOption[] {
   const { data } = useSitePages();
   return useMemo(() => {
     const dynamic: LinkOption[] = (data ?? [])
-      .map((p) => ({
-        value: p.path || (p.is_custom ? `/p/${p.page}` : ""),
-        label: `${p.name}${p.name_bn ? ` — ${p.name_bn}` : ""}`,
-        group: p.is_custom ? "Custom pages (/p/)" : "CMS pages",
+      .map((p: any) => ({
+        value: p.path || (p.is_custom || p.isCustom ? `/p/${p.page}` : ""),
+        label: `${p.name}${p.name_bn || p.nameBn ? ` — ${p.name_bn || p.nameBn}` : ""}`,
+        group: p.is_custom || p.isCustom ? "Custom pages (/p/)" : "CMS pages",
       }))
-      .filter((o) => !!o.value);
+      .filter((o: any) => !!o.value);
     const seen = new Set(STATIC_LINKS.map((s) => s.value));
     return [...STATIC_LINKS, ...dynamic.filter((d) => !seen.has(d.value) && (seen.add(d.value), true))];
   }, [data]);

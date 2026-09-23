@@ -6,7 +6,7 @@
  * `cms_settings`.
  */
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+
 import {
   Loader2,
   Save,
@@ -175,14 +175,20 @@ export function FooterSettingsCard({ canEdit = true }: { canEdit?: boolean }) {
 
   useEffect(() => {
     void (async () => {
-      const { data, error } = await supabase.from("cms_settings").select("*").eq("key", "footer_config").maybeSingle();
-      if (error) setErr(error.message);
-      if (data) {
-        setRowId((data as { id: string }).id);
-        skipHistory.current = true;
-        setCfg(normaliseFooterConfig((data as { value: unknown }).value));
+      try {
+        const res = await fetch("/api/admin/settings?key=footer_config");
+        if (!res.ok) throw new Error("Failed to load footer settings");
+        const data = await res.json();
+        if (data) {
+          setRowId(data.id);
+          skipHistory.current = true;
+          setCfg(normaliseFooterConfig(data.value));
+        }
+      } catch (e) {
+        setErr((e as Error).message);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     })();
   }, []);
 
@@ -191,15 +197,19 @@ export function FooterSettingsCard({ canEdit = true }: { canEdit?: boolean }) {
     setSaving(true);
     setErr(null);
     setMsg(null);
-    const payload = { value: cfg as unknown } as never;
-    const res = rowId
-      ? await supabase.from("cms_settings").update(payload).eq("id", rowId)
-      : await supabase
-          .from("cms_settings")
-          .insert({ key: "footer_config", label: "Footer", group: "footer", value: cfg, sort_order: 90 } as never);
-    if (res.error) setErr(res.error.message);
-    else setMsg("Footer saved · ফুটার সেভ হয়েছে।");
-    setSaving(false);
+    try {
+      const res = await fetch("/api/admin/settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: "footer_config", value: cfg }),
+      });
+      if (!res.ok) throw new Error("Failed to save footer settings");
+      setMsg("Footer saved · ফুটার সেভ হয়েছে।");
+    } catch (e) {
+      setErr((e as Error).message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const setStyle = <K extends keyof FooterConfig["style"]>(k: K, v: FooterConfig["style"][K]) =>

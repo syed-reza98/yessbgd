@@ -1,4 +1,6 @@
-import { Link, useLocation } from "@tanstack/react-router";
+"use client";
+
+import { Link, useLocation } from "@/components/ui/link";
 import { useState, useEffect, useCallback, useRef, memo } from "react";
 import { Menu, X, ChevronDown, Mail, Phone, Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
 import { COMPANY_CONTACT, phoneHref } from "@/lib/companyContact";

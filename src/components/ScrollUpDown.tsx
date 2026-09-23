@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useCallback } from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";

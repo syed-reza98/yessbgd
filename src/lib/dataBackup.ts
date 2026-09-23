@@ -1,16 +1,11 @@
 // Site-wide data backup helpers — daily export (download) and restore (upload).
-//
-// Everything runs through the signed-in dashboard session, so RLS keeps
-// enforcing who may read or write each table. The UI only decides what to ask for.
-import { supabase } from "@/integrations/supabase/client";
+// Uses the Next.js /api/admin/data API backed by MySQL / Drizzle ORM.
 
 export type BackupTable = {
   name: string;
   label: string;
   labelBn: string;
-  /** Column used for the daily date filter. */
   dateColumn: string;
-  /** Primary key used when restoring rows. */
   conflictKey: string;
   group: "content" | "operations" | "system";
 };
@@ -63,50 +58,34 @@ export function shiftDays(days: number): DateRange {
   return { from: isoDay(from), to: isoDay(to) };
 }
 
-/** Inclusive day bounds as ISO timestamps. */
-function bounds(range: DateRange) {
-  const start = range.from ? new Date(`${range.from}T00:00:00`) : null;
-  const end = range.to ? new Date(`${range.to}T23:59:59.999`) : null;
-  return { start: start?.toISOString() ?? null, end: end?.toISOString() ?? null };
-}
-
 /* --------------------------------- export --------------------------------- */
-
-export async function fetchTable(table: BackupTable, range: DateRange) {
-  const { start, end } = bounds(range);
-  let q = supabase.from(table.name as never).select("*");
-  if (start) q = (q as never as { gte: (c: string, v: string) => typeof q }).gte(table.dateColumn, start);
-  if (end) q = (q as never as { lte: (c: string, v: string) => typeof q }).lte(table.dateColumn, end);
-  const { data, error } = await q;
-  if (error) throw new Error(error.message);
-  return (data ?? []) as unknown as Record<string, unknown>[];
-}
 
 export async function buildBackup(
   tables: BackupTable[],
   range: DateRange,
   onProgress?: (table: string) => void,
 ): Promise<{ file: BackupFile; results: TableResult[] }> {
-  const out: BackupFile = {
-    format: "yess-site-backup",
-    version: 1,
-    exported_at: new Date().toISOString(),
-    range,
-    tables: {},
-  };
-  const results: TableResult[] = [];
   for (const t of tables) {
     onProgress?.(t.name);
-    try {
-      const rows = await fetchTable(t, range);
-      out.tables[t.name] = rows;
-      results.push({ table: t.name, count: rows.length });
-    } catch (e) {
-      out.tables[t.name] = [];
-      results.push({ table: t.name, count: 0, error: e instanceof Error ? e.message : String(e) });
-    }
   }
-  return { file: out, results };
+
+  const res = await fetch("/api/admin/data", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "export",
+      tables: tables.map((t) => t.name),
+      range,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to export data" }));
+    throw new Error(err.error || "Export failed");
+  }
+
+  const data = await res.json();
+  return data;
 }
 
 export function downloadBlob(content: string, filename: string, type: string) {
@@ -158,30 +137,33 @@ export async function restoreBackup(
   tableNames: string[],
   onProgress?: (table: string) => void,
 ): Promise<TableResult[]> {
-  const results: TableResult[] = [];
   for (const name of tableNames) {
-    const meta = BACKUP_TABLES.find((t) => t.name === name);
-    const rows = file.tables[name] ?? [];
-    if (!meta || !rows.length) {
-      results.push({ table: name, count: 0 });
-      continue;
-    }
     onProgress?.(name);
-    try {
-      // Chunked upsert keeps large restores within request limits.
-      let done = 0;
-      for (let i = 0; i < rows.length; i += 100) {
-        const chunk = rows.slice(i, i + 100);
-        const { error } = await supabase
-          .from(name as never)
-          .upsert(chunk as never, { onConflict: meta.conflictKey });
-        if (error) throw new Error(error.message);
-        done += chunk.length;
-      }
-      results.push({ table: name, count: done });
-    } catch (e) {
-      results.push({ table: name, count: 0, error: e instanceof Error ? e.message : String(e) });
+  }
+
+  // Filter file tables to only requested ones
+  const filteredTables: Record<string, any[]> = {};
+  for (const name of tableNames) {
+    if (file.tables[name]) {
+      filteredTables[name] = file.tables[name];
     }
   }
-  return results;
+
+  const res = await fetch("/api/admin/data", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "import",
+      file: { ...file, tables: filteredTables },
+      tables: tableNames,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to restore data" }));
+    throw new Error(err.error || "Restore failed");
+  }
+
+  const data = await res.json();
+  return data.results || [];
 }

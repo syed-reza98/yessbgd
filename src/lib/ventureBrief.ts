@@ -6,8 +6,11 @@ import {
   getVenturePackages,
   getVentureFaqs,
 } from "@/data/ventures";
-import logoUrl from "@/assets/yess-bangla-logo.png";
-import letterheadUrl from "@/assets/yess-bangla-letterhead.jpeg";
+import rawLogo from "@/assets/yess-bangla-logo.png";
+import rawLetterhead from "@/assets/yess-bangla-letterhead.jpeg";
+
+const logoUrl = (rawLogo as any)?.src || (rawLogo as unknown as string);
+const letterheadUrl = (rawLetterhead as any)?.src || (rawLetterhead as unknown as string);
 import {
   type BriefBranding,
   DEFAULT_BRANDING,

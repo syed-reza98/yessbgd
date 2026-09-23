@@ -14,6 +14,8 @@ import yessTourismImg from "@/assets/ventures/yess-tourism.jpg";
 import yessAioImg from "@/assets/ventures/yess-all-in-one-solution.jpg";
 import yessLegalImg from "@/assets/ventures/yess-legal-advice.jpg";
 
+const getSrc = (img: any): string => (typeof img === "object" && img?.src ? img.src : String(img));
+
 export type VentureCase = {
   challenge: string;
   solution: string;
@@ -91,7 +93,7 @@ export const ventures: Venture[] = [
     desc: "Custom software, web & mobile applications, ERP, CRM and enterprise systems built for modern businesses across Bangladesh and beyond.",
     longDesc:
       "Yess Soft is the engineering core of the YESS Bangla group — a product studio that ships secure, observable, cloud-native software for ambitious teams. From single-screen MVPs to multi-tenant ERP platforms, every release is built with TypeScript, automated tests, and a relentless focus on time-to-value.",
-    image: yessSoftImg,
+    image: getSrc(yessSoftImg),
     icon: Code2,
     color: "from-primary to-primary-glow",
     highlights: [
@@ -147,7 +149,7 @@ export const ventures: Venture[] = [
     desc: "A modern satellite broadcast channel delivering news, entertainment, drama, talk shows and cultural programs across the country.",
     longDesc:
       "Akash TV is a 24/7 general-entertainment satellite channel reaching households across Bangladesh and the diaspora. From breaking news to flagship dramas and live cultural events, our newsroom and production studios are built to international broadcast standards.",
-    image: akashTvImg,
+    image: getSrc(akashTvImg),
     icon: Tv,
     color: "from-accent to-primary",
     highlights: [
@@ -205,7 +207,7 @@ export const ventures: Venture[] = [
     desc: "An on-demand streaming platform with films, web originals, live TV and exclusive premieres tailored for Bangla-speaking audiences worldwide.",
     longDesc:
       "Akash OTT is the digital home for Bangla storytelling — feature films, web series, live TV simulcasts and exclusive premieres, available on mobile, web and smart TV with personalised recommendations and offline downloads.",
-    image: akashOttImg,
+    image: getSrc(akashOttImg),
     icon: PlayCircle,
     color: "from-primary-glow to-accent",
     highlights: [
@@ -263,7 +265,7 @@ export const ventures: Venture[] = [
     desc: "A digital-first newspaper delivering breaking news, in-depth analysis, business, sports and lifestyle stories that matter — every day.",
     longDesc:
       "The Daily Akash is an independent, digital-first newsroom. Our reporters cover politics, business, sports, technology and culture with an editorial code that puts accuracy and accountability ahead of speed.",
-    image: dailyAkashImg,
+    image: getSrc(dailyAkashImg),
     icon: Newspaper,
     color: "from-primary to-accent",
     highlights: [
@@ -319,7 +321,7 @@ export const ventures: Venture[] = [
     desc: "Corporate legal advisory — company formation, contracts, compliance, intellectual property and dispute support for businesses and individuals.",
     longDesc:
       "Yess Legal Advice is the group's counsel desk — a panel of barristers, advocates and company secretaries who handle everything from RJSC incorporation and trade licences to contract drafting, IP filings and regulatory compliance, so founders can build with confidence.",
-    image: yessLegalImg,
+    image: getSrc(yessLegalImg),
     icon: Scale,
     color: "from-primary to-accent",
     highlights: [
@@ -377,7 +379,7 @@ export const ventures: Venture[] = [
     desc: "Farm-to-table organic food and lifestyle products sourced directly from verified local producers and delivered fresh.",
     longDesc:
       "Yess Organic Haat is a farm-to-fork marketplace that connects verified Bangladeshi farmers directly to urban households. Cold-chain logistics, lab-tested produce and a transparent grading system mean what you order is what arrives — fresh, traceable and fair to the grower.",
-    image: organicHaatImg,
+    image: getSrc(organicHaatImg),
     icon: Leaf,
     color: "from-accent to-primary-glow",
     highlights: [
@@ -435,7 +437,7 @@ export const ventures: Venture[] = [
     desc: "On-demand professional services — from home maintenance and cleaning to expert consultations — delivered by vetted professionals.",
     longDesc:
       "Shondhaan brings the country's best home and professional service providers onto a single, dependable booking platform. Every technician is background-checked, trained and rated by customers — with a written service guarantee on every job.",
-    image: yessServiceImg,
+    image: getSrc(yessServiceImg),
     icon: Wrench,
     color: "from-primary to-primary-glow",
     highlights: [
@@ -491,7 +493,7 @@ export const ventures: Venture[] = [
     desc: "Reliable web hosting, domains, cloud servers and managed infrastructure for businesses of all sizes — backed by 24/7 expert support.",
     longDesc:
       "Yess Host is enterprise-grade infrastructure for everyone — from a first portfolio site to a multi-region SaaS. NVMe storage, isolated containers, automated backups and a tier-3 support desk that actually answers.",
-    image: yessHostImg,
+    image: getSrc(yessHostImg),
     icon: Server,
     color: "from-primary-glow to-primary",
     highlights: [
@@ -547,7 +549,7 @@ export const ventures: Venture[] = [
     desc: "End-to-end event planning, production and management for corporate, cultural, brand activations and private occasions.",
     longDesc:
       "Yess Event designs and produces moments people remember — corporate conferences, brand launches, music festivals and private celebrations. Strategy, creative, production and logistics under one roof.",
-    image: yessEventImg,
+    image: getSrc(yessEventImg),
     icon: CalendarHeart,
     color: "from-accent to-primary",
     highlights: [
@@ -603,7 +605,7 @@ export const ventures: Venture[] = [
     desc: "A modeling and talent agency discovering and nurturing fresh faces — connecting models, actors and creators with leading brands.",
     longDesc:
       "Yess Model is a full-service talent agency representing models, actors, presenters and creators. From scouting and grooming to bookings, contracts and aftercare — we build careers, not just shoots.",
-    image: yessModelImg,
+    image: getSrc(yessModelImg),
     icon: Sparkles,
     color: "from-primary to-accent",
     highlights: [
@@ -659,7 +661,7 @@ export const ventures: Venture[] = [
     desc: "Quality-driven food experiences — from cloud kitchens and signature dining concepts to packaged food brands.",
     longDesc:
       "Yess Food is a multi-format F&B operator — cloud kitchens, signature dine-in concepts, catering and packaged food brands — all built on hygiene-first kitchens and a chef-led recipe lab.",
-    image: yessFoodImg,
+    image: getSrc(yessFoodImg),
     icon: ChefHat,
     color: "from-primary-glow to-accent",
     highlights: [
@@ -715,7 +717,7 @@ export const ventures: Venture[] = [
     desc: "Bespoke holiday packages, business travel, hajj & umrah, visa support and inbound experiences — designed for comfort, value and unforgettable moments.",
     longDesc:
       "Yess Tourism is the group's full-service travel house — domestic getaways, international holidays, corporate travel, hajj & umrah, student travel and inbound Bangladesh experiences. IATA-aligned booking, in-house visa specialists and 24/7 on-trip concierge mean every itinerary is planned, priced and protected end-to-end.",
-    image: yessTourismImg,
+    image: getSrc(yessTourismImg),
     icon: Plane,
     color: "from-accent to-primary-glow",
     highlights: [
@@ -827,7 +829,7 @@ export const ventures: Venture[] = [
     desc: "A unified platform bringing together every YESS service — software, media, lifestyle and professional services — for seamless business and personal needs.",
     longDesc:
       "Yess All-in-One is the master account that unlocks every YESS venture — software builds, media buys, organic supply, hosting, events and more — through a single login, a single invoice and a single concierge team.",
-    image: yessAioImg,
+    image: getSrc(yessAioImg),
     icon: LayoutGrid,
     color: "from-primary to-primary-glow",
     highlights: [

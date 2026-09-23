@@ -1,14 +1,4 @@
-// Role-aware access helpers for the dashboard.
-//
-// Three dashboard personas, mapped onto the `app_role` enum:
-//   admin      — full control panel
-//   moderator  — operations desk (job applications + contact messages)
-//   user       — content editor (pages, content, media)
-//
-// Every check is only a *view* filter: the database keeps enforcing the real
-// rules through RLS policies, so hiding a card can never be the only guard.
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
 export type DashboardRole = "admin" | "moderator" | "user";
 
@@ -52,17 +42,13 @@ export function useDashboardRole() {
     queryKey: ["admin", "role"],
     staleTime: 60_000,
     queryFn: async (): Promise<{ role: DashboardRole; userId: string | null; email: string | null }> => {
-      const { data: auth } = await supabase.auth.getUser();
-      const user = auth.user;
-      if (!user) return { role: "user", userId: null, email: null };
-      const { data } = await supabase.from("user_roles").select("role").eq("user_id", user.id);
-      const roles = (data ?? []).map((r) => r.role as DashboardRole);
-      const role: DashboardRole = roles.includes("admin")
-        ? "admin"
-        : roles.includes("moderator")
-          ? "moderator"
-          : "user";
-      return { role, userId: user.id, email: user.email ?? null };
+      try {
+        const res = await fetch("/api/admin/role");
+        if (!res.ok) return { role: "user", userId: null, email: null };
+        return await res.json();
+      } catch {
+        return { role: "user", userId: null, email: null };
+      }
     },
   });
 
@@ -103,26 +89,23 @@ export function useProfile() {
     queryKey: ["admin", "profile"],
     staleTime: 60_000,
     queryFn: async (): Promise<Profile | null> => {
-      const { data: auth } = await supabase.auth.getUser();
-      const user = auth.user;
-      if (!user) return null;
-      const { data } = await supabase.from("profiles").select("*").eq("id", user.id).maybeSingle();
-      if (data) return data as unknown as Profile;
-      // Row missing (account created before profiles existed) — create it now.
-      const { data: created } = await supabase
-        .from("profiles")
-        .insert({ id: user.id } as never)
-        .select("*")
-        .maybeSingle();
-      return (created ?? null) as unknown as Profile | null;
+      try {
+        const res = await fetch("/api/admin/profile");
+        if (!res.ok) return null;
+        return await res.json();
+      } catch {
+        return null;
+      }
     },
   });
 
   const save = async (patch: Partial<Profile>) => {
-    const id = query.data?.id;
-    if (!id) throw new Error("No profile loaded");
-    const { error } = await supabase.from("profiles").update(patch as never).eq("id", id);
-    if (error) throw error;
+    const res = await fetch("/api/admin/profile", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patch),
+    });
+    if (!res.ok) throw new Error("Failed to save profile");
     await qc.invalidateQueries({ queryKey: ["admin", "profile"] });
   };
 

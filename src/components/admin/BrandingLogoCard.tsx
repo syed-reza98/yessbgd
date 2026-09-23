@@ -3,9 +3,9 @@
 // as `{ "text": "<url>" }` rows so the rest of the CMS reads them as usual.
 import { useEffect, useState } from "react";
 import { Loader2, Save, Check } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { MediaPicker } from "@/components/admin/MediaPicker";
 import { resolveMediaUrl } from "@/lib/mediaAssets";
+
 
 const FIELDS = [
   { key: "logo_url", label: "Header logo", labelBn: "হেডার লোগো" },
@@ -24,17 +24,21 @@ export function BrandingLogoCard({ onSaved }: { onSaved?: () => void }) {
 
   useEffect(() => {
     void (async () => {
-      const { data, error } = await supabase
-        .from("cms_settings")
-        .select("key,value")
-        .in("key", FIELDS.map((f) => f.key) as string[]);
-      if (error) setErr(error.message);
-      const next: Record<string, string> = {};
-      for (const row of (data ?? []) as { key: string; value: { text?: string } | null }[]) {
-        next[row.key] = typeof row.value?.text === "string" ? row.value.text : "";
+      try {
+        const keys = FIELDS.map((f) => f.key).join(",");
+        const res = await fetch(`/api/admin/settings?keys=${keys}`);
+        if (!res.ok) throw new Error("Failed to load branding logos");
+        const data = await res.json();
+        const next: Record<string, string> = {};
+        for (const row of (data ?? []) as { key: string; value: { text?: string } | null }[]) {
+          next[row.key] = typeof row.value?.text === "string" ? row.value.text : "";
+        }
+        setValues(next);
+      } catch (e) {
+        setErr((e as Error).message);
+      } finally {
+        setLoading(false);
       }
-      setValues(next);
-      setLoading(false);
     })();
   }, []);
 
@@ -43,20 +47,20 @@ export function BrandingLogoCard({ onSaved }: { onSaved?: () => void }) {
     setErr(null);
     setDone(false);
     try {
-      for (const f of FIELDS) {
-        const { error } = await supabase
-          .from("cms_settings")
-          .upsert(
-            {
-              key: f.key,
-              label: f.label,
-              group: "branding",
-              value: { text: values[f.key] ?? "" },
-            } as never,
-            { onConflict: "key" },
-          );
-        if (error) throw new Error(error.message);
-      }
+      const items = FIELDS.map((f) => ({
+        key: f.key,
+        label: f.label,
+        group: "branding",
+        value: { text: values[f.key] ?? "" },
+      }));
+
+      const res = await fetch("/api/admin/settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(items),
+      });
+
+      if (!res.ok) throw new Error("Failed to save logos");
       setDone(true);
       onSaved?.();
       setTimeout(() => setDone(false), 2500);

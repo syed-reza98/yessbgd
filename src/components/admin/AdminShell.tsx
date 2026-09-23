@@ -1,7 +1,7 @@
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@/components/ui/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { CMS_TYPES } from "@/lib/cmsSchema";
+
 import {
   LayoutDashboard,
   Briefcase,
@@ -162,8 +162,12 @@ export function AdminShell({ children, email }: { children: ReactNode; email?: s
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    navigate({ to: "/admin/login" });
+    try {
+      await fetch("/api/auth/signout", { method: "POST" });
+    } catch {
+      // ignore
+    }
+    window.location.href = "/admin/login";
   };
 
   // Global search over all navigation destinations.

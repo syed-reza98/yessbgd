@@ -1,3 +1,5 @@
+"use client";
+
 // Live "preview before publish" channel for CMS menu edits.
 //
 // The admin Menus editor writes an unsaved draft into sessionStorage; the public

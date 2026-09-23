@@ -1,9 +1,8 @@
-// Dynamic content layer — reads published CMS rows from the database and
+// Dynamic content layer — reads published CMS rows from API / DB and
 // falls back to the bundled static content when a row is missing/empty.
 import { useQuery } from "@tanstack/react-query";
 import * as Icons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { resolveMediaUrl } from "@/lib/mediaAssets";
 
 import { ventures as staticVentures, type Venture } from "@/data/ventures";
@@ -46,10 +45,6 @@ function merge<T extends { slug: string }>(
 
 /* ---------------------------------- ventures --------------------------------- */
 
-// Bundled venture artwork, keyed by file name. Lets the CMS store a friendly
-// path like "/src/assets/ventures/yess-food.jpg" (or just "yess-food.jpg")
-// while the site still serves the hashed, build-safe asset URL.
-/** Resolve a CMS image reference to a URL that works in dev and production. */
 export function resolveImage(value: unknown, fallback: string): string {
   return resolveMediaUrl(value, fallback);
 }
@@ -65,24 +60,19 @@ function toVenture(row: Record<string, unknown>, base: Venture | undefined): Ven
     category: (row.category as string) ?? fallback.category,
     tagline: (row.tagline as string) ?? fallback.tagline,
     desc: (row.description as string) ?? fallback.desc,
-    image: resolveImage(row.image_path, fallback.image),
+    image: resolveImage(row.image_path || row.imagePath, fallback.image),
     icon: icon(row.icon, fallback.icon),
   } as Venture;
 }
-
-
 
 export function useVentures(): Venture[] {
   const { data } = useQuery({
     queryKey: ["cms", "ventures"],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_ventures")
-        .select("*")
-        .eq("is_published", true)
-        .order("sort_order", { ascending: true });
-      return data ?? [];
+      const res = await fetch("/api/cms?resource=ventures");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
   return merge(data as Record<string, unknown>[] | undefined, staticVentures, toVenture);
@@ -114,12 +104,9 @@ export function useServices(): ServiceItem[] {
     queryKey: ["cms", "services"],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_services")
-        .select("*")
-        .eq("is_published", true)
-        .order("sort_order", { ascending: true });
-      return data ?? [];
+      const res = await fetch("/api/cms?resource=services");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
   return merge(data as Record<string, unknown>[] | undefined, staticServices, toService);
@@ -150,12 +137,9 @@ export function useIndustries(): IndustryItem[] {
     queryKey: ["cms", "industries"],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_industries")
-        .select("*")
-        .eq("is_published", true)
-        .order("sort_order", { ascending: true });
-      return data ?? [];
+      const res = await fetch("/api/cms?resource=industries");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
   return merge(data as Record<string, unknown>[] | undefined, staticIndustries, toIndustry);
@@ -185,12 +169,9 @@ export function useInsights(): Insight[] {
     queryKey: ["cms", "insights"],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_insights")
-        .select("*")
-        .eq("is_published", true)
-        .order("published_at", { ascending: false });
-      return data ?? [];
+      const res = await fetch("/api/cms?resource=insights");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
   return merge(data as Record<string, unknown>[] | undefined, staticInsights, toInsight);
@@ -207,7 +188,7 @@ const iconName = (fn: unknown) =>
   (fn as { name?: string })?.name ||
   null;
 
-/** One-click: push the bundled static content into the CMS tables (admin only). */
+/** One-click: push the bundled static content into the CMS tables via /api/admin/cms (admin only). */
 export async function syncStaticContentToCms() {
   const ventureRows = staticVentures.map((v, index) => {
     const { slug, title, category, tagline, desc, image, icon: ic, ...rest } = v;
@@ -270,15 +251,18 @@ export async function syncStaticContentToCms() {
     };
   });
 
-  const results = await Promise.all([
-    supabase.from("cms_ventures").upsert(ventureRows as never, { onConflict: "slug" }),
-    supabase.from("cms_services").upsert(serviceRows as never, { onConflict: "slug" }),
-    supabase.from("cms_industries").upsert(industryRows as never, { onConflict: "slug" }),
-    supabase.from("cms_insights").upsert(insightRows as never, { onConflict: "slug" }),
-  ]);
-
-  const failed = results.find((r) => r.error);
-  if (failed?.error) throw new Error(failed.error.message);
+  for (const row of ventureRows) {
+    await fetch("/api/admin/cms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "ventures", data: row }) });
+  }
+  for (const row of serviceRows) {
+    await fetch("/api/admin/cms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "services", data: row }) });
+  }
+  for (const row of industryRows) {
+    await fetch("/api/admin/cms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "industries", data: row }) });
+  }
+  for (const row of insightRows) {
+    await fetch("/api/admin/cms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "insights", data: row }) });
+  }
 
   return {
     ventures: ventureRows.length,
@@ -287,3 +271,4 @@ export async function syncStaticContentToCms() {
     insights: insightRows.length,
   };
 }
+

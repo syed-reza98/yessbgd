@@ -2,7 +2,6 @@
 // Every hook falls back to sensible defaults so the site never breaks
 // when a row is missing.
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
 const STALE = 60_000;
 
@@ -22,13 +21,16 @@ export function useSettings() {
     queryKey: ["cms", "settings"],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase.from("cms_settings").select("*").order("sort_order");
-      return (data ?? []) as unknown as SettingRow[];
+      const res = await fetch("/api/cms?resource=settings");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
   const map: Record<string, Record<string, unknown>> = {};
-  for (const row of data ?? []) map[row.key] = (row.value ?? {}) as Record<string, unknown>;
-  return { rows: data ?? [], map };
+  for (const row of (data ?? []) as SettingRow[]) {
+    map[row.key] = (row.value ?? {}) as Record<string, unknown>;
+  }
+  return { rows: (data ?? []) as SettingRow[], map };
 }
 
 /** Read a single text setting (`{ "text": "..." }` shape) with fallback. */
@@ -68,16 +70,12 @@ export function usePageSections(page: string) {
     queryKey: ["cms", "pages", page],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_pages")
-        .select("*")
-        .eq("page", page)
-        .eq("is_published", true)
-        .order("sort_order");
-      return (data ?? []) as unknown as PageSection[];
+      const res = await fetch(`/api/cms?resource=site-page&page=${encodeURIComponent(page)}`);
+      if (!res.ok) return [];
+      return res.json();
     },
   });
-  const rows = data ?? [];
+  const rows = (data ? [data] : []) as PageSection[];
   const bySection = new Map(rows.map((r) => [r.section_key, r]));
   return {
     sections: rows,
@@ -135,26 +133,10 @@ export function buildMenuTree(items: MenuItem[]): MenuNode[] {
 
 export type ViewerRole = "guest" | "authenticated" | "admin";
 
-/** Who is looking at the site right now (used for menu visibility rules). */
 export function useViewerRole(): ViewerRole {
-  const { data } = useQuery({
-    queryKey: ["viewer", "role"],
-    staleTime: STALE,
-    queryFn: async (): Promise<ViewerRole> => {
-      const { data: auth } = await supabase.auth.getUser();
-      const user = auth.user;
-      if (!user) return "guest";
-      const { data: isAdmin } = await supabase.rpc("has_role", {
-        _user_id: user.id,
-        _role: "admin",
-      } as never);
-      return isAdmin ? "admin" : "authenticated";
-    },
-  });
-  return data ?? "guest";
+  return "guest";
 }
 
-/** Does a menu item's visibility rule allow this viewer? */
 export function canSeeMenuItem(item: MenuItem, role: ViewerRole): boolean {
   const rule = (item.visible_to ?? "all") as MenuVisibility;
   if (rule === "all") return true;
@@ -169,16 +151,12 @@ export function useMenu(location: "header" | "footer") {
     queryKey: ["cms", "menu", location],
     staleTime: STALE,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_menu_items")
-        .select("*")
-        .eq("location", location)
-        .eq("is_published", true)
-        .order("sort_order");
-      return (data ?? []) as unknown as MenuItem[];
+      const res = await fetch(`/api/cms?resource=menus&location=${location}`);
+      if (!res.ok) return [];
+      return res.json();
     },
   });
-  return (data ?? []).filter((i) => canSeeMenuItem(i, role));
+  return ((data ?? []) as MenuItem[]).filter((i) => canSeeMenuItem(i, role));
 }
 
 /** Same as useMenu but nested by parent_id. */
@@ -186,8 +164,6 @@ export function useMenuTree(location: "header" | "footer") {
   const flat = useMenu(location);
   return buildMenuTree(flat);
 }
-
-
 
 /* ----------------------------------- media ---------------------------------- */
 
@@ -203,53 +179,49 @@ export type MediaRow = {
   created_at: string;
 };
 
-export const MEDIA_BUCKET = "media";
-const SIGNED_TTL = 60 * 60 * 24 * 7; // 7 days
-
 export async function signedMediaUrl(path: string): Promise<string> {
-  const { data } = await supabase.storage.from(MEDIA_BUCKET).createSignedUrl(path, SIGNED_TTL);
-  return data?.signedUrl ?? "";
+  return path.startsWith("/") ? path : `/${path}`;
 }
 
 export function useMediaLibrary() {
-  return useQuery({
+  return useQuery<MediaRow[]>({
     queryKey: ["cms", "media"],
     staleTime: 10_000,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_media")
-        .select("*")
-        .order("created_at", { ascending: false });
-      return (data ?? []) as unknown as MediaRow[];
+      const res = await fetch("/api/admin/media");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
 }
 
-/** Uploads a file to the media bucket and records it in cms_media. */
 export async function uploadMedia(file: File, folder = "general", alt = "") {
-  const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "-").toLowerCase();
-  const path = `${folder}/${Date.now()}-${safe}`;
-  const up = await supabase.storage.from(MEDIA_BUCKET).upload(path, file, {
-    cacheControl: "31536000",
-    upsert: false,
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("folder", folder);
+  formData.append("alt", alt);
+
+  const res = await fetch("/api/admin/media", {
+    method: "POST",
+    body: formData,
   });
-  if (up.error) throw new Error(up.error.message);
-  const url = await signedMediaUrl(path);
-  const { error } = await supabase.from("cms_media").insert({
-    file_name: file.name,
-    url,
-    path,
-    mime_type: file.type,
-    size_bytes: file.size,
-    alt_text: alt,
-    folder,
-  } as never);
-  if (error) throw new Error(error.message);
-  return { path, url };
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || "Upload failed");
+  }
+
+  return await res.json();
 }
 
 export async function deleteMedia(row: MediaRow) {
-  if (row.path) await supabase.storage.from(MEDIA_BUCKET).remove([row.path]);
-  const { error } = await supabase.from("cms_media").delete().eq("id", row.id);
-  if (error) throw new Error(error.message);
+  const res = await fetch(`/api/admin/media?id=${row.id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || "Delete failed");
+  }
 }
+

@@ -45,13 +45,17 @@ export function listSiteAssets(): SiteAsset[] {
  * Handles absolute URLs, data/blob URIs, bundled `/src/assets/...` paths,
  * bare file names and `/public` paths.
  */
-export function resolveMediaUrl(value: unknown, fallback = ""): string {
-  if (typeof value !== "string" || !value.trim()) return fallback;
+export function resolveMediaUrl(value: unknown, fallback: string | { src: string } = ""): string {
+  const fallbackStr = typeof fallback === "object" && fallback !== null && "src" in fallback ? (fallback as { src: string }).src : String(fallback || "");
+  if (typeof value === "object" && value !== null && "src" in value) {
+    return (value as { src: string }).src;
+  }
+  if (typeof value !== "string" || !value.trim()) return fallbackStr;
   const v = value.trim();
   if (/^(https?:)?\/\//.test(v) || v.startsWith("data:") || v.startsWith("blob:")) return v;
   if (BUNDLED_BY_PATH[v]) return BUNDLED_BY_PATH[v];
   const name = (v.split("?")[0].split("/").pop() ?? v).toLowerCase();
   if (BUNDLED_BY_NAME[name]) return BUNDLED_BY_NAME[name];
   if (v.startsWith("/") && !v.startsWith("/src/")) return v;
-  return fallback || v;
+  return fallbackStr || v;
 }

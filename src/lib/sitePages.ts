@@ -1,10 +1,9 @@
 // Site page registry — every public page is described by a row in
-import { resolveMediaUrl } from "@/lib/mediaAssets";
 // `cms_site_pages` so the dashboard can edit its hero, body, images and SEO
 // in both English and Bangla, and create brand-new custom pages.
+import { resolveMediaUrl } from "@/lib/mediaAssets";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { supabase } from "@/integrations/supabase/client";
 
 const STALE = 60_000;
 
@@ -52,17 +51,13 @@ export const SITE_PAGE_FIELDS: {
 
 /** All pages (admin view — includes unpublished when signed in). */
 export function useSitePages() {
-  return useQuery({
+  return useQuery<SitePage[]>({
     queryKey: ["cms", "site-pages"],
     staleTime: STALE,
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("cms_site_pages")
-        .select("*")
-        .order("sort_order")
-        .order("name");
-      if (error) throw error;
-      return (data ?? []) as unknown as SitePage[];
+      const res = await fetch("/api/cms?resource=site-pages");
+      if (!res.ok) return [];
+      return res.json();
     },
   });
 }
@@ -74,12 +69,9 @@ export function useSitePage(page: string) {
     staleTime: STALE,
     enabled: !!page,
     queryFn: async () => {
-      const { data } = await supabase
-        .from("cms_site_pages")
-        .select("*")
-        .eq("page", page)
-        .maybeSingle();
-      return (data ?? null) as unknown as SitePage | null;
+      const res = await fetch(`/api/cms?resource=site-page&page=${encodeURIComponent(page)}`);
+      if (!res.ok) return null;
+      return res.json();
     },
   });
 }

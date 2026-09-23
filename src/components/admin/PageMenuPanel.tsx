@@ -2,9 +2,10 @@
 // editor: pick header/footer, choose a parent menu item (so it becomes a
 // submenu), set bilingual labels, visibility rules, reorder siblings with
 // drag & drop and preview the resulting menu live. Writes to cms_menu_items.
+"use client";
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { buildMenuTree, type MenuItem, type MenuNode, type MenuVisibility } from "@/lib/siteContent";
 import {
   Loader2,
@@ -68,10 +69,16 @@ export function PageMenuPanel({
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("cms_menu_items").select("*").order("sort_order");
-    if (error) setErr(error.message);
-    setRows((data ?? []) as unknown as MenuItem[]);
-    setLoading(false);
+    try {
+      const res = await fetch("/api/admin/menus");
+      if (!res.ok) throw new Error("Failed to load menus");
+      const data = await res.json();
+      setRows((data ?? []) as MenuItem[]);
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -179,54 +186,80 @@ export function PageMenuPanel({
     const siblings = rows.filter(
       (r) => r.location === location && (r.parent_id ?? null) === (parent?.id ?? null),
     );
-    const { error } = await supabase.from("cms_menu_items").insert({
-      location,
-      label: label.trim() || nameEn,
-      label_bn: labelBn.trim() || null,
-      href: path,
-      parent_id: parent?.id ?? null,
-      depth,
-      sort_order: siblings.length + 1,
-      is_published: true,
-      visible_to: visibleTo,
-    } as never);
-    setBusy(false);
-    if (error) {
-      setErr(error.message);
-      return;
+
+    try {
+      const res = await fetch("/api/admin/menus", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          location,
+          label: label.trim() || nameEn,
+          label_bn: labelBn.trim() || null,
+          href: path,
+          parent_id: parent?.id ?? null,
+          depth,
+          sort_order: siblings.length + 1,
+          is_published: true,
+          visible_to: visibleTo,
+        }),
+      });
+      if (!res.ok) {
+        const d = await res.json();
+        throw new Error(d.error || "Failed to add menu item");
+      }
+      setMsg(
+        parent
+          ? `Added as a submenu of “${parent.label}” · সাবমেনু যোগ হয়েছে`
+          : "Added to the menu · মেনুতে যোগ হয়েছে",
+      );
+      await load();
+      await refreshSite();
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setBusy(false);
     }
-    setMsg(
-      parent
-        ? `Added as a submenu of “${parent.label}” · সাবমেনু যোগ হয়েছে`
-        : "Added to the menu · মেনুতে যোগ হয়েছে",
-    );
-    await load();
-    await refreshSite();
   };
 
   const updateEntry = async (item: MenuItem, patch: Partial<MenuItem>, successMsg?: string) => {
     setBusy(true);
     setErr(null);
-    const { error } = await supabase.from("cms_menu_items").update(patch as never).eq("id", item.id);
-    setBusy(false);
-    if (error) setErr(error.message);
-    else {
+    try {
+      const res = await fetch("/api/admin/menus", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: item.id, ...patch }),
+      });
+      if (!res.ok) {
+        const d = await res.json();
+        throw new Error(d.error || "Failed to update menu item");
+      }
       setMsg(successMsg ?? "Menu entry updated · আপডেট হয়েছে");
       await load();
       await refreshSite();
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setBusy(false);
     }
   };
 
   const removeEntry = async (item: MenuItem) => {
     if (!window.confirm(`Remove “${item.label}” from the ${item.location} menu?`)) return;
     setBusy(true);
-    const { error } = await supabase.from("cms_menu_items").delete().eq("id", item.id);
-    setBusy(false);
-    if (error) setErr(error.message);
-    else {
+    try {
+      const res = await fetch(`/api/admin/menus?id=${item.id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const d = await res.json();
+        throw new Error(d.error || "Failed to delete menu item");
+      }
       setMsg("Removed from the menu · মেনু থেকে সরানো হয়েছে");
       await load();
       await refreshSite();
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setBusy(false);
     }
   };
 
@@ -235,21 +268,26 @@ export function PageMenuPanel({
   const persistOrder = async (ordered: MenuItem[]) => {
     setBusy(true);
     setErr(null);
-    for (let i = 0; i < ordered.length; i++) {
-      const { error } = await supabase
-        .from("cms_menu_items")
-        .update({ sort_order: i + 1 } as never)
-        .eq("id", ordered[i].id);
-      if (error) {
-        setBusy(false);
-        setErr(error.message);
-        return;
+    try {
+      const res = await fetch("/api/admin/menus", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: ordered.map((item, i) => ({ id: item.id, sort_order: i + 1 })),
+        }),
+      });
+      if (!res.ok) {
+        const d = await res.json();
+        throw new Error(d.error || "Failed to persist order");
       }
+      setMsg("Order updated · ক্রম আপডেট হয়েছে");
+      await load();
+      await refreshSite();
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setBusy(false);
     }
-    setBusy(false);
-    setMsg("Order updated · ক্রম আপডেট হয়েছে");
-    await load();
-    await refreshSite();
   };
 
   const reorder = async (sourceId: string, targetId: string) => {

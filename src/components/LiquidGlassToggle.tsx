@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Droplets, Check, Sun, Moon, Monitor } from "lucide-react";
 import {
