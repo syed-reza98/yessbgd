@@ -54,31 +54,16 @@ export function ScrollUpDown() {
           animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.9 }}
           transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
-          className="fixed z-40 flex flex-col gap-2"
-          style={{
-            right: "max(1rem, env(safe-area-inset-right))",
-            bottom: "max(1rem, env(safe-area-inset-bottom))",
-          }}
-          aria-label="Page scroll controls"
+          className="fixed z-40 bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] lg:bottom-6 right-5"
+          aria-label="Back to top"
         >
           <button
             type="button"
             onClick={() => scrollTo(0)}
             aria-label="Scroll to top"
-            className="group grid h-11 w-11 place-items-center rounded-full glass-strong border border-glass-border text-foreground shadow-elegant backdrop-blur transition-transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="group flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-background/85 text-foreground shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:border-primary/50 hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            <ArrowUp className="h-5 w-5" strokeWidth={2} />
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              scrollTo(document.documentElement.scrollHeight)
-            }
-            aria-label="Scroll to bottom"
-            disabled={atBottom}
-            className="group grid h-11 w-11 place-items-center rounded-full glass-strong border border-glass-border text-foreground shadow-elegant backdrop-blur transition-transform hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            <ArrowDown className="h-5 w-5" strokeWidth={2} />
+            <ArrowUp className="h-5 w-5 transition-transform duration-200 group-hover:-translate-y-0.5" strokeWidth={2} />
           </button>
         </motion.div>
       )}

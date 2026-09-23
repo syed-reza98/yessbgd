@@ -205,7 +205,7 @@ export function Footer({ configOverride }: { configOverride?: FooterConfig } = {
           {col.show_newsletter !== false && (
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mt-5 flex overflow-hidden rounded-full border border-border bg-card"
+              className="mt-5 flex overflow-hidden rounded-full border border-border bg-card transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background"
             >
               <input
                 type="email"
@@ -214,7 +214,10 @@ export function Footer({ configOverride }: { configOverride?: FooterConfig } = {
                 aria-label={t("footer.newsletterAria")}
                 className="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none placeholder:text-muted-foreground"
               />
-              <button type="submit" className="bg-gradient-primary px-4 text-sm font-semibold text-primary-foreground">
+              <button
+                type="submit"
+                className="bg-gradient-primary px-4 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
                 {t("footer.subscribe")}
               </button>
             </form>

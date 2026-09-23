@@ -403,7 +403,7 @@ export function Header() {
           </div>
         </div>
       </div>
-      <header data-on-dark className="sticky top-0 z-50 glass-nav">
+      <header className="sticky top-0 z-50 glass-nav transition-all">
       {previewing && (
         <div
           data-testid="menu-preview-banner"

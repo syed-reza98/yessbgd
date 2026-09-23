@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import { Link } from "@/components/ui/link";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Calendar, Mail } from "lucide-react";
@@ -8,12 +9,21 @@ import { useInsights } from "@/lib/dynamicContent";
 
 const categories = ["All", "Strategy", "Technology", "E-commerce", "Leadership", "IT Services", "Design"];
 
-
 export default function Insights() {
   const insights = useInsights();
-  const featured = insights[0];
-  const posts = insights.slice(1);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const { t } = useTranslation();
+
+  const filteredPosts = useMemo(() => {
+    if (selectedCategory === "All") return insights;
+    return insights.filter(
+      (p) => p.tag?.toLowerCase() === selectedCategory.toLowerCase()
+    );
+  }, [insights, selectedCategory]);
+
+  const featured = filteredPosts[0] || insights[0];
+  const posts = filteredPosts.length > 1 ? filteredPosts.slice(1) : filteredPosts;
+
   return (
     <>
       <PageHero
@@ -25,18 +35,24 @@ export default function Insights() {
 
       <section className="pb-6">
         <div className="container-tight flex flex-wrap justify-center gap-2">
-          {categories.map((c, i) => (
-            <button
-              key={c}
-              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
-                i === 0
-                  ? "bg-gradient-primary text-primary-foreground shadow-glow"
-                  : "glass-card text-muted-foreground hover:text-primary"
-              }`}
-            >
-              {c}
-            </button>
-          ))}
+          {categories.map((c) => {
+            const isActive = selectedCategory === c;
+            return (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setSelectedCategory(c)}
+                aria-pressed={isActive}
+                className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  isActive
+                    ? "bg-gradient-primary text-primary-foreground shadow-glow"
+                    : "glass-card text-muted-foreground hover:text-primary hover:border-primary/30"
+                }`}
+              >
+                {c}
+              </button>
+            );
+          })}
         </div>
       </section>
 

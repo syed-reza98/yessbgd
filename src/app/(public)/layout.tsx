@@ -4,7 +4,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WaterBackground } from "@/components/WaterBackground";
 import { ScrollUpDown } from "@/components/ScrollUpDown";
-import { LiquidGlassToggle } from "@/components/LiquidGlassToggle";
 import { MobileTabBar } from "@/components/MobileTabBar";
 
 export default function PublicLayout({
@@ -24,7 +23,6 @@ export default function PublicLayout({
       </main>
       <Footer />
       <ScrollUpDown />
-      <LiquidGlassToggle />
       <MobileTabBar />
     </div>
   );

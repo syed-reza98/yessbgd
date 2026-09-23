@@ -18,7 +18,7 @@ type Row = {
 };
 
 const inputCls =
-  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary";
+  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary";
 
 /**
  * Friendly editors — the admin just types plain text, no JSON.

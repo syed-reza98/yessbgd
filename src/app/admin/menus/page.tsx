@@ -50,7 +50,7 @@ import {
 } from "lucide-react";
 
 const inputCls =
-  "w-full rounded-lg border border-border bg-background px-2.5 py-1.5 text-sm outline-none focus:border-primary";
+  "w-full rounded-lg border border-border bg-background px-2.5 py-1.5 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary";
 const labelCls = "mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground";
 
 const MAX_DEPTH = 2; // 0 = menu, 1 = submenu, 2 = sub-submenu

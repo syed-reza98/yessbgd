@@ -1167,7 +1167,7 @@ function StepForm({
               <label
                 htmlFor="resume"
                 className={
-                  "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-8 text-center transition-colors hover:bg-secondary/40 " +
+                  "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-8 text-center transition-colors hover:bg-secondary/40 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring has-[:focus-visible]:border-primary " +
                   (errors.resume ? "border-destructive/60" : "border-border")
                 }
               >

@@ -377,7 +377,7 @@ export function AdminShell({ children, email }: { children: ReactNode; email?: s
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search admin…"
               aria-label="Search admin"
-              className="w-full rounded-md border border-white/10 bg-white/5 py-2 pl-9 pr-3 text-sm text-admin-sidebar-foreground placeholder:text-admin-sidebar-muted focus:border-admin-accent focus:outline-none"
+              className="w-full rounded-md border border-white/10 bg-white/5 py-2 pl-9 pr-3 text-sm text-admin-sidebar-foreground placeholder:text-admin-sidebar-muted focus:border-admin-accent focus:outline-none focus:ring-1 focus:ring-admin-accent"
             />
             {results.length > 0 && (
               <ul className="absolute left-0 right-0 top-11 z-50 overflow-hidden rounded-md border border-border bg-card py-1 text-card-foreground shadow-xl">

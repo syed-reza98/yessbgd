@@ -81,8 +81,8 @@ export function LiquidGlassToggle() {
 
   return (
     <div
-      className="fixed bottom-4 left-4 z-40"
-      style={{ paddingLeft: "env(safe-area-inset-left)", paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] lg:bottom-4 left-4 z-40"
+      style={{ paddingLeft: "env(safe-area-inset-left)" }}
     >
       <div className="relative">
         {open && (

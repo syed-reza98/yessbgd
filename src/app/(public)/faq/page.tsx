@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { PageHero } from "@/components/PageHero";
 import { ArrowRight, MessageCircle, Phone } from "lucide-react";
+import { COMPANY_CONTACT } from "@/lib/companyContact";
 
 
 const groups = [
@@ -90,12 +91,16 @@ export default function FAQ() {
                 Open contact form <ArrowRight className="h-4 w-4" />
               </span>
             </Link>
-            <a href="tel:+880" className="group rounded-2xl glass-card p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-elegant">
+            <a
+              href={`tel:${COMPANY_CONTACT.phone.tel}`}
+              aria-label={`Call YESS Bangla at ${COMPANY_CONTACT.phone.display}`}
+              className="group rounded-2xl glass-card p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-elegant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Phone className="h-5 w-5" />
               </div>
               <h3 className="mt-4 font-display text-lg font-semibold">Talk to our team</h3>
-              <p className="mt-2 text-sm text-muted-foreground">Sun–Thu, 10 AM – 6 PM (BST).</p>
+              <p className="mt-2 text-sm text-muted-foreground">{COMPANY_CONTACT.phone.display} • Sun–Thu, 10 AM – 6 PM (BST)</p>
               <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
                 Call us <ArrowRight className="h-4 w-4" />
               </span>
