@@ -35,6 +35,22 @@ import {
 } from "lucide-react";
 import { ventures as defaultVentures } from "@/data/ventures";
 
+const VENTURE_ICONS: Record<string, any> = {
+  "yess-soft": Code2,
+  "akash-tv": Tv,
+  "akash-ott": PlayCircle,
+  "akash-news": Newspaper,
+  "yess-organic-food": Leaf,
+  "yess-one-stop-engineering": Wrench,
+  "yess-technology": Server,
+  "yess-entertainment": CalendarHeart,
+  "yess-event-management": Sparkles,
+  "yess-restaurant": ChefHat,
+  "yess-interior": LayoutGrid,
+  "yess-overseas": Plane,
+  "yess-law-chamber": Scale,
+};
+
 export function HomeClient({
   sitePage,
   initialVentures,
@@ -773,7 +789,7 @@ export function HomeClient({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredVentures.map((venture) => {
-              const Icon = venture.icon;
+              const Icon = VENTURE_ICONS[venture.slug] || Building2;
               return (
                 <div
                   key={venture.slug}

@@ -15,7 +15,8 @@ import {
   Scale,
 } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
-import { services } from "@/data/services";
+import { getServices, getSitePage } from "@/lib/cms";
+import { services as fallbackServices } from "@/data/services";
 
 export const metadata = {
   title: "Services & Solutions | YESS Bangladesh",
@@ -65,7 +66,14 @@ const engagementModels = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [allServices, sitePage] = await Promise.all([
+    getServices(),
+    getSitePage("services"),
+  ]);
+
+  const serviceList = allServices && allServices.length > 0 ? allServices : fallbackServices;
+
   return (
     <div className="flex flex-col w-full">
       {/* Canonical Stitch Hero Section: Full-Lifecycle Engineering */}
@@ -87,20 +95,26 @@ export default function ServicesPage() {
           {/* Pill Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/30 text-[#d4a359] text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
-            <span>— ENTERPRISE SERVICES &amp; STRATEGIC CAPABILITIES —</span>
+            <span>{sitePage?.hero_eyebrow || "— ENTERPRISE SERVICES & STRATEGIC CAPABILITIES —"}</span>
           </div>
 
           {/* Main Heading & Subtitle */}
           <div className="max-w-4xl mb-12">
             <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight tracking-tight">
-              Full-Lifecycle Engineering, Capital Advisory &amp;{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-[#d4a359]">
-                Sovereign Transformation
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Full-Lifecycle Engineering, Capital Advisory &amp;{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-[#d4a359]">
+                    Sovereign Transformation
+                  </span>
+                  .
+                </>
+              )}
             </h1>
             <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-              From tier-3 cloud architectures to national cold-chain logistics, we deliver institutional capabilities designed for domestic sovereignty and international scale.
+              {sitePage?.hero_subtitle || "From tier-3 cloud architectures to national cold-chain logistics, we deliver institutional capabilities designed for domestic sovereignty and international scale."}
             </p>
           </div>
 
@@ -166,7 +180,7 @@ export default function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((item) => {
+            {serviceList.map((item) => {
               const Icon = item.icon;
               return (
                 <Link

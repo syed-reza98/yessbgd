@@ -3,6 +3,7 @@ import Link from "next/link";
 import { InsightsDirectory } from "@/components/InsightsDirectory";
 import { NewsletterSubscription } from "@/components/NewsletterSubscription";
 import { BookOpen, Users, BarChart3, ShieldCheck, Sparkles } from "lucide-react";
+import { getInsights, getSitePage } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Insights & Thought Leadership Hub | YESS Bangladesh",
@@ -45,7 +46,12 @@ const editorialMetrics = [
   },
 ];
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const [allInsights, sitePage] = await Promise.all([
+    getInsights(),
+    getSitePage("insights"),
+  ]);
+
   return (
     <div className="flex flex-col w-full">
       {/* 1. Signature Corporate Hero Section */}
@@ -70,21 +76,26 @@ export default function InsightsPage() {
           {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
             <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-            <span>— INSTITUTIONAL RESEARCH &amp; THOUGHT LEADERSHIP —</span>
+            <span>{sitePage?.hero_eyebrow || "— INSTITUTIONAL RESEARCH & THOUGHT LEADERSHIP —"}</span>
           </div>
 
           {/* Headline & Subtitle */}
           <div className="max-w-4xl">
             <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6 leading-tight">
-              Macroeconomic Intelligence &amp;{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Sovereign Systems Architecture
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Macroeconomic Intelligence &amp;{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Sovereign Systems Architecture
+                  </span>
+                  .
+                </>
+              )}
             </h1>
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              Proprietary research, macroeconomic analysis, and engineering whitepapers published by YESS venture
-              architects and sector specialists.
+              {sitePage?.hero_subtitle || "Proprietary research, macroeconomic analysis, and engineering whitepapers published by YESS venture architects and sector specialists."}
             </p>
           </div>
 
@@ -121,7 +132,7 @@ export default function InsightsPage() {
       {/* Main Content Area */}
       <main className="py-16 sm:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <InsightsDirectory />
+          <InsightsDirectory initialInsights={allInsights} />
 
           {/* Institutional Intelligence Dispatch Newsletter */}
           <section className="rounded-3xl p-8 sm:p-12 text-white border border-emerald-500/25 bg-gradient-to-br from-[#061a1b] via-[#092224] to-[#061a1b] shadow-2xl relative overflow-hidden">

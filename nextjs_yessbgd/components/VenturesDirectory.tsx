@@ -17,8 +17,33 @@ import {
   ExternalLink,
   ShieldCheck,
   TrendingUp,
+  Code2,
+  PlayCircle,
+  Newspaper,
+  Wrench,
+  CalendarHeart,
+  ChefHat,
+  Plane,
+  Scale,
+  Building2,
 } from "lucide-react";
 import { ventures, type Venture } from "@/data/ventures";
+
+const VENTURE_ICONS: Record<string, any> = {
+  "yess-soft": Code2,
+  "akash-tv": Tv,
+  "akash-ott": PlayCircle,
+  "akash-news": Newspaper,
+  "yess-organic-food": Leaf,
+  "yess-one-stop-engineering": Wrench,
+  "yess-technology": Server,
+  "yess-entertainment": CalendarHeart,
+  "yess-event-management": Sparkles,
+  "yess-restaurant": ChefHat,
+  "yess-interior": LayoutGrid,
+  "yess-overseas": Plane,
+  "yess-law-chamber": Scale,
+};
 
 const ventureMetrics: Record<string, { label1: string; val1: string; label2: string; val2: string }> = {
   "yess-soft": { label1: "Daily Volume", val1: "1M+ Core Txns", label2: "Reliability", val2: "99.98% SLA" },
@@ -56,7 +81,7 @@ const categoryMapping: Record<string, string> = {
 export function VenturesDirectory({
   initialVentures,
 }: {
-  initialVentures?: Venture[];
+  initialVentures?: (Omit<Venture, "icon"> & { icon?: any })[];
 } = {}) {
   const [query, setQuery] = useState("");
   const [selectedCluster, setSelectedCluster] = useState<string>("all");
@@ -206,7 +231,7 @@ export function VenturesDirectory({
       {viewMode === "grid" ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredAndSorted.map((venture) => {
-            const Icon = venture.icon;
+            const Icon = typeof venture.icon === "function" ? venture.icon : (VENTURE_ICONS[venture.slug] || Building2);
             const cluster = categoryMapping[venture.category] || venture.category;
             const metric = ventureMetrics[venture.slug] || {
               label1: "Operations",

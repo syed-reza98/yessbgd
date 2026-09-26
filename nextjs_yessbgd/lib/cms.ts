@@ -51,7 +51,7 @@ export const CMS_TAGS = {
 /**
  * Fetch all published ventures from Supabase with instant local fallback.
  */
-export async function getVentures(): Promise<Venture[]> {
+export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
   try {
     const { data, error } = await supabase
       .from("cms_ventures")
@@ -60,15 +60,16 @@ export async function getVentures(): Promise<Venture[]> {
       .order("sort_order", { ascending: true });
 
     if (error || !data || data.length === 0) {
-      return localVentures;
+      return localVentures.map(({ icon, ...rest }) => rest);
     }
 
     return data.map((row) => {
       const fallback = localVentures.find((v) => v.slug === row.slug) || localVentures[0];
+      const { icon, ...cleanFallback } = fallback;
       const extra = (row.data as any) || {};
 
       return {
-        ...fallback,
+        ...cleanFallback,
         slug: row.slug,
         title: row.title,
         tagline: row.tagline || fallback.tagline,
@@ -95,7 +96,7 @@ export async function getVentures(): Promise<Venture[]> {
     });
   } catch (err) {
     console.warn("⚠️ getVentures fallback triggered:", err);
-    return localVentures;
+    return localVentures.map(({ icon, ...rest }) => rest);
   }
 }
 

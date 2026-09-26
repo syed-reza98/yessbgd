@@ -35,12 +35,18 @@ const categoryMap: Record<string, string[]> = {
   "Media & Broadcasting": ["Media", "Design"],
 };
 
-export function InsightsDirectory() {
+export function InsightsDirectory({
+  initialInsights,
+}: {
+  initialInsights?: Insight[];
+} = {}) {
   const [selectedCategory, setSelectedCategory] = useState("All Intelligence");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const effectiveInsights = initialInsights && initialInsights.length > 0 ? initialInsights : insights;
+
   const filteredInsights = useMemo(() => {
-    return insights.filter((item) => {
+    return effectiveInsights.filter((item) => {
       let matchCategory = true;
       if (selectedCategory !== "All Intelligence") {
         const mappedTags = categoryMap[selectedCategory] || [];

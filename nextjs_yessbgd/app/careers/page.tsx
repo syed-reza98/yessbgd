@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CareersDirectory } from "@/components/CareersDirectory";
 import { ServiceFaqDrawer } from "@/components/ServiceFaqDrawer";
+import { getOpenings, getSitePage } from "@/lib/cms";
 import {
   Users,
   Award,
@@ -129,7 +130,12 @@ const hiringFaqs = [
   },
 ];
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const [allOpenings, sitePage] = await Promise.all([
+    getOpenings(),
+    getSitePage("careers"),
+  ]);
+
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
@@ -155,27 +161,31 @@ export default function CareersPage() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— TALENT &amp; SOVEREIGN CAPABILITIES —</span>
+              <span>{sitePage?.hero_eyebrow || "— TALENT & SOVEREIGN CAPABILITIES —"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight tracking-tight mb-6">
-              Build{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Sovereign Technologies
-              </span>{" "}
-              &amp; Shape Bangladesh&apos;s{" "}
-              <span className="text-[#f6c87a] underline decoration-[#d4a359]/40 decoration-2 underline-offset-8">
-                Industrial Future
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Build{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Sovereign Technologies
+                  </span>{" "}
+                  &amp; Shape Bangladesh&apos;s{" "}
+                  <span className="text-[#f6c87a] underline decoration-[#d4a359]/40 decoration-2 underline-offset-8">
+                    Industrial Future
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              Join an institutional ecosystem of 500+ engineers, product architects, and operations leaders
-              building the next generation of regional champions across enterprise cloud, agritech,
-              streaming, and sovereign finance.
+              {sitePage?.hero_subtitle || "Join an institutional ecosystem of 500+ engineers, product architects, and operations leaders building the next generation of regional champions across enterprise cloud, agritech, streaming, and sovereign finance."}
             </p>
 
             {/* Action Buttons */}
@@ -341,7 +351,7 @@ export default function CareersPage() {
           </p>
         </div>
 
-        <CareersDirectory />
+        <CareersDirectory initialOpenings={allOpenings} />
       </section>
 
       {/* 4-Step Selection Pipeline & Status Tracker Callout */}

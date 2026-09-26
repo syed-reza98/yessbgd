@@ -53,7 +53,11 @@ const departments = [
   "Corporate Governance (1)",
 ];
 
-export function CareersDirectory() {
+export function CareersDirectory({
+  initialOpenings,
+}: {
+  initialOpenings?: Opening[];
+} = {}) {
   const [selectedDept, setSelectedDept] = useState("All Roles (12)");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All");
@@ -61,12 +65,14 @@ export function CareersDirectory() {
   const [selectedSubsidiary, setSelectedSubsidiary] = useState("All");
   const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
 
+  const effectiveOpenings = initialOpenings && initialOpenings.length > 0 ? initialOpenings : openings;
+
   const toggleBookmark = (slug: string) => {
     setBookmarked((prev) => ({ ...prev, [slug]: !prev[slug] }));
   };
 
   const filteredOpenings = useMemo(() => {
-    return openings.filter((item) => {
+    return effectiveOpenings.filter((item) => {
       let matchDept = true;
       if (selectedDept.startsWith("Software")) {
         matchDept = item.dept.toLowerCase().includes("engineer") || item.title.toLowerCase().includes("engineer");

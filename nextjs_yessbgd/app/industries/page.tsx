@@ -15,7 +15,8 @@ import {
   Workflow,
   Sparkles,
 } from "lucide-react";
-import { industries } from "@/data/industries";
+import { industries as fallbackIndustries } from "@/data/industries";
+import { getIndustries, getSitePage } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Industries Overview | YESS Bangladesh",
@@ -58,7 +59,14 @@ const industryMetrics = [
   },
 ];
 
-export default function IndustriesPage() {
+export default async function IndustriesPage() {
+  const [allIndustries, sitePage] = await Promise.all([
+    getIndustries(),
+    getSitePage("industries"),
+  ]);
+
+  const industryList = allIndustries && allIndustries.length > 0 ? allIndustries : fallbackIndustries;
+
   return (
     <div className="flex flex-col w-full">
       {/* 1. Signature Corporate Hero Section */}
@@ -83,20 +91,25 @@ export default function IndustriesPage() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— SECTOR TRANSFORMATION &amp; INDUSTRIAL THESIS —</span>
+              <span>{sitePage?.hero_eyebrow || "— SECTOR TRANSFORMATION & INDUSTRIAL THESIS —"}</span>
             </div>
 
             <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mb-6 leading-tight tracking-tight">
-              Transforming Bangladesh&apos;s Critical Economic Sectors at{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Sovereign Industrial Scale
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Transforming Bangladesh&apos;s Critical Economic Sectors at{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Sovereign Industrial Scale
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              Bringing enterprise cloud architectures, regulatory compliance, IoT automation, and institutional governance
-              to the core engines driving Bangladesh&apos;s multi-billion dollar economy.
+              {sitePage?.hero_subtitle || "Bringing enterprise cloud architectures, regulatory compliance, IoT automation, and institutional governance to the core engines driving Bangladesh's multi-billion dollar economy."}
             </p>
           </div>
 
@@ -130,7 +143,7 @@ export default function IndustriesPage() {
       <section className="py-20 bg-background">
         <div className="container-tight">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {industries.map((ind) => {
+            {industryList.map((ind) => {
               const Icon = ind.icon;
               return (
                 <Link

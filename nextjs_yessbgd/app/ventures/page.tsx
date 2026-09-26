@@ -51,7 +51,12 @@ const metrics = [
   },
 ];
 
-export default function VenturesPage() {
+export default async function VenturesPage() {
+  const [venturesData, sitePage] = await Promise.all([
+    getVentures(),
+    getSitePage("ventures"),
+  ]);
+
   return (
     <div className="flex flex-col w-full">
       {/* 1. Hero Section */}
@@ -74,20 +79,25 @@ export default function VenturesPage() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— SOVEREIGN VENTURE PORTFOLIO —</span>
+              <span>{sitePage?.hero_eyebrow || "— SOVEREIGN VENTURE PORTFOLIO —"}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-              13 Transformative Ventures Driving{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Bangladesh&apos;s New Economy
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  13 Transformative Ventures Driving{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Bangladesh&apos;s New Economy
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-10">
-              From enterprise cloud architectures to sovereign cold-chain logistics, explore our diversified portfolio
-              companies built for regional resilience and global competitiveness.
+              {sitePage?.hero_subtitle || "From enterprise cloud architectures to sovereign cold-chain logistics, explore our diversified portfolio companies built for regional resilience and global competitiveness."}
             </p>
           </div>
 
@@ -118,7 +128,7 @@ export default function VenturesPage() {
       {/* 2. Directory Section with Filters & Interactive Fleet */}
       <section className="py-12 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <VenturesDirectory />
+          <VenturesDirectory initialVentures={venturesData} />
         </div>
       </section>
     </div>
