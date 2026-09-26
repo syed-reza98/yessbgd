@@ -149,12 +149,13 @@ export function ApplicationStatusTracker() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Reference ID Input */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-bold text-on-surface">
+                <label htmlFor="tracker-ref-id" className="block text-xs font-bold text-on-surface">
                   Application Reference ID
                 </label>
                 <div className="relative">
                   <Tag className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline w-4 h-4" />
                   <input
+                    id="tracker-ref-id"
                     type="text"
                     required
                     value={refId}
@@ -171,12 +172,13 @@ export function ApplicationStatusTracker() {
 
               {/* Email Input */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-bold text-on-surface">
+                <label htmlFor="tracker-email" className="block text-xs font-bold text-on-surface">
                   Registered Email Address
                 </label>
                 <div className="relative">
                   <User className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline w-4 h-4" />
                   <input
+                    id="tracker-email"
                     type="email"
                     required
                     value={candidateEmail}
@@ -195,8 +197,9 @@ export function ApplicationStatusTracker() {
             {/* Bottom Control Bar */}
             <div className="pt-3 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2 cursor-pointer select-none text-xs font-medium text-on-surface-variant">
+                <label htmlFor="tracker-remember-me" className="flex items-center gap-2 cursor-pointer select-none text-xs font-medium text-on-surface-variant">
                   <input
+                    id="tracker-remember-me"
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}

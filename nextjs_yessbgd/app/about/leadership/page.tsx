@@ -159,9 +159,9 @@ export default function LeadershipPage() {
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
               INDEPENDENT OVERSIGHT
             </span>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-foreground mt-1">
+            <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground mt-1">
               Institutional Governance & Advisory Pillars
-            </h3>
+            </h2>
             <p className="text-sm text-foreground/70 mt-2">
               External governance councils protecting minority stakeholders and guaranteeing sovereign operational fidelity.
             </p>
@@ -170,9 +170,9 @@ export default function LeadershipPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="glass-card rounded-2xl p-6">
               <ShieldCheck className="h-8 w-8 text-primary mb-3" />
-              <h4 className="font-display font-bold text-lg text-foreground">
+              <h3 className="font-display font-bold text-lg text-foreground">
                 Regulatory & Compliance
-              </h4>
+              </h3>
               <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
                 Bi-annual statutory audits under RJSC GovBD regulations, NBR corporate tax filings, and full alignment with Bangladesh Bank foreign exchange rules.
               </p>
@@ -180,9 +180,9 @@ export default function LeadershipPage() {
 
             <div className="glass-card rounded-2xl p-6">
               <Award className="h-8 w-8 text-[#d4a359] mb-3" />
-              <h4 className="font-display font-bold text-lg text-foreground">
+              <h3 className="font-display font-bold text-lg text-foreground">
                 Academic Research Alliances
-              </h4>
+              </h3>
               <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
                 Collaboration with leading engineering universities in Dhaka on distributed cryptography, agricultural IoT protocols, and domestic edge meshes.
               </p>
@@ -190,9 +190,9 @@ export default function LeadershipPage() {
 
             <div className="glass-card rounded-2xl p-6">
               <Lock className="h-8 w-8 text-primary mb-3" />
-              <h4 className="font-display font-bold text-lg text-foreground">
+              <h3 className="font-display font-bold text-lg text-foreground">
                 Capital Structure & Audit
-              </h4>
+              </h3>
               <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
                 Zero capital default protocols, bilateral escrow milestone gates, and 100% foreground IP protection guaranteed on all enterprise partnerships.
               </p>
@@ -210,9 +210,9 @@ export default function LeadershipPage() {
                 <span className="text-xs font-bold text-[#d4a359] uppercase tracking-widest block">
                   CONFIDENTIAL EXECUTIVE CHANNEL
                 </span>
-                <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mt-1">
+                <h2 className="font-display font-bold text-2xl sm:text-3xl text-white mt-1">
                   Speak with our leadership.
-                </h3>
+                </h2>
               </div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">
                 <Lock className="h-3 w-3" />
@@ -223,9 +223,9 @@ export default function LeadershipPage() {
             {formSubmitted ? (
               <div className="p-8 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-center">
                 <CheckCircle2 className="h-12 w-12 text-emerald-400 mx-auto mb-3" />
-                <h4 className="font-display font-bold text-xl text-white">
+                <h3 className="font-display font-bold text-xl text-white">
                   Leadership Briefing Requested
-                </h4>
+                </h3>
                 <p className="text-xs text-white/70 mt-2 max-w-md mx-auto">
                   Our Managing Director's office will review your institutional inquiry and respond with a formal invitation within 1 business day.
                 </p>
@@ -240,10 +240,11 @@ export default function LeadershipPage() {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-white/80 block mb-1.5">
+                    <label htmlFor="exec-consult-name" className="text-xs font-semibold text-white/80 block mb-1.5">
                       Your Full Name *
                     </label>
                     <input
+                      id="exec-consult-name"
                       type="text"
                       required
                       placeholder="e.g. Tariqur Rahman"
@@ -251,10 +252,11 @@ export default function LeadershipPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-white/80 block mb-1.5">
+                    <label htmlFor="exec-consult-email" className="text-xs font-semibold text-white/80 block mb-1.5">
                       Institutional Email *
                     </label>
                     <input
+                      id="exec-consult-email"
                       type="email"
                       required
                       placeholder="name@enterprise.com"
@@ -265,10 +267,11 @@ export default function LeadershipPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-white/80 block mb-1.5">
+                    <label htmlFor="exec-consult-org" className="text-xs font-semibold text-white/80 block mb-1.5">
                       Organization / Holding Co. *
                     </label>
                     <input
+                      id="exec-consult-org"
                       type="text"
                       required
                       placeholder="e.g. Beximco Group / BRAC"
@@ -276,10 +279,11 @@ export default function LeadershipPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-white/80 block mb-1.5">
+                    <label htmlFor="exec-consult-focus" className="text-xs font-semibold text-white/80 block mb-1.5">
                       Executive Dialogue Focus
                     </label>
                     <select
+                      id="exec-consult-focus"
                       className="w-full px-4 py-2.5 rounded-xl bg-[#0a2022] border border-white/15 text-white text-xs focus:outline-none focus:border-emerald-400"
                     >
                       <option>Sovereign Venture Incubation & Co-Investment</option>
@@ -292,10 +296,11 @@ export default function LeadershipPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-white/80 block mb-1.5">
+                  <label htmlFor="exec-consult-message" className="text-xs font-semibold text-white/80 block mb-1.5">
                     Brief Scoping Context
                   </label>
                   <textarea
+                    id="exec-consult-message"
                     rows={3}
                     placeholder="Outline your strategic mandate, key timelines, or proposed co-investment scale..."
                     className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/40 text-xs focus:outline-none focus:border-emerald-400"

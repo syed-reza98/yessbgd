@@ -110,9 +110,9 @@ export default async function InsightArticlePage({ params }: Props) {
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-sm sm:text-base text-brand-navy dark:text-white">
+                  <span className="font-bold text-sm sm:text-base text-brand-navy dark:text-white">
                     {article.author.name}
-                  </h3>
+                  </span>
                   <CheckCircle2 className="w-4 h-4 text-[#0d6e6e]" />
                 </div>
                 <p className="text-xs text-[#0d6e6e] font-medium mt-0.5">{article.author.role}</p>

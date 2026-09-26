@@ -239,10 +239,12 @@ export function InsightsDirectory() {
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40 w-4 h-4" />
           <input
+            id="insights-search-input"
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search insights by topic, architectural concept, or author..."
+            aria-label="Search insights by topic, architectural concept, or author"
             className="w-full bg-background border border-border rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-foreground"
           />
         </div>

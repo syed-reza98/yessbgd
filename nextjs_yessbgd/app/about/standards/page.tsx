@@ -280,9 +280,9 @@ export default function StandardsPage() {
                           <Icon className="w-5 h-5" />
                         </div>
                         <div>
-                          <h4 className="font-display font-bold text-sm text-white mb-1">
+                          <h3 className="font-display font-bold text-sm text-white mb-1">
                             {pillar.title}
-                          </h4>
+                          </h3>
                           <p className="text-xs text-white/70 leading-relaxed">
                             {pillar.desc}
                           </p>
@@ -348,7 +348,7 @@ export default function StandardsPage() {
                       <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center border border-emerald-500/30">
                         <CheckCircle2 className="w-6 h-6" />
                       </div>
-                      <h4 className="font-display font-bold text-lg text-white">Quality Brief Registered</h4>
+                      <h3 className="font-display font-bold text-lg text-white">Quality Brief Registered</h3>
                       <p className="text-xs text-white/70">
                         Our quality governance council will review your specifications and establish bilateral contact within 24 hours.
                       </p>

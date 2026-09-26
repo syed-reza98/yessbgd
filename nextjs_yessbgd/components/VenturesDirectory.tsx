@@ -99,10 +99,12 @@ export function VenturesDirectory() {
           <div className="relative w-full lg:w-96">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline w-4 h-4" />
             <input
+              id="ventures-search-input"
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search ventures by name, sector, or capability..."
+              aria-label="Search ventures by name, sector, or capability"
               className="w-full pl-10 pr-12 py-2.5 bg-surface-container-low dark:bg-white/5 text-on-surface rounded-xl text-xs sm:text-sm border border-outline-variant/40 focus:border-[#0d6e6e] outline-none transition-all placeholder:text-outline"
             />
             <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-surface-container-high dark:bg-white/10 text-on-surface-variant rounded border border-outline-variant/40">
@@ -112,9 +114,11 @@ export function VenturesDirectory() {
 
           {/* View Modes & Sort */}
           <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end">
-            <div className="flex items-center gap-1 bg-surface-container-low dark:bg-white/5 p-1 rounded-xl border border-outline-variant/30">
+            <div className="flex items-center gap-1 bg-surface-container-low dark:bg-white/5 p-1 rounded-xl border border-outline-variant/30" role="group" aria-label="View layout switcher">
               <button
                 onClick={() => setViewMode("grid")}
+                aria-label="Grid View"
+                aria-pressed={viewMode === "grid"}
                 className={`p-1.5 rounded-lg text-xs font-semibold transition-all ${
                   viewMode === "grid"
                     ? "bg-white dark:bg-[#005454] text-[#005454] dark:text-white shadow-xs"
@@ -126,6 +130,8 @@ export function VenturesDirectory() {
               </button>
               <button
                 onClick={() => setViewMode("table")}
+                aria-label="Table View"
+                aria-pressed={viewMode === "table"}
                 className={`p-1.5 rounded-lg text-xs font-semibold transition-all ${
                   viewMode === "table"
                     ? "bg-white dark:bg-[#005454] text-[#005454] dark:text-white shadow-xs"
@@ -139,8 +145,10 @@ export function VenturesDirectory() {
 
             <div className="relative">
               <select
+                id="ventures-sort-select"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
+                aria-label="Sort ventures"
                 className="appearance-none bg-surface-container-low dark:bg-white/5 text-on-surface font-semibold text-xs py-2.5 pl-3 pr-8 rounded-xl border border-outline-variant/30 focus:border-[#0d6e6e] outline-none cursor-pointer"
               >
                 <option value="founded">Sort by: Founding Year (Newest)</option>

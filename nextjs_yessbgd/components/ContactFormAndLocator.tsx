@@ -110,10 +110,11 @@ export function ContactFormAndLocator() {
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-full-name" className="block text-xs font-semibold text-on-surface mb-1.5">
                     Full Name *
                   </label>
                   <input
+                    id="contact-full-name"
                     type="text"
                     required
                     value={fullName}
@@ -123,10 +124,11 @@ export function ContactFormAndLocator() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-email" className="block text-xs font-semibold text-on-surface mb-1.5">
                     Corporate Email (.com / .bd) *
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     required
                     value={email}
@@ -140,10 +142,11 @@ export function ContactFormAndLocator() {
               {/* Phone & Organization Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-phone" className="block text-xs font-semibold text-on-surface mb-1.5">
                     Phone / WhatsApp Number *
                   </label>
                   <input
+                    id="contact-phone"
                     type="tel"
                     required
                     value={phone}
@@ -153,10 +156,11 @@ export function ContactFormAndLocator() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-organization" className="block text-xs font-semibold text-on-surface mb-1.5">
                     Enterprise / Organization *
                   </label>
                   <input
+                    id="contact-organization"
                     type="text"
                     required
                     value={organization}
@@ -169,10 +173,11 @@ export function ContactFormAndLocator() {
 
               {/* Inquiry Type Dropdown */}
               <div>
-                <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                <label htmlFor="contact-practice-area" className="block text-xs font-semibold text-on-surface mb-1.5">
                   Inquiry Type / Practice Area *
                 </label>
                 <select
+                  id="contact-practice-area"
                   value={practiceArea}
                   onChange={(e) => setPracticeArea(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface focus:outline-none focus:border-[#0d6e6e] transition-all"
@@ -189,10 +194,11 @@ export function ContactFormAndLocator() {
 
               {/* Project Scope Textarea */}
               <div>
-                <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                <label htmlFor="contact-message" className="block text-xs font-semibold text-on-surface mb-1.5">
                   Project Scope & Architectural Requirements
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   required
                   value={message}

@@ -117,9 +117,9 @@ export default function InsightsPage() {
               <span className="text-xs font-mono uppercase tracking-wider text-amber-300">
                 Institutional Intelligence Dispatch
               </span>
-              <h3 className="font-display font-bold text-2xl sm:text-3xl text-white">
+              <h2 className="font-display font-bold text-2xl sm:text-3xl text-white">
                 Receive Monthly Sovereign Technology Briefings
-              </h3>
+              </h2>
               <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
                 Join 4,500+ CTOs, public sector leaders, and enterprise architects receiving our curated quarterly whitepapers, architecture tear-downs, and regulatory tech analyses.
               </p>

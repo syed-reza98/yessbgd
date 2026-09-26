@@ -25,11 +25,13 @@ export function NewsletterSubscription() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
       <input
+        id="newsletter-email-input"
         type="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter enterprise email..."
+        aria-label="Enter enterprise email to subscribe"
         className="w-full sm:w-72 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-xs focus:outline-none focus:border-[#35b0aa]"
       />
       <button

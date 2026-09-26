@@ -119,7 +119,7 @@ export default function FaqPage() {
               <span className="text-xs font-mono uppercase tracking-wider text-[#35b0aa]">
                 Have a Complex or Specific Requirement?
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold">Direct Partner & Architect Consultation</h3>
+              <h2 className="text-xl sm:text-2xl font-bold">Direct Partner & Architect Consultation</h2>
               <p className="text-xs text-outline-variant leading-relaxed">
                 Our Managing Partners and Chief Architects are directly accessible for enterprise strategy,
                 sovereign cloud tenders, and bilateral NDA consultations.

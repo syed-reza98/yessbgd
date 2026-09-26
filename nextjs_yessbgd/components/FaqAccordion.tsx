@@ -139,10 +139,12 @@ export function FaqAccordion() {
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-outline w-5 h-5" />
           <input
+            id="faq-search-input"
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions by topic, e.g. pricing, NDA, OTT, SLA, cloud residency..."
+            aria-label="Search questions by topic, pricing, SLA, or cloud residency"
             className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-[#0d6e6e]"
           />
         </div>

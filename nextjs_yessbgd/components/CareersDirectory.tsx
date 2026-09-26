@@ -129,18 +129,22 @@ export function CareersDirectory() {
           <div className="md:col-span-6 relative">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/40 w-4 h-4" />
             <input
+              id="careers-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by role, tech stack, or subsidiary..."
+              aria-label="Search open roles by title, skill, or subsidiary"
               className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div className="md:col-span-2">
             <select
+              id="careers-level-filter"
               value={selectedLevel}
               onChange={(e) => setSelectedLevel(e.target.value)}
+              aria-label="Filter roles by experience level"
               className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
             >
               <option value="All">Experience: All Tiers</option>
@@ -152,8 +156,10 @@ export function CareersDirectory() {
 
           <div className="md:col-span-2">
             <select
+              id="careers-location-filter"
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
+              aria-label="Filter roles by location"
               className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
             >
               <option value="All">Location: Dhaka Hubs</option>
@@ -165,8 +171,10 @@ export function CareersDirectory() {
 
           <div className="md:col-span-2">
             <select
+              id="careers-subsidiary-filter"
               value={selectedSubsidiary}
               onChange={(e) => setSelectedSubsidiary(e.target.value)}
+              aria-label="Filter roles by subsidiary venture"
               className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
             >
               <option value="All">Subsidiary: All Ventures</option>

@@ -172,9 +172,9 @@ export default function HomePage() {
                         className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
                       />
                     </div>
-                    <h3 className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <span className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
                       Yess Soft
-                    </h3>
+                    </span>
                     <p className="text-[11px] text-slate-300/80 mt-0.5">Enterprise Cloud & AI</p>
                     <span className="mt-1.5 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2 py-0.5 rounded-md border border-emerald-500/30">
                       Tier-1 Cloud Ready
@@ -195,9 +195,9 @@ export default function HomePage() {
                         className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
                       />
                     </div>
-                    <h3 className="text-xs font-bold text-white group-hover:text-rose-300 transition-colors">
+                    <span className="text-xs font-bold text-white group-hover:text-rose-300 transition-colors">
                       Shondhaan
-                    </h3>
+                    </span>
                     <p className="text-[11px] text-slate-300/80 mt-0.5">National Discovery</p>
                     <span className="mt-1.5 text-[9px] text-[#f87171] font-bold uppercase tracking-wider bg-rose-950/90 px-2 py-0.5 rounded-md border border-rose-500/30">
                       National Engine
@@ -218,9 +218,9 @@ export default function HomePage() {
                         className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
                       />
                     </div>
-                    <h3 className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <span className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
                       Organic Haat
-                    </h3>
+                    </span>
                     <p className="text-[11px] text-slate-300/80 mt-0.5">Farm-to-Fork AgriTech</p>
                     <span className="mt-1.5 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2 py-0.5 rounded-md border border-emerald-500/30">
                       10,000+ Growers
@@ -241,9 +241,9 @@ export default function HomePage() {
                         className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
                       />
                     </div>
-                    <h3 className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
+                    <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
                       Akash OTT
-                    </h3>
+                    </span>
                     <p className="text-[11px] text-slate-300/80 mt-0.5">Streaming & Media</p>
                     <span className="mt-1.5 text-[9px] text-[#d4a359] font-bold uppercase tracking-wider bg-amber-950/90 px-2 py-0.5 rounded-md border border-amber-500/30">
                       4.8M Viewers

@@ -269,7 +269,7 @@ export default function MethodologyPage() {
                   >
                     <Icon className="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="text-white text-sm font-semibold mb-1">{c.title}</h4>
+                      <h3 className="text-white text-sm font-semibold mb-1">{c.title}</h3>
                       <p className="text-white/70 text-xs leading-relaxed">{c.desc}</p>
                     </div>
                   </div>

@@ -118,8 +118,9 @@ export function JobApplicationForm({ job }: { job: Opening }) {
 
       <form onSubmit={handleSubmit} className="space-y-4 text-xs">
         <div>
-          <label className="font-semibold text-on-surface block mb-1.5">Full Name *</label>
+          <label htmlFor="job-applicant-name" className="font-semibold text-on-surface block mb-1.5">Full Name *</label>
           <input
+            id="job-applicant-name"
             type="text"
             required
             value={fullName}
@@ -130,8 +131,9 @@ export function JobApplicationForm({ job }: { job: Opening }) {
         </div>
 
         <div>
-          <label className="font-semibold text-on-surface block mb-1.5">Corporate / Personal Email *</label>
+          <label htmlFor="job-applicant-email" className="font-semibold text-on-surface block mb-1.5">Corporate / Personal Email *</label>
           <input
+            id="job-applicant-email"
             type="email"
             required
             value={email}
@@ -142,8 +144,9 @@ export function JobApplicationForm({ job }: { job: Opening }) {
         </div>
 
         <div>
-          <label className="font-semibold text-on-surface block mb-1.5">Mobile / WhatsApp Number *</label>
+          <label htmlFor="job-applicant-phone" className="font-semibold text-on-surface block mb-1.5">Mobile / WhatsApp Number *</label>
           <input
+            id="job-applicant-phone"
             type="tel"
             required
             value={phone}
@@ -154,10 +157,11 @@ export function JobApplicationForm({ job }: { job: Opening }) {
         </div>
 
         <div>
-          <label className="font-semibold text-on-surface block mb-1.5">
+          <label htmlFor="job-applicant-portfolio" className="font-semibold text-on-surface block mb-1.5">
             GitHub / LinkedIn / Portfolio URL
           </label>
           <input
+            id="job-applicant-portfolio"
             type="url"
             value={portfolioUrl}
             onChange={(e) => setPortfolioUrl(e.target.value)}
@@ -167,9 +171,10 @@ export function JobApplicationForm({ job }: { job: Opening }) {
         </div>
 
         <div>
-          <label className="font-semibold text-on-surface block mb-1.5">Attach Résumé / CV (PDF or DOCX)</label>
+          <label htmlFor="job-applicant-cv" className="font-semibold text-on-surface block mb-1.5">Attach Résumé / CV (PDF or DOCX)</label>
           <div className="relative border-2 border-dashed border-outline-variant rounded-xl p-4 text-center hover:border-[#0d6e6e] transition-colors cursor-pointer bg-surface-container-low/40">
             <input
+              id="job-applicant-cv"
               type="file"
               accept=".pdf,.doc,.docx"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
@@ -183,6 +188,7 @@ export function JobApplicationForm({ job }: { job: Opening }) {
                 </span>
                 <button
                   type="button"
+                  aria-label="Remove attached CV"
                   onClick={(e) => {
                     e.stopPropagation();
                     setFile(null);
@@ -204,10 +210,11 @@ export function JobApplicationForm({ job }: { job: Opening }) {
         </div>
 
         <div>
-          <label className="font-semibold text-on-surface block mb-1.5">
+          <label htmlFor="job-applicant-note" className="font-semibold text-on-surface block mb-1.5">
             Short Note on Technical Contributions
           </label>
           <textarea
+            id="job-applicant-note"
             rows={3}
             value={coverNote}
             onChange={(e) => setCoverNote(e.target.value)}

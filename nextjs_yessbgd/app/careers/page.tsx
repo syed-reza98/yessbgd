@@ -197,25 +197,25 @@ export default function CareersPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-[#061a1b] text-white p-6 rounded-2xl border border-surface-container-high/15 relative overflow-hidden group shadow-sm">
               <span className="text-3xl lg:text-4xl font-extrabold text-[#35b0aa] block mb-2">500+</span>
-              <h3 className="font-bold text-sm text-surface-bright mb-1">Ecosystem Builders</h3>
+              <h2 className="font-bold text-sm text-surface-bright mb-1">Ecosystem Builders</h2>
               <p className="text-outline-variant text-xs">Engineers, Agronomists & Venture Architects</p>
             </div>
 
             <div className="bg-[#061a1b] text-white p-6 rounded-2xl border border-surface-container-high/15 relative overflow-hidden group shadow-sm">
               <span className="text-3xl lg:text-4xl font-extrabold text-[#f6c87a] block mb-2">94%</span>
-              <h3 className="font-bold text-sm text-surface-bright mb-1">Retention Rate</h3>
+              <h2 className="font-bold text-sm text-surface-bright mb-1">Retention Rate</h2>
               <p className="text-outline-variant text-xs">Long-term institutional loyalty & career growth</p>
             </div>
 
             <div className="bg-[#061a1b] text-white p-6 rounded-2xl border border-surface-container-high/15 relative overflow-hidden group shadow-sm">
               <span className="text-2xl lg:text-3xl font-extrabold text-[#a0f0f0] block mb-2">Dual Hub</span>
-              <h3 className="font-bold text-sm text-surface-bright mb-1">Gulshan-2 & Motijheel</h3>
+              <h2 className="font-bold text-sm text-surface-bright mb-1">Gulshan-2 & Motijheel</h2>
               <p className="text-outline-variant text-xs">Dhaka Dual-Campus Innovation Labs & Dev Ops</p>
             </div>
 
             <div className="bg-[#061a1b] text-white p-6 rounded-2xl border border-surface-container-high/15 relative overflow-hidden group shadow-sm">
               <span className="text-3xl lg:text-4xl font-extrabold text-[#f2be71] block mb-2">৳250k+</span>
-              <h3 className="font-bold text-sm text-surface-bright mb-1">Annual Learning Grants</h3>
+              <h2 className="font-bold text-sm text-surface-bright mb-1">Annual Learning Grants</h2>
               <p className="text-outline-variant text-xs">Sponsoring certifications & advanced research</p>
             </div>
           </div>
@@ -339,9 +339,9 @@ export default function CareersPage() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold text-xs text-brand-navy dark:text-white">
+                    <h3 className="font-semibold text-xs text-brand-navy dark:text-white">
                       Portfolio & Architecture Submission
-                    </h4>
+                    </h3>
                     <p className="text-outline text-xs mt-0.5">
                       Submit code repositories, system diagrams, or portfolio links in under 5 minutes.
                     </p>
@@ -353,9 +353,9 @@ export default function CareersPage() {
                     2
                   </div>
                   <div>
-                    <h4 className="font-semibold text-xs text-brand-navy dark:text-white">
+                    <h3 className="font-semibold text-xs text-brand-navy dark:text-white">
                       Peer Technical Assessment (Live Deep Dive)
-                    </h4>
+                    </h3>
                     <p className="text-outline text-xs mt-0.5">
                       60-minute collaborative session with Lead Systems Architect on real-world architecture.
                     </p>
@@ -367,9 +367,9 @@ export default function CareersPage() {
                     3
                   </div>
                   <div>
-                    <h4 className="font-semibold text-xs text-brand-navy dark:text-white">
+                    <h3 className="font-semibold text-xs text-brand-navy dark:text-white">
                       Venture MD Dialogue & Executive Offer
-                    </h4>
+                    </h3>
                     <p className="text-outline text-xs mt-0.5">
                       Direct compensation, profit-sharing, and equity onboarding with venture leadership.
                     </p>
@@ -434,7 +434,7 @@ export default function CareersPage() {
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div>
-                <h4 className="font-bold text-xs text-brand-navy dark:text-white">{t.name}</h4>
+                <h3 className="font-bold text-xs text-brand-navy dark:text-white">{t.name}</h3>
                 <p className="text-[11px] text-[#0d6e6e] font-medium mt-0.5">{t.role}</p>
               </div>
             </div>

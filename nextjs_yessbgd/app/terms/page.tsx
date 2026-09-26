@@ -209,9 +209,9 @@ export default function TermsPage() {
           {/* Sticky 14-Clause Table of Contents (4 cols) */}
           <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
             <div className="glass-card rounded-2xl p-6 border border-outline-variant/40 space-y-4">
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#0d6e6e] pb-2 border-b border-outline-variant/30">
+              <h2 className="text-xs font-extrabold uppercase tracking-wider text-[#0d6e6e] pb-2 border-b border-outline-variant/30">
                 Table of Contents (14 Clauses)
-              </h3>
+              </h2>
               <nav className="space-y-1.5 text-xs">
                 {clauses.map((c) => (
                   <a

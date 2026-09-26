@@ -337,8 +337,9 @@ export default function AwardsPage() {
                         />
                       </div>
                       <div className="pt-1">
-                        <label className="flex items-start gap-2.5 cursor-pointer text-xs text-white/80 leading-snug">
+                        <label htmlFor="awards-nda-checkbox" className="flex items-start gap-2.5 cursor-pointer text-xs text-white/80 leading-snug">
                           <input
+                            id="awards-nda-checkbox"
                             type="checkbox"
                             defaultChecked
                             className="mt-0.5 rounded border-white/30 text-emerald-500 focus:ring-amber-400 bg-white/10"

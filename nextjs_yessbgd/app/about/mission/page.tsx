@@ -78,9 +78,9 @@ export default function MissionPage() {
                 <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 font-bold">
                   01
                 </div>
-                <h4 className="font-display font-bold text-lg text-foreground">
+                <h3 className="font-display font-bold text-lg text-foreground">
                   Strategy with Direct Operators
-                </h4>
+                </h3>
                 <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
                   Engagements are staffed and delivered by senior architects and venture leads, never handed down to junior pools or outsourced contractors.
                 </p>
@@ -96,9 +96,9 @@ export default function MissionPage() {
                 <div className="h-10 w-10 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 font-bold">
                   02
                 </div>
-                <h4 className="font-display font-bold text-lg text-foreground">
+                <h3 className="font-display font-bold text-lg text-foreground">
                   Shipped Code & Physical Logistics
-                </h4>
+                </h3>
                 <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
                   We measure success not in decks or strategy documents, but in deployed bare-metal clusters, production ERP systems, and tangible farm-to-table networks.
                 </p>
@@ -114,9 +114,9 @@ export default function MissionPage() {
                 <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 font-bold">
                   03
                 </div>
-                <h4 className="font-display font-bold text-lg text-foreground">
+                <h3 className="font-display font-bold text-lg text-foreground">
                   Zero-Defect Sovereign Governance
-                </h4>
+                </h3>
                 <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
                   ISO-aligned quality assurance, zero-trust cryptographic architectures, and domestic data residency across all 64 districts in Bangladesh.
                 </p>
@@ -132,9 +132,9 @@ export default function MissionPage() {
                 <div className="h-10 w-10 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 font-bold">
                   04
                 </div>
-                <h4 className="font-display font-bold text-lg text-foreground">
+                <h3 className="font-display font-bold text-lg text-foreground">
                   Capital Preservation & Alignment
-                </h4>
+                </h3>
                 <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
                   Every tranche is tied to verifiable business outcomes. We co-invest sovereign capital alongside enterprise partners to guarantee skin-in-the-game.
                 </p>
