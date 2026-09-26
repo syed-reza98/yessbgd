@@ -127,14 +127,14 @@ export default function AwardsPage() {
               return (
                 <div
                   key={badge.title}
-                  className="rounded-xl bg-surface-container-lowest dark:bg-[#061a1b] p-3.5 flex items-center gap-3 border border-outline-variant/30 shadow-xs hover:border-primary/40 transition-colors"
+                  className="rounded-xl glass-card p-3.5 flex items-center gap-3 border border-border shadow-sm hover:border-primary/40 transition-colors"
                 >
                   <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                     <Icon className={`w-5 h-5 ${badge.color}`} />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-on-surface leading-snug">{badge.title}</div>
-                    <div className="text-[11px] text-on-surface-variant">{badge.subtitle}</div>
+                    <div className="text-xs font-bold text-foreground leading-snug">{badge.title}</div>
+                    <div className="text-[11px] text-foreground/60">{badge.subtitle}</div>
                   </div>
                 </div>
               );
@@ -165,7 +165,7 @@ export default function AwardsPage() {
               return (
                 <article
                   key={item.title}
-                  className="rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] p-7 border border-outline-variant/30 hover:border-primary/40 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                  className="rounded-2xl glass-card p-7 border border-border hover:border-primary/40 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-start justify-between mb-6">
@@ -176,14 +176,14 @@ export default function AwardsPage() {
                         {item.tier}
                       </span>
                     </div>
-                    <h3 className="font-display font-bold text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="font-display font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
+                    <p className="text-sm text-foreground/70 leading-relaxed mb-6">
                       {item.desc}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-outline-variant/30 flex items-center gap-2 text-xs font-medium text-on-surface-variant">
+                  <div className="pt-4 border-t border-border flex items-center gap-2 text-xs font-medium text-foreground/80">
                     <FooterIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                     <span>{item.footerText}</span>
                   </div>

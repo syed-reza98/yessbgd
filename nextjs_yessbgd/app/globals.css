@@ -38,28 +38,7 @@
   --color-brand-teal-glow: #35b0aa;
   --color-brand-gold: #d4a359;
   --color-brand-gold-glow: #f6c87a;
-  --color-brand-navy: #061a1b;
-
-  /* Stitch & Material 3 Semantic Surface Tokens */
-  --color-surface-bright: var(--surface-bright);
-  --color-surface-dim: var(--surface-dim);
-  --color-surface-container-lowest: var(--surface-container-lowest);
-  --color-surface-container-low: var(--surface-container-low);
-  --color-surface-container: var(--surface-container);
-  --color-surface-container-high: var(--surface-container-high);
-  --color-surface-container-highest: var(--surface-container-highest);
-
-  /* Stitch Semantic Foreground & Outline Tokens */
-  --color-on-surface: var(--on-surface);
-  --color-on-surface-variant: var(--on-surface-variant);
-  --color-outline: var(--outline);
-  --color-outline-variant: var(--outline-variant);
-
-  /* Additional Stitch Container Tokens */
-  --color-primary-container: var(--primary-container);
-  --color-on-primary-container: var(--on-primary-container);
-  --color-secondary-container: var(--secondary-container);
-  --color-on-secondary-container: var(--on-secondary-container);
+  --color-brand-navy: #081d1e;
 
   --font-display: var(--font-jakarta), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -67,49 +46,28 @@
 
 :root {
   --radius: 1rem;
-  --background: #f7faf9;
-  --foreground: #181c1c;
-
-  /* Stitch & M3 Surface Palette */
-  --surface: #f7faf9;
-  --surface-bright: #ffffff;
-  --surface-dim: #d7dbda;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f4f3;
-  --surface-container: #ebeeee;
-  --surface-container-high: #dfecec;
-  --surface-container-highest: #d4e4e4;
-
-  /* Stitch Text & Outline */
-  --on-surface: #181c1c;
-  --on-surface-variant: #3e4948;
-  --outline: #6e7979;
-  --outline-variant: #bec9c8;
-
-  /* Cards & Popovers */
-  --card: #ffffff;
-  --card-foreground: #181c1c;
-  --popover: #ffffff;
-  --popover-foreground: #181c1c;
+  --background: oklch(0.985 0.003 250);
+  --foreground: oklch(0.18 0.018 250);
+  --surface: oklch(0.97 0.004 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 250);
+  --popover: oklch(0.99 0.003 250);
+  --popover-foreground: oklch(0.18 0.02 250);
 
   /* Brand: deep institutional teal with restrained glow */
-  --primary: #005454;
-  --primary-foreground: #ffffff;
-  --primary-glow: #35b0aa;
-  --primary-container: #0d6e6e;
-  --on-primary-container: #9dedec;
+  --primary: oklch(0.42 0.075 188);
+  --primary-foreground: oklch(0.985 0.003 250);
+  --primary-glow: oklch(0.68 0.070 182);
 
-  --secondary: #7e5713;
-  --secondary-foreground: #ffffff;
-  --secondary-container: #fec97b;
-  --on-secondary-container: #78520e;
+  --secondary: oklch(0.965 0.004 250);
+  --secondary-foreground: oklch(0.22 0.03 250);
 
   /* Accent: champagne gold */
-  --accent: #d4a359;
-  --accent-foreground: #061a1b;
+  --accent: oklch(0.72 0.105 78);
+  --accent-foreground: oklch(0.20 0.020 250);
 
-  --muted: #ebeeee;
-  --muted-foreground: #3e4948;
+  --muted: oklch(0.96 0.004 250);
+  --muted-foreground: oklch(0.5 0.012 250);
 
   --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
@@ -134,43 +92,17 @@
 }
 
 .dark {
-  --background: #061a1b;
-  --foreground: #f7faf9;
-
-  --surface: #061a1b;
-  --surface-bright: #0d282a;
-  --surface-dim: #041213;
-  --surface-container-lowest: #051617;
-  --surface-container-low: #081f21;
-  --surface-container: #0b2729;
-  --surface-container-high: #103235;
-  --surface-container-highest: #163f43;
-
-  --on-surface: #f7faf9;
-  --on-surface-variant: #bec9c8;
-  --outline: #8e9e9d;
-  --outline-variant: #2d4547;
-
-  --card: #081f21;
-  --card-foreground: #f7faf9;
-  --popover: #081f21;
-  --popover-foreground: #f7faf9;
-
-  --primary: #84d4d3;
-  --primary-foreground: #002020;
-  --primary-glow: #35b0aa;
-  --primary-container: #005454;
-  --on-primary-container: #9dedec;
-
-  --secondary: #f2be71;
-  --secondary-foreground: #291800;
-  --secondary-container: #614000;
-  --on-secondary-container: #ffddb1;
-
-  --border: #163f43;
-  --input: #163f43;
-  --glass-bg: rgba(6, 26, 27, 0.75);
-  --glass-border: rgba(53, 176, 170, 0.25);
+  --background: oklch(0.14 0.03 195);
+  --foreground: oklch(0.985 0.003 250);
+  --surface: oklch(0.18 0.03 195);
+  --card: oklch(0.16 0.03 195);
+  --card-foreground: oklch(0.985 0.003 250);
+  --popover: oklch(0.16 0.03 195);
+  --popover-foreground: oklch(0.985 0.003 250);
+  --border: oklch(0.28 0.03 195);
+  --input: oklch(0.28 0.03 195);
+  --glass-bg: oklch(0.14 0.03 195 / 0.75);
+  --glass-border: oklch(0.42 0.075 188 / 0.35);
 }
 
 body {

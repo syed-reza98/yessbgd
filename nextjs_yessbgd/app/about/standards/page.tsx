@@ -168,7 +168,7 @@ export default function StandardsPage() {
               return (
                 <div
                   key={m.value}
-                  className="rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] p-6 border border-outline-variant/30 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 shadow-sm"
+                  className="rounded-2xl glass-card p-6 border border-border hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 shadow-sm"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <Icon className={`w-7 h-7 ${m.iconColor}`} />
@@ -176,10 +176,10 @@ export default function StandardsPage() {
                       {m.tag}
                     </span>
                   </div>
-                  <div className="font-display font-bold text-xl sm:text-2xl text-on-surface tracking-tight mb-1">
+                  <div className="font-display font-bold text-xl sm:text-2xl text-foreground tracking-tight mb-1">
                     {m.value}
                   </div>
-                  <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                  <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
                     {m.desc}
                   </p>
                 </div>
@@ -195,11 +195,11 @@ export default function StandardsPage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
             <div>
               <span className="text-xs font-bold text-primary uppercase tracking-wider">Pillars of Execution</span>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl text-on-surface mt-1">
+              <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground mt-1">
                 Enterprise Quality Architecture
               </h2>
             </div>
-            <p className="text-sm text-on-surface-variant max-w-md mt-4 md:mt-0 leading-relaxed">
+            <p className="text-sm text-foreground/70 max-w-md mt-4 md:mt-0 leading-relaxed">
               Six non-negotiable operational disciplines baked into every sovereign software deployment, venture build, and managed delivery contract.
             </p>
           </div>
@@ -211,21 +211,21 @@ export default function StandardsPage() {
               return (
                 <div
                   key={p.title}
-                  className={`rounded-3xl bg-surface-container-lowest dark:bg-[#061a1b] p-8 border border-outline-variant/30 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group ${p.borderHover}`}
+                  className={`rounded-3xl glass-card p-8 border border-border transition-all duration-300 hover:shadow-lg flex flex-col justify-between group ${p.borderHover}`}
                 >
                   <div>
                     <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-105 transition-transform">
                       <Icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="font-display font-bold text-lg text-on-surface mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="font-display font-bold text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
                       {p.title}
                     </h3>
-                    <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
+                    <p className="text-sm text-foreground/70 leading-relaxed mb-6">
                       {p.desc}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-semibold text-on-surface">
+                  <div className="pt-4 border-t border-border flex items-center justify-between text-xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted font-semibold text-foreground/80">
                       <BadgeIcon className="w-3.5 h-3.5 text-primary" />
                       <span>{p.badge}</span>
                     </span>

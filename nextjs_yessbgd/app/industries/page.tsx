@@ -27,23 +27,23 @@ export default function IndustriesPage() {
                 <Link
                   key={ind.slug}
                   href={`/industries/${ind.slug}`}
-                  className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group shadow-xs"
+                  className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                       <Icon className="h-6 w-6" />
                     </div>
 
-                    <h3 className="font-display font-bold text-xl text-on-surface group-hover:text-primary transition-colors">
+                    <h3 className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors">
                       {ind.title}
                     </h3>
-                    <p className="text-sm text-on-surface-variant mt-2.5 leading-relaxed">
+                    <p className="text-sm text-foreground/70 mt-2.5 leading-relaxed">
                       {ind.desc}
                     </p>
 
-                    <div className="mt-6 pt-4 border-t border-outline-variant/30 space-y-2">
+                    <div className="mt-6 pt-4 border-t border-border space-y-2">
                       {ind.outcomes.map((o) => (
-                        <div key={o} className="flex items-center gap-2 text-xs font-semibold text-on-surface-variant">
+                        <div key={o} className="flex items-center gap-2 text-xs font-semibold text-foreground/80">
                           <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
                           <span>{o}</span>
                         </div>
@@ -51,7 +51,7 @@ export default function IndustriesPage() {
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-primary">
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs font-bold text-primary">
                     <span>Explore Solutions</span>
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
                   </div>

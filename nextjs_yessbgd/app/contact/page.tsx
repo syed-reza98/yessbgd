@@ -101,9 +101,9 @@ export default function ContactPage() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy dark:text-white tracking-tight mb-4">
               Connect With Bangladesh&apos;s{" "}
-              <span className="bg-gradient-to-r from-primary to-brand-gold bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#0d6e6e] via-[#35b0aa] to-[#d4a359] bg-clip-text text-transparent">
                 Venture Ecosystem
               </span>
               .
@@ -118,7 +118,7 @@ export default function ContactPage() {
           </div>
 
           {/* Telemetry Metric Badges */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-brand-navy text-white border border-white/10 shadow-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#061a1b] text-white border border-white/10 shadow-sm">
             {telemetryBadges.map((badge) => {
               const Icon = badge.icon;
               return (
@@ -146,13 +146,13 @@ export default function ContactPage() {
       </main>
 
       {/* Frequently Addressed Inquiries Strip */}
-      <section className="py-12 bg-surface-container-low border-t border-outline-variant/30">
+      <section className="py-12 bg-surface-container-low dark:bg-[#061a1b]/40 border-t border-outline-variant/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-secondary font-bold text-xs uppercase tracking-widest block mb-2">
+            <span className="text-[#7e5713] dark:text-[#f2be71] font-bold text-xs uppercase tracking-widest block mb-2">
               Institutional Protocols
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-primary">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#005454] dark:text-white">
               Frequently Addressed Inquiries
             </h2>
             <p className="text-xs sm:text-sm text-on-surface-variant mt-2">

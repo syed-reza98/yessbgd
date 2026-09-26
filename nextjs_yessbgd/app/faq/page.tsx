@@ -84,19 +84,19 @@ export default function FaqPage() {
           </div>
 
           {/* Quick Trust Strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 shadow-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl glass-card border border-outline-variant/30 shadow-sm">
             {trustMetrics.map((item) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.title}
-                  className="flex items-center gap-3.5 p-3 rounded-xl bg-surface-container-low dark:bg-surface-container border border-outline-variant/20"
+                  className="flex items-center gap-3.5 p-3 rounded-xl bg-surface-container-lowest/70 border border-surface-container-high/40"
                 >
                   <div className="w-10 h-10 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e] flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-xs sm:text-sm text-on-surface leading-tight">
+                    <div className="font-bold text-xs sm:text-sm text-brand-navy dark:text-white leading-tight">
                       {item.title}
                     </div>
                     <div className="text-[11px] text-on-surface-variant">{item.desc}</div>

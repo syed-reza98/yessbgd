@@ -184,10 +184,10 @@ export function VenturesDirectory() {
       {/* Counter Bar */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <span className="text-xs uppercase font-bold tracking-wider text-secondary block">
+          <span className="text-[11px] uppercase font-bold tracking-wider text-[#7e5713] dark:text-[#f2be71] block">
             Operational Fleet
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-primary">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#005454] dark:text-white">
             Portfolio Subsidiaries
           </h2>
         </div>
@@ -212,15 +212,15 @@ export function VenturesDirectory() {
             return (
               <article
                 key={venture.slug}
-                className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl border border-outline-variant/30 p-6 flex flex-col justify-between hover:shadow-lg hover:border-brand-teal/40 transition-all duration-200 group"
+                className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl border border-outline-variant/30 p-6 flex flex-col justify-between hover:shadow-lg hover:border-[#0d6e6e]/40 transition-all duration-200 group"
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center text-brand-teal group-hover:bg-brand-teal group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-[#0d6e6e]/10 border border-[#0d6e6e]/20 flex items-center justify-center text-[#0d6e6e] dark:text-[#35b0aa] group-hover:bg-[#0d6e6e] group-hover:text-white transition-colors">
                       <Icon className="w-6 h-6" />
                     </div>
                     <div className="text-right">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-surface-container text-primary">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-surface-container dark:bg-white/10 text-[#005454] dark:text-[#84d4d3]">
                         {cluster}
                       </span>
                       <p className="text-[10px] text-outline mt-1 font-medium">
@@ -229,30 +229,30 @@ export function VenturesDirectory() {
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-on-surface group-hover:text-brand-teal transition-colors">
+                  <h3 className="text-lg font-bold text-on-surface group-hover:text-[#0d6e6e] dark:group-hover:text-[#35b0aa] transition-colors">
                     {venture.title}
                   </h3>
-                  <p className="text-xs font-semibold text-secondary mt-0.5">{venture.tagline}</p>
+                  <p className="text-xs font-semibold text-[#d4a359] mt-0.5">{venture.tagline}</p>
                   <p className="text-xs text-on-surface-variant mt-2 mb-4 leading-relaxed line-clamp-3">
                     {venture.desc}
                   </p>
                 </div>
 
                 <div>
-                  <div className="py-2.5 px-3 rounded-xl bg-surface-container-low border border-outline-variant/20 mb-4 text-xs grid grid-cols-2 gap-2">
+                  <div className="py-2.5 px-3 rounded-xl bg-surface-container-low dark:bg-white/5 border border-outline-variant/20 mb-4 text-xs grid grid-cols-2 gap-2">
                     <div>
                       <span className="text-[10px] text-outline block">{metric.label1}</span>
                       <span className="font-bold text-on-surface text-xs">{metric.val1}</span>
                     </div>
                     <div>
                       <span className="text-[10px] text-outline block">{metric.label2}</span>
-                      <span className="font-bold text-brand-teal text-xs">{metric.val2}</span>
+                      <span className="font-bold text-[#0d6e6e] dark:text-[#35b0aa] text-xs">{metric.val2}</span>
                     </div>
                   </div>
 
                   <Link
                     href={`/ventures/${venture.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-brand-gold group-hover:translate-x-0.5 transition-all"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#005454] dark:text-[#84d4d3] hover:text-[#d4a359] group-hover:translate-x-0.5 transition-all"
                   >
                     <span>Explore Venture Profile</span>
                     <ArrowRight className="w-3.5 h-3.5" />

@@ -119,24 +119,24 @@ export function ApplicationStatusTracker() {
 
       {/* 2. Hero Section */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high/80 dark:bg-white/5 border border-brand-teal/20 text-primary dark:text-[#84d4d3] mb-6 shadow-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high dark:bg-white/5 border border-[#35b0aa]/20 text-[#005454] dark:text-[#84d4d3] mb-4 shadow-sm">
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal-glow opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary dark:bg-[#35b0aa]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#35b0aa] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#005454] dark:bg-[#35b0aa]" />
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider font-inter">
+          <span className="text-[11px] font-bold uppercase tracking-wider">
             Recruitment Pipeline &amp; Candidate Telemetry
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-on-surface mb-4 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#005454] dark:text-white mb-4 tracking-tight">
           Track Your{" "}
-          <span className="bg-gradient-to-r from-primary via-brand-teal to-brand-teal-glow bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#005454] via-[#0d6e6e] to-[#35b0aa] bg-clip-text text-transparent">
             Application Status
           </span>
         </h1>
 
-        <p className="text-sm sm:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
           Real-time candidate telemetry for engineering, product, and consulting roles across YESS Bangladesh
           ventures. Enter your tracking reference number and registered email to check status.
         </p>
@@ -262,7 +262,7 @@ export function ApplicationStatusTracker() {
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-brand-navy dark:text-white tracking-tight">
                 Lead Cloud Solutions Architect — Yess Soft Ltd.
               </h2>
 

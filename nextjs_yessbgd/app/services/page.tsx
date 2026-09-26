@@ -172,7 +172,7 @@ export default function ServicesPage() {
                 <Link
                   key={item.slug}
                   href={`/services/${item.slug}`}
-                  className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
+                  className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-5">
@@ -184,16 +184,16 @@ export default function ServicesPage() {
                       </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-xl text-on-surface group-hover:text-primary transition-colors">
+                    <h3 className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-on-surface-variant mt-2.5 leading-relaxed">
+                    <p className="text-sm text-foreground/70 mt-2.5 leading-relaxed">
                       {item.desc}
                     </p>
 
-                    <ul className="mt-5 space-y-2 border-t border-outline-variant/30 pt-4">
+                    <ul className="mt-5 space-y-2 border-t border-border pt-4">
                       {item.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-2 text-xs text-on-surface-variant font-medium">
+                        <li key={b} className="flex items-start gap-2 text-xs text-foreground/80 font-medium">
                           <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
                           <span>{b}</span>
                         </li>
@@ -201,7 +201,7 @@ export default function ServicesPage() {
                     </ul>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-primary">
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs font-bold text-primary">
                     <span>Pricing from {item.pricing.from}</span>
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
                   </div>
@@ -213,16 +213,16 @@ export default function ServicesPage() {
       </section>
 
       {/* 2. Engagement Models Matrix */}
-      <section className="py-20 bg-surface-container-low border-y border-outline-variant/20">
+      <section className="py-20 bg-[#f4f8f8] border-y border-[#eaf2f2]">
         <div className="container-tight">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
               COMMERCIAL STRUCTURES
             </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-on-surface mt-2">
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
               Flexible Engagement Models
             </h2>
-            <p className="text-sm text-on-surface-variant mt-2">
+            <p className="text-sm text-foreground/70 mt-2">
               Select the operational engagement model best aligned with your development stage and governance requirements.
             </p>
           </div>
@@ -233,8 +233,8 @@ export default function ServicesPage() {
                 key={model.name}
                 className={`rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 relative ${
                   model.highlight
-                    ? "bg-surface-container-lowest dark:bg-[#061a1b] border-2 border-primary shadow-xl"
-                    : "bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 shadow-sm"
+                    ? "glass-card-strong border-2 border-primary shadow-xl bg-white"
+                    : "glass-card border border-border"
                 }`}
               >
                 {model.highlight && (
@@ -243,11 +243,11 @@ export default function ServicesPage() {
                   </span>
                 )}
                 <div>
-                  <h3 className="font-display font-bold text-xl text-on-surface">
+                  <h3 className="font-display font-bold text-xl text-foreground">
                     {model.name}
                   </h3>
                   <div className="mt-3">
-                    <span className="font-display font-extrabold text-2xl text-on-surface">
+                    <span className="font-display font-extrabold text-2xl text-foreground">
                       {model.price}
                     </span>
                     <span className="text-xs text-muted-foreground block font-medium mt-0.5">
