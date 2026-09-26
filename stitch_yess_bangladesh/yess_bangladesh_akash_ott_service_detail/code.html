@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Akash OTT — High-Concurrency Streaming &amp; Digital Media Infrastructure | YESS Bangladesh</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Plus Jakarta Sans & Inter Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e0e3e2",
+            "on-secondary-fixed": "#291800",
+            "surface": "#f7faf9",
+            "tertiary": "#743c1d",
+            "outline-variant": "#bec9c8",
+            "on-secondary": "#ffffff",
+            "brand-gold": "#d4a359",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#ffb692",
+            "inverse-surface": "#2d3131",
+            "surface-container-lowest": "#ffffff",
+            "brand-teal": "#0d6e6e",
+            "brand-teal-glow": "#35b0aa",
+            "inverse-on-surface": "#eef1f0",
+            "surface-container-low": "#f4f8f8",
+            "background": "#f7faf9",
+            "on-primary": "#ffffff",
+            "surface-bright": "#ffffff",
+            "secondary-fixed-dim": "#f2be71",
+            "inverse-primary": "#84d4d3",
+            "brand-gold-glow": "#f6c87a",
+            "primary-fixed": "#a0f0f0",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#3e4948",
+            "brand-navy": "#061a1b",
+            "surface-tint": "#016a6a",
+            "on-background": "#181c1c",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#ebeeee",
+            "on-primary-container": "#9dedec",
+            "on-primary-fixed-variant": "#004f50",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#78520e",
+            "secondary-container": "#fec97b",
+            "surface-container-highest": "#e0e3e2",
+            "outline": "#6e7979",
+            "on-primary-fixed": "#002020",
+            "primary": "#005454",
+            "primary-container": "#0d6e6e",
+            "secondary-fixed": "#ffddb1",
+            "surface-container-high": "#e6e9e8",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "error-container": "#ffdad6",
+            "on-surface": "#181c1c",
+            "on-secondary-fixed-variant": "#614000",
+            "primary-fixed-dim": "#84d4d3",
+            "surface-dim": "#d7dbda",
+            "tertiary-container": "#915332",
+            "secondary": "#7e5713",
+            "on-tertiary-fixed": "#341100",
+            "on-tertiary-container": "#ffd8c6",
+            "tertiary-fixed": "#ffdbcb"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter", "Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter", "Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+    }
+    .liquid-glass-accent {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(244, 248, 248, 0.65) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(212, 163, 89, 0.35);
+    }
+    .teal-glow-hover:hover {
+      box-shadow: 0 10px 30px -10px rgba(13, 110, 110, 0.45);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-brand-teal selection:text-white">
+<!-- 1. Top Utility Notification Bar -->
+<div class="w-full bg-brand-navy text-surface-container-high py-1.5 px-gutter text-[11px] font-label-md tracking-wider border-b border-surface-variant/10">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-4 flex-wrap">
+<span class="flex items-center gap-1.5 text-surface-variant hover:text-brand-gold transition-colors">
+<span class="material-symbols-outlined text-brand-gold text-[15px]">call</span>
+<span>Hotline: +880 1805-464343</span>
+</span>
+<span class="hidden sm:inline text-surface-variant/40">•</span>
+<span class="flex items-center gap-1.5 text-surface-variant hover:text-brand-gold transition-colors">
+<span class="material-symbols-outlined text-brand-gold text-[15px]">mail</span>
+<span>yessbangla.bd@gmail.com</span>
+</span>
+<span class="hidden md:inline text-surface-variant/40">•</span>
+<span class="hidden md:flex items-center gap-1.5 text-surface-variant">
+<span class="material-symbols-outlined text-brand-teal-glow text-[15px]">schedule</span>
+<span>Dhaka BST Operational</span>
+</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5 text-brand-gold-glow">
+<span class="material-symbols-outlined text-brand-gold text-[15px]">verified</span>
+<span>RJSC Reg: C-184920</span>
+</span>
+<span class="text-surface-variant/40">•</span>
+<span class="hidden lg:flex items-center gap-1.5 text-surface-variant">
+<span class="material-symbols-outlined text-brand-teal-glow text-[15px]">security</span>
+<span>256-Bit Sovereign Protocol</span>
+</span>
+<span class="text-surface-variant/40">•</span>
+<div class="flex items-center gap-1 text-[11px] font-semibold">
+<span class="text-brand-gold cursor-default px-1 py-0.5 rounded bg-brand-navy">EN</span>
+<span class="text-surface-variant/40">|</span>
+<a class="text-surface-variant/70 hover:text-white transition-colors px-1 py-0.5" href="#">বাংলা</a>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Sticky Frosted Header Navigation (Anchored from Shared Components JSON) -->
+<header class="sticky top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-md shadow-sm transition-all duration-200">
+<div class="w-full px-gutter max-w-7xl mx-auto flex items-center justify-between py-space-sm">
+<!-- Crest & Brand Identity -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 rounded-lg bg-brand-navy flex items-center justify-center border border-brand-teal/40 group-hover:border-brand-gold transition-colors shadow-sm">
+<span class="material-symbols-outlined text-brand-gold text-2xl" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-brand-navy tracking-tight leading-none group-hover:text-brand-teal transition-colors">YESS Bangladesh</span>
+<span class="text-[10px] tracking-widest text-brand-gold font-semibold uppercase mt-0.5">Sovereign Venture Builder</span>
+</div>
+</a>
+<!-- Desktop Nav Links -->
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-on-surface-variant font-medium hover:text-brand-teal pb-1 transition-colors text-label-lg font-label-lg" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-brand-teal pb-1 transition-colors text-label-lg font-label-lg" href="#">About Us</a>
+<a class="text-on-surface-variant font-medium hover:text-brand-teal pb-1 transition-colors text-label-lg font-label-lg inline-flex items-center gap-1.5" href="#">
+<span>Ventures</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-[11px] font-bold px-1.5 py-0.5 rounded-full">13</span>
+</a>
+<!-- Active Intent Lock: Services -->
+<a class="text-brand-teal font-bold border-b-2 border-brand-teal pb-1 text-label-lg font-label-lg" href="#">Services</a>
+<a class="text-on-surface-variant font-medium hover:text-brand-teal pb-1 transition-colors text-label-lg font-label-lg" href="#">Initiatives</a>
+<a class="text-on-surface-variant font-medium hover:text-brand-teal pb-1 transition-colors text-label-lg font-label-lg" href="#">Governance</a>
+<a class="text-on-surface-variant font-medium hover:text-brand-teal pb-1 transition-colors text-label-lg font-label-lg" href="#">Case Studies</a>
+</nav>
+<!-- Trailing CTAs from JSON -->
+<div class="flex items-center gap-3">
+<a class="hidden xl:flex items-center gap-1.5 text-label-md font-label-md text-on-surface-variant hover:text-brand-teal px-3 py-2 rounded-lg transition-colors" href="tel:+8801805464343">
+<span class="material-symbols-outlined text-brand-teal text-[18px]">call</span>
+<span>+880 1805-464343</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-primary-container hover:bg-brand-navy text-on-primary px-5 py-2.5 rounded-lg text-label-lg font-label-lg font-semibold shadow-sm transition-all duration-200 teal-glow-hover active:scale-95" href="#quote">
+<span>Let's Talk</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</header>
+<main class="w-full">
+<!-- 3. Breadcrumb & Page Hero Section -->
+<section class="relative pt-10 pb-16 px-gutter overflow-hidden bg-gradient-to-b from-surface-container-low via-surface to-background">
+<!-- Decorative Backdrop Auras -->
+<div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-teal/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -top-10 right-10 w-80 h-80 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="mb-6">
+<ol class="flex items-center gap-2 text-label-md font-label-md text-outline">
+<li><a class="hover:text-brand-teal transition-colors" href="#">Home</a></li>
+<li><span class="material-symbols-outlined text-[14px]">chevron_right</span></li>
+<li><a class="hover:text-brand-teal transition-colors" href="#">Services</a></li>
+<li><span class="material-symbols-outlined text-[14px]">chevron_right</span></li>
+<li class="text-brand-teal font-semibold">Akash OTT</li>
+</ol>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-8">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/40 border border-brand-gold/30 text-secondary mb-4 text-label-md font-label-md">
+<span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+<span class="tracking-wider">ENTERPRISE PRACTICE</span>
+</div>
+<!-- Main Headline -->
+<h1 class="text-display-lg font-display-lg text-brand-navy mb-4 tracking-tight">
+              Akash OTT — High-Concurrency Streaming &amp; Digital Media Infrastructure
+            </h1>
+<!-- Hero Subtitle -->
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl mb-8 leading-relaxed">
+              Bangladesh's premier digital streaming platform engineered by YESS Bangla Communications under Akash TV. Multi-device streaming with studio-grade DRM and national scale.
+            </p>
+<!-- Dual Hero CTAs -->
+<div class="flex flex-wrap items-center gap-4 mb-8">
+<a class="inline-flex items-center gap-2 bg-brand-teal hover:bg-brand-navy text-on-primary px-7 py-3.5 rounded-lg text-label-lg font-label-lg font-bold shadow-md transition-all duration-200 teal-glow-hover active:scale-95" href="#quote">
+<span>Get a Streaming Quote</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center gap-2 liquid-glass hover:bg-surface-container-high/80 text-brand-navy px-6 py-3.5 rounded-lg text-label-lg font-label-lg font-semibold border border-outline-variant/40 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to All Services</span>
+</a>
+</div>
+<!-- Telemetry Chips -->
+<div class="flex flex-wrap gap-2.5">
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-variant text-[13px] text-on-surface font-medium shadow-sm">
+<span class="material-symbols-outlined text-brand-teal text-[16px]">speed</span>
+<span>Zero-Buffer CDN</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-variant text-[13px] text-on-surface font-medium shadow-sm">
+<span class="material-symbols-outlined text-brand-gold text-[16px]">cloud_download</span>
+<span>4K Ultra-HD Ready</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-variant text-[13px] text-on-surface font-medium shadow-sm">
+<span class="material-symbols-outlined text-brand-teal text-[16px]">lock</span>
+<span>Widevine &amp; FairPlay DRM</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-variant text-[13px] text-on-surface font-medium shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]">payments</span>
+<span>bKash &amp; Nagad In-App MFS</span>
+</div>
+</div>
+</div>
+<!-- Hero Media Card Visual -->
+<div class="lg:col-span-4">
+<div class="relative liquid-glass rounded-xl p-6 shadow-lg border border-surface-container-highest">
+<div class="flex items-center justify-between pb-4 border-b border-surface-variant/40 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="text-label-md font-label-md text-brand-navy">National Live Edge Node</span>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-brand-teal px-2 py-0.5 rounded bg-brand-teal/10">Active Telemetry</span>
+</div>
+<div class="space-y-4">
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-container">
+<div class="text-[12px] text-outline font-medium">Peak Concurrency Tested</div>
+<div class="text-headline-lg font-headline-lg text-brand-navy">1.2M+ <span class="text-[13px] font-normal text-outline">concurrent streams</span></div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 rounded-lg bg-surface-container-low border border-surface-container">
+<div class="text-[11px] text-outline font-medium">End-to-End Latency</div>
+<div class="text-headline-md font-headline-md text-brand-teal">&lt; 2.4s</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low border border-surface-container">
+<div class="text-[11px] text-outline font-medium">Uptime Assurance</div>
+<div class="text-headline-md font-headline-md text-brand-gold">99.98%</div>
+</div>
+</div>
+<div class="text-[12px] text-on-surface-variant/80 flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-brand-teal text-[16px]">verified</span>
+<span>Akash TV Network Production Validated</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Overview & Engagement Pricing Split Section (1.5fr / 1fr) -->
+<section class="py-16 px-gutter bg-surface">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Card (1.5fr ratio) -->
+<div class="lg:col-span-7 liquid-glass rounded-xl p-8 shadow-sm border border-brand-teal/20 relative">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-14 h-14 rounded-xl bg-brand-teal/10 flex items-center justify-center text-brand-teal border border-brand-teal/30 relative">
+<span class="material-symbols-outlined text-3xl">tv</span>
+<span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-brand-teal-glow animate-pulse"></span>
+</div>
+<div>
+<span class="text-label-md font-label-md text-brand-teal uppercase tracking-wider">Architecture Blueprint</span>
+<h2 class="text-headline-lg font-headline-lg text-brand-navy">Overview &amp; Technical Mandate</h2>
+</div>
+</div>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-6 leading-relaxed">
+            End-to-end OTT platform engineering — from ingest and DRM to multi-device playback, monetisation and analytics. Built for Bangladeshi audiences with global delivery infrastructure.
+          </p>
+<div class="space-y-4 pt-2 border-t border-surface-variant/40">
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-brand-teal/15 flex items-center justify-center text-brand-teal shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg text-brand-navy">Multi-device streaming</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Production-ready apps across responsive Web, iOS, Android, Android TV, Tizen, and WebOS.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-brand-teal/15 flex items-center justify-center text-brand-teal shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg text-brand-navy">Subscription &amp; ad-supported monetisation</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Frictionless domestic bKash, Nagad, Rocket alongside international credit cards and Stripe.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-brand-teal/15 flex items-center justify-center text-brand-teal shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg text-brand-navy">Content management &amp; studio DRM</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Hollywood-grade Widevine, FairPlay, and PlayReady DRM with automated geo-fencing and forensic watermarks.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-brand-teal/15 flex items-center justify-center text-brand-teal shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg text-brand-navy">Ultra-low latency HLS/DASH packaging</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Dynamic multi-bitrate ladder optimized for Bangladesh telco edge networks and low-bandwidth resilience.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Aside Card: Commercial Engagement (1fr ratio) -->
+<div class="lg:col-span-5 liquid-glass-accent rounded-xl p-8 shadow-md border-2 border-brand-gold/40 relative">
+<div class="inline-block px-3 py-1 rounded bg-brand-gold/15 text-secondary text-label-md font-label-md tracking-wider uppercase mb-4 border border-brand-gold/30">
+            COMMERCIAL ENGAGEMENT
+          </div>
+<div class="mb-6">
+<span class="text-label-md font-label-md text-outline block">Starting from</span>
+<div class="flex items-baseline gap-2">
+<span class="text-display-lg font-display-lg text-brand-navy font-extrabold tracking-tight">৳ 8,00,000</span>
+<span class="text-body-md font-body-md text-on-surface-variant">BDT</span>
+</div>
+<p class="text-[13px] text-outline mt-1 font-medium">Fixed-Price Project / Turnkey Delivery</p>
+</div>
+<div class="space-y-4 mb-8 pt-4 border-t border-brand-gold/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold text-xl">calendar_month</span>
+<div>
+<span class="text-[12px] text-outline uppercase block font-semibold">Production Timeline</span>
+<span class="text-label-lg font-label-lg text-brand-navy">12–20 Weeks</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-teal text-xl">verified_user</span>
+<div>
+<span class="text-[12px] text-outline uppercase block font-semibold">Warranty &amp; Support</span>
+<span class="text-label-lg font-label-lg text-brand-navy">90-Day Warranty + 24/5 SLA Included</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold text-xl">workspace_premium</span>
+<div>
+<span class="text-[12px] text-outline uppercase block font-semibold">Deliverable Guarantee</span>
+<span class="text-label-lg font-label-lg text-brand-navy">100% Client IP Ownership Guaranteed</span>
+</div>
+</div>
+</div>
+<a class="w-full text-center block bg-brand-teal hover:bg-brand-navy text-on-primary py-3.5 px-4 rounded-lg text-label-lg font-label-lg font-bold shadow-md transition-all duration-200 teal-glow-hover active:scale-95" href="#quote">
+            Schedule Free 30-Min Strategy Call
+          </a>
+<span class="block text-center text-[12px] text-outline mt-2.5">Non-Disclosure Agreement signed prior to discovery</span>
+</div>
+</div>
+</section>
+<!-- 5. Core Capabilities Grid (4 High-Caliber Frosted Glass Cards) -->
+<section class="py-16 px-gutter bg-surface-container-low/50">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-12">
+<span class="text-label-md font-label-md text-brand-teal font-semibold uppercase tracking-wider">Enterprise Architecture</span>
+<h2 class="text-display-md font-display-md text-brand-navy mt-1">Engineered for High-Throughput Media</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">Built with sovereign resilience, bank-grade payment hooks, and studio distribution compliance.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="liquid-glass rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-surface-container-highest flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-lg bg-brand-teal/10 flex items-center justify-center text-brand-teal mb-4 group-hover:bg-brand-teal group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">stream</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">1. Adaptive Streaming</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                HLS / DASH packaging with multi-bitrate transcoding and CDN-backed delivery for low latency at national scale.
+              </p>
+</div>
+<div class="pt-4 mt-4 border-t border-surface-variant/40 flex items-center gap-1.5 text-[12px] font-semibold text-brand-teal">
+<span>Bitrate Auto-Stepping</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="liquid-glass rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-surface-container-highest flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-lg bg-brand-teal/10 flex items-center justify-center text-brand-teal mb-4 group-hover:bg-brand-teal group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">enhanced_encryption</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">2. DRM &amp; Content Protection</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                Widevine, FairPlay and PlayReady integration with concurrent-stream limits and forensic watermarking.
+              </p>
+</div>
+<div class="pt-4 mt-4 border-t border-surface-variant/40 flex items-center gap-1.5 text-[12px] font-semibold text-brand-teal">
+<span>Studio Rights Approved</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="liquid-glass rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-surface-container-highest flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-lg bg-brand-gold/15 flex items-center justify-center text-secondary mb-4 group-hover:bg-brand-gold group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">3. SVOD + AVOD Monetisation</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                Subscription tiers, in-app purchases, server-side ad insertion (SSAI) and yield management.
+              </p>
+</div>
+<div class="pt-4 mt-4 border-t border-surface-variant/40 flex items-center gap-1.5 text-[12px] font-semibold text-brand-gold">
+<span>Dynamic Ad Insertion</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="liquid-glass rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-surface-container-highest flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-lg bg-brand-teal/10 flex items-center justify-center text-brand-teal mb-4 group-hover:bg-brand-teal group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">dashboard_customize</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">4. Enterprise CMS &amp; Scheduling</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                Editorial workflows, Electronic Program Guide (EPG), content tagging, recommendation rules and rights management.
+              </p>
+</div>
+<div class="pt-4 mt-4 border-t border-surface-variant/40 flex items-center gap-1.5 text-[12px] font-semibold text-brand-teal">
+<span>Modular Workflows</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Deliverables & Tech Stack Split Grid -->
+<section class="py-16 px-gutter bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Deliverables Card -->
+<div class="liquid-glass rounded-xl p-8 border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-brand-teal text-3xl">inventory_2</span>
+<h3 class="text-headline-lg font-headline-lg text-brand-navy">What You Get</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3.5">
+<span class="material-symbols-outlined text-brand-teal text-[20px] shrink-0 mt-0.5">check_circle</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">Web, iOS, Android and Smart-TV production apps tailored with custom branded UI/UX.</span>
+</li>
+<li class="flex items-start gap-3.5">
+<span class="material-symbols-outlined text-brand-teal text-[20px] shrink-0 mt-0.5">check_circle</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">Admin CMS with role-based access control (RBAC), video asset ingestion, and metadata engines.</span>
+</li>
+<li class="flex items-start gap-3.5">
+<span class="material-symbols-outlined text-brand-teal text-[20px] shrink-0 mt-0.5">check_circle</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">Subscription, billing and entitlement engine integrating bKash, Nagad, Rocket, and Cards.</span>
+</li>
+<li class="flex items-start gap-3.5">
+<span class="material-symbols-outlined text-brand-teal text-[20px] shrink-0 mt-0.5">check_circle</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">Real-time QoS &amp; business analytics telemetry dashboards tracking latency and churn.</span>
+</li>
+<li class="flex items-start gap-3.5">
+<span class="material-symbols-outlined text-brand-teal text-[20px] shrink-0 mt-0.5">check_circle</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">DevOps runbooks, automated CI/CD deployment pipelines, and 24/5 SLA support plan.</span>
+</li>
+</ul>
+</div>
+<!-- Tech Stack Card -->
+<div class="liquid-glass rounded-xl p-8 border border-outline-variant/30 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-brand-gold text-3xl">terminal</span>
+<h3 class="text-headline-lg font-headline-lg text-brand-navy">Technology Stack</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+                Engineered with industry-standard, resilient streaming protocols and enterprise-grade cloud primitives:
+              </p>
+<div class="flex flex-wrap gap-2.5">
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-navy font-semibold text-[13px] border border-surface-variant">TypeScript</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-navy font-semibold text-[13px] border border-surface-variant">Node.js</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-navy font-semibold text-[13px] border border-surface-variant">Next.js</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-teal font-semibold text-[13px] border border-brand-teal/30">AWS MediaConvert</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-teal font-semibold text-[13px] border border-brand-teal/30">CloudFront CDN</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-secondary font-semibold text-[13px] border border-brand-gold/30">Widevine DRM</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-secondary font-semibold text-[13px] border border-brand-gold/30">FairPlay Streaming</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-navy font-semibold text-[13px] border border-surface-variant">PostgreSQL</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-navy font-semibold text-[13px] border border-surface-variant">Redis Cache</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-teal font-semibold text-[13px] border border-brand-teal/30">Kubernetes</span>
+<span class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-brand-navy font-semibold text-[13px] border border-surface-variant">Grafana Telemetry</span>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant/40 flex items-center justify-between text-label-md font-label-md text-outline">
+<span>Cloud Agnostic: AWS / GCP / Sovereign Bare Metal</span>
+<span class="flex items-center gap-1 text-brand-teal">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                Verified Benchmarks
+              </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. 4-Phase Delivery Process Grid -->
+<section class="py-16 px-gutter bg-surface-container-low/40">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="text-label-md font-label-md text-brand-teal font-semibold uppercase tracking-wider">Methodology &amp; Execution</span>
+<h2 class="text-display-md font-display-md text-brand-navy mt-1">4-Phase Turnkey Delivery</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">Transparent roadmap from initial catalog ingest to sovereign commercial broadcast.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Step 1 -->
+<div class="liquid-glass rounded-xl p-6 border-t-4 border-t-brand-teal border-x border-b border-surface-container-highest shadow-sm relative">
+<span class="text-display-md font-display-md text-brand-teal/20 font-black absolute top-4 right-4">01</span>
+<div class="text-label-md font-label-md text-brand-teal font-bold mb-1">Weeks 1-2</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">Discovery &amp; Ingest Specification</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+              Codec profiling, bitrate ladder definition, media mezzanine formats, and catalog taxonomy architecture.
+            </p>
+</div>
+<!-- Step 2 -->
+<div class="liquid-glass rounded-xl p-6 border-t-4 border-t-brand-teal border-x border-b border-surface-container-highest shadow-sm relative">
+<span class="text-display-md font-display-md text-brand-teal/20 font-black absolute top-4 right-4">02</span>
+<div class="text-label-md font-label-md text-brand-teal font-bold mb-1">Weeks 3-6</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">Architecture &amp; DRM Engineering</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+              Cloud media pipeline setup, KMS key exchange, license proxy cluster creation, and player SDK integration.
+            </p>
+</div>
+<!-- Step 3 -->
+<div class="liquid-glass rounded-xl p-6 border-t-4 border-t-brand-gold border-x border-b border-surface-container-highest shadow-sm relative">
+<span class="text-display-md font-display-md text-brand-gold/30 font-black absolute top-4 right-4">03</span>
+<div class="text-label-md font-label-md text-secondary font-bold mb-1">Weeks 7-14</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">Cross-Platform Build &amp; QA</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+              Native mobile &amp; Smart-TV client apps, MFS billing gateway hooks, and high-concurrency stress testing.
+            </p>
+</div>
+<!-- Step 4 -->
+<div class="liquid-glass rounded-xl p-6 border-t-4 border-t-brand-gold border-x border-b border-surface-container-highest shadow-sm relative">
+<span class="text-display-md font-display-md text-brand-gold/30 font-black absolute top-4 right-4">04</span>
+<div class="text-label-md font-label-md text-secondary font-bold mb-1">Weeks 15-20</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">Launch &amp; Operate</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+              Edge CDN warm-up, Apple App Store &amp; Google Play approval, real-time telemetry monitoring, and 90-day warranty handover.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. Frequently Asked Questions Accordion -->
+<section class="py-16 px-gutter bg-surface">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-12">
+<span class="text-label-md font-label-md text-brand-teal font-semibold uppercase tracking-wider">Enterprise Inquiries</span>
+<h2 class="text-display-md font-display-md text-brand-navy mt-1">Frequently Asked Questions</h2>
+</div>
+<div class="space-y-4">
+<!-- Accordion Item 1 -->
+<div class="liquid-glass rounded-xl border border-surface-variant/60 overflow-hidden shadow-sm">
+<button class="w-full py-5 px-6 text-left flex items-center justify-between gap-4 font-headline-md text-brand-navy hover:text-brand-teal transition-colors" onclick="const p = this.nextElementSibling; const ic = this.querySelector('.faq-icon'); p.classList.toggle('hidden'); ic.classList.toggle('rotate-180');">
+<span class="text-headline-md">How long does an OTT launch take?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-200 text-outline">expand_more</span>
+</button>
+<div class="px-6 pb-5 text-body-md font-body-md text-on-surface-variant border-t border-surface-variant/30 pt-3 leading-relaxed">
+              Engagements typically range between 12 to 20 weeks from kick-off to public launch, depending on the number of target platforms (e.g., Web, iOS, Android, and Smart TV ecosystems) and existing catalog volume.
+            </div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="liquid-glass rounded-xl border border-surface-variant/60 overflow-hidden shadow-sm">
+<button class="w-full py-5 px-6 text-left flex items-center justify-between gap-4 font-headline-md text-brand-navy hover:text-brand-teal transition-colors" onclick="const p = this.nextElementSibling; const ic = this.querySelector('.faq-icon'); p.classList.toggle('hidden'); ic.classList.toggle('rotate-180');">
+<span class="text-headline-md">Can you integrate local payments?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-200 text-outline">expand_more</span>
+</button>
+<div class="px-6 pb-5 text-body-md font-body-md text-on-surface-variant border-t border-surface-variant/30 pt-3 leading-relaxed">
+              Yes. We integrate native zero-friction checkout for bKash, Nagad, Rocket, and Upay, alongside international Visa, Mastercard, AMEX, and Stripe workflows with recurring subscription mandate tokens.
+            </div>
+</div>
+<!-- Accordion Item 3 -->
+<div class="liquid-glass rounded-xl border border-surface-variant/60 overflow-hidden shadow-sm">
+<button class="w-full py-5 px-6 text-left flex items-center justify-between gap-4 font-headline-md text-brand-navy hover:text-brand-teal transition-colors" onclick="const p = this.nextElementSibling; const ic = this.querySelector('.faq-icon'); p.classList.toggle('hidden'); ic.classList.toggle('rotate-180');">
+<span class="text-headline-md">Do you offer 24/7 support after launch?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-200 text-outline">expand_more</span>
+</button>
+<div class="px-6 pb-5 text-body-md font-body-md text-on-surface-variant border-t border-surface-variant/30 pt-3 leading-relaxed">
+              Yes. Standard engagements include a 90-day comprehensive warranty and 24/5 SLA. For tier-1 broadcasters, we offer dedicated 24/7 mission-critical SRE support retainers with guaranteed 15-minute response times.
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. Related Enterprise Services Cards -->
+<section class="py-16 px-gutter bg-surface-container-low/40">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<span class="text-label-md font-label-md text-brand-teal font-semibold uppercase tracking-wider">Synergistic Capabilities</span>
+<h2 class="text-display-md font-display-md text-brand-navy mt-1">Complementary Sovereign Practices</h2>
+</div>
+<a class="inline-flex items-center gap-1.5 text-label-lg font-label-lg text-brand-teal font-semibold hover:text-brand-navy transition-colors" href="#">
+<span>Explore All 13 Ventures &amp; Practices</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Service 1 -->
+<div class="liquid-glass rounded-xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div>
+<div class="text-[11px] font-bold text-brand-teal uppercase tracking-wider mb-2">Core Engineering</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">Enterprise Custom Software</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+                Tier-3 cloud microservices, sovereign workflows, and mission-critical enterprise systems designed for national compliance.
+              </p>
+</div>
+<a class="inline-flex items-center gap-1 text-label-lg font-label-lg font-semibold text-brand-teal hover:text-brand-navy" href="#">
+<span>Learn More</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Service 2 -->
+<div class="liquid-glass rounded-xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div>
+<div class="text-[11px] font-bold text-secondary uppercase tracking-wider mb-2">DevOps &amp; Security</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">Cloud Infrastructure &amp; SRE</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+                Bare-metal Kubernetes, multi-region automated failover, and sovereign latency routing for high-throughput public systems.
+              </p>
+</div>
+<a class="inline-flex items-center gap-1 text-label-lg font-label-lg font-semibold text-secondary hover:text-brand-navy" href="#">
+<span>Learn More</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Service 3 -->
+<div class="liquid-glass rounded-xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div>
+<div class="text-[11px] font-bold text-brand-teal uppercase tracking-wider mb-2">Applied AI</div>
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-2">AI &amp; Data Engineering</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+                Real-time telemetry pipelines, LLM operational frameworks, and algorithmic recommendation models for media platforms.
+              </p>
+</div>
+<a class="inline-flex items-center gap-1 text-label-lg font-label-lg font-semibold text-brand-teal hover:text-brand-navy" href="#">
+<span>Learn More</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. Final Institutional Lead Capture Banner -->
+<section class="py-20 px-gutter bg-gradient-to-br from-brand-navy via-brand-teal/95 to-brand-navy text-white relative overflow-hidden" id="quote">
+<!-- Decorative Backdrop Glow -->
+<div class="absolute -bottom-20 -right-20 w-96 h-96 bg-brand-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<div class="lg:col-span-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/20 border border-brand-gold/40 text-brand-gold-glow mb-4 text-label-md font-label-md">
+<span class="w-2 h-2 rounded-full bg-brand-gold"></span>
+<span>ENTERPRISE CONSULTATION</span>
+</div>
+<h2 class="text-display-lg font-display-lg text-white mb-4">
+            Ready to start with Akash OTT?
+          </h2>
+<p class="text-body-lg font-body-lg text-surface-container-high max-w-lg mb-6 leading-relaxed">
+            Speak directly with our senior digital media architects and streaming engineers. Bilateral NDA and 24h turnaround.
+          </p>
+<div class="space-y-3 text-label-md font-label-md text-surface-container-high/90">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]">verified</span>
+<span>100% Guaranteed IP Ownership Transfer</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]">security</span>
+<span>Bilateral NDA Executed Prior to Technical Discussions</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]">phone_in_talk</span>
+<span>Direct Desk Line: +880 1805-464343 (Dhaka BST)</span>
+</div>
+</div>
+</div>
+<!-- Embedded Intake Form -->
+<div class="lg:col-span-6">
+<div class="bg-surface-container-lowest text-on-surface rounded-2xl p-8 shadow-2xl border border-surface-variant/40">
+<h3 class="text-headline-md font-headline-md text-brand-navy mb-1">Request Streaming Proposal</h3>
+<p class="text-body-md font-body-md text-outline mb-6">Receive a custom architecture breakdown and budget within 24 hours.</p>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('Inquiry received. A Senior Solutions Architect will contact you under NDA within 24 hours.');">
+<div>
+<label class="block text-label-md font-label-md text-brand-navy mb-1">Full Name *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface-container-low focus:border-brand-teal focus:ring-1 focus:ring-brand-teal text-body-md font-body-md text-on-surface outline-none transition-all" placeholder="e.g. Asif Mahmud" required="" type="text"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-brand-navy mb-1">Corporate Email *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface-container-low focus:border-brand-teal focus:ring-1 focus:ring-brand-teal text-body-md font-body-md text-on-surface outline-none transition-all" placeholder="name@broadcaster.com" required="" type="email"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-brand-navy mb-1">Organization / Broadcaster</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface-container-low focus:border-brand-teal focus:ring-1 focus:ring-brand-teal text-body-md font-body-md text-on-surface outline-none transition-all" placeholder="Media Group or Network Name" type="text"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-brand-navy mb-1">Target Launch Timeline</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface-container-low focus:border-brand-teal focus:ring-1 focus:ring-brand-teal text-body-md font-body-md text-on-surface outline-none transition-all">
+<option>Immediate (Within 4-8 Weeks)</option>
+<option selected="">Standard Turnkey (12-20 Weeks)</option>
+<option>Q3/Q4 Enterprise Rollout</option>
+<option>Exploratory Technical Feasibility</option>
+</select>
+</div>
+<button class="w-full mt-2 bg-brand-teal hover:bg-brand-navy text-on-primary py-3.5 px-6 rounded-lg text-label-lg font-label-lg font-bold shadow-md transition-all duration-200 teal-glow-hover active:scale-95 flex items-center justify-center gap-2" type="submit">
+<span>Request Streaming Proposal</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 11. Institutional Corporate Multi-Column Footer (Anchored from Shared Components JSON) -->
+<footer class="w-full relative bg-brand-navy text-surface-variant/80">
+<div class="w-full px-gutter max-w-7xl mx-auto py-space-xl grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Col 1: Brand & Credentials -->
+<div class="space-y-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest/10 flex items-center justify-center text-brand-gold">
+<span class="material-symbols-outlined text-xl">hub</span>
+</div>
+<span class="text-headline-lg font-headline-lg font-bold text-surface-container-lowest tracking-tight">YESS Bangladesh</span>
+</div>
+<p class="text-body-md font-body-md text-surface-variant/70 leading-relaxed">
+          National sovereign venture builder architecting high-scale infrastructure, OTT media platforms, and digital public goods.
+        </p>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-surface-variant/10 text-brand-gold-glow">BASIS MEMBER</span>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-surface-variant/10 text-brand-gold-glow">DCCI AFFILIATE</span>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-surface-variant/10 text-brand-gold-glow">ISO 9001 &amp; 27001</span>
+</div>
+</div>
+<!-- Col 2: Institutional Hubs (from JSON links) -->
+<div>
+<h4 class="text-headline-sm font-headline-md text-surface-container-lowest font-semibold mb-4">Locations &amp; Hubs</h4>
+<ul class="space-y-3 text-body-md font-body-md">
+<li>
+<span class="block text-brand-gold font-semibold text-[13px]">Dhaka HQ: Motijheel C/A, Dhaka 1000</span>
+<span class="text-[12px] text-surface-variant/60">Executive Secretariat &amp; Governance</span>
+</li>
+<li>
+<span class="block text-brand-gold font-semibold text-[13px]">Gulshan R&amp;D Lab: Road 11, Block D, Banani</span>
+<span class="text-[12px] text-surface-variant/60">Media Engineering &amp; SRE Telemetry</span>
+</li>
+<li>
+<a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Akash OTT Portal</a>
+</li>
+</ul>
+</div>
+<!-- Col 3: Ventures & Practices -->
+<div>
+<h4 class="text-headline-sm font-headline-md text-surface-container-lowest font-semibold mb-4">Venture Practices</h4>
+<ul class="space-y-2.5 text-body-md font-body-md">
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Enterprise Custom Software</a></li>
+<li><a class="text-brand-gold font-semibold" href="#">Akash OTT Streaming</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Cloud Infrastructure &amp; SRE</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">AI &amp; Sovereign Data Systems</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">FinTech &amp; MFS Gateway Engineering</a></li>
+</ul>
+</div>
+<!-- Col 4: Governance & Legal (from JSON links) -->
+<div>
+<h4 class="text-headline-sm font-headline-md text-surface-container-lowest font-semibold mb-4">Governance</h4>
+<ul class="space-y-2.5 text-body-md font-body-md">
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Institutional Governance</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Terms of Engagement</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">Whistleblower Sovereign Protocol</a></li>
+<li><a class="text-surface-variant/80 hover:text-brand-gold-glow transition-colors" href="#">RJSC Bangladesh Compliance</a></li>
+</ul>
+</div>
+</div>
+<!-- Sub-Footer Copyright Bar -->
+<div class="w-full border-t border-surface-variant/10 py-6 px-gutter text-center md:text-left">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] font-label-md text-surface-variant/60">
+<div>
+          © 2024 YESS Bangladesh. RJSC Reg C-184920. All rights reserved.
+        </div>
+<div class="flex items-center gap-6">
+<span class="hover:text-surface-variant transition-colors cursor-pointer">Sovereign Encryption 256-Bit</span>
+<span>•</span>
+<span class="hover:text-surface-variant transition-colors cursor-pointer">Security Operations Center: Active</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>YESS Bangladesh | Institutional Venture Builder &amp; Enterprise Ecosystem</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#7e5713",
+            "surface-tint": "#016a6a",
+            "surface-dim": "#f0f4f4",
+            "on-secondary-fixed-variant": "#614000",
+            "tertiary-fixed-dim": "#ffb692",
+            "outline": "#6e7979",
+            "background": "#f7faf9",
+            "on-tertiary-container": "#ffd8c6",
+            "brand-teal": "#0d6e6e",
+            "surface-container-low": "#f1f4f3",
+            "secondary-fixed": "#ffddb1",
+            "surface": "#f7faf9",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "outline-variant": "#bec9c8",
+            "tertiary-fixed": "#ffdbcb",
+            "surface-container-high": "#e6e9e8",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#84d4d3",
+            "brand-navy": "#061a1b",
+            "on-secondary-fixed": "#291800",
+            "primary": "#005454",
+            "on-tertiary-fixed": "#341100",
+            "brand-gold-glow": "#f6c87a",
+            "secondary-fixed-dim": "#f2be71",
+            "on-surface-variant": "#3e4948",
+            "inverse-surface": "#2d3131",
+            "surface-bright": "#ffffff",
+            "secondary-container": "#fec97b",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "tertiary": "#743c1d",
+            "on-background": "#181c1c",
+            "brand-teal-glow": "#35b0aa",
+            "on-surface": "#181c1c",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "primary-container": "#0d6e6e",
+            "on-primary": "#ffffff",
+            "surface-container": "#ebeeee",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#915332",
+            "on-primary-container": "#9dedec",
+            "surface-container-highest": "#e0e3e2",
+            "error": "#ba1a1a",
+            "surface-variant": "#e0e3e2",
+            "on-primary-fixed-variant": "#004f50",
+            "on-primary-fixed": "#002020",
+            "primary-fixed": "#a0f0f0",
+            "inverse-primary": "#84d4d3",
+            "brand-gold": "#d4a359",
+            "on-secondary-container": "#78520e",
+            "inverse-on-surface": "#eef1f0"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Custom utility animations and hide-scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 22s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+    .metallic-coin-rim {
+      box-shadow: inset 0 0 0 2px #d4a359, inset 0 0 10px rgba(212, 163, 89, 0.4), 0 8px 20px -4px rgba(6, 26, 27, 0.7);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased selection:bg-brand-teal selection:text-white flex justify-center min-h-screen">
+<!-- Mobile Viewport Frame Canvas (390px fixed structure) -->
+<div class="w-full max-w-[390px] min-h-screen bg-background relative flex flex-col shadow-2xl overflow-x-hidden border-x border-outline-variant/30">
+<!-- 1. Top Compact Notification Ticker -->
+<header class="bg-brand-navy text-outline-variant text-[11px] leading-tight px-3 py-1.5 flex items-center justify-between border-b border-white/5 z-50">
+<div class="flex items-center gap-1.5 text-primary-fixed">
+<span class="material-symbols-outlined text-[13px] text-brand-gold">call</span>
+<a class="hover:text-brand-gold-glow transition-colors font-medium tracking-tight" href="tel:+8801805464343">+880 1805-464343</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-white/70">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Dhaka BST
+        </span>
+<span class="text-white/20">|</span>
+<button class="bg-white/10 hover:bg-white/20 text-brand-gold-glow px-1.5 py-0.5 rounded text-[10px] font-semibold tracking-wider transition-colors">
+          EN | বাংলা
+        </button>
+</div>
+</header>
+<!-- 2. Sticky Frosted Glass Mobile Header (TopAppBar) -->
+<nav class="sticky top-0 z-40 bg-surface/85 dark:bg-brand-navy/85 backdrop-blur-md px-3.5 h-14 flex items-center justify-between shadow-sm border-b border-brand-teal/20 transition-all">
+<div class="flex items-center gap-2.5">
+<!-- Shield Crest Emblem -->
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-teal to-brand-navy p-0.5 flex items-center justify-center shadow-md shadow-brand-teal/30">
+<div class="w-full h-full rounded-[6px] bg-brand-navy flex items-center justify-center border border-brand-gold/60">
+<span class="material-symbols-outlined text-brand-gold text-[18px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[15px] font-extrabold text-primary dark:text-primary-fixed tracking-tight leading-none">YESS BANGLADESH</span>
+<span class="text-[9px] font-semibold text-brand-gold tracking-widest uppercase mt-0.5">Venture Builder</span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-1">
+<button aria-label="Search Ecosystem" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button aria-label="Open Navigation Drawer" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all" id="drawerToggle">
+<span class="material-symbols-outlined text-[22px]">menu</span>
+</button>
+</div>
+</nav>
+<!-- Interactive Navigation Drawer (Overlay Menu) -->
+<aside class="fixed inset-y-0 left-0 w-[280px] bg-surface dark:bg-brand-navy z-50 transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col p-4 border-r border-brand-teal/20" id="sideNavDrawer">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-2xl" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-brand-teal-glow">YESS Bangladesh</span>
+</div>
+<button class="p-1 rounded-full text-on-surface-variant hover:bg-surface-container" id="closeDrawer">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-1 py-4 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container-low dark:bg-surface-container-high text-primary dark:text-brand-teal-glow rounded-lg font-semibold text-sm" href="#ventures">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Ventures</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container rounded-lg text-sm transition-colors" href="#practices">
+<span class="material-symbols-outlined">business_center</span>
+<span>Services</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container rounded-lg text-sm transition-colors" href="#practices">
+<span class="material-symbols-outlined">account_balance</span>
+<span>Practice Areas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container rounded-lg text-sm transition-colors" href="#brief">
+<span class="material-symbols-outlined">info</span>
+<span>About YESS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container rounded-lg text-sm transition-colors" href="#contact-hq">
+<span class="material-symbols-outlined">contact_phone</span>
+<span>Direct Engagement</span>
+</a>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 text-xs text-on-surface-variant flex flex-col gap-1">
+<span class="font-bold text-primary">Dhaka HQ Executive Wing</span>
+<span>City Center Tower, Motijheel C/A</span>
+<span class="text-brand-gold mt-1 font-mono text-[11px]">RJSC C-184920</span>
+</div>
+</aside>
+<div class="fixed inset-0 bg-brand-navy/60 backdrop-blur-xs z-40 hidden transition-opacity" id="drawerBackdrop"></div>
+<main class="flex-1 pb-20">
+<!-- 3. Mobile Hero Section -->
+<section class="relative bg-brand-navy text-white px-4 pt-7 pb-8 overflow-hidden">
+<!-- Atmospheric Teal & Gold Radial Glow Background -->
+<div class="absolute -top-16 -right-16 w-64 h-64 bg-brand-teal/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 -left-20 w-52 h-52 bg-brand-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-start">
+<!-- Eyebrow Badge -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-teal/20 border border-brand-gold/40 mb-3.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-gold animate-ping"></span>
+<span class="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-headline-md">— A BANGLADESH-BUILT VENTURE STUDIO —</span>
+</div>
+<!-- Hero Headline -->
+<h1 class="font-headline-lg text-[25px] leading-[32px] font-extrabold tracking-tight text-white mb-3">
+            Youth Entrepreneurship for 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-brand-gold-glow">smart success</span> 
+            with 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed to-brand-teal-glow">excellence &amp; solutions.</span>
+</h1>
+<!-- Subtitle -->
+<p class="font-body-md text-sm text-outline-variant leading-relaxed mb-5">
+            Catalyzing next-generation enterprises across software engineering, sustainable agribusiness, fintech, and digital media in Bangladesh and global high-growth corridors.
+          </p>
+<!-- Full-Width Stacked CTA Buttons -->
+<div class="w-full flex flex-col gap-2.5 mb-5">
+<a class="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-lg bg-gradient-to-r from-brand-teal to-primary hover:from-primary hover:to-brand-teal text-white font-label-lg font-bold shadow-lg shadow-brand-teal/30 active:scale-[0.98] transition-all" href="#contact-hq">
+<span>Start a project</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="w-full flex items-center justify-center gap-2 py-2.5 px-5 rounded-lg bg-white/5 border border-white/20 hover:bg-white/10 text-white font-label-lg font-semibold active:scale-[0.98] transition-all backdrop-blur-sm" href="#practices">
+<span>Explore services</span>
+<span class="material-symbols-outlined text-[18px]">travel_explore</span>
+</a>
+</div>
+<!-- Trust Verification Badges -->
+<div class="w-full flex flex-wrap items-center gap-1.5 pt-1 border-t border-white/10 text-[11px] text-white/80 font-medium">
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10">✓ ISO-grade processes</span>
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10">✓ 11+ yrs expertise</span>
+<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10">✓ 98% client retention</span>
+</div>
+</div>
+<!-- Flagship Portfolio Medallions Carousel -->
+<div class="mt-6 pt-4 border-t border-white/10">
+<div class="flex items-center justify-between mb-3">
+<span class="text-[11px] font-bold tracking-wider uppercase text-brand-gold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">stars</span> Flagship Sovereign Mint
+            </span>
+<span class="text-[10px] text-outline-variant italic">Swipe horizontal →</span>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 pt-1 -mx-4 px-4 snap-x snap-mandatory">
+<!-- Coin 1: Yess Soft -->
+<div class="snap-center shrink-0 w-[150px] p-3 rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/15 flex flex-col items-center text-center relative backdrop-blur-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-gold to-brand-teal p-[2px] metallic-coin-rim mb-2 flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center border border-brand-gold/60">
+<span class="material-symbols-outlined text-brand-teal-glow text-2xl">terminal</span>
+</div>
+</div>
+<h2 class="font-headline-md text-xs font-bold text-white mb-0.5">Yess Soft</h2>
+<p class="text-[10px] text-brand-gold-glow font-medium mb-1">ERP &amp; Cloud AI</p>
+<span class="text-[9px] text-outline-variant bg-black/40 px-1.5 py-0.5 rounded-full">Tier-1 Cloud Ready</span>
+</div>
+<!-- Coin 2: Shondhaan -->
+<div class="snap-center shrink-0 w-[150px] p-3 rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/15 flex flex-col items-center text-center relative backdrop-blur-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-gold to-brand-teal p-[2px] metallic-coin-rim mb-2 flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center border border-brand-gold/60">
+<span class="material-symbols-outlined text-brand-gold text-2xl">hub</span>
+</div>
+</div>
+<h2 class="font-headline-md text-xs font-bold text-white mb-0.5">Shondhaan</h2>
+<p class="text-[10px] text-brand-gold-glow font-medium mb-1">Search &amp; Logistics</p>
+<span class="text-[9px] text-outline-variant bg-black/40 px-1.5 py-0.5 rounded-full">4.8M Viewers</span>
+</div>
+<!-- Coin 3: Organic Haat -->
+<div class="snap-center shrink-0 w-[150px] p-3 rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/15 flex flex-col items-center text-center relative backdrop-blur-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-gold to-brand-teal p-[2px] metallic-coin-rim mb-2 flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center border border-brand-gold/60">
+<span class="material-symbols-outlined text-emerald-400 text-2xl">eco</span>
+</div>
+</div>
+<h2 class="font-headline-md text-xs font-bold text-white mb-0.5">Organic Haat</h2>
+<p class="text-[10px] text-brand-gold-glow font-medium mb-1">Farm-to-Fork Agri</p>
+<span class="text-[9px] text-outline-variant bg-black/40 px-1.5 py-0.5 rounded-full">10,000+ Growers</span>
+</div>
+<!-- Coin 4: Akash OTT -->
+<div class="snap-center shrink-0 w-[150px] p-3 rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/15 flex flex-col items-center text-center relative backdrop-blur-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-gold to-brand-teal p-[2px] metallic-coin-rim mb-2 flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center border border-brand-gold/60">
+<span class="material-symbols-outlined text-rose-400 text-2xl">play_circle</span>
+</div>
+</div>
+<h2 class="font-headline-md text-xs font-bold text-white mb-0.5">Akash OTT</h2>
+<p class="text-[10px] text-brand-gold-glow font-medium mb-1">Streaming Media</p>
+<span class="text-[9px] text-outline-variant bg-black/40 px-1.5 py-0.5 rounded-full">National Engine</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Direct Engagement Action Cards -->
+<section class="px-4 py-5 flex flex-col gap-3.5 bg-surface-container-low" id="brief">
+<!-- Card 1: Institutional Advisory -->
+<div class="bg-surface-bright p-4 rounded-xl border border-brand-teal/20 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-brand-teal/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold tracking-wider text-brand-teal uppercase px-2 py-0.5 bg-brand-teal/10 rounded-full">Direct Desk</span>
+<span class="text-[10px] text-secondary font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Guaranteed &lt; 24h
+            </span>
+</div>
+<h2 class="font-headline-md text-base font-bold text-on-surface mb-1">Institutional Advisory &amp; Inquiries</h2>
+<p class="font-body-md text-xs text-on-surface-variant mb-3.5">
+            Engage YESS Group principals for public-private partnerships, enterprise tech consortia, or cross-border expansion in Bangladesh.
+          </p>
+<div class="flex items-center gap-2">
+<a class="flex-1 py-2 px-3 rounded-lg bg-brand-navy text-white text-xs font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-transform" href="https://wa.me/8801805464343" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-sm text-emerald-400">forum</span>
+              WhatsApp Desk
+            </a>
+<a class="flex-1 py-2 px-3 rounded-lg bg-brand-teal text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-transform" href="#contact-hq">
+<span>Contact Us Today</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Capability Brief & Kit -->
+<div class="bg-gradient-to-br from-brand-navy to-[#0a2729] text-white p-4 rounded-xl border border-brand-gold/30 shadow-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-brand-gold text-lg">description</span>
+<span class="text-[11px] font-bold tracking-wider uppercase text-brand-gold">Corporate Kit 2025 Edition</span>
+</div>
+<h2 class="font-headline-md text-base font-bold text-white mb-1">Capability Brief &amp; Practice Overview</h2>
+<p class="font-body-md text-xs text-outline-variant mb-3">
+            Structured institutional portfolio breakdown, sovereign licenses, board governance architecture, and audited capacity metrics.
+          </p>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white text-[11px] font-semibold flex items-center justify-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xs text-brand-gold">download</span>
+              Brochure (English PDF)
+            </button>
+<button class="py-2 px-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white text-[11px] font-semibold flex items-center justify-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xs text-brand-teal-glow">download</span>
+              ব্রোশিওর (বাংলা PDF)
+            </button>
+</div>
+</div>
+</section>
+<!-- 5. Trusted Enterprise Marquee -->
+<section class="py-4 bg-brand-navy border-y border-white/10 overflow-hidden">
+<div class="px-4 mb-2 text-center">
+<p class="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-headline-md">
+            TRUSTED BY INSTITUTIONAL LEADERS &amp; ENTERPRISE PARTNERS
+          </p>
+</div>
+<div class="relative w-full overflow-hidden">
+<div class="animate-marquee whitespace-nowrap flex items-center gap-6 py-1 text-xs font-semibold text-white/80">
+<!-- First Loop -->
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>ICT Division Bangladesh</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>BASIS Bangladesh</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>Robi Axiata PLC</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>Beximco Group</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>Walton Hi-Tech</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>BRAC Enterprises</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>Grameen Telecom</span>
+<!-- Second Duplicated Loop -->
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>ICT Division Bangladesh</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>BASIS Bangladesh</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>Robi Axiata PLC</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>Beximco Group</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>Walton Hi-Tech</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>BRAC Enterprises</span>
+<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>Grameen Telecom</span>
+</div>
+</div>
+</section>
+<!-- 6. Institutional Practice Areas -->
+<section class="px-4 py-7 bg-surface" id="practices">
+<div class="mb-4">
+<span class="text-[11px] font-bold text-primary uppercase tracking-widest font-headline-md">Disciplines of Execution</span>
+<h2 class="font-headline-lg text-xl font-extrabold text-on-surface tracking-tight mt-0.5">Institutional Practice Areas</h2>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">Cross-industry venture frameworks architected for resilience and regional scalability.</p>
+</div>
+<div class="space-y-3">
+<!-- Practice 01 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between">
+<span class="font-mono text-xs font-bold text-brand-gold">01 / ARCHITECTURE</span>
+<span class="material-symbols-outlined text-primary text-xl">account_balance</span>
+</div>
+<h3 class="font-headline-md text-sm font-bold text-on-surface mt-1">Venture Incubation &amp; Capital Architecture</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">
+              End-to-end SPV formation, corporate venture capital (CVC) advisory, cross-border intellectual property structuring, and sovereign compliance under Bangladesh Law.
+            </p>
+</div>
+<!-- Practice 02 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between">
+<span class="font-mono text-xs font-bold text-brand-teal">02 / CORE TECH</span>
+<span class="material-symbols-outlined text-primary text-xl">code</span>
+</div>
+<h3 class="font-headline-md text-sm font-bold text-on-surface mt-1">Enterprise Software &amp; Cloud Systems (Yess Soft)</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">
+              Distributed banking microservices, high-throughput payment gateways, automated customs clearing engines, and Tier-3 private cloud infrastructures.
+            </p>
+</div>
+<!-- Practice 03 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between">
+<span class="font-mono text-xs font-bold text-emerald-600">03 / AGROTECH</span>
+<span class="material-symbols-outlined text-emerald-700 text-xl">psychiatry</span>
+</div>
+<h3 class="font-headline-md text-sm font-bold text-on-surface mt-1">Sustainable Agritech &amp; Supply Chains (Organic Haat)</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">
+              Cold-chain IoT tracking, decentralized grain storage verification, and direct farmer-to-distribution digitized fair-trade commodity markets.
+            </p>
+</div>
+<!-- Practice 04 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between">
+<span class="font-mono text-xs font-bold text-rose-600">04 / STREAMING</span>
+<span class="material-symbols-outlined text-rose-700 text-xl">live_tv</span>
+</div>
+<h3 class="font-headline-md text-sm font-bold text-on-surface mt-1">Media Streaming &amp; Digital Platforms (Akash OTT)</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">
+              Ultra-low-latency WebRTC video delivery, telco direct carrier billing (DCB), DRM authorization pipelines, and hyper-localized content engines.
+            </p>
+</div>
+<!-- Practice 05 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between">
+<span class="font-mono text-xs font-bold text-brand-gold">05 / COMMERCE</span>
+<span class="material-symbols-outlined text-primary text-xl">local_shipping</span>
+</div>
+<h3 class="font-headline-md text-sm font-bold text-on-surface mt-1">Cross-border Trade &amp; Logistics</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">
+              Chattogram &amp; Mongla port bonded warehouse digitized manifests, automated freight brokerage, and RMG supplier transparency portals.
+            </p>
+</div>
+<!-- Practice 06 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between">
+<span class="font-mono text-xs font-bold text-primary">06 / CIVIC TECH</span>
+<span class="material-symbols-outlined text-primary text-xl">security</span>
+</div>
+<h3 class="font-headline-md text-sm font-bold text-on-surface mt-1">GovTech &amp; Digital Public Infrastructure</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">
+              National registry interoperability bridges, smart land-titling cryptographic registries, and municipal e-service delivery applications.
+            </p>
+</div>
+</div>
+</section>
+<!-- 7. Impact By The Numbers (High-Contrast 2x2 Grid) -->
+<section class="px-4 py-8 bg-brand-navy text-white relative">
+<div class="mb-4 text-center">
+<span class="text-[10px] font-bold text-brand-gold uppercase tracking-widest font-headline-md">Sovereign Milestones</span>
+<h2 class="font-headline-lg text-lg font-bold text-white mt-0.5">Impact By The Numbers</h2>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white/5 border border-white/10 p-3.5 rounded-xl text-center backdrop-blur-sm">
+<span class="font-display-md text-2xl font-black text-brand-gold-glow block tracking-tight">13+</span>
+<span class="font-label-md text-[11px] text-white/90 font-semibold block mt-0.5">Sovereign Ventures</span>
+<span class="text-[10px] text-outline-variant block mt-0.5">Incubated &amp; Scaled</span>
+</div>
+<div class="bg-white/5 border border-white/10 p-3.5 rounded-xl text-center backdrop-blur-sm">
+<span class="font-display-md text-2xl font-black text-primary-fixed block tracking-tight">500+</span>
+<span class="font-label-md text-[11px] text-white/90 font-semibold block mt-0.5">Engineers &amp; Talents</span>
+<span class="text-[10px] text-outline-variant block mt-0.5">Full-time Ecosystem</span>
+</div>
+<div class="bg-white/5 border border-white/10 p-3.5 rounded-xl text-center backdrop-blur-sm">
+<span class="font-display-md text-2xl font-black text-brand-teal-glow block tracking-tight">$50M+</span>
+<span class="font-label-md text-[11px] text-white/90 font-semibold block mt-0.5">Enterprise Value</span>
+<span class="text-[10px] text-outline-variant block mt-0.5">Cumulative Portfolio</span>
+</div>
+<div class="bg-white/5 border border-white/10 p-3.5 rounded-xl text-center backdrop-blur-sm">
+<span class="font-display-md text-2xl font-black text-brand-gold block tracking-tight">99.4%</span>
+<span class="font-label-md text-[11px] text-white/90 font-semibold block mt-0.5">Client Retention</span>
+<span class="text-[10px] text-outline-variant block mt-0.5">Tier-1 Institutional</span>
+</div>
+</div>
+</section>
+<!-- 8. Sovereign Subsidiaries Showcase -->
+<section class="px-4 py-7 bg-surface-container-low" id="ventures">
+<div class="mb-3.5">
+<span class="text-[11px] font-bold text-primary uppercase tracking-widest font-headline-md">Corporate Entities</span>
+<h2 class="font-headline-lg text-xl font-extrabold text-on-surface tracking-tight mt-0.5">Sovereign Subsidiaries</h2>
+</div>
+<!-- Filter Pills (Scrollable) -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2 mb-3 -mx-4 px-4 text-xs font-semibold">
+<button class="px-3 py-1 rounded-full bg-primary text-white shrink-0 shadow-sm">All</button>
+<button class="px-3 py-1 rounded-full bg-surface-bright text-on-surface-variant border border-outline-variant shrink-0">Technology &amp; AI</button>
+<button class="px-3 py-1 rounded-full bg-surface-bright text-on-surface-variant border border-outline-variant shrink-0">Agri &amp; Commerce</button>
+<button class="px-3 py-1 rounded-full bg-surface-bright text-on-surface-variant border border-outline-variant shrink-0">Media &amp; Telecom</button>
+<button class="px-3 py-1 rounded-full bg-surface-bright text-on-surface-variant border border-outline-variant shrink-0">Consulting</button>
+</div>
+<!-- Vertical Listing of Subsidiaries -->
+<div class="space-y-3">
+<!-- Subsidiary 1 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 shadow-xs">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-bold text-on-surface">Yess Soft Ltd.</span>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Est. 2017</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mb-2">
+              National-scale ERP platforms, biometric identification gateways, and core microfinance switching engines.
+            </p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 hover:text-brand-teal" href="#ventures">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Subsidiary 2 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 shadow-xs">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-bold text-on-surface">Shondhaan Platforms</span>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Est. 2019</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mb-2">
+              B2B intelligent procurement network connecting domestic raw material vendors directly with mid-market manufacturing hubs.
+            </p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 hover:text-brand-teal" href="#ventures">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Subsidiary 3 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 shadow-xs">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-bold text-on-surface">YESS Organic Haat</span>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Est. 2020</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mb-2">
+              Regenerative agriculture aggregator providing certified chemical-free produce with QR-verifiable origin tagging.
+            </p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 hover:text-brand-teal" href="#ventures">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Subsidiary 4 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 shadow-xs">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-bold text-on-surface">Akash OTT Media</span>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Est. 2021</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mb-2">
+              Next-generation broadcast OTT platform catering to Bengali diaspora across the UK, GCC, and North America.
+            </p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 hover:text-brand-teal" href="#ventures">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Subsidiary 5 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 shadow-xs">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-bold text-on-surface">Yess FinCorp Solutions</span>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Est. 2022</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mb-2">
+              Digital invoice factoring and supply-chain liquidity infrastructure adhering to Bangladesh Bank compliance regimes.
+            </p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 hover:text-brand-teal" href="#ventures">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Subsidiary 6 -->
+<div class="bg-surface-bright p-3.5 rounded-xl border border-outline-variant/40 shadow-xs">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-bold text-on-surface">DeshLogix Express</span>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Est. 2022</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mb-2">
+              Last-mile autonomous fulfillment, regional cross-docking hubs, and temperature-controlled pharmaceutical transport.
+            </p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 hover:text-brand-teal" href="#ventures">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 9. Mobile Footer (Shared Component Guidance) -->
+<footer class="bg-surface-container-highest dark:bg-brand-navy text-on-surface flex flex-col items-center gap-4 px-6 pt-8 pb-10 text-center border-t border-outline-variant/30" id="contact-hq">
+<!-- Corporate Crest & Title -->
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-brand-gold shadow-md">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-brand-teal">YESS Bangladesh</span>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">
+            Pioneering institutional venture building, indigenous IP creation, and diversified enterprise acceleration in Dhaka, Bangladesh.
+          </p>
+</div>
+<!-- Registration Citation -->
+<div class="inline-block px-3 py-1 rounded bg-surface-container border border-outline-variant/50 text-[11px] font-mono text-on-surface-variant">
+          RJSC GovBD / C-184920
+        </div>
+<!-- Dhaka HQ Contact Block -->
+<div class="text-xs text-on-surface-variant space-y-1">
+<p class="font-bold text-on-surface">Dhaka HQ Executive Wing:</p>
+<p>Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000</p>
+<p class="text-primary font-medium">invest@yessbgd.com | +880 1805-464343</p>
+</div>
+<!-- Navigation Links (Exact from Footer JSON) -->
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs font-label-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#ventures">Sovereign Subsidiaries</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#practices">Client Marquee</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#brief">Bilingual Profile</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<!-- Copyright -->
+<p class="text-[11px] text-outline font-body-md pt-2">
+          © 2024 YESS Bangladesh. All rights reserved. Dhaka HQ.
+        </p>
+</footer>
+</main>
+<!-- 10. Docked Floating Bottom Tab Bar (BottomNavBar Shared Component) -->
+<!-- Prohibiting top border line as per Shell Border Ban, using subtle drop shadow and tonal shift -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center px-2 py-2 max-w-[390px] mx-auto bg-surface-bright/95 dark:bg-brand-navy/95 backdrop-blur-lg rounded-t-xl shadow-[0_-4px_16px_rgba(1,106,106,0.12)]">
+<!-- Destination 1: Home (Active State strictly mapped) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-brand-teal-glow font-bold relative after:content-[''] after:w-8 after:h-1 after:bg-brand-teal-glow after:rounded-full after:mt-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md mt-0.5">Home</span>
+</a>
+<!-- Destination 2: Ventures -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-brand-teal-glow transition-colors active:scale-90 transition-transform" href="#ventures">
+<span class="material-symbols-outlined text-[20px]">domain</span>
+<span class="font-label-md text-label-md mt-0.5">Ventures</span>
+</a>
+<!-- Destination 3: Services -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-brand-teal-glow transition-colors active:scale-90 transition-transform" href="#practices">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+<span class="font-label-md text-label-md mt-0.5">Services</span>
+</a>
+<!-- Destination 4: Insights -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-brand-teal-glow transition-colors active:scale-90 transition-transform" href="#brief">
+<span class="material-symbols-outlined text-[20px]">article</span>
+<span class="font-label-md text-label-md mt-0.5">Insights</span>
+</a>
+<!-- Destination 5: Contact -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-brand-teal-glow transition-colors active:scale-90 transition-transform" href="#contact-hq">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="font-label-md text-label-md mt-0.5">Contact</span>
+</a>
+</nav>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    const drawerToggle = document.getElementById('drawerToggle');
+    const closeDrawer = document.getElementById('closeDrawer');
+    const sideNavDrawer = document.getElementById('sideNavDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+    function openNav() {
+      sideNavDrawer.classList.remove('-translate-x-full');
+      drawerBackdrop.classList.remove('hidden');
+    }
+
+    function closeNav() {
+      sideNavDrawer.classList.add('-translate-x-full');
+      drawerBackdrop.classList.add('hidden');
+    }
+
+    drawerToggle.addEventListener('click', openNav);
+    closeDrawer.addEventListener('click', closeNav);
+    drawerBackdrop.addEventListener('click', closeNav);
+
+    // Close drawer when clicking any link inside it
+    sideNavDrawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeNav);
+    });
+  </script>
+</body></html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YESS Bangladesh (yessbgd) — Venture Builder &amp; Corporate Conglomerate</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#ffdad6",
+            "on-background": "#181c1c",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "primary": "#005454",
+            "background": "#f7faf9",
+            "primary-fixed": "#a0f0f0",
+            "surface-container-highest": "#d4e4e4",
+            "surface-tint": "#016a6a",
+            "on-secondary-container": "#78520e",
+            "tertiary": "#743c1d",
+            "surface-container-high": "#e6e9e8",
+            "on-primary-fixed": "#002020",
+            "inverse-primary": "#84d4d3",
+            "secondary": "#7e5713",
+            "surface-variant": "#e0e3e2",
+            "inverse-surface": "#2d3131",
+            "surface-dim": "#d7dbda",
+            "on-surface": "#181c1c",
+            "surface-container": "#ebeeee",
+            "outline-variant": "#bec9c8",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#fec97b",
+            "outline": "#6e7979",
+            "primary-container": "#0d6e6e",
+            "on-secondary-fixed-variant": "#614000",
+            "tertiary-container": "#915332",
+            "surface": "#f7faf9",
+            "surface-bright": "#ffffff",
+            "surface-container-low": "#f4f8f8",
+            "tertiary-fixed-dim": "#ffb692",
+            "on-tertiary-container": "#ffd8c6",
+            "tertiary-fixed": "#ffdbcb",
+            "secondary-fixed": "#ffddb1",
+            "brand-gold": "#d4a359",
+            "primary-fixed-dim": "#84d4d3",
+            "secondary-fixed-dim": "#f2be71",
+            "brand-teal": "#0d6e6e",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#3e4948",
+            "on-error-container": "#93000a",
+            "on-primary-container": "#9dedec",
+            "on-primary": "#ffffff",
+            "brand-teal-glow": "#35b0aa",
+            "brand-gold-glow": "#f6c87a",
+            "on-primary-fixed-variant": "#004f50",
+            "on-tertiary-fixed": "#341100",
+            "inverse-on-surface": "#eef1f0",
+            "brand-navy": "#061a1b",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#291800",
+            "on-tertiary-fixed-variant": "#6f3819"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 28s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Minted 3D Embossed Coins */
+    .coin-3d {
+      background: radial-gradient(circle at 35% 30%, #224e50 0%, #0d6e6e 40%, #061a1b 95%);
+      box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.7),
+        0 12px 24px -6px rgba(6, 26, 27, 0.5),
+        0 0 16px rgba(53, 176, 170, 0.25);
+    }
+    .coin-gold {
+      background: radial-gradient(circle at 35% 30%, #ffe9b8 0%, #d4a359 45%, #614000 95%);
+      box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.7),
+        0 12px 24px -6px rgba(6, 26, 27, 0.5),
+        0 0 16px rgba(212, 163, 89, 0.35);
+    }
+    .reeded-edge {
+      border: 3px dashed rgba(212, 163, 89, 0.45);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-brand-teal selection:text-white">
+<!-- 1. Top Utility Banner -->
+<aside aria-label="Corporate Utility Information" class="w-full bg-brand-navy text-outline-variant py-2.5 px-gutter border-b border-surface-container/10">
+<div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-label-md font-label-md gap-4">
+<!-- Contact Details & Direct Hotline -->
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-1.5 hover:text-brand-gold transition-colors duration-150" href="tel:+8801805464343">
+<span class="material-symbols-outlined text-brand-gold text-[16px]">call</span>
+<span>+880 1805-464343</span>
+</a>
+<span class="text-outline/40">|</span>
+<a class="flex items-center gap-1.5 hover:text-brand-gold transition-colors duration-150" href="mailto:yessbangla.bd@gmail.com">
+<span class="material-symbols-outlined text-brand-gold text-[16px]">mail</span>
+<span>yessbangla.bd@gmail.com</span>
+</a>
+</div>
+<!-- Live Operations Status & HQ Clock -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container/10 text-on-primary-container border border-brand-teal/30">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal-glow opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-brand-teal-glow"></span>
+</span>
+<span class="text-surface-bright font-label-md">Dhaka BST 15:42</span>
+<span class="text-outline-variant">•</span>
+<span class="text-brand-gold font-label-md">Operational — HQ Motijheel &amp; Gulshan, Dhaka</span>
+</div>
+<!-- Social Channels & Language Toggle -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 pr-2 border-r border-outline/30">
+<a aria-label="LinkedIn" class="hover:text-brand-gold transition-colors" href="#"><span class="material-symbols-outlined text-[17px]">hub</span></a>
+<a aria-label="Facebook" class="hover:text-brand-gold transition-colors" href="#"><span class="material-symbols-outlined text-[17px]">public</span></a>
+<a aria-label="YouTube" class="hover:text-brand-gold transition-colors" href="#"><span class="material-symbols-outlined text-[17px]">smart_display</span></a>
+<a aria-label="X" class="hover:text-brand-gold transition-colors" href="#"><span class="material-symbols-outlined text-[17px]">share</span></a>
+</div>
+<!-- Language Pill Toggle -->
+<div class="inline-flex items-center p-0.5 rounded-full bg-surface-container-high/20 border border-outline/30 text-label-md font-label-md">
+<button class="px-2.5 py-0.5 rounded-full bg-brand-teal text-white shadow-sm font-semibold" type="button">EN</button>
+<button class="px-2.5 py-0.5 rounded-full text-outline-variant hover:text-white transition-colors" type="button">বাংলা</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- 2. Sticky Glass Header (Shared Component: TopNavBar Anchor) -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 dark:bg-brand-navy/80 backdrop-blur-md shadow-sm transition-all duration-200">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-20">
+<!-- Brand Logo / Corporate Crest Emblem -->
+<a class="flex items-center gap-3.5 group" href="#">
+<div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-navy via-primary-container to-brand-gold p-0.5 shadow-md flex items-center justify-center transition-transform group-hover:scale-105">
+<div class="w-full h-full bg-brand-navy rounded-[10px] flex items-center justify-center text-brand-gold">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md tracking-tight font-extrabold text-primary dark:text-brand-teal-glow leading-none">
+            YESS BANGLADESH
+          </span>
+<span class="text-label-md font-label-md tracking-widest text-brand-gold uppercase">yessbgd • VENTURE BUILDER</span>
+</div>
+</a>
+<!-- Desktop Navigation Cluster (Shared Components Rule) -->
+<nav class="hidden md:flex items-center space-x-7">
+<a class="text-primary dark:text-brand-teal-glow font-label-lg border-b-2 border-primary dark:border-brand-teal-glow pb-1 transition-all" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-lg transition-colors hover:text-primary dark:hover:text-brand-teal-glow" href="#ventures">Ventures</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-lg transition-colors hover:text-primary dark:hover:text-brand-teal-glow" href="#impact">Impact</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-lg transition-colors hover:text-primary dark:hover:text-brand-teal-glow" href="#governance">Governance</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-lg transition-colors hover:text-primary dark:hover:text-brand-teal-glow" href="#news">News</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-lg transition-colors hover:text-primary dark:hover:text-brand-teal-glow" href="#careers">Careers</a>
+</nav>
+<!-- Action Controls -->
+<div class="flex items-center gap-3">
+<button aria-label="Search" class="p-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="Toggle Theme" class="p-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<a class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-white font-label-lg shadow-sm transition-all duration-200 active:scale-95 group" href="#contact">
+<span>Let's Talk</span>
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</header>
+<!-- 3. Hero Section (Split View with Minted 3D Circular Medallion Coins) -->
+<section class="relative bg-brand-navy overflow-hidden text-surface py-20 lg:py-28">
+<!-- Ambient Oceanic Teal Radial Glow & Subtle Grid Background -->
+<div class="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-teal/25 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute bottom-10 right-1/4 w-80 h-80 bg-brand-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative max-w-7xl mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Left Hero Column -->
+<div class="lg:col-span-7 flex flex-col space-y-6">
+<!-- Eyebrow Badge -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container/10 border border-brand-gold/30 text-brand-gold text-label-md font-label-md w-fit">
+<span class="material-symbols-outlined text-[16px] text-brand-gold">auto_awesome</span>
+<span>— A BANGLADESH-BUILT CONSULTANCY &amp; VENTURE BUILDER —</span>
+</div>
+<!-- Display Headline (52px / display-lg Plus Jakarta Sans) -->
+<h1 class="text-display-md lg:text-display-lg font-display-lg tracking-tight text-white leading-tight">
+            Youth Entrepreneurship for <span class="bg-gradient-to-r from-brand-teal-glow via-primary-fixed to-brand-gold bg-clip-text text-transparent">smart success</span> with <span class="bg-gradient-to-r from-brand-gold via-secondary-fixed to-brand-teal-glow bg-clip-text text-transparent">excellence</span> &amp; solutions.
+          </h1>
+<!-- Subtitle -->
+<p class="text-body-lg font-body-lg text-outline-variant max-w-2xl">
+            Catalyzing next-generation enterprises across software engineering, sustainable agribusiness, fintech, and digital media in Bangladesh and global high-growth corridors.
+          </p>
+<!-- Dual CTAs -->
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-brand-teal hover:bg-brand-teal-glow text-white font-label-lg shadow-lg hover:shadow-brand-teal/40 transition-all duration-200 active:scale-95 group" href="#contact">
+<span>Start a project</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+<a class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-surface-container-high/15 hover:bg-surface-container-high/30 border border-outline-variant/30 text-surface-bright font-label-lg backdrop-blur-md transition-all duration-200" href="#services">
+<span class="material-symbols-outlined text-[20px] text-brand-gold">grid_view</span>
+<span>Explore services</span>
+</a>
+</div>
+<!-- Trust Credentials Badge Bar -->
+<div class="pt-6 border-t border-outline/20 grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md font-label-md text-surface-container-high">ISO-grade processes</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md font-label-md text-surface-container-high">11+ years expertise</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md font-label-md text-surface-container-high">98% client retention</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md font-label-md text-surface-container-high">Certified B-Corp pending</span>
+</div>
+</div>
+</div>
+<!-- Right Hero Column: OUR FLAGSHIP VENTURES (Minted 3D Embossed Coins) -->
+<div class="lg:col-span-5">
+<div class="rounded-2xl p-6 bg-surface-container-high/10 border border-outline-variant/20 backdrop-blur-xl shadow-2xl relative">
+<div class="flex justify-between items-center mb-6 pb-4 border-b border-outline/20">
+<div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider block">OUR FLAGSHIP VENTURES</span>
+<span class="text-headline-md font-headline-md text-white font-bold">Pioneering Portfolio</span>
+</div>
+<span class="px-3 py-1 rounded-full text-label-md font-label-md bg-brand-teal/20 text-brand-teal-glow border border-brand-teal/40">
+                13 Sovereign Assets
+              </span>
+</div>
+<!-- 4 Minted 3D Embossed Medallion Coins Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- 1. Yess Soft -->
+<div class="group p-4 rounded-xl bg-surface-container/10 border border-outline/15 hover:border-brand-teal/60 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full coin-3d reeded-edge p-2 flex items-center justify-center mb-3 transition-transform group-hover:rotate-6 group-hover:scale-105">
+<div class="w-14 h-14 rounded-full bg-brand-navy/60 border border-brand-teal-glow/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-brand-teal-glow">memory</span>
+</div>
+</div>
+<h2 class="text-label-lg font-label-lg text-white group-hover:text-brand-teal-glow transition-colors">Yess Soft</h2>
+<p class="text-label-md font-label-md text-outline-variant mt-0.5">Enterprise ERP &amp; AI</p>
+<span class="mt-2 text-label-md font-label-md text-brand-gold font-semibold">Tier-1 Cloud Ready</span>
+</div>
+<!-- 2. Shondhaan -->
+<div class="group p-4 rounded-xl bg-surface-container/10 border border-outline/15 hover:border-brand-gold/60 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full coin-gold reeded-edge p-2 flex items-center justify-center mb-3 transition-transform group-hover:-rotate-6 group-hover:scale-105">
+<div class="w-14 h-14 rounded-full bg-brand-navy/60 border border-brand-gold/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-brand-gold">explore</span>
+</div>
+</div>
+<h2 class="text-label-lg font-label-lg text-white group-hover:text-brand-gold transition-colors">Shondhaan</h2>
+<p class="text-label-md font-label-md text-outline-variant mt-0.5">Search &amp; Supply Chain</p>
+<span class="mt-2 text-label-md font-label-md text-brand-teal-glow font-semibold">National Engine</span>
+</div>
+<!-- 3. Yess Organic Haat -->
+<div class="group p-4 rounded-xl bg-surface-container/10 border border-outline/15 hover:border-brand-teal/60 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full coin-3d reeded-edge p-2 flex items-center justify-center mb-3 transition-transform group-hover:rotate-6 group-hover:scale-105">
+<div class="w-14 h-14 rounded-full bg-brand-navy/60 border border-brand-teal-glow/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-brand-teal-glow">eco</span>
+</div>
+</div>
+<h2 class="text-label-lg font-label-lg text-white group-hover:text-brand-teal-glow transition-colors">Organic Haat</h2>
+<p class="text-label-md font-label-md text-outline-variant mt-0.5">Farm-to-Fork Agrotech</p>
+<span class="mt-2 text-label-md font-label-md text-brand-gold font-semibold">10,000+ Growers</span>
+</div>
+<!-- 4. Akash OTT -->
+<div class="group p-4 rounded-xl bg-surface-container/10 border border-outline/15 hover:border-brand-gold/60 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full coin-gold reeded-edge p-2 flex items-center justify-center mb-3 transition-transform group-hover:-rotate-6 group-hover:scale-105">
+<div class="w-14 h-14 rounded-full bg-brand-navy/60 border border-brand-gold/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-brand-gold">smart_display</span>
+</div>
+</div>
+<h2 class="text-label-lg font-label-lg text-white group-hover:text-brand-gold transition-colors">Akash OTT</h2>
+<p class="text-label-md font-label-md text-outline-variant mt-0.5">Streaming &amp; Content</p>
+<span class="mt-2 text-label-md font-label-md text-brand-teal-glow font-semibold">4.8M Viewers</span>
+</div>
+</div>
+<!-- Bottom Live Audit Feed -->
+<div class="mt-4 pt-3 border-t border-outline/20 flex items-center justify-between text-label-md font-label-md text-outline-variant">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-brand-teal-glow">verified</span>
+                Audited Portfolio Valuation
+              </span>
+<span class="text-white font-semibold">$50M+ Cumulative Base</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Action Cards Section ('READY WHEN YOU ARE') -->
+<section class="py-16 bg-surface-container-low border-b border-surface-container">
+<div class="max-w-7xl mx-auto px-gutter">
+<div class="text-center max-w-3xl mx-auto mb-10">
+<span class="text-label-md font-label-md text-brand-teal font-bold uppercase tracking-wider">DIRECT ENGAGEMENT</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-1">
+          READY WHEN YOU ARE — Let’s build what’s next, together.
+        </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1: Direct Contact / 24h SLA -->
+<div class="p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/60 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/40 text-primary flex items-center justify-center mb-5">
+<span class="material-symbols-outlined text-2xl">quickreply</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-teal/10 text-brand-teal text-label-md font-label-md mb-3">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Reply guaranteed within 1 business day</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Institutional Advisory &amp; Inquiries</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+              Connect directly with our investment committee and venture partners in Dhaka. From corporate spin-outs to digital software engineering, get a confidential proposal.
+            </p>
+</div>
+<div class="pt-6 mt-6 border-t border-surface-container flex flex-wrap items-center justify-between gap-4">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-white font-label-lg transition-all" href="#contact">
+<span>Contact Us Today</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<div class="text-label-md font-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-brand-gold">call</span>
+<span>Hotline: +880 1805-464343</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Explore Capabilities & Download Deck -->
+<div class="p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/60 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 text-secondary flex items-center justify-center mb-5">
+<span class="material-symbols-outlined text-2xl">download</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-gold/15 text-secondary text-label-md font-label-md mb-3">
+<span class="material-symbols-outlined text-[14px]">menu_book</span>
+<span>Corporate Kit 2025 Edition</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Capability Brief &amp; Practice Overview</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+              Examine our multi-sector competencies: Enterprise cloud architecture, organic agribusiness logistics, digital broadcasting streaming pipelines, and regulatory GovTech.
+            </p>
+</div>
+<div class="pt-6 mt-6 border-t border-surface-container flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md transition-all" href="#">
+<span class="material-symbols-outlined text-[18px] text-primary">description</span>
+<span>Brochure (English PDF)</span>
+</a>
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md transition-all" href="#">
+<span class="material-symbols-outlined text-[18px] text-primary">description</span>
+<span>ব্রোশিওর (বাংলা PDF)</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Social Proof Marquee / Partner Ticker -->
+<section class="py-10 bg-brand-navy border-y border-outline/10 overflow-hidden">
+<div class="max-w-7xl mx-auto px-gutter mb-6 text-center">
+<p class="text-label-md font-label-md uppercase tracking-widest text-brand-gold font-semibold">
+        TRUSTED BY INSTITUTIONAL LEADERS &amp; ENTERPRISE PARTNERS IN BANGLADESH
+      </p>
+</div>
+<!-- Infinite Scrolling Logos -->
+<div class="relative overflow-hidden w-full">
+<div class="animate-marquee flex items-center gap-14 text-outline-variant font-label-lg font-bold tracking-wider">
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">assured_workload</span> ICT DIVISION BANGLADESH
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold">terminal</span> BASIS BANGLADESH
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">cell_tower</span> ROBI AXIATA PLC
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold">domain</span> BEXIMCO GROUP
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">devices</span> WALTON HI-TECH
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold">handshake</span> BRAC ENTERPRISES
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">wifi</span> GRAMEEN TELECOM
+        </span>
+<!-- Duplicated for Seamless Loop -->
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">assured_workload</span> ICT DIVISION BANGLADESH
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold">terminal</span> BASIS BANGLADESH
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">cell_tower</span> ROBI AXIATA PLC
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold">domain</span> BEXIMCO GROUP
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">devices</span> WALTON HI-TECH
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold">handshake</span> BRAC ENTERPRISES
+        </span>
+<span class="hover:text-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-glow">wifi</span> GRAMEEN TELECOM
+        </span>
+</div>
+</div>
+</section>
+<!-- 6. Core Services Grid (6 Bento/Glassmorphic Cards) -->
+<section class="py-20 bg-surface" id="services">
+<div class="max-w-7xl mx-auto px-gutter">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<span class="text-label-md font-label-md text-brand-teal font-bold uppercase tracking-widest">ENGINEERED FOR SCALE</span>
+<h2 class="text-display-md font-display-md text-on-surface mt-2 font-bold">
+            Institutional Practice Areas
+          </h2>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-md mt-4 md:mt-0">
+          Deploying structured equity, enterprise-grade engineering teams, and regulatory foresight to compound growth across South Asia.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Practice 1 -->
+<div class="group p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/70 hover:border-brand-teal transition-all duration-300 hover:shadow-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider">Practice 01</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">Venture Incubation &amp; Capital Architecture</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-3">
+            Syndicated financing structures, equity frameworks, seed acceleration, and institutional governance setup for high-momentum founders.
+          </p>
+<ul class="mt-6 space-y-2 border-t border-surface-container pt-4 text-label-md font-label-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> SPV Formation &amp; Structuring</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Corporate Venture Capital (CVC)</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Cross-border IP Ring-fencing</li>
+</ul>
+</div>
+<!-- Practice 2 -->
+<div class="group p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/70 hover:border-brand-teal transition-all duration-300 hover:shadow-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl">developer_mode_tv</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider">Practice 02 • Yess Soft</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">Enterprise Software &amp; Cloud Systems</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-3">
+            Mission-critical ERP suites, localized microservices, high-load payment gateways, and enterprise AI automation models.
+          </p>
+<ul class="mt-6 space-y-2 border-t border-surface-container pt-4 text-label-md font-label-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> High-Concurrency Fintech Pipelines</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Multi-Tenant SaaS Infrastructures</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Kubernetes &amp; Hybrid Cloud Orchestration</li>
+</ul>
+</div>
+<!-- Practice 3 -->
+<div class="group p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/70 hover:border-brand-teal transition-all duration-300 hover:shadow-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl">agriculture</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider">Practice 03 • Organic Haat</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">Sustainable Agritech &amp; Supply Chains</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-3">
+            Disintermediating rural-to-urban agricultural trade through cold-chain IoT tracking, fair-price farmer cooperatives, and certified organic distribution.
+          </p>
+<ul class="mt-6 space-y-2 border-t border-surface-container pt-4 text-label-md font-label-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Farm-Level Traceability Passports</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Controlled Cold-Chain Logistics Hubs</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Fair-Price Wholesale Auctions</li>
+</ul>
+</div>
+<!-- Practice 4 -->
+<div class="group p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/70 hover:border-brand-teal transition-all duration-300 hover:shadow-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl">play_circle</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider">Practice 04 • Akash OTT</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">Media Streaming &amp; Digital Platforms</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-3">
+            Ultra-low latency adaptive video delivery networks, localized vernacular content licensing, and interactive streaming monetization.
+          </p>
+<ul class="mt-6 space-y-2 border-t border-surface-container pt-4 text-label-md font-label-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> HLS &amp; WebRTC Transcoding Mesh</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> DRM &amp; Dynamic Watermarking</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Telco Direct Carrier Billing (DCB)</li>
+</ul>
+</div>
+<!-- Practice 5 -->
+<div class="group p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/70 hover:border-brand-teal transition-all duration-300 hover:shadow-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider">Practice 05</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">Cross-border Trade &amp; Logistics</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-3">
+            Customs clearance automation, inter-district freight brokerage systems, and integrated bonded warehousing management for imports and exports.
+          </p>
+<ul class="mt-6 space-y-2 border-t border-surface-container pt-4 text-label-md font-label-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Chittagong Port Automated Clearances</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Last-Mile FMCG Fleet Management</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Cross-Border Letter of Credit Advisory</li>
+</ul>
+</div>
+<!-- Practice 6 -->
+<div class="group p-8 rounded-2xl bg-surface-bright border border-surface-container-highest/70 hover:border-brand-teal transition-all duration-300 hover:shadow-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl">assured_workload</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold uppercase tracking-wider">Practice 06</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">GovTech &amp; Digital Public Infrastructure</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-3">
+            Public sector modernizations, citizen identity validation gateways, municipal taxation portals, and Smart Bangladesh institutional rollouts.
+          </p>
+<ul class="mt-6 space-y-2 border-t border-surface-container pt-4 text-label-md font-label-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> National Registry Integrations</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Citizen Data Privacy (GDPR/BD Alignment)</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-brand-teal">check</span> Automated Land Record Frameworks</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Impact Metrics Counter (Sleek Dark Oceanic Container) -->
+<section class="py-16 bg-brand-navy text-surface relative overflow-hidden" id="impact">
+<div class="absolute inset-0 bg-gradient-to-r from-brand-teal/15 via-transparent to-brand-gold/10 pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-gutter relative">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-outline/20">
+<div class="pt-6 sm:pt-0 sm:px-6 text-center">
+<span class="text-display-md lg:text-display-lg font-display-lg text-brand-gold font-extrabold tracking-tight">13+</span>
+<p class="text-headline-md font-headline-md text-white mt-1">Sovereign Ventures</p>
+<p class="text-body-md font-body-md text-outline-variant mt-1">Independent subsidiaries across 5 economic sectors</p>
+</div>
+<div class="pt-6 sm:pt-0 sm:px-6 text-center">
+<span class="text-display-md lg:text-display-lg font-display-lg text-brand-teal-glow font-extrabold tracking-tight">500+</span>
+<p class="text-headline-md font-headline-md text-white mt-1">Engineers &amp; Talents</p>
+<p class="text-body-md font-body-md text-outline-variant mt-1">Full-time technologists, researchers, and agronomists</p>
+</div>
+<div class="pt-6 sm:pt-0 sm:px-6 text-center">
+<span class="text-display-md lg:text-display-lg font-display-lg text-brand-gold font-extrabold tracking-tight">$50M+</span>
+<p class="text-headline-md font-headline-md text-white mt-1">Enterprise Value</p>
+<p class="text-body-md font-body-md text-outline-variant mt-1">Delivered and sustained across portfolio entities</p>
+</div>
+<div class="pt-6 sm:pt-0 sm:px-6 text-center">
+<span class="text-display-md lg:text-display-lg font-display-lg text-brand-teal-glow font-extrabold tracking-tight">99.4%</span>
+<p class="text-headline-md font-headline-md text-white mt-1">Client Retention</p>
+<p class="text-body-md font-body-md text-outline-variant mt-1">Across institutional partners &amp; corporate clients</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. 13 Ventures Subsidiary Showcase Grid -->
+<section class="py-20 bg-surface-container-low" id="ventures">
+<div class="max-w-7xl mx-auto px-gutter">
+<div class="text-center max-w-3xl mx-auto mb-12">
+<span class="text-label-md font-label-md text-brand-teal font-bold uppercase tracking-wider">THE CONGLOMERATE CANVAS</span>
+<h2 class="text-display-md font-display-md text-on-surface mt-2 font-bold">13 Sovereign Subsidiaries</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+          From micro-lending algorithms to pan-district logistics and digital television, YESS Bangladesh incubates and scales self-sustaining institutional assets.
+        </p>
+<!-- Filter Tabs -->
+<div class="mt-8 flex flex-wrap justify-center gap-2">
+<button class="px-4 py-2 rounded-full bg-primary text-white text-label-md font-label-md shadow-sm" type="button">All Ventures (13)</button>
+<button class="px-4 py-2 rounded-full bg-surface-bright text-on-surface-variant hover:text-primary text-label-md font-label-md border border-outline-variant/40" type="button">Technology &amp; AI</button>
+<button class="px-4 py-2 rounded-full bg-surface-bright text-on-surface-variant hover:text-primary text-label-md font-label-md border border-outline-variant/40" type="button">Agri &amp; Commerce</button>
+<button class="px-4 py-2 rounded-full bg-surface-bright text-on-surface-variant hover:text-primary text-label-md font-label-md border border-outline-variant/40" type="button">Media &amp; Telecom</button>
+<button class="px-4 py-2 rounded-full bg-surface-bright text-on-surface-variant hover:text-primary text-label-md font-label-md border border-outline-variant/40" type="button">Consulting &amp; Fin</button>
+</div>
+</div>
+<!-- Ventures Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- 1. Yess Soft -->
+<div class="p-6 rounded-2xl bg-surface-bright border border-surface-container-highest/80 hover:border-brand-teal transition-all duration-200">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/30 text-primary flex items-center justify-center font-bold text-lg">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-label-md font-label-md text-on-surface-variant">Est. 2017</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold mt-4 block">Software &amp; Cloud</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1">Yess Soft Ltd.</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+            Flagship enterprise ERP, automated payroll engines, and high-security transactional infrastructures.
+          </p>
+<a class="mt-4 inline-flex items-center gap-1.5 text-brand-teal font-label-lg hover:text-brand-teal-glow transition-colors" href="#">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 2. Shondhaan -->
+<div class="p-6 rounded-2xl bg-surface-bright border border-surface-container-highest/80 hover:border-brand-teal transition-all duration-200">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 text-secondary flex items-center justify-center font-bold text-lg">
+<span class="material-symbols-outlined">explore</span>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-label-md font-label-md text-on-surface-variant">Est. 2019</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold mt-4 block">Search &amp; Catalog</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1">Shondhaan Platforms</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+            AI-driven verified business directory and sovereign B2B discovery portal for Bangladeshi industrial trade.
+          </p>
+<a class="mt-4 inline-flex items-center gap-1.5 text-brand-teal font-label-lg hover:text-brand-teal-glow transition-colors" href="#">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 3. Organic Haat -->
+<div class="p-6 rounded-2xl bg-surface-bright border border-surface-container-highest/80 hover:border-brand-teal transition-all duration-200">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/30 text-primary flex items-center justify-center font-bold text-lg">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-label-md font-label-md text-on-surface-variant">Est. 2020</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold mt-4 block">Agro &amp; Supply Chain</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1">YESS Organic Haat</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+            Pesticide-free food logistics network sourcing straight from 64 district rural clusters directly into metro households.
+          </p>
+<a class="mt-4 inline-flex items-center gap-1.5 text-brand-teal font-label-lg hover:text-brand-teal-glow transition-colors" href="#">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 4. Akash OTT -->
+<div class="p-6 rounded-2xl bg-surface-bright border border-surface-container-highest/80 hover:border-brand-teal transition-all duration-200">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 text-secondary flex items-center justify-center font-bold text-lg">
+<span class="material-symbols-outlined">live_tv</span>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-label-md font-label-md text-on-surface-variant">Est. 2021</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold mt-4 block">Media &amp; Entertainment</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1">Akash OTT Media</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+            South Asian dynamic streaming platform showcasing authentic regional storytelling and high-fidelity video broadcasts.
+          </p>
+<a class="mt-4 inline-flex items-center gap-1.5 text-brand-teal font-label-lg hover:text-brand-teal-glow transition-colors" href="#">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 5. Yess FinCorp -->
+<div class="p-6 rounded-2xl bg-surface-bright border border-surface-container-highest/80 hover:border-brand-teal transition-all duration-200">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/30 text-primary flex items-center justify-center font-bold text-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-label-md font-label-md text-on-surface-variant">Est. 2022</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold mt-4 block">Fintech &amp; Credit</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1">Yess FinCorp Solutions</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+            Algorithmic micro-credit scoring for informal MSMEs, enabling collateral-free capital flow across trade corridors.
+          </p>
+<a class="mt-4 inline-flex items-center gap-1.5 text-brand-teal font-label-lg hover:text-brand-teal-glow transition-colors" href="#">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 6. DeshLogix -->
+<div class="p-6 rounded-2xl bg-surface-bright border border-surface-container-highest/80 hover:border-brand-teal transition-all duration-200">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 text-secondary flex items-center justify-center font-bold text-lg">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-label-md font-label-md text-on-surface-variant">Est. 2018</span>
+</div>
+<span class="text-label-md font-label-md text-brand-gold mt-4 block">Logistics &amp; Freight</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mt-1">DeshLogix Express</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">
+            Intermodal dispatch management with telematics-linked freight trailers linking Dhaka, Chittagong, and Mongla ports.
+          </p>
+<a class="mt-4 inline-flex items-center gap-1.5 text-brand-teal font-label-lg hover:text-brand-teal-glow transition-colors" href="#">
+<span>View Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="mt-10 text-center">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-bright border border-primary text-primary font-label-lg hover:bg-primary hover:text-white transition-all duration-200" href="#contact">
+<span>Inquire About Subsidiary Investment Portfolios</span>
+<span class="material-symbols-outlined text-[18px]">launch</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 9. Institutional Footer (Shared Component: Footer Anchor) -->
+<footer class="docked full-width bg-brand-navy text-surface py-space-xl border-t border-outline/20" id="governance">
+<div class="w-full max-w-7xl mx-auto px-gutter">
+<!-- Top 4-Column Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-outline/20">
+<!-- Column 1: Brand & Mission Statement -->
+<div class="lg:col-span-4 flex flex-col space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-brand-gold flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">shield_with_heart</span>
+</div>
+<span class="text-headline-lg font-headline-lg font-bold text-surface tracking-tight">YESS Bangladesh</span>
+</div>
+<p class="text-body-md font-body-md text-outline-variant max-w-sm">
+            Pioneering institutional venture building, engineering resilient technological backbone infrastructures, and empowering youth-led socioeconomic transformation across South Asia.
+          </p>
+<div class="pt-2 text-label-md font-label-md text-brand-gold">
+            Registration: RJSC GovBD / C-184920 • Founded in Dhaka, Bangladesh
+          </div>
+</div>
+<!-- Column 2: Sovereign Ventures Portfolio Links -->
+<div class="lg:col-span-2 flex flex-col space-y-3">
+<span class="text-label-md font-label-md uppercase tracking-wider text-brand-gold font-bold">Ventures</span>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Yess Soft (ERP)</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Shondhaan Search</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Organic Haat Agro</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Akash OTT Media</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Yess FinCorp</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">DeshLogix Express</a>
+</div>
+<!-- Column 3: Corporate Governance & Policy Links -->
+<div class="lg:col-span-2 flex flex-col space-y-3">
+<span class="text-label-md font-label-md uppercase tracking-wider text-brand-gold font-bold">Governance</span>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Board of Directors</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Impact &amp; Sustainability</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Annual Reports</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Careers at YESS</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Privacy Policy</a>
+<a class="text-outline-variant hover:text-brand-gold transition-colors text-body-md font-body-md" href="#">Terms of Service</a>
+</div>
+<!-- Column 4: Dhaka HQ & Executive Newsletter -->
+<div class="lg:col-span-4 flex flex-col space-y-4" id="contact">
+<span class="text-label-md font-label-md uppercase tracking-wider text-brand-gold font-bold">Headquarters &amp; Insights</span>
+<div class="text-body-md font-body-md text-outline-variant space-y-1">
+<p class="text-white font-semibold">Dhaka Corporate HQ:</p>
+<p>Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000</p>
+<p>Regional Innovation Lab: Gulshan-2, Dhaka-1212, Bangladesh</p>
+<p class="pt-1 text-brand-teal-glow">Direct: +880 1805-464343 | yessbangla.bd@gmail.com</p>
+</div>
+<!-- Newsletter Subscribe Box -->
+<div class="pt-2">
+<label class="text-label-md font-label-md text-surface-container-high block mb-1.5" for="sub-email">Executive Briefing &amp; Sector Reports</label>
+<div class="flex items-center gap-2">
+<input class="bg-surface-container-high/10 border border-outline/30 rounded-lg px-3.5 py-2 text-body-md font-body-md text-white placeholder-outline-variant/60 focus:outline-none focus:border-brand-teal w-full" id="sub-email" placeholder="corporate.email@domain.com" type="email"/>
+<button class="px-4 py-2 rounded-lg bg-brand-teal hover:bg-brand-teal-glow text-white font-label-md shadow-sm transition-all whitespace-nowrap" type="button">
+                Subscribe
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Copyright & Compliance Bar (JSON Anchor exact match) -->
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between text-body-md font-body-md text-outline-variant gap-4">
+<div>
+          © 2025 YESS Bangladesh (yessbgd). All rights reserved. Pioneering institutional venture building.
+        </div>
+<div class="flex items-center gap-6 text-label-md font-label-md">
+<a class="hover:text-brand-gold transition-colors" href="#">Ventures Portfolio</a>
+<a class="hover:text-brand-gold transition-colors" href="#">Corporate Governance</a>
+<a class="hover:text-brand-gold transition-colors" href="#">Impact &amp; Sustainability</a>
+<a class="hover:text-brand-gold transition-colors" href="#">Annual Reports</a>
+<a class="hover:text-brand-gold transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-brand-gold transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

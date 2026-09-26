@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Careers Hub &amp; Talent Portal | YESS Bangladesh</title>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#ffdbcb",
+            "primary-fixed": "#a0f0f0",
+            "inverse-on-surface": "#eef1f0",
+            "primary-fixed-dim": "#84d4d3",
+            "on-tertiary-container": "#ffd8c6",
+            "error-container": "#ffdad6",
+            "surface-dim": "#d7dbda",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "surface": "#f7faf9",
+            "surface-container-low": "#f1f4f3",
+            "secondary": "#7e5713",
+            "background": "#f7faf9",
+            "on-secondary-fixed": "#291800",
+            "on-primary-fixed-variant": "#004f50",
+            "outline-variant": "#bec9c8",
+            "on-primary-fixed": "#002020",
+            "surface-bright": "#ffffff",
+            "on-background": "#181c1c",
+            "surface-container-highest": "#d4e4e4",
+            "primary": "#005454",
+            "brand-gold": "#d4a359",
+            "on-secondary-container": "#78520e",
+            "on-tertiary": "#ffffff",
+            "brand-teal": "#0d6e6e",
+            "primary-container": "#0d6e6e",
+            "on-primary-container": "#9dedec",
+            "surface-tint": "#016a6a",
+            "brand-navy": "#061a1b",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary": "#743c1d",
+            "surface-variant": "#e0e3e2",
+            "secondary-fixed-dim": "#f2be71",
+            "brand-teal-glow": "#35b0aa",
+            "surface-container-high": "#dfecec",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#341100",
+            "tertiary-container": "#915332",
+            "secondary-container": "#fec97b",
+            "on-secondary-fixed-variant": "#614000",
+            "surface-container": "#ebeeee",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#84d4d3",
+            "on-surface-variant": "#3e4948",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "secondary-fixed": "#ffddb1",
+            "outline": "#6e7979",
+            "inverse-surface": "#2d3131",
+            "tertiary-fixed-dim": "#ffb692",
+            "on-surface": "#181c1c",
+            "brand-gold-glow": "#f6c87a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "label-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Hide scrollbar for horizontal chip row */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased font-body-md text-body-md flex justify-center selection:bg-brand-teal-glow selection:text-white">
+<!-- Mobile Viewport Wrapper (strictly 390px mobile canvas) -->
+<div class="w-full max-w-[390px] min-h-screen bg-surface flex flex-col relative pb-20 shadow-2xl overflow-x-hidden">
+<!-- 1. Top Compact Notification / Utility Ticker -->
+<aside class="bg-brand-navy text-surface-container-low px-3 py-1.5 flex items-center justify-between z-50 text-[11px] font-medium tracking-tight">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+<span class="text-white/90">Dhaka BST</span>
+<span class="text-white/40">|</span>
+<a class="text-white/80 hover:text-brand-gold-glow transition-colors" href="tel:+8801805464343">+880 1805-464343</a>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-surface-container-highest/20 hover:bg-surface-container-highest/30 px-2 py-0.5 rounded text-[10px] font-semibold text-brand-gold tracking-wide transition-colors" type="button">
+          EN | বাংলা
+        </button>
+</div>
+</aside>
+<!-- 2. Sticky Frosted Liquid Glass Header -->
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-surface/90 shadow-sm transition-all duration-150">
+<div class="flex justify-between items-center w-full px-4 h-14">
+<!-- Brand & Context -->
+<a class="flex items-center gap-2 group" href="#">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm group-hover:bg-brand-teal transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[17px] font-bold text-primary tracking-tight leading-none">YESS Bangladesh</span>
+<span class="text-[9px] font-label-md font-bold tracking-widest text-brand-gold mt-0.5">TALENT &amp; CAREERS</span>
+</div>
+</a>
+<!-- Header Actions -->
+<div class="flex items-center gap-1">
+<button aria-label="Search Positions" class="w-9 h-9 flex items-center justify-center rounded-lg text-primary hover:bg-surface-container transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button aria-label="Toggle Theme" class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</button>
+<button aria-label="Open Navigation Drawer" class="w-9 h-9 flex items-center justify-center rounded-lg text-primary hover:bg-surface-container transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- 3. Mobile Hero Section with Oceanic Gradient -->
+<section class="relative bg-gradient-to-br from-brand-navy via-brand-teal to-primary text-white px-4 pt-5 pb-7 overflow-hidden">
+<!-- Ambient Wave Shimmer Pattern Overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-gold via-transparent to-brand-teal-glow"></div>
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-1.5 text-[11px] text-white/70 mb-3 font-medium">
+<a class="hover:text-white transition-colors" href="#">Home</a>
+<span class="text-white/40">/</span>
+<span class="text-brand-gold font-semibold">Careers</span>
+</nav>
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright/10 backdrop-blur-md border border-brand-gold/30 text-brand-gold font-label-md text-[10px] tracking-wider mb-2.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+        — TALENT &amp; SOVEREIGN CAPABILITIES —
+      </div>
+<!-- Main Headline -->
+<h1 class="font-headline-lg text-[25px] font-extrabold text-white leading-tight tracking-tight mb-2.5">
+        Build Sovereign Tech &amp; Shape Bangladesh's Industrial Future.
+      </h1>
+<!-- Subtitle -->
+<p class="font-body-md text-[13px] text-surface-container-low/90 leading-relaxed mb-5">
+        Join 500+ engineers, product architects, and venture leaders in Dhaka building national scale platforms.
+      </p>
+<!-- Dual Action CTAs -->
+<div class="flex items-center gap-2.5 mb-6">
+<a class="flex-1 bg-brand-teal-glow hover:bg-teal-400 text-brand-navy font-label-md text-[13px] font-bold py-2.5 px-3 rounded-lg text-center shadow-lg shadow-brand-teal-glow/20 transition-all active:scale-95 flex items-center justify-center gap-1.5" href="#requisitions">
+<span>Explore 12 Open Roles</span>
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</a>
+<a class="px-3.5 py-2.5 rounded-lg bg-surface-bright/10 backdrop-blur-md border border-white/20 hover:bg-surface-bright/20 text-white font-label-md text-[13px] font-semibold transition-all active:scale-95 flex items-center justify-center gap-1" href="#wizard">
+<span>Track Status</span>
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</a>
+</div>
+<!-- Compact 2x2 Telemetry Metric Grid -->
+<div class="grid grid-cols-2 gap-2.5">
+<div class="bg-surface-bright/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+<div class="font-headline-md text-[20px] font-bold text-white tracking-tight leading-none mb-1">500+</div>
+<div class="text-[11px] font-semibold text-brand-gold mb-0.5">Builders</div>
+<div class="text-[10px] text-surface-container-low/80 leading-tight">Engineers &amp; Architects</div>
+</div>
+<div class="bg-surface-bright/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+<div class="font-headline-md text-[20px] font-bold text-white tracking-tight leading-none mb-1">94%</div>
+<div class="text-[11px] font-semibold text-brand-gold mb-0.5">Retention Rate</div>
+<div class="text-[10px] text-surface-container-low/80 leading-tight">Long-term Institutional Loyalty</div>
+</div>
+<div class="bg-surface-bright/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+<div class="font-headline-md text-[20px] font-bold text-white tracking-tight leading-none mb-1">Dual Hub</div>
+<div class="text-[11px] font-semibold text-brand-gold mb-0.5">Dhaka Core</div>
+<div class="text-[10px] text-surface-container-low/80 leading-tight">Gulshan Lab &amp; Motijheel HQ</div>
+</div>
+<div class="bg-surface-bright/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+<div class="font-headline-md text-[20px] font-bold text-white tracking-tight leading-none mb-1">৳250k+</div>
+<div class="text-[11px] font-semibold text-brand-gold mb-0.5">Annual Grants</div>
+<div class="text-[10px] text-surface-container-low/80 leading-tight">Sponsored Certs &amp; R&amp;D</div>
+</div>
+</div>
+</section>
+<!-- 4. Institutional Values & Culture (Life at YESS) -->
+<section class="px-4 py-6 bg-surface">
+<div class="mb-4">
+<span class="text-[11px] font-label-md font-bold tracking-widest text-secondary uppercase">Institutional Culture</span>
+<h2 class="font-headline-md text-[20px] font-bold text-on-surface tracking-tight mt-0.5">How We Pioneer &amp; Operate</h2>
+</div>
+<div class="space-y-3">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-high transition-transform duration-150 active:scale-98">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div>
+<h3 class="font-label-lg text-primary text-[14px] font-bold leading-tight">Sovereign Engineering Autonomy</h3>
+<p class="font-body-md text-on-surface-variant text-[12px] mt-1 leading-snug">
+                Architect high-concurrency microservices, sovereign cloud arrays, and zero-trust infrastructure free from legacy technical debt.
+              </p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-high transition-transform duration-150 active:scale-98">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+</div>
+<div>
+<h3 class="font-label-lg text-primary text-[14px] font-bold leading-tight">Meritocratic Growth</h3>
+<p class="font-body-md text-on-surface-variant text-[12px] mt-1 leading-snug">
+                Transparent advancement ladders without bureaucratic seniority ceilings. Ship transformative infrastructure and lead venture verticals.
+              </p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-high transition-transform duration-150 active:scale-98">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+</div>
+<div>
+<h3 class="font-label-lg text-primary text-[14px] font-bold leading-tight">True Venture Ownership</h3>
+<p class="font-body-md text-on-surface-variant text-[12px] mt-1 leading-snug">
+                Direct equity allocations, venture royalty sharing, and intellectual patent attribution across all YESS conglomerate subsidiaries.
+              </p>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-high transition-transform duration-150 active:scale-98">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div>
+<h3 class="font-label-lg text-primary text-[14px] font-bold leading-tight">Institutional Resilience</h3>
+<p class="font-body-md text-on-surface-variant text-[12px] mt-1 leading-snug">
+                Tier-3 certified operational continuity, high psychological safety, and stable sovereign capital reserves safeguarding long horizons.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Total Rewards & High-Performer Perks -->
+<section class="px-4 py-6 bg-surface-container-low">
+<div class="mb-4">
+<span class="text-[11px] font-label-md font-bold tracking-widest text-secondary uppercase">Total Rewards Framework</span>
+<h2 class="font-headline-md text-[20px] font-bold text-on-surface tracking-tight mt-0.5">World-Class Care for High Performers</h2>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Perk 1 -->
+<div class="bg-surface p-3 rounded-xl border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<h4 class="font-label-md text-[13px] font-bold text-primary leading-tight">Executive Compensation</h4>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">
+              Top-decile Dhaka remuneration &amp; quarterly venture profit-sharing.
+            </p>
+</div>
+</div>
+<!-- Perk 2 -->
+<div class="bg-surface p-3 rounded-xl border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">health_and_safety</span>
+</div>
+<h4 class="font-label-md text-[13px] font-bold text-primary leading-tight">Comprehensive Health</h4>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">
+              100% cashless medical &amp; life coverage for self, spouse, and parents.
+            </p>
+</div>
+</div>
+<!-- Perk 3 -->
+<div class="bg-surface p-3 rounded-xl border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">airport_shuttle</span>
+</div>
+<h4 class="font-label-md text-[13px] font-bold text-primary leading-tight">Hybrid &amp; Transit</h4>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">
+              Autonomous schedule + AC shuttle across Gulshan, Banani, &amp; Motijheel.
+            </p>
+</div>
+</div>
+<!-- Perk 4 -->
+<div class="bg-surface p-3 rounded-xl border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">devices</span>
+</div>
+<h4 class="font-label-md text-[13px] font-bold text-primary leading-tight">Hardware Grant</h4>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">
+              Apple M-Series MacBook Pro or custom Linux rig + ergonomic seating.
+            </p>
+</div>
+</div>
+<!-- Perk 5 -->
+<div class="bg-surface p-3 rounded-xl border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+</div>
+<h4 class="font-label-md text-[13px] font-bold text-primary leading-tight">Gourmet Catering</h4>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">
+              Organic meals sourced directly from YESS Organic Haat at Gulshan Hub.
+            </p>
+</div>
+</div>
+<!-- Perk 6 -->
+<div class="bg-surface p-3 rounded-xl border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">school</span>
+</div>
+<h4 class="font-label-md text-[13px] font-bold text-primary leading-tight">Global Certifications</h4>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">
+              Funded AWS/GCP, CMMI, CFA credentials plus paid study sabbatical.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Filterable Institutional Open Requisitions Directory -->
+<section class="px-4 py-6 bg-surface" id="requisitions">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-headline-md text-[19px] font-bold text-on-surface tracking-tight">Open Requisitions</h2>
+<span class="text-[10px] font-label-md font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">Q1/Q2 2026</span>
+</div>
+<p class="text-[12px] text-on-surface-variant font-medium mb-3">12 Priority Openings across 6 Subsidiaries</p>
+<!-- Search Input -->
+<div class="relative mb-3">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-low pl-9 pr-4 py-2.5 rounded-lg border border-surface-container-high text-[13px] text-on-surface placeholder:text-outline focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all" placeholder="Search by role, stack, or subsidiary..." type="text"/>
+</div>
+<!-- Horizontal scrolling filter pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-3 pt-1">
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-[12px] font-label-md font-bold bg-primary text-white shadow-sm shrink-0" type="button">
+          All Roles (12)
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-[12px] font-label-md font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors shrink-0" type="button">
+          Software (5)
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-[12px] font-label-md font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors shrink-0" type="button">
+          Agri/Ops (2)
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-[12px] font-label-md font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors shrink-0" type="button">
+          Product &amp; UX (2)
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-[12px] font-label-md font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors shrink-0" type="button">
+          Security/Cloud (2)
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-[12px] font-label-md font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors shrink-0" type="button">
+          Finance (1)
+        </button>
+</div>
+<!-- Stacked Interactive Job Cards -->
+<div class="space-y-3 mt-1">
+<!-- Job Card 1 -->
+<article class="bg-surface-bright p-3.5 rounded-xl border border-surface-container-high shadow-sm hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between gap-2">
+<span class="inline-block text-[10px] font-label-md font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">
+              Yess Soft Ltd.
+            </span>
+<button aria-label="Save Job" class="text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface mt-1.5 leading-snug">
+            Lead Distributed Systems Architect (Go / K8s / Kafka)
+          </h3>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-on-surface-variant mt-1.5">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">location_on</span>Gulshan HQ</span>
+<span>•</span>
+<span>Full-Time</span>
+<span>•</span>
+<span class="font-semibold text-secondary">Senior Staff</span>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 border-t border-surface-container">
+<div class="text-[12px] font-bold text-primary font-label-md">
+              ৳280k - ৳380k<span class="text-[10px] font-normal text-on-surface-variant">/mo + Equity</span>
+</div>
+<a class="bg-primary hover:bg-brand-teal text-white font-label-md text-[11px] font-bold px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-95 transition-all" href="#wizard">
+              Apply Now <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Job Card 2 -->
+<article class="bg-surface-bright p-3.5 rounded-xl border border-surface-container-high shadow-sm hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between gap-2">
+<span class="inline-block text-[10px] font-label-md font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">
+              Yess Soft Ltd.
+            </span>
+<button aria-label="Save Job" class="text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface mt-1.5 leading-snug">
+            Senior Full-Stack Engineer (React / Next.js / TypeScript / Node)
+          </h3>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-on-surface-variant mt-1.5">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">home_work</span>Hybrid (Dhaka)</span>
+<span>•</span>
+<span>Full-Time</span>
+<span>•</span>
+<span class="font-semibold text-secondary">Senior Level</span>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 border-t border-surface-container">
+<div class="text-[12px] font-bold text-primary font-label-md">
+              ৳160k - ৳220k<span class="text-[10px] font-normal text-on-surface-variant">/mo</span>
+</div>
+<a class="bg-primary hover:bg-brand-teal text-white font-label-md text-[11px] font-bold px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-95 transition-all" href="#wizard">
+              Apply Now <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Job Card 3 -->
+<article class="bg-surface-bright p-3.5 rounded-xl border border-surface-container-high shadow-sm hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between gap-2">
+<span class="inline-block text-[10px] font-label-md font-bold px-2 py-0.5 rounded bg-brand-gold/20 text-secondary">
+              AgriSense IoT
+            </span>
+<button aria-label="Save Job" class="text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface mt-1.5 leading-snug">
+            IoT Systems &amp; Firmware Engineer (LoRaWAN / ESP32 / C++)
+          </h3>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-on-surface-variant mt-1.5">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">sensors</span>Gulshan Lab &amp; Field</span>
+<span>•</span>
+<span>Full-Time</span>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 border-t border-surface-container">
+<div class="text-[12px] font-bold text-primary font-label-md">
+              ৳140k - ৳190k<span class="text-[10px] font-normal text-on-surface-variant">/mo</span>
+</div>
+<a class="bg-primary hover:bg-brand-teal text-white font-label-md text-[11px] font-bold px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-95 transition-all" href="#wizard">
+              Apply Now <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Job Card 4 -->
+<article class="bg-surface-bright p-3.5 rounded-xl border border-surface-container-high shadow-sm hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between gap-2">
+<span class="inline-block text-[10px] font-label-md font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">
+              CyberKilla / SecOps
+            </span>
+<button aria-label="Save Job" class="text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface mt-1.5 leading-snug">
+            Principal Cloud Security &amp; DevSecOps (Zero-Trust / ISO 27001)
+          </h3>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-on-surface-variant mt-1.5">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">security</span>Motijheel Ops</span>
+<span>•</span>
+<span>Full-Time</span>
+<span>•</span>
+<span class="font-semibold text-secondary">Lead</span>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 border-t border-surface-container">
+<div class="text-[12px] font-bold text-primary font-label-md">
+              ৳250k - ৳340k<span class="text-[10px] font-normal text-on-surface-variant">/mo</span>
+</div>
+<a class="bg-primary hover:bg-brand-teal text-white font-label-md text-[11px] font-bold px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-95 transition-all" href="#wizard">
+              Apply Now <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Job Card 5 -->
+<article class="bg-surface-bright p-3.5 rounded-xl border border-surface-container-high shadow-sm hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between gap-2">
+<span class="inline-block text-[10px] font-label-md font-bold px-2 py-0.5 rounded bg-brand-gold/20 text-secondary">
+              YESS Organic Haat
+            </span>
+<button aria-label="Save Job" class="text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface mt-1.5 leading-snug">
+            Senior Supply Chain Optimization Manager
+          </h3>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-on-surface-variant mt-1.5">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">local_shipping</span>Tejgaon Hub</span>
+<span>•</span>
+<span>Full-Time</span>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 border-t border-surface-container">
+<div class="text-[12px] font-bold text-primary font-label-md">
+              ৳150k - ৳210k<span class="text-[10px] font-normal text-on-surface-variant">/mo</span>
+</div>
+<a class="bg-primary hover:bg-brand-teal text-white font-label-md text-[11px] font-bold px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-95 transition-all" href="#wizard">
+              Apply Now <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Job Card 6 -->
+<article class="bg-surface-bright p-3.5 rounded-xl border border-surface-container-high shadow-sm hover:border-brand-teal transition-all">
+<div class="flex items-start justify-between gap-2">
+<span class="inline-block text-[10px] font-label-md font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">
+              Akash OTT Media
+            </span>
+<button aria-label="Save Job" class="text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface mt-1.5 leading-snug">
+            Video Streaming Infrastructure Engineer (WebRTC / HLS)
+          </h3>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-on-surface-variant mt-1.5">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">live_tv</span>Gulshan Hub</span>
+<span>•</span>
+<span>Full-Time</span>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 border-t border-surface-container">
+<div class="text-[12px] font-bold text-primary font-label-md">
+              ৳180k - ৳250k<span class="text-[10px] font-normal text-on-surface-variant">/mo</span>
+</div>
+<a class="bg-primary hover:bg-brand-teal text-white font-label-md text-[11px] font-bold px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-95 transition-all" href="#wizard">
+              Apply Now <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+</section>
+<!-- 7. Mobile 4-Step Application Wizard Card -->
+<section class="px-4 py-6 bg-surface-container-low" id="wizard">
+<div class="bg-surface-bright rounded-2xl p-4 border border-surface-container-high shadow-sm">
+<!-- Step Progress Header -->
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-[11px] font-label-md font-bold text-secondary uppercase">Institutional Onboarding</span>
+<span class="text-[11px] font-label-md font-bold text-primary">Step 3 of 4</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-3">
+<div class="bg-brand-teal h-full w-3/4 rounded-full"></div>
+</div>
+<h3 class="font-headline-md text-[16px] font-bold text-on-surface leading-tight">
+          Resume &amp; Verified Credentials
+        </h3>
+<p class="text-[11px] text-on-surface-variant mt-1 mb-4 leading-normal">
+          Transparent, algorithmic screening without recruiter gatekeeping.
+        </p>
+<!-- Touch File Upload Zone -->
+<div class="border-2 border-dashed border-primary/30 rounded-xl p-3 bg-surface-container-low mb-4 text-center">
+<div class="flex items-center justify-between bg-surface p-2.5 rounded-lg border border-surface-container-high">
+<div class="flex items-center gap-2.5 overflow-hidden">
+<span class="material-symbols-outlined text-primary text-[24px]">picture_as_pdf</span>
+<div class="text-left overflow-hidden">
+<div class="text-[12px] font-bold text-on-surface truncate">Tariq_Ahmed_Staff_Architect_CV.pdf</div>
+<div class="text-[10px] text-outline">2.4 MB</div>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 text-[10px] font-bold font-label-md bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0">
+<span class="material-symbols-outlined text-[13px]">check_circle</span> Verified
+            </span>
+</div>
+</div>
+<!-- Form Inputs -->
+<div class="space-y-3">
+<div>
+<label class="block text-[11px] font-label-md font-semibold text-on-surface-variant mb-1">
+              GitHub / Institutional Portfolio URL
+            </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[16px]">link</span>
+<input class="w-full bg-surface-container-low pl-8 pr-3 py-2 rounded-lg border border-surface-container-high text-[12px] text-on-surface font-medium focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal" type="url" value="https://github.com/tariq-sovereign-arch"/>
+</div>
+</div>
+<div>
+<label class="block text-[11px] font-label-md font-semibold text-on-surface-variant mb-1">
+              Earliest Availability
+            </label>
+<div class="relative">
+<select class="w-full bg-surface-container-low px-3 py-2 rounded-lg border border-surface-container-high text-[12px] text-on-surface font-medium focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal appearance-none">
+<option selected="">30 Days (Standard Notice)</option>
+<option>Immediate / Under 14 Days</option>
+<option>60 Days Notice</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-[11px] font-label-md font-semibold text-on-surface-variant mb-1">
+              Expected Monthly Remuneration (Gross BDT)
+            </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[16px]">account_balance_wallet</span>
+<input class="w-full bg-surface-container-low pl-8 pr-3 py-2 rounded-lg border border-surface-container-high text-[12px] text-on-surface font-medium focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal" type="text" value="৳ 320,000 / month"/>
+</div>
+</div>
+</div>
+<!-- Continue CTA -->
+<button class="w-full mt-4 bg-primary hover:bg-brand-teal text-white font-label-md text-[13px] font-bold py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all" type="button">
+<span>Continue to Step 4: Architectural Review</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<!-- Status Lookup Box -->
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-[11px]">
+<span class="font-mono text-[10px] text-on-surface-variant bg-surface-container px-2 py-1 rounded">
+            Ref: YESS-2026-ENG-8492
+          </span>
+<a class="font-label-md font-bold text-primary hover:underline flex items-center gap-0.5" href="#">
+            Track Status <span class="material-symbols-outlined text-[13px]">open_in_new</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 8. Sovereign Talent Registry Pool Banner -->
+<section class="px-4 py-6 bg-surface">
+<div class="bg-gradient-to-br from-brand-navy via-brand-teal to-primary rounded-2xl p-4 text-white relative overflow-hidden border border-brand-gold/30">
+<!-- Subtle Glow Highlight -->
+<div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-brand-gold/15 blur-2xl pointer-events-none"></div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-1 text-[10px] font-label-md font-bold text-brand-gold-glow mb-1.5 uppercase">
+<span class="material-symbols-outlined text-[14px]">military_tech</span> Executive &amp; Fellow Network
+          </div>
+<h3 class="font-headline-md text-[17px] font-extrabold text-white leading-tight mb-1.5">
+            Don't see an exact match for your specialty?
+          </h3>
+<p class="text-[12px] text-surface-container-low/85 leading-relaxed mb-3.5">
+            We continually build new venture units in sovereign cloud, agritech, and deep tech. Register your profile directly with our Managing Partners.
+          </p>
+<form class="space-y-2" onsubmit="event.preventDefault();">
+<input class="w-full bg-surface-bright/15 backdrop-blur-md px-3 py-2 rounded-lg border border-white/20 text-[12px] text-white placeholder:text-white/60 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold" placeholder="Enter official or personal email..." type="email"/>
+<button class="w-full bg-brand-gold hover:bg-brand-gold-glow text-brand-navy font-label-md text-[12px] font-bold py-2 rounded-lg transition-all active:scale-95 shadow-md" type="submit">
+              Join Talent Registry
+            </button>
+</form>
+</div>
+</div>
+</section>
+<!-- 9. Mobile Corporate Footer (Exact JSON Specs) -->
+<footer class="bg-surface-container-highest flex flex-col items-center gap-4 px-6 pt-8 pb-24 text-center max-w-[390px] mx-auto w-full">
+<!-- Corporate Crest & Headline -->
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">YESS Bangladesh</span>
+</div>
+<div class="text-[11px] font-body-md text-on-surface-variant max-w-[280px] leading-relaxed">
+        RJSC Reg: No. C-184920 • Dhaka HQ<br/>
+        Gulshan Innovation Wing &amp; Motijheel Center<br/>
+<span class="font-semibold text-primary">careers@yessbgd.com</span> • +880 1805-464343
+      </div>
+<!-- Links from JSON -->
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-label-md font-label-md text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Sovereign Subsidiaries</a>
+<a class="hover:text-primary transition-colors" href="#">Client Marquee</a>
+<a class="hover:text-primary transition-colors" href="#">Bilingual Profile</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<!-- Copyright text from JSON -->
+<p class="font-body-md text-[11px] text-on-surface-variant opacity-80 mt-1">
+        © 2024 YESS Bangladesh. All rights reserved. Dhaka HQ.
+      </p>
+</footer>
+<!-- 10. Docked Floating Bottom Tab Bar (Exact JSON Specs + Semantic Active State) -->
+<!-- Destination Rule: This is a top-level hub destination; Careers maps semantically to ventures/services -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 max-w-[390px] mx-auto bg-surface-bright/95 backdrop-blur-lg rounded-t-xl shadow-[0_-4px_16px_rgba(1,106,106,0.12)]">
+<!-- 1. Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="font-label-md text-[10px] mt-0.5">Home</span>
+</a>
+<!-- 2. Ventures -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">domain</span>
+<span class="font-label-md text-[10px] mt-0.5">Ventures</span>
+</a>
+<!-- 3. Services -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+<span class="font-label-md text-[10px] mt-0.5">Services</span>
+</a>
+<!-- 4. Insights (Active semantic proxy for institutional recruitment & updates) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative after:content-[''] after:w-8 after:h-1 after:bg-brand-teal-glow after:rounded-full after:mt-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">article</span>
+<span class="font-label-md text-[10px] mt-0.5">Insights</span>
+</a>
+<!-- 5. Contact -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="font-label-md text-[10px] mt-0.5">Contact</span>
+</a>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ventures Directory — YESS Bangladesh</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#9dedec",
+            "secondary-fixed": "#ffddb1",
+            "surface-container-high": "#e6e9e8",
+            "primary": "#005454",
+            "background": "#f7faf9",
+            "on-tertiary-container": "#ffd8c6",
+            "on-secondary-fixed-variant": "#614000",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#ebeeee",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed": "#291800",
+            "on-secondary-container": "#78520e",
+            "on-error": "#ffffff",
+            "brand-navy": "#061a1b",
+            "brand-gold": "#d4a359",
+            "tertiary-fixed": "#ffdbcb",
+            "surface-container-highest": "#e0e3e2",
+            "secondary-fixed-dim": "#f2be71",
+            "outline-variant": "#bec9c8",
+            "secondary": "#7e5713",
+            "secondary-container": "#fec97b",
+            "on-error-container": "#93000a",
+            "surface-tint": "#016a6a",
+            "surface-bright": "#ffffff",
+            "inverse-surface": "#2d3131",
+            "primary-fixed-dim": "#84d4d3",
+            "inverse-on-surface": "#eef1f0",
+            "surface-container-low": "#f4f8f8",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "surface-variant": "#e0e3e2",
+            "on-tertiary-fixed": "#341100",
+            "outline": "#6e7979",
+            "on-primary-fixed": "#002020",
+            "tertiary-container": "#915332",
+            "on-surface": "#181c1c",
+            "on-primary-fixed-variant": "#004f50",
+            "surface-dim": "#f0f4f4",
+            "brand-teal-glow": "#35b0aa",
+            "tertiary-fixed-dim": "#ffb692",
+            "primary-container": "#0d6e6e",
+            "brand-teal": "#0d6e6e",
+            "tertiary": "#743c1d",
+            "surface": "#f7faf9",
+            "on-background": "#181c1c",
+            "inverse-primary": "#84d4d3",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed": "#a0f0f0",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#3e4948",
+            "brand-gold-glow": "#f6c87a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "display-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "label-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-md": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom scrollbar suppression for horizontal category pills */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased selection:bg-brand-teal selection:text-white font-body-md text-body-md min-h-screen">
+<!-- Mobile Screen Container Fixed 390px Viewport Simulation -->
+<div class="w-full max-w-[390px] mx-auto bg-surface min-h-screen shadow-2xl relative flex flex-col pb-28">
+<!-- 1. COMPACT TOP UTILITY BANNER -->
+<header class="bg-brand-navy text-outline-variant px-3 py-1.5 flex justify-between items-center text-[10px] tracking-wide border-b border-white/5 select-none">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-outline-variant">
+<span class="material-symbols-outlined text-[13px] text-brand-gold">call</span>
+<span class="text-white font-medium">+880 1805-464343</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-white/60 font-label-md text-label-md">Dhaka BST 15:42</span>
+<div class="inline-flex items-center bg-white/10 rounded-full px-1.5 py-0.5 text-[10px] text-brand-gold font-bold">
+          EN | বাংলা
+        </div>
+</div>
+</header>
+<!-- 2. STICKY MOBILE GLASS TOP APP BAR (Shared Component Anchor) -->
+<nav class="bg-surface/80 backdrop-blur-md text-primary font-headline-md text-headline-md docked full-width top-0 sticky z-40 shadow-sm flex justify-between items-center w-full px-4 h-14">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-primary hover:bg-surface-container active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[22px]">menu</span>
+</button>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-brand-teal inline-block rotate-45"></span>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">YESS Bangladesh</span>
+</div>
+<span class="text-[9px] tracking-wider font-semibold text-secondary uppercase -mt-1">VENTURE BUILDER • SOVEREIGN TECH</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-primary hover:bg-surface-container active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-primary hover:bg-surface-container active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+</nav>
+<!-- MAIN CANVAS CONTENT -->
+<main class="px-4 pt-3 flex flex-col gap-4">
+<!-- 3. MOBILE HERO HEADER SECTION -->
+<section class="bg-gradient-to-br from-brand-navy via-primary-container to-brand-navy rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+<!-- Subtle Decorative Glow Background -->
+<div class="absolute -right-8 -top-8 w-36 h-36 bg-brand-teal-glow/20 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-1.5 text-[11px] text-outline-variant font-label-md text-label-md mb-2">
+<span>Home</span>
+<span class="text-white/40">/</span>
+<span class="text-brand-gold font-semibold">Ventures</span>
+</div>
+<div class="text-[11px] font-bold text-brand-gold tracking-widest uppercase mb-1">
+          — SOVEREIGN VENTURE PORTFOLIO —
+        </div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-white tracking-tight leading-tight mb-2">
+          13 Transformative Ventures Driving Bangladesh's New Economy.
+        </h1>
+<p class="font-body-md text-body-md text-surface-container-high/90 mb-4 leading-relaxed">
+          From enterprise cloud to cold-chain agritech, explore our portfolio of sovereign market-leading companies.
+        </p>
+<!-- Compact 2x2 Metric Stats Grid -->
+<div class="grid grid-cols-2 gap-2 pt-1 border-t border-white/10">
+<div class="bg-white/5 backdrop-blur-sm rounded-lg p-2.5 border border-white/10 flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-brand-teal-glow">13</span>
+<span class="font-label-md text-label-md text-surface-container-high/80 text-[11px]">Operating Entities</span>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-lg p-2.5 border border-white/10 flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-brand-gold-glow">$50M+</span>
+<span class="font-label-md text-label-md text-surface-container-high/80 text-[11px]">Cumulative Value</span>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-lg p-2.5 border border-white/10 flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-white">4</span>
+<span class="font-label-md text-label-md text-surface-container-high/80 text-[11px]">Core Verticals</span>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-lg p-2.5 border border-white/10 flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-brand-teal-glow">100%</span>
+<span class="font-label-md text-label-md text-surface-container-high/80 text-[11px]">Sovereign BD Ownership</span>
+</div>
+</div>
+</section>
+<!-- 4. SEARCH & FILTER TOOLBAR -->
+<section class="flex flex-col gap-2.5 -mx-4 px-4 sticky top-14 z-30 bg-surface/90 backdrop-blur-md py-2 border-b border-surface-container-high">
+<!-- Search Field -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-low rounded-lg pl-9 pr-3 py-2 text-on-surface font-body-md text-body-md border border-outline-variant focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all placeholder:text-outline" placeholder="Search 13 ventures..." type="text"/>
+</div>
+<!-- Horizontally Scrollable Category Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="shrink-0 bg-primary text-white font-label-md text-label-md px-3 py-1.5 rounded-full shadow-sm">
+            All (13)
+          </button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-primary font-label-md text-label-md px-3 py-1.5 rounded-full border border-outline-variant/60 active:scale-95 transition-all">
+            Technology &amp; AI (4)
+          </button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-primary font-label-md text-label-md px-3 py-1.5 rounded-full border border-outline-variant/60 active:scale-95 transition-all">
+            Agritech &amp; Food (3)
+          </button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-primary font-label-md text-label-md px-3 py-1.5 rounded-full border border-outline-variant/60 active:scale-95 transition-all">
+            Media &amp; Content (2)
+          </button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-primary font-label-md text-label-md px-3 py-1.5 rounded-full border border-outline-variant/60 active:scale-95 transition-all">
+            Supply Chain &amp; Logistics (2)
+          </button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-primary font-label-md text-label-md px-3 py-1.5 rounded-full border border-outline-variant/60 active:scale-95 transition-all">
+            Financial Infrastructure (2)
+          </button>
+</div>
+</section>
+<!-- 5. 13 PORTFOLIO SUBSIDIARY MOBILE CARDS -->
+<section class="flex flex-col gap-3">
+<!-- Card 1: Yess Soft -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">code</span> Technology &amp; AI
+            </span>
+<span class="font-label-md text-label-md text-secondary bg-secondary-fixed/40 px-2 py-0.5 rounded-md font-bold text-[10px]">
+              Est. 2018 • Flagship
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Yess Soft</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Enterprise Cloud microservices, biometric authentication, and sovereign transactional middleware.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Volume</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">1M+ Core Txns</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Availability</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">99.98% SLA</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 2: Shondhaan -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">hub</span> Technology &amp; AI
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2019
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Shondhaan</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              B2B intelligent procurement network connecting domestic raw material vendors directly with mid-market manufacturing hubs.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Network</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">4.8M Viewers</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Vendors</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">2,400+ Verified</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 3: YESS Organic Haat -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">eco</span> Agritech &amp; Food
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2021
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">YESS Organic Haat</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Regenerative agriculture aggregator providing certified chemical-free produce with QR-verifiable origin tagging and cold logistics.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Farmers</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">2,500+ Farmers</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Distribution</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">30+ Hubs</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 4: Akash OTT -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">play_circle</span> Media &amp; Content
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2022
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Akash OTT</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Ultra-low-latency WebRTC streaming engine and diaspora storytelling network with carrier billing.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Audience</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">350K+ Active</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Delivery</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">Zero-Buffer CDN</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 5: DeshLogix Express -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">local_shipping</span> Supply Chain &amp; Logistics
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2023
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">DeshLogix Express</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Bonded warehouse digitization, customs clearing automation, and intermodal freight connecting Chattogram &amp; Mongla ports.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Coverage</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">64 Districts</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Turnaround</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">48h SLA</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 6: Yess FinCorp Solutions -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">account_balance</span> Financial Infrastructure
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2023
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Yess FinCorp Solutions</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Algorithmic micro-credit scoring and sovereign digital working capital lines designed for RMG &amp; agrarian vendors.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Capital</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">৳140M+ Disbursed</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Quality</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">0.8% NPL</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 7: AgriSense IoT -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">sensors</span> Agritech &amp; Food
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2024
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">AgriSense IoT</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Solar-powered agricultural telemetry hardware measuring soil nitrogen, moisture, and microclimate variables.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Acreage</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">12,000 Ha Field</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Efficiency</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">32% Water Saved</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 8: CloudBarta -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">sms</span> Technology &amp; AI
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2022
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">CloudBarta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Sovereign transactional A2P messaging infrastructure and encrypted OTP delivery engine compliant with national cybersecurity.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Throughput</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">85M+ OTP/mo</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Latency</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">1.2s Mean Speed</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 9: Shadhin Energy -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">solar_power</span> Supply Chain &amp; Logistics
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2023
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Shadhin Energy</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Industrial and commercial rooftop solar EPC with automated power factor balancing for export mills.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Solar Load</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">18.4 MW Cap</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Offset</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">14.2k T CO2/yr</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 10: MedLink BD -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">medical_services</span> Technology &amp; AI
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2024
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">MedLink BD</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Decentralized pharmaceutical cold-chain verification and rural telemedicine triage connecting community clinics.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Footprint</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">42 Upazila Hubs</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Consults</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">120k Sessions</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 11: CraftBangla -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">storefront</span> Media &amp; Content
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2021
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">CraftBangla</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Direct-to-consumer international eCommerce pipeline exporting GI-tagged Jamdani, jute handicrafts, and artisanal brassware.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Artisans</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">1,800 Artisans</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Exports</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">28 Nations</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 12: CyberKilla -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">security</span> Technology &amp; AI
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-md text-[10px]">
+              Est. 2024
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">CyberKilla</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              Offensive cybersecurity red-teaming, zero-trust penetration testing, and ISO 27001 compliance audit suite.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Disclosed</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">34 Zero-Days</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Sovereign Audit</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">14 Audits Done</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+<!-- Card 13: YESS Capital Labs -->
+<article class="bg-surface-bright rounded-xl p-3.5 border border-surface-container-high shadow-sm hover:border-brand-teal/40 transition-all flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-primary bg-primary-fixed/30 px-2 py-0.5 rounded-md font-semibold text-[11px]">
+<span class="material-symbols-outlined text-[13px]">rocket</span> Financial Infrastructure
+            </span>
+<span class="font-label-md text-label-md text-secondary bg-secondary-fixed/40 px-2 py-0.5 rounded-md font-bold text-[10px]">
+              Est. 2018 • Sovereign In-House
+            </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">YESS Capital Labs</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-relaxed mt-1">
+              In-house venture acceleration engine providing early-stage seed funding, regulatory sandboxing, and technical mentorship.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2 border border-surface-container">
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Incubation</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">18 Cohorts</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase font-semibold block">Deployed</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">$12M+ Seeded</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between text-primary font-label-md text-label-md font-bold pt-1 hover:text-brand-teal transition-colors" href="#">
+<span>Explore Venture Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</article>
+</section>
+<!-- 6. STUDIO INCUBATION CALL-TO-ACTION CARD -->
+<section class="bg-brand-navy rounded-xl p-5 text-white shadow-lg relative overflow-hidden my-2 border border-brand-teal/30">
+<div class="absolute right-0 top-0 w-44 h-44 bg-brand-gold/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="inline-block bg-brand-gold/20 text-brand-gold text-[10px] font-bold px-2.5 py-0.5 rounded-full mb-3 tracking-wider">
+          DHAKA VENTURE STUDIO
+        </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-white tracking-tight leading-snug mb-2">
+          Have a Transformative Venture Thesis or Seeking Strategic Co-Investment?
+        </h2>
+<p class="font-body-md text-body-md text-outline-variant text-[13px] leading-relaxed mb-4">
+          YESS Bangladesh co-builds enduring technological and operational institutions with balance sheet capital and regulatory clearances.
+        </p>
+<div class="flex flex-col gap-2.5">
+<button class="w-full bg-brand-gold text-brand-navy hover:bg-brand-gold-glow font-label-lg text-label-lg font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all">
+<span>Pitch Your Venture</span>
+<span class="material-symbols-outlined text-[18px]">trending_flat</span>
+</button>
+<button class="w-full bg-white/10 hover:bg-white/15 text-white border border-white/20 font-label-lg text-label-lg font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px] text-brand-teal-glow">download</span>
+<span>Download Portfolio Deck (PDF)</span>
+</button>
+</div>
+</section>
+</main>
+<!-- 7. COMPACT MOBILE FOOTER (Shared Component Anchor) -->
+<footer class="bg-surface-container-highest font-body-md text-body-md text-on-surface-variant flex flex-col items-center gap-3 px-5 pt-8 pb-10 text-center border-t border-surface-container-high mt-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-sm bg-brand-teal inline-block rotate-45"></span>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">YESS Bangladesh</span>
+</div>
+<p class="text-[12px] text-on-surface-variant max-w-[320px] leading-relaxed">
+        Dhaka Executive Wing: City Center Tower, Level 19, Motijheel C/A, Dhaka-1000. RJSC Reg C-184920. Institutional Member: BASIS &amp; DCCI.
+      </p>
+<!-- Quick Links -->
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 py-2 text-[11px] font-label-md text-label-md text-primary font-semibold">
+<a class="hover:underline" href="#">Sovereign Subsidiaries</a>
+<a class="hover:underline" href="#">Client Marquee</a>
+<a class="hover:underline" href="#">Bilingual Profile</a>
+<a class="hover:underline" href="#">Privacy Policy</a>
+</div>
+<!-- Security Stamp -->
+<div class="inline-flex items-center gap-1.5 bg-surface-container px-3 py-1 rounded-full text-[10px] text-outline font-semibold">
+<span class="material-symbols-outlined text-[13px] text-brand-teal">verified_user</span>
+<span>256-Bit Encrypted Institutional Portal</span>
+</div>
+<div class="text-[11px] text-outline pt-2">
+        © 2024 YESS Bangladesh. All rights reserved. Dhaka HQ.
+      </div>
+</footer>
+<!-- 8. FIXED BOTTOM NAVIGATION BAR (Shared Component Anchor) -->
+<nav class="bg-surface-bright/95 backdrop-blur-lg fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center px-2 py-2 max-w-[390px] mx-auto rounded-t-xl shadow-[0_-4px_16px_rgba(1,106,106,0.12)]">
+<!-- Tab 1: Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 flex-1" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="font-label-md text-label-md text-[10px] mt-0.5">Home</span>
+</a>
+<!-- Tab 2: Ventures (ACTIVE LOCK) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative after:content-[''] after:w-8 after:h-1 after:bg-brand-teal after:rounded-full after:mt-0.5 active:scale-90 flex-1" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-label-md text-label-md text-[10px] mt-0.5 text-primary">Ventures</span>
+</a>
+<!-- Tab 3: Services -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 flex-1" href="#">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+<span class="font-label-md text-label-md text-[10px] mt-0.5">Services</span>
+</a>
+<!-- Tab 4: Insights -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 flex-1" href="#">
+<span class="material-symbols-outlined text-[20px]">article</span>
+<span class="font-label-md text-label-md text-[10px] mt-0.5">Insights</span>
+</a>
+<!-- Tab 5: Contact -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 flex-1" href="#">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="font-label-md text-label-md text-[10px] mt-0.5">Contact</span>
+</a>
+</nav>
+</div>
+</body></html>

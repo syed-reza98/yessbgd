@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quality Standards &amp; QA Framework | YESS Bangladesh</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error": "#ffffff",
+            "brand-navy": "#061a1b",
+            "on-secondary-fixed": "#291800",
+            "brand-gold": "#d4a359",
+            "surface-dim": "#f0f4f4",
+            "outline": "#6e7979",
+            "on-secondary-fixed-variant": "#614000",
+            "brand-teal": "#0d6e6e",
+            "outline-variant": "#bec9c8",
+            "surface-container-high": "#e6e9e8",
+            "surface-bright": "#f7faf9",
+            "surface-container-highest": "#e0e3e2",
+            "tertiary-fixed-dim": "#ffb692",
+            "on-tertiary-fixed": "#341100",
+            "on-primary-fixed-variant": "#004f50",
+            "tertiary-fixed": "#ffdbcb",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "surface-container-low": "#f4f8f8",
+            "primary-fixed": "#a0f0f0",
+            "on-tertiary-container": "#ffd8c6",
+            "surface-tint": "#016a6a",
+            "primary": "#005454",
+            "primary-container": "#0d6e6e",
+            "surface-variant": "#e0e3e2",
+            "inverse-primary": "#84d4d3",
+            "brand-gold-glow": "#f6c87a",
+            "error-container": "#ffdad6",
+            "surface": "#f7faf9",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "inverse-on-surface": "#eef1f0",
+            "on-error-container": "#93000a",
+            "surface-container": "#eaf2f2",
+            "on-surface": "#181c1c",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#2d3131",
+            "on-surface-variant": "#3e4948",
+            "background": "#f7faf9",
+            "tertiary": "#743c1d",
+            "on-secondary-container": "#78520e",
+            "brand-teal-glow": "#35b0aa",
+            "secondary-fixed-dim": "#f2be71",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#002020",
+            "secondary-fixed": "#ffddb1",
+            "secondary": "#7e5713",
+            "on-background": "#181c1c",
+            "tertiary-container": "#915332",
+            "primary-fixed-dim": "#84d4d3",
+            "secondary-container": "#fec97b",
+            "on-primary-container": "#9dedec"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "margin": "2rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+            "label-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-md": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .glass-card {
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px 0 rgba(13, 110, 110, 0.05);
+    }
+    .glass-card-dark {
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      background: rgba(6, 26, 27, 0.85);
+      border: 1px solid rgba(53, 176, 170, 0.2);
+    }
+    .glass-card-subtle {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(190, 201, 200, 0.4);
+    }
+    .mesh-gradient-hero {
+      background: radial-gradient(circle at 10% 20%, rgba(13, 110, 110, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(212, 163, 89, 0.09) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 50%, rgba(53, 176, 170, 0.05) 0%, transparent 60%);
+    }
+    .gold-glow {
+      box-shadow: 0 0 20px -2px rgba(212, 163, 89, 0.35);
+    }
+    .teal-glow {
+      box-shadow: 0 0 20px -2px rgba(13, 110, 110, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md selection:bg-brand-teal selection:text-white min-h-screen flex flex-col">
+<!-- 1. Top Utility Notification Bar -->
+<section class="bg-brand-navy text-surface-container-high font-label-md text-label-md py-2 px-6 border-b border-brand-teal/20 relative z-50">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center flex-wrap gap-x-6 gap-y-1 text-outline-variant">
+<span class="flex items-center gap-1.5 text-surface-bright">
+<span class="material-symbols-outlined text-brand-gold text-[16px]">call</span>
+          Hotline: <strong class="text-surface-bright tracking-wide">+880 1805-464343</strong>
+</span>
+<span class="hidden md:inline text-outline/40">|</span>
+<span class="flex items-center gap-1.5 hover:text-brand-teal-glow transition-colors">
+<span class="material-symbols-outlined text-brand-teal-glow text-[16px]">mail</span>
+          yessbangla.bd@gmail.com
+        </span>
+<span class="hidden lg:inline text-outline/40">|</span>
+<span class="hidden lg:flex items-center gap-1.5">
+<span class="material-symbols-outlined text-brand-teal-glow text-[16px]">schedule</span>
+          Dhaka BST Operational (GMT+6)
+        </span>
+</div>
+<div class="flex items-center gap-4 text-outline-variant">
+<span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-brand-teal/20 text-brand-teal-glow border border-brand-teal/30">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+          RJSC Reg: C-184920
+        </span>
+<span class="hidden xl:inline-flex items-center gap-1 text-[11px] text-brand-gold">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+          256-Bit Sovereign Protocol
+        </span>
+<!-- Language Switcher -->
+<div class="inline-flex items-center p-0.5 bg-surface-container-highest/10 rounded-full border border-brand-teal/30">
+<button class="px-2.5 py-0.5 rounded-full bg-brand-teal text-white text-[11px] font-bold shadow-sm transition-all">EN</button>
+<button class="px-2.5 py-0.5 rounded-full text-outline-variant hover:text-surface-bright text-[11px] transition-all">বাংলা</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Sticky Top Navigation Bar (Shared Component Anchored) -->
+<header class="sticky top-0 w-full z-40 bg-surface-bright/80 backdrop-blur-md shadow-sm transition-all duration-200">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+<!-- Brand Logo / Identity -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 rounded-xl bg-brand-navy flex items-center justify-center p-2 shadow-sm border border-brand-teal/30 group-hover:border-brand-gold transition-colors">
+<div class="w-full h-full rounded-lg bg-gradient-to-br from-brand-teal to-brand-navy flex items-center justify-center text-brand-gold font-black tracking-tighter text-lg">
+            Y
+          </div>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-primary leading-none group-hover:text-brand-teal transition-colors">
+            YESS Bangladesh
+          </span>
+<span class="text-[10px] tracking-widest font-semibold uppercase text-brand-gold mt-1">
+            SOVEREIGN VENTURE BUILDER
+          </span>
+</div>
+</a>
+<!-- Desktop Navigation Cluster -->
+<nav class="hidden lg:flex items-center space-x-7">
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Home</a>
+<!-- Active Tab with Submenu Context -->
+<div class="relative group">
+<button class="flex items-center gap-1 border-b-2 border-primary text-primary font-label-lg text-label-lg pb-1 transition-colors duration-200">
+<span>About Us</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<!-- Dropdown Preview Card -->
+<div class="absolute top-full left-0 mt-2 w-64 p-2 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/30 hidden group-hover:block transition-all">
+<a class="block px-3 py-2 rounded-lg bg-surface-container-low text-primary font-medium text-body-md flex items-center justify-between" href="#">
+<span>Quality &amp; QA Framework</span>
+<span class="material-symbols-outlined text-brand-gold text-[18px]">check_circle</span>
+</a>
+<a class="block px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container text-body-md transition-colors" href="#">Corporate Governance</a>
+<a class="block px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container text-body-md transition-colors" href="#">Leadership &amp; Council</a>
+</div>
+</div>
+<div class="relative flex items-center gap-1.5">
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Ventures</a>
+<span class="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-secondary-container text-on-secondary-container">13</span>
+</div>
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Solutions</a>
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Methodology</a>
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Governance</a>
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Insights</a>
+<a class="text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-150" href="#">Careers</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3">
+<a class="px-5 py-2.5 rounded-lg bg-brand-teal text-white font-label-lg text-label-lg flex items-center gap-2 hover:bg-primary transition-all duration-200 shadow-sm border border-brand-gold/40 hover:border-brand-gold active:scale-95" href="#consultation-intake">
+<span>Let's Talk</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+<!-- Mobile Menu Trigger -->
+<button aria-label="Toggle Menu" class="lg:hidden p-2 rounded-lg text-on-surface hover:bg-surface-container">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- 3. Breadcrumb & Page Hero Section -->
+<section class="mesh-gradient-hero border-b border-surface-container-high/60 pt-10 pb-16 relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Breadcrumb Hierarchy -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-outline font-label-md text-label-md mb-6">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">About Us</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Quality Standards &amp; QA Framework</span>
+</nav>
+<!-- Main Header Cluster -->
+<div class="max-w-4xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/40 border border-brand-gold/50 text-secondary font-label-md text-label-md mb-5">
+<span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+<span>QUALITY &amp; GOVERNANCE</span>
+</div>
+<h1 class="font-display-lg text-display-lg font-extrabold text-brand-navy tracking-tight leading-[1.1] mb-5">
+          International Standards &amp; <br class="hidden sm:inline"/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-brand-teal-glow">
+            Engineering Governance
+          </span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+          How YESS Bangladesh is operated to international quality, enterprise security, and rigorous delivery standards across all 13 operating subsidiaries.
+        </p>
+</div>
+<!-- 4 High-Impact Metric Cards (Frosted Glass) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+<!-- Metric 1 -->
+<div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-brand-teal text-3xl">verified_user</span>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-teal/10 text-brand-teal">Framework</span>
+</div>
+<div class="font-headline-lg text-headline-lg font-bold text-brand-navy tracking-tight mb-1">
+            ISO 9001:2015
+          </div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            QMS Aligned &amp; Audited process lifecycle
+          </p>
+</div>
+<!-- Metric 2 -->
+<div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-brand-gold text-3xl">engineering</span>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-gold/15 text-secondary">Personnel</span>
+</div>
+<div class="font-headline-lg text-headline-lg font-bold text-brand-navy tracking-tight mb-1">
+            100% Senior-Led
+          </div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Zero Junior-Only Squads deployed to core systems
+          </p>
+</div>
+<!-- Metric 3 -->
+<div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-brand-teal text-3xl">nest_clock_farsight_analog</span>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-teal/10 text-brand-teal">Coverage</span>
+</div>
+<div class="font-headline-lg text-headline-lg font-bold text-brand-navy tracking-tight mb-1">
+            24/5 to 24/7
+          </div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Contracted Response SLAs with guaranteed escalation
+          </p>
+</div>
+<!-- Metric 4 -->
+<div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-brand-gold text-3xl">sentiment_very_satisfied</span>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-gold/15 text-secondary">Benchmark</span>
+</div>
+<div class="font-headline-lg text-headline-lg font-bold text-brand-navy tracking-tight mb-1">
+            NPS 68
+          </div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            24-Month Sustained Average institutional client score
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. The 6 Enterprise Standards Grid (3x2 Bento Layout) -->
+<section class="py-20 bg-surface relative">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-14">
+<div>
+<span class="text-brand-teal font-label-md text-label-md tracking-wider uppercase font-bold">PILLARS OF EXECUTION</span>
+<h2 class="font-display-md text-display-md font-bold text-brand-navy mt-1">
+            Enterprise Quality Architecture
+          </h2>
+</div>
+<p class="text-on-surface-variant max-w-md mt-4 md:mt-0 font-body-md text-body-md">
+          Six non-negotiable operational disciplines baked into every sovereign software deployment, venture build, and managed delivery contract.
+        </p>
+</div>
+<!-- 3x2 Grid Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="glass-card rounded-3xl p-8 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group border border-outline-variant/40 hover:border-brand-teal/40">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-brand-teal">shield</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-brand-navy mb-3 group-hover:text-primary transition-colors">
+              ISO-Aligned Processes
+            </h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed mb-6">
+              Documented processes covering end-to-end project management, peer code reviews, continuous security scanning, and automated incident response runbooks.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-label-md text-label-md text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+              100% Documented SDLC
+            </span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] group-hover:text-primary transition-colors">arrow_outward</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-3xl p-8 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group border border-outline-variant/40 hover:border-brand-gold/50">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container/40 flex items-center justify-center text-secondary mb-6 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-brand-gold">military_tech</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-brand-navy mb-3 group-hover:text-secondary transition-colors">
+              Quality Assured &amp; Verified
+            </h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed mb-6">
+              Independent QA on every sprint release with strict automated test coverage, regression suites, and Core Web Vitals (CWV) telemetry tracked in CI/CD.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/30 font-label-md text-label-md text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+              &gt;85% Coverage &amp; CWV Green
+            </span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] group-hover:text-secondary transition-colors">arrow_outward</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-3xl p-8 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group border border-outline-variant/40 hover:border-brand-teal/40">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-brand-teal">groups</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-brand-navy mb-3 group-hover:text-primary transition-colors">
+              Senior-Led Delivery Teams
+            </h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed mb-6">
+              Every engagement is architected and steered by a senior practitioner with 8+ years of production experience — zero junior-only engineering squads.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-label-md text-label-md text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">workspace_premium</span>
+              8+ Years Avg Lead Experience
+            </span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] group-hover:text-primary transition-colors">arrow_outward</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-card rounded-3xl p-8 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group border border-outline-variant/40 hover:border-brand-gold/50">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container/40 flex items-center justify-center text-secondary mb-6 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-brand-gold">public</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-brand-navy mb-3 group-hover:text-secondary transition-colors">
+              Global Delivery Corridors
+            </h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed mb-6">
+              Working hours synchronized to overlap with EU, UK, and US clients, backed by clear 3-tier escalation matrices and bilingual project management.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/30 font-label-md text-label-md text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">sync_alt</span>
+              4+ Hours Daily Overlap (GMT/EST)
+            </span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] group-hover:text-secondary transition-colors">arrow_outward</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="glass-card rounded-3xl p-8 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group border border-outline-variant/40 hover:border-brand-teal/40">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-brand-teal">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-brand-navy mb-3 group-hover:text-primary transition-colors">
+              Contracted Support &amp; 24/5 SLA
+            </h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed mb-6">
+              Standard enterprise SLA includes dedicated 24/5 support; mission-critical 24/7 high-availability support is deployed on managed infrastructure retainers.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-label-md text-label-md text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">alarm_on</span>
+              &lt;15 Min Critical Incident SLA
+            </span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] group-hover:text-primary transition-colors">arrow_outward</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="glass-card rounded-3xl p-8 transition-all duration-300 hover:shadow-lg flex flex-col justify-between group border border-outline-variant/40 hover:border-brand-gold/50">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container/40 flex items-center justify-center text-secondary mb-6 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-brand-gold">query_stats</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-brand-navy mb-3 group-hover:text-secondary transition-colors">
+              Sustained NPS 60+ Customer Satisfaction
+            </h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed mb-6">
+              Average client Net Promoter Score sustained consistently above 60 across the past 24 months, with multi-year contract renewals across banking and public sector.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/30 font-label-md text-label-md text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">handshake</span>
+              NPS 68 Annual Average
+            </span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] group-hover:text-secondary transition-colors">arrow_outward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. 'Audit-Ready by Default' Assurance Section -->
+<section class="py-20 bg-brand-navy text-surface-bright relative overflow-hidden">
+<!-- Subtle Background Graphic Watermark -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-brand-teal/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -top-20 w-96 h-96 rounded-full bg-brand-gold/5 blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="glass-card-dark rounded-3xl p-8 lg:p-14 border border-brand-teal/30">
+<div class="flex flex-col lg:flex-row gap-12 items-start justify-between">
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-teal/20 text-brand-teal-glow font-label-md text-label-md border border-brand-teal/40 mb-5">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>INDEPENDENT COMPLIANCE &amp; VERIFICATION</span>
+</div>
+<h2 class="font-display-lg text-display-lg font-bold text-white tracking-tight mb-4">
+              Audit-Ready by Default
+            </h2>
+<p class="font-body-lg text-body-lg text-outline-variant leading-relaxed mb-8">
+              Every engagement ships with documented architecture decisions (ADRs), immutable cryptographic audit logs, and a turnkey security-and-quality runbook your internal compliance officer or external Big-4 auditor can inspect immediately.
+            </p>
+<a class="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-brand-gold text-brand-navy font-label-lg text-label-lg font-bold hover:bg-brand-gold-glow transition-all duration-200 gold-glow" href="#">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Download QA Runbook Sample (PDF)</span>
+</a>
+</div>
+<!-- 3 Audit Pillars (Stacked Cards) -->
+<div class="w-full lg:w-5/12 space-y-4">
+<div class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-teal-glow/50 transition-colors">
+<div class="flex items-start gap-4">
+<div class="p-2 rounded-lg bg-brand-teal/30 text-brand-teal-glow mt-0.5">
+<span class="material-symbols-outlined text-[22px]">history_edu</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg font-bold text-white mb-1">
+                    Immutable GitOps Audit Trails
+                  </h4>
+<p class="font-body-md text-body-md text-outline-variant leading-normal">
+                    Cryptographic commit signatures, branch protection, and automated sign-offs logged to immutable ledgers.
+                  </p>
+</div>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-teal-glow/50 transition-colors">
+<div class="flex items-start gap-4">
+<div class="p-2 rounded-lg bg-brand-gold/20 text-brand-gold mt-0.5">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg font-bold text-white mb-1">
+                    Static AST &amp; Dependency Security Scans
+                  </h4>
+<p class="font-body-md text-body-md text-outline-variant leading-normal">
+                    Continuous SAST, DAST, and automated CVE dependency remediation integrated into mandatory merge checks.
+                  </p>
+</div>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-teal-glow/50 transition-colors">
+<div class="flex items-start gap-4">
+<div class="p-2 rounded-lg bg-brand-teal/30 text-brand-teal-glow mt-0.5">
+<span class="material-symbols-outlined text-[22px]">vpn_key</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg font-bold text-white mb-1">
+                    ISO 27001 Information Security Controls
+                  </h4>
+<p class="font-body-md text-body-md text-outline-variant leading-normal">
+                    Zero-trust access, encrypted secrets management, and strict data residency compliance under Bangladesh ICT policies.
+                  </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Institutional Lead Capture CTA Banner -->
+<section class="py-20 bg-surface-container relative" id="consultation-intake">
+<div class="max-w-7xl mx-auto px-6">
+<div class="rounded-3xl bg-brand-teal text-white p-8 lg:p-14 shadow-xl relative overflow-hidden border border-brand-teal-glow/30">
+<!-- Decorative Ambient Light -->
+<div class="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-brand-gold/10 blur-2xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<!-- Left Column: Context & Guarantees -->
+<div class="lg:col-span-6 space-y-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white font-label-md text-label-md border border-white/20">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-gold-glow"></span>
+              DIRECT INSTITUTIONAL DIALOGUE
+            </span>
+<h2 class="font-display-md text-display-md font-bold tracking-tight text-white leading-tight">
+              Hold your delivery to a higher bar.
+            </h2>
+<p class="font-body-lg text-body-lg text-surface-container-high leading-relaxed">
+              Speak directly with our principal delivery directors and senior architects about how we would structure, monitor, and guarantee your engagement.
+            </p>
+<div class="space-y-3 pt-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold-glow text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-surface-bright">Bilateral Mutual NDA before consultation</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold-glow text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-surface-bright">Direct partner and lead architect access</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold-glow text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-surface-bright">Zero recruiter friction</span>
+</div>
+</div>
+<!-- Direct Contact Box -->
+<div class="pt-6 border-t border-white/15 flex flex-wrap gap-6 items-center">
+<div>
+<span class="block text-xs uppercase text-surface-container-high font-semibold">Institutional Hotline</span>
+<span class="text-white font-bold font-body-lg text-body-lg">+880 1805-464343</span>
+</div>
+<div class="hidden sm:block w-px h-8 bg-white/20"></div>
+<div>
+<span class="block text-xs uppercase text-surface-container-high font-semibold">Priority Email</span>
+<span class="text-white font-bold font-body-lg text-body-lg">invest@yessbgd.com</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Intake Form (Glassmorphism) -->
+<div class="lg:col-span-6">
+<div class="glass-card rounded-2xl p-6 sm:p-8 text-on-surface border border-white/80 shadow-2xl">
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant font-semibold mb-1">
+                    Full Name &amp; Designation
+                  </label>
+<input class="w-full rounded-lg border-outline-variant/60 bg-surface-container-low px-4 py-2.5 text-body-md focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all" placeholder="e.g. Engr. Tanvir Ahmed, CTO" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant font-semibold mb-1">
+                      Corporate Email
+                    </label>
+<input class="w-full rounded-lg border-outline-variant/60 bg-surface-container-low px-4 py-2.5 text-body-md focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all" placeholder="name@organization.com" type="email"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant font-semibold mb-1">
+                      Enterprise / Entity
+                    </label>
+<input class="w-full rounded-lg border-outline-variant/60 bg-surface-container-low px-4 py-2.5 text-body-md focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all" placeholder="e.g. Commercial Bank / ICT" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant font-semibold mb-1">
+                    Project Scope / Timeline
+                  </label>
+<select class="w-full rounded-lg border-outline-variant/60 bg-surface-container-low px-4 py-2.5 text-body-md focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all">
+<option>1-3 Months (Sprint Proof-of-Concept)</option>
+<option>3-6 Months (Full System Overhaul)</option>
+<option selected="">Multi-Year Retainer (Venture Co-Build)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant font-semibold mb-1">
+                    Message / Scope Notes
+                  </label>
+<textarea class="w-full rounded-lg border-outline-variant/60 bg-surface-container-low px-4 py-2 text-body-md focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all resize-none" placeholder="Outline governance requirements or infrastructure constraints..." rows="3"></textarea>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<input checked="" class="rounded border-outline-variant text-brand-teal focus:ring-brand-teal h-4 w-4" id="nda-check" type="checkbox"/>
+<label class="text-[12px] text-on-surface-variant" for="nda-check">
+                    Mandate Bilateral NDA execution prior to discovery call
+                  </label>
+</div>
+<button class="w-full py-3 px-6 rounded-lg bg-brand-navy hover:bg-primary text-white font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 mt-2" type="submit">
+<span>Request Standards &amp; QA Briefing</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Institutional Corporate Multi-Column Footer (Shared Component Anchored) -->
+<footer class="w-full bg-brand-navy text-outline-variant font-body-md text-body-md">
+<div class="max-w-7xl mx-auto px-6 py-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+<!-- Brand & Institutional Persona -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-brand-teal flex items-center justify-center text-brand-gold font-bold text-base">
+              Y
+            </div>
+<span class="font-headline-lg text-headline-lg font-bold text-surface-bright tracking-tight">
+              YESS Bangladesh
+            </span>
+</div>
+<p class="font-body-md text-body-md text-outline-variant leading-relaxed max-w-sm">
+            Engineering Institutional Excellence across Bangladesh and global tech corridors. Operating as a sovereign venture studio and enterprise delivery collective.
+          </p>
+<div class="pt-2">
+<span class="text-xs uppercase font-bold tracking-wider text-brand-gold block mb-2">Dual-Hub Presence:</span>
+<div class="text-xs space-y-1 text-surface-container-high">
+<p>• Dhaka HQ: City Centre Tower, Level 19, Motijheel C/A, Dhaka-1000</p>
+<p>• Gulshan Innovation Wing: Road 11, Block D, Gulshan-2, Dhaka-1212</p>
+</div>
+</div>
+</div>
+<!-- Links Column 1: Core Methodology -->
+<div>
+<h4 class="font-label-md text-label-md font-bold uppercase tracking-wider text-surface-bright mb-4">
+            Methodology
+          </h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Engineering Methodology</a></li>
+<li><a class="text-surface-bright font-label-md text-label-md hover:text-brand-gold-glow transition-colors duration-200" href="#">Weekly Cadence</a></li>
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Quality Assurance</a></li>
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Dual-Hub Operations</a></li>
+</ul>
+</div>
+<!-- Links Column 2: Governance & Compliance -->
+<div>
+<h4 class="font-label-md text-label-md font-bold uppercase tracking-wider text-surface-bright mb-4">
+            Governance
+          </h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Corporate Governance</a></li>
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Security Compliance</a></li>
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-brand-gold-glow transition-colors duration-200" href="#">Contact RJSC Secretariat</a></li>
+</ul>
+</div>
+<!-- Links Column 3: Institutional Credentials -->
+<div>
+<h4 class="font-label-md text-label-md font-bold uppercase tracking-wider text-surface-bright mb-4">
+            Accreditations
+          </h4>
+<div class="space-y-2 text-xs">
+<div class="p-2.5 rounded bg-surface-container-lowest/5 border border-surface-container-lowest/10">
+<p class="text-surface-bright font-semibold">RJSC Registration</p>
+<p class="text-outline-variant">Reg No. C-184920</p>
+</div>
+<div class="p-2.5 rounded bg-surface-container-lowest/5 border border-surface-container-lowest/10">
+<p class="text-surface-bright font-semibold">BASIS &amp; DCCI</p>
+<p class="text-outline-variant">Institutional Member</p>
+</div>
+<div class="p-2.5 rounded bg-surface-container-lowest/5 border border-surface-container-lowest/10">
+<p class="text-surface-bright font-semibold">ISO Standard</p>
+<p class="text-brand-teal-glow font-medium">9001:2015 &amp; 27001 Aligned</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Copyright Sub-Footer -->
+<div class="pt-8 border-t border-surface-container-lowest/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<p class="text-outline-variant">
+          © 2025 YESS Bangladesh. Registered under RJSC. All rights reserved. Engineering Institutional Excellence.
+        </p>
+<div class="flex items-center gap-6 text-outline-variant">
+<a class="hover:text-surface-bright transition-colors" href="#">Information Security</a>
+<a class="hover:text-surface-bright transition-colors" href="#">Whistleblower Policy</a>
+<a class="hover:text-surface-bright transition-colors" href="#">System Status</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

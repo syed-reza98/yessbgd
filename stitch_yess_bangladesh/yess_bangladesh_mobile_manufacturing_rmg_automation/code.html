@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YESS Bangladesh - Mobile Manufacturing &amp; RMG Automation</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "brand-gold-glow": "#f6c87a",
+            "tertiary-container": "#915332",
+            "on-error": "#ffffff",
+            "surface-container-high": "#e6e9e8",
+            "surface-container": "#ebeeee",
+            "surface-bright": "#f7faf9",
+            "on-primary-fixed": "#002020",
+            "surface": "#f7faf9",
+            "on-secondary-container": "#78520e",
+            "surface-variant": "#e0e3e2",
+            "outline-variant": "#bec9c8",
+            "inverse-surface": "#2d3131",
+            "brand-teal-glow": "#35b0aa",
+            "on-surface": "#181c1c",
+            "on-secondary-fixed-variant": "#614000",
+            "on-tertiary-container": "#ffd8c6",
+            "on-primary-fixed-variant": "#004f50",
+            "secondary-container": "#fec97b",
+            "inverse-primary": "#84d4d3",
+            "tertiary-fixed": "#ffdbcb",
+            "surface-container-low": "#f1f4f3",
+            "on-primary-container": "#9dedec",
+            "primary-fixed-dim": "#84d4d3",
+            "on-background": "#181c1c",
+            "on-surface-variant": "#3e4948",
+            "surface-container-highest": "#e0e3e2",
+            "brand-navy": "#061a1b",
+            "tertiary": "#743c1d",
+            "on-error-container": "#93000a",
+            "primary": "#005454",
+            "on-tertiary-fixed": "#341100",
+            "surface-dim": "#f0f4f4",
+            "secondary": "#7e5713",
+            "outline": "#6e7979",
+            "surface-tint": "#016a6a",
+            "primary-fixed": "#a0f0f0",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "tertiary-fixed-dim": "#ffb692",
+            "error": "#ba1a1a",
+            "brand-teal": "#0d6e6e",
+            "secondary-fixed-dim": "#f2be71",
+            "primary-container": "#0d6e6e",
+            "on-secondary-fixed": "#291800",
+            "on-secondary": "#ffffff",
+            "brand-gold": "#d4a359",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#ffddb1",
+            "background": "#f7faf9",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#eef1f0",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "display-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f7faf9;
+      color: #181c1c;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 20px -2px rgba(13, 110, 110, 0.06);
+    }
+    .liquid-glass-dark {
+      background: rgba(6, 26, 27, 0.82);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid rgba(53, 176, 170, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased flex justify-center selection:bg-brand-teal selection:text-white">
+<!-- Mobile Viewport Wrapper (390px Max Standard) -->
+<div class="w-full max-w-[390px] min-h-screen bg-background relative flex flex-col shadow-2xl overflow-x-hidden">
+<!-- 1. Top Utility Notification Bar -->
+<div class="w-full bg-brand-navy text-outline-variant px-3 py-1.5 flex items-center justify-between font-label-md text-[10px] tracking-tight border-b border-surface-container-high/10 z-50">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-teal-glow animate-pulse"></span>
+<span class="text-white font-medium">Dhaka BST Operational</span>
+</div>
+<div class="flex items-center gap-3">
+<a class="text-brand-gold-glow hover:underline flex items-center gap-0.5" href="tel:+8801805464343">
+<span class="material-symbols-outlined text-[11px]" data-icon="call">call</span>
+          +880 1805-464343
+        </a>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest/20 text-white font-semibold cursor-pointer">
+          EN | বাংলা
+        </span>
+</div>
+</div>
+<!-- 2. Mobile Header (Sticky / Frosted Liquid Glass) -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-40 w-full flex justify-between items-center px-4 h-14 shadow-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-white font-bold shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[17px] font-bold text-primary tracking-tight leading-tight">YESS Bangladesh</span>
+<span class="text-[9px] font-medium text-brand-gold uppercase tracking-wider">Industrial Sovereignty</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Search" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</button>
+<button aria-label="Menu Drawer" class="p-2 rounded-lg text-primary hover:bg-surface-container transition-colors duration-150 active:scale-95" id="drawerToggle">
+<span class="material-symbols-outlined text-[22px]" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- Navigation Drawer Backdrop & Modal (Hidden by Default) -->
+<div class="fixed inset-0 bg-brand-navy/60 backdrop-blur-sm z-50 hidden transition-opacity duration-200" id="drawerOverlay">
+<div class="fixed top-0 left-0 h-full w-[280px] bg-surface p-4 flex flex-col shadow-xl z-50 rounded-r-xl">
+<div class="flex justify-between items-center pb-4 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-brand-teal flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]" data-icon="business_center">business_center</span>
+</div>
+<span class="font-headline-md text-headline-md font-extrabold text-primary">YESS Bangladesh</span>
+</div>
+<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container" id="drawerClose">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-1 py-4">
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container-low text-primary rounded-lg font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-body-md text-body-md">Ventures</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="business_center">business_center</span>
+<span class="font-body-md text-body-md">Services</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-body-md text-body-md">Practice Areas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<span class="font-body-md text-body-md">About YESS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="contact_phone">contact_phone</span>
+<span class="font-body-md text-body-md">Direct Engagement</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t border-surface-container text-center">
+<p class="font-label-md text-label-md text-outline">Dhaka High-Tech Hub • ISO 9001</p>
+</div>
+</div>
+</div>
+<!-- 3. Breadcrumb & Mobile Hero Section -->
+<main class="flex-1 flex flex-col pb-28">
+<!-- Breadcrumb Bar -->
+<section class="px-4 pt-3 pb-1">
+<nav class="flex items-center gap-1.5 text-outline text-[11px] font-label-md overflow-x-auto no-scrollbar whitespace-nowrap">
+<a class="hover:text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[13px]" data-icon="home">home</span>
+            Home
+          </a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary" href="#">Industries</a>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-semibold">Manufacturing &amp; RMG</span>
+</nav>
+</section>
+<!-- Hero Header -->
+<section class="px-4 pt-3 pb-4">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-secondary-container/40 border border-brand-gold/30 mb-3">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-md text-[10px] text-secondary font-bold tracking-wider uppercase">NATIONAL INDUSTRIAL SECTOR</span>
+</div>
+<h1 class="font-headline-lg text-[27px] font-extrabold text-on-surface tracking-tight leading-[34px]">
+          Manufacturing &amp; RMG Automation
+        </h1>
+<p class="font-headline-md text-headline-md text-brand-teal font-semibold mt-1">
+          Across Bangladesh
+        </p>
+<p class="font-body-md text-[13.5px] leading-relaxed text-on-surface-variant mt-2.5">
+          Operations digitisation for factories across Bangladesh — production tracking, IoT sensors, quality assurance, inventory, and predictive maintenance under one unified sovereign platform.
+        </p>
+<!-- Live Telemetry Edge Badge -->
+<div class="mt-4 p-3 rounded-xl bg-surface-container-low border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal-glow opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<div class="flex flex-col">
+<span class="font-label-md text-[10px] font-bold uppercase tracking-wider text-primary">Shop-Floor Telemetry [ONLINE]</span>
+<span class="font-body-md text-[11px] text-on-surface-variant">Line 14 Gazipur Plant • OEE: 86.4%</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">
+            0ms Edge
+          </span>
+</div>
+<!-- Action CTAs -->
+<div class="mt-4 flex flex-col gap-2.5">
+<a class="w-full py-3.5 px-4 bg-primary text-on-primary rounded-xl font-headline-md text-[15px] font-bold shadow-md shadow-primary/20 flex items-center justify-center gap-2 hover:bg-brand-teal transition-all active:scale-[0.98]" href="#leadCapture">
+            Talk to a Sector Specialist
+            <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="w-full py-2.5 px-4 liquid-glass text-primary rounded-xl font-label-lg text-center font-semibold text-[13px] border border-outline-variant/30 flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_back">arrow_back</span>
+            All Industries
+          </a>
+</div>
+<!-- Micro Trust Indicators -->
+<div class="mt-4 pt-3 border-t border-surface-container-high grid grid-cols-3 gap-2 text-center">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="font-label-md text-[10px] text-on-surface-variant font-semibold mt-1">42+ Production Lines</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high px-1">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="verified">verified</span>
+<span class="font-label-md text-[10px] text-on-surface-variant font-semibold mt-1">ISO 9001:2015 QMS</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="cloud_off">cloud_off</span>
+<span class="font-label-md text-[10px] text-on-surface-variant font-semibold mt-1">Zero Cloud Reliance</span>
+</div>
+</div>
+</section>
+<!-- 4. 2x2 Sector Metrics Grid -->
+<section class="px-4 py-3">
+<div class="flex items-center justify-between mb-2.5">
+<h2 class="font-headline-md text-[16px] font-bold text-on-surface">Measured Factory Impact</h2>
+<span class="font-label-md text-[10px] text-secondary font-bold uppercase tracking-wider">Benchmark SLA</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Metric 1 -->
+<div class="liquid-glass p-3.5 rounded-xl flex flex-col justify-between">
+<div class="flex items-center justify-between text-primary">
+<span class="font-headline-lg text-[26px] font-extrabold text-primary leading-none">+18%</span>
+<span class="material-symbols-outlined text-[18px] text-brand-teal-glow" data-icon="trending_up">trending_up</span>
+</div>
+<span class="font-label-md text-[12px] font-bold text-on-surface mt-2">OEE Improvement</span>
+<p class="font-body-md text-[10.5px] text-on-surface-variant leading-tight mt-1">
+              Overall equipment effectiveness verified across automated lines.
+            </p>
+</div>
+<!-- Metric 2 -->
+<div class="liquid-glass p-3.5 rounded-xl flex flex-col justify-between">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-headline-lg text-[26px] font-extrabold text-secondary leading-none">−24%</span>
+<span class="material-symbols-outlined text-[18px] text-brand-gold" data-icon="inventory_2">inventory_2</span>
+</div>
+<span class="font-label-md text-[12px] font-bold text-on-surface mt-2">Stock-Out Incidents</span>
+<p class="font-body-md text-[10.5px] text-on-surface-variant leading-tight mt-1">
+              Real-time raw material and work-in-progress telemetry.
+            </p>
+</div>
+<!-- Metric 3 -->
+<div class="liquid-glass p-3.5 rounded-xl flex flex-col justify-between">
+<div class="flex items-center justify-between text-primary">
+<span class="font-headline-lg text-[26px] font-extrabold text-primary leading-none">−31%</span>
+<span class="material-symbols-outlined text-[18px] text-brand-teal-glow" data-icon="check_circle">check_circle</span>
+</div>
+<span class="font-label-md text-[12px] font-bold text-on-surface mt-2">Quality Rejection</span>
+<p class="font-body-md text-[10.5px] text-on-surface-variant leading-tight mt-1">
+              In-line digital QC checklists and automated defect logging.
+            </p>
+</div>
+<!-- Metric 4 -->
+<div class="liquid-glass p-3.5 rounded-xl flex flex-col justify-between">
+<div class="flex items-center justify-between text-error">
+<span class="font-headline-lg text-[26px] font-extrabold text-error leading-none">−40%</span>
+<span class="material-symbols-outlined text-[18px] text-error" data-icon="build">build</span>
+</div>
+<span class="font-label-md text-[12px] font-bold text-on-surface mt-2">Unplanned Downtime</span>
+<p class="font-body-md text-[10.5px] text-on-surface-variant leading-tight mt-1">
+              Preventive maintenance alerts and IoT vibration sensors.
+            </p>
+</div>
+</div>
+</section>
+<!-- 5. Systemic Diagnostics: Challenges vs. Sovereign Solution Mobile Stack -->
+<section class="px-4 py-3 space-y-3">
+<div class="flex items-center gap-2">
+<span class="w-1 h-4 bg-primary rounded-full"></span>
+<h2 class="font-headline-md text-[17px] font-bold text-on-surface">Systemic Diagnostics</h2>
+</div>
+<!-- Card 1: Common Challenges (Light Container with Warning Tone) -->
+<div class="bg-surface-container-low border border-error/20 rounded-2xl p-4 shadow-sm">
+<div class="flex items-center gap-2 text-error font-headline-md text-[14.5px] font-bold mb-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="warning">warning</span>
+            Common Challenges on Bangladeshi Shop Floors
+          </div>
+<ul class="space-y-2.5 text-[12.5px] font-body-md text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[16px] shrink-0 mt-0.5" data-icon="cancel">cancel</span>
+<span>Production data captured manually on paper log sheets with 24h delay</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[16px] shrink-0 mt-0.5" data-icon="cancel">cancel</span>
+<span>Unpredicted stock-outs of imported raw materials halting assembly lines</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[16px] shrink-0 mt-0.5" data-icon="cancel">cancel</span>
+<span>Quality defect spikes caught too late at final garment packaging</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[16px] shrink-0 mt-0.5" data-icon="cancel">cancel</span>
+<span>Machine maintenance schedules ignored until catastrophic line breakdown</span>
+</li>
+</ul>
+<div class="mt-3.5 pt-2.5 border-t border-error/10 flex items-center justify-between font-label-md text-[11px] text-error font-bold">
+<span>National Average Idle Time</span>
+<span class="bg-error/10 px-2 py-0.5 rounded">14.2% Per Shift</span>
+</div>
+</div>
+<!-- Card 2: Sovereign Digital Factory Framework (Deep Oceanic Navy #061a1b) -->
+<div class="bg-brand-navy border border-brand-teal-glow/30 rounded-2xl p-4 text-white shadow-xl relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-primary/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center gap-2 text-brand-teal-glow font-headline-md text-[15px] font-bold mb-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+            Sovereign Digital Factory Framework
+          </div>
+<div class="space-y-3.5">
+<div class="bg-surface-container-highest/10 p-2.5 rounded-xl border border-surface-container-highest/10">
+<h3 class="text-brand-gold-glow font-label-lg text-[13px] font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="speed">speed</span>
+                1. Production Tracking &amp; MES
+              </h3>
+<p class="text-[12px] text-outline-variant mt-1 leading-normal font-body-md">
+                Shop-floor touch terminals, real-time line OEE, worker pacing telemetry, zero cloud reliance.
+              </p>
+</div>
+<div class="bg-surface-container-highest/10 p-2.5 rounded-xl border border-surface-container-highest/10">
+<h3 class="text-brand-gold-glow font-label-lg text-[13px] font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="qr_code_scanner">qr_code_scanner</span>
+                2. Smart Inventory &amp; Procurement
+              </h3>
+<p class="text-[12px] text-outline-variant mt-1 leading-normal font-body-md">
+                Raw material and WIP tracking with RFID tags, dynamic bin location maps, automated reordering.
+              </p>
+</div>
+<div class="bg-surface-container-highest/10 p-2.5 rounded-xl border border-surface-container-highest/10">
+<h3 class="text-brand-gold-glow font-label-lg text-[13px] font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="shield">shield</span>
+                3. Automated Quality &amp; Maintenance
+              </h3>
+<p class="text-[12px] text-outline-variant mt-1 leading-normal font-body-md">
+                Digital QC inspection checklists, Non-Conformance Reports (NCR) with image evidence, predictive vibration/sensor schedules.
+              </p>
+</div>
+</div>
+<!-- SRE Footer -->
+<div class="mt-4 pt-3 border-t border-brand-teal/30 flex items-center justify-between text-[10.5px] font-label-md text-brand-teal-glow">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span>
+              99.98% Local Factory Uptime SLA
+            </span>
+<span class="text-white/80">Full On-Premises</span>
+</div>
+</div>
+</section>
+<!-- 6. Field-Proven Industrial Deployments (Recent Case Studies) -->
+<section class="px-4 py-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-1 h-4 bg-secondary rounded-full"></span>
+<h2 class="font-headline-md text-[17px] font-bold text-on-surface">Field-Proven Deployments</h2>
+</div>
+<span class="font-label-md text-[11px] text-primary font-bold">Case Studies</span>
+</div>
+<div class="space-y-3">
+<!-- Case Study 1 -->
+<div class="liquid-glass rounded-2xl p-4 border border-outline-variant/30 relative">
+<div class="flex items-start justify-between">
+<div>
+<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20 mb-1.5">
+                  Gazipur Industrial Belt
+                </span>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface">
+                  Tier-1 RMG Factory MES Deployment
+                </h3>
+</div>
+</div>
+<div class="my-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container/30 border border-brand-gold/40 text-secondary font-label-md text-[11px] font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="bolt">bolt</span>
+              +18% OEE Lift | 42 Sewing Lines
+            </div>
+<p class="font-body-md text-[12px] text-on-surface-variant leading-relaxed">
+              Real-time shop-floor terminals across 42 sewing lines eliminated paper reconciliation errors and enabled immediate defect triage.
+            </p>
+<div class="mt-3 pt-2.5 border-t border-surface-container flex flex-wrap gap-1.5 font-label-md text-[10px] text-primary">
+<span class="px-2 py-0.5 bg-surface-container rounded">Edge Touch Terminals</span>
+<span class="px-2 py-0.5 bg-surface-container rounded">Offline-First SQLite</span>
+<span class="px-2 py-0.5 bg-surface-container rounded">Central MES Cluster</span>
+</div>
+</div>
+<!-- Case Study 2 -->
+<div class="liquid-glass rounded-2xl p-4 border border-outline-variant/30 relative">
+<div class="flex items-start justify-between">
+<div>
+<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-gold/20 text-secondary border border-brand-gold/30 mb-1.5">
+                  Narayanganj Hub
+                </span>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface">
+                  Food &amp; Beverage Processing ERP
+                </h3>
+</div>
+</div>
+<div class="my-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary-fixed/30 border border-primary/30 text-primary font-label-md text-[11px] font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="fact_check">fact_check</span>
+              −3.5 Days Lead Time | 100% Traceability
+            </div>
+<p class="font-body-md text-[12px] text-on-surface-variant leading-relaxed">
+              Multi-warehouse raw material procurement with supplier bidding portals, cutting lead times by 3.5 days.
+            </p>
+<div class="mt-3 pt-2.5 border-t border-surface-container flex flex-wrap gap-1.5 font-label-md text-[10px] text-primary">
+<span class="px-2 py-0.5 bg-surface-container rounded">Batch Traceability</span>
+<span class="px-2 py-0.5 bg-surface-container rounded">Vendor Portal</span>
+<span class="px-2 py-0.5 bg-surface-container rounded">Automated Reorder Engine</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Compliance & Factory Standards Strip -->
+<section class="py-3 px-4">
+<h2 class="font-label-md text-[11px] font-bold text-outline uppercase tracking-wider mb-2">Compliance &amp; Global Standards</h2>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<div class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="verified">verified</span>
+<span class="font-label-md text-[11px] text-on-surface font-semibold">ISO 9001:2015 Aligned QMS</span>
+</div>
+<div class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="policy">policy</span>
+<span class="font-label-md text-[11px] text-on-surface font-semibold">Audit-Ready Batch Traceability</span>
+</div>
+<div class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-secondary" data-icon="factory">factory</span>
+<span class="font-label-md text-[11px] text-on-surface font-semibold">BGMEA / BKMEA Compliance</span>
+</div>
+<div class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="security">security</span>
+<span class="font-label-md text-[11px] text-on-surface font-semibold">Accord / Alliance Safety Auditing</span>
+</div>
+<div class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="health_and_safety">health_and_safety</span>
+<span class="font-label-md text-[11px] text-on-surface font-semibold">Worker Safety Telemetry</span>
+</div>
+<div class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-brand-teal" data-icon="lock_open">lock_open</span>
+<span class="font-label-md text-[11px] text-on-surface font-semibold">Zero Cloud Lock-In</span>
+</div>
+</div>
+</section>
+<!-- 8. Frequently Addressed Inquiries (Accordion style) -->
+<section class="px-4 py-3">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-1 h-4 bg-primary rounded-full"></span>
+<h2 class="font-headline-md text-[17px] font-bold text-on-surface">Frequently Addressed Inquiries</h2>
+</div>
+<div class="space-y-2">
+<!-- Accordion 1 -->
+<details class="group bg-surface-container-low rounded-xl border border-outline-variant/30 p-3.5 [&amp;_summary::-webkit-details-marker]:hidden" open="">
+<summary class="flex items-center justify-between cursor-pointer list-none">
+<span class="font-headline-md text-[13.5px] font-bold text-on-surface pr-2">
+                Do shop-floor workers need to be tech-literate?
+              </span>
+<span class="material-symbols-outlined text-[18px] text-primary transition-transform duration-200 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="font-body-md text-[12px] text-on-surface-variant leading-relaxed mt-2.5 pt-2 border-t border-surface-container">
+              No. Terminals are engineered specifically for low-literacy use with intuitive Bangla voice prompts, visual iconography, high-contrast color-coded status, and one-touch barcode/RFID scanners. Factory operators typically master daily logging in under 15 minutes.
+            </p>
+</details>
+<!-- Accordion 2 -->
+<details class="group bg-surface-container-low rounded-xl border border-outline-variant/30 p-3.5 [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between cursor-pointer list-none">
+<span class="font-headline-md text-[13.5px] font-bold text-on-surface pr-2">
+                Can the factory terminals work completely offline?
+              </span>
+<span class="material-symbols-outlined text-[18px] text-primary transition-transform duration-200 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="font-body-md text-[12px] text-on-surface-variant leading-relaxed mt-2.5 pt-2 border-t border-surface-container">
+              Yes. Every shop-floor terminal buffers all telemetry locally in embedded SQLite databases and syncs automatically with zero data loss when LAN or Wi-Fi connectivity is restored.
+            </p>
+</details>
+</div>
+</section>
+<!-- 9. Cross-Sector Capabilities -->
+<section class="px-4 py-3">
+<h2 class="font-label-md text-[11px] font-bold text-outline uppercase tracking-wider mb-2.5">Explore Other Verticals</h2>
+<div class="grid grid-cols-2 gap-2">
+<a class="p-3 bg-surface-container rounded-xl flex items-center gap-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md text-[11.5px] font-bold text-on-surface">Supply Chain</span>
+</a>
+<a class="p-3 bg-surface-container rounded-xl flex items-center gap-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="account_balance">account_balance</span>
+<span class="font-label-md text-[11.5px] font-bold text-on-surface">Banking &amp; Fintech</span>
+</a>
+<a class="p-3 bg-surface-container rounded-xl flex items-center gap-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-md text-[11.5px] font-bold text-on-surface">Retail &amp; E-comm</span>
+</a>
+<a class="p-3 bg-surface-container rounded-xl flex items-center gap-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="podcasts">podcasts</span>
+<span class="font-label-md text-[11.5px] font-bold text-on-surface">Media &amp; Broadcast</span>
+</a>
+</div>
+</section>
+<!-- 10. Final Lead Capture Card -->
+<section class="px-4 py-4" id="leadCapture">
+<div class="bg-gradient-to-br from-brand-navy via-[#072426] to-primary rounded-2xl p-4 text-white shadow-xl border border-brand-teal/40">
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold-glow font-label-md text-[10px] font-bold uppercase tracking-wider mb-2">
+            FACTORY MODERNISATION BRIEFING
+          </div>
+<h2 class="font-headline-lg text-[22px] font-bold tracking-tight text-white leading-tight">
+            Build for Manufacturing &amp; RMG.
+          </h2>
+<p class="font-body-md text-[12px] text-outline-variant mt-1.5 leading-relaxed">
+            Tell us about your factory goals — we will connect you with a sector specialist within one business day for an on-site feasibility evaluation.
+          </p>
+<!-- Guarantees -->
+<div class="mt-3.5 space-y-1.5 border-y border-white/10 py-3 text-[11px] font-label-md text-brand-teal-glow">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span>
+<span>Bilateral NDA prior to data sharing</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="engineering">engineering</span>
+<span>Factory Walkthrough by certified industrial engineers</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span>Turnkey Proof of Concept in 3 Weeks</span>
+</div>
+</div>
+<!-- Form Fields -->
+<form class="mt-4 space-y-2.5" onsubmit="event.preventDefault(); alert('Briefing requested! A YESS industrial specialist will contact your team within 24 hours.');">
+<div>
+<label class="block text-[10.5px] font-label-md text-outline-variant mb-1">Full Name</label>
+<input class="w-full bg-surface-container-highest/20 border border-white/20 rounded-xl px-3 py-2 text-[13px] text-white placeholder-outline-variant/60 focus:outline-none focus:border-brand-teal-glow text-body-md" placeholder="e.g. Md. Ashraful Islam" required="" type="text"/>
+</div>
+<div>
+<label class="block text-[10.5px] font-label-md text-outline-variant mb-1">Enterprise Email</label>
+<input class="w-full bg-surface-container-highest/20 border border-white/20 rounded-xl px-3 py-2 text-[13px] text-white placeholder-outline-variant/60 focus:outline-none focus:border-brand-teal-glow text-body-md" placeholder="name@apparelgroup.com.bd" required="" type="email"/>
+</div>
+<div>
+<label class="block text-[10.5px] font-label-md text-outline-variant mb-1">Factory / Organization</label>
+<input class="w-full bg-surface-container-highest/20 border border-white/20 rounded-xl px-3 py-2 text-[13px] text-white placeholder-outline-variant/60 focus:outline-none focus:border-brand-teal-glow text-body-md" placeholder="e.g. Beximco Textile Mills, Gazipur" required="" type="text"/>
+</div>
+<div>
+<label class="block text-[10.5px] font-label-md text-outline-variant mb-1">Production Lines</label>
+<select class="w-full bg-brand-navy border border-white/20 rounded-xl px-3 py-2 text-[13px] text-white focus:outline-none focus:border-brand-teal-glow text-body-md">
+<option value="1-10">1-10 Lines</option>
+<option value="11-30">11-30 Lines</option>
+<option value="30+">30+ Production Lines (Enterprise)</option>
+</select>
+</div>
+<div>
+<label class="block text-[10.5px] font-label-md text-outline-variant mb-1">Scope &amp; Primary Challenges</label>
+<textarea class="w-full bg-surface-container-highest/20 border border-white/20 rounded-xl px-3 py-2 text-[13px] text-white placeholder-outline-variant/60 focus:outline-none focus:border-brand-teal-glow text-body-md" placeholder="Describe line bottlenecks, current ERP, or offline needs..." rows="2"></textarea>
+</div>
+<button class="w-full mt-2 py-3 px-4 bg-brand-gold text-brand-navy rounded-xl font-headline-md text-[14px] font-extrabold shadow-lg hover:bg-brand-gold-glow transition-all flex items-center justify-center gap-1.5 active:scale-[0.98]" type="submit">
+<span>Request Factory Modernisation Briefing</span>
+<span class="material-symbols-outlined text-[17px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+</div>
+</section>
+<!-- 11. Mobile Institutional Corporate Footer -->
+<footer class="bg-surface-container-highest flex flex-col items-center gap-4 px-6 pt-8 pb-10 text-center">
+<!-- Logo & Crest -->
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]" data-icon="domain">domain</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary">YESS Bangladesh</span>
+</div>
+<p class="font-body-md text-[11.5px] text-on-surface-variant max-w-[320px] leading-relaxed">
+          National sovereign technology infrastructure enterprise delivering on-premises automation for industrial plants and conglomerate operations.
+        </p>
+<!-- Links -->
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-on-surface-variant text-[11px] font-label-md">
+<a class="hover:text-primary transition-colors" href="#">Sovereign Subsidiaries</a>
+<a class="hover:text-primary transition-colors" href="#">Client Marquee</a>
+<a class="hover:text-primary transition-colors" href="#">Bilingual Profile</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<!-- Statutory Accreditation Badges -->
+<div class="p-3 bg-surface rounded-xl border border-outline-variant/30 w-full text-center space-y-1">
+<div class="font-label-md text-[10px] font-bold text-primary uppercase">Institutional Accreditations</div>
+<div class="text-[10px] text-on-surface-variant font-body-md flex flex-wrap justify-center gap-x-2 gap-y-1">
+<span>RJSC Reg: C-184920</span>
+<span>•</span>
+<span>BASIS Member</span>
+<span>•</span>
+<span>DCCI Member</span>
+<span>•</span>
+<span>ISO 9001 &amp; 27001 Aligned</span>
+</div>
+</div>
+<!-- Addresses -->
+<div class="text-[10.5px] text-outline font-body-md space-y-0.5">
+<p>Motijheel C/A HQ, Dhaka-1000 | Gulshan-2 R&amp;D Lab</p>
+<p class="font-label-md">© 2024 YESS Bangladesh. All rights reserved. Dhaka HQ.</p>
+</div>
+</footer>
+</main>
+<!-- 12. Docked Floating Bottom Tab Bar (5 Dest: Home, Ventures, Services, Insights, Contact) -->
+<!-- The current screen is 'Ventures / Industries' -> Highlight Ventures -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 max-w-[390px] mx-auto bg-surface-bright/95 backdrop-blur-lg rounded-t-xl shadow-[0_-4px_16px_rgba(1,106,106,0.12)]">
+<!-- Tab 1: Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 py-1 px-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="home">home</span>
+<span class="font-label-md text-[10px] mt-0.5">Home</span>
+</a>
+<!-- Tab 2: Ventures (Active Industry Focus) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative after:content-[''] after:w-8 after:h-1 after:bg-brand-teal-glow after:rounded-full after:mt-1 py-1 px-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="domain" data-weight="fill" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-label-md text-[10px] mt-0.5">Ventures</span>
+</a>
+<!-- Tab 3: Services -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 py-1 px-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="corporate_fare">corporate_fare</span>
+<span class="font-label-md text-[10px] mt-0.5">Services</span>
+</a>
+<!-- Tab 4: Insights -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 py-1 px-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="article">article</span>
+<span class="font-label-md text-[10px] mt-0.5">Insights</span>
+</a>
+<!-- Tab 5: Contact -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 py-1 px-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="call">call</span>
+<span class="font-label-md text-[10px] mt-0.5">Contact</span>
+</a>
+</nav>
+</div>
+<!-- Interactive script for drawer toggle -->
+<script>
+    const drawerToggle = document.getElementById('drawerToggle');
+    const drawerClose = document.getElementById('drawerClose');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+
+    if (drawerToggle && drawerOverlay && drawerClose) {
+      drawerToggle.addEventListener('click', () => {
+        drawerOverlay.classList.remove('hidden');
+      });
+      drawerClose.addEventListener('click', () => {
+        drawerOverlay.classList.add('hidden');
+      });
+      drawerOverlay.addEventListener('click', (e) => {
+        if (e.target === drawerOverlay) {
+          drawerOverlay.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</body></html>

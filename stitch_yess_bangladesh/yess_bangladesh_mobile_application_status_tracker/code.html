@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Application Status Tracker | YESS Bangladesh</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#ffdbcb",
+            "on-tertiary-fixed": "#341100",
+            "surface-container-highest": "#d4e4e4",
+            "on-tertiary-container": "#ffd8c6",
+            "primary": "#005454",
+            "secondary": "#7e5713",
+            "primary-fixed-dim": "#84d4d3",
+            "brand-navy": "#061a1b",
+            "on-surface": "#181c1c",
+            "brand-gold": "#d4a359",
+            "on-primary-container": "#9dedec",
+            "background": "#f7faf9",
+            "surface": "#f7faf9",
+            "on-secondary-fixed": "#291800",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#ffddb1",
+            "secondary-fixed-dim": "#f2be71",
+            "tertiary": "#743c1d",
+            "surface-bright": "#ffffff",
+            "primary-container": "#0d6e6e",
+            "on-secondary": "#ffffff",
+            "surface-container-low": "#f1f4f3",
+            "secondary-container": "#fec97b",
+            "outline-variant": "#bec9c8",
+            "primary-fixed": "#a0f0f0",
+            "outline": "#6e7979",
+            "surface-dim": "#f0f4f4",
+            "inverse-surface": "#2d3131",
+            "inverse-primary": "#84d4d3",
+            "brand-teal": "#0d6e6e",
+            "surface-container-high": "#e6e9e8",
+            "tertiary-container": "#915332",
+            "tertiary-fixed-dim": "#ffb692",
+            "on-primary": "#ffffff",
+            "brand-gold-glow": "#f6c87a",
+            "error-container": "#ffdad6",
+            "surface-container-lowest": "#ffffff",
+            "surface-tint": "#016a6a",
+            "on-error": "#ffffff",
+            "inverse-on-surface": "#eef1f0",
+            "surface-container": "#ebeeee",
+            "on-secondary-container": "#78520e",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed-variant": "#614000",
+            "brand-teal-glow": "#35b0aa",
+            "surface-variant": "#e0e3e2",
+            "on-primary-fixed-variant": "#004f50",
+            "on-surface-variant": "#3e4948",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "on-background": "#181c1c",
+            "on-primary-fixed": "#002020",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    .frosted-glass {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+    /* Pulse glow keyframe */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
+    }
+    .animate-telemetry-ping {
+      animation: subtlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased flex justify-center selection:bg-brand-teal-glow selection:text-white min-h-screen">
+<!-- Mobile Viewport Constraint (390px canonical) -->
+<div class="w-full max-w-[390px] min-h-screen bg-background relative flex flex-col shadow-2xl overflow-x-hidden border-x border-outline-variant/30">
+<!-- TOP APP BAR -->
+<header class="docked full-width top-0 sticky z-40 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center w-full px-4 h-14 max-w-[390px] mx-auto">
+<!-- Leading: Menu + Brand Emblem -->
+<div class="flex items-center gap-2">
+<button aria-label="Open menu" class="p-1.5 rounded-lg text-primary hover:bg-surface-container active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[22px]">menu</span>
+</button>
+<div class="flex items-center gap-1.5">
+<!-- Sovereign Crest Icon -->
+<div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined fill text-[18px] text-brand-gold-glow">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[15px] leading-tight font-extrabold text-primary tracking-tight">YESS Bangladesh</span>
+<span class="font-label-md text-[9px] uppercase tracking-wider text-outline font-bold">Ventures Telemetry</span>
+</div>
+</div>
+</div>
+<!-- Trailing: BST Badge & Language Toggle -->
+<div class="flex items-center gap-1.5">
+<div class="hidden xs:flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-md text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-telemetry-ping"></span>
+<span>BST 15:42</span>
+</div>
+<div class="flex items-center bg-surface-container-high p-0.5 rounded-lg border border-outline-variant/50">
+<span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-primary text-white shadow-xs">EN</span>
+<span class="px-1.5 py-0.5 rounded text-[11px] font-medium text-on-surface-variant hover:text-primary">বাং</span>
+</div>
+<button aria-label="Search" class="p-1 rounded-lg text-primary hover:bg-surface-container active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 px-4 pt-4 pb-28 space-y-5">
+<!-- HERO SECTION -->
+<section class="space-y-2.5">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
+<span class="w-2 h-2 rounded-full bg-brand-teal-glow animate-telemetry-ping"></span>
+<span class="font-label-md text-[11px] tracking-wide font-bold uppercase text-primary">RECRUITMENT PIPELINE &amp; TELEMETRY</span>
+</div>
+<!-- Headline & Subtitle -->
+<div>
+<h1 class="font-headline-lg text-[26px] leading-[32px] font-extrabold text-on-surface tracking-tight">
+            Track Your Application <span class="bg-gradient-to-r from-primary via-brand-teal to-brand-teal-glow bg-clip-text text-transparent">Status</span>
+</h1>
+<p class="font-body-md text-on-surface-variant text-[13px] leading-[18px] mt-1.5">
+            Real-time candidate telemetry across YESS Bangladesh ventures. Enter your tracking reference number and registered email to check status.
+          </p>
+</div>
+</section>
+<!-- MOBILE TRACKING QUERY & LOOKUP CARD (Liquid Glass) -->
+<section class="frosted-glass rounded-xl p-4 shadow-[0_8px_24px_rgba(0,84,84,0.08)] border border-white/60 relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-28 h-28 bg-brand-teal-glow/15 rounded-full blur-2xl pointer-events-none"></div>
+<form class="space-y-3 relative z-10" onsubmit="event.preventDefault()">
+<!-- Input 1: Reference ID -->
+<div>
+<label class="block font-label-md text-[11px] font-bold text-on-surface-variant mb-1 uppercase tracking-wider">
+              Application Reference ID
+            </label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">badge</span>
+<input class="w-full bg-surface-container-lowest/90 border border-outline-variant rounded-lg pl-9 pr-3 py-2 text-[13px] font-semibold text-primary focus:border-brand-teal focus:ring-2 focus:ring-brand-teal-glow/30 outline-none transition-all" placeholder="e.g. YESS-ENG-2026-XXXXX" type="text" value="YESS-ENG-2026-89412"/>
+</div>
+<p class="font-label-md text-[10px] text-outline mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">info</span> Sovereign Candidate Docket Format
+            </p>
+</div>
+<!-- Input 2: Registered Email -->
+<div>
+<label class="block font-label-md text-[11px] font-bold text-on-surface-variant mb-1 uppercase tracking-wider">
+              Registered Email Address
+            </label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">mail</span>
+<input class="w-full bg-surface-container-lowest/90 border border-outline-variant rounded-lg pl-9 pr-3 py-2 text-[13px] font-semibold text-on-surface focus:border-brand-teal focus:ring-2 focus:ring-brand-teal-glow/30 outline-none transition-all" placeholder="name@domain.com" type="email" value="syed.candidate@example.com"/>
+</div>
+</div>
+<!-- Checkbox & Encryption Pill -->
+<div class="pt-1 flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-brand-teal w-4 h-4 rounded" type="checkbox"/>
+<span class="font-label-md text-[12px] text-on-surface-variant">Remember details on this device</span>
+</label>
+<div class="flex items-center gap-1.5 text-outline font-label-md text-[10.5px]">
+<span class="material-symbols-outlined text-[13px] text-brand-teal">lock</span>
+<span>256-bit Encrypted Candidate Session</span>
+</div>
+</div>
+<!-- Primary Full Width CTA -->
+<button class="w-full mt-2 bg-primary hover:bg-primary-container text-on-primary py-2.5 px-4 rounded-lg font-label-lg font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-98 transition-all duration-150" type="submit">
+<span>Check Status</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Connection Telemetry Pill -->
+<div class="mt-3 pt-3 border-t border-outline-variant/40 flex items-center justify-between text-[10px] text-outline font-label-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Live sovereign connection active</span>
+</div>
+<span>BST 15:42:19</span>
+</div>
+</section>
+<!-- ACTIVE APPLICATION RESULT CARD -->
+<section class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/50 shadow-sm space-y-3.5">
+<!-- Card Header Badges -->
+<div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-surface-container pb-2.5">
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-1 rounded-md text-[11px] font-bold text-primary">
+<span class="material-symbols-outlined text-[14px]">domain</span>
+<span>Yess Soft Ltd. (Enterprise Cloud &amp; AI)</span>
+</div>
+<span class="font-label-md text-[10px] text-outline px-1.5 py-0.5 rounded bg-surface-container-high font-mono">
+            BD-VNT-04
+          </span>
+</div>
+<!-- Status Badge Champagne Gold -->
+<div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed border border-brand-gold font-label-md text-[12px] font-bold shadow-xs">
+<span class="material-symbols-outlined fill text-[15px] text-secondary">event_available</span>
+<span>Interview Round 2 Scheduled</span>
+</div>
+<!-- Job Title -->
+<h2 class="font-headline-md text-[17px] leading-tight font-bold text-primary mt-2">
+            Lead Cloud Solutions Architect — Yess Soft Ltd.
+          </h2>
+</div>
+<!-- Metadata Grid -->
+<div class="grid grid-cols-2 gap-2 text-[12px] bg-surface-container-low p-2.5 rounded-lg border border-outline-variant/30">
+<div>
+<span class="block text-outline text-[10px] uppercase font-bold">Candidate</span>
+<span class="font-semibold text-on-surface">Syed Reza</span>
+<span class="block text-[11px] text-on-surface-variant">(Lead Architect)</span>
+</div>
+<div>
+<span class="block text-outline text-[10px] uppercase font-bold">Applied Date</span>
+<span class="font-semibold text-on-surface">Sep 12, 2026</span>
+<span class="block text-[11px] text-outline">Dhaka HQ (Motijheel)</span>
+</div>
+<div class="col-span-2 pt-1 border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-1">
+<span class="text-outline text-[10px] uppercase font-bold">Dossier Ref:</span>
+<span class="font-mono text-xs font-bold text-primary">YESS-ENG-2026-89412</span>
+</div>
+<button class="flex items-center gap-0.5 text-primary text-[11px] font-bold hover:underline" title="Copy Reference">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg bg-surface-container text-primary font-label-md text-[11.5px] font-bold hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Application PDF</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg bg-surface-container text-primary font-label-md text-[11.5px] font-bold hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">edit_calendar</span>
+<span>Reschedule</span>
+</button>
+</div>
+</section>
+<!-- VERTICAL 5-STAGE PIPELINE STEPPER -->
+<section class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/50 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">linear_scale</span>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface">Telemetry Pipeline Stages</h3>
+</div>
+<span class="font-label-md text-[11px] font-bold text-brand-teal bg-primary/10 px-2 py-0.5 rounded-full">Stage 3 of 5</span>
+</div>
+<!-- Vertical Stepper List -->
+<div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-3 before:w-[2px] before:bg-surface-container-highest">
+<!-- Step 1: Completed -->
+<div class="relative">
+<div class="absolute -left-[24px] top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-white shadow-xs">
+<span class="material-symbols-outlined fill text-[14px]">check</span>
+</div>
+<div class="space-y-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[13px] font-bold text-on-surface">1. Submitted</span>
+<span class="font-label-md text-[10px] text-outline">Sep 12, 2026</span>
+</div>
+<p class="font-body-md text-[11.5px] text-on-surface-variant">Received &amp; Acknowledged via Candidate Portal</p>
+<span class="inline-block mt-1 font-label-md text-[10px] px-2 py-0.5 rounded bg-surface-container text-primary font-semibold">
+                Automated Screening Passed
+              </span>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative">
+<div class="absolute -left-[24px] top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-white shadow-xs">
+<span class="material-symbols-outlined fill text-[14px]">check</span>
+</div>
+<div class="space-y-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[13px] font-bold text-on-surface">2. Under Review</span>
+<span class="font-label-md text-[10px] text-outline">Sep 15, 2026</span>
+</div>
+<p class="font-body-md text-[11.5px] text-on-surface-variant">Technical Profile &amp; Architectural Credentials Screened</p>
+<span class="inline-block mt-1 font-label-md text-[10px] px-2 py-0.5 rounded bg-surface-container text-primary font-semibold">
+                VP Engineering Cleared
+              </span>
+</div>
+</div>
+<!-- Step 3: Active (Interview Round 2) -->
+<div class="relative">
+<div class="absolute -left-[24px] top-0 w-6 h-6 rounded-full bg-brand-teal-glow flex items-center justify-center text-white ring-4 ring-brand-teal/20 shadow-md">
+<span class="material-symbols-outlined fill text-[14px]">videocam</span>
+</div>
+<div class="space-y-1 bg-surface-container-low p-2.5 rounded-lg border-l-2 border-brand-teal-glow">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[13px] font-extrabold text-primary">3. Interview Round 2</span>
+<span class="font-label-md text-[10px] font-bold text-secondary bg-secondary-fixed px-1.5 py-0.2 rounded">ACTIVE</span>
+</div>
+<p class="font-body-md text-[12px] font-semibold text-on-surface">
+                System Architecture Deep Dive
+              </p>
+<p class="font-body-md text-[11px] text-on-surface-variant">
+                Sep 24, 2026 at 3:00 PM BST (GMT+6)
+              </p>
+<div class="flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[14px] text-brand-gold">video_call</span>
+<span class="font-label-md text-[11px] font-bold text-secondary">Google Meet Confirmed</span>
+</div>
+</div>
+</div>
+<!-- Step 4: Upcoming -->
+<div class="relative opacity-65">
+<div class="absolute -left-[24px] top-0 w-6 h-6 rounded-full bg-surface-container border-2 border-dashed border-outline flex items-center justify-center text-outline ring-4 ring-white">
+<span class="text-[10px] font-bold">4</span>
+</div>
+<div class="space-y-0.5">
+<span class="font-label-md text-[13px] font-bold text-on-surface">4. Offer &amp; Terms</span>
+<p class="font-body-md text-[11.5px] text-outline">Compensation, Sovereign Equity Pool &amp; IP Agreements</p>
+</div>
+</div>
+<!-- Step 5: Upcoming -->
+<div class="relative opacity-50">
+<div class="absolute -left-[24px] top-0 w-6 h-6 rounded-full bg-surface-container border-2 border-outline-variant flex items-center justify-center text-outline ring-4 ring-white">
+<span class="text-[10px] font-bold">5</span>
+</div>
+<div class="space-y-0.5">
+<span class="font-label-md text-[13px] font-bold text-on-surface">5. Onboarding</span>
+<p class="font-body-md text-[11.5px] text-outline">Day 1 Orientation &amp; Sovereign Enclave Security Clearance</p>
+</div>
+</div>
+</div>
+</section>
+<!-- RECRUITMENT PANEL DIRECTIVE & PREPARATION CARD -->
+<section class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/50 shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment</span>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface">Recruitment Panel Directive</h3>
+</div>
+<span class="font-label-md text-[10px] font-bold text-error bg-error-container/60 px-2 py-0.5 rounded-full">
+            Action Required
+          </span>
+</div>
+<!-- Directive Quote Box -->
+<div class="p-3 bg-surface-container-low rounded-lg border-l-4 border-brand-teal text-[12px] leading-relaxed text-on-surface-variant italic">
+          "Your Round 1 interview results were outstanding. The technical panel has scheduled your Round 2 architecture presentation for Thursday at 3:00 PM BST via Google Meet."
+        </div>
+<!-- Evaluation Panel Members -->
+<div>
+<span class="block font-label-md text-[11px] font-bold text-outline uppercase tracking-wider mb-2">
+            Evaluation Panel Members
+          </span>
+<div class="grid grid-cols-1 gap-2">
+<div class="flex items-center gap-2.5 p-2 bg-surface-container rounded-lg">
+<div class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
+                AK
+              </div>
+<div class="flex-1 min-w-0">
+<span class="font-label-md text-[12px] font-bold text-on-surface block truncate">Arif Khan</span>
+<span class="font-body-md text-[10.5px] text-on-surface-variant block truncate">Head of Engineering &amp; Chief Architect</span>
+</div>
+<span class="material-symbols-outlined text-brand-teal text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-2.5 p-2 bg-surface-container rounded-lg">
+<div class="w-8 h-8 rounded-full bg-brand-gold/20 text-secondary flex items-center justify-center font-bold text-xs">
+                SR
+              </div>
+<div class="flex-1 min-w-0">
+<span class="font-label-md text-[12px] font-bold text-on-surface block truncate">Sadia Rahman</span>
+<span class="font-body-md text-[10.5px] text-on-surface-variant block truncate">Chief Operating Officer, Yess Soft Ltd.</span>
+</div>
+<span class="material-symbols-outlined text-brand-teal text-[16px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Candidate Checklist -->
+<div class="pt-2">
+<span class="block font-label-md text-[11px] font-bold text-outline uppercase tracking-wider mb-2">
+            Required Session Preparation
+          </span>
+<div class="space-y-2 text-[12px]">
+<label class="flex items-start gap-2.5 cursor-pointer bg-surface-container-low p-2 rounded-lg">
+<input checked="" class="mt-0.5 rounded border-outline-variant text-primary focus:ring-brand-teal" type="checkbox"/>
+<span class="text-on-surface leading-tight">1. Prepare 20-min distributed system design presentation (Focus on sovereign multi-region disaster recovery).</span>
+</label>
+<label class="flex items-start gap-2.5 cursor-pointer bg-surface-container-low p-2 rounded-lg">
+<input checked="" class="mt-0.5 rounded border-outline-variant text-primary focus:ring-brand-teal" type="checkbox"/>
+<span class="text-on-surface leading-tight">2. Review sovereign cloud mesh architecture paper v4.2.</span>
+</label>
+<label class="flex items-start gap-2.5 cursor-pointer bg-surface-container-low p-2 rounded-lg">
+<input checked="" class="mt-0.5 rounded border-outline-variant text-primary focus:ring-brand-teal" type="checkbox"/>
+<span class="text-on-surface leading-tight">3. Have Github &amp; enterprise portfolio repositories ready for screen share.</span>
+</label>
+</div>
+</div>
+</section>
+<!-- APPLICATION VAULT & PARAMETERS CARD -->
+<section class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/50 shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">folder_special</span>
+<h3 class="font-headline-md text-[15px] font-bold text-on-surface">Application Vault</h3>
+</div>
+<span class="flex items-center gap-1 font-label-md text-[10px] text-brand-teal font-semibold">
+<span class="material-symbols-outlined text-[13px]">lock</span> 256-bit Verified
+          </span>
+</div>
+<!-- File List -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container text-[12px]">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-error text-[18px]">picture_as_pdf</span>
+<div class="truncate">
+<span class="font-semibold block truncate">Resume_Syed_Reza_LeadArchitect.pdf</span>
+<span class="text-[10px] text-outline">2.4 MB • Verified</span>
+</div>
+</div>
+<button aria-label="Download resume" class="p-1 text-primary hover:bg-surface-container-high rounded">
+<span class="material-symbols-outlined text-[16px]">cloud_download</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container text-[12px]">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-error text-[18px]">picture_as_pdf</span>
+<div class="truncate">
+<span class="font-semibold block truncate">Architecture_Portfolio_Mesh.pdf</span>
+<span class="text-[10px] text-outline">8.9 MB • Verified</span>
+</div>
+</div>
+<button aria-label="Download portfolio" class="p-1 text-primary hover:bg-surface-container-high rounded">
+<span class="material-symbols-outlined text-[16px]">cloud_download</span>
+</button>
+</div>
+</div>
+<!-- Parameters & Talent Partner -->
+<div class="grid grid-cols-2 gap-2 pt-2 border-t border-surface-container text-[11.5px]">
+<div class="p-2 rounded-lg bg-surface-container-low">
+<span class="text-outline text-[10px] uppercase font-bold block">Target Comp</span>
+<span class="font-bold text-on-surface">৳ 320,000 / mo</span>
+<span class="text-[10px] text-brand-teal block">+ Venture Equity Pool</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low">
+<span class="text-outline text-[10px] uppercase font-bold block">Notice Period</span>
+<span class="font-bold text-on-surface">30 Calendar Days</span>
+<span class="text-[10px] text-outline block">Official Buyout Available</span>
+</div>
+</div>
+<!-- Dedicated Partner -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
+<div>
+<span class="text-[10px] text-outline uppercase font-bold block">Dedicated Talent Partner</span>
+<span class="font-bold text-[12px] text-on-surface">Tariq Al-Mansoor</span>
+</div>
+</div>
+<span class="font-label-md text-[10px] bg-primary text-white px-2 py-0.5 rounded font-semibold">Exec Search</span>
+</div>
+</section>
+<!-- TALENT CONCIERGE ASSISTANCE BANNER -->
+<section class="bg-gradient-to-br from-primary via-primary-container to-brand-navy text-white rounded-xl p-4 shadow-md space-y-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-brand-gold-glow text-[22px]">contact_support</span>
+<div>
+<h4 class="font-headline-md text-[14px] font-bold text-white">Need Concierge Assistance?</h4>
+<p class="font-body-md text-[11.5px] text-on-primary-container leading-tight mt-0.5">
+              Need to modify your schedule or update submitted credentials? Direct line to executive hiring.
+            </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<a class="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-white font-label-md text-[11px] font-bold backdrop-blur-sm border border-white/20 transition-all" href="tel:+8809638445566">
+<span class="material-symbols-outlined text-[15px]">call</span>
+<span>+880 9638-445566</span>
+</a>
+<a class="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-brand-gold hover:bg-brand-gold-glow text-brand-navy font-label-md text-[11px] font-bold transition-all shadow-sm" href="mailto:careers@yessbd.com">
+<span class="material-symbols-outlined text-[15px]">mail</span>
+<span>Email Talent Team</span>
+</a>
+</div>
+<div class="flex items-center justify-between text-[9.5px] text-outline-variant/80 pt-1 border-t border-white/10 font-mono">
+<span>Session Auto-refresh: 14:59m</span>
+<span>Encrypted Gateway v4.8</span>
+</div>
+</section>
+<!-- FOOTER COMPONENT (From Shared Components JSON) -->
+<footer class="flex flex-col items-center gap-3 px-2 pt-6 pb-4 text-center max-w-[390px] mx-auto text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined fill text-primary text-[18px]">verified_user</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-brand-teal">YESS Bangladesh</span>
+</div>
+<p class="font-body-md text-[11px] leading-tight text-outline max-w-[280px]">
+          RJSC Reg C-184920/2022 • City Center Tower Level 19, Motijheel C/A, Dhaka 1000, Bangladesh
+        </p>
+<!-- Links from Shared JSON -->
+<div class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-on-surface-variant font-label-md text-[11px]">
+<a class="hover:text-primary transition-colors" href="#">Sovereign Subsidiaries</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Client Marquee</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Bilingual Profile</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<p class="font-label-md text-[10px] text-outline">
+          © 2024 YESS Bangladesh. All rights reserved. Dhaka HQ.
+        </p>
+</footer>
+</main>
+<!-- DOCKED FROSTED BOTTOM NAVIGATION BAR (Shared Component JSON Rules) -->
+<!-- Destination labels from JSON: ["Home", "Ventures", "Services", "Insights", "Contact"] -->
+<!-- Careers / Application context falls gracefully into Services / Ventures, mapped semantically -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 max-w-[390px] mx-auto bg-surface-bright/95 backdrop-blur-lg rounded-t-xl shadow-[0_-4px_16px_rgba(1,106,106,0.12)] border-0">
+<!-- 1. Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="font-label-md text-[10px] mt-0.5">Home</span>
+</a>
+<!-- 2. Ventures (Active semantic alignment for Ventures Division application status) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative after:content-[''] after:w-8 after:h-1 after:bg-brand-teal-glow after:rounded-full after:mt-1 active:scale-90 transition-transform duration-150 w-16" href="#">
+<span class="material-symbols-outlined fill text-[20px]">domain</span>
+<span class="font-label-md text-[10px]">Ventures</span>
+</a>
+<!-- 3. Services -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+<span class="font-label-md text-[10px] mt-0.5">Services</span>
+</a>
+<!-- 4. Insights -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined text-[20px]">article</span>
+<span class="font-label-md text-[10px] mt-0.5">Insights</span>
+</a>
+<!-- 5. Contact -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-150 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="font-label-md text-[10px] mt-0.5">Contact</span>
+</a>
+</nav>
+</div>
+</body></html>
