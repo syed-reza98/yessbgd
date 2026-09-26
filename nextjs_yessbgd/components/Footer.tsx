@@ -14,18 +14,18 @@ export function Footer() {
           {/* Col 1 & 2: Brand & Headquarters */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-primary-glow p-0.5 flex items-center justify-center">
-                <div className="h-full w-full bg-[#061a1b] rounded-[10px] flex items-center justify-center">
-                  <span className="font-display font-extrabold text-base tracking-tighter text-accent">
-                    YB
-                  </span>
-                </div>
+              <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-white shadow-sm border border-white/20">
+                <img
+                  src="/assets/yess-bangla-logo.png"
+                  alt="YESS Bangladesh"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col pl-2 border-l border-white/20">
                 <span className="font-display font-extrabold text-xl tracking-tight text-white">
-                  YESS <span className="text-primary-glow font-bold">Bangladesh</span>
+                  YESS <span className="text-emerald-400 font-bold">Bangladesh</span>
                 </span>
-                <span className="text-[10px] tracking-wider uppercase text-white/50 font-semibold">
+                <span className="text-[10px] tracking-wider uppercase text-[#f87171] font-semibold">
                   Sovereign Enterprise Studio
                 </span>
               </div>

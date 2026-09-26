@@ -29,11 +29,16 @@
   --color-ring: var(--ring);
   --color-surface: var(--surface);
 
+  --color-brand-green: #008744;
+  --color-brand-green-deep: #005454;
+  --color-brand-green-glow: #059669;
+  --color-brand-red: #c82333;
+  --color-brand-red-glow: #e11d48;
   --color-brand-teal: #0d6e6e;
   --color-brand-teal-glow: #35b0aa;
   --color-brand-gold: #d4a359;
   --color-brand-gold-glow: #f6c87a;
-  --color-brand-navy: #061a1b;
+  --color-brand-navy: #081d1e;
 
   --font-display: var(--font-jakarta), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -126,11 +131,43 @@ body {
 }
 
 .glass-card-dark {
-  background: rgba(6, 26, 27, 0.85);
+  background: rgba(6, 26, 27, 0.92);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(53, 176, 170, 0.25);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+  box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* Minted 3D Embossed Coins */
+.coin-3d {
+  background: radial-gradient(circle at 35% 30%, #1d4648 0%, #0d6e6e 40%, #061a1b 95%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.7),
+    0 8px 20px -4px rgba(6, 26, 27, 0.6),
+    0 0 16px rgba(53, 176, 170, 0.25);
+}
+
+.coin-gold {
+  background: radial-gradient(circle at 35% 30%, #ffe9b8 0%, #d4a359 45%, #614000 95%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.7),
+    0 8px 20px -4px rgba(6, 26, 27, 0.6),
+    0 0 16px rgba(212, 163, 89, 0.35);
+}
+
+.coin-red {
+  background: radial-gradient(circle at 35% 30%, #ff9e99 0%, #c82333 45%, #56000e 95%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.7),
+    0 8px 20px -4px rgba(6, 26, 27, 0.6),
+    0 0 16px rgba(200, 35, 51, 0.35);
+}
+
+.reeded-edge {
+  border: 2px dashed rgba(212, 163, 89, 0.45);
 }
 
 .glass-pill {

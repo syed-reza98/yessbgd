@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, Phone, Mail, Globe, ArrowRight, ShieldCheck } from "lucide-react";
@@ -89,26 +90,29 @@ export function Header() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
-            ? "glass-card-strong shadow-lg py-2.5 border-b border-border/60"
-            : "bg-background/85 backdrop-blur-md py-3.5 border-b border-border/30"
+            ? "bg-[#061a1b]/95 backdrop-blur-md shadow-xl py-2.5 border-b border-white/15"
+            : "bg-[#061a1b]/90 backdrop-blur-md py-3.5 border-b border-white/10"
         }`}
       >
         <div className="container-tight flex items-center justify-between">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-br from-primary to-primary-glow p-0.5 shadow-md flex items-center justify-center">
-              <div className="h-full w-full bg-[#061a1b] rounded-[10px] flex items-center justify-center p-1.5">
-                <span className="font-display font-extrabold text-base tracking-tighter text-accent">
-                  YB
-                </span>
-              </div>
+            <div className="relative flex items-center justify-center p-1 rounded-xl bg-white shadow-sm border border-white/20">
+              <Image
+                src="/assets/yess-bangla-logo.png"
+                alt="YESS Bangladesh"
+                width={130}
+                height={40}
+                className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                priority
+              />
             </div>
-            <div className="flex flex-col">
-              <span className="font-display font-extrabold text-lg sm:text-xl tracking-tight text-foreground leading-tight group-hover:text-primary transition-colors">
-                YESS <span className="text-primary font-bold">Bangladesh</span>
+            <div className="hidden sm:flex flex-col pl-2 border-l border-white/20">
+              <span className="font-display font-extrabold text-sm sm:text-base tracking-tight text-white leading-none">
+                YESS <span className="text-emerald-400 font-bold">Bangladesh</span>
               </span>
-              <span className="text-[10px] tracking-wider uppercase text-muted-foreground font-semibold">
-                Sovereign Enterprise Studio
+              <span className="text-[9px] tracking-widest uppercase text-[#f87171] font-bold mt-0.5">
+                Venture Builder • Sovereign Tech
               </span>
             </div>
           </Link>
@@ -127,8 +131,8 @@ export function Header() {
                   href={link.href}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                     isActive
-                      ? "text-primary bg-primary/10 font-semibold"
-                      : "text-foreground/80 hover:text-foreground hover:bg-secondary/60"
+                      ? "text-white bg-emerald-500/20 border border-emerald-500/40 font-semibold shadow-xs"
+                      : "text-slate-300 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   {link.label}
@@ -141,14 +145,14 @@ export function Header() {
           <div className="hidden sm:flex items-center gap-3">
             <Link
               href="/application-status"
-              className="text-xs font-semibold px-3 py-2 rounded-xl text-primary bg-primary/10 hover:bg-primary/15 transition-all border border-primary/20 hidden xl:flex items-center gap-1.5"
+              className="text-xs font-semibold px-3 py-2 rounded-xl text-[#d4a359] bg-[#d4a359]/10 hover:bg-[#d4a359]/20 transition-all border border-[#d4a359]/30 hidden xl:flex items-center gap-1.5"
             >
               <span>Track Status</span>
             </Link>
 
             <Link
               href="/contact"
-              className="text-xs sm:text-sm font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-white hover:bg-primary/90 shadow-sm hover:shadow-glow transition-all flex items-center gap-1.5 group"
+              className="text-xs sm:text-sm font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white hover:from-[#006A4E] hover:to-[#085252] shadow-md shadow-emerald-950/40 hover:shadow-emerald-950/60 transition-all flex items-center gap-1.5 group"
             >
               <span>Let's Talk</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
@@ -159,13 +163,13 @@ export function Header() {
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-              className="px-2 py-1 text-xs rounded-lg border border-border bg-secondary/80 font-bold text-foreground"
+              className="px-2 py-1 text-xs rounded-lg border border-white/20 bg-white/10 font-bold text-white"
             >
               {language === "en" ? "বাংলা" : "EN"}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl border border-border bg-secondary/80 text-foreground"
+              className="p-2 rounded-xl border border-white/20 bg-white/10 text-white"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
