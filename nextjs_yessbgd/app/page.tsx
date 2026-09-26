@@ -29,6 +29,9 @@ import {
   Layers,
   Search,
   Globe2,
+  Radio,
+  Briefcase,
+  Globe,
 } from "lucide-react";
 import { ventures } from "@/data/ventures";
 
@@ -342,18 +345,59 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Social Proof Partner Banner */}
-      <section className="py-8 bg-[#061a1b] text-white border-y border-white/10">
-        <div className="container-tight flex flex-col md:flex-row items-center justify-between gap-6">
-          <span className="text-xs font-bold tracking-widest uppercase text-[#d4a359] shrink-0">
-            STRATEGIC PARTNERS & CLIENT ECOSYSTEM:
-          </span>
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-6 sm:gap-10 text-xs font-bold text-white/60 tracking-wider">
-            <span>ICT DIVISION BANGLADESH</span>
-            <span>BASIS MEMBER</span>
-            <span>BEXIMCO HEALTH</span>
-            <span>WALTON HI-TECH</span>
-            <span>BRAC ENTERPRISES</span>
+      {/* 3. Social Proof Partner Banner: Infinite Scrolling Marquee */}
+      <section className="py-10 bg-[#061a1b] border-y border-white/10 overflow-hidden">
+        <div className="container-tight mb-6 text-center">
+          <p className="text-xs uppercase tracking-widest text-[#d4a359] font-bold">
+            TRUSTED BY INSTITUTIONAL LEADERS &amp; ENTERPRISE PARTNERS IN BANGLADESH
+          </p>
+        </div>
+        <div className="relative overflow-hidden w-full">
+          <div className="animate-marquee flex items-center gap-14 text-slate-300 font-bold tracking-wider text-xs sm:text-sm">
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-[#35b0aa]" /> ICT DIVISION BANGLADESH
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Code2 className="h-4 w-4 text-[#d4a359]" /> BASIS BANGLADESH
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Radio className="h-4 w-4 text-[#35b0aa]" /> ROBI AXIATA PLC
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Briefcase className="h-4 w-4 text-[#d4a359]" /> BEXIMCO GROUP
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Cpu className="h-4 w-4 text-[#35b0aa]" /> WALTON HI-TECH
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-[#d4a359]" /> BRAC ENTERPRISES
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Globe className="h-4 w-4 text-[#35b0aa]" /> GRAMEEN TELECOM
+            </span>
+
+            {/* Duplicated set for seamless loop */}
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-[#35b0aa]" /> ICT DIVISION BANGLADESH
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Code2 className="h-4 w-4 text-[#d4a359]" /> BASIS BANGLADESH
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Radio className="h-4 w-4 text-[#35b0aa]" /> ROBI AXIATA PLC
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Briefcase className="h-4 w-4 text-[#d4a359]" /> BEXIMCO GROUP
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Cpu className="h-4 w-4 text-[#35b0aa]" /> WALTON HI-TECH
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-[#d4a359]" /> BRAC ENTERPRISES
+            </span>
+            <span className="hover:text-white transition-colors flex items-center gap-2">
+              <Globe className="h-4 w-4 text-[#35b0aa]" /> GRAMEEN TELECOM
+            </span>
           </div>
         </div>
       </section>

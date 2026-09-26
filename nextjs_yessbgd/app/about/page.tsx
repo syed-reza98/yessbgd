@@ -1,374 +1,450 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
-  Target,
-  Eye,
-  Heart,
+  Shield,
   ShieldCheck,
-  Award,
-  Users,
-  Globe2,
-  Zap,
-  ArrowRight,
   CheckCircle2,
-  Binary,
-  Flame,
+  Timeline,
+  Users,
+  Award,
   Cpu,
+  Layers,
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
+  BrainCircuit,
+  Building,
+  Building2,
+  Globe2,
+  TreePine,
+  GraduationCap,
+  Scale,
+  FileCheck2,
+  Stamp,
+  Check,
 } from "lucide-react";
-import { PageHero } from "@/components/PageHero";
 
-export const metadata = {
-  title: "About the Group | YESS Bangladesh",
+export const metadata: Metadata = {
+  title: "About Us | YESS Bangladesh — Leading Institutional Venture Builder",
   description:
-    "Learn about YESS Bangladesh — our corporate mission, executive leadership, institutional methodology, and national impact across 64 districts.",
+    "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech.",
 };
 
+const metrics = [
+  {
+    value: "8+",
+    label: "Operating Years",
+    desc: "Continuous institutional venture building since 2018.",
+    icon: TrendingUp,
+    accent: "text-[#d4a359]",
+  },
+  {
+    value: "13",
+    label: "Subsidiaries",
+    desc: "Independent portfolio companies operating at regional scale.",
+    icon: Building2,
+    accent: "text-[#35b0aa]",
+  },
+  {
+    value: "500+",
+    label: "Engineers & Operators",
+    desc: "Full-time engineering, agronomist & product talent.",
+    icon: Users,
+    accent: "text-white",
+  },
+  {
+    value: "ISO",
+    label: "9001 / 27001",
+    desc: "Certified governance, cybersecurity & data protocols.",
+    icon: ShieldCheck,
+    accent: "text-[#f6c87a]",
+  },
+];
+
+const timelineMilestones = [
+  {
+    year: "18",
+    tag: "FOUNDATION",
+    title: "2018: Inception & Seed Incubation",
+    desc: "Registered in Dhaka as a specialized software studio. Formulated the core venture incubator thesis prioritizing proprietary IP over subcontracting.",
+    cardTitle: "Incorporation under RJSC Dhaka",
+    cardSubtitle: "Founding cohort of 12 full-stack software engineers.",
+    initiative: "Initiative",
+  },
+  {
+    year: "20",
+    tag: "INFRASTRUCTURE",
+    title: "2020: Launch of Yess Soft & Enterprise Cloud",
+    desc: "Scaling fintech microservices, ERP suites, and national-scale software architectures to support banking and statutory enterprise automation.",
+    cardTitle: "1,000,000+ Daily Core Transactions",
+    cardSubtitle: "Multi-cloud deployments supporting regional trade.",
+    initiative: "Subsidiary Scale",
+  },
+  {
+    year: "22",
+    tag: "AGRITECH & ESG",
+    title: "2022: Emergence of YESS Organic Haat & Agritech Logistics",
+    desc: "Launch of cold-chain farmer-to-door distribution, connecting 30+ farming hubs in Bogura and Rajshahi with urban Dhaka consumers.",
+    cardTitle: "Fair Compensation Model Established",
+    cardSubtitle: "Over 2,500 rural farming households connected directly.",
+    initiative: "Sustainable Sourcing",
+  },
+  {
+    year: "24",
+    tag: "EXPANSION",
+    title: "2024: Cross-Border Trade & Media Expansion",
+    desc: "Inauguration of DeshLogix Express regional forwarding and Akash OTT media platforms, diversifying portfolio streams into distribution and culture.",
+    cardTitle: "Pan-Bangladesh Fulfilment Network",
+    cardSubtitle: "64-district freight delivery & sovereign CDN nodes.",
+    initiative: "Diversification",
+  },
+  {
+    year: "26",
+    tag: "INSTITUTIONAL HORIZON",
+    title: "2026: Multi-Sector Sovereign Conglomerate Structure",
+    desc: "Consolidating 13 subsidiaries with $50M+ cumulative enterprise valuation, preparing for institutional debt facilities and regional sovereign partnerships.",
+    cardTitle: "Tier-1 Venture Ecosystem",
+    cardSubtitle: "13 Subsidiaries • Regional Export Competence.",
+    initiative: "Consolidated Vision",
+  },
+];
+
 export default function AboutPage() {
-  const pillars = [
-    {
-      href: "/about/mission",
-      icon: Target,
-      title: "Strategic Mission & Purpose",
-      desc: "Empowering organizations across Bangladesh with sovereign technology, venture acceleration, and high-impact digital infrastructure.",
-      tag: "Core Mandate",
-    },
-    {
-      href: "/about/leadership",
-      icon: Users,
-      title: "Executive Leadership & Board",
-      desc: "Meet our board members, principal architects, and senior practice partners steering national conglomerate ventures.",
-      tag: "Governance",
-    },
-    {
-      href: "/about/awards",
-      icon: Award,
-      title: "Awards & Accreditations",
-      desc: "Recognized nationally by BASIS, the ICT Division, and accredited under ISO 9001:2015 and ISO/IEC 27001 standards.",
-      tag: "Recognition",
-    },
-    {
-      href: "/about/methodology",
-      icon: Cpu,
-      title: "Engineering Methodology",
-      desc: "Our sovereign SDLC lifecycle: bi-weekly agile sprints, zero-trust cloud hardening, automated CI/CD, and Tier-3 SRE operations.",
-      tag: "Sovereign SDLC",
-    },
-    {
-      href: "/about/standards",
-      icon: ShieldCheck,
-      title: "Quality Standards & QA",
-      desc: "IEEE 829 test automation pyramids, ISO/IEC 27001 security enclaves, and 99.9% uptime SLA service guarantees.",
-      tag: "Institutional QA",
-    },
-  ];
-
-  const milestones = [
-    {
-      year: "2014",
-      title: "YESS Bangla Founded",
-      desc: "Established as a boutique management and technology advisory in Dhaka focusing on SME modernization.",
-    },
-    {
-      year: "2018",
-      title: "IT Services Division & Enterprise Cloud",
-      desc: "Launched Yess Soft, expanding into web, mobile, distributed microservices, and ERP systems.",
-    },
-    {
-      year: "2021",
-      title: "Media Operations & Akash TV",
-      desc: "Formed strategic media operations powering low-latency live news and digital broadcasting.",
-    },
-    {
-      year: "2024",
-      title: "Akash OTT Live Streaming Infrastructure",
-      desc: "Rolled out proprietary national OTT streaming architecture serving over 4.8 million concurrent digital viewers.",
-    },
-    {
-      year: "2026",
-      title: "Nationwide Footprint & 13 Conglomerate Subsidiaries",
-      desc: "Active deployments across all 64 districts in Bangladesh with $50M+ cumulative portfolio valuation.",
-    },
-  ];
-
   return (
     <div className="flex flex-col w-full">
-      <PageHero
-        eyebrow="ABOUT YESS BANGLADESH"
-        title="Pioneering Sovereign Enterprise & Venture Building"
-        subtitle="A decade of engineering, consulting, and building resilient digital platforms across Bangladesh and global trade corridors."
-      />
+      {/* 1. Hero Section (Deep Navy & Oceanic Teal Gradient) */}
+      <section className="relative bg-gradient-to-b from-[#061a1b] via-[#072426] to-[#061a1b] text-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-white/10">
+        {/* Subtle Decorative Grid Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(53,176,170,0.18),transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(212,163,89,0.12),transparent_40%)] pointer-events-none" />
 
-      {/* 1. 5 Pillars Exploration Grid */}
-      <section className="py-20 bg-background">
-        <div className="container-tight">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">
-              INSTITUTIONAL FOUNDATION
-            </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
-              Explore Our Strategic Pillars
-            </h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Breadcrumbs */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-outline-variant mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+              Home
+            </Link>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">About Us</span>
+          </nav>
+
+          {/* Eyebrow Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+            <span className="w-2 h-2 rounded-full bg-[#d4a359] animate-ping" />
+            <span>— INSTITUTIONAL MANDATE &amp; HERITAGE —</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pillars.map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <Link
-                  key={pillar.href}
-                  href={pillar.href}
-                  className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-secondary text-foreground border border-border">
-                        {pillar.tag}
-                      </span>
-                    </div>
-                    <h3 className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-sm text-foreground/70 mt-2.5 leading-relaxed">
-                      {pillar.desc}
-                    </p>
-                  </div>
+          {/* Headline & Subtitle */}
+          <div className="max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+              Pioneering Sustainable Venture Architecture &amp;{" "}
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                Sovereign Tech
+              </span>{" "}
+              in Bangladesh.
+            </h1>
+            <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-12">
+              Founded to bridge international engineering standards with Bangladesh&apos;s high-growth demographic
+              dividend, accelerating sovereign enterprises across cloud, agritech, and fintech.
+            </p>
+          </div>
 
-                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                    <span>Read Deep Dive</span>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
+          {/* Strategic Key Metrics Bar (4 Prominent Metric Blocks) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
+            {metrics.map((metric) => {
+              const Icon = metric.icon;
+              return (
+                <div
+                  key={metric.label}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#35b0aa]/50 transition-all group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.accent} group-hover:scale-105 transition-transform`}>
+                      {metric.value}
+                    </span>
+                    <Icon className="w-6 h-6 text-[#35b0aa]" />
                   </div>
-                </Link>
+                  <div className="text-sm font-bold text-white mb-1">{metric.label}</div>
+                  <p className="text-xs text-slate-400">{metric.desc}</p>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* 2. Managing Director Keynote Card */}
-      <section className="py-16 bg-[#f4f8f8] border-y border-[#eaf2f2]">
-        <div className="container-tight">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7 flex flex-col space-y-4">
-              <span className="text-xs font-bold text-primary uppercase tracking-widest">
-                WHY CONGLOMERATES PARTNER WITH US
-              </span>
-              <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground">
-                Customer-Centric. Tech-Driven. Results-Focused.
-              </h2>
-              <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
-                When you engage with YESS Bangladesh, you partner with dedicated principal engineers and advisors who adapt to your governance requirements. We prioritize absolute code ownership, robust data sovereignty, and uncompromised uptime.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {[
-                  "100% Foreground IP & repository handover",
-                  "Nationwide presence across all 64 districts",
-                  "Tier-3 & Tier-4 domestic data center residency",
-                  "24/7 contracted SRE with sub-15 min SLA",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2.5 text-xs font-semibold text-foreground/80">
-                    <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <div className="glass-card-strong rounded-3xl p-8 shadow-xl border border-white/60">
-                <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 rounded-full bg-[#061a1b] text-accent font-display font-extrabold text-xl flex items-center justify-center shadow-md">
-                    EH
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold text-lg text-foreground">
-                      Md Enamul Hayder
-                    </h3>
-                    <p className="text-xs text-foreground/60 font-semibold">
-                      Managing Director, YESS Bangla Group
-                    </p>
-                  </div>
-                </div>
-                <blockquote className="mt-5 text-sm text-foreground/80 leading-relaxed italic border-l-2 border-primary pl-4">
-                  "Our promise is simple: we treat every client's mission-critical operations as if they were our own. That is how we have earned trust across Bangladesh for over a decade."
-                </blockquote>
-
-                {/* Circular Corporate Seal Stamp matching Stitch Section 3 */}
-                <div className="mt-5 p-3 rounded-2xl bg-white/5 border border-dashed border-[#d4a359]/60 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full border-2 border-dashed border-[#d4a359] flex items-center justify-center text-[#d4a359] font-bold text-xs">
-                      RJSC
-                    </div>
-                    <div>
-                      <span className="text-[11px] font-bold text-[#d4a359] block uppercase tracking-wider">
-                        STATUTORY SEAL • GOVBD
-                      </span>
-                      <span className="text-[10px] text-foreground/70">
-                        Reg: C-184920/2022 • Founded in Dhaka
-                      </span>
-                    </div>
-                  </div>
-                  <ShieldCheck className="h-5 w-5 text-emerald-400 shrink-0" />
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
-                  <span className="text-xs text-foreground/60 font-medium">
-                    Dhaka HQ Executive Office
-                  </span>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
-                  >
-                    <span>Connect directly</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Milestone Timeline (2014–2026) */}
-      <section className="py-20 bg-background">
-        <div className="container-tight max-w-4xl">
-          <div className="text-center mb-14">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">
-              HISTORICAL TRAJECTORY
+      {/* 2. 5 Strategic Foundational Pillars Section */}
+      <section className="py-20 bg-background relative border-b border-border/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-[#7e5713] dark:text-[#f2be71] uppercase tracking-widest">
+              PILLARS OF RESILIENCE
             </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
-              Milestones Along Our Journey
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#005454] dark:text-white mt-2 mb-4">
+              5 Strategic Foundational Pillars Architecting Our Growth
             </h2>
-          </div>
-
-          <div className="relative border-l-2 border-primary/30 ml-4 sm:ml-8 pl-8 sm:pl-10 space-y-10">
-            {milestones.map((m) => (
-              <div key={m.year} className="relative group">
-                {/* Timeline node */}
-                <div className="absolute -left-[41px] sm:-left-[49px] top-1.5 h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-bold shadow-md group-hover:scale-125 transition-transform">
-                  ●
-                </div>
-                <div className="inline-block px-3 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold mb-1">
-                  {m.year}
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">
-                  {m.title}
-                </h3>
-                <p className="text-sm text-foreground/70 mt-1 leading-relaxed">
-                  {m.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Explore YESS Bangladesh Further (Stitch Section 4 exact match) */}
-      <section className="py-20 bg-[#f4f8f8] border-t border-[#eaf2f2]">
-        <div className="container-tight">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div>
-              <span className="text-xs font-bold text-primary font-bold uppercase tracking-wider">
-                INSTITUTIONAL EXPLORATION
-              </span>
-              <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-1">
-                Explore YESS Bangladesh Further
-              </h2>
-            </div>
-            <p className="text-sm text-foreground/70 max-w-md mt-2 md:mt-0 leading-relaxed">
-              Access deep-dive disclosures, engineering roadmaps, and statutory board reports across our corporate structure.
+            <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+              Each vertical is engineered to institutional rigor, insulating early-stage risks while maximizing
+              societal and financial returns.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1: Executive Board */}
-            <Link
-              href="/about/leadership"
-              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
-            >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Pillar 1 */}
+            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#0d6e6e]/50 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Users className="h-6 w-6" />
+                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#0d6e6e] border border-[#0d6e6e]/20 group-hover:bg-[#0d6e6e] group-hover:text-white transition-all">
+                  <BrainCircuit className="w-6 h-6" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Executive Board
-                </h3>
-                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
-                  Governed by high-integrity operators, technologists, and public policy pioneers steering 13 sovereign subsidiaries.
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-[#005454] dark:text-[#84d4d3] text-xs font-semibold mb-3">
+                  Sovereign Cloud &amp; AI
+                </div>
+                <h3 className="text-lg font-bold text-on-surface mb-2">1. Innovation &amp; Deep Tech</h3>
+                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                  AI, microservices, cloud telemetry, and sovereign transactional infrastructure architected to handle
+                  mission-critical high-concurrency loads.
                 </p>
               </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>View Leadership</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">
+                <Link href="/about/methodology" className="hover:underline flex items-center gap-1">
+                  <span>Yess Soft • Shondhaan Core</span>
+                </Link>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
-            </Link>
+            </div>
 
-            {/* Card 2: Accreditations */}
-            <Link
-              href="/about/awards"
-              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
-            >
+            {/* Pillar 2 */}
+            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#d4a359]/50 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Award className="h-6 w-6" />
+                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#7e5713] dark:text-[#f2be71] border border-[#d4a359]/30 group-hover:bg-[#7e5713] group-hover:text-white transition-all">
+                  <Scale className="w-6 h-6" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Accreditations
-                </h3>
-                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
-                  ISO-aligned quality management, BASIS member certification, and national technology achievement awards.
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#d4a359]/15 text-[#7e5713] dark:text-[#f2be71] text-xs font-semibold mb-3">
+                  Statutory Fiduciary
+                </div>
+                <h3 className="text-lg font-bold text-on-surface mb-2">2. Institutional Governance &amp; Transparency</h3>
+                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                  Registered under RJSC C-184920, adhering to strict Bangladesh Bank fiduciary compliance, independent board
+                  oversight, and clean audit trails.
                 </p>
               </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>View Citations</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#7e5713] dark:text-[#f2be71]">
+                <Link href="/about/leadership" className="hover:underline flex items-center gap-1">
+                  <span>Audited Compliance &amp; RJSC Reg</span>
+                </Link>
+                <ShieldCheck className="w-4 h-4" />
               </div>
-            </Link>
+            </div>
 
-            {/* Card 3: Engineering SDLC */}
-            <Link
-              href="/about/methodology"
-              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
-            >
+            {/* Pillar 3 */}
+            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#005454]/50 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Cpu className="h-6 w-6" />
+                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#005454] dark:text-[#84d4d3] border border-[#005454]/20 group-hover:bg-[#005454] group-hover:text-white transition-all">
+                  <TreePine className="w-6 h-6" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Engineering SDLC
-                </h3>
-                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
-                  Our proven 4-step delivery lifecycle: Discover, Design, Deliver, and Operate with automated GitOps pipelines.
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-[#005454] dark:text-[#84d4d3] text-xs font-semibold mb-3">
+                  Sustainable Value Chain
+                </div>
+                <h3 className="text-lg font-bold text-on-surface mb-2">3. ESG &amp; Sustainable Agribusiness</h3>
+                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                  Zero-chemical supply chain transparency, cold-chain IoT tracking, and direct rural farmer cooperatives
+                  establishing ethical agricultural commerce.
                 </p>
               </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>View Methodology</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">
+                <Link href="/ventures" className="hover:underline flex items-center gap-1">
+                  <span>YESS Organic Haat Network</span>
+                </Link>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
-            </Link>
+            </div>
 
-            {/* Card 4: QA Framework */}
-            <Link
-              href="/about/standards"
-              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
-            >
+            {/* Pillar 4 */}
+            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#0d6e6e]/50 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <ShieldCheck className="h-6 w-6" />
+                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#0d6e6e] border border-[#0d6e6e]/20 group-hover:bg-[#0d6e6e] group-hover:text-white transition-all">
+                  <GraduationCap className="w-6 h-6" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  QA Framework
-                </h3>
-                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
-                  Zero-trust security enclaves, IEEE 829 test automation pyramids, and contracted 99.9% uptime SLA commitments.
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-[#005454] dark:text-[#84d4d3] text-xs font-semibold mb-3">
+                  Demographic Dividend
+                </div>
+                <h3 className="text-lg font-bold text-on-surface mb-2">4. Youth Leadership &amp; Human Capital</h3>
+                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                  Nurturing top 1% engineering cohorts from BUET, DU, and premier polytechnic institutes into executive
+                  architects and product managers.
                 </p>
               </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>View Standards</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">
+                <Link href="/careers" className="hover:underline flex items-center gap-1">
+                  <span>YESS Talent Accelerator</span>
+                </Link>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
-            </Link>
+            </div>
+
+            {/* Pillar 5 (Spanning 2 columns on lg) */}
+            <div className="lg:col-span-2 glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#0d6e6e]/50 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 group">
+              <div className="max-w-xl">
+                <div className="w-12 h-12 rounded-xl bg-[#061a1b] flex items-center justify-center mb-4 text-[#f6c87a]">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#d4a359]/15 text-[#7e5713] dark:text-[#f2be71] text-xs font-semibold mb-2">
+                  Enterprise Grade
+                </div>
+                <h3 className="text-lg font-bold text-on-surface mb-2">5. Global Quality Benchmarks</h3>
+                <p className="text-xs text-on-surface-variant leading-relaxed">
+                  Export-grade software pipelines, CMMI-aligned methodologies, and Tier-3 sovereign data center
+                  architectures ensuring resilient uptime and multi-tenant security.
+                </p>
+              </div>
+              <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-5 rounded-xl border border-outline-variant/30 min-w-[200px] shrink-0">
+                <div className="text-[11px] text-outline mb-1">Standard Met</div>
+                <div className="text-sm font-bold text-[#005454] dark:text-[#84d4d3]">ISO 27001 / CMMI</div>
+                <div className="text-xs text-on-surface-variant mt-2 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#0d6e6e]" />
+                  <span>Fiduciary Compliant</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Corporate History & Growth Timeline (2018 - 2026) */}
+      <section className="py-20 bg-surface-container-low dark:bg-[#061a1b]/40 border-b border-border/40 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-[#005454] dark:text-[#84d4d3] uppercase tracking-widest">
+              INSTITUTIONAL TRAJECTORY
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#005454] dark:text-white mt-2 mb-4">
+              Milestones of a Decade in the Making
+            </h2>
+            <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+              From a boutique cloud consultancy to an institutional holding structure driving sovereign digital and tangible
+              supply chains.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Center Vertical Track */}
+            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#0d6e6e] via-[#d4a359] to-[#0d6e6e]" />
+
+            <div className="space-y-12">
+              {timelineMilestones.map((milestone, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <div
+                    key={milestone.year}
+                    className={`flex flex-col md:flex-row items-center justify-between gap-8 relative ${
+                      isEven ? "" : "md:flex-row-reverse"
+                    }`}
+                  >
+                    <div className={`w-full md:w-5/12 ${isEven ? "text-left md:text-right" : "text-left"}`}>
+                      <span className="inline-block px-3 py-1 rounded-full bg-[#0d6e6e]/10 text-[#0d6e6e] dark:text-[#35b0aa] text-xs font-bold mb-2">
+                        {milestone.tag}
+                      </span>
+                      <h3 className="text-base sm:text-lg font-bold text-on-surface">{milestone.title}</h3>
+                      <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">{milestone.desc}</p>
+                    </div>
+
+                    <div className="w-10 h-10 rounded-full bg-[#0d6e6e] text-white flex items-center justify-center font-bold text-xs shadow-md z-10 ring-4 ring-white dark:ring-[#061a1b] shrink-0">
+                      {milestone.year}
+                    </div>
+
+                    <div className="w-full md:w-5/12 glass-card p-5 rounded-2xl border border-outline-variant/30 shadow-sm">
+                      <div className="text-[11px] font-semibold text-[#7e5713] dark:text-[#f2be71]">
+                        {milestone.initiative}
+                      </div>
+                      <div className="text-xs sm:text-sm font-bold text-on-surface mt-0.5">{milestone.cardTitle}</div>
+                      <div className="text-xs text-outline mt-1">{milestone.cardSubtitle}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Leadership & Governance Keynote Statement */}
+      <section className="py-20 bg-[#061a1b] text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4a359_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 backdrop-blur-md shadow-2xl relative space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-6 pb-8 border-b border-white/10">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full border-2 border-dashed border-[#d4a359] flex items-center justify-center text-[#d4a359]">
+                  <Stamp className="w-7 h-7" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-[#d4a359] uppercase tracking-wider block">
+                    MANAGING PARTNER KEYNOTE
+                  </span>
+                  <h3 className="text-xl font-bold text-white">Board Governance &amp; Purpose</h3>
+                </div>
+              </div>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#005454]/40 text-[#84d4d3] border border-[#005454]">
+                RJSC Board Ratified
+              </span>
+            </div>
+
+            <p className="text-sm sm:text-base text-slate-200 leading-relaxed italic">
+              &ldquo;We architected YESS Bangladesh not merely as an investment syndicate, but as an institutional
+              nation-building engine. True sovereignty in the 21st century is digital, agrarian, and infrastructural. By
+              fostering homegrown engineering talent and enforcing international fiduciary discipline, we ensure every
+              venture created under our umbrella delivers enduring value for the people of Bangladesh.&rdquo;
+            </p>
+
+            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-bold text-white">Executive Committee &amp; Governing Board</p>
+                <p className="text-xs text-slate-400">YESS Bangladesh • RJSC Reg: C-184920</p>
+              </div>
+              <Link
+                href="/about/leadership"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#005454] hover:bg-[#0d6e6e] text-white text-xs font-bold transition-all shadow-md"
+              >
+                <span>View Full Executive Board</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. National Footprint & 64-District Impact */}
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="p-6 rounded-2xl glass-card border border-border/40">
+              <span className="text-3xl sm:text-4xl font-extrabold text-[#005454] dark:text-[#84d4d3] block mb-1">
+                64
+              </span>
+              <span className="text-xs font-bold text-on-surface block">Districts Covered</span>
+              <span className="text-[11px] text-on-surface-variant">Pan-Bangladesh Presence</span>
+            </div>
+            <div className="p-6 rounded-2xl glass-card border border-border/40">
+              <span className="text-3xl sm:text-4xl font-extrabold text-[#d4a359] block mb-1">
+                10,000+
+              </span>
+              <span className="text-xs font-bold text-on-surface block">Farmers Onboarded</span>
+              <span className="text-[11px] text-on-surface-variant">Regenerative Agrotech</span>
+            </div>
+            <div className="p-6 rounded-2xl glass-card border border-border/40">
+              <span className="text-3xl sm:text-4xl font-extrabold text-[#005454] dark:text-[#84d4d3] block mb-1">
+                4.8M
+              </span>
+              <span className="text-xs font-bold text-on-surface block">Digital Viewers</span>
+              <span className="text-[11px] text-on-surface-variant">Akash OTT &amp; TV</span>
+            </div>
+            <div className="p-6 rounded-2xl glass-card border border-border/40">
+              <span className="text-3xl sm:text-4xl font-extrabold text-[#d4a359] block mb-1">
+                13
+              </span>
+              <span className="text-xs font-bold text-on-surface block">Subsidiary Ventures</span>
+              <span className="text-[11px] text-on-surface-variant">$50M+ Valuation Base</span>
+            </div>
           </div>
         </div>
       </section>

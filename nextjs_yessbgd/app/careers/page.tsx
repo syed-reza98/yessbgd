@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CareersDirectory } from "@/components/CareersDirectory";
+import { ServiceFaqDrawer } from "@/components/ServiceFaqDrawer";
 import {
   Users,
   Award,
@@ -443,31 +444,11 @@ export default function CareersPage() {
 
       {/* Hiring FAQs Accordion */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <span className="text-xs text-[#0d6e6e] font-bold uppercase tracking-wider block mb-2">
-            Clear Answers
-          </span>
-          <h2 className="text-2xl font-bold text-brand-navy dark:text-white">Frequently Asked Hiring Questions</h2>
-        </div>
-
-        <div className="space-y-3">
-          {hiringFaqs.map((faq) => (
-            <details
-              key={faq.q}
-              className="glass-card rounded-xl p-5 group open:border-[#0d6e6e]/50 cursor-pointer"
-            >
-              <summary className="font-bold text-xs sm:text-sm text-brand-navy dark:text-white flex items-center justify-between list-none">
-                <span>{faq.q}</span>
-                <span className="text-[#0d6e6e] text-lg font-mono group-open:rotate-45 transition-transform">
-                  +
-                </span>
-              </summary>
-              <p className="text-xs text-on-surface-variant leading-relaxed mt-3 pt-3 border-t border-outline-variant/20">
-                {faq.a}
-              </p>
-            </details>
-          ))}
-        </div>
+        <ServiceFaqDrawer
+          faqs={hiringFaqs}
+          title="Frequently Asked Hiring Questions"
+          subtitle="Answers to common candidate queries regarding visas, probationary timelines, equity vesting, and technology stack standards."
+        />
       </section>
     </div>
   );

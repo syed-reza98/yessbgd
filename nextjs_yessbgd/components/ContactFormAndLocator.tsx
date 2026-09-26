@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Building,
+  Building2,
   MapPin,
   Phone,
   Mail,
@@ -14,6 +15,14 @@ import {
   ExternalLink,
   Shield,
   Lock,
+  ArrowRight,
+  Check,
+  Radio,
+  FileCheck,
+  MessageSquare,
+  BadgeAlert,
+  Sparkles,
+  Car,
 } from "lucide-react";
 
 export function ContactFormAndLocator() {
@@ -21,7 +30,8 @@ export function ContactFormAndLocator() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState("Sovereign Enterprise Architecture");
+  const [organization, setOrganization] = useState("");
+  const [practiceArea, setPracticeArea] = useState("Venture Co-Building & Equity Structuring");
   const [message, setMessage] = useState("");
   const [requestNda, setRequestNda] = useState(true);
 
@@ -34,7 +44,7 @@ export function ContactFormAndLocator() {
     setError(null);
 
     if (!fullName.trim() || !email.trim() || !message.trim()) {
-      setError("Please fill in your name, email address, and inquiry message.");
+      setError("Please fill in your name, corporate email address, and project requirements.");
       return;
     }
 
@@ -46,283 +56,469 @@ export function ContactFormAndLocator() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      {/* Left Column: Enterprise Inquiry Portal (7 cols) */}
-      <div className="lg:col-span-7 glass-card rounded-3xl p-7 sm:p-9 shadow-lg border border-outline-variant/40 space-y-6">
-        <div className="border-b border-outline-variant/30 pb-4">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#0d6e6e] block">
-            Direct Institutional Inquiries
-          </span>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-brand-navy dark:text-white mt-1">
-            Initiate Sovereign Discussion
-          </h2>
-          <p className="text-xs text-on-surface-variant mt-1">
-            Connect directly with our partners and engineering directors. Executive response guaranteed within 1 business day.
-          </p>
-        </div>
-
-        {submitted ? (
-          <div className="py-12 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      {/* LEFT COLUMN: Enterprise Inquiry Portal (7 cols) */}
+      <div className="lg:col-span-7 flex flex-col justify-between p-7 sm:p-9 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/40 shadow-sm space-y-6">
+        <div>
+          {/* Form Header with Verified Badge */}
+          <div className="flex items-center justify-between pb-6 border-b border-outline-variant/30 mb-6">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#005454] dark:text-white tracking-tight">
+                Submit Institutional Inquiry
+              </h2>
+              <p className="text-xs sm:text-sm text-on-surface-variant mt-1">
+                Direct encrypted intake reviewed by Venture Principals and Solutions Architects.
+              </p>
             </div>
-            <h3 className="text-lg font-bold text-brand-navy dark:text-white">
-              Inquiry Dispatched to Executive Desk
-            </h3>
-            <p className="text-xs text-on-surface-variant max-w-sm mx-auto leading-relaxed">
-              Thank you, <strong>{fullName}</strong>. Your message regarding &ldquo;{subject}&rdquo; has been logged.
-              {requestNda && " A standard bilateral NDA will be counter-signed prior to our introductory call."}
-            </p>
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                setMessage("");
-              }}
-              className="mt-4 px-5 py-2 rounded-xl bg-surface-container text-xs font-semibold hover:bg-surface-container-high transition-colors"
-            >
-              Send Another Inquiry
-            </button>
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-white/5 text-[#005454] dark:text-[#84d4d3] border border-[#005454]/20 text-xs font-semibold">
+              <Shield className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+              <span>Fiduciary Pledge</span>
+            </div>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-            {error && (
-              <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="font-semibold text-on-surface block mb-1.5">Full Name *</label>
-                <input
-                  type="text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. Arif Rahman"
-                  className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-[#0d6e6e]"
-                />
+          {submitted ? (
+            <div className="py-12 text-center space-y-4">
+              <div className="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-8 h-8" />
               </div>
-
-              <div>
-                <label className="font-semibold text-on-surface block mb-1.5">Corporate Email *</label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@enterprise.com.bd"
-                  className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-[#0d6e6e]"
-                />
-              </div>
+              <h3 className="text-lg font-bold text-brand-navy dark:text-white">
+                Inquiry Dispatched to Executive Desk
+              </h3>
+              <p className="text-xs text-on-surface-variant max-w-sm mx-auto leading-relaxed">
+                Thank you, <strong>{fullName}</strong>. Your message regarding &ldquo;{practiceArea}&rdquo; has been logged.
+                {requestNda && " A standard bilateral NDA will be counter-signed prior to our introductory call."}
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setMessage("");
+                }}
+                className="mt-4 px-5 py-2.5 rounded-xl bg-surface-container text-xs font-semibold hover:bg-surface-container-high transition-colors"
+              >
+                Send Another Inquiry
+              </button>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              {error && (
+                <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{error}</span>
+                </div>
+              )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="font-semibold text-on-surface block mb-1.5">Mobile / Direct PABX</label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+880 1XXXXXXXXX"
-                  className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-[#0d6e6e]"
-                />
+              {/* Name & Email Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="e.g. Engr. Tanvir Ahmed Chowdhury"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                    Corporate Email (.com / .bd) *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="e.g. tanvir@conglomerate.com.bd"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                  />
+                </div>
               </div>
 
+              {/* Phone & Organization Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                    Phone / WhatsApp Number *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="e.g. +880 1711-000000"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                    Enterprise / Organization *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
+                    placeholder="e.g. Apex Group / Ministry of ICT"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Inquiry Type Dropdown */}
               <div>
-                <label className="font-semibold text-on-surface block mb-1.5">Subject / Focus Area</label>
+                <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                  Inquiry Type / Practice Area *
+                </label>
                 <select
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant rounded-xl px-3.5 py-2.5 text-xs text-on-surface-variant focus:outline-none focus:border-[#0d6e6e]"
+                  value={practiceArea}
+                  onChange={(e) => setPracticeArea(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface focus:outline-none focus:border-[#0d6e6e] transition-all"
                 >
-                  <option>Sovereign Enterprise Architecture</option>
-                  <option>Venture Co-Investment & SPV</option>
-                  <option>Dedicated Pod Engineering</option>
-                  <option>Akash OTT Media Telco Licensing</option>
-                  <option>Agritech & Supply Chain Modernization</option>
-                  <option>CyberKilla SecOps Audit</option>
+                  <option value="Venture Co-Building & Equity Structuring">Venture Co-Building & Equity Structuring</option>
+                  <option value="Enterprise Cloud & Sovereign Software Architectures">Enterprise Cloud & Sovereign Software Architectures</option>
+                  <option value="Agritech & National Cold-Chain Logistics (Organic Haat)">Agritech & National Cold-Chain Logistics (Organic Haat)</option>
+                  <option value="FinTech & Alternative Capital Structuring">FinTech & Alternative Capital Structuring</option>
+                  <option value="GovTech & Public Digital Infrastructure (DPI)">GovTech & Public Digital Infrastructure (DPI)</option>
+                  <option value="Institutional Careers & Executive Fellowships">Institutional Careers & Executive Fellowships</option>
+                  <option value="Media, Press & Regulatory Disclosures">Media, Press & Regulatory Disclosures</option>
                 </select>
               </div>
-            </div>
 
-            <div>
-              <label className="font-semibold text-on-surface block mb-1.5">Inquiry Details *</label>
-              <textarea
-                rows={4}
-                required
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Outline your strategic objectives, scale, and anticipated delivery milestones..."
-                className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant rounded-xl p-3 text-xs focus:outline-none focus:border-[#0d6e6e]"
-              />
-            </div>
+              {/* Project Scope Textarea */}
+              <div>
+                <label className="block text-xs font-semibold text-on-surface mb-1.5">
+                  Project Scope & Architectural Requirements
+                </label>
+                <textarea
+                  rows={4}
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Detail your enterprise requirements, anticipated capital expenditure tier, strategic timeline, or security clearance specifications..."
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                />
+              </div>
 
-            <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
-              <input
-                type="checkbox"
-                id="nda-checkbox"
-                checked={requestNda}
-                onChange={(e) => setRequestNda(e.target.checked)}
-                className="mt-0.5 rounded border-outline text-[#0d6e6e] focus:ring-[#0d6e6e] w-4 h-4"
-              />
-              <label htmlFor="nda-checkbox" className="text-xs text-on-surface-variant cursor-pointer">
-                <strong>Request Bilateral Non-Disclosure Agreement (NDA)</strong> execution prior to sharing
-                technical requirements.
-              </label>
-            </div>
+              {/* NDA Checkbox Toggle */}
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-low dark:bg-white/5 border border-outline-variant/60">
+                <input
+                  type="checkbox"
+                  id="ndaConsent"
+                  checked={requestNda}
+                  onChange={(e) => setRequestNda(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-outline-variant text-[#005454] focus:ring-[#0d6e6e]"
+                />
+                <label htmlFor="ndaConsent" className="text-xs text-on-surface cursor-pointer select-none">
+                  <span className="font-semibold text-[#005454] dark:text-[#84d4d3] inline-flex items-center gap-1">
+                    <Shield className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+                    Mandate Mutual Non-Disclosure Agreement (NDA)
+                  </span>
+                  <span className="block text-on-surface-variant text-[11px] mt-0.5">
+                    Require bilateral confidentiality documentation prior to technical architecture exchange.
+                  </span>
+                </label>
+              </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#0d6e6e] hover:bg-[#005454] disabled:opacity-50 text-white font-semibold py-3.5 rounded-xl shadow-md shadow-[#0d6e6e]/20 transition-all active:scale-98"
+              {/* Submit CTA */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#005454] hover:bg-[#0d6e6e] disabled:opacity-50 text-white px-7 py-3 rounded-xl text-xs font-bold shadow-md shadow-[#005454]/20 transition-all active:scale-95"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Submitting Inquiry...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Submit Enterprise Inquiry</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+                <span className="text-on-surface-variant text-xs flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-[#d4a359]" />
+                  <span>1-Business-Day Contract SLA Guarantee</span>
+                </span>
+              </div>
+            </form>
+          )}
+        </div>
+
+        {/* Instant Direct Desk Quick-Chips */}
+        <div className="mt-8 pt-6 border-t border-outline-variant/30">
+          <p className="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">
+            Direct Executive Desks
+          </p>
+          <div className="flex flex-wrap gap-2.5 text-xs">
+            <a
+              href="https://wa.me/8801805464343"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container dark:bg-white/5 hover:bg-surface-container-high text-on-surface transition-colors font-medium"
             >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Submitting Inquiry...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="w-4 h-4" />
-                  <span>Transmit Enterprise Inquiry</span>
-                </>
-              )}
-            </button>
-          </form>
-        )}
+              <MessageSquare className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+              <span>WhatsApp: +880 1805-464343 (&lt; 2h BST)</span>
+            </a>
+            <a
+              href="mailto:invest@yessbgd.com"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container dark:bg-white/5 hover:bg-surface-container-high text-on-surface transition-colors font-medium"
+            >
+              <Building2 className="w-3.5 h-3.5 text-[#7e5713] dark:text-[#f2be71]" />
+              <span>invest@yessbgd.com</span>
+            </a>
+            <a
+              href="mailto:careers@yessbgd.com"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container dark:bg-white/5 hover:bg-surface-container-high text-on-surface transition-colors font-medium"
+            >
+              <FileCheck className="w-3.5 h-3.5 text-[#0d6e6e] dark:text-[#35b0aa]" />
+              <span>careers@yessbgd.com</span>
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Right Column: Dual-Office Locator (5 cols) */}
-      <div className="lg:col-span-5 space-y-6">
-        {/* Office Tab Switcher */}
-        <div className="glass-card rounded-2xl p-2 flex items-center gap-2 border border-outline-variant/40">
+      {/* RIGHT COLUMN: Dual-Office Locator & Interactive Map View (5 cols) */}
+      <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+        {/* Office Location Switcher Tabs */}
+        <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-2 rounded-2xl border border-outline-variant/40 flex gap-2">
           <button
             onClick={() => setActiveTab("motijheel")}
-            className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all ${
+            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all flex items-center justify-center gap-2 ${
               activeTab === "motijheel"
-                ? "bg-[#0d6e6e] text-white shadow-md shadow-[#0d6e6e]/20"
-                : "text-on-surface-variant hover:text-on-surface"
+                ? "bg-[#005454] text-white shadow-sm"
+                : "text-on-surface-variant hover:bg-surface-container"
             }`}
+            type="button"
           >
-            Motijheel HQ (Executive)
+            <Building className="w-4 h-4" />
+            <span>Motijheel HQ (Executive)</span>
           </button>
-
           <button
             onClick={() => setActiveTab("gulshan")}
-            className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all ${
+            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all flex items-center justify-center gap-2 ${
               activeTab === "gulshan"
-                ? "bg-[#0d6e6e] text-white shadow-md shadow-[#0d6e6e]/20"
-                : "text-on-surface-variant hover:text-on-surface"
+                ? "bg-[#005454] text-white shadow-sm"
+                : "text-on-surface-variant hover:bg-surface-container"
             }`}
+            type="button"
           >
-            Gulshan-2 (R&D Lab)
+            <Sparkles className="w-4 h-4" />
+            <span>Gulshan-2 Lab (R&D)</span>
           </button>
         </div>
 
-        {/* Office Details Card */}
-        {activeTab === "motijheel" ? (
-          <div className="glass-card rounded-3xl p-7 shadow-lg border border-outline-variant/40 space-y-6">
-            <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4a359]">
-                Institutional Headquarters
+        {/* Branded Custom Map Graphic Card */}
+        <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 shadow-sm bg-[#061a1b] min-h-[300px] flex flex-col justify-between p-5 text-white">
+          {/* Map Top Overlay: Coordinates & Live Radar */}
+          <div className="flex items-center justify-between z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#061a1b]/90 backdrop-blur-md border border-[#35b0aa]/40 text-[11px] font-mono text-[#35b0aa]">
+              <span className="w-2 h-2 rounded-full bg-[#35b0aa] animate-ping" />
+              <span>
+                {activeTab === "motijheel" ? "23.7289° N, 90.4184° E" : "23.7925° N, 90.4078° E"}
               </span>
-              <h3 className="text-lg font-extrabold text-brand-navy dark:text-white">
-                Motijheel Executive Center
-              </h3>
-              <p className="text-xs text-on-surface-variant">
-                Sonali Tower, Level 9, Motijheel Commercial Area, Dhaka-1000, Bangladesh
+            </div>
+            <a
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs font-semibold transition-colors"
+              href={
+                activeTab === "motijheel"
+                  ? "https://maps.google.com/?q=City+Center+Tower+Motijheel+Dhaka"
+                  : "https://maps.google.com/?q=Road+11+Gulshan-2+Dhaka"
+              }
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span>Google Maps</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Stylized Schematic SVG Vector for Dhaka Riverine & Road Grids */}
+          <div className="absolute inset-0 opacity-35 pointer-events-none flex items-center justify-center">
+            <svg
+              className="w-full h-full object-cover"
+              fill="none"
+              viewBox="0 0 600 350"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Buriganga / Gulshan Lake Contour */}
+              {activeTab === "motijheel" ? (
+                <path
+                  d="M-10,320 C140,300 240,240 310,210 C380,180 470,220 620,190"
+                  stroke="#35b0aa"
+                  strokeLinecap="round"
+                  strokeWidth="12"
+                />
+              ) : (
+                <path
+                  d="M100,-10 C160,80 230,160 300,200 C370,240 440,310 520,360"
+                  stroke="#35b0aa"
+                  strokeLinecap="round"
+                  strokeWidth="12"
+                />
+              )}
+              {/* Secondary Canal */}
+              <path
+                d="M120,-10 C150,90 280,130 330,220"
+                stroke="#0d6e6e"
+                strokeDasharray="4 4"
+                strokeWidth="5"
+              />
+              {/* Dhaka Arterial Roads */}
+              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="0" x2="600" y1="120" y2="120" />
+              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="0" x2="600" y1="220" y2="220" />
+              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="180" x2="180" y1="0" y2="350" />
+              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="420" x2="420" y1="0" y2="350" />
+              {/* Radar Ripple around active node */}
+              <circle
+                cx={activeTab === "motijheel" ? "310" : "300"}
+                cy={activeTab === "motijheel" ? "180" : "190"}
+                r="45"
+                stroke="#d4a359"
+                strokeDasharray="2 3"
+                strokeOpacity="0.5"
+                strokeWidth="1"
+              />
+              <circle
+                cx={activeTab === "motijheel" ? "310" : "300"}
+                cy={activeTab === "motijheel" ? "180" : "190"}
+                r="85"
+                stroke="#35b0aa"
+                strokeOpacity="0.3"
+                strokeWidth="1"
+              />
+            </svg>
+          </div>
+
+          {/* Center Pin Indicator */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
+            <div className="w-11 h-11 rounded-full bg-[#005454] flex items-center justify-center shadow-lg border-2 border-[#35b0aa]">
+              {activeTab === "motijheel" ? (
+                <Building className="w-5 h-5 text-white" />
+              ) : (
+                <Sparkles className="w-5 h-5 text-[#f6c87a]" />
+              )}
+            </div>
+            <span className="mt-1 px-2.5 py-0.5 rounded bg-[#061a1b]/95 border border-white/20 text-[10px] font-bold text-[#f6c87a] uppercase tracking-wider">
+              {activeTab === "motijheel" ? "HQ Motijheel" : "Gulshan-2 Lab"}
+            </span>
+          </div>
+
+          {/* Map Bottom Card Overlay */}
+          <div className="relative z-10 p-3.5 rounded-xl bg-[#061a1b]/90 backdrop-blur-md border border-white/10 flex items-center justify-between">
+            <div>
+              <p className="text-xs sm:text-sm font-bold text-white">
+                {activeTab === "motijheel"
+                  ? "City Center Tower, Level 19"
+                  : "House 42, Road 11, Gulshan-2"}
+              </p>
+              <p className="text-[11px] text-outline-variant">
+                {activeTab === "motijheel"
+                  ? "Motijheel Commercial Area, Dhaka-1000"
+                  : "Gulshan Innovation Zone, Dhaka-1212"}
               </p>
             </div>
-
-            <div className="space-y-3 text-xs text-on-surface-variant pt-2 border-t border-outline-variant/30">
-              <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-[#0d6e6e] shrink-0" />
-                <span>+880 1805-464343 (Board Sec Ext: 101 / 102)</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-[#0d6e6e] shrink-0" />
-                <span>executive@yessbgd.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-[#0d6e6e] shrink-0" />
-                <span>Sunday – Thursday: 09:00 – 18:00 BST</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Shield className="w-4 h-4 text-[#d4a359] shrink-0" />
-                <span>RJSC Statutory Registration: C-184920</span>
-              </div>
-            </div>
-
-            {/* Map Link / Coordinate Visual */}
-            <div className="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 space-y-2">
-              <div className="flex items-center justify-between text-[11px] font-mono text-outline">
-                <span>GPS: 23.7330° N, 90.4172° E</span>
-                <span className="text-[#0d6e6e] font-semibold">Financial Hub</span>
-              </div>
-              <a
-                href="https://maps.google.com/?q=Motijheel+Dhaka"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-2 rounded-xl bg-white dark:bg-[#061a1b] border border-outline-variant text-xs font-semibold text-[#0d6e6e] hover:border-[#0d6e6e] transition-colors"
-              >
-                <span>Open in Google Maps</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        ) : (
-          <div className="glass-card rounded-3xl p-7 shadow-lg border border-outline-variant/40 space-y-6">
-            <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#35b0aa]">
-                Innovation & Engineering Wing
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0d6e6e] text-[#9dedec] text-[11px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#35b0aa] animate-pulse" />
+              <span>
+                {activeTab === "motijheel"
+                  ? "Open • BST 09:00 - 18:00"
+                  : "Open • BST 10:00 - 20:00"}
               </span>
-              <h3 className="text-lg font-extrabold text-brand-navy dark:text-white">
-                Gulshan-2 Innovation Labs
-              </h3>
-              <p className="text-xs text-on-surface-variant">
-                Road 45, Gulshan-2, Dhaka-1212, Bangladesh
-              </p>
+            </span>
+          </div>
+        </div>
+
+        {/* Detailed Hub Specifications Card (Below Map) */}
+        <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/40 shadow-sm space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base sm:text-lg font-bold text-[#005454] dark:text-white">
+              {activeTab === "motijheel"
+                ? "Headquarters Specifications"
+                : "Innovation Wing Specifications"}
+            </h3>
+            <span className="text-xs font-bold text-[#7e5713] dark:text-[#f2be71] uppercase tracking-wider">
+              {activeTab === "motijheel" ? "SUITE 804 & 1901" : "LAB TIER-3 EDGE CLUSTER"}
+            </span>
+          </div>
+
+          <div className="space-y-3 text-xs text-on-surface-variant">
+            <div className="flex items-start gap-3">
+              <MapPin className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-on-surface block font-semibold">Physical Dispatch & Concierge</strong>
+                <span>
+                  {activeTab === "motijheel"
+                    ? "Level 19, City Center Tower, 57 Purana Paltan / Motijheel C/A, Dhaka-1000, Bangladesh"
+                    : "House 42, Road 11, Block E, Gulshan-2, Dhaka-1212, Bangladesh"}
+                </span>
+              </div>
             </div>
 
-            <div className="space-y-3 text-xs text-on-surface-variant pt-2 border-t border-outline-variant/30">
-              <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-[#0d6e6e] shrink-0" />
-                <span>+880 1805-464343 (Direct Lab Ext: 401)</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-[#0d6e6e] shrink-0" />
-                <span>labs@yessbgd.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-[#0d6e6e] shrink-0" />
-                <span>Sunday – Friday: 10:00 – 20:00 BST</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Building className="w-4 h-4 text-[#35b0aa] shrink-0" />
-                <span>Tier-3 Edge Dev Cluster & Hardware Lab</span>
+            <div className="flex items-start gap-3">
+              <Clock className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-on-surface block font-semibold">Statutory Visiting Hours</strong>
+                <span>
+                  {activeTab === "motijheel"
+                    ? "Sunday – Thursday: 9:00 AM – 6:00 PM BST (Closed on National Holidays & Fri/Sat)"
+                    : "Sunday – Friday: 10:00 AM – 8:00 PM BST (Extended Edge Operations)"}
+                </span>
               </div>
             </div>
 
-            {/* Map Link / Coordinate Visual */}
-            <div className="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 space-y-2">
-              <div className="flex items-center justify-between text-[11px] font-mono text-outline">
-                <span>GPS: 23.7925° N, 90.4078° E</span>
-                <span className="text-[#35b0aa] font-semibold">Innovation Zone</span>
+            <div className="flex items-start gap-3">
+              <Phone className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-on-surface block font-semibold">Direct Telephony Lines</strong>
+                <span>
+                  {activeTab === "motijheel"
+                    ? "Board Desk: +880 1805-464343 | PABX Trunk: +880 2 9568000 (Ext. 102)"
+                    : "Innovation Desk: +880 1805-464343 | Dev Ops Trunk: +880 2 9884000 (Ext. 401)"}
+                </span>
               </div>
-              <a
-                href="https://maps.google.com/?q=Gulshan+2+Dhaka"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-2 rounded-xl bg-white dark:bg-[#061a1b] border border-outline-variant text-xs font-semibold text-[#0d6e6e] hover:border-[#0d6e6e] transition-colors"
-              >
-                <span>Open in Google Maps</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <Car className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-on-surface block font-semibold">Security Clearance & Parking</strong>
+                <span>
+                  {activeTab === "motijheel"
+                    ? "Government NID or Passport badge registration mandatory at Ground Concierge. Reserved executive parking at Level B2."
+                    : "Biometric badge or visitor clearance mandatory at reception. Secure underground parking on Road 11."}
+                </span>
+              </div>
             </div>
           </div>
-        )}
+
+          {/* Fast Switcher preview to toggle */}
+          <div className="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs text-on-surface">
+              <Building className="w-4 h-4 text-[#7e5713] dark:text-[#f2be71]" />
+              <span>
+                {activeTab === "motijheel" ? (
+                  <>Secondary Lab: <strong>Road 11, Gulshan-2, Dhaka</strong></>
+                ) : (
+                  <>Executive HQ: <strong>City Center Tower, Motijheel</strong></>
+                )}
+              </span>
+            </div>
+            <button
+              onClick={() => setActiveTab(activeTab === "motijheel" ? "gulshan" : "motijheel")}
+              className="text-[#005454] dark:text-[#84d4d3] hover:underline text-xs inline-flex items-center gap-1 font-semibold"
+              type="button"
+            >
+              <span>{activeTab === "motijheel" ? "View Lab Specs" : "View HQ Specs"}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

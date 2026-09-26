@@ -8,34 +8,25 @@ import {
   MapPin,
   Clock,
   ArrowRight,
-  Sparkles,
-  Users,
-  GraduationCap,
-  Heart,
   Search,
-  CheckCircle2,
   Bookmark,
-  Shield,
-  Layers,
-  ChevronRight,
-  TrendingUp,
-  Award,
-  Zap,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 
 const salaryBands: Record<string, string> = {
-  "senior-full-stack-engineer": "৳180k - ৳260k / mo + Equity",
-  "product-designer": "৳130k - ৳180k / mo",
-  "business-analyst": "৳110k - ৳160k / mo",
-  "digital-marketing-specialist": "৳90k - ৳140k / mo",
-  "customer-success-executive": "৳70k - ৳110k / mo",
-  "operations-manager": "৳150k - ৳220k / mo",
-  "qa-engineer": "৳100k - ৳150k / mo",
-  "devops-engineer": "৳170k - ৳250k / mo + Equity",
-  "content-writer": "৳65k - ৳95k / mo",
-  "sales-executive": "৳80k - ৳130k / mo + Commission",
-  "software-engineering-intern": "৳30k - ৳45k / mo (Paid)",
-  "brand-promoter": "৳40k - ৳60k / mo (Flexible)",
+  "senior-full-stack-engineer": "৳280k - ৳380k / mo + Equity",
+  "product-designer": "৳160k - ৳220k / mo",
+  "business-analyst": "৳130k - ৳180k / mo",
+  "digital-marketing-specialist": "৳100k - ৳150k / mo",
+  "customer-success-executive": "৳75k - ৳120k / mo",
+  "operations-manager": "৳180k - ৳250k / mo",
+  "qa-engineer": "৳110k - ৳160k / mo",
+  "devops-engineer": "৳260k - ৳350k / mo + Equity",
+  "content-writer": "৳70k - ৳105k / mo",
+  "sales-executive": "৳90k - ৳140k / mo + Commission",
+  "software-engineering-intern": "৳35k - ৳50k / mo (Paid)",
+  "brand-promoter": "৳45k - ৳70k / mo (Flexible)",
 };
 
 const subsidiaryMap: Record<string, string> = {
@@ -53,194 +44,229 @@ const subsidiaryMap: Record<string, string> = {
   "brand-promoter": "YESS Field Ops",
 };
 
-const departments = ["All Roles", "Engineering", "Design", "Consulting", "Marketing", "Operations"];
+const departments = [
+  "All Roles (12)",
+  "Software Engineering (5)",
+  "Agritech & Logistics (2)",
+  "Product & UX (2)",
+  "Data & AI (2)",
+  "Corporate Governance (1)",
+];
 
 export function CareersDirectory() {
-  const [selectedDept, setSelectedDept] = useState("All Roles");
+  const [selectedDept, setSelectedDept] = useState("All Roles (12)");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All");
   const [selectedLocation, setSelectedLocation] = useState("All");
+  const [selectedSubsidiary, setSelectedSubsidiary] = useState("All");
+  const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
+
+  const toggleBookmark = (slug: string) => {
+    setBookmarked((prev) => ({ ...prev, [slug]: !prev[slug] }));
+  };
 
   const filteredOpenings = useMemo(() => {
     return openings.filter((item) => {
-      const matchDept =
-        selectedDept === "All Roles" || item.dept.toLowerCase() === selectedDept.toLowerCase();
+      let matchDept = true;
+      if (selectedDept.startsWith("Software")) {
+        matchDept = item.dept.toLowerCase().includes("engineer") || item.title.toLowerCase().includes("engineer");
+      } else if (selectedDept.startsWith("Agritech")) {
+        matchDept = item.dept.toLowerCase().includes("operations") || item.title.toLowerCase().includes("operations") || item.title.toLowerCase().includes("brand");
+      } else if (selectedDept.startsWith("Product")) {
+        matchDept = item.dept.toLowerCase().includes("design") || item.title.toLowerCase().includes("designer");
+      } else if (selectedDept.startsWith("Data")) {
+        matchDept = item.dept.toLowerCase().includes("qa") || item.title.toLowerCase().includes("devops") || item.title.toLowerCase().includes("analyst");
+      } else if (selectedDept.startsWith("Corporate")) {
+        matchDept = item.dept.toLowerCase().includes("marketing") || item.dept.toLowerCase().includes("sales");
+      }
+
       const matchLevel = selectedLevel === "All" || item.level === selectedLevel;
       const matchLocation =
         selectedLocation === "All" ||
         item.location.toLowerCase().includes(selectedLocation.toLowerCase());
+      const sub = subsidiaryMap[item.slug] || "";
+      const matchSub =
+        selectedSubsidiary === "All" ||
+        sub.toLowerCase().includes(selectedSubsidiary.toLowerCase());
+
+      const q = searchQuery.toLowerCase();
       const matchSearch =
         searchQuery === "" ||
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (subsidiaryMap[item.slug] &&
-          subsidiaryMap[item.slug].toLowerCase().includes(searchQuery.toLowerCase()));
+        item.title.toLowerCase().includes(q) ||
+        item.summary.toLowerCase().includes(q) ||
+        sub.toLowerCase().includes(q);
 
-      return matchDept && matchLevel && matchLocation && matchSearch;
+      return matchDept && matchLevel && matchLocation && matchSub && matchSearch;
     });
-  }, [selectedDept, searchQuery, selectedLevel, selectedLocation]);
+  }, [selectedDept, searchQuery, selectedLevel, selectedLocation, selectedSubsidiary]);
 
   return (
     <div className="space-y-8" id="open-roles">
-      {/* Filters Toolbar */}
-      <div className="glass-card rounded-2xl p-6 space-y-4">
-        {/* Department Pills */}
+      {/* Department Tabs & Search Filter Header */}
+      <div className="glass-card rounded-2xl p-6 space-y-4 border border-border shadow-sm">
+        {/* Department Pill Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {departments.map((dept) => {
-            const count =
-              dept === "All Roles"
-                ? openings.length
-                : openings.filter((o) => o.dept.toLowerCase() === dept.toLowerCase()).length;
             const active = selectedDept === dept;
             return (
               <button
                 key={dept}
                 onClick={() => setSelectedDept(dept)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
+                className={`font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl whitespace-nowrap transition-all cursor-pointer ${
                   active
-                    ? "bg-[#0d6e6e] text-white shadow-md shadow-[#0d6e6e]/20"
-                    : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+                    ? "bg-primary text-white shadow-sm"
+                    : "bg-muted text-foreground/70 hover:text-foreground hover:bg-muted/80"
                 }`}
               >
-                {dept} ({count})
+                {dept}
               </button>
             );
           })}
         </div>
 
-        {/* Search & Select Grid */}
+        {/* Secondary Search and Dropdown Controls */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 pt-2">
           <div className="md:col-span-6 relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline w-5 h-5" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/40 w-4 h-4" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by role title, tech stack, or subsidiary..."
-              className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#0d6e6e] focus:ring-1 focus:ring-[#0d6e6e]"
+              placeholder="Search by role, tech stack, or subsidiary..."
+              className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <select
               value={selectedLevel}
               onChange={(e) => setSelectedLevel(e.target.value)}
-              className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl px-3 py-2.5 text-sm text-on-surface-variant focus:outline-none focus:border-[#0d6e6e]"
+              className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
             >
               <option value="All">Experience: All Tiers</option>
-              <option value="Internship">Internship</option>
-              <option value="Entry">Entry Level</option>
-              <option value="Mid">Mid-Level</option>
-              <option value="Senior">Senior Level</option>
-              <option value="Lead">Lead / Principal</option>
+              <option value="Mid">Mid-Level (3-5 yrs)</option>
+              <option value="Senior">Senior (5-7 yrs)</option>
+              <option value="Lead">Staff / Principal (7+ yrs)</option>
             </select>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <select
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl px-3 py-2.5 text-sm text-on-surface-variant focus:outline-none focus:border-[#0d6e6e]"
+              className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
             >
-              <option value="All">Location: All Hubs</option>
-              <option value="Dhaka">Dhaka (Gulshan & Motijheel)</option>
-              <option value="Remote">Hybrid / Remote Friendly</option>
-              <option value="Field">Field Operations</option>
+              <option value="All">Location: Dhaka Hubs</option>
+              <option value="Dhaka">Gulshan Innovation Wing</option>
+              <option value="Motijheel">Motijheel Executive Center</option>
+              <option value="Hybrid">Hybrid / Autonomous</option>
+            </select>
+          </div>
+
+          <div className="md:col-span-2">
+            <select
+              value={selectedSubsidiary}
+              onChange={(e) => setSelectedSubsidiary(e.target.value)}
+              className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
+            >
+              <option value="All">Subsidiary: All Ventures</option>
+              <option value="Yess Soft">Yess Soft Ltd.</option>
+              <option value="Akash">Akash OTT Media</option>
+              <option value="Organic">YESS Organic Haat</option>
+              <option value="CyberKilla">CyberKilla</option>
+              <option value="FinCorp">Yess FinCorp Solutions</option>
             </select>
           </div>
         </div>
       </div>
 
       {/* Results Count & Status */}
-      <div className="flex items-center justify-between text-xs text-on-surface-variant px-1 font-medium">
+      <div className="flex items-center justify-between text-xs text-foreground/70 px-1 font-medium">
         <span>
           Showing <strong>{filteredOpenings.length}</strong> active requisitions across venture subsidiaries
         </span>
-        <span className="text-[#0d6e6e] font-semibold">Updated weekly • Direct architect review</span>
+        <span className="text-primary font-semibold">Updated weekly • Direct architect review</span>
       </div>
 
-      {/* Openings Grid */}
-      {filteredOpenings.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center">
-          <Briefcase className="w-12 h-12 text-outline mx-auto mb-3 opacity-60" />
-          <h3 className="font-bold text-lg text-brand-navy dark:text-white">No positions match your criteria</h3>
-          <p className="text-sm text-on-surface-variant mt-1 max-w-md mx-auto">
-            Try resetting your search query or department filters to see other open roles.
-          </p>
-          <button
-            onClick={() => {
-              setSelectedDept("All Roles");
-              setSearchQuery("");
-              setSelectedLevel("All");
-              setSelectedLocation("All");
-            }}
-            className="mt-4 px-5 py-2 rounded-xl bg-[#0d6e6e] text-white text-xs font-semibold hover:bg-[#005454] transition-colors"
-          >
-            Reset All Filters
-          </button>
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {filteredOpenings.map((job) => {
-            const salary = salaryBands[job.slug] || "Competitive Market Band";
-            const subsidiary = subsidiaryMap[job.slug] || "YESS Bangladesh Ecosystem";
+      {/* Job Cards Stream (Stitch Style with Dark Navy + Gold Salary Badge) */}
+      <div className="space-y-4">
+        {filteredOpenings.map((job) => {
+          const salary = salaryBands[job.slug] || "৳180k - ৳260k / mo + Equity";
+          const subsidiary = subsidiaryMap[job.slug] || "Yess Soft Ltd.";
+          const isBookmarked = !!bookmarked[job.slug];
 
-            return (
-              <div
-                key={job.slug}
-                className="glass-card rounded-2xl p-6 hover:border-[#0d6e6e] hover:shadow-lg transition-all duration-200 group"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-                  <div className="space-y-2.5 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#0d6e6e]/10 text-[#0d6e6e] border border-[#0d6e6e]/20">
-                        {subsidiary}
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant">
-                        {job.dept}
-                      </span>
-                      <span className="text-xs font-bold text-[#d4a359] bg-[#061a1b] dark:bg-black px-2.5 py-0.5 rounded-md">
-                        {salary}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display text-xl font-bold text-brand-navy dark:text-white group-hover:text-[#0d6e6e] transition-colors">
-                      {job.title}
-                    </h3>
-
-                    <p className="text-sm text-on-surface-variant line-clamp-2">{job.summary}</p>
-
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-outline pt-1">
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#0d6e6e]" /> {job.location}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5" /> {job.type}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Layers className="w-3.5 h-3.5" /> {job.level} Tier
-                      </span>
-                      <span className="flex items-center gap-1.5 text-emerald-600 font-semibold">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> 48h Response SLA
-                      </span>
-                    </div>
+          return (
+            <div
+              key={job.slug}
+              className="glass-card rounded-2xl p-6 sm:p-7 border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-200"
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                <div className="space-y-2.5 max-w-3xl">
+                  {/* Pills Row */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                      {subsidiary}
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-muted text-foreground/80 border border-border/50">
+                      {job.dept}
+                    </span>
+                    <span className="text-xs font-bold text-amber-300 bg-[#061a1b] px-3 py-1 rounded-full border border-amber-400/30">
+                      {salary}
+                    </span>
                   </div>
 
-                  <div className="flex items-center gap-3 self-end lg:self-center shrink-0">
-                    <Link
-                      href={`/careers/${job.slug}`}
-                      className="inline-flex items-center gap-2 bg-[#0d6e6e] hover:bg-[#005454] text-white text-sm font-semibold px-6 py-3 rounded-xl shadow-md shadow-[#0d6e6e]/20 transition-all active:scale-95 group/btn"
-                    >
-                      <span>Apply Now</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
-                    </Link>
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-foreground">
+                    {job.title}
+                  </h3>
+
+                  {/* Metadata Row */}
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-foreground/60">
+                    <span className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-primary" />
+                      <span>{job.location}</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-foreground/50" />
+                      <span>Full-Time</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5 text-amber-500" />
+                      <span>{job.level} Tier</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      <span>Zero-Trust Gov-Tech</span>
+                    </span>
                   </div>
                 </div>
+
+                {/* Trailing Actions */}
+                <div className="flex items-center gap-3 self-end lg:self-center shrink-0">
+                  <button
+                    onClick={() => toggleBookmark(job.slug)}
+                    className={`p-2.5 rounded-xl border transition-colors cursor-pointer ${
+                      isBookmarked
+                        ? "bg-amber-500/10 border-amber-500/40 text-amber-500"
+                        : "border-border text-foreground/60 hover:text-primary hover:bg-muted"
+                    }`}
+                    title="Bookmark Role"
+                  >
+                    <Bookmark className={`w-4 h-4 ${isBookmarked ? "fill-amber-500" : ""}`} />
+                  </button>
+
+                  <Link
+                    href={`/careers/${job.slug}`}
+                    className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl transition-all shadow-sm active:scale-95 whitespace-nowrap cursor-pointer"
+                  >
+                    <span>Apply Now</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
-            );
-          })}
-        </div>
-      )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -68,11 +68,90 @@ const engagementModels = [
 export default function ServicesPage() {
   return (
     <div className="flex flex-col w-full">
-      <PageHero
-        eyebrow="ENTERPRISE PRACTICES & DELIVERY"
-        title="Services & Enterprise Solutions"
-        subtitle="Sovereign cloud architectures, OTT media platforms, and custom ERP systems engineered for high concurrency."
-      />
+      {/* Canonical Stitch Hero Section: Full-Lifecycle Engineering */}
+      <section className="relative bg-[#061a1b] text-white pt-16 pb-20 overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0 bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#0d6e6e] rounded-full blur-[140px] opacity-25 pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#d4a359] rounded-full blur-[160px] opacity-15 pointer-events-none" />
+
+        <div className="container-tight relative z-10">
+          {/* Breadcrumbs */}
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300 mb-6">
+            <Link href="/" className="hover:text-emerald-400 transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <span className="text-[#d4a359]">Services &amp; Solutions</span>
+          </div>
+
+          {/* Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/30 text-[#d4a359] text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
+            <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
+            <span>— ENTERPRISE SERVICES &amp; STRATEGIC CAPABILITIES —</span>
+          </div>
+
+          {/* Main Heading & Subtitle */}
+          <div className="max-w-4xl mb-12">
+            <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight tracking-tight">
+              Full-Lifecycle Engineering, Capital Advisory &amp;{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-[#d4a359]">
+                Sovereign Transformation
+              </span>
+              .
+            </h1>
+            <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
+              From tier-3 cloud architectures to national cold-chain logistics, we deliver institutional capabilities designed for domestic sovereignty and international scale.
+            </p>
+          </div>
+
+          {/* Key Telemetry Stats Strip (4 Glass Metric Containers) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-emerald-500/50 transition-all group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-slate-300 text-xs font-medium">Practice Portfolio</span>
+                <Server className="h-5 w-5 text-emerald-400" />
+              </div>
+              <div className="font-display text-3xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
+                6
+              </div>
+              <div className="text-xs text-slate-300/80 font-medium">Core Practice Disciplines</div>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-[#d4a359]/50 transition-all group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-slate-300 text-xs font-medium">Guaranteed Reliability</span>
+                <ShieldCheck className="h-5 w-5 text-[#d4a359]" />
+              </div>
+              <div className="font-display text-3xl font-extrabold text-white group-hover:text-[#d4a359] transition-colors">
+                99.4%
+              </div>
+              <div className="text-xs text-slate-300/80 font-medium">SLA Compliance Contracted</div>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-emerald-500/50 transition-all group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-slate-300 text-xs font-medium">Capital Mobilization</span>
+                <TrendingUp className="h-5 w-5 text-emerald-400" />
+              </div>
+              <div className="font-display text-3xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
+                $50M+
+              </div>
+              <div className="text-xs text-slate-300/80 font-medium">Delivered Scope &amp; Assets</div>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-[#d4a359]/50 transition-all group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-slate-300 text-xs font-medium">SRE &amp; NOC Continuity</span>
+                <Clock className="h-5 w-5 text-[#d4a359]" />
+              </div>
+              <div className="font-display text-3xl font-extrabold text-white group-hover:text-[#d4a359] transition-colors">
+                24/7
+              </div>
+              <div className="text-xs text-slate-300/80 font-medium">Mission-Critical Redundancy</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 1. Practice Areas Grid */}
       <section className="py-20 bg-background">
