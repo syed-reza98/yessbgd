@@ -15,10 +15,12 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { ventures } from "@/data/ventures";
+import { getVentures, getVentureBySlug } from "@/lib/cms";
 import { PageHero } from "@/components/PageHero";
 
 export async function generateStaticParams() {
-  return ventures.map((v) => ({
+  const all = await getVentures();
+  return all.map((v) => ({
     slug: v.slug,
   }));
 }
@@ -29,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const venture = ventures.find((v) => v.slug === slug);
+  const venture = await getVentureBySlug(slug);
   if (!venture) return { title: "Venture Not Found" };
 
   return {
@@ -44,14 +46,18 @@ export default async function SingleVenturePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const venture = ventures.find((v) => v.slug === slug);
+  const [venture, allVentures] = await Promise.all([
+    getVentureBySlug(slug),
+    getVentures(),
+  ]);
 
   if (!venture) {
     notFound();
   }
 
   const Icon = venture.icon;
-  const siblingVentures = ventures.filter((v) => v.slug !== venture.slug).slice(0, 3);
+  const siblingVentures = allVentures.filter((v) => v.slug !== venture.slug).slice(0, 3);
+
 
   return (
     <div className="flex flex-col w-full">

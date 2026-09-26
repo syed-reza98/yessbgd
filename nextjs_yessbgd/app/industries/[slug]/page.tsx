@@ -13,11 +13,13 @@ import {
   FileCheck,
 } from "lucide-react";
 import { industries } from "@/data/industries";
+import { getIndustries, getIndustryBySlug } from "@/lib/cms";
 import { PageHero } from "@/components/PageHero";
 import { ServiceFaqDrawer } from "@/components/ServiceFaqDrawer";
 
 export async function generateStaticParams() {
-  return industries.map((i) => ({
+  const all = await getIndustries();
+  return all.map((i) => ({
     slug: i.slug,
   }));
 }
@@ -28,7 +30,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const industry = industries.find((i) => i.slug === slug);
+  const industry = await getIndustryBySlug(slug);
   if (!industry) return { title: "Industry Not Found" };
 
   return {
@@ -43,7 +45,7 @@ export default async function SingleIndustryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const industry = industries.find((i) => i.slug === slug);
+  const industry = await getIndustryBySlug(slug);
 
   if (!industry) {
     notFound();

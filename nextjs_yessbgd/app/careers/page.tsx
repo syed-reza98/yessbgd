@@ -247,8 +247,10 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Institutional Values & Culture */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Main Careers Content */}
+      <main className="py-16 sm:py-20 space-y-20 bg-background">
+        {/* Institutional Values & Culture */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
             <span className="text-xs text-primary font-bold uppercase tracking-wider block mb-2">
@@ -475,6 +477,7 @@ export default function CareersPage() {
           subtitle="Answers to common candidate queries regarding visas, probationary timelines, equity vesting, and technology stack standards."
         />
       </section>
+    </main>
     </div>
   );
 }

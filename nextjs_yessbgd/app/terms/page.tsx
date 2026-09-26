@@ -213,8 +213,9 @@ export default function TermsPage() {
       </section>
 
       {/* Main 2-Column Content Layout */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <main className="py-16 sm:py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Sticky 14-Clause Table of Contents (4 cols) */}
           <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
             <div className="glass-card rounded-2xl p-6 border border-border space-y-4">
@@ -281,6 +282,7 @@ export default function TermsPage() {
               <Shield className="w-8 h-8 text-primary shrink-0" />
             </div>
           </div>
+        </div>
         </div>
       </main>
     </div>

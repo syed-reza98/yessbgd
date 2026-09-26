@@ -124,8 +124,9 @@ export default function FaqPage() {
       </section>
 
       {/* Main FAQ Accordion with Categorized Tabs */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FaqAccordion />
+      <main className="py-16 sm:py-20 bg-background">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FaqAccordion />
 
         {/* Still Have Questions CTA */}
         <div className="mt-16 p-8 rounded-3xl bg-card border border-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
@@ -144,6 +145,7 @@ export default function FaqPage() {
             <span>Speak With Partners</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
+        </div>
         </div>
       </main>
     </div>

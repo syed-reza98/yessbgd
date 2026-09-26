@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { openings, getOpening } from "@/data/openings";
+import { getOpenings, getOpeningBySlug } from "@/lib/cms";
 import { JobApplicationForm } from "./JobApplicationForm";
 import {
   MapPin,
@@ -21,14 +22,15 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return openings.map((o) => ({
+  const all = await getOpenings();
+  return all.map((o) => ({
     slug: o.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const job = getOpening(slug);
+  const job = await getOpeningBySlug(slug);
   if (!job) return { title: "Position Not Found | YESS Bangladesh" };
 
   return {
@@ -39,11 +41,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function JobDetailPage({ params }: Props) {
   const { slug } = await params;
-  const job = getOpening(slug);
+  const job = await getOpeningBySlug(slug);
 
   if (!job) {
     notFound();
   }
+
 
   return (
     <div className="space-y-12 pb-20">

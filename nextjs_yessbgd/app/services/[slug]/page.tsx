@@ -18,10 +18,12 @@ import {
   Lock,
 } from "lucide-react";
 import { services } from "@/data/services";
+import { getServices, getServiceBySlug } from "@/lib/cms";
 import { ServiceFaqDrawer } from "@/components/ServiceFaqDrawer";
 
 export async function generateStaticParams() {
-  return services.map((s) => ({
+  const all = await getServices();
+  return all.map((s) => ({
     slug: s.slug,
   }));
 }
@@ -32,7 +34,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = services.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
   if (!service) return { title: "Service Not Found" };
 
   return {
@@ -40,6 +42,7 @@ export async function generateMetadata({
     description: service.desc,
   };
 }
+
 
 const deliveryPhases = [
   {
@@ -74,7 +77,7 @@ export default async function SingleServicePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = services.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
 
   if (!service) {
     notFound();

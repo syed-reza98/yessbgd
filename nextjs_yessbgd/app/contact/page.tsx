@@ -152,8 +152,10 @@ export default function ContactPage() {
       </section>
 
       {/* Main Dual-Column Engagement Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ContactFormAndLocator />
+      <main className="py-16 sm:py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ContactFormAndLocator />
+        </div>
       </main>
 
       {/* Frequently Addressed Inquiries Strip */}

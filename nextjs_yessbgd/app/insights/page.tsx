@@ -119,28 +119,30 @@ export default function InsightsPage() {
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 pb-20">
-        <InsightsDirectory />
+      <main className="py-16 sm:py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          <InsightsDirectory />
 
-        {/* Institutional Intelligence Dispatch Newsletter */}
-        <section className="rounded-3xl p-8 sm:p-12 text-white border border-emerald-500/25 bg-gradient-to-br from-[#061a1b] via-[#092224] to-[#061a1b] shadow-2xl relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
-            <div className="space-y-2 max-w-xl">
-              <span className="text-xs font-mono uppercase tracking-wider text-amber-300">
-                Institutional Intelligence Dispatch
-              </span>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl text-white">
-                Receive Quarterly Economic Briefings &amp; Technology Whitepapers
-              </h2>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                Direct distribution to sovereign funds, development agencies, and institutional partners across South Asia. Zero spam, bilateral NDA safeguarded.
-              </p>
+          {/* Institutional Intelligence Dispatch Newsletter */}
+          <section className="rounded-3xl p-8 sm:p-12 text-white border border-emerald-500/25 bg-gradient-to-br from-[#061a1b] via-[#092224] to-[#061a1b] shadow-2xl relative overflow-hidden">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
+              <div className="space-y-2 max-w-xl">
+                <span className="text-xs font-mono uppercase tracking-wider text-amber-300">
+                  Institutional Intelligence Dispatch
+                </span>
+                <h2 className="font-display font-bold text-2xl sm:text-3xl text-white">
+                  Receive Quarterly Economic Briefings &amp; Technology Whitepapers
+                </h2>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Direct distribution to sovereign funds, development agencies, and institutional partners across South Asia. Zero spam, bilateral NDA safeguarded.
+                </p>
+              </div>
+              <div className="w-full lg:w-auto">
+                <NewsletterSubscription />
+              </div>
             </div>
-            <div className="w-full lg:w-auto">
-              <NewsletterSubscription />
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
     </div>
   );

@@ -68,16 +68,24 @@ export function InsightsDirectory() {
     <div className="space-y-12">
       {/* Lead Editorial Spotlight (Horizontal Split Showcase Card 60/40) */}
       <section className="w-full">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
-            <h2 className="font-display font-bold text-xl sm:text-2xl text-foreground">
-              Lead Editorial Spotlight
-            </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-7 border-b border-border">
+          <div className="flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center justify-center shrink-0">
+              <Star className="w-5 h-5 fill-amber-500/30" />
+            </span>
+            <div>
+              <span className="text-[11px] font-bold text-primary uppercase tracking-widest block">
+                FEATURED INTELLIGENCE
+              </span>
+              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground">
+                Lead Editorial Spotlight
+              </h2>
+            </div>
           </div>
-          <span className="text-xs font-semibold text-foreground/60 hidden sm:inline">
-            Q1 2026 Sovereign Infrastructure Release
-          </span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-muted border border-border text-xs font-semibold text-foreground/75 w-fit shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Q1 2026 Sovereign Infrastructure Release</span>
+          </div>
         </div>
 
         {/* Master Split Card */}

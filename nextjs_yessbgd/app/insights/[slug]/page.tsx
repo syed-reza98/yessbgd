@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { insights, getInsight } from "@/data/insights";
+import { getInsights, getInsightBySlug } from "@/lib/cms";
 import { ShareArticleButton } from "./ShareArticleButton";
 import { CitationBox } from "@/components/CitationBox";
 import {
@@ -21,14 +22,15 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return insights.map((i) => ({
+  const all = await getInsights();
+  return all.map((i) => ({
     slug: i.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = getInsight(slug);
+  const article = await getInsightBySlug(slug);
   if (!article) return { title: "Insight Not Found | YESS Bangladesh" };
 
   return {
@@ -39,13 +41,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function InsightArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = getInsight(slug);
+  const [article, allInsights] = await Promise.all([
+    getInsightBySlug(slug),
+    getInsights(),
+  ]);
 
   if (!article) {
     notFound();
   }
 
-  const related = insights.filter((i) => i.slug !== article.slug).slice(0, 3);
+  const related = allInsights.filter((i) => i.slug !== article.slug).slice(0, 3);
+
 
   return (
     <div className="space-y-12 pb-24">
