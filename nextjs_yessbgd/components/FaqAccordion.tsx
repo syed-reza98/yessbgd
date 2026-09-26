@@ -135,7 +135,7 @@ export function FaqAccordion() {
   return (
     <div className="space-y-8">
       {/* Search Bar */}
-      <div className="glass-card rounded-2xl p-5 space-y-3">
+      <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-5 space-y-3 shadow-xs">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-outline w-5 h-5" />
           <input
@@ -145,7 +145,7 @@ export function FaqAccordion() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions by topic, e.g. pricing, NDA, OTT, SLA, cloud residency..."
             aria-label="Search questions by topic, pricing, SLA, or cloud residency"
-            className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-[#0d6e6e]"
+            className="w-full bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl pl-12 pr-4 py-3 text-sm text-on-surface focus:outline-none focus:border-[#0d6e6e]"
           />
         </div>
 
@@ -201,9 +201,9 @@ export function FaqAccordion() {
       {/* Accordion List */}
       <div className="space-y-4">
         {filteredFaqs.length === 0 ? (
-          <div className="glass-card rounded-2xl p-12 text-center">
+          <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-12 text-center shadow-xs">
             <HelpCircle className="w-10 h-10 text-outline mx-auto mb-2 opacity-60" />
-            <h3 className="font-bold text-base text-brand-navy dark:text-white">
+            <h3 className="font-bold text-base text-on-surface">
               No questions found
             </h3>
             <p className="text-xs text-on-surface-variant mt-1">
@@ -217,7 +217,7 @@ export function FaqAccordion() {
             return (
               <div
                 key={faq.id}
-                className="glass-card rounded-2xl p-6 hover:border-[#0d6e6e]/40 transition-all shadow-sm"
+                className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 hover:border-[#0d6e6e]/40 transition-all shadow-xs"
               >
                 <button
                   type="button"
@@ -228,7 +228,7 @@ export function FaqAccordion() {
                     <span className="text-[11px] font-bold text-[#0d6e6e] uppercase tracking-wider block">
                       {faq.category}
                     </span>
-                    <h3 className="font-bold text-base sm:text-lg text-brand-navy dark:text-white leading-snug">
+                    <h3 className="font-bold text-base sm:text-lg text-on-surface leading-snug">
                       {faq.question}
                     </h3>
                   </div>

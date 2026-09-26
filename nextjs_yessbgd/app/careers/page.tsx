@@ -226,11 +226,11 @@ export default function CareersPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <span className="text-xs text-[#d4a359] font-bold uppercase tracking-wider block mb-2">
-              Institutional Values & Culture
+            <span className="text-xs text-secondary font-bold uppercase tracking-wider block mb-2">
+              Institutional Values &amp; Culture
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight">
-              How We Pioneer & Operate
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight">
+              How We Pioneer &amp; Operate
             </h2>
           </div>
           <p className="text-sm text-on-surface-variant max-w-md mt-4 md:mt-0">
@@ -240,17 +240,24 @@ export default function CareersPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {culturePillars.map((p) => {
+          {culturePillars.map((p, idx) => {
             const Icon = p.icon;
+            const isGold = idx === 1 || idx === 3;
             return (
               <div
                 key={p.title}
-                className="glass-card rounded-2xl p-7 hover:border-[#0d6e6e] transition-all group"
+                className="bg-surface-container-low dark:bg-[#061a1b] rounded-2xl p-7 border border-outline-variant/40 hover:border-primary/50 transition-all group shadow-xs"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e] flex items-center justify-center mb-6 group-hover:bg-[#0d6e6e] group-hover:text-white transition-colors">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-colors ${
+                    isGold
+                      ? "bg-secondary-container/40 text-secondary group-hover:bg-brand-gold group-hover:text-brand-navy"
+                      : "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-on-primary"
+                  }`}
+                >
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-base text-brand-navy dark:text-white mb-2">{p.title}</h3>
+                <h3 className="font-bold text-base text-on-surface mb-2">{p.title}</h3>
                 <p className="text-xs text-on-surface-variant leading-relaxed">{p.desc}</p>
               </div>
             );
@@ -262,10 +269,10 @@ export default function CareersPage() {
       <section className="bg-surface-container-low py-16 border-y border-outline-variant/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs text-[#0d6e6e] font-bold uppercase tracking-wider block mb-2">
+            <span className="text-xs text-secondary font-bold uppercase tracking-wider block mb-2">
               Total Rewards Framework
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-3">
               World-Class Care for High Performers
             </h2>
             <p className="text-sm text-on-surface-variant">
@@ -280,7 +287,7 @@ export default function CareersPage() {
               return (
                 <div
                   key={perk.title}
-                  className="bg-white dark:bg-[#061a1b] rounded-2xl p-7 border border-outline-variant/30 hover:border-[#0d6e6e] transition-all shadow-sm"
+                  className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-7 border border-outline-variant/30 hover:border-primary/40 transition-all shadow-sm"
                 >
                   <div className="flex items-center gap-4 mb-3">
                     <div className="w-11 h-11 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e] flex items-center justify-center">

@@ -112,13 +112,13 @@ export default async function SingleIndustryPage({
                   {industry.solutions.map((sol) => (
                     <div
                       key={sol.title}
-                      className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-colors"
+                      className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-6 border border-outline-variant/30 hover:border-primary/40 transition-colors shadow-xs"
                     >
                       <CheckCircle2 className="h-5 w-5 text-primary mb-3" />
-                      <h4 className="font-display font-bold text-base text-foreground">
+                      <h4 className="font-display font-bold text-base text-on-surface">
                         {sol.title}
                       </h4>
-                      <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                      <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
                         {sol.desc}
                       </p>
                     </div>
@@ -128,21 +128,21 @@ export default async function SingleIndustryPage({
 
               {/* Sovereign Governance & Compliance Matrix */}
               {industry.compliance && industry.compliance.length > 0 && (
-                <div className="rounded-2xl p-6 bg-muted/40 border border-border glass-card">
+                <div className="rounded-2xl p-6 bg-surface-container-low border border-outline-variant/30">
                   <div className="flex items-center gap-2 mb-3">
                     <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                    <h3 className="font-display font-bold text-lg text-foreground">
+                    <h3 className="font-display font-bold text-lg text-on-surface">
                       Sovereign Governance &amp; Regulatory Alignment
                     </h3>
                   </div>
-                  <p className="text-xs text-foreground/70 mb-4 leading-relaxed">
+                  <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
                     Every deployment in {industry.title} is strictly audited for compliance under national statutory mandates and international standards.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {industry.compliance.map((c) => (
                       <span
                         key={c}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-background border border-border text-foreground/90 shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-lowest border border-outline-variant/30 text-on-surface shadow-xs"
                       >
                         <FileCheck className="w-3.5 h-3.5 text-primary" />
                         <span>{c}</span>
@@ -154,17 +154,17 @@ export default async function SingleIndustryPage({
 
               {/* Verified Case Outcomes */}
               {industry.caseHighlights && industry.caseHighlights.length > 0 && (
-                <div className="glass-card-strong rounded-2xl p-8 border border-border">
-                  <h3 className="font-display font-bold text-xl text-foreground mb-4">
+                <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-8 border border-outline-variant/30 shadow-sm">
+                  <h3 className="font-display font-bold text-xl text-on-surface mb-4">
                     Verified Deployment Outcomes
                   </h3>
                   <div className="space-y-4">
                     {industry.caseHighlights.map((c) => (
                       <div
                         key={c.title}
-                        className="p-4 rounded-xl bg-background border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                        className="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                       >
-                        <span className="font-bold text-sm text-foreground">{c.title}</span>
+                        <span className="font-bold text-sm text-on-surface">{c.title}</span>
                         <span className="text-xs font-semibold text-primary px-3 py-1 rounded-full bg-primary/10 w-fit">
                           {c.result}
                         </span>
@@ -186,14 +186,14 @@ export default async function SingleIndustryPage({
 
             {/* Right 4 Cols: Consultation Card */}
             <div className="lg:col-span-4 flex flex-col space-y-6">
-              <div className="glass-card-strong rounded-2xl p-6 border border-border shadow-md">
+              <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-6 border border-outline-variant/30 shadow-md">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#d4a359]">
                   SECTOR ADVISORY
                 </span>
-                <h4 className="font-display font-bold text-lg text-foreground mt-1 mb-2">
+                <h4 className="font-display font-bold text-lg text-on-surface mt-1 mb-2">
                   Engage Industry Practice
                 </h4>
-                <p className="text-xs text-foreground/70 leading-relaxed mb-6">
+                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
                   Book a confidential 30-minute discovery consultation with our dedicated industry domain architects.
                 </p>
 

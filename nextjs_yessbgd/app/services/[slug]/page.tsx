@@ -193,12 +193,12 @@ export default async function SingleServicePage({
                   {service.capabilities.map((cap) => (
                     <div
                       key={cap.title}
-                      className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-colors"
+                      className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-6 border border-outline-variant/30 hover:border-primary/40 transition-colors shadow-xs"
                     >
-                      <h3 className="font-display font-bold text-base text-foreground">
+                      <h3 className="font-display font-bold text-base text-on-surface">
                         {cap.title}
                       </h3>
-                      <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                      <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
                         {cap.desc}
                       </p>
                     </div>
@@ -207,15 +207,15 @@ export default async function SingleServicePage({
               </div>
 
               {/* Turnkey Deliverables List */}
-              <div className="glass-card rounded-2xl p-8 border border-border">
-                <h3 className="font-display font-bold text-xl text-foreground mb-4">
+              <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-8 border border-outline-variant/30 shadow-sm">
+                <h3 className="font-display font-bold text-xl text-on-surface mb-4">
                   Turnkey Deliverables &amp; Artifacts
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {service.deliverables.map((item) => (
                     <div
                       key={item}
-                      className="flex items-start gap-2.5 text-xs font-semibold text-foreground/80"
+                      className="flex items-start gap-2.5 text-xs font-semibold text-on-surface-variant"
                     >
                       <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                       <span>{item}</span>
@@ -226,10 +226,10 @@ export default async function SingleServicePage({
 
               {/* Turnkey Service Delivery Framework (4 Cards) */}
               <div>
-                <h3 className="font-display font-bold text-2xl text-foreground mb-2">
+                <h3 className="font-display font-bold text-2xl text-on-surface mb-2">
                   Turnkey Service Delivery Framework
                 </h3>
-                <p className="text-xs sm:text-sm text-foreground/70 mb-6">
+                <p className="text-xs sm:text-sm text-on-surface-variant mb-6">
                   Our structured delivery lifecycle ensures transparency, risk mitigation, and verifiable progress at every step.
                 </p>
 
@@ -237,17 +237,17 @@ export default async function SingleServicePage({
                   {deliveryPhases.map((phase) => (
                     <div
                       key={phase.step}
-                      className="rounded-2xl p-5 border border-border glass-card hover:border-primary/40 transition-all"
+                      className="rounded-2xl p-5 border border-outline-variant/30 bg-surface-container-lowest dark:bg-[#061a1b] hover:border-primary/40 transition-all shadow-xs"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">
                           {phase.step}
                         </span>
-                        <span className="text-[11px] font-semibold text-foreground/50">
+                        <span className="text-[11px] font-semibold text-on-surface-variant/70">
                           {phase.tat}
                         </span>
                       </div>
-                      <h4 className="font-display font-bold text-sm text-foreground">
+                      <h4 className="font-display font-bold text-sm text-on-surface">
                         {phase.title}
                       </h4>
                       <p className="text-xs text-foreground/70 mt-1.5 leading-relaxed">
@@ -287,17 +287,17 @@ export default async function SingleServicePage({
 
             {/* Right 4 Cols: Pricing & Consultation Intake */}
             <div className="lg:col-span-4 flex flex-col space-y-8">
-              <div className="glass-card-strong rounded-2xl p-6 border border-border shadow-md">
+              <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-6 border border-outline-variant/30 shadow-md">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#d4a359]">
                   COMMERCIAL TERMS
                 </span>
-                <h4 className="font-display font-bold text-lg text-foreground mt-1 mb-4">
+                <h4 className="font-display font-bold text-lg text-on-surface mt-1 mb-4">
                   Baseline Investment
                 </h4>
 
-                <div className="space-y-4 text-sm pb-4 border-b border-border">
+                <div className="space-y-4 text-sm pb-4 border-b border-outline-variant/30">
                   <div className="flex items-center justify-between">
-                    <span className="text-foreground/70">From</span>
+                    <span className="text-on-surface-variant">From</span>
                     <span className="font-extrabold text-xl text-primary">
                       {service.pricing.from}
                     </span>

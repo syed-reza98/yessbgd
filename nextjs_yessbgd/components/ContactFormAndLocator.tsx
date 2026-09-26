@@ -63,15 +63,15 @@ export function ContactFormAndLocator() {
           {/* Form Header with Verified Badge */}
           <div className="flex items-center justify-between pb-6 border-b border-outline-variant/30 mb-6">
             <div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-[#005454] dark:text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-primary tracking-tight">
                 Submit Institutional Inquiry
               </h2>
               <p className="text-xs sm:text-sm text-on-surface-variant mt-1">
                 Direct encrypted intake reviewed by Venture Principals and Solutions Architects.
               </p>
             </div>
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-white/5 text-[#005454] dark:text-[#84d4d3] border border-[#005454]/20 text-xs font-semibold">
-              <Shield className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-primary border border-primary/20 text-xs font-semibold">
+              <Shield className="w-3.5 h-3.5 text-primary" />
               <span>Fiduciary Pledge</span>
             </div>
           </div>
@@ -443,19 +443,19 @@ export function ContactFormAndLocator() {
         {/* Detailed Hub Specifications Card (Below Map) */}
         <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/40 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base sm:text-lg font-bold text-[#005454] dark:text-white">
+            <h3 className="text-base sm:text-lg font-bold text-primary">
               {activeTab === "motijheel"
                 ? "Headquarters Specifications"
                 : "Innovation Wing Specifications"}
             </h3>
-            <span className="text-xs font-bold text-[#7e5713] dark:text-[#f2be71] uppercase tracking-wider">
+            <span className="text-xs font-bold text-secondary uppercase tracking-wider">
               {activeTab === "motijheel" ? "SUITE 804 & 1901" : "LAB TIER-3 EDGE CLUSTER"}
             </span>
           </div>
 
           <div className="space-y-3 text-xs text-on-surface-variant">
             <div className="flex items-start gap-3">
-              <MapPin className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
                 <strong className="text-on-surface block font-semibold">Physical Dispatch & Concierge</strong>
                 <span>

@@ -113,35 +113,35 @@ export default function LeadershipPage() {
             {executives.map((m) => (
               <article
                 key={m.name}
-                className="rounded-2xl glass-card p-8 hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group"
+                className="rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 p-8 hover:shadow-lg hover:border-brand-gold/40 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-start gap-4 mb-5">
-                    <div className="h-16 w-16 rounded-2xl bg-[#061a1b] text-[#d4a359] font-display font-extrabold text-xl flex items-center justify-center shadow-md border border-white/10 shrink-0 group-hover:scale-105 transition-transform">
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary via-primary-container to-brand-navy text-brand-gold font-display font-extrabold text-xl flex items-center justify-center shadow-md border border-brand-gold/40 shrink-0 group-hover:scale-105 transition-transform">
                       {m.initials}
                     </div>
                     <div>
-                      <h3 className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      <h3 className="font-display text-xl font-bold text-primary group-hover:text-brand-teal transition-colors">
                         {m.name}
                       </h3>
-                      <p className="text-xs font-bold text-primary uppercase tracking-wider mt-0.5">
+                      <p className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-0.5">
                         {m.role}
                       </p>
-                      <span className="text-[11px] text-foreground/60 font-medium block mt-1">
+                      <span className="text-[11px] text-outline font-medium block mt-1">
                         {m.credentials}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-sm leading-relaxed text-foreground/70">
+                  <p className="text-sm leading-relaxed text-on-surface-variant">
                     {m.bio}
                   </p>
 
-                  <div className="mt-4 pt-3 border-t border-border">
-                    <span className="text-[11px] font-bold text-[#d4a359] uppercase tracking-wider block">
+                  <div className="mt-4 pt-3 border-t border-outline-variant/30">
+                    <span className="text-[11px] font-bold text-secondary uppercase tracking-wider block">
                       Core Portfolio Focus:
                     </span>
-                    <span className="text-xs text-foreground/80 font-medium">
+                    <span className="text-xs text-on-surface font-medium">
                       {m.focus}
                     </span>
                   </div>
@@ -168,32 +168,32 @@ export default function LeadershipPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card rounded-2xl p-6">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 shadow-sm">
               <ShieldCheck className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-display font-bold text-lg text-foreground">
-                Regulatory & Compliance
+              <h3 className="font-display font-bold text-lg text-on-surface">
+                Regulatory &amp; Compliance
               </h3>
-              <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+              <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
                 Bi-annual statutory audits under RJSC GovBD regulations, NBR corporate tax filings, and full alignment with Bangladesh Bank foreign exchange rules.
               </p>
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
-              <Award className="h-8 w-8 text-[#d4a359] mb-3" />
-              <h3 className="font-display font-bold text-lg text-foreground">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 shadow-sm">
+              <Award className="h-8 w-8 text-secondary mb-3" />
+              <h3 className="font-display font-bold text-lg text-on-surface">
                 Academic Research Alliances
               </h3>
-              <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+              <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
                 Collaboration with leading engineering universities in Dhaka on distributed cryptography, agricultural IoT protocols, and domestic edge meshes.
               </p>
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 shadow-sm">
               <Lock className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-display font-bold text-lg text-foreground">
-                Capital Structure & Audit
+              <h3 className="font-display font-bold text-lg text-on-surface">
+                Capital Structure &amp; Audit
               </h3>
-              <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+              <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
                 Zero capital default protocols, bilateral escrow milestone gates, and 100% foreground IP protection guaranteed on all enterprise partnerships.
               </p>
             </div>

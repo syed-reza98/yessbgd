@@ -39,21 +39,21 @@ export default function MissionPage() {
       <section className="py-20 bg-background border-b border-border">
         <div className="container-tight max-w-5xl">
           {/* Executive Quote Block */}
-          <div className="glass-card-strong rounded-3xl p-8 sm:p-12 mb-16 shadow-xl border border-white/60 relative overflow-hidden">
+          <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-3xl p-8 sm:p-12 mb-16 shadow-xl border border-outline-variant/30 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
             <div className="h-14 w-14 rounded-2xl bg-primary text-white flex items-center justify-center mb-6 shadow-glow">
               <Target className="h-7 w-7" />
             </div>
             <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-2">
-              OPERATING CHARTER & CORE MANDATE
+              OPERATING CHARTER &amp; CORE MANDATE
             </span>
-            <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground mb-4">
+            <h2 className="font-display font-bold text-2xl sm:text-3xl text-on-surface mb-4">
               Translating Executive Strategy into Measurable Enterprise Power
             </h2>
-            <blockquote className="text-base sm:text-lg leading-relaxed text-foreground/80 italic border-l-4 border-primary pl-4 my-6">
+            <blockquote className="text-base sm:text-lg leading-relaxed text-on-surface-variant italic border-l-4 border-primary pl-4 my-6">
               “Our mission is to be the most accountable consulting and technology partner for ambitious Bangladeshi organisations. We translate strategy into shipped product, measure outcomes in your operating metrics, and stay engaged long after launch. Every engagement is anchored in three commitments: clarity of scope, transparency of progress and ownership of outcomes.”
             </blockquote>
-            <div className="flex items-center gap-3 pt-2 text-xs font-semibold text-foreground/70">
+            <div className="flex items-center gap-3 pt-2 text-xs font-semibold text-on-surface-variant">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               <span>MANDATE PROTOCOL V4.2 — YESS Sovereign Holding Committee</span>
             </div>
@@ -73,75 +73,75 @@ export default function MissionPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-card rounded-2xl p-7 flex flex-col justify-between hover:border-primary/50 transition-all">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-7 flex flex-col justify-between hover:border-primary/50 hover:shadow-md transition-all">
               <div>
-                <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 font-bold">
+                <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 font-bold text-sm">
                   01
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground">
+                <h3 className="font-display font-bold text-lg text-on-surface">
                   Strategy with Direct Operators
                 </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
                   Engagements are staffed and delivered by senior architects and venture leads, never handed down to junior pools or outsourced contractors.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-border flex items-center gap-2 text-xs text-primary font-semibold">
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center gap-2 text-xs text-primary font-semibold">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Senior architect oversight on every milestone</span>
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-7 flex flex-col justify-between hover:border-primary/50 transition-all">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-7 flex flex-col justify-between hover:border-brand-gold/50 hover:shadow-md transition-all">
               <div>
-                <div className="h-10 w-10 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 font-bold">
+                <div className="h-10 w-10 rounded-xl bg-secondary-container/40 text-secondary flex items-center justify-center mb-4 font-bold text-sm">
                   02
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground">
-                  Shipped Code & Physical Logistics
+                <h3 className="font-display font-bold text-lg text-on-surface">
+                  Shipped Code &amp; Physical Logistics
                 </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
                   We measure success not in decks or strategy documents, but in deployed bare-metal clusters, production ERP systems, and tangible farm-to-table networks.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-border flex items-center gap-2 text-xs text-[#7e5713] font-semibold">
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center gap-2 text-xs text-secondary font-semibold">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Working software and audited telemetry</span>
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-7 flex flex-col justify-between hover:border-primary/50 transition-all">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-7 flex flex-col justify-between hover:border-primary/50 hover:shadow-md transition-all">
               <div>
-                <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 font-bold">
+                <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 font-bold text-sm">
                   03
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground">
+                <h3 className="font-display font-bold text-lg text-on-surface">
                   Zero-Defect Sovereign Governance
                 </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
                   ISO-aligned quality assurance, zero-trust cryptographic architectures, and domestic data residency across all 64 districts in Bangladesh.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-border flex items-center gap-2 text-xs text-primary font-semibold">
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center gap-2 text-xs text-primary font-semibold">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>100% Foreground IP and repository transfer</span>
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-7 flex flex-col justify-between hover:border-primary/50 transition-all">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-7 flex flex-col justify-between hover:border-brand-gold/50 hover:shadow-md transition-all">
               <div>
-                <div className="h-10 w-10 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 font-bold">
+                <div className="h-10 w-10 rounded-xl bg-secondary-container/40 text-secondary flex items-center justify-center mb-4 font-bold text-sm">
                   04
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground">
-                  Capital Preservation & Alignment
+                <h3 className="font-display font-bold text-lg text-on-surface">
+                  Capital Preservation &amp; Alignment
                 </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
                   Every tranche is tied to verifiable business outcomes. We co-invest sovereign capital alongside enterprise partners to guarantee skin-in-the-game.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-border flex items-center gap-2 text-xs text-[#7e5713] font-semibold">
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center gap-2 text-xs text-secondary font-semibold">
                 <CheckCircle2 className="h-4 w-4" />
-                <span>Aligned incentives & milestone release schedules</span>
+                <span>Aligned incentives &amp; milestone release schedules</span>
               </div>
             </div>
           </div>
@@ -236,72 +236,72 @@ export default function MissionPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link
               href="/about/leadership"
-              className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
+              className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
             >
               <div>
                 <Users className="h-8 w-8 text-primary mb-3" />
-                <h4 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                <h4 className="font-display font-bold text-lg text-on-surface group-hover:text-primary transition-colors">
                   Executive Board
                 </h4>
-                <p className="text-xs text-foreground/70 mt-2">
+                <p className="text-xs text-on-surface-variant mt-2">
                   Meet our principal operators, regulatory directors, and technology architects.
                 </p>
               </div>
-              <div className="mt-4 pt-2 border-t border-border text-xs font-semibold text-primary">
+              <div className="mt-4 pt-2 border-t border-outline-variant/30 text-xs font-semibold text-primary">
                 Explore Leadership →
               </div>
             </Link>
 
             <Link
               href="/about/awards"
-              className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
+              className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
             >
               <div>
                 <Award className="h-8 w-8 text-[#d4a359] mb-3" />
-                <h4 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                <h4 className="font-display font-bold text-lg text-on-surface group-hover:text-primary transition-colors">
                   Accreditations
                 </h4>
-                <p className="text-xs text-foreground/70 mt-2">
+                <p className="text-xs text-on-surface-variant mt-2">
                   ISO 9001:2015, ISO 27001, and BASIS national technology citations.
                 </p>
               </div>
-              <div className="mt-4 pt-2 border-t border-border text-xs font-semibold text-primary">
+              <div className="mt-4 pt-2 border-t border-outline-variant/30 text-xs font-semibold text-primary">
                 Explore Awards →
               </div>
             </Link>
 
             <Link
               href="/about/methodology"
-              className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
+              className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
             >
               <div>
                 <Cpu className="h-8 w-8 text-primary mb-3" />
-                <h4 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                <h4 className="font-display font-bold text-lg text-on-surface group-hover:text-primary transition-colors">
                   Engineering SDLC
                 </h4>
-                <p className="text-xs text-foreground/70 mt-2">
+                <p className="text-xs text-on-surface-variant mt-2">
                   Our 4-step delivery lifecycle: Discover, Design, Deliver, and Handover.
                 </p>
               </div>
-              <div className="mt-4 pt-2 border-t border-border text-xs font-semibold text-primary">
+              <div className="mt-4 pt-2 border-t border-outline-variant/30 text-xs font-semibold text-primary">
                 Explore SDLC →
               </div>
             </Link>
 
             <Link
               href="/about/standards"
-              className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
+              className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all flex flex-col justify-between group"
             >
               <div>
                 <ShieldCheck className="h-8 w-8 text-[#d4a359] mb-3" />
-                <h4 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                <h4 className="font-display font-bold text-lg text-on-surface group-hover:text-primary transition-colors">
                   Quality Standards
                 </h4>
-                <p className="text-xs text-foreground/70 mt-2">
+                <p className="text-xs text-on-surface-variant mt-2">
                   Zero-trust security enclaves and automated test coverage pyramids.
                 </p>
               </div>
-              <div className="mt-4 pt-2 border-t border-border text-xs font-semibold text-primary">
+              <div className="mt-4 pt-2 border-t border-outline-variant/30 text-xs font-semibold text-primary">
                 Explore Standards →
               </div>
             </Link>
@@ -310,16 +310,16 @@ export default function MissionPage() {
       </section>
 
       {/* 4. Ready to Partner Executive CTA Banner (Stitch Section 4 exact match) */}
-      <section className="py-20 bg-[#f4f8f8]">
+      <section className="py-20 bg-surface-container-low">
         <div className="container-tight max-w-4xl text-center">
-          <div className="glass-card rounded-3xl p-10 sm:p-14 shadow-xl border border-white">
+          <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-3xl p-10 sm:p-14 shadow-xl border border-outline-variant/30">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
               INSTITUTIONAL ENGAGEMENT
             </span>
-            <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
+            <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-on-surface mt-2">
               Ready to partner with YESS Bangladesh?
             </h3>
-            <p className="text-base text-foreground/70 mt-3 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base text-on-surface-variant mt-3 max-w-2xl mx-auto leading-relaxed">
               Discuss your strategic initiative with our leadership team and discover how sovereign technology drives resilient enterprise growth.
             </p>
 

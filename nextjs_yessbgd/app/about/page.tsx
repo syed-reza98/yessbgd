@@ -177,13 +177,13 @@ export default function AboutPage() {
       <section className="py-20 bg-background relative border-b border-border/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-[#7e5713] dark:text-[#f2be71] uppercase tracking-widest">
+            <span className="text-xs font-bold text-secondary uppercase tracking-widest">
               PILLARS OF RESILIENCE
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#005454] dark:text-white mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-on-surface mt-2 mb-4">
               5 Strategic Foundational Pillars Architecting Our Growth
             </h2>
-            <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
               Each vertical is engineered to institutional rigor, insulating early-stage risks while maximizing
               societal and financial returns.
             </p>
@@ -191,21 +191,21 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Pillar 1 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#0d6e6e]/50 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#0d6e6e] border border-[#0d6e6e]/20 group-hover:bg-[#0d6e6e] group-hover:text-white transition-all">
-                  <BrainCircuit className="w-6 h-6" />
+                <div className="w-14 h-14 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-brand-teal border border-brand-teal/20 group-hover:bg-brand-teal group-hover:text-white transition-all">
+                  <BrainCircuit className="w-7 h-7" />
                 </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-[#005454] dark:text-[#84d4d3] text-xs font-semibold mb-3">
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-primary dark:text-[#84d4d3] text-xs font-semibold mb-3">
                   Sovereign Cloud &amp; AI
                 </div>
-                <h3 className="text-lg font-bold text-on-surface mb-2">1. Innovation &amp; Deep Tech</h3>
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <h3 className="text-xl font-bold text-on-surface mb-3">1. Innovation &amp; Deep Tech</h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
                   AI, microservices, cloud telemetry, and sovereign transactional infrastructure architected to handle
                   mission-critical high-concurrency loads.
                 </p>
               </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">
+              <div className="border-t border-surface-container dark:border-white/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-teal dark:text-[#35b0aa]">
                 <Link href="/about/methodology" className="hover:underline flex items-center gap-1">
                   <span>Yess Soft • Shondhaan Core</span>
                 </Link>
@@ -214,21 +214,21 @@ export default function AboutPage() {
             </div>
 
             {/* Pillar 2 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#d4a359]/50 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#7e5713] dark:text-[#f2be71] border border-[#d4a359]/30 group-hover:bg-[#7e5713] group-hover:text-white transition-all">
-                  <Scale className="w-6 h-6" />
+                <div className="w-14 h-14 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-secondary dark:text-brand-gold-glow border border-brand-gold/30 group-hover:bg-brand-gold group-hover:text-white transition-all">
+                  <Scale className="w-7 h-7" />
                 </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#d4a359]/15 text-[#7e5713] dark:text-[#f2be71] text-xs font-semibold mb-3">
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container dark:bg-brand-gold/20 dark:text-brand-gold-glow text-xs font-semibold mb-3">
                   Statutory Fiduciary
                 </div>
-                <h3 className="text-lg font-bold text-on-surface mb-2">2. Institutional Governance &amp; Transparency</h3>
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <h3 className="text-xl font-bold text-on-surface mb-3">2. Institutional Governance &amp; Transparency</h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
                   Registered under RJSC C-184920, adhering to strict Bangladesh Bank fiduciary compliance, independent board
                   oversight, and clean audit trails.
                 </p>
               </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#7e5713] dark:text-[#f2be71]">
+              <div className="border-t border-surface-container dark:border-white/10 pt-4 flex items-center justify-between text-xs font-semibold text-secondary dark:text-brand-gold-glow">
                 <Link href="/about/leadership" className="hover:underline flex items-center gap-1">
                   <span>Audited Compliance &amp; RJSC Reg</span>
                 </Link>
@@ -237,21 +237,21 @@ export default function AboutPage() {
             </div>
 
             {/* Pillar 3 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#005454]/50 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#005454] dark:text-[#84d4d3] border border-[#005454]/20 group-hover:bg-[#005454] group-hover:text-white transition-all">
-                  <TreePine className="w-6 h-6" />
+                <div className="w-14 h-14 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-primary dark:text-[#84d4d3] border border-primary/20 group-hover:bg-primary group-hover:text-white transition-all">
+                  <TreePine className="w-7 h-7" />
                 </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-[#005454] dark:text-[#84d4d3] text-xs font-semibold mb-3">
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-primary dark:text-[#84d4d3] text-xs font-semibold mb-3">
                   Sustainable Value Chain
                 </div>
-                <h3 className="text-lg font-bold text-on-surface mb-2">3. ESG &amp; Sustainable Agribusiness</h3>
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <h3 className="text-xl font-bold text-on-surface mb-3">3. ESG &amp; Sustainable Agribusiness</h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
                   Zero-chemical supply chain transparency, cold-chain IoT tracking, and direct rural farmer cooperatives
                   establishing ethical agricultural commerce.
                 </p>
               </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">
+              <div className="border-t border-surface-container dark:border-white/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-teal dark:text-[#35b0aa]">
                 <Link href="/ventures" className="hover:underline flex items-center gap-1">
                   <span>YESS Organic Haat Network</span>
                 </Link>
@@ -260,21 +260,21 @@ export default function AboutPage() {
             </div>
 
             {/* Pillar 4 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#0d6e6e]/50 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-[#0d6e6e] border border-[#0d6e6e]/20 group-hover:bg-[#0d6e6e] group-hover:text-white transition-all">
-                  <GraduationCap className="w-6 h-6" />
+                <div className="w-14 h-14 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center mb-6 text-brand-teal dark:text-[#35b0aa] border border-brand-teal/20 group-hover:bg-brand-teal group-hover:text-white transition-all">
+                  <GraduationCap className="w-7 h-7" />
                 </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-[#005454] dark:text-[#84d4d3] text-xs font-semibold mb-3">
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-high dark:bg-white/10 text-primary dark:text-[#84d4d3] text-xs font-semibold mb-3">
                   Demographic Dividend
                 </div>
-                <h3 className="text-lg font-bold text-on-surface mb-2">4. Youth Leadership &amp; Human Capital</h3>
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <h3 className="text-xl font-bold text-on-surface mb-3">4. Youth Leadership &amp; Human Capital</h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
                   Nurturing top 1% engineering cohorts from BUET, DU, and premier polytechnic institutes into executive
                   architects and product managers.
                 </p>
               </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">
+              <div className="border-t border-surface-container dark:border-white/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-teal dark:text-[#35b0aa]">
                 <Link href="/careers" className="hover:underline flex items-center gap-1">
                   <span>YESS Talent Accelerator</span>
                 </Link>
@@ -283,25 +283,25 @@ export default function AboutPage() {
             </div>
 
             {/* Pillar 5 (Spanning 2 columns on lg) */}
-            <div className="lg:col-span-2 glass-card rounded-2xl p-8 hover:shadow-xl hover:border-[#0d6e6e]/50 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 group">
+            <div className="lg:col-span-2 bg-gradient-to-r from-surface-container to-surface-container-low dark:from-white/5 dark:to-white/[0.02] border border-outline-variant/30 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 relative group flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="max-w-xl">
-                <div className="w-12 h-12 rounded-xl bg-[#061a1b] flex items-center justify-center mb-4 text-[#f6c87a]">
-                  <ShieldCheck className="w-6 h-6" />
+                <div className="w-14 h-14 rounded-xl bg-brand-navy flex items-center justify-center mb-4 text-brand-gold-glow">
+                  <ShieldCheck className="w-7 h-7" />
                 </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#d4a359]/15 text-[#7e5713] dark:text-[#f2be71] text-xs font-semibold mb-2">
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-surface-bright dark:bg-white/10 text-secondary dark:text-brand-gold-glow text-xs font-semibold mb-2">
                   Enterprise Grade
                 </div>
-                <h3 className="text-lg font-bold text-on-surface mb-2">5. Global Quality Benchmarks</h3>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
+                <h3 className="text-xl font-bold text-on-surface mb-2">5. Global Quality Benchmarks</h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
                   Export-grade software pipelines, CMMI-aligned methodologies, and Tier-3 sovereign data center
                   architectures ensuring resilient uptime and multi-tenant security.
                 </p>
               </div>
-              <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-5 rounded-xl border border-outline-variant/30 min-w-[200px] shrink-0">
-                <div className="text-[11px] text-outline mb-1">Standard Met</div>
-                <div className="text-sm font-bold text-[#005454] dark:text-[#84d4d3]">ISO 27001 / CMMI</div>
-                <div className="text-xs text-on-surface-variant mt-2 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#0d6e6e]" />
+              <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-6 rounded-xl border border-outline-variant/30 min-w-[220px] shrink-0">
+                <div className="text-xs text-outline mb-1 font-medium">Standard Met</div>
+                <div className="text-lg font-bold text-primary dark:text-[#84d4d3]">ISO 27001 / CMMI</div>
+                <div className="text-sm text-on-surface-variant mt-2 flex items-center gap-1.5 font-medium">
+                  <CheckCircle2 className="w-4 h-4 text-brand-teal dark:text-brand-teal-glow" />
                   <span>Fiduciary Compliant</span>
                 </div>
               </div>
@@ -314,13 +314,13 @@ export default function AboutPage() {
       <section className="py-20 bg-surface-container-low dark:bg-[#061a1b]/40 border-b border-border/40 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-[#005454] dark:text-[#84d4d3] uppercase tracking-widest">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest">
               INSTITUTIONAL TRAJECTORY
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#005454] dark:text-white mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-on-surface mt-2 mb-4">
               Milestones of a Decade in the Making
             </h2>
-            <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
               From a boutique cloud consultancy to an institutional holding structure driving sovereign digital and tangible
               supply chains.
             </p>
@@ -333,6 +333,8 @@ export default function AboutPage() {
             <div className="space-y-12">
               {timelineMilestones.map((milestone, idx) => {
                 const isEven = idx % 2 === 0;
+                const is26 = milestone.year === "26";
+                const isGold = milestone.year === "20" || milestone.year === "24";
                 return (
                   <div
                     key={milestone.year}
@@ -341,23 +343,51 @@ export default function AboutPage() {
                     }`}
                   >
                     <div className={`w-full md:w-5/12 ${isEven ? "text-left md:text-right" : "text-left"}`}>
-                      <span className="inline-block px-3 py-1 rounded-full bg-[#0d6e6e]/10 text-[#0d6e6e] dark:text-[#35b0aa] text-xs font-bold mb-2">
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-2 ${
+                          is26
+                            ? "bg-brand-teal text-white"
+                            : isGold
+                            ? "bg-brand-gold/20 text-secondary dark:text-brand-gold-glow"
+                            : "bg-brand-teal/10 text-brand-teal dark:text-[#35b0aa]"
+                        }`}
+                      >
                         {milestone.tag}
                       </span>
-                      <h3 className="text-base sm:text-lg font-bold text-on-surface">{milestone.title}</h3>
-                      <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">{milestone.desc}</p>
+                      <h3 className="text-xl font-bold text-on-surface">{milestone.title}</h3>
+                      <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">{milestone.desc}</p>
                     </div>
 
-                    <div className="w-10 h-10 rounded-full bg-[#0d6e6e] text-white flex items-center justify-center font-bold text-xs shadow-md z-10 ring-4 ring-white dark:ring-[#061a1b] shrink-0">
+                    <div
+                      className={`w-10 h-10 rounded-full text-white flex items-center justify-center font-bold text-xs shadow-md z-10 shrink-0 ${
+                        is26
+                          ? "bg-primary ring-4 ring-brand-gold shadow-lg"
+                          : isGold
+                          ? "bg-brand-gold ring-4 ring-white dark:ring-[#061a1b]"
+                          : "bg-brand-teal ring-4 ring-white dark:ring-[#061a1b]"
+                      }`}
+                    >
                       {milestone.year}
                     </div>
 
-                    <div className="w-full md:w-5/12 glass-card p-5 rounded-2xl border border-outline-variant/30 shadow-sm">
-                      <div className="text-[11px] font-semibold text-[#7e5713] dark:text-[#f2be71]">
+                    <div
+                      className={`w-full md:w-5/12 p-6 rounded-2xl border shadow-sm ${
+                        is26
+                          ? "bg-gradient-to-br from-surface-container-lowest to-surface-container dark:from-white/10 dark:to-white/5 border-2 border-brand-teal/40"
+                          : "bg-surface-container-lowest dark:bg-[#061a1b] border-outline-variant/30"
+                      }`}
+                    >
+                      <div
+                        className={`text-xs font-bold uppercase tracking-wider mb-1 ${
+                          idx % 2 === 0
+                            ? "text-secondary dark:text-brand-gold-glow"
+                            : "text-brand-teal dark:text-[#35b0aa]"
+                        }`}
+                      >
                         {milestone.initiative}
                       </div>
-                      <div className="text-xs sm:text-sm font-bold text-on-surface mt-0.5">{milestone.cardTitle}</div>
-                      <div className="text-xs text-outline mt-1">{milestone.cardSubtitle}</div>
+                      <div className="text-base font-bold text-on-surface mt-0.5">{milestone.cardTitle}</div>
+                      <div className="text-xs text-outline mt-1 font-medium">{milestone.cardSubtitle}</div>
                     </div>
                   </div>
                 );
@@ -417,28 +447,28 @@ export default function AboutPage() {
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-6 rounded-2xl glass-card border border-border/40">
+            <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 shadow-sm">
               <span className="text-3xl sm:text-4xl font-extrabold text-[#005454] dark:text-[#84d4d3] block mb-1">
                 64
               </span>
               <span className="text-xs font-bold text-on-surface block">Districts Covered</span>
               <span className="text-[11px] text-on-surface-variant">Pan-Bangladesh Presence</span>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-border/40">
+            <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 shadow-sm">
               <span className="text-3xl sm:text-4xl font-extrabold text-[#d4a359] block mb-1">
                 10,000+
               </span>
               <span className="text-xs font-bold text-on-surface block">Farmers Onboarded</span>
               <span className="text-[11px] text-on-surface-variant">Regenerative Agrotech</span>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-border/40">
+            <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 shadow-sm">
               <span className="text-3xl sm:text-4xl font-extrabold text-[#005454] dark:text-[#84d4d3] block mb-1">
                 4.8M
               </span>
               <span className="text-xs font-bold text-on-surface block">Digital Viewers</span>
               <span className="text-[11px] text-on-surface-variant">Akash OTT &amp; TV</span>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-border/40">
+            <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/30 shadow-sm">
               <span className="text-3xl sm:text-4xl font-extrabold text-[#d4a359] block mb-1">
                 13
               </span>

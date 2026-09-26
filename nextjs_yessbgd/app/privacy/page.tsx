@@ -128,7 +128,7 @@ export default function PrivacyPage() {
           </div>
 
           {/* Document Release Metadata Strip */}
-          <div className="glass-card p-5 rounded-2xl border border-outline-variant/30 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-5 rounded-2xl border border-outline-variant/30 shadow-xs grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="flex items-start gap-3">
               <div className="p-2.5 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e]">
                 <FileText className="w-5 h-5" />
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
                 <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
                   Document Release
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-on-surface">
                   Version 2.3 (Data Protection Compliant)
                 </span>
               </div>
@@ -151,7 +151,7 @@ export default function PrivacyPage() {
                 <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
                   Effective Date
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-on-surface">
                   September 2026
                 </span>
               </div>
@@ -165,7 +165,7 @@ export default function PrivacyPage() {
                 <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
                   Encryption Posture
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-on-surface">
                   AES-256 at Rest • TLS 1.3 Transit
                 </span>
               </div>
@@ -179,7 +179,7 @@ export default function PrivacyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Sticky Table of Contents (4 cols) */}
           <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
-            <div className="glass-card rounded-2xl p-6 border border-outline-variant/40 space-y-4">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-6 border border-outline-variant/40 space-y-4 shadow-xs">
               <h2 className="text-xs font-extrabold uppercase tracking-wider text-[#0d6e6e] pb-2 border-b border-outline-variant/30">
                 Privacy Framework (10 Sections)
               </h2>
@@ -214,13 +214,13 @@ export default function PrivacyPage() {
               <section
                 key={s.id}
                 id={s.id}
-                className="glass-card rounded-2xl p-7 border border-outline-variant/40 hover:border-[#0d6e6e]/40 transition-all space-y-3"
+                className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-7 border border-outline-variant/40 hover:border-[#0d6e6e]/40 transition-all space-y-3 shadow-xs"
               >
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-lg bg-[#0d6e6e]/10 text-[#0d6e6e] font-mono font-bold text-xs flex items-center justify-center shrink-0">
                     {s.num}
                   </span>
-                  <h2 className="text-base sm:text-lg font-bold text-brand-navy dark:text-white">
+                  <h2 className="text-base sm:text-lg font-bold text-on-surface">
                     {s.title}
                   </h2>
                 </div>

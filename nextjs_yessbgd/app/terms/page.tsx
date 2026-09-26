@@ -157,7 +157,7 @@ export default function TermsPage() {
           </div>
 
           {/* Document Release Metadata Strip */}
-          <div className="glass-card p-5 rounded-2xl border border-outline-variant/30 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-5 rounded-2xl border border-outline-variant/30 shadow-xs grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="flex items-start gap-3">
               <div className="p-2.5 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e]">
                 <FileText className="w-5 h-5" />
@@ -166,7 +166,7 @@ export default function TermsPage() {
                 <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
                   Document Release
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-on-surface">
                   Version 2.4 (Statutory Revision)
                 </span>
               </div>
@@ -180,7 +180,7 @@ export default function TermsPage() {
                 <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
                   Effective Date
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-on-surface">
                   September 2026 (Operational)
                 </span>
               </div>
@@ -194,7 +194,7 @@ export default function TermsPage() {
                 <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
                   Legal Jurisdiction
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-on-surface">
                   Courts of Dhaka, Bangladesh (RJSC C-184920)
                 </span>
               </div>
@@ -208,7 +208,7 @@ export default function TermsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Sticky 14-Clause Table of Contents (4 cols) */}
           <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
-            <div className="glass-card rounded-2xl p-6 border border-outline-variant/40 space-y-4">
+            <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-6 border border-outline-variant/40 space-y-4 shadow-xs">
               <h2 className="text-xs font-extrabold uppercase tracking-wider text-[#0d6e6e] pb-2 border-b border-outline-variant/30">
                 Table of Contents (14 Clauses)
               </h2>
@@ -243,13 +243,13 @@ export default function TermsPage() {
               <section
                 key={c.id}
                 id={c.id}
-                className="glass-card rounded-2xl p-7 border border-outline-variant/40 hover:border-[#0d6e6e]/40 transition-all space-y-3"
+                className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl p-7 border border-outline-variant/40 hover:border-[#0d6e6e]/40 transition-all space-y-3 shadow-xs"
               >
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-lg bg-[#0d6e6e]/10 text-[#0d6e6e] font-mono font-bold text-xs flex items-center justify-center shrink-0">
                     {c.num}
                   </span>
-                  <h2 className="text-base sm:text-lg font-bold text-brand-navy dark:text-white">
+                  <h2 className="text-base sm:text-lg font-bold text-on-surface">
                     {c.title}
                   </h2>
                 </div>
@@ -262,7 +262,7 @@ export default function TermsPage() {
             {/* Bottom Institutional Seal Card */}
             <div className="p-6 rounded-2xl bg-surface-container-high border border-outline-variant/40 flex items-center justify-between">
               <div className="space-y-1">
-                <span className="font-bold text-xs text-brand-navy dark:text-white">
+                <span className="font-bold text-xs text-on-surface">
                   Statutory Registrar of Joint Stock Companies (RJSC)
                 </span>
                 <p className="text-[11px] text-outline">

@@ -162,15 +162,15 @@ export default function MethodologyPage() {
               return (
                 <div
                   key={m.title}
-                  className="rounded-xl glass-card p-5 border border-border hover:border-primary/40 transition-all duration-200 hover:-translate-y-1 shadow-sm"
+                  className="rounded-xl bg-surface-container-lowest dark:bg-[#061a1b] p-5 border border-outline-variant/30 hover:border-primary/40 transition-all duration-200 hover:-translate-y-1 shadow-sm"
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <span className={`p-2 rounded-lg ${m.badgeColor}`}>
                       <Icon className="w-5 h-5" />
                     </span>
-                    <span className="font-display font-bold text-sm text-foreground">{m.title}</span>
+                    <span className="font-display font-bold text-sm text-on-surface">{m.title}</span>
                   </div>
-                  <p className="text-xs text-foreground/70 leading-relaxed">
+                  <p className="text-xs text-on-surface-variant leading-relaxed">
                     {m.desc}
                   </p>
                 </div>
@@ -183,12 +183,12 @@ export default function MethodologyPage() {
       {/* 2. The 4-Step Lifecycle Framework */}
       <section className="py-20 bg-background">
         <div className="container-tight max-w-6xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-border">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-outline-variant/30">
             <div>
-              <span className="text-xs font-bold text-amber-600 dark:text-amber-400 tracking-widest uppercase">Execution Protocol</span>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground mt-1">Lifecycle Phases</h2>
+              <span className="text-xs font-bold text-secondary tracking-widest uppercase">Execution Protocol</span>
+              <h2 className="font-display font-bold text-2xl sm:text-3xl text-on-surface mt-1">Lifecycle Phases</h2>
             </div>
-            <p className="text-sm text-foreground/70 max-w-md mt-2 md:mt-0 leading-relaxed">
+            <p className="text-sm text-on-surface-variant max-w-md mt-2 md:mt-0 leading-relaxed">
               Engineered to eliminate ambiguity, minimize enterprise risk, and provide full transparency from Day 1 to infinity.
             </p>
           </div>
@@ -199,7 +199,7 @@ export default function MethodologyPage() {
               return (
                 <article
                   key={step.title}
-                  className="rounded-2xl glass-card p-8 border border-border hover:border-primary/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                  className="rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] p-8 border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-6">
@@ -210,22 +210,22 @@ export default function MethodologyPage() {
                         <Icon className={`w-6 h-6 ${step.iconColor}`} />
                       </div>
                     </div>
-                    <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                    <h3 className="font-display font-bold text-xl text-on-surface mb-3">
                       {step.title}
                     </h3>
-                    <p className="text-sm text-foreground/70 leading-relaxed mb-6">
+                    <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
                       {step.desc}
                     </p>
                   </div>
                   <div>
-                    <div className="text-xs font-semibold text-foreground/50 uppercase tracking-wider mb-2.5">
+                    <div className="text-xs font-semibold text-outline uppercase tracking-wider mb-2.5">
                       Key Artifacts &amp; Deliverables
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {step.artifacts.map((a) => (
                         <span
                           key={a}
-                          className="px-2.5 py-1 bg-muted text-foreground/80 text-xs rounded-md font-medium border border-border/50"
+                          className="px-2.5 py-1 bg-surface-container text-on-surface text-xs rounded-md font-medium border border-outline-variant/30"
                         >
                           {a}
                         </span>
