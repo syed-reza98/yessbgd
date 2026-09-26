@@ -10,9 +10,9 @@ export function Footer() {
   return (
     <footer className="bg-[#061a1b] text-white/90 border-t border-white/10 pt-16 pb-24 lg:pb-12 relative z-10">
       <div className="container-tight">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-white/10">
-          {/* Col 1 & 2: Brand & Headquarters */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+          {/* Column 1: Brand & Headquarters */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-3">
               <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-white shadow-sm border border-white/20">
                 <img
@@ -32,24 +32,32 @@ export function Footer() {
             </Link>
 
             <p className="text-sm leading-relaxed text-white/70 max-w-sm mt-1">
-              Building national digital infrastructure, enterprise software systems, media OTT platforms, and cold-chain agritech networks across all 64 districts of Bangladesh.
+              Pioneering institutional venture building, engineering resilient technological backbone infrastructures, and empowering youth-led socioeconomic transformation across South Asia.
             </p>
 
-            <div className="flex flex-col gap-2.5 mt-2 text-xs text-white/70">
+            <div className="flex flex-col gap-2 mt-2 text-xs text-white/70">
               <div className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                <span>
-                  Office: Block-A, Road-3, House-127 (Green View), Mirpur-12, Dhaka-1216
-                </span>
+                <MapPin className="h-4 w-4 text-[#d4a359] shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-white block">Dhaka Corporate HQ:</span>
+                  <span>Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-accent shrink-0" />
+              <div className="flex items-start gap-2.5">
+                <MapPin className="h-4 w-4 text-[#35b0aa] shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-white block">Regional Innovation Lab:</span>
+                  <span>Gulshan-2, Dhaka-1212, Bangladesh</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2.5 pt-1">
+                <Phone className="h-4 w-4 text-[#d4a359] shrink-0" />
                 <a href="tel:+8801805464343" className="hover:text-white transition-colors">
                   +880 1805-464343
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-accent shrink-0" />
+                <Mail className="h-4 w-4 text-[#35b0aa] shrink-0" />
                 <a href="mailto:yessbangla.bd@gmail.com" className="hover:text-white transition-colors">
                   yessbangla.bd@gmail.com
                 </a>
@@ -58,146 +66,158 @@ export function Footer() {
 
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 w-fit text-xs text-white/60 mt-1">
               <ShieldCheck className="h-4 w-4 text-emerald-400" />
-              <span>RJSC Registration: C-184920</span>
+              <span>Registration: RJSC GovBD / C-184920 • Founded in Dhaka</span>
             </div>
           </div>
 
-          {/* Col 3: Subsidiary Ventures */}
-          <div className="flex flex-col gap-3">
-            <h4 className="font-display text-sm font-bold uppercase tracking-wider text-accent">
+          {/* Column 2: Sovereign Ventures Portfolio */}
+          <div className="lg:col-span-2 flex flex-col gap-3">
+            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-[#d4a359]">
               Ventures
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <Link href="/ventures/yess-soft" className="hover:text-white transition-colors flex items-center justify-between group">
-                  <span>Yess Soft Ltd.</span>
+                <Link href="/ventures/yess-soft" className="hover:text-[#d4a359] transition-colors flex items-center justify-between group">
+                  <span>Yess Soft (ERP)</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link href="/services/akash-ott" className="hover:text-white transition-colors flex items-center justify-between group">
+                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
+                  Shondhaan Search
+                </Link>
+              </li>
+              <li>
+                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
+                  Organic Haat Agro
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/akash-ott" className="hover:text-[#d4a359] transition-colors flex items-center justify-between group">
                   <span>Akash OTT Media</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link href="/ventures" className="hover:text-white transition-colors">
-                  Shondhaan Portal
+                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
+                  Yess FinCorp
                 </Link>
               </li>
               <li>
-                <Link href="/ventures" className="hover:text-white transition-colors">
-                  YESS Organic Haat
+                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
+                  DeshLogix Express
                 </Link>
               </li>
               <li>
-                <Link href="/ventures" className="hover:text-white transition-colors">
-                  DeshLogix Freight
-                </Link>
-              </li>
-              <li>
-                <Link href="/ventures" className="text-primary-glow font-semibold hover:underline">
+                <Link href="/ventures" className="text-emerald-400 font-semibold hover:underline block pt-1">
                   All 13 Subsidiaries →
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Disciplines & Solutions */}
-          <div className="flex flex-col gap-3">
-            <h4 className="font-display text-sm font-bold uppercase tracking-wider text-accent">
-              Solutions
-            </h4>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Enterprise Cloud & AI
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Bespoke Software & ERP
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  OTT & Media Distribution
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries/manufacturing" className="hover:text-white transition-colors">
-                  Manufacturing & RMG IoT
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Turnkey EPC Architecture
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries" className="hover:text-white transition-colors">
-                  Industries Overview
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 5: Governance & Portal */}
-          <div className="flex flex-col gap-3">
-            <h4 className="font-display text-sm font-bold uppercase tracking-wider text-accent">
+          {/* Column 3: Corporate Governance & Policy */}
+          <div className="lg:col-span-2 flex flex-col gap-3">
+            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-[#d4a359]">
               Governance
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  About the Group
+                <Link href="/about/leadership" className="hover:text-[#d4a359] transition-colors">
+                  Board of Directors
                 </Link>
               </li>
               <li>
-                <Link href="/about/leadership" className="hover:text-white transition-colors">
-                  Executive Leadership & Board
+                <Link href="/about/standards" className="hover:text-[#d4a359] transition-colors">
+                  Impact & Sustainability
                 </Link>
               </li>
               <li>
-                <Link href="/about/methodology" className="hover:text-white transition-colors">
-                  Engineering Methodology
+                <Link href="/about/awards" className="hover:text-[#d4a359] transition-colors">
+                  Annual Reports
                 </Link>
               </li>
               <li>
-                <Link href="/about/awards" className="hover:text-white transition-colors">
-                  Awards & Accreditations
+                <Link href="/careers" className="hover:text-[#d4a359] transition-colors">
+                  Careers at YESS
                 </Link>
               </li>
               <li>
-                <Link href="/application-status" className="hover:text-white transition-colors flex items-center gap-1.5 text-primary-glow font-medium">
-                  <span>Candidate Status Tracker</span>
+                <Link href="/privacy" className="hover:text-[#d4a359] transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-white transition-colors">
-                  FAQ & Knowledge Base
+                <Link href="/terms" className="hover:text-[#d4a359] transition-colors">
+                  Terms of Service
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Column 4: Headquarters & Executive Dispatch Newsletter */}
+          <div className="lg:col-span-4 flex flex-col gap-3" id="contact">
+            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-[#d4a359]">
+              Headquarters & Insights
+            </h4>
+            <p className="text-xs text-white/70 leading-relaxed">
+              Quarterly macro research, policy briefings, and sovereign technology dispatches delivered to institutional partners.
+            </p>
+            {/* Inline Newsletter Subscribe Box */}
+            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2 mt-1">
+              <label htmlFor="footer-sub-email" className="text-[11px] text-white/60">
+                Executive Briefing & Sector Reports
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  id="footer-sub-email"
+                  type="email"
+                  placeholder="corporate.email@domain.com"
+                  className="bg-white/10 border border-white/20 rounded-xl px-3.5 py-2 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#35b0aa] w-full"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-xl bg-[#008744] hover:bg-[#059669] text-white font-bold text-xs shadow-sm transition-all whitespace-nowrap active:scale-95"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+            <div className="pt-2">
+              <Link
+                href="/application-status"
+                className="inline-flex items-center gap-1.5 text-xs text-[#d4a359] hover:underline"
+              >
+                <ShieldCheck className="h-3.5 w-3.5" />
+                <span>Candidate Application Tracker →</span>
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Legal */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
-          <p>© {new Date().getFullYear()} YESS Bangla Private Limited. All rights reserved.</p>
-
-          <div className="flex items-center gap-6">
-            <Link href="/terms" className="hover:text-white transition-colors">
-              Terms of Service
+        {/* Bottom Copyright & Compliance Bar */}
+        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-xs text-white/60 gap-4">
+          <div>
+            © 2025 YESS Bangladesh (yessbgd). All rights reserved. Pioneering institutional venture building.
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs">
+            <Link className="hover:text-[#d4a359] transition-colors" href="/ventures">
+              Ventures Portfolio
             </Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">
+            <Link className="hover:text-[#d4a359] transition-colors" href="/about/leadership">
+              Corporate Governance
+            </Link>
+            <Link className="hover:text-[#d4a359] transition-colors" href="/about/standards">
+              Impact & Sustainability
+            </Link>
+            <Link className="hover:text-[#d4a359] transition-colors" href="/about/awards">
+              Annual Reports
+            </Link>
+            <Link className="hover:text-[#d4a359] transition-colors" href="/privacy">
               Privacy Policy
             </Link>
-            <Link href="/faq" className="hover:text-white transition-colors">
-              FAQ
-            </Link>
-            <Link href="/contact" className="hover:text-white transition-colors">
-              Contact Desk
+            <Link className="hover:text-[#d4a359] transition-colors" href="/terms">
+              Terms of Service
             </Link>
           </div>
         </div>

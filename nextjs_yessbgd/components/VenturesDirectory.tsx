@@ -5,6 +5,22 @@ import { useState, useMemo } from "react";
 import { Search, X, ArrowRight, Layers, Sparkles } from "lucide-react";
 import { ventures, type Venture } from "@/data/ventures";
 
+const ventureMetrics: Record<string, { label1: string; val1: string; label2: string; val2: string }> = {
+  "yess-soft": { label1: "Core Scale", val1: "1M+ Txns/Day", label2: "Delivery SLA", val2: "99.97% Uptime" },
+  "akash-tv": { label1: "Network Reach", val1: "4.8M Viewers", label2: "Broadcast Grid", val2: "64 Districts" },
+  "akash-ott": { label1: "Streaming Base", val1: "2.4M Active MAU", label2: "Low-Latency Edge", val2: "<800ms Buffer" },
+  "akash-news": { label1: "Daily Readers", val1: "500K+ Pageviews", label2: "Verified Desk", val2: "100% Fact-Checked" },
+  "yess-organic-food": { label1: "Agrarian Base", val1: "10,000+ Farmers", label2: "Supply Hubs", val2: "30+ Direct Depots" },
+  "yess-one-stop-engineering": { label1: "Projects Delivered", val1: "200+ Commercial", label2: "Design QA", val2: "BNBC Aligned" },
+  "yess-technology": { label1: "Edge Infrastructure", val1: "99.98% Core SLA", label2: "Protocol", val2: "256-Bit Sovereign" },
+  "yess-entertainment": { label1: "Total Impressions", val1: "15M+ Streaming", label2: "Original IP", val2: "45+ Productions" },
+  "yess-event-management": { label1: "Sovereign Summits", val1: "150+ Summits", label2: "Delegates Hosted", val2: "75,000+ Total" },
+  "yess-restaurant": { label1: "Diners Served", val1: "500,000+ Diners", label2: "Hygiene Rating", val2: "Grade A Certified" },
+  "yess-interior": { label1: "Fitout Footprint", val1: "350,000+ Sq.Ft", label2: "Corporate Sites", val2: "120+ Completed" },
+  "yess-overseas": { label1: "Global Deployment", val1: "1,200+ Placements", label2: "Corridors", val2: "GCC, EU & ASEAN" },
+  "yess-law-chamber": { label1: "Corporate Briefs", val1: "500+ Retainers", label2: "Compliance", val2: "100% Statutory" },
+};
+
 export function VenturesDirectory() {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -73,6 +89,13 @@ export function VenturesDirectory() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((venture) => {
           const Icon = venture.icon;
+          const metric = ventureMetrics[venture.slug] || {
+            label1: "Operations",
+            val1: "Enterprise Grade",
+            label2: "Coverage",
+            val2: "Nationwide",
+          };
+
           return (
             <Link
               key={venture.slug}
@@ -80,13 +103,18 @@ export function VenturesDirectory() {
               className="glass-card rounded-2xl p-7 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex items-start justify-between mb-5">
                   <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-secondary text-foreground/80 border border-border">
-                    {venture.category}
-                  </span>
+                  <div className="text-right">
+                    <span className="inline-block text-[11px] font-bold px-2.5 py-1 rounded-full bg-secondary text-foreground/80 border border-border">
+                      {venture.category}
+                    </span>
+                    <p className="text-[10px] text-foreground/50 mt-1 font-semibold">
+                      Est. {venture.founded || "2020"}
+                    </p>
+                  </div>
                 </div>
 
                 <h3 className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors">
@@ -97,8 +125,20 @@ export function VenturesDirectory() {
                   {venture.desc}
                 </p>
 
+                {/* Operational Metric Badges Box */}
+                <div className="mt-4 p-2.5 rounded-xl bg-muted/60 border border-border/60 text-xs grid grid-cols-2 gap-2">
+                  <div>
+                    <span className="text-[10px] text-foreground/60 block">{metric.label1}</span>
+                    <span className="font-bold text-foreground text-xs">{metric.val1}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-foreground/60 block">{metric.label2}</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">{metric.val2}</span>
+                  </div>
+                </div>
+
                 {/* Highlights tags */}
-                <div className="mt-4 flex flex-wrap gap-1.5">
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
                   {venture.highlights.slice(0, 2).map((h) => (
                     <span
                       key={h}
@@ -111,7 +151,7 @@ export function VenturesDirectory() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs font-bold text-primary">
-                <span>View Full Profile</span>
+                <span>Explore Venture Profile</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </Link>

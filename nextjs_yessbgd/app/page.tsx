@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -30,6 +33,25 @@ import {
 import { ventures } from "@/data/ventures";
 
 export default function HomePage() {
+  const [activeTab, setActiveTab] = useState<string>("all");
+
+  const filteredVentures = ventures.filter((v) => {
+    if (activeTab === "all") return true;
+    if (activeTab === "tech") {
+      return ["Software & IT Solutions", "Hosting & Cloud Infrastructure", "Integrated Business Solutions"].includes(v.category);
+    }
+    if (activeTab === "agri") {
+      return ["Organic Marketplace", "Food & Beverage", "Home & Professional Services"].includes(v.category);
+    }
+    if (activeTab === "media") {
+      return ["Streaming Platform", "Satellite Television", "Digital Newspaper"].includes(v.category);
+    }
+    if (activeTab === "consulting") {
+      return ["Legal Advisory", "Event Management", "Modeling & Talent Agency", "Travel & Tourism"].includes(v.category);
+    }
+    return true;
+  });
+
   return (
     <div className="flex flex-col w-full">
       {/* 1. Cinematic Hero Section with 4 Flagship Minted 3D Medallions */}
@@ -341,116 +363,224 @@ export default function HomePage() {
         <div className="container-tight">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
-              CAPABILITIES & PRACTICES
+              ENGINEERING & VENTURE CAPABILITIES
             </span>
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
-              Sovereign Engineering & Multi-Sector Solutions
+              Institutional Practice Areas
             </h2>
             <p className="text-sm sm:text-base text-foreground/70 mt-3">
-              Deploying enterprise architecture, low-latency streaming networks, and cold-chain agritech platforms designed for scale.
+              Sovereign enterprise architecture, high-concurrency streaming pipelines, and AI-driven automation built to institutional-grade resilience.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Discipline 1 */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Server className="h-6 w-6" />
+            {/* Discipline 1: Enterprise Software & Cloud */}
+            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Server className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Enterprise Software & Cloud Systems
+                </h3>
+                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                  Zero-trust microservices, sovereign cloud mesh topologies, and high-concurrency database architectures hosting critical workloads.
+                </p>
+                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Zero-trust microservices & mesh architecture</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Bare-metal Kubernetes domestic edge nodes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>ISO 27001 compliant security governance</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                Enterprise Cloud & Distributed Systems
-              </h3>
-              <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                Zero-trust microservices, sovereign cloud mesh topologies, and high-concurrency database architectures hosting critical workloads.
-              </p>
-              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>Yess Soft Core</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Discipline 2 */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Code2 className="h-6 w-6" />
-              </div>
-              <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                Bespoke Software & Enterprise ERP
-              </h3>
-              <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                Tailored enterprise management systems, payroll suites, inventory control, and multi-tenant platforms built with TypeScript & PostgreSQL.
-              </p>
-              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>Custom Engineering</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Discipline 3 */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <PlayCircle className="h-6 w-6" />
-              </div>
-              <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                OTT Media & Live Transcoding
-              </h3>
-              <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                Sub-second latency video ingestion, adaptive HLS/DASH streaming, DRM content protection, and edge CDN distribution for millions of viewers.
-              </p>
-              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>Akash OTT Tech</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <Link href="/services/yess-one-stop" className="hover:underline flex items-center justify-between w-full">
+                  <span>Explore Practice Dossier</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             </div>
 
-            {/* Discipline 4 */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Leaf className="h-6 w-6" />
+            {/* Discipline 2: Venture Incubation */}
+            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Code2 className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Venture Incubation & Capital Architecture
+                </h3>
+                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                  Turnkey venture building, capitalization advisory, equity structuring, and operational governance for early-to-growth enterprises.
+                </p>
+                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>100% Foreground IP retention guarantee</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>Dhaka Innovation Lab co-residency</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>Milestone-based seed tranches</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                Cold-Chain AgriTech & IoT Telemetry
-              </h3>
-              <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                Sensor-driven logistics, temperature-controlled farm-to-table traceability, and direct market access for 10,000+ organic growers.
-              </p>
-              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>Organic Haat Core</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
+                  <span>Explore Practice Dossier</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             </div>
 
-            {/* Discipline 5 */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Plane className="h-6 w-6" />
+            {/* Discipline 3: Digital Media & Streaming */}
+            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <PlayCircle className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Digital Media Streaming & Content Delivery
+                </h3>
+                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                  Sub-second latency video ingestion, adaptive HLS/DASH streaming, DRM content protection, and edge CDN distribution for millions of viewers.
+                </p>
+                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Sub-second low latency HLS/DASH packaging</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Multi-DRM cryptographic studio security</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Telecom carrier billing API integration</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                Multimodal Logistics & Freight
-              </h3>
-              <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                Cross-border cargo visibility, port logistics automated scheduling, and warehouse fleet management across major economic corridors.
-              </p>
-              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>DeshLogix</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <Link href="/services/akash-ott" className="hover:underline flex items-center justify-between w-full">
+                  <span>Explore Practice Dossier</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             </div>
 
-            {/* Discipline 6 */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Scale className="h-6 w-6" />
+            {/* Discipline 4: AgriTech & IoT */}
+            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Leaf className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Sustainable Agribusiness & Cold-Chain IoT
+                </h3>
+                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                  Sensor-driven logistics, temperature-controlled farm-to-table traceability, and direct market access for 10,000+ organic growers.
+                </p>
+                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>LoRaWAN farm IoT telemetry nodes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>Traceable harvest QR passport registries</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>Direct farmer digital liquidity rails</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                Statutory Governance & Advisory
-              </h3>
-              <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                RJSC corporate registration, cross-border intellectual property structuring, bilateral joint venture agreements, and NBR tax compliance.
-              </p>
-              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <span>Legal Advisory</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
+                  <span>Explore Practice Dossier</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Discipline 5: Freight & Logistics */}
+            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Plane className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Cross-Border Freight & Customs Automation
+                </h3>
+                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                  Cross-border cargo visibility, port logistics automated scheduling, and warehouse fleet management across major economic corridors.
+                </p>
+                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Chittagong Port customs clearance bridge</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>Multimodal fleet automated dispatch</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                    <span>EDI/AS4 statutory customs integration</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
+                  <span>Explore Practice Dossier</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Discipline 6: Regulatory Technology */}
+            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Scale className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Regulatory Technology & Sovereign Advisory
+                </h3>
+                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
+                  RJSC corporate registration, cross-border intellectual property structuring, bilateral joint venture agreements, and NBR tax compliance.
+                </p>
+                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>Bilateral JV structuring & statutory governance</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>NBR tax & statutory regulatory compliance</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <span>RJSC statutory filing & IP ownership</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
+                  <span>Explore Practice Dossier</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             </div>
           </div>
@@ -458,39 +588,51 @@ export default function HomePage() {
       </section>
 
       {/* 5. Impact Metric Counters */}
-      <section className="py-16 bg-[#061a1b] text-white border-y border-white/10">
+      <section className="py-16 bg-[#061a1b] text-white border-y border-white/10" id="impact">
         <div className="container-tight">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="flex flex-col">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#35b0aa]">
-                13+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div className="flex flex-col items-center">
+              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#d4a359]">
+                ৳250M+
               </span>
-              <span className="text-xs uppercase tracking-wider text-white/60 font-semibold mt-2">
-                Active Subsidiaries
+              <span className="text-sm font-bold text-white mt-2">
+                Sovereign Capital Deployed
+              </span>
+              <span className="text-xs text-white/60 mt-1">
+                Across 13 wholly-owned and partnered subsidiaries
               </span>
             </div>
-            <div className="flex flex-col">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#d4a359]">
+            <div className="flex flex-col items-center">
+              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#35b0aa]">
                 500+
               </span>
-              <span className="text-xs uppercase tracking-wider text-white/60 font-semibold mt-2">
+              <span className="text-sm font-bold text-white mt-2">
                 Engineers & Specialists
               </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#35b0aa]">
-                $50M+
-              </span>
-              <span className="text-xs uppercase tracking-wider text-white/60 font-semibold mt-2">
-                Enterprise Value Created
+              <span className="text-xs text-white/60 mt-1">
+                Distributed across 64 administrative districts
               </span>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
+              <span className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-400">
+                99.8%
+              </span>
+              <span className="text-sm font-bold text-white mt-2">
+                Enterprise Core SLA & Uptime
+              </span>
+              <span className="text-xs text-white/60 mt-1">
+                Governed under zero-trust operational protocols
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
               <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#d4a359]">
-                99.4%
+                13
               </span>
-              <span className="text-xs uppercase tracking-wider text-white/60 font-semibold mt-2">
-                Client SLA Retention
+              <span className="text-sm font-bold text-white mt-2">
+                Scaled Subsidiaries
+              </span>
+              <span className="text-xs text-white/60 mt-1">
+                Covering ERP, media, agri-tech, fintech and trade
               </span>
             </div>
           </div>
@@ -500,56 +642,115 @@ export default function HomePage() {
       {/* 6. Subsidiaries Directory Preview (All 13 Ventures) */}
       <section id="ventures" className="py-20 bg-[#f8faf9]">
         <div className="container-tight">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-xs font-bold text-primary uppercase tracking-widest">
-                PORTFOLIO ECOSYSTEM
-              </span>
-              <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-1">
-                The 13 Conglomerate Ventures
-              </h2>
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-xs font-bold text-primary uppercase tracking-widest">
+              THE CONGLOMERATE CANVAS
+            </span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
+              13 Sovereign Subsidiaries
+            </h2>
+            <p className="text-sm sm:text-base text-foreground/70 mt-2">
+              From enterprise ERP to pan-district logistics and digital television, YESS Bangladesh incubates and scales self-sustaining institutional assets.
+            </p>
+
+            {/* Filter Tabs matching Stitch exactly */}
+            <div className="mt-8 flex flex-wrap justify-center gap-2">
+              <button
+                type="button"
+                onClick={() => setActiveTab("all")}
+                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
+                  activeTab === "all"
+                    ? "bg-primary text-white"
+                    : "bg-white text-foreground/70 hover:text-primary border border-border"
+                }`}
+              >
+                All Ventures (13)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("tech")}
+                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
+                  activeTab === "tech"
+                    ? "bg-primary text-white"
+                    : "bg-white text-foreground/70 hover:text-primary border border-border"
+                }`}
+              >
+                Technology & AI
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("agri")}
+                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
+                  activeTab === "agri"
+                    ? "bg-primary text-white"
+                    : "bg-white text-foreground/70 hover:text-primary border border-border"
+                }`}
+              >
+                Agri & Commerce
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("media")}
+                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
+                  activeTab === "media"
+                    ? "bg-primary text-white"
+                    : "bg-white text-foreground/70 hover:text-primary border border-border"
+                }`}
+              >
+                Media & Telecom
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("consulting")}
+                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
+                  activeTab === "consulting"
+                    ? "bg-primary text-white"
+                    : "bg-white text-foreground/70 hover:text-primary border border-border"
+                }`}
+              >
+                Consulting & Fin
+              </button>
             </div>
-            <Link
-              href="/ventures"
-              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
-            >
-              <span>Explore full directory</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ventures.map((venture) => {
+            {filteredVentures.map((venture) => {
               const Icon = venture.icon;
               return (
-                <Link
+                <div
                   key={venture.slug}
-                  href={`/ventures/${venture.slug}`}
-                  className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Icon className="h-5 w-5" />
+                    <div className="flex items-start justify-between">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-lg group-hover:scale-105 transition-transform">
+                        <Icon className="h-6 w-6" />
                       </div>
-                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-secondary/80 text-foreground border border-border">
-                        {venture.category}
+                      <span className="px-2.5 py-1 rounded bg-[#eaf2f2] text-[11px] font-bold text-foreground/70">
+                        Est. 2018
                       </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                    <span className="text-xs font-bold text-[#d4a359] mt-4 block uppercase tracking-wider">
+                      {venture.category}
+                    </span>
+
+                    <h3 className="font-display font-bold text-xl text-foreground mt-1 group-hover:text-primary transition-colors">
                       {venture.title}
                     </h3>
-                    <p className="text-xs text-foreground/70 mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-foreground/70 mt-2 line-clamp-3 leading-relaxed">
                       {venture.desc}
                     </p>
                   </div>
 
-                  <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                    <span>View Profile</span>
+                  <Link
+                    href={`/ventures/${venture.slug}`}
+                    className="mt-5 inline-flex items-center gap-1.5 text-primary font-bold text-xs hover:text-[#35b0aa] transition-colors"
+                  >
+                    <span>View Venture Profile</span>
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               );
             })}
           </div>

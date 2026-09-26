@@ -123,22 +123,36 @@ export default async function SingleVenturePage({
               {/* Core Features & Products */}
               {venture.features && venture.features.length > 0 && (
                 <div>
-                  <h3 className="font-display font-bold text-2xl text-foreground mb-6">
-                    Flagship Capabilities & Products
-                  </h3>
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="font-display font-bold text-2xl text-foreground">
+                      Flagship Capabilities &amp; Products
+                    </h3>
+                    <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>Production Deployments Active</span>
+                    </span>
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    {venture.features.map((feat) => (
+                    {venture.features.map((feat, idx) => (
                       <div
                         key={feat.title}
-                        className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-all"
+                        className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-all flex flex-col justify-between"
                       >
-                        <CheckCircle2 className="h-5 w-5 text-primary mb-3" />
-                        <h4 className="font-display font-bold text-base text-foreground">
-                          {feat.title}
-                        </h4>
-                        <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
-                          {feat.desc}
-                        </p>
+                        <div>
+                          <div className="flex items-center justify-between mb-3">
+                            <CheckCircle2 className="h-5 w-5 text-primary" />
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                              <span>{idx === 0 ? "Active v4.2" : idx === 1 ? "Enterprise Live" : "Sovereign Tier"}</span>
+                            </span>
+                          </div>
+                          <h4 className="font-display font-bold text-base text-foreground">
+                            {feat.title}
+                          </h4>
+                          <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                            {feat.desc}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   </div>

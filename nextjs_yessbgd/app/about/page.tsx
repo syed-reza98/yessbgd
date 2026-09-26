@@ -193,6 +193,25 @@ export default function AboutPage() {
                 <blockquote className="mt-5 text-sm text-foreground/80 leading-relaxed italic border-l-2 border-primary pl-4">
                   "Our promise is simple: we treat every client's mission-critical operations as if they were our own. That is how we have earned trust across Bangladesh for over a decade."
                 </blockquote>
+
+                {/* Circular Corporate Seal Stamp matching Stitch Section 3 */}
+                <div className="mt-5 p-3 rounded-2xl bg-white/5 border border-dashed border-[#d4a359]/60 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full border-2 border-dashed border-[#d4a359] flex items-center justify-center text-[#d4a359] font-bold text-xs">
+                      RJSC
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-bold text-[#d4a359] block uppercase tracking-wider">
+                        STATUTORY SEAL • GOVBD
+                      </span>
+                      <span className="text-[10px] text-foreground/70">
+                        Reg: C-184920/2022 • Founded in Dhaka
+                      </span>
+                    </div>
+                  </div>
+                  <ShieldCheck className="h-5 w-5 text-emerald-400 shrink-0" />
+                </div>
+
                 <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
                   <span className="text-xs text-foreground/60 font-medium">
                     Dhaka HQ Executive Office
@@ -241,6 +260,115 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Explore YESS Bangladesh Further (Stitch Section 4 exact match) */}
+      <section className="py-20 bg-[#f4f8f8] border-t border-[#eaf2f2]">
+        <div className="container-tight">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+              <span className="text-xs font-bold text-primary font-bold uppercase tracking-wider">
+                INSTITUTIONAL EXPLORATION
+              </span>
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-1">
+                Explore YESS Bangladesh Further
+              </h2>
+            </div>
+            <p className="text-sm text-foreground/70 max-w-md mt-2 md:mt-0 leading-relaxed">
+              Access deep-dive disclosures, engineering roadmaps, and statutory board reports across our corporate structure.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1: Executive Board */}
+            <Link
+              href="/about/leadership"
+              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Users className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Executive Board
+                </h3>
+                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                  Governed by high-integrity operators, technologists, and public policy pioneers steering 13 sovereign subsidiaries.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <span>View Leadership</span>
+                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* Card 2: Accreditations */}
+            <Link
+              href="/about/awards"
+              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Award className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Accreditations
+                </h3>
+                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                  ISO-aligned quality management, BASIS member certification, and national technology achievement awards.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <span>View Citations</span>
+                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* Card 3: Engineering SDLC */}
+            <Link
+              href="/about/methodology"
+              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Cpu className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  Engineering SDLC
+                </h3>
+                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                  Our proven 4-step delivery lifecycle: Discover, Design, Deliver, and Operate with automated GitOps pipelines.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <span>View Methodology</span>
+                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* Card 4: QA Framework */}
+            <Link
+              href="/about/standards"
+              className="glass-card rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <ShieldCheck className="h-6 w-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                  QA Framework
+                </h3>
+                <p className="text-xs text-foreground/70 mt-2 leading-relaxed">
+                  Zero-trust security enclaves, IEEE 829 test automation pyramids, and contracted 99.9% uptime SLA commitments.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                <span>View Standards</span>
+                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
           </div>
         </div>
       </section>

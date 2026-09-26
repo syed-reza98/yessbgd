@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { insights, getInsight } from "@/data/insights";
 import { ShareArticleButton } from "./ShareArticleButton";
+import { CitationBox } from "@/components/CitationBox";
 import {
   ArrowLeft,
   Calendar,
@@ -143,8 +144,16 @@ export default async function InsightArticlePage({ params }: Props) {
           ))}
         </div>
 
+        {/* Citation Box Component */}
+        <CitationBox
+          title={article.title}
+          author={article.author.name}
+          year="2025"
+          slug={article.slug}
+        />
+
         {/* Institutional Statutory Seal Footer in Article */}
-        <div className="mt-12 pt-8 border-t border-outline-variant/30 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 space-y-3">
+        <div className="mt-8 pt-8 border-t border-outline-variant/30 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 space-y-3">
           <div className="flex items-center gap-2 text-xs font-bold text-[#0d6e6e] uppercase tracking-wider">
             <Shield className="w-4 h-4" />
             <span>Institutional Research Integrity</span>
@@ -152,8 +161,8 @@ export default async function InsightArticlePage({ params }: Props) {
           <p className="text-xs text-on-surface-variant leading-relaxed">
             All whitepapers and architectural blueprints published by YESS Bangladesh undergo peer review
             by our Executive Architecture Board. For licensing, reprinting, or strategic advisory, contact{" "}
-            <a href="mailto:insights@yessbgd.com" className="text-[#0d6e6e] underline">
-              insights@yessbgd.com
+            <a href="mailto:yessbangla.bd@gmail.com" className="text-[#0d6e6e] underline">
+              yessbangla.bd@gmail.com
             </a>
             .
           </p>

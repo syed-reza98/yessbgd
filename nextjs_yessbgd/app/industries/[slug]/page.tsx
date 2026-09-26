@@ -8,9 +8,13 @@ import {
   ShieldCheck,
   Building2,
   Sparkles,
+  Lock,
+  Scale,
+  FileCheck,
 } from "lucide-react";
 import { industries } from "@/data/industries";
 import { PageHero } from "@/components/PageHero";
+import { ServiceFaqDrawer } from "@/components/ServiceFaqDrawer";
 
 export async function generateStaticParams() {
   return industries.map((i) => ({
@@ -79,7 +83,7 @@ export default async function SingleIndustryPage({
       <section className="py-16 bg-background">
         <div className="container-tight">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Left 8 Cols: Challenges, Solutions, Case Highlights */}
+            {/* Left 8 Cols: Challenges, Solutions, Compliance, Outcomes, FAQs */}
             <div className="lg:col-span-8 flex flex-col space-y-12">
               {/* Challenges vs Solutions */}
               <div>
@@ -108,7 +112,7 @@ export default async function SingleIndustryPage({
                   {industry.solutions.map((sol) => (
                     <div
                       key={sol.title}
-                      className="glass-card rounded-2xl p-6 border border-border"
+                      className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-colors"
                     >
                       <CheckCircle2 className="h-5 w-5 text-primary mb-3" />
                       <h4 className="font-display font-bold text-base text-foreground">
@@ -122,7 +126,33 @@ export default async function SingleIndustryPage({
                 </div>
               </div>
 
-              {/* Case Highlights */}
+              {/* Sovereign Governance & Compliance Matrix */}
+              {industry.compliance && industry.compliance.length > 0 && (
+                <div className="rounded-2xl p-6 bg-muted/40 border border-border glass-card">
+                  <div className="flex items-center gap-2 mb-3">
+                    <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                    <h3 className="font-display font-bold text-lg text-foreground">
+                      Sovereign Governance &amp; Regulatory Alignment
+                    </h3>
+                  </div>
+                  <p className="text-xs text-foreground/70 mb-4 leading-relaxed">
+                    Every deployment in {industry.title} is strictly audited for compliance under national statutory mandates and international standards.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {industry.compliance.map((c) => (
+                      <span
+                        key={c}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-background border border-border text-foreground/90 shadow-sm"
+                      >
+                        <FileCheck className="w-3.5 h-3.5 text-primary" />
+                        <span>{c}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Verified Case Outcomes */}
               {industry.caseHighlights && industry.caseHighlights.length > 0 && (
                 <div className="glass-card-strong rounded-2xl p-8 border border-border">
                   <h3 className="font-display font-bold text-xl text-foreground mb-4">
@@ -143,6 +173,15 @@ export default async function SingleIndustryPage({
                   </div>
                 </div>
               )}
+
+              {/* Collapsible FAQ Drawer */}
+              {industry.faqs && industry.faqs.length > 0 && (
+                <ServiceFaqDrawer
+                  faqs={industry.faqs}
+                  title={`${industry.title} FAQ`}
+                  subtitle="Common inquiries regarding regulatory compliance, legacy migrations, and engagement models."
+                />
+              )}
             </div>
 
             {/* Right 4 Cols: Consultation Card */}
@@ -158,12 +197,20 @@ export default async function SingleIndustryPage({
                   Book a confidential 30-minute discovery consultation with our dedicated industry domain architects.
                 </p>
 
-                <Link
-                  href="/contact"
-                  className="w-full text-center py-3.5 rounded-xl bg-primary text-white font-bold text-xs block shadow-sm hover:bg-primary/90 transition-all"
-                >
-                  Schedule Industry Consultation
-                </Link>
+                <div className="space-y-3">
+                  <Link
+                    href="/contact"
+                    className="w-full text-center py-3.5 rounded-xl bg-primary text-white font-bold text-xs block shadow-sm hover:bg-primary/90 transition-all cursor-pointer"
+                  >
+                    Schedule Industry Consultation
+                  </Link>
+                  <Link
+                    href="/industries"
+                    className="w-full text-center py-2.5 rounded-xl bg-secondary text-foreground font-semibold text-xs block border border-border hover:bg-secondary/80 transition-all"
+                  >
+                    ← All Industry Verticals
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
