@@ -1,23 +1,130 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Factory, Tv, Truck, ShoppingCart, Landmark, HeartPulse } from "lucide-react";
-import { PageHero } from "@/components/PageHero";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Factory,
+  Tv,
+  Truck,
+  ShoppingCart,
+  Landmark,
+  HeartPulse,
+  TrendingUp,
+  ShieldCheck,
+  Building2,
+  Workflow,
+  Sparkles,
+} from "lucide-react";
 import { industries } from "@/data/industries";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Industries Overview | YESS Bangladesh",
   description:
     "Sector transformation across Media & Broadcasting, Manufacturing & RMG, Logistics, E-commerce, Financial Services, and Healthcare in Bangladesh.",
 };
 
+const industryMetrics = [
+  {
+    value: "6",
+    label: "Core Industry Verticals",
+    desc: "National high-impact sectors transformed",
+    icon: Factory,
+    color: "text-white",
+    glow: "text-[#35b0aa]",
+  },
+  {
+    value: "$100M+",
+    label: "Cumulative Transaction Flow",
+    desc: "Enterprise transaction volume secured",
+    icon: TrendingUp,
+    color: "text-[#d4a359]",
+    glow: "text-[#f6c87a]",
+  },
+  {
+    value: "64 Districts",
+    label: "Nationwide Deployment",
+    desc: "Active logistics & digital reach",
+    icon: Truck,
+    color: "text-white",
+    glow: "text-[#35b0aa]",
+  },
+  {
+    value: "Zero-Trust",
+    label: "Sovereign Compliance",
+    desc: "RJSC, BIDA & central bank standards",
+    icon: ShieldCheck,
+    color: "text-[#d4a359]",
+    glow: "text-[#f6c87a]",
+  },
+];
+
 export default function IndustriesPage() {
   return (
     <div className="flex flex-col w-full">
-      <PageHero
-        eyebrow="SECTOR TRANSFORMATION"
-        title="Industries We Transform"
-        subtitle="Bringing sovereign technology, regulatory compliance, and deep operational expertise to Bangladesh's core economic engines."
-      />
+      {/* 1. Signature Corporate Hero Section */}
+      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10">
+        {/* Background Ambient Geometric Grid Overlay */}
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
 
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb & Tag */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+              Home
+            </Link>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">Industries</span>
+          </nav>
+
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>— SECTOR TRANSFORMATION &amp; INDUSTRIAL THESIS —</span>
+            </div>
+
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mb-6 leading-tight tracking-tight">
+              Transforming Bangladesh&apos;s Critical Economic Sectors at{" "}
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                Sovereign Industrial Scale
+              </span>
+              .
+            </h1>
+
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
+              Bringing enterprise cloud architectures, regulatory compliance, IoT automation, and institutional governance
+              to the core engines driving Bangladesh&apos;s multi-billion dollar economy.
+            </p>
+          </div>
+
+          {/* 4 Telemetry Metric Cards Strip */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
+            {industryMetrics.map((metric) => {
+              const Icon = metric.icon;
+              return (
+                <div
+                  key={metric.label}
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span
+                      className={`text-3xl sm:text-4xl font-extrabold ${metric.color} group-hover:scale-105 transition-transform`}
+                    >
+                      {metric.value}
+                    </span>
+                    <Icon className={`w-6 h-6 ${metric.glow}`} />
+                  </div>
+                  <p className="text-sm font-bold text-white">{metric.label}</p>
+                  <p className="text-xs text-slate-400 mt-1">{metric.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Industries Grid Section */}
       <section className="py-20 bg-background">
         <div className="container-tight">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

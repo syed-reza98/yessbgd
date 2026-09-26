@@ -6,9 +6,7 @@ import {
   Building,
   Users,
   ShieldCheck,
-  ChevronRight,
-  Shield,
-  ArrowRight,
+  Sparkles,
   Download,
   Gavel,
   Globe2,
@@ -27,24 +25,28 @@ const telemetryBadges = [
     title: "1 Business Day",
     desc: "Response SLA Contracted",
     color: "text-[#35b0aa]",
+    glow: "text-[#35b0aa]",
   },
   {
     icon: Building,
     title: "2 Strategic Hubs",
     desc: "Motijheel HQ & Gulshan Lab",
-    color: "text-[#f6c87a]",
+    color: "text-[#d4a359]",
+    glow: "text-[#f6c87a]",
   },
   {
     icon: Users,
     title: "Direct Partner Access",
     desc: "Zero Recruiter Barrier",
-    color: "text-[#35b0aa]",
+    color: "text-white",
+    glow: "text-[#35b0aa]",
   },
   {
     icon: ShieldCheck,
     title: "NDA Governance",
     desc: "Bilateral Protocol Enforced",
-    color: "text-[#f6c87a]",
+    color: "text-[#d4a359]",
+    glow: "text-[#f6c87a]",
   },
 ];
 
@@ -81,58 +83,65 @@ const faqCards = [
 export default function ContactPage() {
   return (
     <div className="space-y-16 pb-20">
-      {/* Hero Section */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* 1. Signature Corporate Hero Section */}
+      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+        {/* Background Ambient Geometric Grid Overlay */}
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-foreground/60 mb-6">
-            <Link href="/" className="hover:text-primary transition-colors">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
               Home
             </Link>
-            <span>/</span>
-            <span className="text-primary font-bold">Contact Us</span>
-          </div>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">Contact Us</span>
+          </nav>
 
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-              <Shield className="w-3.5 h-3.5" />
-              <span>Direct Institutional Channels</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>— DIRECT INSTITUTIONAL CHANNELS —</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight mb-6 leading-tight">
               Connect With Bangladesh&apos;s{" "}
-              <span className="text-primary">
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
                 Venture Ecosystem
               </span>
               .
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-foreground/70 max-w-3xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
               Engage our managing partners, venture leads, and engineering directors directly. Guaranteed
               executive response within one business day for institutional inquiries and sovereign tech
               partnerships.
             </p>
           </div>
 
-          {/* Telemetry Metric Badges */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl glass-card border border-border shadow-sm">
+          {/* Telemetry Metric Cards Strip (4 Glass Cards) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
             {telemetryBadges.map((badge) => {
               const Icon = badge.icon;
               return (
                 <div
                   key={badge.title}
-                  className="flex items-center gap-3 px-3 py-2 border-r border-border last:border-none"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                    <Icon className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-2">
+                    <span
+                      className={`text-2xl sm:text-3xl font-extrabold ${badge.color} group-hover:scale-105 transition-transform`}
+                    >
+                      {badge.title}
+                    </span>
+                    <Icon className={`w-6 h-6 ${badge.glow}`} />
                   </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-display font-bold text-foreground">{badge.title}</p>
-                    <p className="text-[10px] text-foreground/60">{badge.desc}</p>
-                  </div>
+                  <p className="text-xs text-slate-400 mt-1">{badge.desc}</p>
                 </div>
               );
             })}
@@ -148,16 +157,15 @@ export default function ContactPage() {
       {/* Frequently Addressed Inquiries Strip */}
       <section className="py-12 bg-muted/20 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-primary font-bold text-xs uppercase tracking-widest block mb-2">
-              Institutional Protocols
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-foreground">
-              Frequently Addressed Inquiries
-            </h2>
-            <p className="text-xs sm:text-sm text-foreground/70 mt-2">
-              Key governance policies governing our partnerships, IP protection, and foreign enterprise engagements.
-            </p>
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-primary">
+                Statutory FAQs
+              </span>
+              <h2 className="font-display font-bold text-2xl text-foreground">
+                Institutional Engagement Protocols
+              </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -166,23 +174,31 @@ export default function ContactPage() {
               return (
                 <div
                   key={faq.question}
-                  className="p-6 rounded-2xl glass-card border border-border shadow-sm hover:border-primary/40 transition-all flex flex-col justify-between"
+                  className="glass-card rounded-2xl p-6 border border-border shadow-sm flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5" />
+                    <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                      <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-sm sm:text-base font-display font-bold text-foreground mb-2">
+                    <h3 className="font-display font-bold text-base text-foreground mb-2">
                       {faq.question}
                     </h3>
                     <p className="text-xs text-foreground/70 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs text-primary font-semibold">
-                    <Link href={faq.href} className="hover:underline flex items-center gap-1.5">
+
+                  <div className="mt-6 pt-4 border-t border-border">
+                    <Link
+                      href={faq.href}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+                    >
                       <span>{faq.action}</span>
-                      {faq.download ? <Download className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                      {faq.download ? (
+                        <Download className="w-3.5 h-3.5" />
+                      ) : (
+                        <Globe2 className="w-3.5 h-3.5" />
+                      )}
                     </Link>
                   </div>
                 </div>

@@ -9,6 +9,7 @@ import {
   FileText,
   Lock,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -121,80 +122,86 @@ const clauses = [
 export default function TermsPage() {
   return (
     <div className="space-y-16 pb-20">
-      {/* Hero Section */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* 1. Signature Corporate Hero Section */}
+      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+        {/* Background Ambient Geometric Grid Overlay */}
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-foreground/60 mb-6">
-            <Link href="/" className="hover:text-primary transition-colors">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
               Home
             </Link>
-            <span>/</span>
-            <span className="text-primary font-bold">Terms of Service</span>
-          </div>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">Terms of Service</span>
+          </nav>
 
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-              <Gavel className="w-4 h-4" />
-              <span>Statutory Corporate Governance &amp; Legal Framework</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>— STATUTORY CORPORATE GOVERNANCE &amp; LEGAL FRAMEWORK —</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight mb-6 leading-tight">
               Terms of{" "}
-              <span className="text-primary">
-                Service
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                Institutional Service
               </span>
+              .
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-foreground/70 max-w-3xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
               The master institutional agreement governing enterprise software deliverables, Statements of
               Work (SOW), foreground intellectual property transfer, statutory withholding tax, sovereign
               data residency, and binding dispute resolution with YESS Bangladesh.
             </p>
           </div>
 
-          {/* Document Release Metadata Strip */}
-          <div className="glass-card p-5 rounded-2xl border border-border shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+          {/* Document Release Metadata Strip (3 Glass Cards) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-4">
+            <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all flex items-start gap-4">
+              <div className="p-2.5 rounded-xl bg-white/10 text-[#35b0aa] shrink-0">
                 <FileText className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-foreground/60 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
                   Document Release
                 </span>
-                <span className="text-xs font-bold text-foreground">
+                <span className="text-xs font-bold text-white mt-0.5 block">
                   Version 2.4 (Statutory Revision)
                 </span>
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+            <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all flex items-start gap-4">
+              <div className="p-2.5 rounded-xl bg-white/10 text-[#f6c87a] shrink-0">
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-foreground/60 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
                   Effective Date
                 </span>
-                <span className="text-xs font-bold text-foreground">
+                <span className="text-xs font-bold text-white mt-0.5 block">
                   September 2026 (Operational)
                 </span>
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-400">
+            <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all flex items-start gap-4">
+              <div className="p-2.5 rounded-xl bg-white/10 text-[#35b0aa] shrink-0">
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-foreground/60 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
                   Legal Jurisdiction
                 </span>
-                <span className="text-xs font-bold text-foreground">
+                <span className="text-xs font-bold text-white mt-0.5 block">
                   Courts of Dhaka, Bangladesh (RJSC C-184920)
                 </span>
               </div>

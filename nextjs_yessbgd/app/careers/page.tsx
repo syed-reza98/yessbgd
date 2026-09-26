@@ -132,89 +132,114 @@ const hiringFaqs = [
 export default function CareersPage() {
   return (
     <div className="space-y-16 pb-20">
-      {/* Hero Section */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* 1. Signature Corporate Hero Section */}
+      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+        {/* Background Ambient Geometric Grid Overlay */}
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-foreground/60 mb-6">
-            <Link href="/" className="hover:text-primary transition-colors">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
               Home
             </Link>
-            <span>/</span>
-            <span className="text-primary font-bold">Careers Hub</span>
-          </div>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">Careers Hub</span>
+          </nav>
 
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-6">
-              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-              <span>Talent &amp; Sovereign Capabilities</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>— TALENT &amp; SOVEREIGN CAPABILITIES —</span>
             </div>
 
             {/* Headline */}
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight tracking-tight mb-6">
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight tracking-tight mb-6">
               Build{" "}
-              <span className="bg-gradient-to-r from-emerald-600 via-teal-500 to-[#d4a359] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
                 Sovereign Technologies
               </span>{" "}
               &amp; Shape Bangladesh&apos;s{" "}
-              <span className="text-[#d4a359] underline decoration-[#d4a359]/40 decoration-2 underline-offset-8">
+              <span className="text-[#f6c87a] underline decoration-[#d4a359]/40 decoration-2 underline-offset-8">
                 Industrial Future
               </span>
               .
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg text-foreground/75 max-w-3xl leading-relaxed mb-10">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
               Join an institutional ecosystem of 500+ engineers, product architects, and operations leaders
               building the next generation of regional champions across enterprise cloud, agritech,
               streaming, and sovereign finance.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 mb-14">
+            <div className="flex flex-wrap items-center gap-4 mb-12">
               <a
                 href="#open-roles"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-7 py-3.5 rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                className="inline-flex items-center gap-2 bg-[#0d6e6e] hover:bg-[#0d6e6e]/90 text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg border border-[#35b0aa]/50 transition-all active:scale-95 cursor-pointer"
               >
                 <span>Explore 12 Open Roles</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 text-[#f6c87a]" />
               </a>
 
               <Link
                 href="/application-status"
-                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 text-foreground font-semibold text-sm px-6 py-3.5 rounded-xl transition-all border border-border"
+                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all border border-white/15 backdrop-blur-sm hover:border-[#35b0aa]/40"
               >
-                <ClipboardCheck className="w-4 h-4 text-primary" />
+                <ClipboardCheck className="w-4 h-4 text-[#35b0aa]" />
                 <span>Fast-Track Application Status</span>
               </Link>
             </div>
           </div>
 
-          {/* Talent Telemetry Strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="glass-card p-6 rounded-2xl border border-border shadow-sm group">
-              <span className="font-display text-3xl lg:text-4xl font-extrabold text-primary block mb-2">500+</span>
-              <h2 className="font-display font-bold text-sm text-foreground mb-1">Ecosystem Builders</h2>
-              <p className="text-foreground/70 text-xs">Engineers, Agronomists &amp; Venture Architects</p>
+          {/* Talent Telemetry Strip (4 Glass Cards) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#35b0aa] group-hover:scale-105 transition-transform">
+                  500+
+                </span>
+                <Users className="w-6 h-6 text-[#35b0aa]" />
+              </div>
+              <p className="text-sm font-bold text-white mb-1">Ecosystem Builders</p>
+              <p className="text-xs text-slate-400">Engineers, Agronomists &amp; Venture Architects</p>
             </div>
 
-            <div className="glass-card p-6 rounded-2xl border border-border shadow-sm group">
-              <span className="font-display text-3xl lg:text-4xl font-extrabold text-amber-500 block mb-2">94%</span>
-              <h2 className="font-display font-bold text-sm text-foreground mb-1">Retention Rate</h2>
-              <p className="text-foreground/70 text-xs">Long-term institutional loyalty &amp; career growth</p>
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#d4a359] group-hover:scale-105 transition-transform">
+                  94%
+                </span>
+                <TrendingUp className="w-6 h-6 text-[#f6c87a]" />
+              </div>
+              <p className="text-sm font-bold text-white mb-1">Retention Rate</p>
+              <p className="text-xs text-slate-400">Long-term institutional loyalty &amp; career growth</p>
             </div>
 
-            <div className="glass-card p-6 rounded-2xl border border-border shadow-sm group">
-              <span className="font-display text-2xl lg:text-3xl font-extrabold text-primary block mb-2">Dual Hub</span>
-              <h2 className="font-display font-bold text-sm text-foreground mb-1">Gulshan-2 &amp; Motijheel</h2>
-              <p className="text-foreground/70 text-xs">Dhaka Dual-Campus Innovation Labs &amp; Dev Ops</p>
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-2xl sm:text-3xl font-extrabold text-white group-hover:scale-105 transition-transform">
+                  Dual Hub
+                </span>
+                <Building2 className="w-6 h-6 text-[#35b0aa]" />
+              </div>
+              <p className="text-sm font-bold text-white mb-1">Gulshan-2 &amp; Motijheel</p>
+              <p className="text-xs text-slate-400">Dhaka Dual-Campus Innovation Labs &amp; Dev Ops</p>
             </div>
 
-            <div className="glass-card p-6 rounded-2xl border border-border shadow-sm group">
-              <span className="font-display text-3xl lg:text-4xl font-extrabold text-amber-500 block mb-2">৳250k+</span>
-              <h2 className="font-display font-bold text-sm text-foreground mb-1">Annual Learning Grants</h2>
-              <p className="text-foreground/70 text-xs">Sponsoring certifications &amp; advanced research</p>
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#d4a359] group-hover:scale-105 transition-transform">
+                  ৳250k+
+                </span>
+                <GraduationCap className="w-6 h-6 text-[#f6c87a]" />
+              </div>
+              <p className="text-sm font-bold text-white mb-1">Annual Learning Grants</p>
+              <p className="text-xs text-slate-400">Sponsoring certifications &amp; advanced research</p>
             </div>
           </div>
         </div>

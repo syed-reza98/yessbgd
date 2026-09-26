@@ -53,31 +53,72 @@ export default async function SingleIndustryPage({
 
   return (
     <div className="flex flex-col w-full">
-      <PageHero
-        eyebrow="VERTICAL EXCELLENCE"
-        title={industry.title}
-        subtitle={industry.intro}
-      />
+      {/* Industry Sub-Page Dark Hero */}
+      <section className="relative bg-[#061a1b] text-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Metrics Strip */}
-      {industry.keyMetrics && industry.keyMetrics.length > 0 && (
-        <section className="py-10 bg-muted/20 border-b border-border">
-          <div className="container-tight">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="container-tight relative z-10">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+              Home
+            </Link>
+            <span className="text-white/30">/</span>
+            <Link href="/industries" className="hover:text-[#f6c87a] transition-colors">
+              Industries
+            </Link>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">{industry.title}</span>
+          </nav>
+
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
+            {/* Medallion Icon */}
+            <div className="relative shrink-0">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl p-2 bg-gradient-to-tr from-[#0d6e6e] via-[#35b0aa] to-[#d4a359] shadow-2xl flex items-center justify-center">
+                <div className="w-full h-full rounded-xl bg-[#061a1b] border-2 border-[#d4a359]/40 flex items-center justify-center p-3 shadow-inner">
+                  <Icon className="h-10 w-10 text-[#d4a359]" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col space-y-3 text-center md:text-left max-w-3xl">
+              <div className="inline-flex items-center justify-center md:justify-start gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+                  <span>VERTICAL EXCELLENCE</span>
+                </span>
+              </div>
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+                {industry.title}
+              </h1>
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                {industry.intro}
+              </p>
+            </div>
+          </div>
+
+          {/* Key Metrics Strip */}
+          {industry.keyMetrics && industry.keyMetrics.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-white/10">
               {industry.keyMetrics.map((km) => (
-                <div key={km.label} className="glass-card p-6 rounded-2xl border border-border shadow-sm">
-                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-primary block mb-1">
+                <div
+                  key={km.label}
+                  className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all text-center"
+                >
+                  <span className="font-display font-extrabold text-2xl sm:text-3xl text-[#d4a359] block mb-1">
                     {km.value}
                   </span>
-                  <span className="text-xs uppercase tracking-wider text-foreground/70 font-semibold">
+                  <span className="text-xs uppercase tracking-wider text-slate-300 font-semibold">
                     {km.label}
                   </span>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
 
       {/* Main Content */}
       <section className="py-16 bg-background">

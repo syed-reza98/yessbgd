@@ -49,12 +49,16 @@ export default async function InsightArticlePage({ params }: Props) {
 
   return (
     <div className="space-y-12 pb-24">
-      {/* Top Banner & Article Header */}
-      <section className="pt-10 pb-12 bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      {/* Top Banner & Article Header (Signature Dark Corporate Hero) */}
+      <section className="relative bg-[#061a1b] text-white py-14 sm:py-18 overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <Link
             href="/insights"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline mb-8"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-[#f6c87a] hover:underline mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>All Insights &amp; Intelligence</span>
@@ -62,61 +66,61 @@ export default async function InsightArticlePage({ params }: Props) {
 
           {/* Metadata Pills Row */}
           <div className="flex flex-wrap items-center gap-2.5 mb-6">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-primary/10 text-primary border border-primary/20">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/10 text-[#35b0aa] border border-[#35b0aa]/30">
               {article.tag}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-muted text-foreground/70 border border-border">
-              <Calendar className="w-3.5 h-3.5 text-foreground/40" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-slate-300 border border-white/10">
+              <Calendar className="w-3.5 h-3.5 text-slate-400" />
               <span>{article.date}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-muted text-foreground/70 border border-border">
-              <Clock className="w-3.5 h-3.5 text-foreground/40" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-slate-300 border border-white/10">
+              <Clock className="w-3.5 h-3.5 text-slate-400" />
               <span>{article.readTime}</span>
             </span>
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>Peer-Reviewed &amp; Certified</span>
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-foreground/60 bg-muted border border-border">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-slate-400 bg-white/5 border border-white/10">
               <code>WP-BD-2026-ARCH</code>
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground tracking-tight leading-tight mb-6">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight leading-tight mb-6">
             {article.title}
           </h1>
 
           {/* Editorial Excerpt */}
-          <p className="text-sm sm:text-lg text-foreground/80 font-normal leading-relaxed border-l-4 border-primary pl-5 italic mb-8">
+          <p className="text-sm sm:text-lg text-slate-300 font-normal leading-relaxed border-l-4 border-[#35b0aa] pl-5 italic mb-8">
             {article.excerpt}
           </p>
 
           {/* Author Byline Card */}
-          <div className="glass-card rounded-2xl p-5 border border-border shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm tracking-wider border-2 border-primary/40 shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#0d6e6e] to-[#35b0aa] flex items-center justify-center text-white font-bold text-sm tracking-wider border-2 border-[#d4a359]/40 shadow-sm">
                   {article.author.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
                 </div>
                 <span
-                  className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-background"
+                  className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-[#061a1b]"
                   title="Verified Author"
                 />
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-display font-bold text-sm sm:text-base text-foreground">
+                  <span className="font-display font-bold text-sm sm:text-base text-white">
                     {article.author.name}
                   </span>
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
+                  <CheckCircle2 className="w-4 h-4 text-[#35b0aa]" />
                 </div>
-                <p className="text-xs text-primary font-medium mt-0.5">{article.author.role}</p>
-                <p className="text-[10px] text-foreground/60 mt-0.5">
+                <p className="text-xs text-[#f6c87a] font-medium mt-0.5">{article.author.role}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">
                   Published by YESS Institutional Research &amp; Strategy Council
                 </p>
               </div>
