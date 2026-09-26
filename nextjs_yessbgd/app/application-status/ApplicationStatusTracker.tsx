@@ -36,6 +36,7 @@ import {
   Lock,
   GitBranch,
 } from "lucide-react";
+import { supabase } from "@/lib/supabase/client";
 
 export function ApplicationStatusTracker() {
   const searchParams = useSearchParams();
@@ -51,10 +52,48 @@ export function ApplicationStatusTracker() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastPingTime, setLastPingTime] = useState("BST 15:42:19");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [liveApp, setLiveApp] = useState<any | null>(null);
+
+  const performLookup = async (targetRef: string, targetEmail: string) => {
+    if (!targetRef.trim() || !targetEmail.trim()) return;
+    setIsRefreshing(true);
+    setStatusMessage(null);
+    try {
+      const { data, error } = await supabase.rpc("lookup_application", {
+        _email: targetEmail.trim(),
+        _ref: targetRef.trim(),
+      });
+
+      if (error) {
+        console.warn("Telemetry lookup warning:", error.message);
+        setStatusMessage("Showing benchmark candidate telemetry (Offline mode active).");
+      } else if (data && data.length > 0) {
+        setLiveApp(data[0]);
+        setStatusMessage("Candidate telemetry synchronized with live sovereign recruitment ledger.");
+      } else {
+        setLiveApp(null);
+        setStatusMessage("No candidate dossier matching these credentials found in live ledger.");
+      }
+    } catch (err: any) {
+      console.warn("Lookup error:", err);
+    } finally {
+      const now = new Date();
+      setLastPingTime(
+        `BST ${now.getHours().toString().padStart(2, "0")}:${now
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`
+      );
+      setIsRefreshing(false);
+    }
+  };
 
   useEffect(() => {
     if (queryRef) setRefId(queryRef);
     if (queryEmail) setCandidateEmail(queryEmail);
+    if (queryRef && queryEmail) {
+      performLookup(queryRef, queryEmail);
+    }
   }, [queryRef, queryEmail]);
 
   const handleCopyRef = () => {
@@ -67,19 +106,7 @@ export function ApplicationStatusTracker() {
 
   const handleRefresh = (e: FormEvent) => {
     e.preventDefault();
-    setIsRefreshing(true);
-    setStatusMessage(null);
-    setTimeout(() => {
-      const now = new Date();
-      setLastPingTime(
-        `BST ${now.getHours().toString().padStart(2, "0")}:${now
-          .getMinutes()
-          .toString()
-          .padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`
-      );
-      setIsRefreshing(false);
-      setStatusMessage("Dossier credentials synchronized with sovereign talent ledger.");
-    }, 600);
+    performLookup(refId, candidateEmail);
   };
 
   return (
@@ -263,18 +290,18 @@ export function ApplicationStatusTracker() {
               </div>
 
               <h2 className="text-xl sm:text-2xl font-display font-extrabold text-foreground tracking-tight">
-                Lead Cloud Solutions Architect — Yess Soft Ltd.
+                {liveApp?.opening_title || "Lead Cloud Solutions Architect — Yess Soft Ltd."}
               </h2>
 
               <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-foreground/70 pt-1">
                 <span className="flex items-center gap-1.5 font-medium text-foreground">
                   <User className="w-3.5 h-3.5 text-primary" />
-                  Applicant: <strong>Syed Reza</strong> (Senior Systems Architect)
+                  Applicant: <strong>{liveApp?.full_name || "Syed Reza"}</strong>
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5 text-foreground/40" />
-                  Applied: September 12, 2026
+                  Applied: {liveApp?.created_at ? new Date(liveApp.created_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "September 12, 2026"}
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1.5">
@@ -303,7 +330,15 @@ export function ApplicationStatusTracker() {
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
                 </span>
                 <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                <span className="text-xs font-bold uppercase tracking-wider">Interview Round 2 Scheduled</span>
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  {liveApp ? (
+                    liveApp.status === "submitted" ? "Stage 1: Application Received" :
+                    liveApp.status === "screening" ? "Stage 2: Technical Profile Screened" :
+                    liveApp.status === "interview" ? "Stage 3: Interview Scheduled" :
+                    liveApp.status === "offered" ? "Stage 4: Sovereign Offer Extended" :
+                    "Archived / Inactive"
+                  ) : "Interview Round 2 Scheduled"}
+                </span>
               </div>
 
               {/* Fast Action Bar */}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getSitePage } from "@/lib/cms";
 import {
   Shield,
   ShieldCheck,
@@ -202,7 +203,9 @@ const timelineMilestones = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const sitePage = await getSitePage("about");
+
   return (
     <div className="flex flex-col w-full">
       {/* 1. Hero Section (Deep Navy & Oceanic Teal Gradient) */}
@@ -224,21 +227,26 @@ export default function AboutPage() {
           {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
             <span className="w-2 h-2 rounded-full bg-[#d4a359] animate-ping" />
-            <span>— INSTITUTIONAL MANDATE &amp; HERITAGE —</span>
+            <span>{sitePage?.hero_eyebrow || "— INSTITUTIONAL MANDATE & HERITAGE —"}</span>
           </div>
 
           {/* Headline & Subtitle */}
           <div className="max-w-4xl">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-              Pioneering Sustainable Venture Architecture &amp;{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Sovereign Tech
-              </span>{" "}
-              in Bangladesh.
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Pioneering Sustainable Venture Architecture &amp;{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Sovereign Tech
+                  </span>{" "}
+                  in Bangladesh.
+                </>
+              )}
             </h1>
             <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-12">
-              Founded to bridge international engineering standards with Bangladesh&apos;s high-growth demographic
-              dividend, accelerating sovereign enterprises across cloud, agritech, and fintech.
+              {sitePage?.hero_subtitle || "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech."}
             </p>
           </div>
 

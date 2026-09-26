@@ -61,7 +61,7 @@ export function JobApplicationForm({ job }: { job: Opening }) {
 
       const { error: insertErr } = await supabase.from("job_applications").insert({
         reference_number: generatedRef,
-        opening_id: job.id,
+        opening_id: (job as any).id || job.slug,
         opening_title: job.title,
         full_name: fullName.trim(),
         email: email.trim(),
