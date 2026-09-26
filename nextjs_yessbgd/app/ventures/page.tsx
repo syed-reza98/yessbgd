@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { VenturesDirectory } from "@/components/VenturesDirectory";
+import { getVentures, getSitePage } from "@/lib/cms";
 import {
   TrendingUp,
   ShieldCheck,

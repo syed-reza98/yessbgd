@@ -53,24 +53,30 @@ const categoryMapping: Record<string, string> = {
   "Legal Advisory": "Financial Infrastructure",
 };
 
-export function VenturesDirectory() {
+export function VenturesDirectory({
+  initialVentures,
+}: {
+  initialVentures?: Venture[];
+} = {}) {
   const [query, setQuery] = useState("");
   const [selectedCluster, setSelectedCluster] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
   const [sortBy, setSortBy] = useState<"founded" | "valuation" | "alpha">("founded");
 
+  const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : ventures;
+
   const clusters = [
-    { id: "all", label: "All Ventures (13)" },
-    { id: "Technology & AI", label: "Technology & AI (4)" },
-    { id: "Agritech & Food Systems", label: "Agritech & Food Systems (3)" },
-    { id: "Media & Entertainment", label: "Media & Entertainment (4)" },
-    { id: "Supply Chain & Logistics", label: "Supply Chain & Logistics (1)" },
-    { id: "Financial Infrastructure", label: "Financial Infrastructure (1)" },
+    { id: "all", label: `All Ventures (${effectiveVentures.length})` },
+    { id: "Technology & AI", label: "Technology & AI" },
+    { id: "Agritech & Food Systems", label: "Agritech & Food Systems" },
+    { id: "Media & Entertainment", label: "Media & Entertainment" },
+    { id: "Supply Chain & Logistics", label: "Supply Chain & Logistics" },
+    { id: "Financial Infrastructure", label: "Financial Infrastructure" },
   ];
 
   const filteredAndSorted = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const result = ventures.filter((v) => {
+    const result = effectiveVentures.filter((v) => {
       const cluster = categoryMapping[v.category] || "Other";
       if (selectedCluster !== "all" && cluster !== selectedCluster) return false;
       if (!q) return true;
