@@ -121,15 +121,17 @@ const clauses = [
 
 export default function TermsPage() {
   return (
-    <div className="space-y-16 pb-20">
+    <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
-      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
-        {/* Background Ambient Geometric Grid Overlay */}
+      <section className="relative bg-gradient-to-b from-[#061a1b] via-[#072426] to-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10">
+        {/* Subtle Decorative Grid Glow & Brand Ambience */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(53,176,170,0.18),transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(212,163,89,0.12),transparent_40%)] pointer-events-none" />
         <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
             <Link href="/" className="hover:text-[#f6c87a] transition-colors">

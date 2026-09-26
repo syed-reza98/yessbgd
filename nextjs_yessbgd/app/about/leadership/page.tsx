@@ -61,6 +61,41 @@ const executives = [
   },
 ];
 
+const leadershipMetrics = [
+  {
+    value: "11+ Years",
+    label: "Operating History",
+    desc: "Venture incubation & operational presence in Dhaka.",
+    icon: Calendar,
+    color: "text-[#d4a359]",
+    glow: "text-[#d4a359]",
+  },
+  {
+    value: "13",
+    label: "Direct Oversight",
+    desc: "Subsidiaries under active executive portfolio steering.",
+    icon: Building2,
+    color: "text-[#35b0aa]",
+    glow: "text-[#35b0aa]",
+  },
+  {
+    value: "100%",
+    label: "Statutory RJSC",
+    desc: "Registration C-184920 with audited independent charters.",
+    icon: Award,
+    color: "text-white",
+    glow: "text-emerald-400",
+  },
+  {
+    value: "Zero-Trust",
+    label: "Fiduciary Protocol",
+    desc: "Bilateral NDA covenant & complete client IP protection.",
+    icon: ShieldCheck,
+    color: "text-[#f6c87a]",
+    glow: "text-[#d4a359]",
+  },
+];
+
 export default function LeadershipPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [ndaChecked, setNdaChecked] = useState(true);
@@ -68,12 +103,15 @@ export default function LeadershipPage() {
   return (
     <div className="flex flex-col w-full">
       {/* 1. Page Hero & Governance Telemetry (Signature Corporate Dark Hero) */}
-      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+      <section className="relative bg-gradient-to-b from-[#061a1b] via-[#072426] to-[#061a1b] text-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-white/10">
+        {/* Subtle Decorative Grid Glow & Brand Ambience */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(53,176,170,0.18),transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(212,163,89,0.12),transparent_40%)] pointer-events-none" />
         <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
             <Link href="/" className="hover:text-[#f6c87a] transition-colors">
@@ -109,75 +147,26 @@ export default function LeadershipPage() {
             </p>
           </div>
 
-          {/* 4 Glass Telemetry Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#d4a359]/50 transition-all duration-200 group">
-              <div className="flex items-center justify-between mb-3">
-                <span className="p-2.5 rounded-xl bg-white/10 text-[#d4a359] group-hover:scale-110 transition-transform">
-                  <Calendar className="w-5 h-5" />
-                </span>
-                <span className="text-xs font-bold text-[#d4a359] bg-[#d4a359]/10 px-2.5 py-0.5 rounded-full border border-[#d4a359]/30">
-                  Established
-                </span>
-              </div>
-              <div className="font-display font-extrabold text-2xl text-white group-hover:text-[#d4a359] transition-colors mb-1">
-                11+ Years
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Operating history &amp; venture incubation in Dhaka
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group">
-              <div className="flex items-center justify-between mb-3">
-                <span className="p-2.5 rounded-xl bg-white/10 text-[#35b0aa] group-hover:scale-110 transition-transform">
-                  <Building2 className="w-5 h-5" />
-                </span>
-                <span className="text-xs font-bold text-[#35b0aa] bg-[#35b0aa]/10 px-2.5 py-0.5 rounded-full border border-[#35b0aa]/30">
-                  Direct Oversight
-                </span>
-              </div>
-              <div className="font-display font-extrabold text-2xl text-white group-hover:text-[#35b0aa] transition-colors mb-1">
-                13 Subsidiaries
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Under active portfolio steering &amp; resource pooling
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-400/50 transition-all duration-200 group">
-              <div className="flex items-center justify-between mb-3">
-                <span className="p-2.5 rounded-xl bg-white/10 text-emerald-400 group-hover:scale-110 transition-transform">
-                  <Award className="w-5 h-5" />
-                </span>
-                <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                  Statutory RJSC
-                </span>
-              </div>
-              <div className="font-display font-extrabold text-2xl text-white group-hover:text-emerald-300 transition-colors mb-1">
-                100% Compliance
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Registration C-184920 with audited board charters
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#f6c87a]/50 transition-all duration-200 group">
-              <div className="flex items-center justify-between mb-3">
-                <span className="p-2.5 rounded-xl bg-white/10 text-[#f6c87a] group-hover:scale-110 transition-transform">
-                  <ShieldCheck className="w-5 h-5" />
-                </span>
-                <span className="text-xs font-bold text-[#f6c87a] bg-[#d4a359]/10 px-2.5 py-0.5 rounded-full border border-[#d4a359]/30">
-                  Governance
-                </span>
-              </div>
-              <div className="font-display font-extrabold text-2xl text-white group-hover:text-[#f6c87a] transition-colors mb-1">
-                Zero-Trust
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Bilateral fiduciary protocol &amp; IP protection covenant
-              </p>
-            </div>
+          {/* 4 Metric Cards Strip (Identical to About / Ventures standard) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
+            {leadershipMetrics.map((metric) => {
+              const Icon = metric.icon;
+              return (
+                <div
+                  key={metric.label}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#35b0aa]/50 transition-all duration-200 group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.color} group-hover:scale-105 transition-transform`}>
+                      {metric.value}
+                    </span>
+                    <Icon className={`w-6 h-6 ${metric.glow}`} />
+                  </div>
+                  <div className="text-sm font-bold text-white mb-1">{metric.label}</div>
+                  <p className="text-xs text-slate-400 leading-relaxed">{metric.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

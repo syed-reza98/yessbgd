@@ -25,28 +25,36 @@ import {
 
 const deliveryMetrics = [
   {
-    icon: RotateCw,
-    title: "2-Week Sprint Cadence",
+    value: "2 Weeks",
+    label: "Sprint Cadence",
     desc: "Bi-weekly iterative delivery cycles ensuring continuous client alignment with zero project drift.",
-    badgeColor: "bg-primary/10 text-primary",
+    icon: RotateCw,
+    color: "text-[#35b0aa]",
+    glow: "text-[#35b0aa]",
   },
   {
-    icon: Monitor,
-    title: "Friday Live Demos",
+    value: "Friday",
+    label: "Live Staging Demos",
     desc: "Working software deployed every Friday afternoon for transparent stakeholder inspection.",
-    badgeColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    icon: Monitor,
+    color: "text-[#d4a359]",
+    glow: "text-[#f6c87a]",
   },
   {
-    icon: ShieldCheck,
-    title: "Zero Slideware Guarantee",
+    value: "Zero",
+    label: "Slideware Guarantee",
     desc: "We present real code running in staging environments and verifiable telemetry, never mockups alone.",
-    badgeColor: "bg-primary/10 text-primary",
+    icon: ShieldCheck,
+    color: "text-white",
+    glow: "text-[#35b0aa]",
   },
   {
-    icon: Server,
-    title: "99.9% Uptime Retention",
+    value: "99.9%",
+    label: "Contractual SLA",
     desc: "Enterprise Site Reliability Engineering governance with contractual SLAs and telemetry guardrails.",
-    badgeColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    icon: Server,
+    color: "text-[#f6c87a]",
+    glow: "text-[#d4a359]",
   },
 ];
 
@@ -128,12 +136,15 @@ export default function MethodologyPage() {
   return (
     <div className="flex flex-col w-full">
       {/* 1. Page Hero & Delivery Metrics (Signature Corporate Dark Hero) */}
-      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+      <section className="relative bg-gradient-to-b from-[#061a1b] via-[#072426] to-[#061a1b] text-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-white/10">
+        {/* Subtle Decorative Grid Glow & Brand Ambience */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(53,176,170,0.18),transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(212,163,89,0.12),transparent_40%)] pointer-events-none" />
         <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
             <Link href="/" className="hover:text-[#f6c87a] transition-colors">
@@ -169,27 +180,23 @@ export default function MethodologyPage() {
             </p>
           </div>
 
-          {/* Delivery Velocity SLA Badges (4 Glass Cards) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            {deliveryMetrics.map((m) => {
-              const Icon = m.icon;
+          {/* 4 Metric Cards Strip (Identical to About / Ventures standard) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
+            {deliveryMetrics.map((metric) => {
+              const Icon = metric.icon;
               return (
                 <div
-                  key={m.title}
-                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group"
+                  key={metric.label}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#35b0aa]/50 transition-all duration-200 group"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className="p-2.5 rounded-xl bg-white/10 text-[#35b0aa] group-hover:scale-110 transition-transform">
-                      <Icon className="w-5 h-5" />
+                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.color} group-hover:scale-105 transition-transform`}>
+                      {metric.value}
                     </span>
-                    <span className="text-xs font-bold text-[#f6c87a] bg-[#d4a359]/10 px-2.5 py-0.5 rounded-full border border-[#d4a359]/30">
-                      SLA Active
-                    </span>
+                    <Icon className={`w-6 h-6 ${metric.glow}`} />
                   </div>
-                  <h3 className="font-display font-bold text-sm text-white mb-1.5">{m.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    {m.desc}
-                  </p>
+                  <div className="text-sm font-bold text-white mb-1">{metric.label}</div>
+                  <p className="text-xs text-slate-400 leading-relaxed">{metric.desc}</p>
                 </div>
               );
             })}
