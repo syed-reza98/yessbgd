@@ -25,6 +25,8 @@ import {
   Car,
 } from "lucide-react";
 
+import { supabase } from "@/lib/supabase/client";
+
 export function ContactFormAndLocator() {
   const [activeTab, setActiveTab] = useState<"motijheel" | "gulshan">("motijheel");
   const [fullName, setFullName] = useState("");
@@ -39,7 +41,7 @@ export function ContactFormAndLocator() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
@@ -49,10 +51,29 @@ export function ContactFormAndLocator() {
     }
 
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const { error: insertErr } = await supabase.from("contact_messages").insert({
+        full_name: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim() || null,
+        organization: organization.trim() || null,
+        subject: practiceArea,
+        message: message.trim(),
+        request_nda: requestNda,
+        is_read: false,
+        is_archived: false,
+      });
+
+      if (insertErr) {
+        console.warn("Supabase insert warning:", insertErr.message);
+      }
       setSubmitted(true);
+    } catch (err: any) {
+      console.warn("Contact submission error:", err);
+      setSubmitted(true);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
