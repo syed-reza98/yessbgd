@@ -88,6 +88,7 @@ export function Header() {
 
       {/* 2. Main Sticky Floating Glass Header */}
       <header
+        data-public-header="true"
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
             ? "bg-[#061a1b]/95 backdrop-blur-md shadow-xl py-2.5 border-b border-white/15"

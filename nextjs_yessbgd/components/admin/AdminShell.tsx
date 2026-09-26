@@ -93,12 +93,18 @@ function buildNav(): NavGroup[] {
   ];
 }
 
-export function AdminShell({ children }: { children: ReactNode }) {
+export function AdminShell({
+  children,
+  initialUserEmail,
+}: {
+  children: ReactNode;
+  initialUserEmail?: string;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState<string | null>("admin@yessbgd.com");
+  const [userEmail, setUserEmail] = useState<string | null>(initialUserEmail || "admin@yessbgd.com");
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     "Content CMS": true,
     Appearance: true,

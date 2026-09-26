@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { MobileTabBar } from "@/components/MobileTabBar";
+import { PublicChrome } from "@/components/PublicChrome";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -65,12 +63,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <LanguageProvider>
-          <Header />
-          <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
-            {children}
-          </main>
-          <Footer />
-          <MobileTabBar />
+          <PublicChrome>{children}</PublicChrome>
         </LanguageProvider>
       </body>
     </html>

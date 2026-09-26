@@ -8,8 +8,8 @@ import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle, Sparkles } from "luci
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@yessbgd.com");
-  const [password, setPassword] = useState("Admin@YessBgd2026!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -103,15 +103,6 @@ export default function AdminLoginPage() {
                   placeholder="••••••••••••"
                   className="w-full pl-10 pr-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#35b0aa] focus:ring-1 focus:ring-[#35b0aa] transition-all"
                 />
-              </div>
-            </div>
-
-            {/* Seeded Credentials Banner */}
-            <div className="p-3 bg-white/5 rounded-xl border border-white/10 text-[11px] text-slate-300">
-              <span className="font-bold text-[#d4a359]">Default Provisioned Credentials:</span>
-              <div className="mt-1 flex items-center justify-between font-mono text-[10px] text-slate-400">
-                <span>admin@yessbgd.com</span>
-                <span>Admin@YessBgd2026!</span>
               </div>
             </div>
 

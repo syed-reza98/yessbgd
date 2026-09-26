@@ -8,7 +8,7 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-[#061a1b] text-white/90 border-t border-white/10 pt-16 pb-24 lg:pb-12 relative z-10">
+    <footer data-public-footer="true" className="bg-[#061a1b] text-white/90 border-t border-white/10 pt-16 pb-24 lg:pb-12 relative z-10">
       <div className="container-tight">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
           {/* Column 1: Brand & Headquarters */}
