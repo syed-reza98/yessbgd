@@ -122,34 +122,34 @@ export default function TermsPage() {
   return (
     <div className="space-y-16 pb-20">
       {/* Hero Section */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-surface-container-low via-surface to-background border-b border-outline-variant/30">
+      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-outline mb-6">
+          <div className="flex items-center gap-2 text-xs font-semibold text-foreground/60 mb-6">
             <Link href="/" className="hover:text-primary transition-colors">
               Home
             </Link>
             <span>/</span>
-            <span className="text-[#0d6e6e] font-bold">Terms of Service</span>
+            <span className="text-primary font-bold">Terms of Service</span>
           </div>
 
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-[#0d6e6e]/20 text-[#0d6e6e] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
               <Gavel className="w-4 h-4" />
-              <span>Statutory Corporate Governance & Legal Framework</span>
+              <span>Statutory Corporate Governance &amp; Legal Framework</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy dark:text-white tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground tracking-tight mb-4">
               Terms of{" "}
-              <span className="bg-gradient-to-r from-[#0d6e6e] via-[#35b0aa] to-[#d4a359] bg-clip-text text-transparent">
+              <span className="text-primary">
                 Service
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-on-surface-variant max-w-3xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-foreground/70 max-w-3xl leading-relaxed mb-8">
               The master institutional agreement governing enterprise software deliverables, Statements of
               Work (SOW), foreground intellectual property transfer, statutory withholding tax, sovereign
               data residency, and binding dispute resolution with YESS Bangladesh.
@@ -157,44 +157,44 @@ export default function TermsPage() {
           </div>
 
           {/* Document Release Metadata Strip */}
-          <div className="glass-card p-5 rounded-2xl border border-outline-variant/30 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="glass-card p-5 rounded-2xl border border-border shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e]">
+              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
                 <FileText className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-foreground/60 uppercase tracking-wider block">
                   Document Release
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-foreground">
                   Version 2.4 (Statutory Revision)
                 </span>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e]">
+              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-foreground/60 uppercase tracking-wider block">
                   Effective Date
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-foreground">
                   September 2026 (Operational)
                 </span>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-[#d4a359]/15 text-[#7e5713] dark:text-[#f2be71]">
+              <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-400">
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-outline uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-foreground/60 uppercase tracking-wider block">
                   Legal Jurisdiction
                 </span>
-                <span className="text-xs font-bold text-brand-navy dark:text-white">
+                <span className="text-xs font-bold text-foreground">
                   Courts of Dhaka, Bangladesh (RJSC C-184920)
                 </span>
               </div>
@@ -208,8 +208,8 @@ export default function TermsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Sticky 14-Clause Table of Contents (4 cols) */}
           <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
-            <div className="glass-card rounded-2xl p-6 border border-outline-variant/40 space-y-4">
-              <h2 className="text-xs font-extrabold uppercase tracking-wider text-[#0d6e6e] pb-2 border-b border-outline-variant/30">
+            <div className="glass-card rounded-2xl p-6 border border-border space-y-4">
+              <h2 className="text-xs font-extrabold uppercase tracking-wider text-primary pb-2 border-b border-border">
                 Table of Contents (14 Clauses)
               </h2>
               <nav className="space-y-1.5 text-xs">
@@ -217,19 +217,19 @@ export default function TermsPage() {
                   <a
                     key={c.id}
                     href={`#${c.id}`}
-                    className="flex items-center gap-2 py-1.5 px-2 rounded-lg text-on-surface-variant hover:text-[#0d6e6e] hover:bg-surface-container transition-colors truncate"
+                    className="flex items-center gap-2 py-1.5 px-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-muted transition-colors truncate"
                   >
-                    <span className="font-mono text-[10px] text-outline w-4">{c.num}.</span>
+                    <span className="font-mono text-[10px] text-foreground/40 w-4">{c.num}.</span>
                     <span className="truncate">{c.title}</span>
                   </a>
                 ))}
               </nav>
 
-              <div className="pt-4 border-t border-outline-variant/30 text-[11px] text-outline space-y-2">
+              <div className="pt-4 border-t border-border text-[11px] text-foreground/60 space-y-2">
                 <p>Need a custom enterprise agreement or legal review?</p>
                 <a
                   href="mailto:legal@yessbgd.com"
-                  className="text-[#0d6e6e] font-semibold hover:underline block"
+                  className="text-primary font-semibold hover:underline block"
                 >
                   legal@yessbgd.com
                 </a>
@@ -243,33 +243,33 @@ export default function TermsPage() {
               <section
                 key={c.id}
                 id={c.id}
-                className="glass-card rounded-2xl p-7 border border-outline-variant/40 hover:border-[#0d6e6e]/40 transition-all space-y-3"
+                className="glass-card rounded-2xl p-7 border border-border hover:border-primary/40 transition-all space-y-3"
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-lg bg-[#0d6e6e]/10 text-[#0d6e6e] font-mono font-bold text-xs flex items-center justify-center shrink-0">
+                  <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary font-mono font-bold text-xs flex items-center justify-center shrink-0">
                     {c.num}
                   </span>
-                  <h2 className="text-base sm:text-lg font-bold text-brand-navy dark:text-white">
+                  <h2 className="text-base sm:text-lg font-display font-bold text-foreground">
                     {c.title}
                   </h2>
                 </div>
-                <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed pl-10">
+                <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed pl-10">
                   {c.content}
                 </p>
               </section>
             ))}
 
             {/* Bottom Institutional Seal Card */}
-            <div className="p-6 rounded-2xl bg-surface-container-high border border-outline-variant/40 flex items-center justify-between">
+            <div className="p-6 rounded-2xl bg-muted/30 border border-border flex items-center justify-between">
               <div className="space-y-1">
-                <span className="font-bold text-xs text-brand-navy dark:text-white">
+                <span className="font-display font-bold text-xs text-foreground">
                   Statutory Registrar of Joint Stock Companies (RJSC)
                 </span>
-                <p className="text-[11px] text-outline">
+                <p className="text-[11px] text-foreground/60">
                   Incorporated as YESS Bangla Private Limited • Certificate of Incorporation C-184920
                 </p>
               </div>
-              <Shield className="w-8 h-8 text-[#d4a359] shrink-0" />
+              <Shield className="w-8 h-8 text-primary shrink-0" />
             </div>
           </div>
         </div>

@@ -50,74 +50,74 @@ export default async function InsightArticlePage({ params }: Props) {
   return (
     <div className="space-y-12 pb-24">
       {/* Top Banner & Article Header */}
-      <section className="pt-10 pb-12 bg-surface-container-low border-b border-outline-variant/30">
+      <section className="pt-10 pb-12 bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <Link
             href="/insights"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#0d6e6e] hover:underline mb-8"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>All Insights & Intelligence</span>
+            <span>All Insights &amp; Intelligence</span>
           </Link>
 
           {/* Metadata Pills Row */}
           <div className="flex flex-wrap items-center gap-2.5 mb-6">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-[#0d6e6e] to-[#35b0aa] text-white">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-primary/10 text-primary border border-primary/20">
               {article.tag}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
-              <Calendar className="w-3.5 h-3.5 text-outline" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-muted text-foreground/70 border border-border">
+              <Calendar className="w-3.5 h-3.5 text-foreground/40" />
               <span>{article.date}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
-              <Clock className="w-3.5 h-3.5 text-outline" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-muted text-foreground/70 border border-border">
+              <Clock className="w-3.5 h-3.5 text-foreground/40" />
               <span>{article.readTime}</span>
             </span>
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Peer-Reviewed & Certified</span>
+              <span>Peer-Reviewed &amp; Certified</span>
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-outline bg-surface-container-low border border-outline-variant/40">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-foreground/60 bg-muted border border-border">
               <code>WP-BD-2026-ARCH</code>
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy dark:text-white tracking-tight leading-tight mb-6">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground tracking-tight leading-tight mb-6">
             {article.title}
           </h1>
 
           {/* Editorial Excerpt */}
-          <p className="text-sm sm:text-lg text-on-surface-variant font-normal leading-relaxed border-l-3 border-[#0d6e6e] pl-5 italic mb-8">
+          <p className="text-sm sm:text-lg text-foreground/80 font-normal leading-relaxed border-l-4 border-primary pl-5 italic mb-8">
             {article.excerpt}
           </p>
 
           {/* Author Byline Card */}
-          <div className="glass-card rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="glass-card rounded-2xl p-5 border border-border shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#0d6e6e] to-[#061a1b] flex items-center justify-center text-white font-bold text-sm tracking-wider border-2 border-[#d4a359] shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm tracking-wider border-2 border-primary/40 shadow-sm">
                   {article.author.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
                 </div>
                 <span
-                  className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white"
+                  className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-background"
                   title="Verified Author"
                 />
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-sm sm:text-base text-brand-navy dark:text-white">
+                  <span className="font-display font-bold text-sm sm:text-base text-foreground">
                     {article.author.name}
                   </span>
-                  <CheckCircle2 className="w-4 h-4 text-[#0d6e6e]" />
+                  <CheckCircle2 className="w-4 h-4 text-primary" />
                 </div>
-                <p className="text-xs text-[#0d6e6e] font-medium mt-0.5">{article.author.role}</p>
-                <p className="text-[10px] text-outline mt-0.5">
-                  Published by YESS Institutional Research & Strategy Council
+                <p className="text-xs text-primary font-medium mt-0.5">{article.author.role}</p>
+                <p className="text-[10px] text-foreground/60 mt-0.5">
+                  Published by YESS Institutional Research &amp; Strategy Council
                 </p>
               </div>
             </div>
@@ -131,11 +131,11 @@ export default async function InsightArticlePage({ params }: Props) {
 
       {/* Article Longform Body */}
       <article className="max-w-3xl mx-auto px-4 sm:px-6 space-y-8">
-        <div className="space-y-6 text-sm sm:text-base text-on-surface-variant leading-relaxed">
+        <div className="space-y-6 text-sm sm:text-base text-foreground/80 leading-relaxed">
           {article.content.map((sec, idx) => (
             <div key={idx} className="space-y-3">
               {sec.heading && (
-                <h2 className="text-xl sm:text-2xl font-bold text-brand-navy dark:text-white pt-4 pb-1 border-b border-outline-variant/30">
+                <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground pt-4 pb-1 border-b border-border">
                   {sec.heading}
                 </h2>
               )}
@@ -153,15 +153,15 @@ export default async function InsightArticlePage({ params }: Props) {
         />
 
         {/* Institutional Statutory Seal Footer in Article */}
-        <div className="mt-8 pt-8 border-t border-outline-variant/30 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold text-[#0d6e6e] uppercase tracking-wider">
+        <div className="mt-8 pt-8 border-t border-border p-6 rounded-2xl bg-muted/30 border border-border space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider">
             <Shield className="w-4 h-4" />
             <span>Institutional Research Integrity</span>
           </div>
-          <p className="text-xs text-on-surface-variant leading-relaxed">
+          <p className="text-xs text-foreground/70 leading-relaxed">
             All whitepapers and architectural blueprints published by YESS Bangladesh undergo peer review
             by our Executive Architecture Board. For licensing, reprinting, or strategic advisory, contact{" "}
-            <a href="mailto:yessbangla.bd@gmail.com" className="text-[#0d6e6e] underline">
+            <a href="mailto:yessbangla.bd@gmail.com" className="text-primary underline">
               yessbangla.bd@gmail.com
             </a>
             .
@@ -171,12 +171,12 @@ export default async function InsightArticlePage({ params }: Props) {
 
       {/* Related Insights Grid */}
       {related.length > 0 && (
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 border-t border-outline-variant/30">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 border-t border-border">
           <div className="mb-8">
-            <span className="text-xs text-[#0d6e6e] font-bold uppercase tracking-wider block mb-1">
+            <span className="text-xs text-primary font-bold uppercase tracking-wider block mb-1">
               Further Intelligence
             </span>
-            <h3 className="text-xl font-bold text-brand-navy dark:text-white">Related Insights & Papers</h3>
+            <h3 className="text-xl font-display font-bold text-foreground">Related Insights &amp; Papers</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -184,19 +184,19 @@ export default async function InsightArticlePage({ params }: Props) {
               <Link
                 key={item.slug}
                 href={`/insights/${item.slug}`}
-                className="glass-card rounded-2xl p-6 hover:border-[#0d6e6e] transition-all group flex flex-col justify-between"
+                className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-all group flex flex-col justify-between"
               >
                 <div className="space-y-2">
-                  <span className="text-[10px] font-bold uppercase text-[#0d6e6e]">{item.tag}</span>
-                  <h4 className="font-bold text-sm text-brand-navy dark:text-white group-hover:text-[#0d6e6e] transition-colors leading-snug">
+                  <span className="text-[10px] font-bold uppercase text-primary">{item.tag}</span>
+                  <h4 className="font-display font-bold text-sm text-foreground group-hover:text-primary transition-colors leading-snug">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-on-surface-variant line-clamp-2">{item.excerpt}</p>
+                  <p className="text-xs text-foreground/70 line-clamp-2">{item.excerpt}</p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs text-outline">
+                <div className="pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-foreground/60">
                   <span>{item.readTime}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#0d6e6e] group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 text-primary group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}

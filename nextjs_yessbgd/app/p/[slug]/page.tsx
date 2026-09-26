@@ -38,31 +38,31 @@ export default async function DynamicCMSPage({ params }: Props) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-[#0d6e6e] hover:underline"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Return to Homepage</span>
         </Link>
 
-        <div className="glass-card rounded-3xl p-8 space-y-6">
-          <div className="flex items-center gap-3 pb-4 border-b border-outline-variant/30">
-            <div className="w-10 h-10 rounded-xl bg-[#0d6e6e]/10 text-[#0d6e6e] flex items-center justify-center">
+        <div className="glass-card rounded-3xl p-8 border border-border space-y-6 shadow-sm">
+          <div className="flex items-center gap-3 pb-4 border-b border-border">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-brand-navy dark:text-white">{formattedTitle}</h2>
-              <p className="text-xs text-outline">CMS Page Reference: /p/{slug}</p>
+              <h2 className="text-lg font-display font-bold text-foreground">{formattedTitle}</h2>
+              <p className="text-xs text-foreground/60">CMS Page Reference: /p/{slug}</p>
             </div>
           </div>
 
-          <p className="text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-sm text-foreground/80 leading-relaxed">
             This institutional document is maintained under YESS Bangladesh governance. Content updates are
             managed through our centralized content management registry.
           </p>
 
-          <div className="p-4 rounded-xl bg-surface-container text-xs text-on-surface-variant space-y-1">
+          <div className="p-4 rounded-xl bg-muted/40 border border-border text-xs text-foreground/70 space-y-1">
             <p>
-              <strong>Status:</strong> Active & Compliant
+              <strong>Status:</strong> Active &amp; Compliant
             </p>
             <p>
               <strong>Governing Entity:</strong> YESS Bangla Private Limited (RJSC Reg: C-184920)

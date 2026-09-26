@@ -62,7 +62,7 @@ export default function VenturesPage() {
 
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb & Tag */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-outline-variant mb-6">
+          <div className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
             <Link href="/" className="hover:text-[#f6c87a] transition-colors">
               Home
             </Link>

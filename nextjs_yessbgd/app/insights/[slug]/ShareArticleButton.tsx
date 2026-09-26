@@ -15,7 +15,7 @@ export function ShareArticleButton({ title }: { title: string }) {
   return (
     <button
       onClick={handleShare}
-      className="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-[#0d6e6e] transition-colors flex items-center gap-1.5"
+      className="px-4 py-2 rounded-xl text-xs font-semibold bg-muted hover:bg-muted/80 text-primary border border-border transition-colors flex items-center gap-1.5"
     >
       <Share2 className="w-3.5 h-3.5" />
       <span>Share Paper</span>

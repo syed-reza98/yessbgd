@@ -82,35 +82,35 @@ export default function ContactPage() {
   return (
     <div className="space-y-16 pb-20">
       {/* Hero Section */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-surface via-surface-container-low to-background border-b border-outline-variant/30">
+      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-muted/30 via-background to-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-outline mb-6">
+          <div className="flex items-center gap-2 text-xs font-semibold text-foreground/60 mb-6">
             <Link href="/" className="hover:text-primary transition-colors">
               Home
             </Link>
             <span>/</span>
-            <span className="text-[#0d6e6e] font-bold">Contact Us</span>
+            <span className="text-primary font-bold">Contact Us</span>
           </div>
 
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container border border-[#d4a359]/30 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-              <Shield className="w-3.5 h-3.5 text-secondary" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+              <Shield className="w-3.5 h-3.5" />
               <span>Direct Institutional Channels</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy dark:text-white tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground tracking-tight mb-4">
               Connect With Bangladesh&apos;s{" "}
-              <span className="bg-gradient-to-r from-[#0d6e6e] via-[#35b0aa] to-[#d4a359] bg-clip-text text-transparent">
+              <span className="text-primary">
                 Venture Ecosystem
               </span>
               .
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-on-surface-variant max-w-3xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-foreground/70 max-w-3xl leading-relaxed mb-8">
               Engage our managing partners, venture leads, and engineering directors directly. Guaranteed
               executive response within one business day for institutional inquiries and sovereign tech
               partnerships.
@@ -118,20 +118,20 @@ export default function ContactPage() {
           </div>
 
           {/* Telemetry Metric Badges */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#061a1b] text-white border border-white/10 shadow-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl glass-card border border-border shadow-sm">
             {telemetryBadges.map((badge) => {
               const Icon = badge.icon;
               return (
                 <div
                   key={badge.title}
-                  className="flex items-center gap-3 px-3 py-2 border-r border-white/10 last:border-none"
+                  className="flex items-center gap-3 px-3 py-2 border-r border-border last:border-none"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                    <Icon className={`w-5 h-5 ${badge.color}`} />
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm font-bold text-white">{badge.title}</p>
-                    <p className="text-[10px] text-outline-variant">{badge.desc}</p>
+                    <p className="text-xs sm:text-sm font-display font-bold text-foreground">{badge.title}</p>
+                    <p className="text-[10px] text-foreground/60">{badge.desc}</p>
                   </div>
                 </div>
               );
@@ -146,16 +146,16 @@ export default function ContactPage() {
       </main>
 
       {/* Frequently Addressed Inquiries Strip */}
-      <section className="py-12 bg-surface-container-low dark:bg-[#061a1b]/40 border-t border-outline-variant/30">
+      <section className="py-12 bg-muted/20 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-[#7e5713] dark:text-[#f2be71] font-bold text-xs uppercase tracking-widest block mb-2">
+            <span className="text-primary font-bold text-xs uppercase tracking-widest block mb-2">
               Institutional Protocols
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#005454] dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-foreground">
               Frequently Addressed Inquiries
             </h2>
-            <p className="text-xs sm:text-sm text-on-surface-variant mt-2">
+            <p className="text-xs sm:text-sm text-foreground/70 mt-2">
               Key governance policies governing our partnerships, IP protection, and foreign enterprise engagements.
             </p>
           </div>
@@ -166,20 +166,20 @@ export default function ContactPage() {
               return (
                 <div
                   key={faq.question}
-                  className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/40 shadow-sm hover:border-[#0d6e6e]/40 transition-all flex flex-col justify-between"
+                  className="p-6 rounded-2xl glass-card border border-border shadow-sm hover:border-primary/40 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-surface-container dark:bg-white/5 flex items-center justify-center text-[#005454] dark:text-[#84d4d3] mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#005454] dark:text-white mb-2">
+                    <h3 className="text-sm sm:text-base font-display font-bold text-foreground mb-2">
                       {faq.question}
                     </h3>
-                    <p className="text-xs text-on-surface-variant leading-relaxed">
+                    <p className="text-xs text-foreground/70 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs text-[#005454] dark:text-[#84d4d3] font-semibold">
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs text-primary font-semibold">
                     <Link href={faq.href} className="hover:underline flex items-center gap-1.5">
                       <span>{faq.action}</span>
                       {faq.download ? <Download className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}

@@ -218,7 +218,7 @@ export function CareersDirectory() {
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-muted text-foreground/80 border border-border/50">
                       {job.dept}
                     </span>
-                    <span className="text-xs font-bold text-amber-300 bg-[#061a1b] px-3 py-1 rounded-full border border-amber-400/30">
+                    <span className="text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
                       {salary}
                     </span>
                   </div>

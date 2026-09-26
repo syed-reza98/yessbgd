@@ -58,20 +58,20 @@ export function ContactFormAndLocator() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       {/* LEFT COLUMN: Enterprise Inquiry Portal (7 cols) */}
-      <div className="lg:col-span-7 flex flex-col justify-between p-7 sm:p-9 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/40 shadow-sm space-y-6">
+      <div className="lg:col-span-7 flex flex-col justify-between p-7 sm:p-9 rounded-2xl glass-card border border-border shadow-sm space-y-6">
         <div>
           {/* Form Header with Verified Badge */}
-          <div className="flex items-center justify-between pb-6 border-b border-outline-variant/30 mb-6">
+          <div className="flex items-center justify-between pb-6 border-b border-border mb-6">
             <div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-[#005454] dark:text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-display font-extrabold text-foreground tracking-tight">
                 Submit Institutional Inquiry
               </h2>
-              <p className="text-xs sm:text-sm text-on-surface-variant mt-1">
+              <p className="text-xs sm:text-sm text-foreground/70 mt-1">
                 Direct encrypted intake reviewed by Venture Principals and Solutions Architects.
               </p>
             </div>
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-white/5 text-[#005454] dark:text-[#84d4d3] border border-[#005454]/20 text-xs font-semibold">
-              <Shield className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-semibold">
+              <Shield className="w-3.5 h-3.5 text-primary" />
               <span>Fiduciary Pledge</span>
             </div>
           </div>
@@ -81,10 +81,10 @@ export function ContactFormAndLocator() {
               <div className="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-brand-navy dark:text-white">
+              <h3 className="text-lg font-display font-bold text-foreground">
                 Inquiry Dispatched to Executive Desk
               </h3>
-              <p className="text-xs text-on-surface-variant max-w-sm mx-auto leading-relaxed">
+              <p className="text-xs text-foreground/70 max-w-sm mx-auto leading-relaxed">
                 Thank you, <strong>{fullName}</strong>. Your message regarding &ldquo;{practiceArea}&rdquo; has been logged.
                 {requestNda && " A standard bilateral NDA will be counter-signed prior to our introductory call."}
               </p>
@@ -93,7 +93,7 @@ export function ContactFormAndLocator() {
                   setSubmitted(false);
                   setMessage("");
                 }}
-                className="mt-4 px-5 py-2.5 rounded-xl bg-surface-container text-xs font-semibold hover:bg-surface-container-high transition-colors"
+                className="mt-4 px-5 py-2.5 rounded-xl bg-muted text-foreground text-xs font-semibold hover:bg-muted/80 transition-colors"
               >
                 Send Another Inquiry
               </button>
@@ -110,7 +110,7 @@ export function ContactFormAndLocator() {
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="contact-full-name" className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-full-name" className="block text-xs font-semibold text-foreground mb-1.5">
                     Full Name *
                   </label>
                   <input
@@ -120,11 +120,11 @@ export function ContactFormAndLocator() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Engr. Tanvir Ahmed Chowdhury"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
                 <div>
-                  <label htmlFor="contact-email" className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-email" className="block text-xs font-semibold text-foreground mb-1.5">
                     Corporate Email (.com / .bd) *
                   </label>
                   <input
@@ -134,7 +134,7 @@ export function ContactFormAndLocator() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="e.g. tanvir@conglomerate.com.bd"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
@@ -142,7 +142,7 @@ export function ContactFormAndLocator() {
               {/* Phone & Organization Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="contact-phone" className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-phone" className="block text-xs font-semibold text-foreground mb-1.5">
                     Phone / WhatsApp Number *
                   </label>
                   <input
@@ -152,11 +152,11 @@ export function ContactFormAndLocator() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="e.g. +880 1711-000000"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
                 <div>
-                  <label htmlFor="contact-organization" className="block text-xs font-semibold text-on-surface mb-1.5">
+                  <label htmlFor="contact-organization" className="block text-xs font-semibold text-foreground mb-1.5">
                     Enterprise / Organization *
                   </label>
                   <input
@@ -166,21 +166,21 @@ export function ContactFormAndLocator() {
                     value={organization}
                     onChange={(e) => setOrganization(e.target.value)}
                     placeholder="e.g. Apex Group / Ministry of ICT"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
 
               {/* Inquiry Type Dropdown */}
               <div>
-                <label htmlFor="contact-practice-area" className="block text-xs font-semibold text-on-surface mb-1.5">
+                <label htmlFor="contact-practice-area" className="block text-xs font-semibold text-foreground mb-1.5">
                   Inquiry Type / Practice Area *
                 </label>
                 <select
                   id="contact-practice-area"
                   value={practiceArea}
                   onChange={(e) => setPracticeArea(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface focus:outline-none focus:border-[#0d6e6e] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 >
                   <option value="Venture Co-Building & Equity Structuring">Venture Co-Building & Equity Structuring</option>
                   <option value="Enterprise Cloud & Sovereign Software Architectures">Enterprise Cloud & Sovereign Software Architectures</option>
@@ -194,7 +194,7 @@ export function ContactFormAndLocator() {
 
               {/* Project Scope Textarea */}
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-semibold text-on-surface mb-1.5">
+                <label htmlFor="contact-message" className="block text-xs font-semibold text-foreground mb-1.5">
                   Project Scope & Architectural Requirements
                 </label>
                 <textarea
@@ -204,25 +204,25 @@ export function ContactFormAndLocator() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Detail your enterprise requirements, anticipated capital expenditure tier, strategic timeline, or security clearance specifications..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low dark:bg-[#061a1b] border border-outline-variant text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-[#0d6e6e] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 />
               </div>
 
               {/* NDA Checkbox Toggle */}
-              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-low dark:bg-white/5 border border-outline-variant/60">
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-muted/40 border border-border">
                 <input
                   type="checkbox"
                   id="ndaConsent"
                   checked={requestNda}
                   onChange={(e) => setRequestNda(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-outline-variant text-[#005454] focus:ring-[#0d6e6e]"
+                  className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-primary"
                 />
-                <label htmlFor="ndaConsent" className="text-xs text-on-surface cursor-pointer select-none">
-                  <span className="font-semibold text-[#005454] dark:text-[#84d4d3] inline-flex items-center gap-1">
-                    <Shield className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+                <label htmlFor="ndaConsent" className="text-xs text-foreground cursor-pointer select-none">
+                  <span className="font-semibold text-primary inline-flex items-center gap-1">
+                    <Shield className="w-3.5 h-3.5" />
                     Mandate Mutual Non-Disclosure Agreement (NDA)
                   </span>
-                  <span className="block text-on-surface-variant text-[11px] mt-0.5">
+                  <span className="block text-foreground/60 text-[11px] mt-0.5">
                     Require bilateral confidentiality documentation prior to technical architecture exchange.
                   </span>
                 </label>
@@ -233,7 +233,7 @@ export function ContactFormAndLocator() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#005454] hover:bg-[#0d6e6e] disabled:opacity-50 text-white px-7 py-3 rounded-xl text-xs font-bold shadow-md shadow-[#005454]/20 transition-all active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground px-7 py-3 rounded-xl text-xs font-bold shadow-md transition-all active:scale-95"
                 >
                   {loading ? (
                     <>
@@ -247,8 +247,8 @@ export function ContactFormAndLocator() {
                     </>
                   )}
                 </button>
-                <span className="text-on-surface-variant text-xs flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-[#d4a359]" />
+                <span className="text-foreground/60 text-xs flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-primary" />
                   <span>1-Business-Day Contract SLA Guarantee</span>
                 </span>
               </div>
@@ -257,8 +257,8 @@ export function ContactFormAndLocator() {
         </div>
 
         {/* Instant Direct Desk Quick-Chips */}
-        <div className="mt-8 pt-6 border-t border-outline-variant/30">
-          <p className="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">
+        <div className="mt-8 pt-6 border-t border-border">
+          <p className="text-xs font-bold text-foreground/60 uppercase tracking-wider mb-3">
             Direct Executive Desks
           </p>
           <div className="flex flex-wrap gap-2.5 text-xs">
@@ -266,23 +266,23 @@ export function ContactFormAndLocator() {
               href="https://wa.me/8801805464343"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container dark:bg-white/5 hover:bg-surface-container-high text-on-surface transition-colors font-medium"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-[#005454] dark:text-[#84d4d3]" />
+              <MessageSquare className="w-3.5 h-3.5 text-primary" />
               <span>WhatsApp: +880 1805-464343 (&lt; 2h BST)</span>
             </a>
             <a
               href="mailto:invest@yessbgd.com"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container dark:bg-white/5 hover:bg-surface-container-high text-on-surface transition-colors font-medium"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
-              <Building2 className="w-3.5 h-3.5 text-[#7e5713] dark:text-[#f2be71]" />
+              <Building2 className="w-3.5 h-3.5 text-primary" />
               <span>invest@yessbgd.com</span>
             </a>
             <a
               href="mailto:careers@yessbgd.com"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container dark:bg-white/5 hover:bg-surface-container-high text-on-surface transition-colors font-medium"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
-              <FileCheck className="w-3.5 h-3.5 text-[#0d6e6e] dark:text-[#35b0aa]" />
+              <FileCheck className="w-3.5 h-3.5 text-primary" />
               <span>careers@yessbgd.com</span>
             </a>
           </div>
@@ -292,13 +292,13 @@ export function ContactFormAndLocator() {
       {/* RIGHT COLUMN: Dual-Office Locator & Interactive Map View (5 cols) */}
       <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
         {/* Office Location Switcher Tabs */}
-        <div className="bg-surface-container-lowest dark:bg-[#061a1b] p-2 rounded-2xl border border-outline-variant/40 flex gap-2">
+        <div className="bg-muted/40 p-1.5 rounded-2xl border border-border flex gap-2">
           <button
             onClick={() => setActiveTab("motijheel")}
-            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all flex items-center justify-center gap-2 ${
+            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold text-center transition-all flex items-center justify-center gap-2 ${
               activeTab === "motijheel"
-                ? "bg-[#005454] text-white shadow-sm"
-                : "text-on-surface-variant hover:bg-surface-container"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-foreground/70 hover:bg-muted"
             }`}
             type="button"
           >
@@ -307,10 +307,10 @@ export function ContactFormAndLocator() {
           </button>
           <button
             onClick={() => setActiveTab("gulshan")}
-            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all flex items-center justify-center gap-2 ${
+            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold text-center transition-all flex items-center justify-center gap-2 ${
               activeTab === "gulshan"
-                ? "bg-[#005454] text-white shadow-sm"
-                : "text-on-surface-variant hover:bg-surface-container"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-foreground/70 hover:bg-muted"
             }`}
             type="button"
           >
@@ -320,7 +320,7 @@ export function ContactFormAndLocator() {
         </div>
 
         {/* Branded Custom Map Graphic Card */}
-        <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 shadow-sm bg-[#061a1b] min-h-[300px] flex flex-col justify-between p-5 text-white">
+        <div className="relative rounded-2xl overflow-hidden border border-border shadow-sm bg-[#061a1b] min-h-[300px] flex flex-col justify-between p-5 text-white">
           {/* Map Top Overlay: Coordinates & Live Radar */}
           <div className="flex items-center justify-between z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#061a1b]/90 backdrop-blur-md border border-[#35b0aa]/40 text-[11px] font-mono text-[#35b0aa]">
@@ -423,7 +423,7 @@ export function ContactFormAndLocator() {
                   ? "City Center Tower, Level 19"
                   : "House 42, Road 11, Gulshan-2"}
               </p>
-              <p className="text-[11px] text-outline-variant">
+              <p className="text-[11px] text-white/70">
                 {activeTab === "motijheel"
                   ? "Motijheel Commercial Area, Dhaka-1000"
                   : "Gulshan Innovation Zone, Dhaka-1212"}
@@ -441,23 +441,23 @@ export function ContactFormAndLocator() {
         </div>
 
         {/* Detailed Hub Specifications Card (Below Map) */}
-        <div className="p-6 rounded-2xl bg-surface-container-lowest dark:bg-[#061a1b] border border-outline-variant/40 shadow-sm space-y-4">
+        <div className="p-6 rounded-2xl glass-card border border-border shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base sm:text-lg font-bold text-[#005454] dark:text-white">
+            <h3 className="text-base sm:text-lg font-display font-bold text-foreground">
               {activeTab === "motijheel"
                 ? "Headquarters Specifications"
                 : "Innovation Wing Specifications"}
             </h3>
-            <span className="text-xs font-bold text-[#7e5713] dark:text-[#f2be71] uppercase tracking-wider">
+            <span className="text-xs font-bold text-primary uppercase tracking-wider">
               {activeTab === "motijheel" ? "SUITE 804 & 1901" : "LAB TIER-3 EDGE CLUSTER"}
             </span>
           </div>
 
-          <div className="space-y-3 text-xs text-on-surface-variant">
+          <div className="space-y-3 text-xs text-foreground/70">
             <div className="flex items-start gap-3">
-              <MapPin className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <strong className="text-on-surface block font-semibold">Physical Dispatch & Concierge</strong>
+                <strong className="text-foreground block font-semibold">Physical Dispatch & Concierge</strong>
                 <span>
                   {activeTab === "motijheel"
                     ? "Level 19, City Center Tower, 57 Purana Paltan / Motijheel C/A, Dhaka-1000, Bangladesh"
@@ -467,9 +467,9 @@ export function ContactFormAndLocator() {
             </div>
 
             <div className="flex items-start gap-3">
-              <Clock className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <Clock className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <strong className="text-on-surface block font-semibold">Statutory Visiting Hours</strong>
+                <strong className="text-foreground block font-semibold">Statutory Visiting Hours</strong>
                 <span>
                   {activeTab === "motijheel"
                     ? "Sunday – Thursday: 9:00 AM – 6:00 PM BST (Closed on National Holidays & Fri/Sat)"
@@ -479,9 +479,9 @@ export function ContactFormAndLocator() {
             </div>
 
             <div className="flex items-start gap-3">
-              <Phone className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <Phone className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <strong className="text-on-surface block font-semibold">Direct Telephony Lines</strong>
+                <strong className="text-foreground block font-semibold">Direct Telephony Lines</strong>
                 <span>
                   {activeTab === "motijheel"
                     ? "Board Desk: +880 1805-464343 | PABX Trunk: +880 2 9568000 (Ext. 102)"
@@ -491,9 +491,9 @@ export function ContactFormAndLocator() {
             </div>
 
             <div className="flex items-start gap-3">
-              <Car className="w-4 h-4 text-[#005454] dark:text-[#84d4d3] shrink-0 mt-0.5" />
+              <Car className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <strong className="text-on-surface block font-semibold">Security Clearance & Parking</strong>
+                <strong className="text-foreground block font-semibold">Security Clearance & Parking</strong>
                 <span>
                   {activeTab === "motijheel"
                     ? "Government NID or Passport badge registration mandatory at Ground Concierge. Reserved executive parking at Level B2."
@@ -504,9 +504,9 @@ export function ContactFormAndLocator() {
           </div>
 
           {/* Fast Switcher preview to toggle */}
-          <div className="pt-4 border-t border-outline-variant/30 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-xs text-on-surface">
-              <Building className="w-4 h-4 text-[#7e5713] dark:text-[#f2be71]" />
+          <div className="pt-4 border-t border-border flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs text-foreground">
+              <Building className="w-4 h-4 text-primary" />
               <span>
                 {activeTab === "motijheel" ? (
                   <>Secondary Lab: <strong>Road 11, Gulshan-2, Dhaka</strong></>
@@ -517,7 +517,7 @@ export function ContactFormAndLocator() {
             </div>
             <button
               onClick={() => setActiveTab(activeTab === "motijheel" ? "gulshan" : "motijheel")}
-              className="text-[#005454] dark:text-[#84d4d3] hover:underline text-xs inline-flex items-center gap-1 font-semibold"
+              className="text-primary hover:underline text-xs inline-flex items-center gap-1 font-semibold"
               type="button"
             >
               <span>{activeTab === "motijheel" ? "View Lab Specs" : "View HQ Specs"}</span>

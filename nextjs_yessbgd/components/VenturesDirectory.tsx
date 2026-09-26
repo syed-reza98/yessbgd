@@ -92,12 +92,12 @@ export function VenturesDirectory() {
 
   return (
     <div className="flex flex-col w-full -mt-10 relative z-20">
-      {/* Search & Filter Controls Card (matching Stitch) */}
-      <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl shadow-sm border border-outline-variant/30 p-5 sm:p-6 mb-8">
+      {/* Search & Filter Controls Toolbar */}
+      <div className="glass-card rounded-2xl shadow-sm border border-border p-5 sm:p-6 mb-8">
         <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
           {/* Search Field */}
           <div className="relative w-full lg:w-96">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline w-4 h-4" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/40 w-4 h-4" />
             <input
               id="ventures-search-input"
               type="text"
@@ -105,24 +105,24 @@ export function VenturesDirectory() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search ventures by name, sector, or capability..."
               aria-label="Search ventures by name, sector, or capability"
-              className="w-full pl-10 pr-12 py-2.5 bg-surface-container-low dark:bg-white/5 text-on-surface rounded-xl text-xs sm:text-sm border border-outline-variant/40 focus:border-[#0d6e6e] outline-none transition-all placeholder:text-outline"
+              className="w-full pl-10 pr-12 py-2.5 bg-background text-foreground rounded-xl text-xs sm:text-sm border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-foreground/40"
             />
-            <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-surface-container-high dark:bg-white/10 text-on-surface-variant rounded border border-outline-variant/40">
+            <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-muted text-foreground/70 rounded border border-border">
               ⌘K
             </kbd>
           </div>
 
           {/* View Modes & Sort */}
           <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end">
-            <div className="flex items-center gap-1 bg-surface-container-low dark:bg-white/5 p-1 rounded-xl border border-outline-variant/30" role="group" aria-label="View layout switcher">
+            <div className="flex items-center gap-1 bg-muted p-1 rounded-xl border border-border" role="group" aria-label="View layout switcher">
               <button
                 onClick={() => setViewMode("grid")}
                 aria-label="Grid View"
                 aria-pressed={viewMode === "grid"}
-                className={`p-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   viewMode === "grid"
-                    ? "bg-white dark:bg-[#005454] text-[#005454] dark:text-white shadow-xs"
-                    : "text-outline hover:text-on-surface"
+                    ? "bg-primary text-white shadow-xs"
+                    : "text-foreground/60 hover:text-foreground"
                 }`}
                 title="Grid View"
               >
@@ -132,10 +132,10 @@ export function VenturesDirectory() {
                 onClick={() => setViewMode("table")}
                 aria-label="Table View"
                 aria-pressed={viewMode === "table"}
-                className={`p-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   viewMode === "table"
-                    ? "bg-white dark:bg-[#005454] text-[#005454] dark:text-white shadow-xs"
-                    : "text-outline hover:text-on-surface"
+                    ? "bg-primary text-white shadow-xs"
+                    : "text-foreground/60 hover:text-foreground"
                 }`}
                 title="Table View"
               >
@@ -149,29 +149,29 @@ export function VenturesDirectory() {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
                 aria-label="Sort ventures"
-                className="appearance-none bg-surface-container-low dark:bg-white/5 text-on-surface font-semibold text-xs py-2.5 pl-3 pr-8 rounded-xl border border-outline-variant/30 focus:border-[#0d6e6e] outline-none cursor-pointer"
+                className="appearance-none bg-background text-foreground font-semibold text-xs py-2.5 pl-3 pr-8 rounded-xl border border-border focus:border-primary outline-none cursor-pointer"
               >
                 <option value="founded">Sort by: Founding Year (Newest)</option>
                 <option value="valuation">Sort by: Enterprise Valuation</option>
                 <option value="alpha">Sort by: Alphabetical (A-Z)</option>
               </select>
-              <ChevronDown className="w-4 h-4 absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none" />
+              <ChevronDown className="w-4 h-4 absolute right-2.5 top-1/2 -translate-y-1/2 text-foreground/40 pointer-events-none" />
             </div>
           </div>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-1 scrollbar-none border-t border-outline-variant/20 pt-4">
+        <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-1 scrollbar-none border-t border-border pt-4">
           {clusters.map((cluster) => {
             const isActive = selectedCluster === cluster.id;
             return (
               <button
                 key={cluster.id}
                 onClick={() => setSelectedCluster(cluster.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
-                    ? "bg-[#0d6e6e] text-white shadow-xs"
-                    : "bg-surface-container-low dark:bg-white/5 text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30"
+                    ? "bg-primary text-white shadow-xs"
+                    : "bg-muted text-foreground/70 hover:text-foreground hover:bg-muted/80 border border-border"
                 }`}
               >
                 {cluster.label}
@@ -184,14 +184,14 @@ export function VenturesDirectory() {
       {/* Counter Bar */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <span className="text-[11px] uppercase font-bold tracking-wider text-[#7e5713] dark:text-[#f2be71] block">
+          <span className="text-[11px] uppercase font-bold tracking-wider text-primary block">
             Operational Fleet
           </span>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#005454] dark:text-white">
+          <h2 className="font-display text-xl sm:text-2xl font-extrabold text-foreground">
             Portfolio Subsidiaries
           </h2>
         </div>
-        <span className="text-xs text-outline font-semibold">
+        <span className="text-xs text-foreground/60 font-semibold">
           Displaying {filteredAndSorted.length} of {ventures.length} Operating Companies
         </span>
       </div>
@@ -212,51 +212,53 @@ export function VenturesDirectory() {
             return (
               <article
                 key={venture.slug}
-                className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl border border-outline-variant/30 p-6 flex flex-col justify-between hover:shadow-lg hover:border-[#0d6e6e]/40 transition-all duration-200 group"
+                className="glass-card rounded-2xl border border-border p-7 flex flex-col justify-between hover:shadow-xl hover:border-primary/40 transition-all duration-200 group"
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#0d6e6e]/10 border border-[#0d6e6e]/20 flex items-center justify-center text-[#0d6e6e] dark:text-[#35b0aa] group-hover:bg-[#0d6e6e] group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
                       <Icon className="w-6 h-6" />
                     </div>
                     <div className="text-right">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-surface-container dark:bg-white/10 text-[#005454] dark:text-[#84d4d3]">
+                      <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/20">
                         {cluster}
                       </span>
-                      <p className="text-[10px] text-outline mt-1 font-medium">
+                      <p className="text-[10px] text-foreground/50 mt-1 font-medium">
                         Est. {venture.founded || "2020"} • {venture.category}
                       </p>
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-on-surface group-hover:text-[#0d6e6e] dark:group-hover:text-[#35b0aa] transition-colors">
+                  <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors leading-snug">
                     {venture.title}
                   </h3>
                   <p className="text-xs font-semibold text-[#d4a359] mt-0.5">{venture.tagline}</p>
-                  <p className="text-xs text-on-surface-variant mt-2 mb-4 leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-sm text-foreground/70 mt-2 mb-4 leading-relaxed line-clamp-3">
                     {venture.desc}
                   </p>
                 </div>
 
                 <div>
-                  <div className="py-2.5 px-3 rounded-xl bg-surface-container-low dark:bg-white/5 border border-outline-variant/20 mb-4 text-xs grid grid-cols-2 gap-2">
+                  <div className="py-2.5 px-3 rounded-xl bg-muted/50 border border-border mb-4 text-xs grid grid-cols-2 gap-2">
                     <div>
-                      <span className="text-[10px] text-outline block">{metric.label1}</span>
-                      <span className="font-bold text-on-surface text-xs">{metric.val1}</span>
+                      <span className="text-[10px] text-foreground/60 block">{metric.label1}</span>
+                      <span className="font-bold text-foreground text-xs">{metric.val1}</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-outline block">{metric.label2}</span>
-                      <span className="font-bold text-[#0d6e6e] dark:text-[#35b0aa] text-xs">{metric.val2}</span>
+                      <span className="text-[10px] text-foreground/60 block">{metric.label2}</span>
+                      <span className="font-bold text-primary text-xs">{metric.val2}</span>
                     </div>
                   </div>
 
-                  <Link
-                    href={`/ventures/${venture.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#005454] dark:text-[#84d4d3] hover:text-[#d4a359] group-hover:translate-x-0.5 transition-all"
-                  >
-                    <span>Explore Venture Profile</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                  <div className="pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                    <Link
+                      href={`/ventures/${venture.slug}`}
+                      className="inline-flex items-center gap-1.5 hover:underline group-hover:translate-x-0.5 transition-transform"
+                    >
+                      <span>Explore Venture Profile</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               </article>
             );
@@ -264,10 +266,10 @@ export function VenturesDirectory() {
         </div>
       ) : (
         /* Table View */
-        <div className="bg-surface-container-lowest dark:bg-[#061a1b] rounded-2xl border border-outline-variant/30 overflow-hidden shadow-sm">
+        <div className="glass-card rounded-2xl border border-border overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-surface-container-low dark:bg-white/5 border-b border-outline-variant/30 font-bold text-on-surface uppercase text-[11px]">
+              <thead className="bg-muted/50 border-b border-border font-bold text-foreground uppercase text-[11px]">
                 <tr>
                   <th scope="col" className="p-4">Entity</th>
                   <th scope="col" className="p-4">Sector Cluster</th>
@@ -277,7 +279,7 @@ export function VenturesDirectory() {
                   <th scope="col" className="p-4 text-right">Dossier</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant/20">
+              <tbody className="divide-y divide-border">
                 {filteredAndSorted.map((v) => {
                   const cluster = categoryMapping[v.category] || v.category;
                   const metric = ventureMetrics[v.slug] || {
@@ -287,20 +289,20 @@ export function VenturesDirectory() {
                     val2: "99.9%",
                   };
                   return (
-                    <tr key={v.slug} className="hover:bg-surface-container-low/50 dark:hover:bg-white/5 transition-colors">
-                      <td className="p-4 font-bold text-on-surface">
-                        <Link href={`/ventures/${v.slug}`} className="hover:text-[#0d6e6e] flex items-center gap-2">
+                    <tr key={v.slug} className="hover:bg-muted/40 transition-colors">
+                      <td className="p-4 font-bold text-foreground">
+                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2">
                           <span>{v.title}</span>
                         </Link>
                       </td>
-                      <td className="p-4 text-on-surface-variant">{cluster}</td>
-                      <td className="p-4 text-outline">{v.founded || "2020"}</td>
-                      <td className="p-4 font-semibold text-on-surface">{metric.val1}</td>
-                      <td className="p-4 font-semibold text-[#0d6e6e] dark:text-[#35b0aa]">{metric.val2}</td>
+                      <td className="p-4 text-foreground/70">{cluster}</td>
+                      <td className="p-4 text-foreground/50">{v.founded || "2020"}</td>
+                      <td className="p-4 font-semibold text-foreground">{metric.val1}</td>
+                      <td className="p-4 font-semibold text-primary">{metric.val2}</td>
                       <td className="p-4 text-right">
                         <Link
                           href={`/ventures/${v.slug}`}
-                          className="inline-flex items-center gap-1 font-bold text-[#005454] dark:text-[#84d4d3] hover:underline"
+                          className="inline-flex items-center gap-1 font-bold text-primary hover:underline"
                         >
                           <span>View Profile</span>
                           <ArrowRight className="w-3 h-3" />

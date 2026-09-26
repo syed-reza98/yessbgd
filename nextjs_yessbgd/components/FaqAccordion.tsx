@@ -135,9 +135,9 @@ export function FaqAccordion() {
   return (
     <div className="space-y-8">
       {/* Search Bar */}
-      <div className="glass-card rounded-2xl p-5 space-y-3">
+      <div className="glass-card rounded-2xl p-5 border border-border space-y-3 shadow-sm">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-outline w-5 h-5" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40 w-5 h-5" />
           <input
             id="faq-search-input"
             type="text"
@@ -145,13 +145,13 @@ export function FaqAccordion() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions by topic, e.g. pricing, NDA, OTT, SLA, cloud residency..."
             aria-label="Search questions by topic, pricing, SLA, or cloud residency"
-            className="w-full bg-white dark:bg-[#061a1b] border border-outline-variant/60 rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-[#0d6e6e]"
+            className="w-full bg-background border border-border rounded-xl pl-12 pr-4 py-3 text-sm text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
 
         {/* Quick Topic Tags */}
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
-          <span className="text-outline font-medium mr-1">Quick Search Topics:</span>
+          <span className="text-foreground/60 font-medium mr-1">Quick Search Topics:</span>
           {["All", "Pricing & SPV", "IP Ownership", "SLAs", "64 Districts", "Legacy Audit"].map(
             (tag) => {
               const active = searchQuery === (tag === "All" ? "" : tag);
@@ -161,8 +161,8 @@ export function FaqAccordion() {
                   onClick={() => setSearchQuery(tag === "All" ? "" : tag)}
                   className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                     active
-                      ? "bg-[#0d6e6e] text-white shadow-sm"
-                      : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
                   }`}
                 >
                   {tag}
@@ -188,8 +188,8 @@ export function FaqAccordion() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
                 active
-                  ? "bg-[#0d6e6e] text-white shadow-md shadow-[#0d6e6e]/20"
-                  : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+                  ? "bg-primary text-primary-foreground shadow-md"
+                  : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
               }`}
             >
               {cat} ({count})
@@ -201,12 +201,12 @@ export function FaqAccordion() {
       {/* Accordion List */}
       <div className="space-y-4">
         {filteredFaqs.length === 0 ? (
-          <div className="glass-card rounded-2xl p-12 text-center">
-            <HelpCircle className="w-10 h-10 text-outline mx-auto mb-2 opacity-60" />
-            <h3 className="font-bold text-base text-brand-navy dark:text-white">
+          <div className="glass-card rounded-2xl p-12 text-center border border-border">
+            <HelpCircle className="w-10 h-10 text-foreground/40 mx-auto mb-2 opacity-60" />
+            <h3 className="font-display font-bold text-base text-foreground">
               No questions found
             </h3>
-            <p className="text-xs text-on-surface-variant mt-1">
+            <p className="text-xs text-foreground/70 mt-1">
               Try adjusting your search query or select another category.
             </p>
           </div>
@@ -217,7 +217,7 @@ export function FaqAccordion() {
             return (
               <div
                 key={faq.id}
-                className="glass-card rounded-2xl p-6 hover:border-[#0d6e6e]/40 transition-all shadow-sm"
+                className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-all shadow-sm"
               >
                 <button
                   type="button"
@@ -225,17 +225,17 @@ export function FaqAccordion() {
                   className="w-full text-left flex items-start justify-between gap-4 select-none cursor-pointer"
                 >
                   <div className="space-y-1">
-                    <span className="text-[11px] font-bold text-[#0d6e6e] uppercase tracking-wider block">
+                    <span className="text-[11px] font-bold text-primary uppercase tracking-wider block">
                       {faq.category}
                     </span>
-                    <h3 className="font-bold text-base sm:text-lg text-brand-navy dark:text-white leading-snug">
+                    <h3 className="font-display font-bold text-base sm:text-lg text-foreground leading-snug">
                       {faq.question}
                     </h3>
                   </div>
 
                   <div
-                    className={`w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-[#0d6e6e] transition-transform duration-200 ${
-                      isOpen ? "rotate-180 bg-[#0d6e6e]/10" : ""
+                    className={`w-8 h-8 rounded-full bg-muted flex items-center justify-center shrink-0 text-foreground/70 transition-transform duration-200 ${
+                      isOpen ? "rotate-180 bg-primary/10 text-primary" : ""
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -243,14 +243,14 @@ export function FaqAccordion() {
                 </button>
 
                 {isOpen && (
-                  <div className="mt-4 pt-4 border-t border-outline-variant/30 text-xs sm:text-sm text-on-surface-variant leading-relaxed space-y-3">
+                  <div className="mt-4 pt-4 border-t border-border text-xs sm:text-sm text-foreground/70 leading-relaxed space-y-3">
                     <p>{faq.answer}</p>
 
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       {faq.tags.map((t) => (
                         <span
                           key={t}
-                          className="px-2 py-0.5 rounded text-[10px] font-semibold bg-surface-container text-outline"
+                          className="px-2 py-0.5 rounded text-[10px] font-semibold bg-muted text-foreground/60 border border-border"
                         >
                           #{t}
                         </span>

@@ -18,8 +18,8 @@ export default function ApplicationStatusPage() {
     <Suspense
       fallback={
         <div className="py-24 text-center">
-          <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#0d6e6e]" />
-          <p className="mt-3 text-xs text-on-surface-variant">Loading sovereign candidate session...</p>
+          <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
+          <p className="mt-3 text-xs text-foreground/70">Loading sovereign candidate session...</p>
         </div>
       }
     >

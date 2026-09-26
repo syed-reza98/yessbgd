@@ -61,15 +61,15 @@ export default async function SingleIndustryPage({
 
       {/* Metrics Strip */}
       {industry.keyMetrics && industry.keyMetrics.length > 0 && (
-        <section className="py-10 bg-[#061a1b] text-white border-y border-white/10">
+        <section className="py-10 bg-muted/20 border-b border-border">
           <div className="container-tight">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               {industry.keyMetrics.map((km) => (
-                <div key={km.label} className="flex flex-col">
-                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-[#35b0aa]">
+                <div key={km.label} className="glass-card p-6 rounded-2xl border border-border shadow-sm">
+                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-primary block mb-1">
                     {km.value}
                   </span>
-                  <span className="text-xs uppercase tracking-wider text-white/60 font-semibold mt-1">
+                  <span className="text-xs uppercase tracking-wider text-foreground/70 font-semibold">
                     {km.label}
                   </span>
                 </div>
