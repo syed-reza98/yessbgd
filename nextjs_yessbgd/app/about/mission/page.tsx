@@ -15,7 +15,6 @@ import {
   Award,
   Sparkles,
 } from "lucide-react";
-import { PageHero } from "@/components/PageHero";
 import { aboutPillars } from "@/data/about";
 
 export const metadata = {
@@ -29,11 +28,120 @@ export default function MissionPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <PageHero
-        eyebrow="STRATEGIC FOUNDATION"
-        title="Our Mission: Empower Ambitious Organizations Across Bangladesh"
-        subtitle="Empower organisations across Bangladesh with strategic consulting and technology that drives measurable growth, operational autonomy, and long-term enterprise resilience."
-      />
+      {/* 1. Page Hero & Strategic Mission Overview (Signature Corporate Dark Hero) */}
+      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+              Home
+            </Link>
+            <span className="text-white/30">/</span>
+            <Link href="/about" className="hover:text-[#f6c87a] transition-colors">
+              About Us
+            </Link>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">Strategic Mission &amp; Purpose</span>
+          </nav>
+
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>— STRATEGIC FOUNDATION &amp; PURPOSE —</span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6 leading-tight">
+              Our Sovereign Mission:{" "}
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                Empowering Bangladesh&apos;s Enterprise Future
+              </span>
+              .
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-3xl mb-10">
+              Empowering organizations across Bangladesh with strategic consulting, sovereign technology, and measurable enterprise growth that drives operational autonomy and institutional resilience.
+            </p>
+          </div>
+
+          {/* 4 Glass Telemetry Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-3">
+                <span className="p-2.5 rounded-xl bg-white/10 text-[#35b0aa] group-hover:scale-110 transition-transform">
+                  <Compass className="w-5 h-5" />
+                </span>
+                <span className="text-xs font-bold text-[#35b0aa] bg-[#35b0aa]/10 px-2.5 py-0.5 rounded-full border border-[#35b0aa]/30">
+                  Autonomy
+                </span>
+              </div>
+              <div className="font-display font-extrabold text-2xl text-white group-hover:text-[#35b0aa] transition-colors mb-1">
+                Sovereignty
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Domestic infrastructure, local hosting &amp; data governance
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#d4a359]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-3">
+                <span className="p-2.5 rounded-xl bg-white/10 text-[#d4a359] group-hover:scale-110 transition-transform">
+                  <Layers className="w-5 h-5" />
+                </span>
+                <span className="text-xs font-bold text-[#d4a359] bg-[#d4a359]/10 px-2.5 py-0.5 rounded-full border border-[#d4a359]/30">
+                  Scale
+                </span>
+              </div>
+              <div className="font-display font-extrabold text-2xl text-white group-hover:text-[#d4a359] transition-colors mb-1">
+                13 Ventures
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                High-performance subsidiaries operating across Bangladesh
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-400/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-3">
+                <span className="p-2.5 rounded-xl bg-white/10 text-emerald-400 group-hover:scale-110 transition-transform">
+                  <Cpu className="w-5 h-5" />
+                </span>
+                <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  Execution
+                </span>
+              </div>
+              <div className="font-display font-extrabold text-2xl text-white group-hover:text-emerald-300 transition-colors mb-1">
+                Zero Slideware
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Measured in shipped code, physical supply rails &amp; live SLAs
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#f6c87a]/50 transition-all duration-200 group">
+              <div className="flex items-center justify-between mb-3">
+                <span className="p-2.5 rounded-xl bg-white/10 text-[#f6c87a] group-hover:scale-110 transition-transform">
+                  <ShieldCheck className="w-5 h-5" />
+                </span>
+                <span className="text-xs font-bold text-[#f6c87a] bg-[#d4a359]/10 px-2.5 py-0.5 rounded-full border border-[#d4a359]/30">
+                  Guarantee
+                </span>
+              </div>
+              <div className="font-display font-extrabold text-2xl text-white group-hover:text-[#f6c87a] transition-colors mb-1">
+                100% IP Handover
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Uncompromising bilateral NDA, security &amp; code ownership
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 1. Operating Charter & Core Mandate */}
       <section className="py-20 bg-background border-b border-border">

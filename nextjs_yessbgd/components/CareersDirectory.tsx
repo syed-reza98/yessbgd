@@ -264,6 +264,7 @@ export function CareersDirectory() {
 
                   <Link
                     href={`/careers/${job.slug}`}
+                    prefetch={true}
                     className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl transition-all shadow-sm active:scale-95 whitespace-nowrap cursor-pointer"
                   >
                     <span>Apply Now</span>

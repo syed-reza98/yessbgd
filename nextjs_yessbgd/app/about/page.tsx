@@ -61,6 +61,99 @@ const metrics = [
   },
 ];
 
+const strategicPillars = [
+  {
+    num: "1",
+    title: "1. Innovation & Deep Tech",
+    tagline: "Sovereign microservices and transactional AI mesh.",
+    desc: "AI, microservices, cloud telemetry, and sovereign transactional infrastructure architected to handle mission-critical high-concurrency loads across banking and statutory enterprise automation.",
+    icon: BrainCircuit,
+    category: "Sovereign Cloud & AI",
+    subtext: "Tier-3 Infra • High Concurrency",
+    metric1Label: "Core Engines",
+    metric1Val: "Yess Soft & Shondhaan",
+    metric2Label: "Daily Throughput",
+    metric2Val: "1M+ Txn/day",
+    href: "/about/methodology",
+    action: "Explore Architecture",
+  },
+  {
+    num: "2",
+    title: "2. Institutional Governance & Transparency",
+    tagline: "Bilateral fiduciary standards and clean audit trails.",
+    desc: "Registered under RJSC C-184920, adhering to strict Bangladesh Bank fiduciary compliance, independent board oversight, and clean audit trails.",
+    icon: Scale,
+    category: "Statutory Fiduciary",
+    subtext: "RJSC C-184920 • BB Compliant",
+    metric1Label: "Incorporation",
+    metric1Val: "RJSC Dhaka C-184920",
+    metric2Label: "Compliance",
+    metric2Val: "BIDA & Central Bank",
+    href: "/about/leadership",
+    action: "Review Governance Board",
+  },
+  {
+    num: "3",
+    title: "3. ESG & Sustainable Agribusiness",
+    tagline: "Direct farmer fair-trade and cold-chain transparency.",
+    desc: "Zero-chemical supply chain transparency, cold-chain IoT tracking, and direct rural farmer cooperatives establishing ethical agricultural commerce.",
+    icon: TreePine,
+    category: "Sustainable Value Chain",
+    subtext: "IoT Cold-Chain • 30+ Hubs",
+    metric1Label: "Rural Reach",
+    metric1Val: "10,000+ Farmers",
+    metric2Label: "Traceability",
+    metric2Val: "100% Verified IoT",
+    href: "/ventures",
+    action: "Explore Organic Haat",
+  },
+  {
+    num: "4",
+    title: "4. Youth Leadership & Human Capital",
+    tagline: "Nurturing high-caliber domestic engineering talent.",
+    desc: "Nurturing top 1% engineering cohorts from BUET, DU, and premier polytechnic institutes into executive architects and product managers.",
+    icon: GraduationCap,
+    category: "Demographic Dividend",
+    subtext: "Top 1% Talent • Leadership Track",
+    metric1Label: "Workforce",
+    metric1Val: "500+ Engineers",
+    metric2Label: "Retention Rate",
+    metric2Val: "94% Long-Term",
+    href: "/careers",
+    action: "Explore Talent Portal",
+  },
+  {
+    num: "5",
+    title: "5. Global Quality Benchmarks",
+    tagline: "Export-grade software pipelines and Tier-3 residency.",
+    desc: "Export-grade software pipelines, CMMI-aligned methodologies, and Tier-3 sovereign data center architectures ensuring resilient uptime and multi-tenant security.",
+    icon: ShieldCheck,
+    category: "Enterprise Grade",
+    subtext: "ISO 27001 • CMMI Level 3",
+    metric1Label: "Standard Met",
+    metric1Val: "ISO 9001 / 27001",
+    metric2Label: "Uptime SLA",
+    metric2Val: "99.98% Guaranteed",
+    href: "/about/standards",
+    action: "Verify Certifications",
+  },
+  {
+    num: "6",
+    title: "6. Cross-Border Scale & Logistics",
+    tagline: "Sovereign supply chain resilience and regional OTT media.",
+    desc: "Consolidating 64-district freight fulfillment networks and sovereign CDN edge nodes, bridging domestic production with regional Asian trade corridors.",
+    icon: Globe2,
+    category: "Nationwide Reach",
+    subtext: "64 Districts • Cross-Border Corridors",
+    metric1Label: "Coverage",
+    metric1Val: "Pan-Bangladesh",
+    metric2Label: "Architecture",
+    metric2Val: "Zero-Buffer CDN",
+    href: "/ventures",
+    action: "Explore Logistics Fleet",
+  },
+];
+
 const timelineMilestones = [
   {
     year: "18",
@@ -173,7 +266,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. 5 Strategic Foundational Pillars Section */}
+      {/* 2. Strategic Foundational Pillars Section */}
       <section className="py-20 bg-background relative border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -181,7 +274,7 @@ export default function AboutPage() {
               PILLARS OF RESILIENCE
             </span>
             <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-foreground mt-2 mb-4">
-              5 Strategic Foundational Pillars Architecting Our Growth
+              Strategic Foundational Pillars Architecting Our Growth
             </h2>
             <p className="text-xs sm:text-sm text-foreground/70 max-w-2xl mx-auto leading-relaxed">
               Each vertical is engineered to institutional rigor, insulating early-stage risks while maximizing
@@ -189,123 +282,63 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Pillar 1 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
-                  <BrainCircuit className="w-6 h-6" />
-                </div>
-                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">
-                  Sovereign Cloud &amp; AI
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors mb-2">1. Innovation &amp; Deep Tech</h3>
-                <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-6">
-                  AI, microservices, cloud telemetry, and sovereign transactional infrastructure architected to handle
-                  mission-critical high-concurrency loads.
-                </p>
-              </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/about/methodology" className="hover:underline flex items-center gap-1">
-                  <span>Yess Soft • Shondhaan Core</span>
-                </Link>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {strategicPillars.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
+                <article
+                  key={pillar.title}
+                  className="glass-card rounded-2xl border border-border p-7 flex flex-col justify-between hover:shadow-xl hover:border-primary/40 transition-all duration-200 group"
+                >
+                  <div>
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <div className="text-right">
+                        <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/20">
+                          {pillar.category}
+                        </span>
+                        <p className="text-[10px] text-foreground/50 mt-1 font-medium">
+                          {pillar.subtext}
+                        </p>
+                      </div>
+                    </div>
 
-            {/* Pillar 2 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
-                  <Scale className="w-6 h-6" />
-                </div>
-                <div className="inline-block px-3 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-400 text-xs font-semibold mb-3 border border-amber-500/30">
-                  Statutory Fiduciary
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors mb-2">2. Institutional Governance &amp; Transparency</h3>
-                <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-6">
-                  Registered under RJSC C-184920, adhering to strict Bangladesh Bank fiduciary compliance, independent board
-                  oversight, and clean audit trails.
-                </p>
-              </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-amber-600 dark:text-amber-400">
-                <Link href="/about/leadership" className="hover:underline flex items-center gap-1">
-                  <span>Audited Compliance &amp; RJSC Reg</span>
-                </Link>
-                <ShieldCheck className="w-4 h-4" />
-              </div>
-            </div>
+                    <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors leading-snug">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-[#d4a359] mt-0.5">{pillar.tagline}</p>
+                    <p className="text-xs sm:text-sm text-foreground/70 mt-2 mb-4 leading-relaxed line-clamp-3">
+                      {pillar.desc}
+                    </p>
+                  </div>
 
-            {/* Pillar 3 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
-                  <TreePine className="w-6 h-6" />
-                </div>
-                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">
-                  Sustainable Value Chain
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors mb-2">3. ESG &amp; Sustainable Agribusiness</h3>
-                <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-6">
-                  Zero-chemical supply chain transparency, cold-chain IoT tracking, and direct rural farmer cooperatives
-                  establishing ethical agricultural commerce.
-                </p>
-              </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/ventures" className="hover:underline flex items-center gap-1">
-                  <span>YESS Organic Haat Network</span>
-                </Link>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
+                  <div>
+                    <div className="py-2.5 px-3 rounded-xl bg-muted/50 border border-border mb-4 text-xs grid grid-cols-2 gap-2">
+                      <div>
+                        <span className="text-[10px] text-foreground/60 block">{pillar.metric1Label}</span>
+                        <span className="font-bold text-foreground text-xs">{pillar.metric1Val}</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-foreground/60 block">{pillar.metric2Label}</span>
+                        <span className="font-bold text-primary text-xs">{pillar.metric2Val}</span>
+                      </div>
+                    </div>
 
-            {/* Pillar 4 */}
-            <div className="glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
-                  <GraduationCap className="w-6 h-6" />
-                </div>
-                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">
-                  Demographic Dividend
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors mb-2">4. Youth Leadership &amp; Human Capital</h3>
-                <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-6">
-                  Nurturing top 1% engineering cohorts from BUET, DU, and premier polytechnic institutes into executive
-                  architects and product managers.
-                </p>
-              </div>
-              <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/careers" className="hover:underline flex items-center gap-1">
-                  <span>YESS Talent Accelerator</span>
-                </Link>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Pillar 5 (Spanning 2 columns on lg) */}
-            <div className="lg:col-span-2 glass-card rounded-2xl p-8 hover:shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 group">
-              <div className="max-w-xl">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <div className="inline-block px-3 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-400 text-xs font-semibold mb-2 border border-amber-500/30">
-                  Enterprise Grade
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-2">5. Global Quality Benchmarks</h3>
-                <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
-                  Export-grade software pipelines, CMMI-aligned methodologies, and Tier-3 sovereign data center
-                  architectures ensuring resilient uptime and multi-tenant security.
-                </p>
-              </div>
-              <div className="bg-muted/50 p-5 rounded-xl border border-border min-w-[200px] shrink-0">
-                <div className="text-[11px] text-foreground/60 mb-1">Standard Met</div>
-                <div className="text-sm font-bold text-foreground">ISO 27001 / CMMI</div>
-                <div className="text-xs text-foreground/70 mt-2 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span>Fiduciary Compliant</span>
-                </div>
-              </div>
-            </div>
+                    <div className="pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
+                      <Link
+                        href={pillar.href}
+                        className="inline-flex items-center gap-1.5 hover:underline group-hover:translate-x-0.5 transition-transform"
+                      >
+                        <span>{pillar.action}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

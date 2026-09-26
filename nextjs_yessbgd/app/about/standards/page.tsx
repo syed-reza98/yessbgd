@@ -21,6 +21,7 @@ import {
   Check,
   TrendingUp,
   FileCheck,
+  Sparkles,
 } from "lucide-react";
 
 const metricCards = [
@@ -132,54 +133,69 @@ export default function StandardsPage() {
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. Hero & High-Impact Metric Cards */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background border-b border-border">
-        <div className="container-tight max-w-6xl">
+      {/* 1. Hero & High-Impact Metric Cards (Signature Corporate Dark Hero) */}
+      <section className="relative bg-[#061a1b] text-white overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-white/10 mb-16">
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center space-x-2 text-xs font-semibold text-foreground/60">
-              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li className="text-foreground/40">/</li>
-              <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-              <li className="text-foreground/40">/</li>
-              <li className="text-primary font-bold">Quality Standards &amp; QA Framework</li>
-            </ol>
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
+            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+              Home
+            </Link>
+            <span className="text-white/30">/</span>
+            <Link href="/about" className="hover:text-[#f6c87a] transition-colors">
+              About Us
+            </Link>
+            <span className="text-white/30">/</span>
+            <span className="text-[#35b0aa]">Quality Standards &amp; QA Framework</span>
           </nav>
 
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold tracking-widest uppercase mb-5">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-            <span>QUALITY &amp; GOVERNANCE</span>
-          </div>
-
           <div className="max-w-4xl">
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-foreground tracking-tight mb-4">
-              International Standards &amp; Engineering Governance
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>— QUALITY GOVERNANCE &amp; ASSURANCE —</span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6 leading-tight">
+              International Standards &amp;{" "}
+              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                Engineering Governance
+              </span>
+              .
             </h1>
-            <p className="text-base sm:text-lg text-foreground/75 leading-relaxed max-w-2xl">
-              How YESS Bangladesh is operated to international quality, enterprise security, and rigorous delivery standards across all 13 operating subsidiaries.
+
+            {/* Subtitle */}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-3xl mb-10">
+              How YESS Bangladesh is operated to international quality benchmarks, enterprise cybersecurity protocols, and rigorous delivery standards across all 13 operating subsidiaries.
             </p>
           </div>
 
-          {/* 4 Metric Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+          {/* 4 Glass Metric Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
             {metricCards.map((m) => {
               const Icon = m.icon;
               return (
                 <div
                   key={m.value}
-                  className="rounded-2xl glass-card p-6 border border-border hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 shadow-sm"
+                  className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all duration-300 hover:-translate-y-1 group"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <Icon className={`w-7 h-7 ${m.iconColor}`} />
-                    <span className={`text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${m.tagColor}`}>
+                    <span className="p-2.5 rounded-xl bg-white/10 text-[#35b0aa] group-hover:scale-110 transition-transform">
+                      <Icon className="w-5 h-5" />
+                    </span>
+                    <span className="text-xs font-bold text-[#f6c87a] bg-[#d4a359]/10 px-2.5 py-0.5 rounded-full border border-[#d4a359]/30 uppercase tracking-wider">
                       {m.tag}
                     </span>
                   </div>
-                  <div className="font-display font-bold text-xl sm:text-2xl text-foreground tracking-tight mb-1">
+                  <div className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight mb-1 group-hover:text-[#f6c87a] transition-colors">
                     {m.value}
                   </div>
-                  <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     {m.desc}
                   </p>
                 </div>

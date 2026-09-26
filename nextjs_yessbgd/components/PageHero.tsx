@@ -5,7 +5,7 @@ export function PageHero({
   title,
   subtitle,
   children,
-  variant = "light",
+  variant = "dark",
 }: {
   eyebrow?: string;
   title: ReactNode;
