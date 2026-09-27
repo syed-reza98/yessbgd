@@ -85,7 +85,7 @@ export default async function ServicesPage() {
   return (
     <div className="flex flex-col w-full">
       {/* Canonical Stitch Hero Section: Full-Lifecycle Engineering */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-20 sm:pt-32 lg:pt-36 overflow-hidden border-b border-slate-200/80">
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-20 sm:pt-32 lg:pt-36 overflow-hidden border-b border-slate-200/80 min-h-[auto] sm:min-h-[540px] lg:min-h-[600px] flex flex-col justify-center">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/services-tech-bd.jpg')` }}

@@ -161,39 +161,40 @@ export function HomeClient({
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. Cinematic Hero Section with 4 Flagship Minted 3D Medallions (Light Theme) */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 text-slate-900 overflow-hidden pt-36 sm:pt-36 lg:pt-36 pb-10 sm:pb-14 lg:pb-18 border-b border-slate-200/80">
+      {/* 1. Canonical Corporate Hero Section with Flagship Ventures Cockpit Card */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80 min-h-[auto] sm:min-h-[580px] lg:min-h-[640px] flex flex-col justify-center">
         {/* Authentic Office Photography Backdrop */}
         <div
-          className="absolute inset-0 z-0 opacity-55 pointer-events-none bg-cover bg-center"
+          className="absolute inset-0 z-0 opacity-28 sm:opacity-30 pointer-events-none bg-cover bg-center mix-blend-multiply"
           style={{ backgroundImage: "url('/assets/heroes/hero_6a8951c6b7346.png')" }}
         />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/70 to-white/30 pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/80 to-white/60 pointer-events-none" />
 
         {/* Ambient Brand Mesh & Strategic Glows */}
-        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-6 right-1/4 w-80 h-80 bg-rose-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="container-tight relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Hero Column */}
-            <div className="lg:col-span-7 flex flex-col space-y-4">
-              {/* Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider w-fit shadow-xs">
-                <Sparkles className="h-3.5 w-3.5 text-amber-600" />
-                <span>{sitePage?.hero_eyebrow || "— BANGLADESH VENTURE BUILDER & ENTERPRISE STUDIO —"}</span>
-              </div>
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              {/* Eyebrow Badge (Only rendered if configured in CMS / not blank) */}
+              {sitePage?.hero_eyebrow && sitePage.hero_eyebrow.trim() !== "" ? (
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-2xs w-fit">
+                  <Sparkles className="h-3.5 w-3.5 text-teal-600" />
+                  <span>{sitePage.hero_eyebrow.trim()}</span>
+                </div>
+              ) : null}
 
               {/* Display Headline */}
-              <h1 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[44px] tracking-tight text-slate-900 leading-[1.18]">
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight mb-6">
                 {sitePage?.hero_title ? (
                   sitePage.hero_title
                 ) : (
                   <>
                     Youth Entrepreneurship for{" "}
-                    <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700 bg-clip-text text-transparent">
                       smart success
                     </span>{" "}
                     with{" "}
@@ -206,12 +207,12 @@ export function HomeClient({
               </h1>
 
               {/* Subtitle */}
-              <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl leading-relaxed mb-8">
                 {sitePage?.hero_subtitle || "Catalyzing next-generation enterprises across sovereign software engineering, sustainable agribusiness, digital media streaming, and logistics in Bangladesh and global high-growth corridors."}
               </p>
 
               {/* Dual CTAs */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-8 sm:mb-10">
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white font-bold shadow-md shadow-emerald-900/20 transition-all duration-200 active:scale-95 group text-xs sm:text-sm"
@@ -221,7 +222,7 @@ export function HomeClient({
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold shadow-xs transition-all duration-200 text-xs sm:text-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold shadow-xs transition-all duration-200 active:scale-95 text-xs sm:text-sm"
                 >
                   <LayoutGrid className="h-4 w-4 text-emerald-700" />
                   <span>Explore services</span>
@@ -229,18 +230,18 @@ export function HomeClient({
               </div>
 
               {/* Trust Credentials Bar */}
-              <div className="pt-4 border-t border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="pt-6 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
                 {effectiveTrustCredentials.map((cred: any, idx: number) => (
                   <div key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                    <span>{cred.label}</span>
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                    <span className="truncate">{cred.label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Right Hero Column: Sleek Cockpit Executive Portfolio Card (Light Theme) */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 w-full">
               <div className="relative rounded-3xl p-5 sm:p-6 bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl shadow-slate-900/5 ring-1 ring-slate-900/5 overflow-hidden">
                 {/* Ambient glow in card background */}
                 <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />

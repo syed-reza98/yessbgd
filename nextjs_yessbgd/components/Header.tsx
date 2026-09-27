@@ -244,36 +244,34 @@ export function Header({
         className="sticky top-0 z-40 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-2.5 -mb-[64px] sm:-mb-[92px]"
       >
         <div
-          className={`max-w-7xl mx-auto rounded-2xl lg:rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg shadow-slate-900/5 px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all duration-300 pointer-events-auto ${
+          className={`max-w-7xl mx-auto rounded-2xl lg:rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg shadow-slate-900/5 px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between transition-all duration-300 pointer-events-auto ${
             scrolled ? "shadow-2xl shadow-slate-950/15 border-slate-300/90 bg-white" : ""
           }`}
         >
           {/* Brand Logo & Corporate Moniker */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative flex items-center justify-center transition-transform group-hover:scale-105">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
+            <div className="relative flex items-center justify-center transition-transform group-hover:scale-105 h-5 sm:h-5.5 lg:h-6 shrink-0">
               <Image
                 src={logoUrl}
                 alt={brandName}
-                width={130}
-                height={40}
-                className="h-8 sm:h-9 w-auto object-contain"
-                style={{ width: "auto", height: "auto" }}
-                sizes="130px"
+                width={65}
+                height={22}
+                className="h-full w-auto object-contain max-h-full"
                 priority
               />
             </div>
-            <div className="hidden sm:flex flex-col pl-3 border-l border-slate-200 text-left">
-              <span className="font-display font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 leading-tight">
+            <div className="hidden sm:flex flex-col pl-2 sm:pl-2.5 border-l border-slate-200 text-left">
+              <span className="font-display font-extrabold text-[11px] sm:text-xs xl:text-sm tracking-tight text-slate-900 leading-tight whitespace-nowrap">
                 {brandName}
               </span>
-              <span className="text-[10px] text-slate-500 font-medium tracking-wide mt-0.5">
+              <span className="text-[9px] sm:text-[10px] text-slate-500 font-medium tracking-wide mt-0.5 whitespace-nowrap">
                 Where Solution Begins
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 relative">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 relative shrink-0">
             {rawNavLinks.map((link) => {
               if (isVenturesLink(link)) {
                 return (
@@ -286,7 +284,7 @@ export function Header({
                     <button
                       type="button"
                       onClick={() => setVenturesDropdownOpen(!venturesDropdownOpen)}
-                      className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
                         pathname === "/ventures" || pathname.startsWith("/ventures/") || venturesDropdownOpen
                           ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
                           : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
@@ -384,7 +382,7 @@ export function Header({
                 <Link
                   key={link.id || link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
+                  className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold whitespace-nowrap transition-all ${
                     isActive
                       ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
@@ -403,10 +401,10 @@ export function Header({
 
 
           {/* Right Action Area */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 xl:gap-2.5 shrink-0">
             <Link
               href={settings?.header?.trackStatusHref || "/application-status"}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all hidden xl:flex items-center gap-1.5"
+              className="text-xs font-semibold px-2.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all hidden 2xl:flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
               <span>
                 {language === "bn" && settings?.header?.trackStatusTextBn
@@ -417,7 +415,7 @@ export function Header({
 
             <Link
               href={settings?.header?.ribbonCtaHref || "/contact"}
-              className="text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white shadow-md shadow-emerald-900/20 hover:shadow-emerald-900/30 transition-all flex items-center gap-1.5 active:scale-95 group"
+              className="text-xs sm:text-xs xl:text-sm font-bold uppercase tracking-wider px-3.5 py-2 sm:px-4.5 sm:py-2 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white shadow-md shadow-emerald-900/20 hover:shadow-emerald-900/30 transition-all flex items-center gap-1.5 active:scale-95 group whitespace-nowrap shrink-0"
             >
               <span>
                 {language === "bn" && settings?.header?.ribbonCtaTextBn
