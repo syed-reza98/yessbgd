@@ -29,7 +29,7 @@ const privacySections = [
     num: "1",
     title: "Data Controller Identity & Scope",
     content:
-      "YESS Bangla Private Limited ('YESS Bangladesh', 'we', 'our', 'us') operates as the primary data controller for personal telemetry collected through yessbgd.com and our subsidiary venture platforms. Incorporated under RJSC Registration C-184920, our registered offices are located at Sonali Tower, Level 9, Motijheel C/A and Road 45, Gulshan-2, Dhaka, Bangladesh. Contact our Data Protection Officer at privacy@yessbgd.com.",
+      "YESS Bangla Private Limited ('YESS Bangladesh', 'we', 'our', 'us') operates as the primary data controller for personal telemetry collected through yessbgd.com and our subsidiary venture platforms. Incorporated under RJSC Registration C-184920, our registered office is located at Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312). Contact our Data Protection Officer at privacy@yessbgd.com.",
   },
   {
     id: "sec-2",
@@ -92,7 +92,7 @@ const privacySections = [
     num: "10",
     title: "Data Protection Officer Contact",
     content:
-      "For inquiries, subject access requests (SAR), or compliance audits, direct communications to: Data Protection Officer, YESS Bangladesh, Gulshan-2 Innovation Labs, Dhaka-1212, or via email at privacy@yessbgd.com. We respond within 30 calendar days.",
+      "For inquiries, subject access requests (SAR), or compliance audits, direct communications to: Data Protection Officer, YESS Bangladesh, Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312), or via email at privacy@yessbgd.com. We respond within 30 calendar days.",
   },
 ];
 
@@ -106,7 +106,7 @@ export default async function PrivacyPage() {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/trust-handshake-bd.jpg')` }}
         />
         {/* Subtle Decorative Grid Glow & Brand Ambience */}

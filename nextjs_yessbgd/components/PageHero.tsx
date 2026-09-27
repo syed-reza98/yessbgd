@@ -13,7 +13,7 @@ export function PageHero({
   subtitle,
   children,
   backgroundImage = "/assets/heroes/hero_6a8951c6b7346.png",
-  imageOpacity = "opacity-20",
+  imageOpacity = "opacity-30",
   breadcrumbs,
   align = "center",
 }: {

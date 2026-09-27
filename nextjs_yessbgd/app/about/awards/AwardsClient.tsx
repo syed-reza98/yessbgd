@@ -103,10 +103,10 @@ export function AwardsClient({ sitePage }: AwardsClientProps) {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div
-          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-15"
+          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-30"
           style={{ backgroundImage: "url('/assets/heroes/hero_6a8975c2b742a.jpg')" }}
         />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70 pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 pointer-events-none" />
 
         <div className="absolute inset-0 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
         <div className="absolute -right-32 -top-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />

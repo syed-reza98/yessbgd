@@ -74,8 +74,8 @@ const perks = [
   },
   {
     icon: Bus,
-    title: "Hybrid Flexibility & Central Transit",
-    desc: "Flexible work autonomy paired with executive air-conditioned shuttle routes connecting Gulshan-2, Banani, Mohakhali, and Dhanmondi.",
+    title: "Hybrid Flexibility & Metro Transit",
+    desc: "Flexible work autonomy paired with immediate Dhaka Metro Rail access (MRT Line-6 Pillar -312) and executive transit connectivity.",
   },
   {
     icon: Laptop,
@@ -85,7 +85,7 @@ const perks = [
   {
     icon: Utensils,
     title: "Subsidized Gourmet Catering",
-    desc: "On-site artisanal dining and organic farm-to-table lunch supplied directly by our subsidiary YESS Organic Haat at the Gulshan Innovation Wing.",
+    desc: "On-site artisanal dining and organic farm-to-table lunch supplied directly by our subsidiary YESS Organic Haat at the Dhaka Headquarters dining facility.",
   },
   {
     icon: BookOpen,
@@ -172,7 +172,7 @@ export default async function CareersPage() {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/heroes/hero_6a8951c6b7346.png')` }}
         />
         {/* Subtle Decorative Grid Glow & Brand Ambience */}
@@ -268,12 +268,12 @@ export default async function CareersPage() {
             <div className="p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs hover:border-teal-500/40 hover:shadow-md transition-all duration-200 group">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 group-hover:text-teal-800 group-hover:scale-105 transition-all">
-                  Dual Hub
+                  Dhaka HQ
                 </span>
                 <Building2 className="w-6 h-6 text-teal-600" />
               </div>
-              <p className="text-sm font-bold text-slate-900 mb-1">Gulshan-2 &amp; Motijheel</p>
-              <p className="text-xs text-slate-500">Dhaka Dual-Campus Innovation Labs &amp; Dev Ops</p>
+              <p className="text-sm font-bold text-slate-900 mb-1">Mirpur, Pallabi</p>
+              <p className="text-xs text-slate-500">Corporate Headquarters &amp; Engineering Labs</p>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs hover:border-amber-500/40 hover:shadow-md transition-all duration-200 group">

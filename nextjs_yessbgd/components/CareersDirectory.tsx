@@ -168,9 +168,8 @@ export function CareersDirectory({
               aria-label="Filter roles by location"
               className="w-full bg-background border border-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-foreground/80 focus:outline-none focus:border-primary"
             >
-              <option value="All">Location: Dhaka Hubs</option>
-              <option value="Dhaka">Gulshan Innovation Wing</option>
-              <option value="Motijheel">Motijheel Executive Center</option>
+              <option value="All">All Locations</option>
+              <option value="Dhaka">Dhaka Headquarters (Mirpur-11)</option>
               <option value="Hybrid">Hybrid / Autonomous</option>
             </select>
           </div>

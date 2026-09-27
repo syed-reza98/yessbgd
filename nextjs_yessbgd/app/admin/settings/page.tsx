@@ -41,28 +41,20 @@ export default function SiteSettingsPage() {
     investEmail: "invest@yessbgd.com",
     careersEmail: "careers@yessbgd.com",
     whatsapp: "+880 1805-464343",
-    address: "Block-A, Road-3, House-127 (Green View), 1st Floor, Mirpur-12, Dhaka-1216",
-    addressBn: "ব্লক-এ, রোড-৩, হাউজ-১২৭ (গ্রিন ভিউ), ১ম তলা, মিরপুর-১২, ঢাকা-১২১৬",
+    address: "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
+    addressBn: "সেকশন-১১, ব্লক-এ, মেইন রোড-৩, প্লট-১০, মিরপুর, পল্লবী, ঢাকা-১২১৬ (মেট্রোরেল পিলার -৩১২)",
   });
 
   const [offices, setOffices] = useState<any>({
-    motijheel: {
+    headquarters: {
       name: "Corporate Headquarters",
-      nameBn: "কর্পোরেট হেডকোয়ার্টার",
-      address: "Jiban Bima Bhaban, Level 14, 10 Dilkusha C/A, Motijheel, Dhaka-1000",
-      badge: "Statutory & Board",
-      hours: "BST 09:00 - 18:00 (Sun - Thu)",
-      lat: 23.7289,
-      lng: 90.4184,
-    },
-    gulshan: {
-      name: "Innovation & Delivery Labs",
-      nameBn: "ইনোভেশন ও ডেলিভারি ল্যাব",
-      address: "Road 134, Gulshan-2, Dhaka-1212",
-      badge: "NOC / SRE Hub",
-      hours: "24/7 Operations",
-      lat: 23.7925,
-      lng: 90.4078,
+      nameBn: "কর্পোরেট হেডকোয়ার্টার",
+      address: "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
+      addressBn: "সেকশন-১১, ব্লক-এ, মেইন রোড-৩, প্লট-১০, মিরপুর, পল্লবী, ঢাকা-১২১৬ (মেট্রোরেল পিলার -৩১২)",
+      badge: "Metro Rail Pillar -312",
+      hours: "BST 09:00 - 18:00 (Sat - Thu)",
+      lat: 23.8223,
+      lng: 90.3654,
     },
   });
 
@@ -134,7 +126,7 @@ export default function SiteSettingsPage() {
     try {
       await saveSettingAction("branding", branding, "Branding & Logos", "branding");
       await saveSettingAction("contact", contact, "Corporate Contact Desks", "contact");
-      await saveSettingAction("offices", offices, "Dual Office Network", "locations");
+      await saveSettingAction("offices", offices, "Corporate Headquarters", "locations");
       await saveSettingAction("socials", socials, "Social Media Channels", "social");
       await saveSettingAction("header", header, "Header Global Configuration", "navigation");
       await saveSettingAction("footer", footer, "Footer Global Configuration", "general");
@@ -151,7 +143,7 @@ export default function SiteSettingsPage() {
   const tabs: { key: TabKey; label: string; icon: any }[] = [
     { key: "branding", label: "Branding & Identity", icon: Sparkles },
     { key: "contact", label: "Contact Desks", icon: Phone },
-    { key: "offices", label: "Dual Offices", icon: Building2 },
+    { key: "offices", label: "Corporate Office", icon: Building2 },
     { key: "socials", label: "Social Networks", icon: Share2 },
     { key: "header", label: "Header Configuration", icon: LayoutTemplate },
     { key: "footer", label: "Footer Configuration", icon: Sliders },
@@ -379,14 +371,14 @@ export default function SiteSettingsPage() {
           </div>
         )}
 
-        {/* TAB 3: DUAL OFFICES */}
+        {/* TAB 3: CORPORATE HEADQUARTERS */}
         {activeTab === "offices" && (
           <div className="space-y-6 animate-in fade-in">
-            {/* Motijheel Corporate HQ */}
+            {/* Corporate HQ */}
             <div className="admin-glass-card rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
               <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
-                <Building2 className="w-5 h-5 text-amber-600" />
-                <h2 className="text-base font-bold text-slate-900">Motijheel Corporate Headquarters (Dhaka HQ)</h2>
+                <Building2 className="w-5 h-5 text-teal-800" />
+                <h2 className="text-base font-bold text-slate-900">Dhaka Corporate Headquarters</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -395,11 +387,11 @@ export default function SiteSettingsPage() {
                   </label>
                   <input
                     type="text"
-                    value={offices?.motijheel?.name || ""}
+                    value={offices?.headquarters?.name || offices?.motijheel?.name || ""}
                     onChange={(e) =>
                       setOffices({
                         ...offices,
-                        motijheel: { ...offices?.motijheel, name: e.target.value },
+                        headquarters: { ...offices?.headquarters, name: e.target.value },
                       })
                     }
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
@@ -411,11 +403,11 @@ export default function SiteSettingsPage() {
                   </label>
                   <input
                     type="text"
-                    value={offices?.motijheel?.nameBn || ""}
+                    value={offices?.headquarters?.nameBn || offices?.motijheel?.nameBn || ""}
                     onChange={(e) =>
                       setOffices({
                         ...offices,
-                        motijheel: { ...offices?.motijheel, nameBn: e.target.value },
+                        headquarters: { ...offices?.headquarters, nameBn: e.target.value },
                       })
                     }
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
@@ -423,15 +415,31 @@ export default function SiteSettingsPage() {
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Physical Address
+                    Physical Address (EN)
                   </label>
                   <input
                     type="text"
-                    value={offices?.motijheel?.address || ""}
+                    value={offices?.headquarters?.address || offices?.motijheel?.address || ""}
                     onChange={(e) =>
                       setOffices({
                         ...offices,
-                        motijheel: { ...offices?.motijheel, address: e.target.value },
+                        headquarters: { ...offices?.headquarters, address: e.target.value },
+                      })
+                    }
+                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    ঠিকানা (বাংলা)
+                  </label>
+                  <input
+                    type="text"
+                    value={offices?.headquarters?.addressBn || ""}
+                    onChange={(e) =>
+                      setOffices({
+                        ...offices,
+                        headquarters: { ...offices?.headquarters, addressBn: e.target.value },
                       })
                     }
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
@@ -443,11 +451,11 @@ export default function SiteSettingsPage() {
                   </label>
                   <input
                     type="text"
-                    value={offices?.motijheel?.badge || ""}
+                    value={offices?.headquarters?.badge || offices?.motijheel?.badge || ""}
                     onChange={(e) =>
                       setOffices({
                         ...offices,
-                        motijheel: { ...offices?.motijheel, badge: e.target.value },
+                        headquarters: { ...offices?.headquarters, badge: e.target.value },
                       })
                     }
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
@@ -459,101 +467,11 @@ export default function SiteSettingsPage() {
                   </label>
                   <input
                     type="text"
-                    value={offices?.motijheel?.hours || ""}
+                    value={offices?.headquarters?.hours || offices?.motijheel?.hours || ""}
                     onChange={(e) =>
                       setOffices({
                         ...offices,
-                        motijheel: { ...offices?.motijheel, hours: e.target.value },
-                      })
-                    }
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Gulshan Innovation Wing */}
-            <div className="admin-glass-card rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
-                <Building2 className="w-5 h-5 text-teal-700" />
-                <h2 className="text-base font-bold text-slate-900">Gulshan Regional Innovation Lab (NOC / SRE)</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Office Name (EN)
-                  </label>
-                  <input
-                    type="text"
-                    value={offices?.gulshan?.name || ""}
-                    onChange={(e) =>
-                      setOffices({
-                        ...offices,
-                        gulshan: { ...offices?.gulshan, name: e.target.value },
-                      })
-                    }
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    অফিসের নাম (বাংলা)
-                  </label>
-                  <input
-                    type="text"
-                    value={offices?.gulshan?.nameBn || ""}
-                    onChange={(e) =>
-                      setOffices({
-                        ...offices,
-                        gulshan: { ...offices?.gulshan, nameBn: e.target.value },
-                      })
-                    }
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Physical Address
-                  </label>
-                  <input
-                    type="text"
-                    value={offices?.gulshan?.address || ""}
-                    onChange={(e) =>
-                      setOffices({
-                        ...offices,
-                        gulshan: { ...offices?.gulshan, address: e.target.value },
-                      })
-                    }
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Badge Label
-                  </label>
-                  <input
-                    type="text"
-                    value={offices?.gulshan?.badge || ""}
-                    onChange={(e) =>
-                      setOffices({
-                        ...offices,
-                        gulshan: { ...offices?.gulshan, badge: e.target.value },
-                      })
-                    }
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Operating Hours
-                  </label>
-                  <input
-                    type="text"
-                    value={offices?.gulshan?.hours || ""}
-                    onChange={(e) =>
-                      setOffices({
-                        ...offices,
-                        gulshan: { ...offices?.gulshan, hours: e.target.value },
+                        headquarters: { ...offices?.headquarters, hours: e.target.value },
                       })
                     }
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white"

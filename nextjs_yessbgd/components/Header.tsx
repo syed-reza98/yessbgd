@@ -161,13 +161,8 @@ export function Header({
   const logoUrl = settings?.branding?.logoUrl || "/assets/yess-bangla-logo.png";
   const brandName = settings?.branding?.legalName || "Yess Bangla Private Limited";
 
-  const preVenturesLinks = rawNavLinks.filter((l) => ["/", "/about", "/services"].includes(l.href));
-  const postVenturesLinks = rawNavLinks.filter((l) => !["/", "/about", "/services", "/ventures"].includes(l.href));
-  const venturesItem = rawNavLinks.find((l) => l.href === "/ventures") || {
-    label: "Ventures",
-    label_bn: "ভেঞ্চার",
-    badge: `${ventures?.length || 13} Active`,
-  };
+  const isVenturesLink = (link: { href: string }) =>
+    link.href === "/ventures" || link.href.startsWith("/ventures");
 
 
   return (
@@ -184,7 +179,7 @@ export function Header({
                   : settings?.header?.ribbonTextEn || "Dhaka BST Operational"}
               </span>
               <span className="text-slate-300">|</span>
-              <span>{settings?.offices?.motijheel?.name || "Motijheel HQ"} & {settings?.offices?.gulshan?.name || "Gulshan Innovation Wing"}</span>
+              <span>{language === "bn" ? "ঢাকা কর্পোরেট হেডকোয়ার্টার" : (settings?.offices?.headquarters?.name || "Dhaka Corporate Headquarters")}</span>
             </span>
             <span className="hidden md:inline text-slate-300">•</span>
             <span className="hidden md:flex items-center gap-1.5">
@@ -260,131 +255,112 @@ export function Header({
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 relative">
-            {preVenturesLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
-              return (
-                <Link
-                  key={link.id || link.href}
-                  href={link.href}
-                  className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
-                    isActive
-                      ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
-                  }`}
-                >
-                  <span>{getLabel(link)}</span>
-                  {link.badge && (
-                    <span className="ml-1 px-1.5 py-0.2 rounded-full text-[9px] bg-emerald-100 text-emerald-800 font-bold">
-                      {link.badge}
-                    </span>
-                  )}
-                </Link>
-              );
-            })}
-
-            {/* Ventures Dropdown Trigger & Panel */}
-            <div
-              className="relative"
-              onMouseEnter={handleMouseEnterVentures}
-              onMouseLeave={handleMouseLeaveVentures}
-            >
-              <button
-                type="button"
-                onClick={() => setVenturesDropdownOpen(!venturesDropdownOpen)}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all cursor-pointer ${
-                  pathname === "/ventures" || pathname.startsWith("/ventures/") || venturesDropdownOpen
-                    ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
-                }`}
-                aria-expanded={venturesDropdownOpen}
-                aria-haspopup="true"
-              >
-                <span>{getLabel(venturesItem)}</span>
-                {venturesItem.badge && (
-                  <span className="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-100 text-amber-900 font-bold">
-                    {venturesItem.badge}
-                  </span>
-                )}
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                    venturesDropdownOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
-                  }`}
-                />
-              </button>
-
-              {/* Mega Menu Dropdown */}
-              {venturesDropdownOpen && (
-                <div
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] xl:w-[620px] bg-white/98 backdrop-blur-2xl rounded-3xl border border-slate-200/90 shadow-2xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
-                  onMouseEnter={handleMouseEnterVentures}
-                  onMouseLeave={handleMouseLeaveVentures}
-                >
-                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
-                    <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider flex items-center gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
-                      <span>Our Flagship Subsidiaries</span>
-                    </span>
-                    <span className="text-[11px] font-semibold text-slate-400">
-                      {ventures?.length || 13} Sovereign Assets
-                    </span>
-                  </div>
-
-                  {/* 2-Column Grid matching reference UI */}
-                  <div className="grid grid-cols-2 gap-2.5">
-                    {displayVentures.map((v) => {
-                      const Icon = (v as any).icon || Wrench;
-                      return (
-                        <Link
-                          key={v.slug}
-                          href={v.href || `/ventures/${v.slug}`}
-                          className="group p-2.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all flex items-center gap-3 text-left"
-                        >
-                          <div className="relative w-11 h-11 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center p-1.5 group-hover:scale-105 group-hover:shadow-sm transition-all shrink-0">
-                            {v.logoUrl ? (
-                              <Image
-                                src={v.logoUrl}
-                                alt={v.title}
-                                width={36}
-                                height={36}
-                                className="w-full h-full object-contain"
-                              />
-                            ) : (
-                              <Icon className="w-5 h-5 text-teal-700" />
-                            )}
-                          </div>
-                          <div className="flex flex-col truncate">
-                            <span className="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition-colors truncate">
-                              {v.title}
-                            </span>
-                            <span className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
-                              {v.category}
-                            </span>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-
-                  {/* Dropdown Footer Link */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-slate-500">
-                      Looking for custom enterprise partnerships?
-                    </span>
-                    <Link
-                      href="/ventures"
-                      className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group"
+            {rawNavLinks.map((link) => {
+              if (isVenturesLink(link)) {
+                return (
+                  <div
+                    key={link.id || link.href}
+                    className="relative"
+                    onMouseEnter={handleMouseEnterVentures}
+                    onMouseLeave={handleMouseLeaveVentures}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setVenturesDropdownOpen(!venturesDropdownOpen)}
+                      className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all cursor-pointer ${
+                        pathname === "/ventures" || pathname.startsWith("/ventures/") || venturesDropdownOpen
+                          ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+                      }`}
+                      aria-expanded={venturesDropdownOpen}
+                      aria-haspopup="true"
                     >
-                      <span>Explore all {ventures?.length || 13} ventures</span>
-                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
+                      <span>{getLabel(link)}</span>
+                      {link.badge && (
+                        <span className="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-100 text-amber-900 font-bold">
+                          {link.badge}
+                        </span>
+                      )}
+                      <ChevronDown
+                        className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                          venturesDropdownOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
+                        }`}
+                      />
+                    </button>
 
-            {/* Remaining Nav Links */}
-            {postVenturesLinks.map((link) => {
-              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+                    {/* Mega Menu Dropdown */}
+                    {venturesDropdownOpen && (
+                      <div
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] xl:w-[620px] bg-white/98 backdrop-blur-2xl rounded-3xl border border-slate-200/90 shadow-2xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                        onMouseEnter={handleMouseEnterVentures}
+                        onMouseLeave={handleMouseLeaveVentures}
+                      >
+                        <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
+                          <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider flex items-center gap-1.5">
+                            <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
+                            <span>Our Flagship Subsidiaries</span>
+                          </span>
+                          <span className="text-[11px] font-semibold text-slate-400">
+                            {ventures?.length || 13} Sovereign Assets
+                          </span>
+                        </div>
+
+                        {/* 2-Column Grid matching reference UI */}
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {displayVentures.map((v) => {
+                            const Icon = (v as any).icon || Wrench;
+                            return (
+                              <Link
+                                key={v.slug}
+                                href={v.href || `/ventures/${v.slug}`}
+                                className="group p-2.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all flex items-center gap-3 text-left"
+                              >
+                                <div className="relative w-11 h-11 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center p-1.5 group-hover:scale-105 group-hover:shadow-sm transition-all shrink-0">
+                                  {v.logoUrl ? (
+                                    <Image
+                                      src={v.logoUrl}
+                                      alt={v.title}
+                                      width={36}
+                                      height={36}
+                                      className="w-full h-full object-contain"
+                                    />
+                                  ) : (
+                                    <Icon className="w-5 h-5 text-teal-700" />
+                                  )}
+                                </div>
+                                <div className="flex flex-col truncate">
+                                  <span className="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition-colors truncate">
+                                    {v.title}
+                                  </span>
+                                  <span className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                                    {v.category}
+                                  </span>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+
+                        {/* Dropdown Footer Link */}
+                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                          <span className="text-slate-500">
+                            Looking for custom enterprise partnerships?
+                          </span>
+                          <Link
+                            href="/ventures"
+                            className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group"
+                          >
+                            <span>Explore all {ventures?.length || 13} ventures</span>
+                            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
               return (
                 <Link
                   key={link.id || link.href}
@@ -456,64 +432,47 @@ export function Header({
       {mobileMenuOpen && (
         <div className="fixed inset-x-3 top-[72px] max-h-[85vh] z-40 bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 overflow-y-auto flex flex-col gap-5 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200">
           <nav className="flex flex-col gap-1.5">
-            {preVenturesLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
-              return (
-                <Link
-                  key={link.id || link.href}
-                  href={link.href}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center justify-between ${
-                    isActive ? "bg-emerald-50 text-emerald-700" : "text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  <span>{getLabel(link)}</span>
-                  {link.badge && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
-                      {link.badge}
-                    </span>
-                  )}
-                </Link>
-              );
-            })}
-
-            {/* Mobile Ventures Accordion */}
-            <div className="rounded-xl border border-slate-200/80 overflow-hidden my-1">
-              <button
-                type="button"
-                onClick={() => setMobileVenturesOpen(!mobileVenturesOpen)}
-                className="w-full px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 bg-slate-50/70"
-              >
-                <span>{getLabel(venturesItem)} ({ventures?.length || 13} Subsidiaries)</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    mobileVenturesOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
-                  }`}
-                />
-              </button>
-              {mobileVenturesOpen && (
-                <div className="p-3 bg-white space-y-1.5 border-t border-slate-200/80">
-                  {displayVentures.map((v) => (
-                    <Link
-                      key={v.slug}
-                      href={v.href || `/ventures/${v.slug}`}
-                      className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 text-xs font-semibold text-slate-800"
+            {rawNavLinks.map((link) => {
+              if (isVenturesLink(link)) {
+                return (
+                  <div key={link.id || link.href} className="rounded-xl border border-slate-200/80 overflow-hidden my-1">
+                    <button
+                      type="button"
+                      onClick={() => setMobileVenturesOpen(!mobileVenturesOpen)}
+                      className="w-full px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 bg-slate-50/70"
                     >
-                      <span>{v.title}</span>
-                      <span className="text-[10px] text-slate-500">{v.category}</span>
-                    </Link>
-                  ))}
-                  <Link
-                    href="/ventures"
-                    className="block pt-2 text-center text-xs font-bold text-emerald-700 hover:underline"
-                  >
-                    View All {ventures?.length || 13} Ventures →
-                  </Link>
-                </div>
-              )}
-            </div>
+                      <span>{getLabel(link)} ({ventures?.length || 13} Subsidiaries)</span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          mobileVenturesOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
+                        }`}
+                      />
+                    </button>
+                    {mobileVenturesOpen && (
+                      <div className="p-3 bg-white space-y-1.5 border-t border-slate-200/80">
+                        {displayVentures.map((v) => (
+                          <Link
+                            key={v.slug}
+                            href={v.href || `/ventures/${v.slug}`}
+                            className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 text-xs font-semibold text-slate-800"
+                          >
+                            <span>{v.title}</span>
+                            <span className="text-[10px] text-slate-500">{v.category}</span>
+                          </Link>
+                        ))}
+                        <Link
+                          href="/ventures"
+                          className="block pt-2 text-center text-xs font-bold text-emerald-700 hover:underline"
+                        >
+                          View All {ventures?.length || 13} Ventures →
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
 
-            {postVenturesLinks.map((link) => {
-              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
               return (
                 <Link
                   key={link.id || link.href}

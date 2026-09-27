@@ -29,7 +29,6 @@ import { supabase } from "@/lib/supabase/client";
 import type { CompanySettings } from "@/lib/cms";
 
 export function ContactFormAndLocator({ settings }: { settings?: CompanySettings }) {
-  const [activeTab, setActiveTab] = useState<"motijheel" | "gulshan">("motijheel");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -313,34 +312,22 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Dual-Office Locator & Interactive Map View (5 cols) */}
+      {/* RIGHT COLUMN: Corporate Headquarters Locator & Interactive Map View (5 cols) */}
       <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-        {/* Office Location Switcher Tabs */}
-        <div className="bg-muted/40 p-1.5 rounded-2xl border border-border flex gap-2">
-          <button
-            onClick={() => setActiveTab("motijheel")}
-            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold text-center transition-all flex items-center justify-center gap-2 ${
-              activeTab === "motijheel"
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-foreground/70 hover:bg-muted"
-            }`}
-            type="button"
-          >
-            <Building className="w-4 h-4" />
-            <span>Motijheel HQ (Executive)</span>
-          </button>
-          <button
-            onClick={() => setActiveTab("gulshan")}
-            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold text-center transition-all flex items-center justify-center gap-2 ${
-              activeTab === "gulshan"
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-foreground/70 hover:bg-muted"
-            }`}
-            type="button"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>Gulshan-2 Lab (R&D)</span>
-          </button>
+        {/* Office Header Badge */}
+        <div className="bg-slate-100/90 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-teal-800 text-white flex items-center justify-center shadow-xs">
+              <Building className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">Dhaka Corporate Headquarters</span>
+              <span className="text-[11px] text-teal-800 font-medium">Principal Registered Office</span>
+            </div>
+          </div>
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+            MRT Pillar -312
+          </span>
         </div>
 
         {/* Branded Custom Map Graphic Card */}
@@ -349,16 +336,14 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           <div className="flex items-center justify-between z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-teal-500/30 text-[11px] font-mono text-teal-800 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
-              <span>
-                {activeTab === "motijheel" ? "23.7289° N, 90.4184° E" : "23.7925° N, 90.4078° E"}
-              </span>
+              <span>23.8223° N, 90.3654° E</span>
             </div>
             <a
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 hover:bg-white backdrop-blur-md text-slate-700 border border-slate-200 text-xs font-semibold shadow-2xs transition-colors"
               href={`https://maps.google.com/?q=${encodeURIComponent(
-                activeTab === "motijheel"
-                  ? (settings?.offices?.motijheel?.address || "Motijheel Commercial Area, Dhaka")
-                  : (settings?.offices?.gulshan?.address || "Gulshan-2, Dhaka")
+                settings?.contact?.address ||
+                  settings?.offices?.headquarters?.address ||
+                  "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)"
               )}`}
               rel="noopener noreferrer"
               target="_blank"
@@ -368,7 +353,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
             </a>
           </div>
 
-          {/* Stylized Schematic SVG Vector for Dhaka Riverine & Road Grids */}
+          {/* Stylized Schematic SVG Vector for Dhaka Road Grid & Metro Rail Corridor */}
           <div className="absolute inset-0 opacity-40 pointer-events-none flex items-center justify-center">
             <svg
               className="w-full h-full object-cover"
@@ -376,38 +361,29 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               viewBox="0 0 600 350"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Buriganga / Gulshan Lake Contour */}
-              {activeTab === "motijheel" ? (
-                <path
-                  d="M-10,320 C140,300 240,240 310,210 C380,180 470,220 620,190"
-                  stroke="#0d6e6e"
-                  strokeLinecap="round"
-                  strokeWidth="12"
-                />
-              ) : (
-                <path
-                  d="M100,-10 C160,80 230,160 300,200 C370,240 440,310 520,360"
-                  stroke="#0d6e6e"
-                  strokeLinecap="round"
-                  strokeWidth="12"
-                />
-              )}
-              {/* Secondary Canal */}
+              {/* Dhaka Metro MRT Line-6 Viaduct Vector */}
               <path
-                d="M120,-10 C150,90 280,130 330,220"
+                d="M50,-10 C120,80 220,160 300,200 C380,240 460,290 550,360"
+                stroke="#0d6e6e"
+                strokeLinecap="round"
+                strokeWidth="10"
+              />
+              {/* Mirpur Main Road Arterial */}
+              <path
+                d="M-10,240 C140,230 260,210 330,190 C420,160 510,130 620,110"
                 stroke="#0d6e6e"
                 strokeDasharray="4 4"
                 strokeWidth="5"
               />
-              {/* Dhaka Arterial Roads */}
+              {/* Grid Lines */}
               <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="0" x2="600" y1="120" y2="120" />
               <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="0" x2="600" y1="220" y2="220" />
               <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="180" x2="180" y1="0" y2="350" />
               <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="420" x2="420" y1="0" y2="350" />
-              {/* Radar Ripple around active node */}
+              {/* Radar Ripple around Mirpur-11 / Pillar 312 node */}
               <circle
-                cx={activeTab === "motijheel" ? "310" : "300"}
-                cy={activeTab === "motijheel" ? "180" : "190"}
+                cx="300"
+                cy="200"
                 r="45"
                 stroke="#d97706"
                 strokeDasharray="2 3"
@@ -415,8 +391,8 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                 strokeWidth="1.5"
               />
               <circle
-                cx={activeTab === "motijheel" ? "310" : "300"}
-                cy={activeTab === "motijheel" ? "180" : "190"}
+                cx="300"
+                cy="200"
                 r="85"
                 stroke="#0d6e6e"
                 strokeOpacity="0.4"
@@ -428,14 +404,10 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           {/* Center Pin Indicator */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
             <div className="w-11 h-11 rounded-full bg-teal-700 flex items-center justify-center shadow-lg border-2 border-teal-500">
-              {activeTab === "motijheel" ? (
-                <Building className="w-5 h-5 text-white" />
-              ) : (
-                <Sparkles className="w-5 h-5 text-amber-300" />
-              )}
+              <Building className="w-5 h-5 text-white" />
             </div>
             <span className="mt-1 px-2.5 py-0.5 rounded bg-white/95 border border-slate-200 text-[10px] font-bold text-teal-900 shadow-2xs uppercase tracking-wider">
-              {activeTab === "motijheel" ? "HQ Motijheel" : "Gulshan-2 Lab"}
+              HQ • Pillar -312
             </span>
           </div>
 
@@ -443,23 +415,17 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           <div className="relative z-10 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm flex items-center justify-between">
             <div>
               <p className="text-xs sm:text-sm font-bold text-slate-900">
-                {activeTab === "motijheel"
-                  ? (settings?.offices?.motijheel?.name || "Corporate Headquarters")
-                  : (settings?.offices?.gulshan?.name || "Regional Innovation Lab")}
+                {settings?.offices?.headquarters?.name || "Corporate Headquarters"}
               </p>
-              <p className="text-[11px] text-slate-600">
-                {activeTab === "motijheel"
-                  ? (settings?.offices?.motijheel?.address || "Motijheel Commercial Area, Dhaka-1000")
-                  : (settings?.offices?.gulshan?.address || "Gulshan Innovation Zone, Dhaka-1212")}
+              <p className="text-[11px] text-slate-600 line-clamp-1">
+                {settings?.contact?.address ||
+                  settings?.offices?.headquarters?.address ||
+                  "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)"}
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-semibold">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-semibold shrink-0 ml-2">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-              <span>
-                {activeTab === "motijheel"
-                  ? (settings?.offices?.motijheel?.hours || "Open • BST 09:00 - 18:00")
-                  : (settings?.offices?.gulshan?.hours || "Open • 24/7 Operations")}
-              </span>
+              <span>Open • BST 09:00 - 18:00</span>
             </span>
           </div>
         </div>
@@ -468,14 +434,10 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
         <div className="p-6 rounded-2xl glass-card border border-border shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-base sm:text-lg font-display font-bold text-foreground">
-              {activeTab === "motijheel"
-                ? (settings?.offices?.motijheel?.name || "Headquarters Specifications")
-                : (settings?.offices?.gulshan?.name || "Innovation Wing Specifications")}
+              Corporate Headquarters Specifications
             </h3>
             <span className="text-xs font-bold text-primary uppercase tracking-wider">
-              {activeTab === "motijheel"
-                ? (settings?.offices?.motijheel?.badge || "SUITE 804 & 1901")
-                : (settings?.offices?.gulshan?.badge || "LAB TIER-3 EDGE CLUSTER")}
+              PILLAR -312 CORRIDOR
             </span>
           </div>
 
@@ -483,11 +445,11 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
             <div className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <strong className="text-foreground block font-semibold">Physical Dispatch & Concierge</strong>
+                <strong className="text-foreground block font-semibold">Physical Dispatch &amp; Concierge</strong>
                 <span>
-                  {activeTab === "motijheel"
-                    ? (settings?.offices?.motijheel?.address || "Jiban Bima Bhaban, Dilkusha, Motijheel C/A, Dhaka-1000")
-                    : (settings?.offices?.gulshan?.address || "Road 134, Gulshan-2, Dhaka-1212")}
+                  {settings?.contact?.address ||
+                    settings?.offices?.headquarters?.address ||
+                    "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)"}
                 </span>
               </div>
             </div>
@@ -497,9 +459,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               <div>
                 <strong className="text-foreground block font-semibold">Statutory Visiting Hours</strong>
                 <span>
-                  {activeTab === "motijheel"
-                    ? (settings?.offices?.motijheel?.hours || "Sunday – Thursday: 9:00 AM – 6:00 PM BST")
-                    : (settings?.offices?.gulshan?.hours || "Sunday – Friday: 10:00 AM – 8:00 PM BST (Extended Edge Operations)")}
+                  {settings?.offices?.headquarters?.hours || "Saturday – Thursday: 9:00 AM – 6:00 PM BST"}
                 </span>
               </div>
             </div>
@@ -509,7 +469,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               <div>
                 <strong className="text-foreground block font-semibold">Direct Telephony Lines</strong>
                 <span>
-                  Primary: {settings?.contact?.phone || "+880 1805-464343"} | Emergency NOC: +880 1805-464343
+                  Primary: {settings?.contact?.phone || "+880 1805-464343"} | WhatsApp: {settings?.contact?.whatsapp || "+880 1805-464343"}
                 </span>
               </div>
             </div>
@@ -517,36 +477,12 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
             <div className="flex items-start gap-3">
               <Car className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <strong className="text-foreground block font-semibold">Security Clearance & Parking</strong>
+                <strong className="text-foreground block font-semibold">Rapid Transit &amp; Parking Access</strong>
                 <span>
-                  {activeTab === "motijheel"
-                    ? "Government NID or Passport badge registration mandatory at Ground Concierge. Reserved executive parking at Level B2."
-                    : "Biometric badge or visitor clearance mandatory at reception. Secure underground parking on Road 134."}
+                  Located directly beside MRT Line-6 (Metro Rail Pillar -312) between Mirpur-11 and Pallabi stations. Dedicated executive parking and visitor security clearance on-site.
                 </span>
               </div>
             </div>
-          </div>
-
-          {/* Fast Switcher preview to toggle */}
-          <div className="pt-4 border-t border-border flex items-center justify-between">
-            <div className="flex items-center gap-2 text-xs text-foreground">
-              <Building className="w-4 h-4 text-primary" />
-              <span>
-                {activeTab === "motijheel" ? (
-                  <>Secondary Lab: <strong>{settings?.offices?.gulshan?.address || "Road 134, Gulshan-2, Dhaka"}</strong></>
-                ) : (
-                  <>Executive HQ: <strong>{settings?.offices?.motijheel?.address || "Dilkusha, Motijheel C/A, Dhaka"}</strong></>
-                )}
-              </span>
-            </div>
-            <button
-              onClick={() => setActiveTab(activeTab === "motijheel" ? "gulshan" : "motijheel")}
-              className="text-primary hover:underline text-xs inline-flex items-center gap-1 font-semibold"
-              type="button"
-            >
-              <span>{activeTab === "motijheel" ? "View Lab Specs" : "View HQ Specs"}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
           </div>
         </div>
       </div>

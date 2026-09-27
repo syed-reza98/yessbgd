@@ -82,7 +82,7 @@ export default async function SingleVenturePage({
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-16 sm:py-24 overflow-hidden border-b border-slate-200/80">
         {/* Dynamic Background Image Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('${heroBgImage}')` }}
         />
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />

@@ -54,7 +54,7 @@ export const defaultFaqData: FaqItem[] = [
     category: "General & National Reach",
     question: "How does YESS Bangladesh operate across all 64 districts?",
     answer:
-      "Our dual innovation hubs in Motijheel and Gulshan serve as core command centers, while our decentralized field engineering network supports IoT sensors, cold-chain logistics, and digital banking terminals deployed across all 8 administrative divisions and 64 districts nationwide.",
+      "Our Corporate Headquarters in Mirpur-11 serves as our primary engineering and operational command center, while our decentralized field engineering network supports IoT sensors, cold-chain logistics, and digital banking terminals deployed across all 8 administrative divisions and 64 districts nationwide.",
     tags: ["64 Districts", "General & National Reach"],
   },
   {

@@ -43,11 +43,11 @@ export const COMPANY_CONTACT: CompanyContact = {
   web: "www.yessbd.com",
   webUrl: "https://www.yessbd.com",
   office:
-    "Block-A, Road-3, House-127 (Green View), 1st Floor, Mirpur-12, Dhaka-1216",
+    "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
   corporateOffice:
-    "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216",
+    "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
   combinedAddress:
-    "Office: Block-A, Road-3, House-127 (Green View) (1st Floor), Mirpur-12, Dhaka-1216 · Corporate Office: Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216",
+    "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
 };
 
 /** Convenience helpers so call sites read clearly. */

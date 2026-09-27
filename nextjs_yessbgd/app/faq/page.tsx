@@ -42,8 +42,8 @@ const trustMetrics = [
     glow: "text-[#f6c87a]",
   },
   {
-    title: "Dual HQ",
-    desc: "Motijheel commercial center and Gulshan tech hub.",
+    title: "Dhaka HQ",
+    desc: "Mirpur-11, Pallabi central corporate office (Metro Pillar -312).",
     icon: MapPin,
     color: "text-white",
     glow: "text-emerald-400",
@@ -79,7 +79,7 @@ export default async function FaqPage() {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/contact-welcome-bd.jpg')` }}
         />
         {/* Subtle Decorative Grid Glow & Brand Ambience */}

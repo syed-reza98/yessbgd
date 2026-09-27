@@ -43,8 +43,11 @@ export function Footer({
   const phoneDisplay = settings?.contact?.phone || "+880 1805-464343";
   const phoneTel = phoneDisplay.replace(/[^0-9+]/g, "");
   const emailDisplay = settings?.contact?.email || "yessbangla.bd@gmail.com";
-  const hqAddress = settings?.offices?.motijheel?.address || settings?.contact?.address || "Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000";
-  const labAddress = settings?.offices?.gulshan?.address || "Gulshan-2, Dhaka-1212, Bangladesh";
+  const addressDisplay =
+    (language === "bn" ? settings?.contact?.addressBn : settings?.contact?.address) ||
+    settings?.offices?.headquarters?.address ||
+    settings?.contact?.address ||
+    "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)";
   const regNumber = settings?.branding?.registrationNo || "C-184920";
   const logoUrl = settings?.branding?.logoUrl || "/assets/yess-bangla-logo.png";
   const brandName = settings?.branding?.companyName || "YESS Bangladesh";
@@ -103,23 +106,14 @@ export function Footer({
                   "Pioneering institutional venture building, engineering resilient technological backbone infrastructures, and empowering youth-led socioeconomic transformation across South Asia."}
             </p>
 
-            <div className="flex flex-col gap-2 mt-2 text-xs text-slate-600">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold text-slate-900 block">
-                    {settings?.offices?.motijheel?.name || "Dhaka Corporate HQ"}:
-                  </span>
-                  <span>{hqAddress}</span>
-                </div>
-              </div>
+            <div className="flex flex-col gap-2.5 mt-2 text-xs text-slate-600">
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-emerald-700 shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-slate-900 block">
-                    {settings?.offices?.gulshan?.name || "Regional Innovation Lab"}:
+                    {language === "bn" ? "কর্পোরেট হেডকোয়ার্টার:" : "Corporate Headquarters:"}
                   </span>
-                  <span>{labAddress}</span>
+                  <span>{addressDisplay}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2.5 pt-1">

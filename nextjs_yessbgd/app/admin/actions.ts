@@ -266,13 +266,34 @@ export async function saveSettingAction(key: string, value: any, label?: string,
 export async function saveMenuItemAction(item: any) {
   const supabase = await createClient();
 
+  const row = {
+    ...item,
+    updated_at: new Date().toISOString(),
+  };
+
   const { error } = await supabase
     .from("cms_menu_items")
-    .upsert(item);
+    .upsert(row);
 
   if (error) throw new Error(error.message);
 
-  await recordAudit(supabase, "UPSERT", "cms_menu_items", item.id || item.label, item);
+  await recordAudit(supabase, "UPSERT", "cms_menu_items", item.id || item.label, row);
+  purgeTag(CMS_TAGS.menus);
+  return { success: true };
+}
+
+export async function reorderMenuItemsAction(orderedItems: { id: string; sort_order: number }[]) {
+  const supabase = await createClient();
+
+  for (const item of orderedItems) {
+    const { error } = await supabase
+      .from("cms_menu_items")
+      .update({ sort_order: item.sort_order, updated_at: new Date().toISOString() })
+      .eq("id", item.id);
+    if (error) throw new Error(error.message);
+  }
+
+  await recordAudit(supabase, "REORDER", "cms_menu_items", "batch", orderedItems);
   purgeTag(CMS_TAGS.menus);
   return { success: true };
 }

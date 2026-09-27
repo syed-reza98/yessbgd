@@ -17,10 +17,10 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("contact");
   return {
-    title: page?.seo_title || "Contact & Dual-Office Locator | YESS Bangladesh",
+    title: page?.seo_title || "Contact & Headquarters Locator | YESS Bangladesh",
     description:
       page?.seo_description ||
-      "Connect directly with managing partners, venture leads, and engineering directors. Dual-campus innovation labs in Motijheel HQ and Gulshan-2, Dhaka.",
+      "Connect directly with managing partners, venture leads, and engineering directors at our Dhaka Corporate Headquarters in Mirpur, Dhaka.",
   };
 }
 
@@ -34,8 +34,8 @@ const telemetryBadges = [
   },
   {
     icon: Building,
-    title: "2 Strategic Hubs",
-    desc: "Motijheel HQ & Gulshan Lab",
+    title: "Corporate HQ",
+    desc: "Mirpur-11, Dhaka-1216",
     color: "text-[#d4a359]",
     glow: "text-[#f6c87a]",
   },
@@ -124,7 +124,7 @@ export default async function ContactPage() {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/contact-welcome-bd.jpg')` }}
         />
         {/* Subtle Decorative Grid Glow & Brand Ambience */}

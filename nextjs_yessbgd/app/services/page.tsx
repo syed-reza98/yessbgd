@@ -87,7 +87,7 @@ export default async function ServicesPage() {
       {/* Canonical Stitch Hero Section: Full-Lifecycle Engineering */}
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-16 pb-20 overflow-hidden border-b border-slate-200/80">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/services-tech-bd.jpg')` }}
         />
         <div className="absolute inset-0 bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />

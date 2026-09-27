@@ -556,7 +556,17 @@ export type CompanySettings = {
     addressBn?: string;
   };
   offices: {
-    motijheel: {
+    headquarters?: {
+      name: string;
+      nameBn?: string;
+      address: string;
+      addressBn?: string;
+      badge?: string;
+      hours?: string;
+      lat?: number;
+      lng?: number;
+    };
+    motijheel?: {
       name: string;
       nameBn?: string;
       address: string;
@@ -565,7 +575,7 @@ export type CompanySettings = {
       lat?: number;
       lng?: number;
     };
-    gulshan: {
+    gulshan?: {
       name: string;
       nameBn?: string;
       address: string;
@@ -624,27 +634,19 @@ const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
     investEmail: "invest@yessbgd.com",
     careersEmail: "careers@yessbgd.com",
     whatsapp: "+880 1805-464343",
-    address: (companyContact as any).office || "Block-A, Road-3, House-127 (Green View), 1st Floor, Mirpur-12, Dhaka-1216",
-    addressBn: "ব্লক-এ, রোড-৩, হাউজ-১২৭ (গ্রিন ভিউ), ১ম তলা, মিরপুর-১২, ঢাকা-১২১৬",
+    address: "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
+    addressBn: "সেকশন-১১, ব্লক-এ, মেইন রোড-৩, প্লট-১০, মিরপুর, পল্লবী, ঢাকা-১২১৬ (মেট্রোরেল পিলার -৩১২)",
   },
   offices: {
-    motijheel: {
+    headquarters: {
       name: "Corporate Headquarters",
-      nameBn: "কর্পোরেট হেডকোয়ার্টার",
-      address: "Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000",
-      badge: "Statutory & Board",
-      hours: "BST 09:00 - 18:00 (Sun - Thu)",
-      lat: 23.7289,
-      lng: 90.4184,
-    },
-    gulshan: {
-      name: "Regional Innovation Lab",
-      nameBn: "ইনোভেশন ও ডেলিভারি ল্যাব",
-      address: "House 42, Road 11, Gulshan-2, Dhaka-1212",
-      badge: "NOC / SRE Hub",
-      hours: "24/7 Operations",
-      lat: 23.7925,
-      lng: 90.4078,
+      nameBn: "কর্পোরেট হেডকোয়ার্টার",
+      address: "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
+      addressBn: "সেকশন-১১, ব্লক-এ, মেইন রোড-৩, প্লট-১০, মিরপুর, পল্লবী, ঢাকা-১২১৬ (মেট্রোরেল পিলার -৩১২)",
+      badge: "Metro Rail Pillar -312",
+      hours: "BST 09:00 - 18:00 (Sat - Thu)",
+      lat: 23.8223,
+      lng: 90.3654,
     },
   },
   socials: {
@@ -711,13 +713,17 @@ export async function getCompanySettings(): Promise<CompanySettings> {
         ...contact,
       },
       offices: {
+        headquarters: {
+          ...DEFAULT_COMPANY_SETTINGS.offices.headquarters,
+          ...(offices.headquarters || offices.motijheel || {}),
+        },
         motijheel: {
-          ...DEFAULT_COMPANY_SETTINGS.offices.motijheel,
-          ...(offices.motijheel || {}),
+          ...DEFAULT_COMPANY_SETTINGS.offices.headquarters,
+          ...(offices.headquarters || offices.motijheel || {}),
         },
         gulshan: {
-          ...DEFAULT_COMPANY_SETTINGS.offices.gulshan,
-          ...(offices.gulshan || {}),
+          ...DEFAULT_COMPANY_SETTINGS.offices.headquarters,
+          ...(offices.headquarters || offices.gulshan || {}),
         },
       },
       socials: {

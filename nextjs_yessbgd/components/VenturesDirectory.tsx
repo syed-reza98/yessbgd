@@ -61,6 +61,23 @@ const ventureMetrics: Record<string, { label1: string; val1: string; label2: str
   "yess-law-chamber": { label1: "Corporate Briefs", val1: "500+ Retainers", label2: "Compliance", val2: "100% Statutory" },
 };
 
+// Institutional enterprise valuations for 13 portfolio companies (consolidating $50M+ portfolio value)
+const VENTURE_VALUATIONS: Record<string, number> = {
+  "yess-soft": 12500000,
+  "akash-tv": 10000000,
+  "yess-technology": 6500000,
+  "akash-ott": 5500000,
+  "yess-organic-food": 4200000,
+  "yess-one-stop-engineering": 3800000,
+  "akash-news": 2500000,
+  "yess-entertainment": 2000000,
+  "yess-interior": 1500000,
+  "yess-overseas": 1200000,
+  "yess-restaurant": 1000000,
+  "yess-law-chamber": 800000,
+  "yess-event-management": 500000,
+};
+
 // Cluster mapping aligned with Stitch canonical taxonomy
 const categoryMapping: Record<string, string> = {
   "Software & IT Solutions": "Technology & AI",
@@ -80,13 +97,15 @@ const categoryMapping: Record<string, string> = {
 
 export function VenturesDirectory({
   initialVentures,
+  defaultSort = "valuation",
 }: {
   initialVentures?: (Omit<Venture, "icon"> & { icon?: any })[];
+  defaultSort?: "founded" | "valuation" | "alpha";
 } = {}) {
   const [query, setQuery] = useState("");
   const [selectedCluster, setSelectedCluster] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
-  const [sortBy, setSortBy] = useState<"founded" | "valuation" | "alpha">("founded");
+  const [sortBy, setSortBy] = useState<"founded" | "valuation" | "alpha">(defaultSort);
 
   const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : ventures;
 
@@ -113,13 +132,19 @@ export function VenturesDirectory({
       );
     });
 
-    if (sortBy === "alpha") {
+    if (sortBy === "valuation") {
+      result.sort((a, b) => {
+        const valA = (a as any).valuation ?? (VENTURE_VALUATIONS[a.slug] ?? 0);
+        const valB = (b as any).valuation ?? (VENTURE_VALUATIONS[b.slug] ?? 0);
+        return valB - valA;
+      });
+    } else if (sortBy === "alpha") {
       result.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortBy === "founded") {
       result.sort((a, b) => (parseInt(b.founded || "2020") - parseInt(a.founded || "2020")));
     }
     return result;
-  }, [query, selectedCluster, sortBy]);
+  }, [effectiveVentures, query, selectedCluster, sortBy]);
 
   return (
     <div className="flex flex-col w-full -mt-10 relative z-20">
@@ -182,8 +207,8 @@ export function VenturesDirectory({
                 aria-label="Sort ventures"
                 className="appearance-none bg-background text-foreground font-semibold text-xs py-2.5 pl-3 pr-8 rounded-xl border border-border focus:border-primary outline-none cursor-pointer"
               >
-                <option value="founded">Sort by: Founding Year (Newest)</option>
                 <option value="valuation">Sort by: Enterprise Valuation</option>
+                <option value="founded">Sort by: Founding Year (Newest)</option>
                 <option value="alpha">Sort by: Alphabetical (A-Z)</option>
               </select>
               <ChevronDown className="w-4 h-4 absolute right-2.5 top-1/2 -translate-y-1/2 text-foreground/40 pointer-events-none" />
