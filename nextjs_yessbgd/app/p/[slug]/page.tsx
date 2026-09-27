@@ -52,6 +52,7 @@ export default async function DynamicCMSPage({ params }: Props) {
         eyebrow={page.hero_eyebrow || "INSTITUTIONAL DOCUMENTATION"}
         title={formattedTitle}
         subtitle={page.hero_subtitle || "Sovereign Venture Ecosystem & Practice Capabilities"}
+        backgroundImage="/assets/heroes/global-network-bg.jpg"
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">

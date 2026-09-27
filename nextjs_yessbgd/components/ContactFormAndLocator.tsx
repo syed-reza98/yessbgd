@@ -344,17 +344,17 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
         </div>
 
         {/* Branded Custom Map Graphic Card */}
-        <div className="relative rounded-2xl overflow-hidden border border-border shadow-sm bg-[#061a1b] min-h-[300px] flex flex-col justify-between p-5 text-white">
+        <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100 min-h-[300px] flex flex-col justify-between p-5 text-slate-900">
           {/* Map Top Overlay: Coordinates & Live Radar */}
           <div className="flex items-center justify-between z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#061a1b]/90 backdrop-blur-md border border-[#35b0aa]/40 text-[11px] font-mono text-[#35b0aa]">
-              <span className="w-2 h-2 rounded-full bg-[#35b0aa] animate-ping" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-teal-500/30 text-[11px] font-mono text-teal-800 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
               <span>
                 {activeTab === "motijheel" ? "23.7289° N, 90.4184° E" : "23.7925° N, 90.4078° E"}
               </span>
             </div>
             <a
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs font-semibold transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 hover:bg-white backdrop-blur-md text-slate-700 border border-slate-200 text-xs font-semibold shadow-2xs transition-colors"
               href={`https://maps.google.com/?q=${encodeURIComponent(
                 activeTab === "motijheel"
                   ? (settings?.offices?.motijheel?.address || "Motijheel Commercial Area, Dhaka")
@@ -369,7 +369,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           </div>
 
           {/* Stylized Schematic SVG Vector for Dhaka Riverine & Road Grids */}
-          <div className="absolute inset-0 opacity-35 pointer-events-none flex items-center justify-center">
+          <div className="absolute inset-0 opacity-40 pointer-events-none flex items-center justify-center">
             <svg
               className="w-full h-full object-cover"
               fill="none"
@@ -380,14 +380,14 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               {activeTab === "motijheel" ? (
                 <path
                   d="M-10,320 C140,300 240,240 310,210 C380,180 470,220 620,190"
-                  stroke="#35b0aa"
+                  stroke="#0d6e6e"
                   strokeLinecap="round"
                   strokeWidth="12"
                 />
               ) : (
                 <path
                   d="M100,-10 C160,80 230,160 300,200 C370,240 440,310 520,360"
-                  stroke="#35b0aa"
+                  stroke="#0d6e6e"
                   strokeLinecap="round"
                   strokeWidth="12"
                 />
@@ -400,61 +400,61 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                 strokeWidth="5"
               />
               {/* Dhaka Arterial Roads */}
-              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="0" x2="600" y1="120" y2="120" />
-              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="0" x2="600" y1="220" y2="220" />
-              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="180" x2="180" y1="0" y2="350" />
-              <line stroke="#bec9c8" strokeOpacity="0.3" strokeWidth="1" x1="420" x2="420" y1="0" y2="350" />
+              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="0" x2="600" y1="120" y2="120" />
+              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="0" x2="600" y1="220" y2="220" />
+              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="180" x2="180" y1="0" y2="350" />
+              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="420" x2="420" y1="0" y2="350" />
               {/* Radar Ripple around active node */}
               <circle
                 cx={activeTab === "motijheel" ? "310" : "300"}
                 cy={activeTab === "motijheel" ? "180" : "190"}
                 r="45"
-                stroke="#d4a359"
+                stroke="#d97706"
                 strokeDasharray="2 3"
-                strokeOpacity="0.5"
-                strokeWidth="1"
+                strokeOpacity="0.6"
+                strokeWidth="1.5"
               />
               <circle
                 cx={activeTab === "motijheel" ? "310" : "300"}
                 cy={activeTab === "motijheel" ? "180" : "190"}
                 r="85"
-                stroke="#35b0aa"
-                strokeOpacity="0.3"
-                strokeWidth="1"
+                stroke="#0d6e6e"
+                strokeOpacity="0.4"
+                strokeWidth="1.5"
               />
             </svg>
           </div>
 
           {/* Center Pin Indicator */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
-            <div className="w-11 h-11 rounded-full bg-[#005454] flex items-center justify-center shadow-lg border-2 border-[#35b0aa]">
+            <div className="w-11 h-11 rounded-full bg-teal-700 flex items-center justify-center shadow-lg border-2 border-teal-500">
               {activeTab === "motijheel" ? (
                 <Building className="w-5 h-5 text-white" />
               ) : (
-                <Sparkles className="w-5 h-5 text-[#f6c87a]" />
+                <Sparkles className="w-5 h-5 text-amber-300" />
               )}
             </div>
-            <span className="mt-1 px-2.5 py-0.5 rounded bg-[#061a1b]/95 border border-white/20 text-[10px] font-bold text-[#f6c87a] uppercase tracking-wider">
+            <span className="mt-1 px-2.5 py-0.5 rounded bg-white/95 border border-slate-200 text-[10px] font-bold text-teal-900 shadow-2xs uppercase tracking-wider">
               {activeTab === "motijheel" ? "HQ Motijheel" : "Gulshan-2 Lab"}
             </span>
           </div>
 
           {/* Map Bottom Card Overlay */}
-          <div className="relative z-10 p-3.5 rounded-xl bg-[#061a1b]/90 backdrop-blur-md border border-white/10 flex items-center justify-between">
+          <div className="relative z-10 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm flex items-center justify-between">
             <div>
-              <p className="text-xs sm:text-sm font-bold text-white">
+              <p className="text-xs sm:text-sm font-bold text-slate-900">
                 {activeTab === "motijheel"
                   ? (settings?.offices?.motijheel?.name || "Corporate Headquarters")
                   : (settings?.offices?.gulshan?.name || "Regional Innovation Lab")}
               </p>
-              <p className="text-[11px] text-white/70">
+              <p className="text-[11px] text-slate-600">
                 {activeTab === "motijheel"
                   ? (settings?.offices?.motijheel?.address || "Motijheel Commercial Area, Dhaka-1000")
                   : (settings?.offices?.gulshan?.address || "Gulshan Innovation Zone, Dhaka-1212")}
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0d6e6e] text-[#9dedec] text-[11px] font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#35b0aa] animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
               <span>
                 {activeTab === "motijheel"
                   ? (settings?.offices?.motijheel?.hours || "Open • BST 09:00 - 18:00")

@@ -59,17 +59,53 @@ export default async function SingleVenturePage({
   const siblingVentures = allVentures.filter((v) => v.slug !== venture.slug).slice(0, 3);
 
 
+  const heroBgMap: Record<string, string> = {
+    "yess-organic-food": "/assets/heroes/hero_6a89646fd72ff.jpg",
+    "yess-soft": "/assets/services-tech-bd.jpg",
+    "yess-technology": "/assets/heroes/hero_6a896e39e25bd.jpg",
+    "akash-tv": "/assets/heroes/hero_6a8975c2b742a.jpg",
+    "akash-ott": "/assets/heroes/hero_6a8975c2b742a.jpg",
+    "akash-news": "/assets/heroes/hero_6a8975c2b742a.jpg",
+    "yess-entertainment": "/assets/heroes/hero_6a8975c2b742a.jpg",
+    "yess-event-management": "/assets/heroes/hero_6a8975c2b742a.jpg",
+    "yess-one-stop-engineering": "/assets/general/centricity.png",
+    "yess-interior": "/assets/general/centricity.png",
+    "yess-overseas": "/assets/general/delivery.png",
+    "yess-restaurant": "/assets/general/retail-pos.jpg",
+    "yess-law-chamber": "/assets/trust-handshake-bd.jpg",
+  };
+  const heroBgImage = heroBgMap[venture.slug] || "/assets/ventures-dhaka-bd.jpg";
+
   return (
     <div className="flex flex-col w-full">
       {/* Venture Hero */}
-      <section className="relative bg-[#061a1b] text-white py-16 sm:py-24 overflow-hidden border-b border-white/10">
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-16 sm:py-24 overflow-hidden border-b border-slate-200/80">
+        {/* Dynamic Background Image Layer */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: `url('${heroBgImage}')` }}
+        />
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        
         <div className="container-tight relative z-10">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+            <Link href="/" className="hover:text-teal-700 transition-colors">
+              Home
+            </Link>
+            <span className="text-slate-300">/</span>
+            <Link href="/ventures" className="hover:text-teal-700 transition-colors">
+              Ventures
+            </Link>
+            <span className="text-slate-300">/</span>
+            <span className="text-teal-700">{venture.title}</span>
+          </div>
+
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            {/* 3D Minted Medallion Coin */}
+            {/* Minted Medallion Coin */}
             <div className="relative shrink-0">
-              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full p-2 bg-gradient-to-tr from-[#0d6e6e] via-[#35b0aa] to-[#d4a359] shadow-2xl flex items-center justify-center">
-                <div className="w-full h-full rounded-full bg-[#061a1b] border-2 border-[#d4a359]/40 flex items-center justify-center overflow-hidden p-3 shadow-inner">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full p-2 bg-gradient-to-tr from-teal-600 via-emerald-500 to-amber-500 shadow-xl flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-white border-2 border-amber-400/50 flex items-center justify-center overflow-hidden p-3 shadow-inner">
                   {venture.logoUrl ? (
                     <Image
                       src={venture.logoUrl}
@@ -79,7 +115,7 @@ export default async function SingleVenturePage({
                       className="w-full h-full object-contain"
                     />
                   ) : (
-                    <Icon className="h-12 w-12 text-[#d4a359]" />
+                    <Icon className="h-12 w-12 text-teal-700" />
                   )}
                 </div>
               </div>
@@ -87,22 +123,22 @@ export default async function SingleVenturePage({
 
             <div className="flex flex-col space-y-3 text-center md:text-left">
               <div className="inline-flex items-center justify-center md:justify-start gap-2">
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/20 text-[#35b0aa] border border-primary/40 uppercase tracking-wider">
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200/80 uppercase tracking-wider shadow-2xs">
                   {venture.category}
                 </span>
                 {venture.founded && (
-                  <span className="text-xs font-medium text-white/60">
+                  <span className="text-xs font-medium text-slate-500">
                     Est. {venture.founded}
                   </span>
                 )}
               </div>
-              <h1 className="font-display font-extrabold text-3xl sm:text-5xl text-white">
+              <h1 className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight">
                 {venture.title}
               </h1>
-              <p className="text-base sm:text-xl text-[#f6c87a] font-semibold max-w-2xl">
+              <p className="text-base sm:text-xl text-amber-700 font-semibold max-w-2xl">
                 {venture.tagline}
               </p>
-              <p className="text-sm sm:text-base text-white/70 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
                 {venture.desc}
               </p>
             </div>

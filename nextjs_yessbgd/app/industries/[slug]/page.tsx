@@ -53,49 +53,63 @@ export default async function SingleIndustryPage({
 
   const Icon = industry.icon;
 
+  const industryBgMap: Record<string, string> = {
+    "manufacturing-rmg": "/assets/general/centricity.png",
+    "media-broadcasting": "/assets/heroes/hero_6a8975c2b742a.jpg",
+    "logistics-supply-chain": "/assets/general/delivery.png",
+    "ecommerce-retail": "/assets/general/retail-pos.jpg",
+    "financial-services": "/assets/general/design.jpg",
+    "healthcare-pharma": "/assets/heroes/hero_6a89646fd72ff.jpg",
+  };
+  const heroBgImage = industryBgMap[industry.slug] || "/assets/general/delivery.png";
+
   return (
     <div className="flex flex-col w-full">
-      {/* Industry Sub-Page Dark Hero */}
-      <section className="relative bg-[#061a1b] text-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+      {/* Industry Sub-Page Light Hero */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: `url('${heroBgImage}')` }}
+        />
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="container-tight relative z-10">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-white/60 mb-6">
-            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+            <Link href="/" className="hover:text-teal-700 transition-colors">
               Home
             </Link>
-            <span className="text-white/30">/</span>
-            <Link href="/industries" className="hover:text-[#f6c87a] transition-colors">
+            <span className="text-slate-300">/</span>
+            <Link href="/industries" className="hover:text-teal-700 transition-colors">
               Industries
             </Link>
-            <span className="text-white/30">/</span>
-            <span className="text-[#35b0aa]">{industry.title}</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-teal-700">{industry.title}</span>
           </nav>
 
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
             {/* Medallion Icon */}
             <div className="relative shrink-0">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl p-2 bg-gradient-to-tr from-[#0d6e6e] via-[#35b0aa] to-[#d4a359] shadow-2xl flex items-center justify-center">
-                <div className="w-full h-full rounded-xl bg-[#061a1b] border-2 border-[#d4a359]/40 flex items-center justify-center p-3 shadow-inner">
-                  <Icon className="h-10 w-10 text-[#d4a359]" />
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl p-2 bg-gradient-to-tr from-teal-600 via-emerald-500 to-amber-500 shadow-xl flex items-center justify-center">
+                <div className="w-full h-full rounded-xl bg-white border-2 border-amber-400/50 flex items-center justify-center p-3 shadow-inner">
+                  <Icon className="h-10 w-10 text-teal-700" />
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col space-y-3 text-center md:text-left max-w-3xl">
               <div className="inline-flex items-center justify-center md:justify-start gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
-                  <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold uppercase tracking-wider shadow-2xs">
+                  <Sparkles className="w-3.5 h-3.5 text-teal-600" />
                   <span>VERTICAL EXCELLENCE</span>
                 </span>
               </div>
-              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight">
                 {industry.title}
               </h1>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 {industry.intro}
               </p>
             </div>
@@ -103,16 +117,16 @@ export default async function SingleIndustryPage({
 
           {/* Key Metrics Strip */}
           {industry.keyMetrics && industry.keyMetrics.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-white/10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-slate-200/80">
               {industry.keyMetrics.map((km) => (
                 <div
                   key={km.label}
-                  className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#35b0aa]/50 transition-all text-center"
+                  className="p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs hover:border-teal-500/40 hover:shadow-md transition-all text-center"
                 >
-                  <span className="font-display font-extrabold text-2xl sm:text-3xl text-[#d4a359] block mb-1">
+                  <span className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 block mb-1">
                     {km.value}
                   </span>
-                  <span className="text-xs uppercase tracking-wider text-slate-300 font-semibold">
+                  <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                     {km.label}
                   </span>
                 </div>

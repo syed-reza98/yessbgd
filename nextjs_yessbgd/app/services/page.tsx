@@ -85,91 +85,95 @@ export default async function ServicesPage() {
   return (
     <div className="flex flex-col w-full">
       {/* Canonical Stitch Hero Section: Full-Lifecycle Engineering */}
-      <section className="relative bg-[#061a1b] text-white pt-16 pb-20 overflow-hidden border-b border-white/10">
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-16 pb-20 overflow-hidden border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: `url('/assets/services-tech-bd.jpg')` }}
+        />
         <div className="absolute inset-0 bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#0d6e6e] rounded-full blur-[140px] opacity-25 pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#d4a359] rounded-full blur-[160px] opacity-15 pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-teal-500/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />
 
         <div className="container-tight relative z-10">
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300 mb-6">
-            <Link href="/" className="hover:text-emerald-400 transition-colors">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+            <Link href="/" className="hover:text-teal-700 transition-colors">
               Home
             </Link>
-            <span>/</span>
-            <span className="text-[#d4a359]">Services &amp; Solutions</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-teal-700">Services &amp; Solutions</span>
           </div>
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/30 text-[#d4a359] text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold tracking-widest uppercase mb-6 shadow-2xs">
+            <Sparkles className="h-3.5 w-3.5 text-teal-600" />
             <span>{sitePage?.hero_eyebrow || "— ENTERPRISE SERVICES & STRATEGIC CAPABILITIES —"}</span>
           </div>
 
           {/* Main Heading & Subtitle */}
           <div className="max-w-4xl mb-12">
-            <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight tracking-tight">
+            <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 mb-6 leading-tight tracking-tight">
               {sitePage?.hero_title ? (
                 sitePage.hero_title
               ) : (
                 <>
                   Full-Lifecycle Engineering, Capital Advisory &amp;{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-[#d4a359]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700">
                     Sovereign Transformation
                   </span>
                   .
                 </>
               )}
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
               {sitePage?.hero_subtitle || "From tier-3 cloud architectures to national cold-chain logistics, we deliver institutional capabilities designed for domestic sovereignty and international scale."}
             </p>
           </div>
 
           {/* Key Telemetry Stats Strip (4 Glass Metric Containers) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-emerald-500/50 transition-all group">
+            <div className="bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs rounded-2xl p-5 hover:border-teal-500/40 hover:shadow-md transition-all group">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-slate-300 text-xs font-medium">Practice Portfolio</span>
-                <Server className="h-5 w-5 text-emerald-400" />
+                <span className="text-slate-500 text-xs font-medium">Practice Portfolio</span>
+                <Server className="h-5 w-5 text-teal-600" />
               </div>
-              <div className="font-display text-3xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
+              <div className="font-display text-3xl font-extrabold text-slate-900 group-hover:text-teal-800 transition-colors">
                 {serviceList.length}
               </div>
-              <div className="text-xs text-slate-300/80 font-medium">Core Practice Disciplines</div>
+              <div className="text-xs text-slate-500 font-medium">Core Practice Disciplines</div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-[#d4a359]/50 transition-all group">
+            <div className="bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs rounded-2xl p-5 hover:border-amber-500/40 hover:shadow-md transition-all group">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-slate-300 text-xs font-medium">Guaranteed Reliability</span>
-                <ShieldCheck className="h-5 w-5 text-[#d4a359]" />
+                <span className="text-slate-500 text-xs font-medium">Guaranteed Reliability</span>
+                <ShieldCheck className="h-5 w-5 text-amber-600" />
               </div>
-              <div className="font-display text-3xl font-extrabold text-white group-hover:text-[#d4a359] transition-colors">
+              <div className="font-display text-3xl font-extrabold text-slate-900 group-hover:text-amber-700 transition-colors">
                 99.4%
               </div>
-              <div className="text-xs text-slate-300/80 font-medium">SLA Compliance Contracted</div>
+              <div className="text-xs text-slate-500 font-medium">SLA Compliance Contracted</div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-emerald-500/50 transition-all group">
+            <div className="bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs rounded-2xl p-5 hover:border-teal-500/40 hover:shadow-md transition-all group">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-slate-300 text-xs font-medium">Capital Mobilization</span>
-                <TrendingUp className="h-5 w-5 text-emerald-400" />
+                <span className="text-slate-500 text-xs font-medium">Capital Mobilization</span>
+                <TrendingUp className="h-5 w-5 text-teal-600" />
               </div>
-              <div className="font-display text-3xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
+              <div className="font-display text-3xl font-extrabold text-slate-900 group-hover:text-teal-800 transition-colors">
                 $50M+
               </div>
-              <div className="text-xs text-slate-300/80 font-medium">Delivered Scope &amp; Assets</div>
+              <div className="text-xs text-slate-500 font-medium">Delivered Scope &amp; Assets</div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-[#d4a359]/50 transition-all group">
+            <div className="bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs rounded-2xl p-5 hover:border-amber-500/40 hover:shadow-md transition-all group">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-slate-300 text-xs font-medium">SRE &amp; NOC Continuity</span>
-                <Clock className="h-5 w-5 text-[#d4a359]" />
+                <span className="text-slate-500 text-xs font-medium">SRE &amp; NOC Continuity</span>
+                <Clock className="h-5 w-5 text-amber-600" />
               </div>
-              <div className="font-display text-3xl font-extrabold text-white group-hover:text-[#d4a359] transition-colors">
+              <div className="font-display text-3xl font-extrabold text-slate-900 group-hover:text-amber-700 transition-colors">
                 24/7
               </div>
-              <div className="text-xs text-slate-300/80 font-medium">Mission-Critical Redundancy</div>
+              <div className="text-xs text-slate-500 font-medium">Mission-Critical Redundancy</div>
             </div>
           </div>
         </div>

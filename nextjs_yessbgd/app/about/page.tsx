@@ -214,65 +214,73 @@ export default async function AboutPage() {
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. Hero Section (Deep Navy & Oceanic Teal Gradient) */}
-      <section className="relative bg-gradient-to-b from-[#061a1b] via-[#072426] to-[#061a1b] text-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-white/10">
+      {/* 1. Hero Section (Modern Light Theme with Authentic Team Background) */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-slate-200/80">
+        {/* Background Image Layer */}
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-20"
+          style={{ backgroundImage: "url('/assets/about-team-bd.jpg')" }}
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70 pointer-events-none" />
+
         {/* Subtle Decorative Grid Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(53,176,170,0.18),transparent_50%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(212,163,89,0.12),transparent_40%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-outline-variant mb-6">
-            <Link href="/" className="hover:text-[#f6c87a] transition-colors">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+            <Link href="/" className="hover:text-emerald-700 transition-colors">
               Home
             </Link>
-            <span className="text-white/30">/</span>
-            <span className="text-[#35b0aa]">About Us</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-emerald-800 font-bold">About Us</span>
           </nav>
 
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4a359]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
-            <span className="w-2 h-2 rounded-full bg-[#d4a359] animate-ping" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
             <span>{sitePage?.hero_eyebrow || "— INSTITUTIONAL MANDATE & HERITAGE —"}</span>
           </div>
 
           {/* Headline & Subtitle */}
           <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
               {sitePage?.hero_title ? (
                 sitePage.hero_title
               ) : (
                 <>
                   Pioneering Sustainable Venture Architecture &amp;{" "}
-                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
                     Sovereign Tech
                   </span>{" "}
                   in Bangladesh.
                 </>
               )}
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-12">
+            <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed mb-12">
               {sitePage?.hero_subtitle || "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech."}
             </p>
           </div>
 
           {/* Strategic Key Metrics Bar (4 Prominent Metric Blocks) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-slate-200">
             {activeMetrics.map((metric: any) => {
               const Icon = typeof metric.icon === "string" ? TrendingUp : (metric.icon || TrendingUp);
               return (
                 <div
                   key={metric.label}
-                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#35b0aa]/50 transition-all group"
+                  className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl p-6 hover:border-emerald-500/50 hover:shadow-md transition-all group shadow-xs"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.accent || "text-[#35b0aa]"} group-hover:scale-105 transition-transform`}>
+                    <span className="text-3xl sm:text-4xl font-extrabold text-emerald-700 group-hover:scale-105 transition-transform">
                       {metric.value}
                     </span>
-                    <Icon className="w-6 h-6 text-[#35b0aa]" />
+                    <Icon className="w-6 h-6 text-emerald-600" />
                   </div>
-                  <div className="text-sm font-bold text-white mb-1">{metric.label}</div>
-                  <p className="text-xs text-slate-400">{metric.desc}</p>
+                  <div className="text-sm font-bold text-slate-900 mb-1">{metric.label}</div>
+                  <p className="text-xs text-slate-500">{metric.desc}</p>
                 </div>
               );
             })}
@@ -423,43 +431,43 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Leadership & Governance Keynote Statement */}
-      <section className="py-20 bg-[#061a1b] text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4a359_1px,transparent_1px)] [background-size:24px_24px]" />
+      {/* 4. Leadership & Governance Keynote Statement (Light Theme) */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-emerald-50/20 to-amber-50/20 text-slate-900 relative overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 backdrop-blur-md shadow-2xl relative space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-6 pb-8 border-b border-white/10">
+          <div className="bg-white/95 border border-slate-200/90 rounded-3xl p-8 sm:p-12 shadow-xl shadow-slate-900/5 relative space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-6 pb-8 border-b border-slate-100">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full border-2 border-dashed border-[#d4a359] flex items-center justify-center text-[#d4a359]">
+                <div className="w-14 h-14 rounded-full border-2 border-dashed border-amber-600 flex items-center justify-center text-amber-700 bg-amber-50">
                   <Stamp className="w-7 h-7" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-[#d4a359] uppercase tracking-wider block">
+                  <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block">
                     MANAGING PARTNER KEYNOTE
                   </span>
-                  <h3 className="font-display text-xl font-bold text-white">Board Governance &amp; Purpose</h3>
+                  <h3 className="font-display text-xl font-bold text-slate-900">Board Governance &amp; Purpose</h3>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
                 RJSC Board Ratified
               </span>
             </div>
 
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed italic">
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed italic">
               &ldquo;We architected YESS Bangladesh not merely as an investment syndicate, but as an institutional
               nation-building engine. True sovereignty in the 21st century is digital, agrarian, and infrastructural. By
               fostering homegrown engineering talent and enforcing international fiduciary discipline, we ensure every
               venture created under our umbrella delivers enduring value for the people of Bangladesh.&rdquo;
             </p>
 
-            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <p className="text-sm font-bold text-white">Executive Committee &amp; Governing Board</p>
-                <p className="text-xs text-slate-400">YESS Bangladesh • RJSC Reg: C-184920</p>
+                <p className="text-sm font-bold text-slate-900">Executive Committee &amp; Governing Board</p>
+                <p className="text-xs text-slate-500">YESS Bangladesh • RJSC Reg: C-184920</p>
               </div>
               <Link
                 href="/about/leadership"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs font-bold transition-all shadow-md"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white text-xs font-bold transition-all shadow-sm hover:shadow-md"
               >
                 <span>View Full Executive Board</span>
                 <ArrowRight className="w-4 h-4" />

@@ -159,34 +159,41 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
       </aside>
 
       {/* 2. Hero Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 mb-4 shadow-sm">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
-          </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider">
-            {initialSitePage?.hero_eyebrow || "Recruitment Pipeline & Candidate Telemetry"}
-          </span>
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-14 sm:py-18 border-b border-slate-200/80 mb-6">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: `url('/assets/general/design.jpg')` }}
+        />
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200/80 mb-4 shadow-2xs">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-600 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider">
+              {initialSitePage?.hero_eyebrow || "Recruitment Pipeline & Candidate Telemetry"}
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 mb-4 tracking-tight">
+            {initialSitePage?.hero_title ? (
+              initialSitePage.hero_title
+            ) : (
+              <>
+                Track Your{" "}
+                <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700 bg-clip-text text-transparent">
+                  Application Status
+                </span>
+              </>
+            )}
+          </h1>
+
+          <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            {initialSitePage?.hero_subtitle ||
+              "Real-time candidate telemetry for engineering, product, and consulting roles across YESS Bangladesh ventures. Enter your tracking reference number and registered email to check status."}
+          </p>
         </div>
-
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground mb-4 tracking-tight">
-          {initialSitePage?.hero_title ? (
-            initialSitePage.hero_title
-          ) : (
-            <>
-              Track Your{" "}
-              <span className="text-primary">
-                Application Status
-              </span>
-            </>
-          )}
-        </h1>
-
-        <p className="text-xs sm:text-sm text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-          {initialSitePage?.hero_subtitle ||
-            "Real-time candidate telemetry for engineering, product, and consulting roles across YESS Bangladesh ventures. Enter your tracking reference number and registered email to check status."}
-        </p>
       </section>
 
       {/* 3. Tracking Form & Lookup Card */}

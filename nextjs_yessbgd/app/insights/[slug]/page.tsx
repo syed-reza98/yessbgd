@@ -55,16 +55,20 @@ export default async function InsightArticlePage({ params }: Props) {
 
   return (
     <div className="space-y-12 pb-24">
-      {/* Top Banner & Article Header (Signature Dark Corporate Hero) */}
-      <section className="relative bg-[#061a1b] text-white py-14 sm:py-18 overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+      {/* Top Banner & Article Header (Signature Light Corporate Hero) */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-14 sm:py-18 overflow-hidden border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: `url('/assets/heroes/global-network-bg.jpg')` }}
+        />
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <Link
             href="/insights"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#f6c87a] hover:underline mb-8"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-teal-700 hover:underline mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>All Insights &amp; Intelligence</span>
@@ -72,61 +76,61 @@ export default async function InsightArticlePage({ params }: Props) {
 
           {/* Metadata Pills Row */}
           <div className="flex flex-wrap items-center gap-2.5 mb-6">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/10 text-[#35b0aa] border border-[#35b0aa]/30">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-teal-50 text-teal-800 border border-teal-200/80 shadow-2xs">
               {article.tag}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-slate-300 border border-white/10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 shadow-2xs">
               <Calendar className="w-3.5 h-3.5 text-slate-400" />
               <span>{article.date}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-slate-300 border border-white/10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 shadow-2xs">
               <Clock className="w-3.5 h-3.5 text-slate-400" />
               <span>{article.readTime}</span>
             </span>
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
               <span>Peer-Reviewed &amp; Certified</span>
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-slate-400 bg-white/5 border border-white/10">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-slate-500 bg-white border border-slate-200 shadow-2xs">
               <code>WP-BD-2026-ARCH</code>
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight leading-tight mb-6">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
             {article.title}
           </h1>
 
           {/* Editorial Excerpt */}
-          <p className="text-sm sm:text-lg text-slate-300 font-normal leading-relaxed border-l-4 border-[#35b0aa] pl-5 italic mb-8">
+          <p className="text-sm sm:text-lg text-slate-700 font-normal leading-relaxed border-l-4 border-teal-600 pl-5 italic mb-8 bg-teal-50/50 py-3 rounded-r-xl">
             {article.excerpt}
           </p>
 
           {/* Author Byline Card */}
-          <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#0d6e6e] to-[#35b0aa] flex items-center justify-center text-white font-bold text-sm tracking-wider border-2 border-[#d4a359]/40 shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-700 to-teal-500 flex items-center justify-center text-white font-bold text-sm tracking-wider border-2 border-amber-400/50 shadow-sm">
                   {article.author.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
                 </div>
                 <span
-                  className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-[#061a1b]"
+                  className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white"
                   title="Verified Author"
                 />
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-display font-bold text-sm sm:text-base text-white">
+                  <span className="font-display font-bold text-sm sm:text-base text-slate-900">
                     {article.author.name}
                   </span>
-                  <CheckCircle2 className="w-4 h-4 text-[#35b0aa]" />
+                  <CheckCircle2 className="w-4 h-4 text-teal-600" />
                 </div>
-                <p className="text-xs text-[#f6c87a] font-medium mt-0.5">{article.author.role}</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">
+                <p className="text-xs text-amber-700 font-medium mt-0.5">{article.author.role}</p>
+                <p className="text-[10px] text-slate-500 mt-0.5">
                   Published by YESS Institutional Research &amp; Strategy Council
                 </p>
               </div>

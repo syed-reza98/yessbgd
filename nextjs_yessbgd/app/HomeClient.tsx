@@ -90,6 +90,58 @@ export function HomeClient({
   const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : defaultVentures;
   const effectiveImpactMetrics = (sitePage?.data?.metrics as typeof defaultHomeImpactMetrics) || defaultHomeImpactMetrics;
 
+  const effectiveTrustCredentials = (sitePage?.data?.trust_credentials as any[]) || [
+    { label: "ISO-grade standards" },
+    { label: "11+ years expertise" },
+    { label: "98% client retention" },
+    { label: "RJSC C-184920" },
+  ];
+
+  const effectiveHeroCoins = (sitePage?.data?.hero_coins as any[]) || [
+    {
+      slug: "yess-soft",
+      title: "Yess Soft",
+      subtitle: "Enterprise Cloud & AI",
+      badge: "Tier-1 Cloud Ready",
+      href: "/ventures/yess-soft",
+      image: "/coins/yess-soft.png",
+    },
+    {
+      slug: "shondhaan",
+      title: "Shondhaan",
+      subtitle: "National Discovery",
+      badge: "National Engine",
+      href: "/ventures",
+      image: "/coins/shondhaan.png",
+    },
+    {
+      slug: "yess-organic-haat",
+      title: "Organic Haat",
+      subtitle: "Farm-to-Fork AgriTech",
+      badge: "10,000+ Growers",
+      href: "/ventures",
+      image: "/coins/yess-organic-haat.png",
+    },
+    {
+      slug: "akash-ott",
+      title: "Akash OTT",
+      subtitle: "Streaming & Media",
+      badge: "HD Streaming",
+      href: "/services/akash-ott",
+      image: "/coins/akash-ott.png",
+    },
+  ];
+
+  const effectiveCtaBanner = sitePage?.data?.cta_banner || {
+    eyebrow: "NATIONAL IMPACT",
+    title: "Architecting the Sovereign Digital Future of Bangladesh",
+    desc: "Partner with our Dhaka headquarters for bespoke enterprise engineering, venture building, and technology consultation.",
+    primary_btn_text: "Schedule Strategic Consultation",
+    primary_btn_href: "/contact",
+    secondary_btn_text: "Candidate Status Portal",
+    secondary_btn_href: "/application-status",
+  };
+
   const filteredVentures = effectiveVentures.filter((v: any) => {
     if (activeTab === "all") return true;
     if (activeTab === "tech") {
@@ -109,52 +161,52 @@ export function HomeClient({
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. Cinematic Hero Section with 4 Flagship Minted 3D Medallions */}
-      <section className="relative bg-[#061a1b] text-white overflow-hidden py-10 sm:py-14 lg:py-16 border-b border-white/10">
-        {/* Authentic Office Photography Backdrop with Dark Radial Mask */}
+      {/* 1. Cinematic Hero Section with 4 Flagship Minted 3D Medallions (Light Theme) */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 text-slate-900 overflow-hidden py-10 sm:py-14 lg:py-18 border-b border-slate-200/80">
+        {/* Authentic Office Photography Backdrop with Light Multiplying Mask */}
         <div
-          className="absolute inset-0 z-0 opacity-15 pointer-events-none mix-blend-luminosity bg-cover bg-center"
-          style={{ backgroundImage: "url('/assets/hero-office-bg.webp')" }}
+          className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-multiply bg-cover bg-center"
+          style={{ backgroundImage: "url('/assets/heroes/hero_6a8951c6b7346.png')" }}
         />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#061a1b] via-[#061a1b]/95 to-[#061a1b]/90 pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70 pointer-events-none" />
 
         {/* Ambient Brand Mesh & Strategic Glows */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#008744]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-6 right-1/4 w-80 h-80 bg-[#c82333]/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-[#d4a359]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-6 right-1/4 w-80 h-80 bg-rose-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="container-tight relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Hero Column */}
             <div className="lg:col-span-7 flex flex-col space-y-4">
               {/* Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-[#d4a359]/35 text-[#d4a359] text-xs font-bold uppercase tracking-wider w-fit backdrop-blur-md">
-                <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider w-fit shadow-xs">
+                <Sparkles className="h-3.5 w-3.5 text-amber-600" />
                 <span>{sitePage?.hero_eyebrow || "— BANGLADESH VENTURE BUILDER & ENTERPRISE STUDIO —"}</span>
               </div>
 
               {/* Display Headline */}
-              <h1 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] tracking-tight text-white leading-[1.18]">
+              <h1 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[44px] tracking-tight text-slate-900 leading-[1.18]">
                 {sitePage?.hero_title ? (
                   sitePage.hero_title
                 ) : (
                   <>
                     Youth Entrepreneurship for{" "}
-                    <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-[#d4a359] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
                       smart success
                     </span>{" "}
                     with{" "}
-                    <span className="bg-gradient-to-r from-[#f87171] via-[#d4a359] to-amber-200 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-amber-600 via-rose-600 to-amber-700 bg-clip-text text-transparent">
                       excellence
                     </span>{" "}
-                    & solutions.
+                    &amp; solutions.
                   </>
                 )}
               </h1>
 
               {/* Subtitle */}
-              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
                 {sitePage?.hero_subtitle || "Catalyzing next-generation enterprises across sovereign software engineering, sustainable agribusiness, digital media streaming, and logistics in Bangladesh and global high-growth corridors."}
               </p>
 
@@ -162,173 +214,110 @@ export function HomeClient({
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white font-bold shadow-lg shadow-emerald-950/50 hover:shadow-emerald-900/60 transition-all duration-200 active:scale-95 group text-xs sm:text-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white font-bold shadow-md shadow-emerald-900/20 transition-all duration-200 active:scale-95 group text-xs sm:text-sm"
                 >
                   <span>Start a project</span>
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold shadow-xs backdrop-blur-md transition-all duration-200 text-xs sm:text-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold shadow-xs transition-all duration-200 text-xs sm:text-sm"
                 >
-                  <LayoutGrid className="h-4 w-4 text-[#d4a359]" />
+                  <LayoutGrid className="h-4 w-4 text-emerald-700" />
                   <span>Explore services</span>
                 </Link>
               </div>
 
               {/* Trust Credentials Bar */}
-              <div className="pt-4 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
-                  <span>ISO-grade standards</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
-                  <span>11+ years expertise</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
-                  <span>98% client retention</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
-                  <span>RJSC C-184920</span>
-                </div>
+              <div className="pt-4 border-t border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {effectiveTrustCredentials.map((cred: any, idx: number) => (
+                  <div key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                    <span>{cred.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right Hero Column: Sleek Cockpit Executive Portfolio Card */}
+            {/* Right Hero Column: Sleek Cockpit Executive Portfolio Card (Light Theme) */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-[#0b2427]/95 via-[#081f21]/95 to-[#061819]/95 border border-emerald-500/30 shadow-2xl shadow-black/70 backdrop-blur-2xl ring-1 ring-white/10 overflow-hidden">
+              <div className="relative rounded-3xl p-5 sm:p-6 bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl shadow-slate-900/5 ring-1 ring-slate-900/5 overflow-hidden">
                 {/* Ambient glow in card background */}
-                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#d4a359]/10 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-40 h-40 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
 
-                <div className="flex justify-between items-center mb-4 pb-3 border-b border-white/10 relative z-10">
+                <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-100 relative z-10">
                   <div>
-                    <span className="text-[10px] font-bold text-[#d4a359] uppercase tracking-wider block flex items-center gap-1.5">
-                      <Sparkles className="w-3 h-3 text-[#d4a359]" />
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider block flex items-center gap-1.5">
+                      <Sparkles className="w-3 h-3 text-amber-600" />
                       <span>OUR FLAGSHIP VENTURES</span>
                     </span>
-                    <span className="font-display text-base sm:text-lg font-bold text-white">
+                    <span className="font-display text-base sm:text-lg font-bold text-slate-900">
                       Pioneering Portfolio
                     </span>
                   </div>
-                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5 shadow-xs">
+                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
                     <span>13 Sovereign Assets</span>
                   </span>
                 </div>
 
-                {/* 4 Illuminated Venture Cards with Pure White Logo Pedestals for 100% Contrast */}
+                {/* Dynamic Illuminated Venture Cards with Pure White Logo Pedestals */}
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 relative z-10">
-                  {/* Coin 1: Yess Soft */}
-                  <Link
-                    href="/ventures/yess-soft"
-                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
-                  >
-                    {/* Elevated Pure White Logo Pedestal */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
-                      <div className="absolute -inset-1 rounded-2xl bg-emerald-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Image
-                        src="/coins/yess-soft.png"
-                        alt="Yess Soft Logo"
-                        width={60}
-                        height={60}
-                        className="w-full h-full object-contain relative z-10"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
-                      Yess Soft
-                    </span>
-                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">Enterprise Cloud & AI</p>
-                    <span className="mt-2 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
-                      Tier-1 Cloud Ready
-                    </span>
-                  </Link>
+                  {effectiveHeroCoins.slice(0, 4).map((coin: any, idx: number) => {
+                    const coinBorderColors = [
+                      "hover:border-emerald-400 hover:shadow-emerald-900/10",
+                      "hover:border-rose-400 hover:shadow-rose-900/10",
+                      "hover:border-emerald-400 hover:shadow-emerald-900/10",
+                      "hover:border-amber-400 hover:shadow-amber-900/10",
+                    ];
+                    const glowColors = [
+                      "bg-emerald-400/20",
+                      "bg-indigo-500/20",
+                      "bg-emerald-500/20",
+                      "bg-sky-500/20",
+                    ];
+                    const badgeStyles = [
+                      "text-emerald-800 bg-emerald-100 border-emerald-200",
+                      "text-rose-800 bg-rose-100 border-rose-200",
+                      "text-emerald-800 bg-emerald-100 border-emerald-200",
+                      "text-amber-800 bg-amber-100 border-amber-200",
+                    ];
 
-                  {/* Coin 2: Shondhaan */}
-                  <Link
-                    href="/ventures"
-                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-rose-400/50 shadow-lg hover:shadow-rose-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
-                  >
-                    {/* Elevated Pure White Logo Pedestal */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
-                      <div className="absolute -inset-1 rounded-2xl bg-indigo-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Image
-                        src="/coins/shondhaan.png"
-                        alt="Shondhaan Logo"
-                        width={60}
-                        height={60}
-                        className="w-full h-full object-contain relative z-10"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-rose-300 transition-colors">
-                      Shondhaan
-                    </span>
-                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">National Discovery</p>
-                    <span className="mt-2 text-[9px] text-[#f87171] font-bold uppercase tracking-wider bg-rose-950/90 px-2.5 py-0.5 rounded-full border border-rose-500/40">
-                      National Engine
-                    </span>
-                  </Link>
-
-                  {/* Coin 3: Yess Organic Haat */}
-                  <Link
-                    href="/ventures"
-                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
-                  >
-                    {/* Elevated Pure White Logo Pedestal */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
-                      <div className="absolute -inset-1 rounded-2xl bg-emerald-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Image
-                        src="/coins/yess-organic-haat.png"
-                        alt="Organic Haat Logo"
-                        width={60}
-                        height={60}
-                        className="w-full h-full object-contain relative z-10"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
-                      Organic Haat
-                    </span>
-                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">Farm-to-Fork AgriTech</p>
-                    <span className="mt-2 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
-                      10,000+ Growers
-                    </span>
-                  </Link>
-
-                  {/* Coin 4: Akash OTT */}
-                  <Link
-                    href="/services/akash-ott"
-                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-amber-400/50 shadow-lg hover:shadow-amber-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
-                  >
-                    {/* Elevated Pure White Logo Pedestal */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
-                      <div className="absolute -inset-1 rounded-2xl bg-sky-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Image
-                        src="/coins/akash-ott.png"
-                        alt="Akash OTT Logo"
-                        width={60}
-                        height={60}
-                        className="w-full h-full object-contain relative z-10"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">
-                      Akash OTT
-                    </span>
-                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">Streaming & Media</p>
-                    <span className="mt-2 text-[9px] text-[#d4a359] font-bold uppercase tracking-wider bg-amber-950/90 px-2.5 py-0.5 rounded-full border border-amber-500/40">
-                      4.8M Viewers
-                    </span>
-                  </Link>
+                    return (
+                      <Link
+                        key={coin.slug || idx}
+                        href={coin.href || "/ventures"}
+                        className={`group relative p-3.5 sm:p-4 rounded-2xl bg-slate-50/80 hover:bg-white border border-slate-200/80 ${coinBorderColors[idx % 4]} shadow-xs hover:shadow-md transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden`}
+                      >
+                        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-xs border border-slate-200 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md ring-2 ring-slate-100 shrink-0">
+                          <div className={`absolute -inset-1 rounded-2xl ${glowColors[idx % 4]} blur-sm opacity-0 group-hover:opacity-100 transition-opacity`} />
+                          <Image
+                            src={coin.image || `/coins/${coin.slug}.png`}
+                            alt={`${coin.title} Logo`}
+                            width={60}
+                            height={60}
+                            className="w-full h-full object-contain relative z-10"
+                          />
+                        </div>
+                        <span className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                          {coin.title}
+                        </span>
+                        <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-1">{coin.subtitle}</p>
+                        <span className={`mt-2 text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${badgeStyles[idx % 4]}`}>
+                          {coin.badge}
+                        </span>
+                      </Link>
+                    );
+                  })}
                 </div>
 
-                <div className="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between text-xs relative z-10">
-                  <span className="flex items-center gap-1.5 font-medium text-slate-300">
-                    <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs relative z-10">
+                  <span className="flex items-center gap-1.5 font-medium text-slate-600">
+                    <ShieldCheck className="h-4 w-4 text-emerald-600" />
                     <span>Audited Portfolio Valuation</span>
                   </span>
-                  <span className="text-emerald-400 font-bold tracking-tight text-sm">$50M+ Cumulative Base</span>
+                  <span className="text-emerald-700 font-bold tracking-tight text-sm">$50M+ Cumulative Base</span>
                 </div>
               </div>
             </div>
@@ -337,7 +326,7 @@ export function HomeClient({
       </section>
 
       {/* 2. Direct Engagement Action Cards ('READY WHEN YOU ARE') */}
-      <section className="py-16 bg-[#f4f8f8] border-b border-[#eaf2f2]">
+      <section className="py-16 bg-slate-50/80 border-b border-slate-200">
         <div className="container-tight">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
@@ -417,58 +406,58 @@ export function HomeClient({
         </div>
       </section>
 
-      {/* 3. Social Proof Partner Banner: Infinite Scrolling Marquee */}
-      <section className="py-10 bg-[#061a1b] border-y border-white/10 overflow-hidden">
+      {/* 3. Social Proof Partner Banner: Infinite Scrolling Marquee (Light Theme) */}
+      <section className="py-10 bg-slate-50 border-y border-slate-200 overflow-hidden">
         <div className="container-tight mb-6 text-center">
-          <p className="text-xs uppercase tracking-widest text-[#d4a359] font-bold">
+          <p className="text-xs uppercase tracking-widest text-emerald-800 font-bold">
             TRUSTED BY INSTITUTIONAL LEADERS &amp; ENTERPRISE PARTNERS IN BANGLADESH
           </p>
         </div>
         <div className="relative overflow-hidden w-full">
-          <div className="animate-marquee flex items-center gap-14 text-slate-300 font-bold tracking-wider text-xs sm:text-sm">
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-[#35b0aa]" /> ICT DIVISION BANGLADESH
+          <div className="animate-marquee flex items-center gap-14 text-slate-600 font-bold tracking-wider text-xs sm:text-sm">
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-emerald-600" /> ICT DIVISION BANGLADESH
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Code2 className="h-4 w-4 text-[#d4a359]" /> BASIS BANGLADESH
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Code2 className="h-4 w-4 text-amber-600" /> BASIS BANGLADESH
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Radio className="h-4 w-4 text-[#35b0aa]" /> ROBI AXIATA PLC
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Radio className="h-4 w-4 text-emerald-600" /> ROBI AXIATA PLC
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Briefcase className="h-4 w-4 text-[#d4a359]" /> BEXIMCO GROUP
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Briefcase className="h-4 w-4 text-amber-600" /> BEXIMCO GROUP
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Cpu className="h-4 w-4 text-[#35b0aa]" /> WALTON HI-TECH
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Cpu className="h-4 w-4 text-emerald-600" /> WALTON HI-TECH
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[#d4a359]" /> BRAC ENTERPRISES
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-amber-600" /> BRAC ENTERPRISES
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Globe className="h-4 w-4 text-[#35b0aa]" /> GRAMEEN TELECOM
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Globe className="h-4 w-4 text-emerald-600" /> GRAMEEN TELECOM
             </span>
 
             {/* Duplicated set for seamless loop */}
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-[#35b0aa]" /> ICT DIVISION BANGLADESH
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-emerald-600" /> ICT DIVISION BANGLADESH
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Code2 className="h-4 w-4 text-[#d4a359]" /> BASIS BANGLADESH
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Code2 className="h-4 w-4 text-amber-600" /> BASIS BANGLADESH
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Radio className="h-4 w-4 text-[#35b0aa]" /> ROBI AXIATA PLC
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Radio className="h-4 w-4 text-emerald-600" /> ROBI AXIATA PLC
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Briefcase className="h-4 w-4 text-[#d4a359]" /> BEXIMCO GROUP
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Briefcase className="h-4 w-4 text-amber-600" /> BEXIMCO GROUP
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Cpu className="h-4 w-4 text-[#35b0aa]" /> WALTON HI-TECH
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Cpu className="h-4 w-4 text-emerald-600" /> WALTON HI-TECH
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[#d4a359]" /> BRAC ENTERPRISES
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-amber-600" /> BRAC ENTERPRISES
             </span>
-            <span className="hover:text-white transition-colors flex items-center gap-2">
-              <Globe className="h-4 w-4 text-[#35b0aa]" /> GRAMEEN TELECOM
+            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
+              <Globe className="h-4 w-4 text-emerald-600" /> GRAMEEN TELECOM
             </span>
           </div>
         </div>
@@ -703,19 +692,19 @@ export function HomeClient({
         </div>
       </section>
 
-      {/* 5. Impact Metric Counters */}
-      <section className="py-16 bg-[#061a1b] text-white border-y border-white/10" id="impact">
+      {/* 5. Impact Metric Counters (Light Theme) */}
+      <section className="py-16 bg-gradient-to-r from-emerald-50 via-teal-50/40 to-slate-50 border-y border-emerald-100/80 text-slate-900" id="impact">
         <div className="container-tight">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {effectiveImpactMetrics.map((m: any, idx: number) => (
               <div key={idx} className="flex flex-col items-center">
-                <span className={`font-display font-extrabold text-4xl sm:text-5xl ${m.color || "text-[#d4a359]"}`}>
+                <span className={`font-display font-extrabold text-4xl sm:text-5xl ${idx % 2 === 0 ? "text-emerald-700" : "text-amber-600"}`}>
                   {m.value}
                 </span>
-                <span className="text-sm font-bold text-white mt-2">
+                <span className="text-sm font-bold text-slate-900 mt-2">
                   {m.label}
                 </span>
-                <span className="text-xs text-white/60 mt-1">
+                <span className="text-xs text-slate-600 mt-1">
                   {m.desc}
                 </span>
               </div>
@@ -725,7 +714,7 @@ export function HomeClient({
       </section>
 
       {/* 6. Subsidiaries Directory Preview (All 13 Ventures) */}
-      <section id="ventures" className="py-20 bg-[#f8faf9]">
+      <section id="ventures" className="py-20 bg-slate-50/60">
         <div className="container-tight">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
@@ -811,7 +800,7 @@ export function HomeClient({
                       <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-lg group-hover:scale-105 transition-transform">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="px-2.5 py-1 rounded bg-[#eaf2f2] text-[11px] font-bold text-foreground/70">
+                      <span className="px-2.5 py-1 rounded bg-slate-100 text-[11px] font-bold text-slate-700">
                         Est. 2018
                       </span>
                     </div>
@@ -842,32 +831,36 @@ export function HomeClient({
         </div>
       </section>
 
-      {/* 7. Strategic Consultation CTA Banner */}
-      <section className="py-20 bg-[#061a1b] text-white relative overflow-hidden">
+      {/* 7. Strategic Consultation CTA Banner (Light Theme) */}
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-teal-50/40 to-amber-50/20 text-slate-900 relative overflow-hidden border-t border-slate-200">
+        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
         <div className="container-tight text-center max-w-3xl mx-auto relative z-10">
-          <span className="text-xs font-bold text-[#f6c87a] uppercase tracking-widest">
-            NATIONAL IMPACT
+          <span className="text-xs font-bold text-amber-700 uppercase tracking-widest">
+            {effectiveCtaBanner.eyebrow || "NATIONAL IMPACT"}
           </span>
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white mt-3 leading-tight">
-            Architecting the Sovereign Digital Future of Bangladesh
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 mt-3 leading-tight">
+            {effectiveCtaBanner.title || "Architecting the Sovereign Digital Future of Bangladesh"}
           </h2>
-          <p className="text-base text-white/70 mt-4 leading-relaxed">
-            Partner with our Dhaka headquarters for bespoke enterprise engineering, venture building, and technology consultation.
+          <p className="text-base text-slate-600 mt-4 leading-relaxed">
+            {effectiveCtaBanner.desc || "Partner with our Dhaka headquarters for bespoke enterprise engineering, venture building, and technology consultation."}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary hover:bg-[#35b0aa] text-white font-bold text-sm shadow-xl transition-all"
+              href={effectiveCtaBanner.primary_btn_href || "/contact"}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white font-bold text-sm shadow-md transition-all active:scale-95"
             >
-              <span>Schedule Strategic Consultation</span>
+              <span>{effectiveCtaBanner.primary_btn_text || "Schedule Strategic Consultation"}</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/application-status"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm transition-all"
+              href={effectiveCtaBanner.secondary_btn_href || "/application-status"}
+              className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-sm shadow-xs transition-all"
             >
-              <span>Candidate Status Portal</span>
+              <span>{effectiveCtaBanner.secondary_btn_text || "Candidate Status Portal"}</span>
             </Link>
           </div>
         </div>

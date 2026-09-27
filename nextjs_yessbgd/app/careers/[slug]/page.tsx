@@ -50,50 +50,54 @@ export default async function JobDetailPage({ params }: Props) {
 
   return (
     <div className="space-y-12 pb-20">
-      {/* Top Banner (Signature Dark Corporate Hero) */}
-      <section className="relative bg-[#061a1b] text-white py-14 sm:py-18 overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-[#0d6e6e]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-[#d4a359]/15 rounded-full blur-3xl pointer-events-none" />
+      {/* Top Banner (Signature Light Corporate Hero) */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-14 sm:py-18 overflow-hidden border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: `url('/assets/about-team-bd.jpg')` }}
+        />
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <Link
             href="/careers"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#f6c87a] hover:underline mb-6"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-teal-700 hover:underline mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to all open positions</span>
           </Link>
 
           <div className="flex flex-wrap items-center gap-2.5 mb-4">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-[#35b0aa] border border-[#35b0aa]/30">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 shadow-2xs">
               {job.dept}
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/5 text-slate-300 border border-white/10">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-slate-700 border border-slate-200 shadow-2xs">
               {job.level} Level
             </span>
-            <span className="text-xs font-bold text-[#f6c87a] bg-[#d4a359]/10 border border-[#d4a359]/30 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200/80 px-3 py-1 rounded-full shadow-2xs">
               48h Application Review SLA
             </span>
           </div>
 
-          <h1 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+          <h1 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
             {job.title}
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-6">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl leading-relaxed mb-6">
             {job.summary}
           </p>
 
-          <div className="flex flex-wrap items-center gap-5 text-xs text-slate-300 font-medium">
+          <div className="flex flex-wrap items-center gap-5 text-xs text-slate-600 font-medium">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-[#35b0aa]" /> {job.location}
+              <MapPin className="w-4 h-4 text-teal-600" /> {job.location}
             </span>
             <span className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-[#f6c87a]" /> {job.type}
+              <Clock className="w-4 h-4 text-amber-600" /> {job.type}
             </span>
             <span className="flex items-center gap-1.5">
-              <Building className="w-4 h-4 text-[#35b0aa]" /> Dhaka Dual-Hub / Hybrid Available
+              <Building className="w-4 h-4 text-teal-600" /> Dhaka Dual-Hub / Hybrid Available
             </span>
           </div>
         </div>

@@ -581,6 +581,32 @@ export type CompanySettings = {
     facebook?: string;
     linkedin?: string;
   };
+  header?: {
+    ribbonTextEn?: string;
+    ribbonTextBn?: string;
+    ribbonCtaTextEn?: string;
+    ribbonCtaTextBn?: string;
+    ribbonCtaHref?: string;
+    trackStatusTextEn?: string;
+    trackStatusTextBn?: string;
+    trackStatusHref?: string;
+  };
+  footer?: {
+    missionNarrativeEn?: string;
+    missionNarrativeBn?: string;
+    newsletterTitleEn?: string;
+    newsletterTitleBn?: string;
+    newsletterDescEn?: string;
+    newsletterDescBn?: string;
+    candidateTrackerLabelEn?: string;
+    candidateTrackerLabelBn?: string;
+    candidateTrackerHref?: string;
+    colTitles?: {
+      ventures?: string;
+      governance?: string;
+      headquarters?: string;
+    };
+  };
 };
 
 const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
@@ -627,10 +653,36 @@ const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
     facebook: "https://facebook.com/yessbangla",
     linkedin: "https://linkedin.com/company/yessbangla",
   },
+  header: {
+    ribbonTextEn: "Dhaka BST Operational",
+    ribbonTextBn: "ঢাকা বিএসটি কার্যকর",
+    ribbonCtaTextEn: "Let's Talk",
+    ribbonCtaTextBn: "যোগাযোগ করুন",
+    ribbonCtaHref: "/contact",
+    trackStatusTextEn: "Track Application",
+    trackStatusTextBn: "আবেদনের অগ্রগতি",
+    trackStatusHref: "/application-status",
+  },
+  footer: {
+    missionNarrativeEn: "Pioneering institutional venture building, engineering resilient technological backbone infrastructures, and empowering youth-led socioeconomic transformation across South Asia.",
+    missionNarrativeBn: "প্রাতিষ্ঠানিক ভেঞ্চার গঠন, টেকসই প্রযুক্তিগত ব্যাকবোন অবকাঠামো প্রকৌশল এবং দক্ষিণ এশিয়া জুড়ে যুব-নেতৃত্বাধীন আর্থ-সামাজিক রূপান্তরকে ক্ষমতায়ন করা।",
+    newsletterTitleEn: "Headquarters & Insights",
+    newsletterTitleBn: "হেডকোয়ার্টার এবং গবেষণা অন্তর্দৃষ্টি",
+    newsletterDescEn: "Quarterly macro research, policy briefings, and sovereign technology dispatches delivered to institutional partners.",
+    newsletterDescBn: "প্রাতিষ্ঠানিক অংশীদারদের জন্য ত্রৈমাসিক ম্যাক্রো গবেষণা, নীতিগত ব্রিফিং এবং প্রযুক্তির বার্তা।",
+    candidateTrackerLabelEn: "Candidate Application Tracker →",
+    candidateTrackerLabelBn: "প্রার্থী আবেদন ট্র্যাকার →",
+    candidateTrackerHref: "/application-status",
+    colTitles: {
+      ventures: "Ventures",
+      governance: "Governance",
+      headquarters: "Headquarters & Insights",
+    },
+  },
 };
 
 /**
- * Fetch consolidated company settings (branding, contact, offices, socials) with fallback.
+ * Fetch consolidated company settings (branding, contact, offices, socials, header, footer) with fallback.
  */
 export async function getCompanySettings(): Promise<CompanySettings> {
   try {
@@ -646,6 +698,8 @@ export async function getCompanySettings(): Promise<CompanySettings> {
     const contact = data.find((s) => s.key === "contact")?.value || {};
     const offices = data.find((s) => s.key === "offices")?.value || {};
     const socials = data.find((s) => s.key === "socials")?.value || {};
+    const header = data.find((s) => s.key === "header")?.value || {};
+    const footer = data.find((s) => s.key === "footer")?.value || {};
 
     return {
       branding: {
@@ -669,6 +723,14 @@ export async function getCompanySettings(): Promise<CompanySettings> {
       socials: {
         ...DEFAULT_COMPANY_SETTINGS.socials,
         ...socials,
+      },
+      header: {
+        ...DEFAULT_COMPANY_SETTINGS.header,
+        ...header,
+      },
+      footer: {
+        ...DEFAULT_COMPANY_SETTINGS.footer,
+        ...footer,
       },
     };
   } catch (err) {

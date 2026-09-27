@@ -95,40 +95,40 @@ export function InsightsDirectory({
         </div>
 
         {/* Master Split Card */}
-        <div className="rounded-3xl bg-[#061a1b] text-white overflow-hidden border border-emerald-500/25 shadow-2xl grid grid-cols-1 lg:grid-cols-12 relative">
-          <div className="absolute -right-32 -bottom-32 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
-          <div className="absolute -left-32 -top-32 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+        <div className="rounded-3xl bg-white text-slate-900 overflow-hidden border border-slate-200/90 shadow-xl grid grid-cols-1 lg:grid-cols-12 relative">
+          <div className="absolute -right-32 -bottom-32 w-80 h-80 rounded-full bg-amber-500/5 blur-3xl pointer-events-none" />
+          <div className="absolute -left-32 -top-32 w-80 h-80 rounded-full bg-teal-500/5 blur-3xl pointer-events-none" />
 
           {/* Left 60% Container */}
           <div className="lg:col-span-7 p-7 sm:p-10 md:p-12 flex flex-col justify-between relative z-10">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold mb-5 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
                 <span>SOVEREIGN CLOUD ARCHITECTURE • MARCH 2026</span>
               </div>
 
-              <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-4 leading-tight hover:text-amber-300 transition-colors">
+              <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 mb-4 leading-tight hover:text-teal-700 transition-colors">
                 {featured.title}
               </h3>
 
-              <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-8">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-8">
                 {featured.excerpt}
               </p>
             </div>
 
             {/* Author & Action Block */}
-            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-white/10 border-2 border-amber-400/60 overflow-hidden flex items-center justify-center text-amber-300 font-bold text-xs sm:text-sm">
+                <div className="w-11 h-11 rounded-full bg-teal-50 border-2 border-teal-600/40 overflow-hidden flex items-center justify-center text-teal-800 font-bold text-xs sm:text-sm">
                   {featured.author.name.split(" ").map((n) => n[0]).join("")}
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <span className="font-bold text-sm text-white">{featured.author.name}</span>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="font-bold text-sm text-slate-900">{featured.author.name}</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
                   </div>
-                  <div className="text-xs text-white/60">{featured.author.role}</div>
-                  <div className="text-[11px] text-emerald-300 font-medium mt-0.5">
+                  <div className="text-xs text-slate-500">{featured.author.role}</div>
+                  <div className="text-[11px] text-teal-700 font-medium mt-0.5">
                     {featured.readTime} • Whitepaper #24
                   </div>
                 </div>
@@ -137,16 +137,16 @@ export function InsightsDirectory({
               <div className="flex items-center gap-3 flex-wrap">
                 <Link
                   href={`/insights/${featured.slug}`}
-                  className="px-5 py-2.5 rounded-xl bg-amber-400 text-[#061a1b] font-bold text-xs sm:text-sm hover:bg-amber-300 transition-all shadow-md active:scale-95 inline-flex items-center gap-1.5 cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-xs sm:text-sm hover:bg-primary/90 transition-all shadow-md active:scale-95 inline-flex items-center gap-1.5 cursor-pointer"
                 >
                   <span>Read Full Whitepaper</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href={`/insights/${featured.slug}`}
-                  className="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold transition-all inline-flex items-center gap-1"
+                  className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold transition-all inline-flex items-center gap-1"
                 >
-                  <Download className="w-4 h-4 text-amber-300" />
+                  <Download className="w-4 h-4 text-amber-600" />
                   <span>PDF (4.2 MB)</span>
                 </Link>
               </div>
@@ -154,16 +154,16 @@ export function InsightsDirectory({
           </div>
 
           {/* Right 40% Architectural Diagram Preview */}
-          <div className="lg:col-span-5 bg-black/40 border-t lg:border-t-0 lg:border-l border-white/10 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-5 bg-slate-50 border-t lg:border-t-0 lg:border-l border-slate-200 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
             {/* Blueprint Header */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <div className="flex items-center gap-2">
-                <Network className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-bold text-white tracking-wider uppercase font-mono">
+                <Network className="w-4 h-4 text-teal-600" />
+                <span className="text-xs font-bold text-slate-900 tracking-wider uppercase font-mono">
                   Mesh Topology Model
                 </span>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800 border border-teal-200">
                 V-MESH 4.1
               </span>
             </div>
@@ -171,56 +171,56 @@ export function InsightsDirectory({
             {/* Visual Node Interconnect Scheme */}
             <div className="py-4 space-y-2.5 font-mono text-xs">
               {/* Node 1 */}
-              <div className="p-3 rounded-xl bg-white/5 border border-emerald-500/30 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-white">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center justify-between">
+                <div className="flex items-center gap-2 text-slate-900">
+                  <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
                   <span className="font-semibold text-xs">Dhaka Tier-3 BNDC Core</span>
                 </div>
-                <span className="text-emerald-300 font-bold text-[11px]">0.8ms Core RTT</span>
+                <span className="text-teal-700 font-bold text-[11px]">0.8ms Core RTT</span>
               </div>
 
               {/* Connecting Line */}
-              <div className="flex justify-center text-white/40 py-0.5">
+              <div className="flex justify-center text-slate-400 py-0.5">
                 <RefreshCw className="w-3.5 h-3.5" />
               </div>
 
               {/* Node 2 */}
-              <div className="p-3 rounded-xl bg-white/5 border border-amber-400/30 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-white">
-                  <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center justify-between">
+                <div className="flex items-center gap-2 text-slate-900">
+                  <span className="w-2 h-2 rounded-full bg-amber-500" />
                   <span className="font-semibold text-xs">Chattogram Port Interconnect</span>
                 </div>
-                <span className="text-amber-300 font-bold text-[11px]">100Gbps Direct</span>
+                <span className="text-amber-700 font-bold text-[11px]">100Gbps Direct</span>
               </div>
 
               {/* Connecting Line */}
-              <div className="flex justify-center text-white/40 py-0.5">
+              <div className="flex justify-center text-slate-400 py-0.5">
                 <RefreshCw className="w-3.5 h-3.5" />
               </div>
 
               {/* Node 3 */}
-              <div className="p-3 rounded-xl bg-white/5 border border-emerald-500/30 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-white">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center justify-between">
+                <div className="flex items-center gap-2 text-slate-900">
+                  <span className="w-2 h-2 rounded-full bg-teal-600" />
                   <span className="font-semibold text-xs">Zero-Trust HSM Gateway</span>
                 </div>
-                <span className="text-emerald-300 font-bold text-[11px]">FIPS 140-3 L3</span>
+                <span className="text-teal-700 font-bold text-[11px]">FIPS 140-3 L3</span>
               </div>
             </div>
 
             {/* Telemetry Diagnostics Footnote */}
-            <div className="pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center">
-              <div className="bg-white/5 p-2 rounded-lg">
-                <div className="text-[10px] text-white/50 uppercase font-bold">Residency</div>
-                <div className="text-xs font-bold text-amber-300 mt-0.5">100% Sovereign</div>
+            <div className="pt-3 border-t border-slate-200 grid grid-cols-3 gap-2 text-center">
+              <div className="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                <div className="text-[10px] text-slate-500 uppercase font-bold">Residency</div>
+                <div className="text-xs font-bold text-amber-700 mt-0.5">100% Sovereign</div>
               </div>
-              <div className="bg-white/5 p-2 rounded-lg">
-                <div className="text-[10px] text-white/50 uppercase font-bold">Standards</div>
-                <div className="text-xs font-bold text-emerald-400 mt-0.5">ISO 27001</div>
+              <div className="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                <div className="text-[10px] text-slate-500 uppercase font-bold">Standards</div>
+                <div className="text-xs font-bold text-teal-700 mt-0.5">ISO 27001</div>
               </div>
-              <div className="bg-white/5 p-2 rounded-lg">
-                <div className="text-[10px] text-white/50 uppercase font-bold">Latency</div>
-                <div className="text-xs font-bold text-emerald-300 mt-0.5">&lt; 1.2ms Avg</div>
+              <div className="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                <div className="text-[10px] text-slate-500 uppercase font-bold">Latency</div>
+                <div className="text-xs font-bold text-teal-700 mt-0.5">&lt; 1.2ms Avg</div>
               </div>
             </div>
           </div>

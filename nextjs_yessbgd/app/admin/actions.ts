@@ -56,6 +56,7 @@ export async function updateSitePageAction(pageKey: string, payload: any) {
       seo_description: payload.seo_description,
       seo_description_bn: payload.seo_description_bn,
       is_published: payload.is_published ?? true,
+      data: payload.data !== undefined ? payload.data : existing?.data,
       updated_at: new Date().toISOString(),
     })
     .eq("page", pageKey);

@@ -66,7 +66,7 @@ export default async function RootLayout({
       <body className="min-h-screen flex flex-col font-sans bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#061a1b] focus:text-[#d4a359] focus:border focus:border-[#d4a359] focus:rounded-xl focus:shadow-2xl focus:font-semibold focus:text-sm focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-teal-900 focus:text-amber-300 focus:border focus:border-amber-400 focus:rounded-xl focus:shadow-2xl focus:font-semibold focus:text-sm focus:outline-none"
         >
           Skip to main content
         </a>

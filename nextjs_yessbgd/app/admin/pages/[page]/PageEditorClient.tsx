@@ -25,6 +25,70 @@ export function PageEditorClient({ initialPage }: { initialPage: any }) {
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const handleFormatJson = () => {
+    try {
+      const parsed = JSON.parse(jsonData);
+      setJsonData(JSON.stringify(parsed, null, 2));
+      setErrorMessage(null);
+    } catch (e: any) {
+      setErrorMessage("Cannot format: Invalid JSON (" + e.message + ")");
+    }
+  };
+
+  const handleApplyTemplate = (type: "home" | "faqs" | "team" | "milestones") => {
+    let tpl: any = {};
+    if (type === "home") {
+      tpl = {
+        trust_credentials: [
+          { label: "ISO-grade standards" },
+          { label: "11+ years expertise" },
+          { label: "98% client retention" },
+          { label: "RJSC C-184920" },
+        ],
+        hero_coins: [
+          { slug: "yess-soft", title: "Yess Soft", subtitle: "Enterprise Cloud & AI", badge: "Tier-1 Cloud Ready", href: "/ventures/yess-soft", image: "/coins/yess-soft.png" },
+          { slug: "shondhaan", title: "Shondhaan", subtitle: "National Discovery", badge: "National Engine", href: "/ventures", image: "/coins/shondhaan.png" },
+          { slug: "yess-organic-haat", title: "Organic Haat", subtitle: "Farm-to-Fork AgriTech", badge: "10,000+ Growers", href: "/ventures", image: "/coins/yess-organic-haat.png" },
+          { slug: "akash-ott", title: "Akash OTT", subtitle: "Bengali Entertainment", badge: "HD Streaming", href: "/services/akash-ott", image: "/coins/akash-ott.png" },
+        ],
+        metrics: [
+          { value: "৳250M+", label: "Sovereign Capital Deployed", desc: "Across 13 subsidiaries", color: "text-[#d4a359]" },
+          { value: "500+", label: "Engineers & Specialists", desc: "Across 64 districts", color: "text-[#35b0aa]" },
+        ],
+        cta_banner: {
+          eyebrow: "NATIONAL IMPACT",
+          title: "Architecting the Sovereign Digital Future of Bangladesh",
+          desc: "Partner with our Dhaka headquarters for bespoke enterprise engineering, venture building, and technology consultation.",
+          primary_btn_text: "Schedule Strategic Consultation",
+          primary_btn_href: "/contact",
+          secondary_btn_text: "Candidate Status Portal",
+          secondary_btn_href: "/application-status",
+        },
+      };
+    } else if (type === "faqs") {
+      tpl = {
+        faqs: [
+          { question: "What is the corporate mission of YESS Bangladesh?", answer: "YESS Bangladesh is a sovereign venture builder and enterprise studio empowering youth-led socioeconomic transformation.", category: "General" },
+          { question: "How does YESS govern its subsidiaries?", answer: "All subsidiaries are governed under zero-trust operational protocols and statutory RJSC compliance.", category: "Governance" },
+        ],
+      };
+    } else if (type === "team") {
+      tpl = {
+        team: [
+          { name: "Executive Leader", role: "Managing Director & CEO", bio: "Over 15 years in enterprise architecture and strategic venture creation.", photo_url: "/team/ceo.webp" },
+        ],
+      };
+    } else if (type === "milestones") {
+      tpl = {
+        milestones: [
+          { year: "2018", title: "Incorporation & Founding", desc: "Established in Dhaka under statutory RJSC framework." },
+          { year: "2024", title: "Scale to 13 Subsidiaries", desc: "Expanded across software, media, agri-tech, and trade." },
+        ],
+      };
+    }
+    setJsonData(JSON.stringify(tpl, null, 2));
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
@@ -305,20 +369,59 @@ export function PageEditorClient({ initialPage }: { initialPage: any }) {
 
           {/* Structured Page Data (JSON) */}
           <div className="admin-glass-card rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
               <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-600" />
                 <span>Structured Section Data (JSON Schema)</span>
               </h2>
-              <span className="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded border border-slate-200">
-                jsonb
-              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleFormatJson}
+                  className="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+                >
+                  Beautify JSON
+                </button>
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded border border-slate-200">
+                  jsonb
+                </span>
+              </div>
             </div>
-            <p className="text-xs text-slate-500">
-              Configure specialized page arrays like FAQs, statutory clauses, governance citations, delivery metrics, or executive profiles.
-            </p>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-semibold text-slate-500">Insert Template:</span>
+              <button
+                type="button"
+                onClick={() => handleApplyTemplate("home")}
+                className="px-2 py-0.5 text-[10px] font-bold rounded bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 transition-colors cursor-pointer"
+              >
+                Home Sections
+              </button>
+              <button
+                type="button"
+                onClick={() => handleApplyTemplate("faqs")}
+                className="px-2 py-0.5 text-[10px] font-bold rounded bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 transition-colors cursor-pointer"
+              >
+                FAQ List
+              </button>
+              <button
+                type="button"
+                onClick={() => handleApplyTemplate("team")}
+                className="px-2 py-0.5 text-[10px] font-bold rounded bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 transition-colors cursor-pointer"
+              >
+                Team Members
+              </button>
+              <button
+                type="button"
+                onClick={() => handleApplyTemplate("milestones")}
+                className="px-2 py-0.5 text-[10px] font-bold rounded bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 transition-colors cursor-pointer"
+              >
+                Milestones
+              </button>
+            </div>
+
             <textarea
-              rows={10}
+              rows={12}
               value={jsonData}
               onChange={(e) => setJsonData(e.target.value)}
               placeholder="{}"
