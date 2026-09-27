@@ -3,35 +3,124 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Phone, Mail, Globe, ArrowRight, ShieldCheck } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Phone,
+  Mail,
+  Globe,
+  ArrowRight,
+  ShieldCheck,
+  Code2,
+  Tv,
+  PlayCircle,
+  Newspaper,
+  Leaf,
+  Wrench,
+  Server,
+  Sparkles,
+} from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
-import { ventures } from "@/data/ventures";
+
+const FEATURED_VENTURES = [
+  {
+    slug: "yess-service",
+    title: "Shondhaan",
+    category: "Home & Professional Services",
+    icon: Wrench,
+    logoUrl: "/coins/shondhaan.png",
+    color: "from-blue-500/10 to-indigo-500/10 text-indigo-700",
+    href: "/ventures",
+  },
+  {
+    slug: "yess-organic-haat",
+    title: "Organic Haat",
+    category: "Organic Marketplace",
+    icon: Leaf,
+    logoUrl: "/coins/yess-organic-haat.png",
+    color: "from-emerald-500/10 to-green-500/10 text-emerald-700",
+    href: "/ventures",
+  },
+  {
+    slug: "yess-host",
+    title: "Yess Host",
+    category: "Hosting & Cloud Infrastructure",
+    icon: Server,
+    color: "from-teal-500/10 to-cyan-500/10 text-teal-700",
+    href: "/ventures",
+  },
+  {
+    slug: "akash-ott",
+    title: "Akash OTT",
+    category: "Streaming Platform",
+    icon: PlayCircle,
+    logoUrl: "/coins/akash-ott.png",
+    color: "from-sky-500/10 to-blue-500/10 text-sky-700",
+    href: "/services/akash-ott",
+  },
+  {
+    slug: "yess-soft",
+    title: "Yess Soft",
+    category: "Software & IT Solutions",
+    icon: Code2,
+    logoUrl: "/coins/yess-soft.png",
+    color: "from-emerald-500/10 to-teal-500/10 text-emerald-700",
+    href: "/ventures/yess-soft",
+  },
+  {
+    slug: "the-daily-akash",
+    title: "The Daily Akash",
+    category: "Digital Newspaper",
+    icon: Newspaper,
+    logoUrl: "/coins/the-daily-akash.png",
+    color: "from-amber-500/10 to-orange-500/10 text-amber-700",
+    href: "/ventures",
+  },
+];
 
 export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileVenturesOpen, setMobileVenturesOpen] = useState(false);
+  const [venturesDropdownOpen, setVenturesDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile drawer on route change
+  // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setVenturesDropdownOpen(false);
   }, [pathname]);
+
+  const handleMouseEnterVentures = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setVenturesDropdownOpen(true);
+  };
+
+  const handleMouseLeaveVentures = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setVenturesDropdownOpen(false);
+    }, 180);
+  };
 
   const navLinks = [
     { href: "/", label: t("nav.home", "Home") },
     { href: "/about", label: t("nav.about", "About") },
-    { href: "/ventures", label: t("nav.ventures", "Ventures") },
     { href: "/services", label: t("nav.services", "Services") },
+    // Ventures has its own dropdown slot
     { href: "/industries", label: t("nav.industries", "Industries") },
     { href: "/insights", label: t("nav.insights", "Insights") },
     { href: "/careers", label: t("nav.careers", "Careers") },
@@ -41,7 +130,7 @@ export function Header() {
   return (
     <>
       {/* 1. Top Utility Ribbon */}
-      <div className="bg-[#061a1b] text-white/80 text-[12px] py-1.5 px-4 border-b border-white/10 hidden sm:block relative z-50">
+      <div className="bg-[#041415] text-white/80 text-[11px] py-1.5 px-4 border-b border-white/10 hidden sm:block relative z-50">
         <div className="container-tight flex items-center justify-between">
           <div className="flex items-center gap-4 text-white/70">
             <span className="flex items-center gap-1.5 font-medium">
@@ -52,7 +141,7 @@ export function Header() {
             </span>
             <span className="hidden md:inline text-white/40">•</span>
             <span className="hidden md:flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-accent" />
+              <ShieldCheck className="h-3.5 w-3.5 text-[#d4a359]" />
               <span>Statutory RJSC Reg: C-184920</span>
             </span>
           </div>
@@ -62,13 +151,13 @@ export function Header() {
               href="tel:+8801805464343"
               className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
-              <Phone className="h-3 w-3 text-accent" />
+              <Phone className="h-3 w-3 text-[#d4a359]" />
               <span>+880 1805-464343</span>
             </a>
             <span className="text-white/30">|</span>
             <Link
               href="/application-status"
-              className="hover:text-primary-glow font-medium transition-colors"
+              className="hover:text-emerald-300 font-medium transition-colors"
             >
               Track Application
             </Link>
@@ -76,64 +165,196 @@ export function Header() {
             {/* Language Switcher Pill */}
             <button
               onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-              className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold transition-all border border-white/20 active:scale-95"
+              className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold transition-all border border-white/20 active:scale-95 cursor-pointer"
               aria-label="Toggle Language"
             >
-              <Globe className="h-3 w-3 text-accent" />
+              <Globe className="h-3 w-3 text-[#d4a359]" />
               <span>{language === "en" ? "বাংলা" : "EN"}</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Sticky Floating Glass Header */}
+      {/* 2. Main Floating Island Header */}
       <header
         data-public-header="true"
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#061a1b]/95 backdrop-blur-md shadow-xl py-2.5 border-b border-white/15"
-            : "bg-[#061a1b]/90 backdrop-blur-md py-3.5 border-b border-white/10"
+        className={`sticky top-0 z-40 transition-all duration-300 bg-[#061a1b] py-2 sm:py-2.5 px-3 sm:px-6 border-b border-white/5 ${
+          scrolled ? "shadow-xl shadow-black/20 bg-[#061a1b]/95 backdrop-blur-md border-white/10" : ""
         }`}
       >
-        <div className="container-tight flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center p-1 rounded-xl bg-white shadow-sm border border-white/20">
+        <div
+          className={`max-w-7xl mx-auto rounded-2xl lg:rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-xl shadow-slate-900/10 px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all duration-300 ${
+            scrolled ? "shadow-2xl shadow-slate-950/20 border-slate-300/90" : ""
+          }`}
+        >
+          {/* Brand Logo & Corporate Moniker */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
+            <div className="relative flex items-center justify-center transition-transform group-hover:scale-105">
               <Image
                 src="/assets/yess-bangla-logo.png"
-                alt="YESS Bangladesh"
+                alt="Yess Bangla Private Limited"
                 width={130}
                 height={40}
-                className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                className="h-8 sm:h-9 w-auto object-contain"
                 priority
               />
             </div>
-            <div className="hidden sm:flex flex-col pl-2 border-l border-white/20">
-              <span className="font-display font-extrabold text-sm sm:text-base tracking-tight text-white leading-none">
-                YESS <span className="text-emerald-400 font-bold">Bangladesh</span>
+            <div className="hidden sm:flex flex-col pl-3 border-l border-slate-200 text-left">
+              <span className="font-display font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 leading-tight">
+                Yess Bangla Private Limited
               </span>
-              <span className="text-[9px] tracking-widest uppercase text-[#f87171] font-bold mt-0.5">
-                Venture Builder • Sovereign Tech
+              <span className="text-[10px] text-slate-500 font-medium tracking-wide mt-0.5">
+                Where Solution Begins
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {navLinks.map((link) => {
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 relative">
+            {/* Home */}
+            <Link
+              href="/"
+              className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
+                pathname === "/"
+                  ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+              }`}
+            >
+              {t("nav.home", "Home")}
+            </Link>
+
+            {/* About */}
+            <Link
+              href="/about"
+              className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
+                pathname === "/about" || pathname.startsWith("/about/")
+                  ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+              }`}
+            >
+              {t("nav.about", "About")}
+            </Link>
+
+            {/* Services */}
+            <Link
+              href="/services"
+              className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
+                pathname === "/services" || pathname.startsWith("/services/")
+                  ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+              }`}
+            >
+              {t("nav.services", "Services")}
+            </Link>
+
+            {/* Ventures Dropdown Trigger & Panel */}
+            <div
+              className="relative"
+              onMouseEnter={handleMouseEnterVentures}
+              onMouseLeave={handleMouseLeaveVentures}
+            >
+              <button
+                type="button"
+                onClick={() => setVenturesDropdownOpen(!venturesDropdownOpen)}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all cursor-pointer ${
+                  pathname === "/ventures" || pathname.startsWith("/ventures/") || venturesDropdownOpen
+                    ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+                }`}
+                aria-expanded={venturesDropdownOpen}
+                aria-haspopup="true"
+              >
+                <span>{t("nav.ventures", "Ventures")}</span>
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    venturesDropdownOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
+                  }`}
+                />
+              </button>
+
+              {/* Mega Menu Dropdown */}
+              {venturesDropdownOpen && (
+                <div
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] xl:w-[620px] bg-white/98 backdrop-blur-2xl rounded-3xl border border-slate-200/90 shadow-2xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                  onMouseEnter={handleMouseEnterVentures}
+                  onMouseLeave={handleMouseLeaveVentures}
+                >
+                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
+                    <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
+                      <span>Our Flagship Subsidiaries</span>
+                    </span>
+                    <span className="text-[11px] font-semibold text-slate-400">
+                      13 Sovereign Assets
+                    </span>
+                  </div>
+
+                  {/* 2-Column Grid matching reference UI */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {FEATURED_VENTURES.map((v) => {
+                      const Icon = v.icon;
+                      return (
+                        <Link
+                          key={v.slug}
+                          href={v.href}
+                          className="group p-2.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all flex items-center gap-3 text-left"
+                        >
+                          <div className="relative w-11 h-11 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center p-1.5 group-hover:scale-105 group-hover:shadow-sm transition-all shrink-0">
+                            {v.logoUrl ? (
+                              <Image
+                                src={v.logoUrl}
+                                alt={v.title}
+                                width={36}
+                                height={36}
+                                className="w-full h-full object-contain"
+                              />
+                            ) : (
+                              <Icon className="w-5 h-5 text-teal-700" />
+                            )}
+                          </div>
+                          <div className="flex flex-col truncate">
+                            <span className="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition-colors truncate">
+                              {v.title}
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                              {v.category}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+
+                  {/* Dropdown Footer Link */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span className="text-slate-500">
+                      Looking for custom enterprise partnerships?
+                    </span>
+                    <Link
+                      href="/ventures"
+                      className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group"
+                    >
+                      <span>Explore all 13 ventures</span>
+                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Remaining Nav Links */}
+            {navLinks.slice(3).map((link) => {
               const isActive =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname === link.href || pathname.startsWith(link.href + "/");
+                pathname === link.href || pathname.startsWith(link.href + "/");
 
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
                     isActive
-                      ? "text-white bg-emerald-500/20 border border-emerald-500/40 font-semibold shadow-xs"
-                      : "text-slate-300 hover:text-white hover:bg-white/10"
+                      ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
                   }`}
                 >
                   {link.label}
@@ -142,35 +363,35 @@ export function Header() {
             })}
           </nav>
 
-          {/* Right Action Buttons */}
+          {/* Right Action Area */}
           <div className="hidden sm:flex items-center gap-3">
             <Link
               href="/application-status"
-              className="text-xs font-semibold px-3 py-2 rounded-xl text-[#d4a359] bg-[#d4a359]/10 hover:bg-[#d4a359]/20 transition-all border border-[#d4a359]/30 hidden xl:flex items-center gap-1.5"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all hidden xl:flex items-center gap-1.5"
             >
               <span>Track Status</span>
             </Link>
 
             <Link
               href="/contact"
-              className="text-xs sm:text-sm font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white hover:from-[#006A4E] hover:to-[#085252] shadow-md shadow-emerald-950/40 hover:shadow-emerald-950/60 transition-all flex items-center gap-1.5 group"
+              className="text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white shadow-md shadow-emerald-900/20 hover:shadow-emerald-900/30 transition-all flex items-center gap-1.5 active:scale-95 group"
             >
               <span>Let's Talk</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
           {/* Mobile Right Bar: Language Toggle + Hamburger */}
-          <div className="flex sm:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-              className="px-2 py-1 text-xs rounded-lg border border-white/20 bg-white/10 font-bold text-white"
+              className="px-2.5 py-1 text-xs rounded-full border border-slate-200 bg-slate-100 font-bold text-slate-700 cursor-pointer"
             >
               {language === "en" ? "বাংলা" : "EN"}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl border border-white/20 bg-white/10 text-white"
+              className="p-2 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -181,62 +402,152 @@ export function Header() {
 
       {/* 3. Mobile Slide-Down Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[60px] bottom-0 z-40 bg-background/95 backdrop-blur-2xl border-t border-border p-6 overflow-y-auto flex flex-col gap-6 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-3 rounded-xl text-base font-semibold transition-colors ${
-                  pathname === link.href
-                    ? "bg-primary text-white shadow-sm"
-                    : "text-foreground hover:bg-secondary"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="fixed inset-x-3 top-[72px] max-h-[85vh] z-40 bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 overflow-y-auto flex flex-col gap-5 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200">
+          <nav className="flex flex-col gap-1.5">
             <Link
-              href="/application-status"
-              className="px-4 py-3 rounded-xl text-base font-semibold text-primary bg-primary/10 border border-primary/20 mt-2 flex items-center justify-between"
+              href="/"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/"
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
             >
-              <span>Track Application Status</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-primary/20">Portal</span>
+              {t("nav.home", "Home")}
             </Link>
             <Link
-              href="/faq"
-              className="px-4 py-3 rounded-xl text-base font-semibold text-foreground/80 hover:bg-secondary"
+              href="/about"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/about" || pathname.startsWith("/about/")
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
             >
-              FAQ & Knowledge Base
+              {t("nav.about", "About")}
+            </Link>
+            <Link
+              href="/services"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/services" || pathname.startsWith("/services/")
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              {t("nav.services", "Services")}
+            </Link>
+
+            {/* Mobile Ventures Accordion */}
+            <div className="rounded-xl border border-slate-200/80 overflow-hidden my-1">
+              <button
+                type="button"
+                onClick={() => setMobileVenturesOpen(!mobileVenturesOpen)}
+                className="w-full px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 bg-slate-50/70"
+              >
+                <span>{t("nav.ventures", "Ventures")} (13 Subsidiaries)</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    mobileVenturesOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
+                  }`}
+                />
+              </button>
+              {mobileVenturesOpen && (
+                <div className="p-3 bg-white space-y-1.5 border-t border-slate-200/80">
+                  {FEATURED_VENTURES.map((v) => (
+                    <Link
+                      key={v.slug}
+                      href={v.href}
+                      className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 text-xs font-semibold text-slate-800"
+                    >
+                      <span>{v.title}</span>
+                      <span className="text-[10px] text-slate-500">{v.category}</span>
+                    </Link>
+                  ))}
+                  <Link
+                    href="/ventures"
+                    className="block pt-2 text-center text-xs font-bold text-emerald-700 hover:underline"
+                  >
+                    View All 13 Ventures →
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/industries"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/industries" || pathname.startsWith("/industries/")
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              {t("nav.industries", "Industries")}
+            </Link>
+            <Link
+              href="/insights"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/insights" || pathname.startsWith("/insights/")
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              {t("nav.insights", "Insights")}
+            </Link>
+            <Link
+              href="/careers"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/careers" || pathname.startsWith("/careers/")
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              {t("nav.careers", "Careers")}
+            </Link>
+            <Link
+              href="/contact"
+              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                pathname === "/contact"
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              {t("nav.contact", "Contact")}
+            </Link>
+            <Link
+              href="/application-status"
+              className="px-4 py-2.5 rounded-xl text-sm font-bold text-emerald-700 bg-emerald-50/70 border border-emerald-200 mt-2 flex items-center justify-between"
+            >
+              <span>Track Application Status</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 font-bold">
+                Portal
+              </span>
             </Link>
           </nav>
 
-          <div className="pt-4 border-t border-border flex flex-col gap-3">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground font-bold">
+          <div className="pt-4 border-t border-slate-200 flex flex-col gap-2">
+            <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
               Direct Corporate Desks
             </p>
             <a
               href="tel:+8801805464343"
-              className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 text-foreground text-sm font-medium"
+              className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 text-slate-700 text-xs font-semibold"
             >
-              <Phone className="h-4 w-4 text-primary" />
+              <Phone className="h-3.5 w-3.5 text-emerald-700" />
               <span>+880 1805-464343 (Dhaka HQ)</span>
             </a>
             <a
               href="mailto:yessbangla.bd@gmail.com"
-              className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 text-foreground text-sm font-medium"
+              className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 text-slate-700 text-xs font-semibold"
             >
-              <Mail className="h-4 w-4 text-primary" />
+              <Mail className="h-3.5 w-3.5 text-emerald-700" />
               <span>yessbangla.bd@gmail.com</span>
             </a>
           </div>
 
-          <div className="mt-auto pt-4">
+          <div className="pt-2">
             <Link
               href="/contact"
-              className="w-full text-center py-3.5 rounded-xl bg-primary text-white font-bold block shadow-md"
+              className="w-full text-center py-3 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white font-bold text-sm block shadow-md shadow-emerald-900/20"
             >
-              Schedule Consultation
+              Let's Talk — Schedule Consultation
             </Link>
           </div>
         </div>

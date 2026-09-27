@@ -171,42 +171,50 @@ export function HomeClient({
 
             {/* Right Hero Column: Sleek Cockpit Executive Portfolio Card */}
             <div className="lg:col-span-5">
-              <div className="rounded-2xl p-5 bg-[#0a2022]/95 border border-emerald-500/25 shadow-2xl shadow-black/60 backdrop-blur-xl relative ring-1 ring-white/10">
-                <div className="flex justify-between items-center mb-4 pb-3 border-b border-white/10">
+              <div className="relative rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-[#0b2427]/95 via-[#081f21]/95 to-[#061819]/95 border border-emerald-500/30 shadow-2xl shadow-black/70 backdrop-blur-2xl ring-1 ring-white/10 overflow-hidden">
+                {/* Ambient glow in card background */}
+                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#d4a359]/10 rounded-full blur-2xl pointer-events-none" />
+
+                <div className="flex justify-between items-center mb-4 pb-3 border-b border-white/10 relative z-10">
                   <div>
-                    <span className="text-[10px] font-bold text-[#d4a359] uppercase tracking-wider block">
-                      OUR FLAGSHIP VENTURES
+                    <span className="text-[10px] font-bold text-[#d4a359] uppercase tracking-wider block flex items-center gap-1.5">
+                      <Sparkles className="w-3 h-3 text-[#d4a359]" />
+                      <span>OUR FLAGSHIP VENTURES</span>
                     </span>
                     <span className="font-display text-base sm:text-lg font-bold text-white">
                       Pioneering Portfolio
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
-                    13 Sovereign Assets
+                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>13 Sovereign Assets</span>
                   </span>
                 </div>
 
-                {/* 4 Minted 3D Medallions Grid */}
-                <div className="grid grid-cols-2 gap-3">
+                {/* 4 Illuminated Venture Cards with Pure White Logo Pedestals for 100% Contrast */}
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 relative z-10">
                   {/* Coin 1: Yess Soft */}
                   <Link
                     href="/ventures/yess-soft"
-                    className="group p-3.5 rounded-xl bg-[#0e272a]/90 hover:bg-[#133539] border border-white/10 hover:border-emerald-500/50 transition-all duration-300 flex flex-col items-center text-center shadow-lg"
+                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
                   >
-                    <div className="relative w-14 h-14 rounded-full p-1 flex items-center justify-center mb-2 transition-transform group-hover:scale-105 group-hover:rotate-6">
+                    {/* Elevated Pure White Logo Pedestal */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
+                      <div className="absolute -inset-1 rounded-2xl bg-emerald-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
                       <Image
                         src="/coins/yess-soft.png"
-                        alt="Yess Soft Minted Coin"
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                        alt="Yess Soft Logo"
+                        width={60}
+                        height={60}
+                        className="w-full h-full object-contain relative z-10"
                       />
                     </div>
-                    <span className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
                       Yess Soft
                     </span>
-                    <p className="text-[11px] text-slate-300/80 mt-0.5">Enterprise Cloud & AI</p>
-                    <span className="mt-1.5 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2 py-0.5 rounded-md border border-emerald-500/30">
+                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">Enterprise Cloud & AI</p>
+                    <span className="mt-2 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
                       Tier-1 Cloud Ready
                     </span>
                   </Link>
@@ -214,22 +222,24 @@ export function HomeClient({
                   {/* Coin 2: Shondhaan */}
                   <Link
                     href="/ventures"
-                    className="group p-3.5 rounded-xl bg-[#0e272a]/90 hover:bg-[#133539] border border-white/10 hover:border-rose-500/50 transition-all duration-300 flex flex-col items-center text-center shadow-lg"
+                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-rose-400/50 shadow-lg hover:shadow-rose-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
                   >
-                    <div className="relative w-14 h-14 rounded-full p-1 flex items-center justify-center mb-2 transition-transform group-hover:scale-105 group-hover:-rotate-6">
+                    {/* Elevated Pure White Logo Pedestal */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
+                      <div className="absolute -inset-1 rounded-2xl bg-indigo-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
                       <Image
                         src="/coins/shondhaan.png"
-                        alt="Shondhaan Minted Coin"
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                        alt="Shondhaan Logo"
+                        width={60}
+                        height={60}
+                        className="w-full h-full object-contain relative z-10"
                       />
                     </div>
-                    <span className="text-xs font-bold text-white group-hover:text-rose-300 transition-colors">
+                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-rose-300 transition-colors">
                       Shondhaan
                     </span>
-                    <p className="text-[11px] text-slate-300/80 mt-0.5">National Discovery</p>
-                    <span className="mt-1.5 text-[9px] text-[#f87171] font-bold uppercase tracking-wider bg-rose-950/90 px-2 py-0.5 rounded-md border border-rose-500/30">
+                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">National Discovery</p>
+                    <span className="mt-2 text-[9px] text-[#f87171] font-bold uppercase tracking-wider bg-rose-950/90 px-2.5 py-0.5 rounded-full border border-rose-500/40">
                       National Engine
                     </span>
                   </Link>
@@ -237,22 +247,24 @@ export function HomeClient({
                   {/* Coin 3: Yess Organic Haat */}
                   <Link
                     href="/ventures"
-                    className="group p-3.5 rounded-xl bg-[#0e272a]/90 hover:bg-[#133539] border border-white/10 hover:border-emerald-500/50 transition-all duration-300 flex flex-col items-center text-center shadow-lg"
+                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
                   >
-                    <div className="relative w-14 h-14 rounded-full p-1 flex items-center justify-center mb-2 transition-transform group-hover:scale-105 group-hover:rotate-6">
+                    {/* Elevated Pure White Logo Pedestal */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
+                      <div className="absolute -inset-1 rounded-2xl bg-emerald-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
                       <Image
                         src="/coins/yess-organic-haat.png"
-                        alt="Organic Haat Minted Coin"
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                        alt="Organic Haat Logo"
+                        width={60}
+                        height={60}
+                        className="w-full h-full object-contain relative z-10"
                       />
                     </div>
-                    <span className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
                       Organic Haat
                     </span>
-                    <p className="text-[11px] text-slate-300/80 mt-0.5">Farm-to-Fork AgriTech</p>
-                    <span className="mt-1.5 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2 py-0.5 rounded-md border border-emerald-500/30">
+                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">Farm-to-Fork AgriTech</p>
+                    <span className="mt-2 text-[9px] text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/90 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
                       10,000+ Growers
                     </span>
                   </Link>
@@ -260,33 +272,35 @@ export function HomeClient({
                   {/* Coin 4: Akash OTT */}
                   <Link
                     href="/services/akash-ott"
-                    className="group p-3.5 rounded-xl bg-[#0e272a]/90 hover:bg-[#133539] border border-white/10 hover:border-amber-500/50 transition-all duration-300 flex flex-col items-center text-center shadow-lg"
+                    className="group relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] hover:from-white/[0.14] hover:to-white/[0.06] border border-white/15 hover:border-amber-400/50 shadow-lg hover:shadow-amber-950/40 transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden"
                   >
-                    <div className="relative w-14 h-14 rounded-full p-1 flex items-center justify-center mb-2 transition-transform group-hover:scale-105 group-hover:-rotate-6">
+                    {/* Elevated Pure White Logo Pedestal */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-md shadow-black/30 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl ring-2 ring-white/30 shrink-0">
+                      <div className="absolute -inset-1 rounded-2xl bg-sky-500/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
                       <Image
                         src="/coins/akash-ott.png"
-                        alt="Akash OTT Minted Coin"
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                        alt="Akash OTT Logo"
+                        width={60}
+                        height={60}
+                        className="w-full h-full object-contain relative z-10"
                       />
                     </div>
-                    <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
+                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">
                       Akash OTT
                     </span>
-                    <p className="text-[11px] text-slate-300/80 mt-0.5">Streaming & Media</p>
-                    <span className="mt-1.5 text-[9px] text-[#d4a359] font-bold uppercase tracking-wider bg-amber-950/90 px-2 py-0.5 rounded-md border border-amber-500/30">
+                    <p className="text-[11px] text-slate-300/90 mt-0.5 line-clamp-1">Streaming & Media</p>
+                    <span className="mt-2 text-[9px] text-[#d4a359] font-bold uppercase tracking-wider bg-amber-950/90 px-2.5 py-0.5 rounded-full border border-amber-500/40">
                       4.8M Viewers
                     </span>
                   </Link>
                 </div>
 
-                <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                <div className="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between text-xs relative z-10">
                   <span className="flex items-center gap-1.5 font-medium text-slate-300">
                     <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                    Audited Portfolio Valuation
+                    <span>Audited Portfolio Valuation</span>
                   </span>
-                  <span className="text-emerald-400 font-bold">$50M+ Cumulative Base</span>
+                  <span className="text-emerald-400 font-bold tracking-tight text-sm">$50M+ Cumulative Base</span>
                 </div>
               </div>
             </div>

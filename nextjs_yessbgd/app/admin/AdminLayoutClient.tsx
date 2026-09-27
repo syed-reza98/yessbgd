@@ -24,12 +24,12 @@ export function AdminLayoutClient({
   }, [isLoginPage, initialUser, router]);
 
   if (isLoginPage) {
-    return <div className="admin-scope min-h-screen bg-[#061a1b] text-white">{children}</div>;
+    return <div className="admin-scope min-h-screen bg-slate-50 text-slate-900">{children}</div>;
   }
 
   if (!initialUser) {
     return (
-      <div className="admin-scope min-h-screen bg-[#061a1b] flex items-center justify-center text-slate-400 text-xs font-mono">
+      <div className="admin-scope min-h-screen bg-slate-50 flex items-center justify-center text-slate-600 text-xs font-mono">
         Verifying sovereign credentials...
       </div>
     );

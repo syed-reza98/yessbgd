@@ -111,19 +111,19 @@ export default function DatabaseToolsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="pb-6 border-b border-white/10">
-        <span className="text-xs font-bold text-[#d4a359] uppercase tracking-widest">
+      <div className="pb-6 border-b border-slate-200">
+        <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">
           DATABASE GOVERNANCE & BACKUP
         </span>
-        <h1 className="text-3xl font-extrabold text-white mt-1">Data Backup & Seed Tools</h1>
-        <p className="text-sm text-slate-400 mt-1">
+        <h1 className="text-3xl font-extrabold text-slate-900 mt-1">Data Backup & Seed Tools</h1>
+        <p className="text-sm text-slate-500 mt-1">
           Generate complete database snapshots, export candidate ATS reports to CSV, or re-verify database seeding.
         </p>
       </div>
 
       {message && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3 text-emerald-300 text-xs font-semibold">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-emerald-800 text-xs font-semibold animate-in fade-in">
+          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
           <span>{message}</span>
         </div>
       )}
@@ -131,16 +131,16 @@ export default function DatabaseToolsPage() {
       {/* Snapshot Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Full Database Snapshot */}
-        <div className="admin-glass-card rounded-2xl p-6 border border-white/10 space-y-4 flex flex-col justify-between">
+        <div className="admin-glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-[#d4a359] uppercase tracking-wider">
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-wider">
                 Full Database Backup
               </span>
-              <Database className="w-5 h-5 text-[#35b0aa]" />
+              <Database className="w-5 h-5 text-teal-600" />
             </div>
-            <h2 className="text-lg font-bold text-white">Export Sovereign Snapshot</h2>
-            <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+            <h2 className="text-lg font-bold text-slate-900">Export Sovereign Snapshot</h2>
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
               Dumps all 10 CMS tables (Ventures, Services, Industries, Insights, Pages, ATS Applications, Messages, Menus, Settings) into a JSON document.
             </p>
           </div>
@@ -148,7 +148,7 @@ export default function DatabaseToolsPage() {
           <button
             onClick={handleExportJson}
             disabled={exporting}
-            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0d6e6e] to-[#35b0aa] text-white font-bold text-xs shadow-md shadow-[#0d6e6e]/20 hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-700 to-teal-600 text-white font-bold text-xs shadow-md shadow-teal-700/20 hover:opacity-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <Download className="w-4 h-4" />
             <span>{exporting ? "Generating Dump..." : "Download Full JSON Snapshot"}</span>
@@ -156,16 +156,16 @@ export default function DatabaseToolsPage() {
         </div>
 
         {/* Operational CSV Exports */}
-        <div className="admin-glass-card rounded-2xl p-6 border border-white/10 space-y-4 flex flex-col justify-between">
+        <div className="admin-glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-[#d4a359] uppercase tracking-wider">
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-wider">
                 Tabular CSV Exports
               </span>
-              <TableIcon className="w-5 h-5 text-indigo-400" />
+              <TableIcon className="w-5 h-5 text-indigo-600" />
             </div>
-            <h2 className="text-lg font-bold text-white">ATS & Inbound Reports</h2>
-            <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+            <h2 className="text-lg font-bold text-slate-900">ATS & Inbound Reports</h2>
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
               Export operational records into standard CSV format for spreadsheet analysis and board committee reporting.
             </p>
           </div>
@@ -173,16 +173,16 @@ export default function DatabaseToolsPage() {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => handleExportCsv("job_applications")}
-              className="py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all"
+              className="py-2.5 px-3 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-800 text-xs font-semibold flex items-center justify-center gap-2 shadow-xs transition-all"
             >
-              <Download className="w-3.5 h-3.5 text-[#d4a359]" />
+              <Download className="w-3.5 h-3.5 text-amber-600" />
               <span>ATS CSV</span>
             </button>
             <button
               onClick={() => handleExportCsv("contact_messages")}
-              className="py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all"
+              className="py-2.5 px-3 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-800 text-xs font-semibold flex items-center justify-center gap-2 shadow-xs transition-all"
             >
-              <Download className="w-3.5 h-3.5 text-[#35b0aa]" />
+              <Download className="w-3.5 h-3.5 text-teal-600" />
               <span>Messages CSV</span>
             </button>
           </div>

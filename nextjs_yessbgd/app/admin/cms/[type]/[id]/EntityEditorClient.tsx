@@ -88,24 +88,24 @@ export function EntityEditorClient({
   return (
     <div className="space-y-6">
       {/* Top Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
         <div className="flex items-center gap-3">
           <Link
             href={`/admin/cms/${type}`}
-            className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all"
+            className="p-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all shadow-xs"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[#d4a359] uppercase tracking-widest capitalize">
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest capitalize">
                 {type} Editor
               </span>
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-white/10 text-slate-300">
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-600">
                 {formData.slug || "new-item"}
               </span>
             </div>
-            <h1 className="text-2xl font-extrabold text-white mt-0.5">
+            <h1 className="text-2xl font-extrabold text-slate-900 mt-0.5">
               {isNew ? `Create New ${type}` : `Editing: ${formData.title || formData.slug}`}
             </h1>
           </div>
@@ -116,16 +116,16 @@ export function EntityEditorClient({
             <Link
               href={`/${type}/${formData.slug}`}
               target="_blank"
-              className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white bg-white/5 border border-white/10 rounded-xl transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-xs transition-colors"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-[#d4a359]" />
+              <ExternalLink className="w-3.5 h-3.5 text-teal-600" />
               <span>Preview Live</span>
             </Link>
           )}
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0d6e6e] to-[#35b0aa] text-white text-xs font-bold shadow-lg shadow-[#0d6e6e]/20 hover:opacity-90 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-teal-700 to-teal-600 text-white text-xs font-bold shadow-md shadow-teal-700/20 hover:opacity-95 transition-all disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             <span>{saving ? "Saving..." : "Save & Publish"}</span>
@@ -134,15 +134,15 @@ export function EntityEditorClient({
       </div>
 
       {savedSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3 text-emerald-300 text-xs font-semibold animate-in fade-in">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-emerald-800 text-xs font-semibold animate-in fade-in">
+          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
           <span>Entity saved and cache revalidated successfully!</span>
         </div>
       )}
 
       {errorMessage && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-3 text-rose-300 text-xs font-semibold">
-          <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-3 text-rose-800 text-xs font-semibold">
+          <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
           <span>{errorMessage}</span>
         </div>
       )}
@@ -150,15 +150,15 @@ export function EntityEditorClient({
       <form onSubmit={handleSave} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Details (2 cols) */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="admin-glass-card rounded-2xl p-6 border border-white/10 space-y-4">
-            <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 pb-3 border-b border-white/10">
-              <Sparkles className="w-4 h-4 text-[#d4a359]" />
+          <div className="admin-glass-card rounded-2xl p-6 space-y-4">
+            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2 pb-3 border-b border-slate-200">
+              <Sparkles className="w-4 h-4 text-amber-600" />
               <span>Core Information</span>
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                   Title / Name
                 </label>
                 <input
@@ -167,12 +167,12 @@ export function EntityEditorClient({
                   value={formData.title || ""}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="e.g. Yess Soft"
-                  className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#35b0aa]"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                   Slug (URL Identifier)
                 </label>
                 <input
@@ -187,14 +187,14 @@ export function EntityEditorClient({
                     })
                   }
                   placeholder="e.g. yess-soft"
-                  className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm font-mono text-white focus:outline-none focus:border-[#35b0aa] disabled:opacity-60"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 disabled:opacity-60 disabled:bg-slate-100"
                 />
               </div>
             </div>
 
             {type === "ventures" && (
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                   Tagline
                 </label>
                 <input
@@ -202,13 +202,13 @@ export function EntityEditorClient({
                   value={formData.tagline || ""}
                   onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
                   placeholder="Engineering software that scales with your ambition."
-                  className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#35b0aa]"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                 Summary / Short Description
               </label>
               <textarea
@@ -222,13 +222,13 @@ export function EntityEditorClient({
                   })
                 }
                 placeholder="High-level descriptive overview..."
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#35b0aa]"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
               />
             </div>
 
             {type === "insights" && (
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                   Article Markdown Body
                 </label>
                 <textarea
@@ -236,13 +236,13 @@ export function EntityEditorClient({
                   value={formData.body_md || ""}
                   onChange={(e) => setFormData({ ...formData, body_md: e.target.value })}
                   placeholder="### Section Heading&#10;&#10;Longform technical prose..."
-                  className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm font-mono text-white focus:outline-none focus:border-[#35b0aa]"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                 Image / Graphic Asset Path
               </label>
               <input
@@ -256,7 +256,7 @@ export function EntityEditorClient({
                   })
                 }
                 placeholder="/assets/ventures/yess-soft.jpg"
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm font-mono text-slate-300 focus:outline-none focus:border-[#35b0aa]"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
               />
             </div>
           </div>
@@ -264,13 +264,13 @@ export function EntityEditorClient({
 
         {/* Sidebar Controls (1 col) */}
         <div className="space-y-6">
-          <div className="admin-glass-card rounded-2xl p-6 border border-white/10 space-y-4">
-            <h2 className="text-sm font-bold text-white uppercase tracking-wider pb-3 border-b border-white/10">
+          <div className="admin-glass-card rounded-2xl p-6 space-y-4">
+            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider pb-3 border-b border-slate-200">
               Taxonomy & Status
             </h2>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                 Category / Vertical / Department
               </label>
               <input
@@ -284,13 +284,13 @@ export function EntityEditorClient({
                   })
                 }
                 placeholder="e.g. Technology & AI"
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#35b0aa]"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
               />
             </div>
 
             {type === "openings" && (
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                   Salary Range (BDT)
                 </label>
                 <input
@@ -298,33 +298,33 @@ export function EntityEditorClient({
                   value={formData.salary_range || ""}
                   onChange={(e) => setFormData({ ...formData, salary_range: e.target.value })}
                   placeholder="৳ 2,50,000 – ৳ 3,80,000 / month"
-                  className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#35b0aa]"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                 Sort Order Priority
               </label>
               <input
                 type="number"
                 value={formData.sort_order || 0}
                 onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#35b0aa]"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
               />
             </div>
 
-            <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-slate-200 block">Published Status</span>
-                <span className="text-[11px] text-slate-400">Visible on public portal</span>
+                <span className="text-xs font-bold text-slate-800 block">Published Status</span>
+                <span className="text-[11px] text-slate-500">Visible on public portal</span>
               </div>
               <input
                 type="checkbox"
                 checked={formData.is_published ?? true}
                 onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
-                className="w-5 h-5 accent-[#0d6e6e] rounded cursor-pointer"
+                className="w-5 h-5 accent-teal-600 rounded cursor-pointer"
               />
             </div>
           </div>

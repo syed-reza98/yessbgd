@@ -74,12 +74,12 @@ const ENTITIES = [
 export default function CmsHubPage() {
   return (
     <div className="space-y-6">
-      <div className="pb-6 border-b border-white/10">
-        <span className="text-xs font-bold text-[#d4a359] uppercase tracking-widest">
+      <div className="pb-6 border-b border-slate-200">
+        <span className="text-xs font-bold text-teal-700 uppercase tracking-widest">
           DYNAMIC ENTITY MANAGEMENT
         </span>
-        <h1 className="text-3xl font-extrabold text-white mt-1">Content Collections</h1>
-        <p className="text-sm text-slate-400 mt-1">
+        <h1 className="text-3xl font-extrabold text-slate-900 mt-1">Content Collections</h1>
+        <p className="text-sm text-slate-500 mt-1">
           Select a content collection to create, edit, or publish entities across the YESS Bangladesh ecosystem.
         </p>
       </div>
@@ -91,28 +91,28 @@ export default function CmsHubPage() {
             <Link
               key={ent.type}
               href={`/admin/cms/${ent.type}`}
-              className={`admin-glass-card rounded-2xl p-6 border border-white/10 ${ent.border} transition-all duration-200 group flex flex-col justify-between`}
+              className={`admin-glass-card rounded-2xl p-6 border border-slate-200 shadow-xs hover:border-teal-400 hover:shadow-md transition-all duration-200 group flex flex-col justify-between`}
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6 text-[#d4a359]" />
+                  <div className="p-3 rounded-xl bg-teal-50 border border-teal-100 group-hover:scale-110 transition-transform">
+                    <Icon className="w-6 h-6 text-teal-700" />
                   </div>
                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${ent.badge}`}>
                     {ent.count}
                   </span>
                 </div>
-                <h2 className="text-lg font-bold text-white group-hover:text-[#35b0aa] transition-colors">
+                <h2 className="text-lg font-bold text-slate-900 group-hover:text-teal-700 transition-colors">
                   {ent.title}
                 </h2>
-                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
                   {ent.desc}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white">
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-teal-700 group-hover:text-teal-900">
                 <span>Manage Collection</span>
-                <ArrowRight className="w-4 h-4 text-[#d4a359] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-teal-700 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>
           );

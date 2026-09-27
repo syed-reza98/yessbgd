@@ -233,45 +233,31 @@ body {
   animation-play-state: paused;
 }
 
-/* ── Phase 3 Admin Scope Console Styles ───────────────────────────────── */
+/* ── Phase 3 Admin Scope Console Styles (Light Theme) ────────────────── */
 .admin-scope {
-  --background: oklch(0.975 0.006 70);
-  --foreground: oklch(0.26 0.020 55);
-  --surface: oklch(1 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.26 0.020 55);
-  --border: oklch(0.88 0.015 65);
-  --admin-canvas: oklch(0.90 0.030 62);
-  --admin-glass: oklch(1 0 0 / 0.52);
-  --admin-glass-strong: oklch(1 0 0 / 0.70);
-  --admin-glass-border: oklch(1 0 0 / 0.58);
-  color: #f1f5f9;
-  background-color: #061a1b;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --border: #e2e8f0;
+  --admin-canvas: #f1f5f9;
+  --admin-glass: rgba(255, 255, 255, 0.9);
+  --admin-glass-strong: rgba(255, 255, 255, 0.98);
+  --admin-glass-border: #e2e8f0;
+  color: #0f172a;
+  background-color: #f8fafc;
   min-height: 100vh;
 }
 
-.dark .admin-scope {
-  --background: oklch(0.17 0.014 55);
-  --foreground: oklch(0.96 0.008 70);
-  --surface: oklch(0.21 0.018 55);
-  --card: oklch(0.21 0.018 55);
-  --card-foreground: oklch(0.96 0.008 70);
-  --border: oklch(0.30 0.018 55);
-  --admin-canvas: oklch(0.24 0.028 48);
-  --admin-glass: oklch(1 0 0 / 0.07);
-  --admin-glass-strong: oklch(1 0 0 / 0.12);
-  --admin-glass-border: oklch(1 0 0 / 0.14);
-}
-
 .admin-scope .admin-glass-card {
-  background-color: rgba(13, 35, 37, 0.7);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
 }
 
 .admin-scope .admin-table-row:hover {
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: #f8fafc;
 }
+
 
