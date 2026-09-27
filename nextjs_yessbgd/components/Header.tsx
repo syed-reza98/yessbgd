@@ -222,7 +222,7 @@ export function Header({
       {/* 2. Main Floating Island Header */}
       <header
         data-public-header="true"
-        className="sticky top-0 z-40 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-2.5 -mb-[68px]"
+        className="sticky top-0 z-40 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-2.5 -mb-[92px]"
       >
         <div
           className={`max-w-7xl mx-auto rounded-2xl lg:rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg shadow-slate-900/5 px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all duration-300 pointer-events-auto ${
