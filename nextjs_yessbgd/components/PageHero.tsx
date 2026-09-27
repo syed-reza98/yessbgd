@@ -29,7 +29,7 @@ export function PageHero({
   const isCenter = align === "center";
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-20 bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
+    <section className="relative overflow-hidden pt-20 pb-14 sm:pt-24 sm:pb-20 bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
       {/* Background Image Layer with Light Multiplying Overlay */}
       {backgroundImage && (
         <div

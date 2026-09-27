@@ -565,6 +565,7 @@ export type CompanySettings = {
       hours?: string;
       lat?: number;
       lng?: number;
+      mapUrl?: string;
     };
     motijheel?: {
       name: string;
@@ -645,8 +646,9 @@ const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
       addressBn: "সেকশন-১১, ব্লক-এ, মেইন রোড-৩, প্লট-১০, মিরপুর, পল্লবী, ঢাকা-১২১৬ (মেট্রোরেল পিলার -৩১২)",
       badge: "Metro Rail Pillar -312",
       hours: "BST 09:00 - 18:00 (Sat - Thu)",
-      lat: 23.8223,
-      lng: 90.3654,
+      lat: 23.8253366,
+      lng: 90.3657431,
+      mapUrl: "https://maps.app.goo.gl/R39sZ5QgTBuTJpEf6",
     },
   },
   socials: {

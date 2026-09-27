@@ -330,103 +330,56 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           </span>
         </div>
 
-        {/* Branded Custom Map Graphic Card */}
-        <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100 min-h-[300px] flex flex-col justify-between p-5 text-slate-900">
-          {/* Map Top Overlay: Coordinates & Live Radar */}
-          <div className="flex items-center justify-between z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-teal-500/30 text-[11px] font-mono text-teal-800 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
-              <span>23.8223° N, 90.3654° E</span>
+        {/* Interactive Google Map Card */}
+        <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-100 min-h-[380px] sm:min-h-[420px] flex flex-col justify-between text-slate-900 group">
+          {/* Real Google Map Embed */}
+          <iframe
+            title="Yess Bangla Private Limited Location Map"
+            src="https://maps.google.com/maps?q=23.8253366,90.3657431&hl=en&z=17&output=embed"
+            className="w-full h-full min-h-[380px] sm:min-h-[420px] border-0"
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+
+          {/* Map Top Floating Overlay: Coordinates & Live Google Maps Link */}
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-teal-500/30 text-[11px] font-mono text-teal-900 shadow-md pointer-events-auto">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
+              <span>23.8253° N, 90.3657° E</span>
             </div>
             <a
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 hover:bg-white backdrop-blur-md text-slate-700 border border-slate-200 text-xs font-semibold shadow-2xs transition-colors"
-              href={`https://maps.google.com/?q=${encodeURIComponent(
-                settings?.contact?.address ||
-                  settings?.offices?.headquarters?.address ||
-                  "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)"
-              )}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 hover:bg-white backdrop-blur-md text-slate-800 hover:text-emerald-700 border border-slate-200 text-xs font-bold shadow-md transition-all pointer-events-auto active:scale-95"
+              href="https://maps.app.goo.gl/R39sZ5QgTBuTJpEf6"
               rel="noopener noreferrer"
               target="_blank"
             >
               <span>Google Maps</span>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
             </a>
           </div>
 
-          {/* Stylized Schematic SVG Vector for Dhaka Road Grid & Metro Rail Corridor */}
-          <div className="absolute inset-0 opacity-40 pointer-events-none flex items-center justify-center">
-            <svg
-              className="w-full h-full object-cover"
-              fill="none"
-              viewBox="0 0 600 350"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Dhaka Metro MRT Line-6 Viaduct Vector */}
-              <path
-                d="M50,-10 C120,80 220,160 300,200 C380,240 460,290 550,360"
-                stroke="#0d6e6e"
-                strokeLinecap="round"
-                strokeWidth="10"
-              />
-              {/* Mirpur Main Road Arterial */}
-              <path
-                d="M-10,240 C140,230 260,210 330,190 C420,160 510,130 620,110"
-                stroke="#0d6e6e"
-                strokeDasharray="4 4"
-                strokeWidth="5"
-              />
-              {/* Grid Lines */}
-              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="0" x2="600" y1="120" y2="120" />
-              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="0" x2="600" y1="220" y2="220" />
-              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="180" x2="180" y1="0" y2="350" />
-              <line stroke="#94a3b8" strokeOpacity="0.5" strokeWidth="1" x1="420" x2="420" y1="0" y2="350" />
-              {/* Radar Ripple around Mirpur-11 / Pillar 312 node */}
-              <circle
-                cx="300"
-                cy="200"
-                r="45"
-                stroke="#d97706"
-                strokeDasharray="2 3"
-                strokeOpacity="0.6"
-                strokeWidth="1.5"
-              />
-              <circle
-                cx="300"
-                cy="200"
-                r="85"
-                stroke="#0d6e6e"
-                strokeOpacity="0.4"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </div>
-
-          {/* Center Pin Indicator */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
-            <div className="w-11 h-11 rounded-full bg-teal-700 flex items-center justify-center shadow-lg border-2 border-teal-500">
-              <Building className="w-5 h-5 text-white" />
-            </div>
-            <span className="mt-1 px-2.5 py-0.5 rounded bg-white/95 border border-slate-200 text-[10px] font-bold text-teal-900 shadow-2xs uppercase tracking-wider">
-              HQ • Pillar -312
-            </span>
-          </div>
-
-          {/* Map Bottom Card Overlay */}
-          <div className="relative z-10 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm flex items-center justify-between">
-            <div>
-              <p className="text-xs sm:text-sm font-bold text-slate-900">
-                {settings?.offices?.headquarters?.name || "Corporate Headquarters"}
+          {/* Map Bottom Floating Card Overlay */}
+          <div className="absolute bottom-3 left-3 right-3 z-10 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg flex items-center justify-between pointer-events-auto">
+            <div className="min-w-0 pr-2">
+              <p className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                Yess Bangla Private Limited
               </p>
-              <p className="text-[11px] text-slate-600 line-clamp-1">
+              <p className="text-[11px] text-slate-600 truncate">
                 {settings?.contact?.address ||
                   settings?.offices?.headquarters?.address ||
                   "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)"}
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-semibold shrink-0 ml-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-              <span>Open • BST 09:00 - 18:00</span>
-            </span>
+            <a
+              href="https://maps.app.goo.gl/R39sZ5QgTBuTJpEf6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold shrink-0 transition-colors shadow-xs"
+            >
+              <MapPin className="w-3.5 h-3.5" />
+              <span>Directions</span>
+            </a>
           </div>
         </div>
 

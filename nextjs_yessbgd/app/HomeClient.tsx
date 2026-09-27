@@ -162,13 +162,13 @@ export function HomeClient({
   return (
     <div className="flex flex-col w-full">
       {/* 1. Cinematic Hero Section with 4 Flagship Minted 3D Medallions (Light Theme) */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 text-slate-900 overflow-hidden py-10 sm:py-14 lg:py-18 border-b border-slate-200/80">
-        {/* Authentic Office Photography Backdrop with Light Multiplying Mask */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 text-slate-900 overflow-hidden pt-20 sm:pt-24 lg:pt-28 pb-10 sm:pb-14 lg:pb-18 border-b border-slate-200/80">
+        {/* Authentic Office Photography Backdrop */}
         <div
-          className="absolute inset-0 z-0 opacity-35 pointer-events-none mix-blend-multiply bg-cover bg-center"
+          className="absolute inset-0 z-0 opacity-55 pointer-events-none bg-cover bg-center"
           style={{ backgroundImage: "url('/assets/heroes/hero_6a8951c6b7346.png')" }}
         />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/70 to-white/30 pointer-events-none" />
 
         {/* Ambient Brand Mesh & Strategic Glows */}
         <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />

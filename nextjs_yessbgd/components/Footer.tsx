@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, ShieldCheck, ArrowUpRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
@@ -50,8 +51,7 @@ export function Footer({
     "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)";
   const regNumber = settings?.branding?.registrationNo || "C-184920";
   const logoUrl = settings?.branding?.logoUrl || "/assets/yess-bangla-logo.png";
-  const brandName = settings?.branding?.companyName || "YESS Bangladesh";
-  const legalName = settings?.branding?.legalName || "Yess Bangla Private Limited";
+  const brandName = settings?.branding?.legalName || settings?.branding?.companyName || "Yess Bangla Private Limited";
 
   const displayVentures = ventures && ventures.length > 0 ? ventures.slice(0, 6) : [
     { slug: "yess-soft", title: "Yess Soft (ERP)" },
@@ -81,20 +81,22 @@ export function Footer({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-200">
           {/* Column 1: Brand & Headquarters */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-white shadow-xs border border-slate-200">
-                <img
+            <Link href="/" className="flex items-center gap-3 group shrink-0">
+              <div className="relative flex items-center justify-center transition-transform group-hover:scale-105">
+                <Image
                   src={logoUrl}
                   alt={brandName}
-                  className="h-8 w-auto object-contain"
+                  width={130}
+                  height={40}
+                  className="h-8 sm:h-9 w-auto object-contain"
                 />
               </div>
-              <div className="flex flex-col pl-2 border-l border-slate-200">
-                <span className="font-display font-extrabold text-xl tracking-tight text-slate-900">
-                  YESS <span className="text-emerald-700 font-bold">Bangladesh</span>
+              <div className="flex flex-col pl-3 border-l border-slate-200 text-left">
+                <span className="font-display font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 leading-tight">
+                  {brandName}
                 </span>
-                <span className="text-[10px] tracking-wider uppercase text-rose-700 font-semibold">
-                  Sovereign Enterprise Studio
+                <span className="text-[10px] text-slate-500 font-medium tracking-wide mt-0.5">
+                  Where Solution Begins
                 </span>
               </div>
             </Link>
@@ -290,7 +292,7 @@ export function Footer({
         {/* Bottom Copyright & Compliance Bar */}
         <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <div>
-            © {currentYear} {brandName} ({legalName}). All rights reserved.
+            © {currentYear} {brandName}. All rights reserved.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs">
             {footerMenus && footerMenus.length > 0 ? (
