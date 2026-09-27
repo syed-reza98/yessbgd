@@ -256,7 +256,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground px-7 py-3 rounded-xl text-xs font-bold shadow-md transition-all active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground px-7 py-3.5 min-h-[48px] rounded-xl text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
                 >
                   {loading ? (
                     <>

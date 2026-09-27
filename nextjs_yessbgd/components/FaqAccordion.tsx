@@ -163,7 +163,7 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
                 <button
                   key={tag}
                   onClick={() => setSearchQuery(tag === "All" ? "" : tag)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                  className={`min-h-[36px] px-3.5 py-1.5 inline-flex items-center justify-center rounded-full text-xs font-semibold transition-all cursor-pointer ${
                     active
                       ? "bg-primary text-primary-foreground shadow-sm"
                       : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
@@ -178,28 +178,30 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
       </div>
 
       {/* Category Filter Horizontal Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-        {categories.map((cat) => {
-          const count =
-            cat === "All Questions"
-              ? effectiveFaqs.length
-              : effectiveFaqs.filter((f) => f.category === cat).length;
-          const active = selectedCategory === cat;
+      <div className="relative [mask-image:linear-gradient(to_right,black_calc(100%-2.5rem),transparent)] sm:[mask-image:none]">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {categories.map((cat) => {
+            const count =
+              cat === "All Questions"
+                ? effectiveFaqs.length
+                : effectiveFaqs.filter((f) => f.category === cat).length;
+            const active = selectedCategory === cat;
 
-          return (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
-                active
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
-              }`}
-            >
-              {cat} ({count})
-            </button>
-          );
-        })}
+            return (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`min-h-[42px] px-4 py-2 inline-flex items-center justify-center rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                  active
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
+                }`}
+              >
+                {cat} ({count})
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Accordion List */}

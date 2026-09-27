@@ -124,7 +124,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
   };
 
   return (
-    <div className="space-y-10 pb-20">
+    <div className="space-y-10 pb-20 pt-20 sm:pt-24 px-3 sm:px-4">
       {/* 1. Top Notification Ribbon & Utility Bar */}
       <aside className="glass-card text-foreground/70 py-2.5 px-4 sm:px-6 lg:px-8 border border-border rounded-2xl mx-auto max-w-7xl">
         <div className="flex flex-wrap items-center justify-between text-xs tracking-wide gap-3">

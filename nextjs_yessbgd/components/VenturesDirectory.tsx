@@ -170,12 +170,12 @@ export function VenturesDirectory({
 
           {/* View Modes & Sort */}
           <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end">
-            <div className="flex items-center gap-1 bg-muted p-1 rounded-xl border border-border" role="group" aria-label="View layout switcher">
+            <div className="hidden sm:flex items-center gap-1 bg-muted p-1 rounded-xl border border-border" role="group" aria-label="View layout switcher">
               <button
                 onClick={() => setViewMode("grid")}
                 aria-label="Grid View"
                 aria-pressed={viewMode === "grid"}
-                className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`min-w-[36px] min-h-[36px] flex items-center justify-center p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   viewMode === "grid"
                     ? "bg-primary text-white shadow-xs"
                     : "text-foreground/60 hover:text-foreground"
@@ -188,7 +188,7 @@ export function VenturesDirectory({
                 onClick={() => setViewMode("table")}
                 aria-label="Table View"
                 aria-pressed={viewMode === "table"}
-                className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`min-w-[36px] min-h-[36px] flex items-center justify-center p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   viewMode === "table"
                     ? "bg-primary text-white shadow-xs"
                     : "text-foreground/60 hover:text-foreground"
@@ -217,23 +217,25 @@ export function VenturesDirectory({
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-1 scrollbar-none border-t border-border pt-4">
-          {clusters.map((cluster) => {
-            const isActive = selectedCluster === cluster.id;
-            return (
-              <button
-                key={cluster.id}
-                onClick={() => setSelectedCluster(cluster.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                  isActive
-                    ? "bg-primary text-white shadow-xs"
-                    : "bg-muted text-foreground/70 hover:text-foreground hover:bg-muted/80 border border-border"
-                }`}
-              >
-                {cluster.label}
-              </button>
-            );
-          })}
+        <div className="relative mt-4 border-t border-border pt-4 [mask-image:linear-gradient(to_right,black_calc(100%-2.5rem),transparent)] sm:[mask-image:none]">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {clusters.map((cluster) => {
+              const isActive = selectedCluster === cluster.id;
+              return (
+                <button
+                  key={cluster.id}
+                  onClick={() => setSelectedCluster(cluster.id)}
+                  className={`min-h-[40px] px-3.5 py-2 inline-flex items-center justify-center rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    isActive
+                      ? "bg-primary text-white shadow-xs"
+                      : "bg-muted text-foreground/70 hover:text-foreground hover:bg-muted/80 border border-border"
+                  }`}
+                >
+                  {cluster.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -279,7 +281,7 @@ export function VenturesDirectory({
                       <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/20">
                         {cluster}
                       </span>
-                      <p className="text-[10px] text-foreground/50 mt-1 font-medium">
+                      <p className="text-[10px] text-slate-600 dark:text-foreground/70 mt-1 font-medium">
                         Est. {venture.founded || "2020"} • {venture.category}
                       </p>
                     </div>
@@ -288,7 +290,7 @@ export function VenturesDirectory({
                   <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors leading-snug">
                     {venture.title}
                   </h3>
-                  <p className="text-xs font-semibold text-[#d4a359] mt-0.5">{venture.tagline}</p>
+                  <p className="text-xs font-semibold text-amber-800 dark:text-amber-400 mt-0.5">{venture.tagline}</p>
                   <p className="text-xs sm:text-sm text-foreground/70 mt-2 mb-4 leading-relaxed line-clamp-3">
                     {venture.desc}
                   </p>
@@ -309,7 +311,7 @@ export function VenturesDirectory({
                   <div className="pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
                     <Link
                       href={`/ventures/${venture.slug}`}
-                      className="inline-flex items-center gap-1.5 hover:underline group-hover:translate-x-0.5 transition-transform"
+                      className="inline-flex items-center gap-1.5 hover:underline group-hover:translate-x-0.5 transition-transform min-h-[44px] py-2"
                     >
                       <span>Explore Venture Profile</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -323,8 +325,8 @@ export function VenturesDirectory({
       ) : (
         /* Table View */
         <div className="glass-card rounded-2xl border border-border overflow-hidden shadow-sm">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto [mask-image:linear-gradient(to_right,black_calc(100%-2rem),transparent)] lg:[mask-image:none]">
+            <table className="w-full text-left text-xs min-w-[640px]">
               <thead className="bg-muted/50 border-b border-border font-bold text-foreground uppercase text-[11px]">
                 <tr>
                   <th scope="col" className="p-4">Entity</th>
@@ -347,7 +349,7 @@ export function VenturesDirectory({
                   return (
                     <tr key={v.slug} className="hover:bg-muted/40 transition-colors">
                       <td className="p-4 font-bold text-foreground">
-                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2">
+                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2 py-1">
                           <span>{v.title}</span>
                         </Link>
                       </td>
@@ -358,7 +360,7 @@ export function VenturesDirectory({
                       <td className="p-4 text-right">
                         <Link
                           href={`/ventures/${v.slug}`}
-                          className="inline-flex items-center gap-1 font-bold text-primary hover:underline"
+                          className="inline-flex items-center gap-1 font-bold text-primary hover:underline min-h-[44px] py-2"
                         >
                           <span>View Profile</span>
                           <ArrowRight className="w-3 h-3" />

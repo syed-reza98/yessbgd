@@ -89,6 +89,8 @@ export function Footer({
                   width={130}
                   height={40}
                   className="h-8 sm:h-9 w-auto object-contain"
+                  style={{ width: "auto", height: "auto" }}
+                  sizes="130px"
                 />
               </div>
               <div className="flex flex-col pl-3 border-l border-slate-200 text-left">
@@ -185,15 +187,15 @@ export function Footer({
 
           {/* Column 2: Sovereign Ventures Portfolio */}
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-amber-700">
+            <h3 className="font-display text-xs font-bold uppercase tracking-wider text-amber-700">
               {settings?.footer?.colTitles?.ventures || "Ventures"}
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-600">
+            </h3>
+            <ul className="space-y-2.5 text-sm text-slate-600">
               {displayVentures.map((v: any) => (
                 <li key={v.slug}>
                   <Link
                     href={`/ventures/${v.slug}`}
-                    className="hover:text-emerald-700 transition-colors flex items-center justify-between group"
+                    className="hover:text-emerald-700 transition-colors flex items-center justify-between group py-1"
                   >
                     <span>{v.title}</span>
                     <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -201,7 +203,7 @@ export function Footer({
                 </li>
               ))}
               <li>
-                <Link href="/ventures" className="text-emerald-700 font-semibold hover:underline block pt-1">
+                <Link href="/ventures" className="text-emerald-700 font-semibold hover:underline block py-1.5">
                   All {ventures?.length || 13} Subsidiaries →
                 </Link>
               </li>
@@ -210,13 +212,13 @@ export function Footer({
 
           {/* Column 3: Corporate Governance & Policy */}
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-amber-700">
+            <h3 className="font-display text-xs font-bold uppercase tracking-wider text-amber-700">
               {settings?.footer?.colTitles?.governance || "Governance"}
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-600">
+            </h3>
+            <ul className="space-y-2.5 text-sm text-slate-600">
               {govLinks.map((link: any) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-emerald-700 transition-colors">
+                  <Link href={link.href} className="hover:text-emerald-700 transition-colors block py-1">
                     {language === "bn" && link.label_bn ? link.label_bn : link.label}
                   </Link>
                 </li>
@@ -226,11 +228,11 @@ export function Footer({
 
           {/* Column 4: Headquarters & Executive Dispatch Newsletter */}
           <div className="lg:col-span-4 flex flex-col gap-3" id="contact">
-            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-amber-700">
+            <h3 className="font-display text-xs font-bold uppercase tracking-wider text-amber-700">
               {language === "bn" && settings?.footer?.newsletterTitleBn
                 ? settings.footer.newsletterTitleBn
                 : settings?.footer?.newsletterTitleEn || settings?.footer?.colTitles?.headquarters || "Headquarters & Insights"}
-            </h4>
+            </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               {language === "bn" && settings?.footer?.newsletterDescBn
                 ? settings.footer.newsletterDescBn
@@ -256,7 +258,7 @@ export function Footer({
                 <button
                   type="submit"
                   disabled={subscribing}
-                  className="px-4 py-2 rounded-xl bg-[#008744] hover:bg-[#059669] text-white font-bold text-xs shadow-xs transition-all whitespace-nowrap active:scale-95 disabled:opacity-50 flex items-center gap-1.5"
+                  className="min-h-[44px] px-4 py-2.5 rounded-xl bg-[#008744] hover:bg-[#059669] text-white font-bold text-xs shadow-xs transition-all whitespace-nowrap active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   {subscribing && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>{subscribing ? "Joining..." : "Subscribe"}</span>
@@ -276,7 +278,7 @@ export function Footer({
             <div className="pt-2">
               <Link
                 href={settings?.footer?.candidateTrackerHref || "/application-status"}
-                className="inline-flex items-center gap-1.5 text-xs text-amber-700 font-semibold hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs text-amber-700 font-semibold hover:underline py-1"
               >
                 <ShieldCheck className="h-3.5 w-3.5" />
                 <span>
@@ -294,12 +296,12 @@ export function Footer({
           <div>
             © {currentYear} {brandName}. All rights reserved.
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs">
             {footerMenus && footerMenus.length > 0 ? (
               footerMenus.map((link: any) => (
                 <Link
                   key={link.id || link.href}
-                  className="hover:text-emerald-700 transition-colors"
+                  className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block"
                   href={link.href}
                 >
                   {language === "bn" && link.label_bn ? link.label_bn : link.label}
@@ -307,22 +309,22 @@ export function Footer({
               ))
             ) : (
               <>
-                <Link className="hover:text-emerald-700 transition-colors" href="/ventures">
+                <Link className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block" href="/ventures">
                   Ventures Portfolio
                 </Link>
-                <Link className="hover:text-emerald-700 transition-colors" href="/about/leadership">
+                <Link className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block" href="/about/leadership">
                   Corporate Governance
                 </Link>
-                <Link className="hover:text-emerald-700 transition-colors" href="/about/standards">
+                <Link className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block" href="/about/standards">
                   Impact & Sustainability
                 </Link>
-                <Link className="hover:text-emerald-700 transition-colors" href="/about/awards">
+                <Link className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block" href="/about/awards">
                   Annual Reports
                 </Link>
-                <Link className="hover:text-emerald-700 transition-colors" href="/privacy">
+                <Link className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block" href="/privacy">
                   Privacy Policy
                 </Link>
-                <Link className="hover:text-emerald-700 transition-colors" href="/terms">
+                <Link className="hover:text-emerald-700 transition-colors py-2 px-1 inline-block" href="/terms">
                   Terms of Service
                 </Link>
               </>

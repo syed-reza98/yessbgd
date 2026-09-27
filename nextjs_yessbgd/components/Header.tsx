@@ -113,6 +113,25 @@ export function Header({
     setVenturesDropdownOpen(false);
   }, [pathname]);
 
+  // Lock body scroll and handle Escape key when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setMobileMenuOpen(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [mobileMenuOpen]);
+
   const handleMouseEnterVentures = () => {
     if (dropdownTimeoutRef.current) {
       clearTimeout(dropdownTimeoutRef.current);
@@ -210,7 +229,7 @@ export function Header({
             <button
               onClick={() => setLanguage(language === "en" ? "bn" : "en")}
               className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 hover:bg-emerald-200/80 text-emerald-900 font-semibold transition-all border border-emerald-300/80 active:scale-95 cursor-pointer"
-              aria-label="Toggle Language"
+              aria-label={`Toggle Language (${language === "en" ? "বাংলা" : "EN"})`}
             >
               <Globe className="h-3 w-3 text-amber-700" />
               <span>{language === "en" ? "বাংলা" : "EN"}</span>
@@ -222,7 +241,7 @@ export function Header({
       {/* 2. Main Floating Island Header */}
       <header
         data-public-header="true"
-        className="sticky top-0 z-40 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-2.5 -mb-[92px]"
+        className="sticky top-0 z-40 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-2.5 -mb-[64px] sm:-mb-[92px]"
       >
         <div
           className={`max-w-7xl mx-auto rounded-2xl lg:rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg shadow-slate-900/5 px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all duration-300 pointer-events-auto ${
@@ -238,6 +257,8 @@ export function Header({
                 width={130}
                 height={40}
                 className="h-8 sm:h-9 w-auto object-contain"
+                style={{ width: "auto", height: "auto" }}
+                sizes="130px"
                 priority
               />
             </div>
@@ -411,14 +432,16 @@ export function Header({
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-              className="px-2.5 py-1 text-xs rounded-full border border-slate-200 bg-slate-100 font-bold text-slate-700 cursor-pointer"
+              className="min-h-[44px] px-3.5 py-2 text-xs rounded-full border border-slate-200 bg-slate-100 font-bold text-slate-700 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
+              aria-label={`Switch to ${language === "en" ? "Bengali" : "English"}`}
             >
               {language === "en" ? "বাংলা" : "EN"}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
-              aria-label="Toggle navigation menu"
+              className="min-w-[48px] min-h-[48px] p-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors cursor-pointer"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -426,9 +449,23 @@ export function Header({
         </div>
       </header>
 
-      {/* 3. Mobile Slide-Down Drawer */}
+      {/* 3. Mobile Backdrop Scrim */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-3 top-[72px] max-h-[85vh] z-40 bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 overflow-y-auto flex flex-col gap-5 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200">
+        <div
+          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[55] lg:hidden transition-opacity animate-in fade-in duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* 4. Mobile Slide-Down Drawer */}
+      {mobileMenuOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation Menu"
+          className="fixed inset-x-3 top-[72px] max-h-[calc(100dvh-92px)] z-[60] bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 pb-12 overflow-y-auto flex flex-col gap-5 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200"
+        >
           <nav className="flex flex-col gap-1.5">
             {rawNavLinks.map((link) => {
               if (isVenturesLink(link)) {
@@ -521,10 +558,11 @@ export function Header({
           </div>
 
 
-          <div className="pt-2">
+          <div className="pt-2 pb-2">
             <Link
               href="/contact"
-              className="w-full text-center py-3 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white font-bold text-sm block shadow-md shadow-emerald-900/20"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-3.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white font-bold text-sm block shadow-md shadow-emerald-900/20 active:scale-95 transition-transform"
             >
               Let's Talk — Schedule Consultation
             </Link>

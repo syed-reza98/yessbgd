@@ -32,10 +32,14 @@ export function PageHero({
     <section className="relative overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
       {/* Background Image Layer with Light Multiplying Overlay */}
       {backgroundImage && (
-        <div
-          className={`absolute inset-0 z-0 bg-cover bg-center pointer-events-none transition-opacity duration-500 mix-blend-multiply ${imageOpacity}`}
-          style={{ backgroundImage: `url('${backgroundImage}')` }}
-        />
+        <>
+          <div
+            className={`absolute inset-0 z-0 bg-cover bg-center pointer-events-none transition-opacity duration-500 mix-blend-multiply ${imageOpacity}`}
+            style={{ backgroundImage: `url('${backgroundImage}')` }}
+          />
+          {/* Subtle mobile readability gradient veil */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70 sm:hidden pointer-events-none" />
+        </>
       )}
 
       {/* Ambient Light Theme Glows & Dot Matrix */}
@@ -84,14 +88,14 @@ export function PageHero({
         )}
 
         {/* Display Title */}
-        <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight">
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight text-balance">
           {title}
         </h1>
 
         {/* Subtitle */}
         {subtitle && (
           <p
-            className={`mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal ${
+            className={`mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal text-pretty ${
               isCenter ? "max-w-2xl mx-auto" : "max-w-3xl"
             }`}
           >

@@ -230,23 +230,25 @@ export function InsightsDirectory({
       {/* Filter & Search Toolbar */}
       <div className="glass-card rounded-2xl p-5 sm:p-6 space-y-4 border border-border shadow-sm">
         {/* Category Pills Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-          {categories.map((cat) => {
-            const active = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                  active
-                    ? "bg-primary text-white shadow-sm"
-                    : "bg-muted text-foreground/70 hover:text-foreground hover:bg-muted/80"
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
+        <div className="relative [mask-image:linear-gradient(to_right,black_calc(100%-2.5rem),transparent)] sm:[mask-image:none]">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {categories.map((cat) => {
+              const active = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`min-h-[42px] px-4 py-2 inline-flex items-center justify-center rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    active
+                      ? "bg-primary text-white shadow-sm"
+                      : "bg-muted text-foreground/70 hover:text-foreground hover:bg-muted/80"
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Search Input */}
