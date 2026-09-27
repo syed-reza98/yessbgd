@@ -159,7 +159,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
       </aside>
 
       {/* 2. Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-14 sm:py-18 border-b border-slate-200/80 mb-6">
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-18 lg:pt-36 border-b border-slate-200/80 mb-6">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/general/design.jpg')` }}

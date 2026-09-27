@@ -88,7 +88,7 @@ export default async function SingleServicePage({
   return (
     <div className="flex flex-col w-full">
       {/* 1. Service Hero with Live Edge Node Telemetry Card */}
-      <section className="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
+      <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
           style={{ backgroundImage: `url('/assets/general/centricity.png')` }}

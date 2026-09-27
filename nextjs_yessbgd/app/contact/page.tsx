@@ -121,7 +121,7 @@ export default async function ContactPage() {
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden py-16 sm:py-20 lg:py-24 border-b border-slate-200/80">
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
