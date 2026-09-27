@@ -19,6 +19,7 @@ import {
 export function PageEditorClient({ initialPage }: { initialPage: any }) {
   const router = useRouter();
   const [pageData, setPageData] = useState(initialPage);
+  const [jsonData, setJsonData] = useState(() => JSON.stringify(initialPage.data || {}, null, 2));
   const [activeTab, setActiveTab] = useState<"en" | "bn">("en");
   const [saving, setSaving] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
@@ -30,8 +31,19 @@ export function PageEditorClient({ initialPage }: { initialPage: any }) {
     setErrorMessage(null);
     setSavedSuccess(false);
 
+    let parsedData = pageData.data;
+    if (jsonData.trim()) {
+      try {
+        parsedData = JSON.parse(jsonData);
+      } catch (err: any) {
+        setErrorMessage("Invalid JSON in Structured Page Data: " + err.message);
+        setSaving(false);
+        return;
+      }
+    }
+
     try {
-      await updateSitePageAction(pageData.page, pageData);
+      await updateSitePageAction(pageData.page, { ...pageData, data: parsedData });
       setSavedSuccess(true);
       router.refresh();
       setTimeout(() => setSavedSuccess(false), 3000);
@@ -129,6 +141,28 @@ export function PageEditorClient({ initialPage }: { initialPage: any }) {
           <span>বাংলা (Bangla Translation)</span>
         </button>
       </div>
+
+      {pageData.page === "contact" && (
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <span className="text-base">🏢</span>
+            <span>
+              <strong>Note on Office Locations &amp; Corporate Contact:</strong> Physical addresses, executive WhatsApp, and phone numbers are managed globally in{" "}
+              <Link href="/admin/settings" className="font-bold underline text-amber-950 hover:text-black">
+                Corporate Settings
+              </Link>
+              .
+            </span>
+          </div>
+          <Link
+            href="/admin/settings"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-200/80 hover:bg-amber-300 text-amber-950 font-bold text-[11px] shrink-0 transition-colors w-fit"
+          >
+            <span>Open Settings</span>
+            <ExternalLink className="w-3 h-3" />
+          </Link>
+        </div>
+      )}
 
       {/* Editor Form */}
       <form onSubmit={handleSave} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -267,6 +301,30 @@ export function PageEditorClient({ initialPage }: { initialPage: any }) {
                 />
               </div>
             )}
+          </div>
+
+          {/* Structured Page Data (JSON) */}
+          <div className="admin-glass-card rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-600" />
+                <span>Structured Section Data (JSON Schema)</span>
+              </h2>
+              <span className="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded border border-slate-200">
+                jsonb
+              </span>
+            </div>
+            <p className="text-xs text-slate-500">
+              Configure specialized page arrays like FAQs, statutory clauses, governance citations, delivery metrics, or executive profiles.
+            </p>
+            <textarea
+              rows={10}
+              value={jsonData}
+              onChange={(e) => setJsonData(e.target.value)}
+              placeholder="{}"
+              className="w-full font-mono text-xs p-4 bg-slate-900 text-emerald-400 rounded-xl border border-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500 shadow-inner"
+              spellCheck={false}
+            />
           </div>
         </div>
 

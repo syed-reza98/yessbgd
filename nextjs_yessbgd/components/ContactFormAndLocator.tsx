@@ -26,8 +26,9 @@ import {
 } from "lucide-react";
 
 import { supabase } from "@/lib/supabase/client";
+import type { CompanySettings } from "@/lib/cms";
 
-export function ContactFormAndLocator() {
+export function ContactFormAndLocator({ settings }: { settings?: CompanySettings }) {
   const [activeTab, setActiveTab] = useState<"motijheel" | "gulshan">("motijheel");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -53,11 +54,13 @@ export function ContactFormAndLocator() {
     setLoading(true);
     try {
       const { error: insertErr } = await supabase.from("contact_messages").insert({
+        name: fullName.trim(),
         full_name: fullName.trim(),
         email: email.trim(),
         phone: phone.trim() || null,
         organization: organization.trim() || null,
         subject: practiceArea,
+        practice_area: practiceArea,
         message: message.trim(),
         request_nda: requestNda,
         is_read: false,
@@ -284,27 +287,27 @@ export function ContactFormAndLocator() {
           </p>
           <div className="flex flex-wrap gap-2.5 text-xs">
             <a
-              href="https://wa.me/8801805464343"
+              href={`https://wa.me/${(settings?.contact?.whatsapp || "+880 1805-464343").replace(/[^0-9]/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
               <MessageSquare className="w-3.5 h-3.5 text-primary" />
-              <span>WhatsApp: +880 1805-464343 (&lt; 2h BST)</span>
+              <span>WhatsApp: {settings?.contact?.whatsapp || "+880 1805-464343"}</span>
             </a>
             <a
-              href="mailto:invest@yessbgd.com"
+              href={`mailto:${settings?.contact?.investEmail || "invest@yessbgd.com"}`}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
               <Building2 className="w-3.5 h-3.5 text-primary" />
-              <span>invest@yessbgd.com</span>
+              <span>{settings?.contact?.investEmail || "invest@yessbgd.com"}</span>
             </a>
             <a
-              href="mailto:careers@yessbgd.com"
+              href={`mailto:${settings?.contact?.careersEmail || "careers@yessbgd.com"}`}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
               <FileCheck className="w-3.5 h-3.5 text-primary" />
-              <span>careers@yessbgd.com</span>
+              <span>{settings?.contact?.careersEmail || "careers@yessbgd.com"}</span>
             </a>
           </div>
         </div>
@@ -352,11 +355,11 @@ export function ContactFormAndLocator() {
             </div>
             <a
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs font-semibold transition-colors"
-              href={
+              href={`https://maps.google.com/?q=${encodeURIComponent(
                 activeTab === "motijheel"
-                  ? "https://maps.google.com/?q=City+Center+Tower+Motijheel+Dhaka"
-                  : "https://maps.google.com/?q=Road+11+Gulshan-2+Dhaka"
-              }
+                  ? (settings?.offices?.motijheel?.address || "Motijheel Commercial Area, Dhaka")
+                  : (settings?.offices?.gulshan?.address || "Gulshan-2, Dhaka")
+              )}`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -441,21 +444,21 @@ export function ContactFormAndLocator() {
             <div>
               <p className="text-xs sm:text-sm font-bold text-white">
                 {activeTab === "motijheel"
-                  ? "City Center Tower, Level 19"
-                  : "House 42, Road 11, Gulshan-2"}
+                  ? (settings?.offices?.motijheel?.name || "Corporate Headquarters")
+                  : (settings?.offices?.gulshan?.name || "Regional Innovation Lab")}
               </p>
               <p className="text-[11px] text-white/70">
                 {activeTab === "motijheel"
-                  ? "Motijheel Commercial Area, Dhaka-1000"
-                  : "Gulshan Innovation Zone, Dhaka-1212"}
+                  ? (settings?.offices?.motijheel?.address || "Motijheel Commercial Area, Dhaka-1000")
+                  : (settings?.offices?.gulshan?.address || "Gulshan Innovation Zone, Dhaka-1212")}
               </p>
             </div>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0d6e6e] text-[#9dedec] text-[11px] font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-[#35b0aa] animate-pulse" />
               <span>
                 {activeTab === "motijheel"
-                  ? "Open • BST 09:00 - 18:00"
-                  : "Open • BST 10:00 - 20:00"}
+                  ? (settings?.offices?.motijheel?.hours || "Open • BST 09:00 - 18:00")
+                  : (settings?.offices?.gulshan?.hours || "Open • 24/7 Operations")}
               </span>
             </span>
           </div>
@@ -466,11 +469,13 @@ export function ContactFormAndLocator() {
           <div className="flex items-center justify-between">
             <h3 className="text-base sm:text-lg font-display font-bold text-foreground">
               {activeTab === "motijheel"
-                ? "Headquarters Specifications"
-                : "Innovation Wing Specifications"}
+                ? (settings?.offices?.motijheel?.name || "Headquarters Specifications")
+                : (settings?.offices?.gulshan?.name || "Innovation Wing Specifications")}
             </h3>
             <span className="text-xs font-bold text-primary uppercase tracking-wider">
-              {activeTab === "motijheel" ? "SUITE 804 & 1901" : "LAB TIER-3 EDGE CLUSTER"}
+              {activeTab === "motijheel"
+                ? (settings?.offices?.motijheel?.badge || "SUITE 804 & 1901")
+                : (settings?.offices?.gulshan?.badge || "LAB TIER-3 EDGE CLUSTER")}
             </span>
           </div>
 
@@ -481,8 +486,8 @@ export function ContactFormAndLocator() {
                 <strong className="text-foreground block font-semibold">Physical Dispatch & Concierge</strong>
                 <span>
                   {activeTab === "motijheel"
-                    ? "Level 19, City Center Tower, 57 Purana Paltan / Motijheel C/A, Dhaka-1000, Bangladesh"
-                    : "House 42, Road 11, Block E, Gulshan-2, Dhaka-1212, Bangladesh"}
+                    ? (settings?.offices?.motijheel?.address || "Jiban Bima Bhaban, Dilkusha, Motijheel C/A, Dhaka-1000")
+                    : (settings?.offices?.gulshan?.address || "Road 134, Gulshan-2, Dhaka-1212")}
                 </span>
               </div>
             </div>
@@ -493,8 +498,8 @@ export function ContactFormAndLocator() {
                 <strong className="text-foreground block font-semibold">Statutory Visiting Hours</strong>
                 <span>
                   {activeTab === "motijheel"
-                    ? "Sunday – Thursday: 9:00 AM – 6:00 PM BST (Closed on National Holidays & Fri/Sat)"
-                    : "Sunday – Friday: 10:00 AM – 8:00 PM BST (Extended Edge Operations)"}
+                    ? (settings?.offices?.motijheel?.hours || "Sunday – Thursday: 9:00 AM – 6:00 PM BST")
+                    : (settings?.offices?.gulshan?.hours || "Sunday – Friday: 10:00 AM – 8:00 PM BST (Extended Edge Operations)")}
                 </span>
               </div>
             </div>
@@ -504,9 +509,7 @@ export function ContactFormAndLocator() {
               <div>
                 <strong className="text-foreground block font-semibold">Direct Telephony Lines</strong>
                 <span>
-                  {activeTab === "motijheel"
-                    ? "Board Desk: +880 1805-464343 | PABX Trunk: +880 2 9568000 (Ext. 102)"
-                    : "Innovation Desk: +880 1805-464343 | Dev Ops Trunk: +880 2 9884000 (Ext. 401)"}
+                  Primary: {settings?.contact?.phone || "+880 1805-464343"} | Emergency NOC: +880 1805-464343
                 </span>
               </div>
             </div>
@@ -518,7 +521,7 @@ export function ContactFormAndLocator() {
                 <span>
                   {activeTab === "motijheel"
                     ? "Government NID or Passport badge registration mandatory at Ground Concierge. Reserved executive parking at Level B2."
-                    : "Biometric badge or visitor clearance mandatory at reception. Secure underground parking on Road 11."}
+                    : "Biometric badge or visitor clearance mandatory at reception. Secure underground parking on Road 134."}
                 </span>
               </div>
             </div>
@@ -530,9 +533,9 @@ export function ContactFormAndLocator() {
               <Building className="w-4 h-4 text-primary" />
               <span>
                 {activeTab === "motijheel" ? (
-                  <>Secondary Lab: <strong>Road 11, Gulshan-2, Dhaka</strong></>
+                  <>Secondary Lab: <strong>{settings?.offices?.gulshan?.address || "Road 134, Gulshan-2, Dhaka"}</strong></>
                 ) : (
-                  <>Executive HQ: <strong>City Center Tower, Motijheel</strong></>
+                  <>Executive HQ: <strong>{settings?.offices?.motijheel?.address || "Dilkusha, Motijheel C/A, Dhaka"}</strong></>
                 )}
               </span>
             </div>

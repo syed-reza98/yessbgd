@@ -18,11 +18,15 @@ import {
 import { industries as fallbackIndustries } from "@/data/industries";
 import { getIndustries, getSitePage } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Industries Overview | YESS Bangladesh",
-  description:
-    "Sector transformation across Media & Broadcasting, Manufacturing & RMG, Logistics, E-commerce, Financial Services, and Healthcare in Bangladesh.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("industries");
+  return {
+    title: page?.seo_title || "Industries Overview | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "Sector transformation across Media & Broadcasting, Manufacturing & RMG, Logistics, E-commerce, Financial Services, and Healthcare in Bangladesh.",
+  };
+}
 
 const industryMetrics = [
   {
@@ -66,6 +70,28 @@ export default async function IndustriesPage() {
   ]);
 
   const industryList = allIndustries && allIndustries.length > 0 ? allIndustries : fallbackIndustries;
+
+  const dynamicMetrics = [
+    {
+      ...industryMetrics[0],
+      value: String(industryList.length || 6),
+    },
+    ...industryMetrics.slice(1),
+  ];
+
+  const activeMetrics = Array.isArray(sitePage?.data?.metrics) && sitePage.data.metrics.length > 0
+    ? sitePage.data.metrics.map((m: any, i: number) => {
+        const fallback = dynamicMetrics[i % dynamicMetrics.length];
+        return {
+          value: m.value || fallback.value,
+          label: m.label || fallback.label,
+          desc: m.desc || fallback.desc,
+          icon: fallback.icon,
+          color: m.color || fallback.color,
+          glow: m.glow || fallback.glow,
+        };
+      })
+    : dynamicMetrics;
 
   return (
     <div className="flex flex-col w-full">
@@ -115,7 +141,7 @@ export default async function IndustriesPage() {
 
           {/* 4 Telemetry Metric Cards Strip */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            {industryMetrics.map((metric) => {
+            {activeMetrics.map((metric: any) => {
               const Icon = metric.icon;
               return (
                 <div
@@ -141,7 +167,15 @@ export default async function IndustriesPage() {
 
       {/* 2. Industries Grid Section */}
       <section className="py-20 bg-background">
-        <div className="container-tight">
+        <div className="container-tight space-y-12">
+          {sitePage?.body && (
+            <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industryList.map((ind) => {
               const Icon = ind.icon;

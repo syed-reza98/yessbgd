@@ -51,6 +51,33 @@ const VENTURE_ICONS: Record<string, any> = {
   "yess-law-chamber": Scale,
 };
 
+const defaultHomeImpactMetrics = [
+  {
+    value: "৳250M+",
+    label: "Sovereign Capital Deployed",
+    desc: "Across 13 wholly-owned and partnered subsidiaries",
+    color: "text-[#d4a359]",
+  },
+  {
+    value: "500+",
+    label: "Engineers & Specialists",
+    desc: "Distributed across 64 administrative districts",
+    color: "text-[#35b0aa]",
+  },
+  {
+    value: "99.8%",
+    label: "Enterprise Core SLA & Uptime",
+    desc: "Governed under zero-trust operational protocols",
+    color: "text-emerald-400",
+  },
+  {
+    value: "13",
+    label: "Scaled Subsidiaries",
+    desc: "Covering ERP, media, agri-tech, fintech and trade",
+    color: "text-[#d4a359]",
+  },
+];
+
 export function HomeClient({
   sitePage,
   initialVentures,
@@ -61,6 +88,7 @@ export function HomeClient({
   const [activeTab, setActiveTab] = useState<string>("all");
 
   const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : defaultVentures;
+  const effectiveImpactMetrics = (sitePage?.data?.metrics as typeof defaultHomeImpactMetrics) || defaultHomeImpactMetrics;
 
   const filteredVentures = effectiveVentures.filter((v: any) => {
     if (activeTab === "all") return true;
@@ -679,50 +707,19 @@ export function HomeClient({
       <section className="py-16 bg-[#061a1b] text-white border-y border-white/10" id="impact">
         <div className="container-tight">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div className="flex flex-col items-center">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#d4a359]">
-                ৳250M+
-              </span>
-              <span className="text-sm font-bold text-white mt-2">
-                Sovereign Capital Deployed
-              </span>
-              <span className="text-xs text-white/60 mt-1">
-                Across 13 wholly-owned and partnered subsidiaries
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#35b0aa]">
-                500+
-              </span>
-              <span className="text-sm font-bold text-white mt-2">
-                Engineers & Specialists
-              </span>
-              <span className="text-xs text-white/60 mt-1">
-                Distributed across 64 administrative districts
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-400">
-                99.8%
-              </span>
-              <span className="text-sm font-bold text-white mt-2">
-                Enterprise Core SLA & Uptime
-              </span>
-              <span className="text-xs text-white/60 mt-1">
-                Governed under zero-trust operational protocols
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#d4a359]">
-                13
-              </span>
-              <span className="text-sm font-bold text-white mt-2">
-                Scaled Subsidiaries
-              </span>
-              <span className="text-xs text-white/60 mt-1">
-                Covering ERP, media, agri-tech, fintech and trade
-              </span>
-            </div>
+            {effectiveImpactMetrics.map((m: any, idx: number) => (
+              <div key={idx} className="flex flex-col items-center">
+                <span className={`font-display font-extrabold text-4xl sm:text-5xl ${m.color || "text-[#d4a359]"}`}>
+                  {m.value}
+                </span>
+                <span className="text-sm font-bold text-white mt-2">
+                  {m.label}
+                </span>
+                <span className="text-xs text-white/60 mt-1">
+                  {m.desc}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

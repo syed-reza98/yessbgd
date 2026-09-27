@@ -1,16 +1,29 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { subscribeNewsletterAction } from "@/app/admin/actions";
 
 export function NewsletterSubscription() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setSubscribed(true);
+
+    setLoading(true);
+    setError(null);
+    try {
+      await subscribeNewsletterAction(email, "insights");
+      setSubscribed(true);
+    } catch (err: any) {
+      setError(err.message || "Failed to subscribe.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (subscribed) {
@@ -36,11 +49,15 @@ export function NewsletterSubscription() {
       />
       <button
         type="submit"
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0d6e6e] hover:bg-[#005454] text-white text-xs font-semibold shadow-md transition-all active:scale-95"
+        disabled={loading}
+        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0d6e6e] hover:bg-[#005454] text-white text-xs font-semibold shadow-md transition-all active:scale-95 disabled:opacity-50"
       >
-        <span>Subscribe</span>
+        {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+        <span>{loading ? "Joining..." : "Subscribe"}</span>
         <ArrowRight className="w-4 h-4" />
       </button>
+      {error && <span className="text-xs text-rose-400">{error}</span>}
     </form>
   );
 }
+

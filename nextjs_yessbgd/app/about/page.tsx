@@ -25,11 +25,15 @@ import {
   Check,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "About Us | YESS Bangladesh — Leading Institutional Venture Builder",
-  description:
-    "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("about");
+  return {
+    title: page?.seo_title || "About Us | YESS Bangladesh — Leading Institutional Venture Builder",
+    description:
+      page?.seo_description ||
+      "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech.",
+  };
+}
 
 const metrics = [
   {
@@ -205,6 +209,8 @@ const timelineMilestones = [
 
 export default async function AboutPage() {
   const sitePage = await getSitePage("about");
+  const activeMetrics = (sitePage?.data?.metrics as typeof metrics) || metrics;
+  const activePillars = (sitePage?.data?.pillars as typeof strategicPillars) || strategicPillars;
 
   return (
     <div className="flex flex-col w-full">
@@ -252,15 +258,15 @@ export default async function AboutPage() {
 
           {/* Strategic Key Metrics Bar (4 Prominent Metric Blocks) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
-            {metrics.map((metric) => {
-              const Icon = metric.icon;
+            {activeMetrics.map((metric: any) => {
+              const Icon = typeof metric.icon === "string" ? TrendingUp : (metric.icon || TrendingUp);
               return (
                 <div
                   key={metric.label}
                   className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#35b0aa]/50 transition-all group"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.accent} group-hover:scale-105 transition-transform`}>
+                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.accent || "text-[#35b0aa]"} group-hover:scale-105 transition-transform`}>
                       {metric.value}
                     </span>
                     <Icon className="w-6 h-6 text-[#35b0aa]" />
@@ -277,6 +283,14 @@ export default async function AboutPage() {
       {/* 2. Strategic Foundational Pillars Section */}
       <section className="py-20 bg-background relative border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {sitePage?.body && (
+            <div className="max-w-4xl mx-auto mb-16 p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
+
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
               PILLARS OF RESILIENCE
@@ -291,8 +305,8 @@ export default async function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {strategicPillars.map((pillar) => {
-              const Icon = pillar.icon;
+            {activePillars.map((pillar: any) => {
+              const Icon = typeof pillar.icon === "string" ? BrainCircuit : (pillar.icon || BrainCircuit);
               return (
                 <article
                   key={pillar.title}

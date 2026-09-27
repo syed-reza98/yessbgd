@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { PublicChrome } from "@/components/PublicChrome";
+import { getMenuItems, getCompanySettings, getVentures } from "@/lib/cms";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -48,11 +49,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [headerMenus, footerMenus, settings, ventures] = await Promise.all([
+    getMenuItems("header"),
+    getMenuItems("footer"),
+    getCompanySettings(),
+    getVentures(),
+  ]);
+
   return (
     <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col font-sans bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
@@ -63,9 +71,17 @@ export default function RootLayout({
           Skip to main content
         </a>
         <LanguageProvider>
-          <PublicChrome>{children}</PublicChrome>
+          <PublicChrome
+            headerMenus={headerMenus}
+            footerMenus={footerMenus}
+            settings={settings}
+            ventures={ventures}
+          >
+            {children}
+          </PublicChrome>
         </LanguageProvider>
       </body>
     </html>
   );
 }
+

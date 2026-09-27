@@ -26,6 +26,7 @@ export type CmsSitePage = {
   seo_description?: string | null;
   seo_description_bn?: string | null;
   is_published?: boolean;
+  data?: any;
 };
 
 // ── Cache Tags ─────────────────────────────────────────────────────────────
@@ -470,3 +471,231 @@ export async function getSetting<T = any>(key: string): Promise<T | null> {
     return null;
   }
 }
+
+// ── Menus & Navigation ──────────────────────────────────────────────────────
+
+export type CmsMenuItem = {
+  id: string;
+  location: string;
+  parent_id?: string | null;
+  depth?: number;
+  label: string;
+  label_bn?: string | null;
+  href: string;
+  group_label?: string | null;
+  badge?: string | null;
+  badge_bn?: string | null;
+  icon?: string | null;
+  sort_order: number;
+  is_external?: boolean;
+  is_published?: boolean;
+};
+
+const DEFAULT_HEADER_MENUS: CmsMenuItem[] = [
+  { id: "1", location: "header", label: "Home", label_bn: "হোম", href: "/", sort_order: 1, is_published: true },
+  { id: "2", location: "header", label: "About", label_bn: "আমাদের সম্পর্কে", href: "/about", sort_order: 2, is_published: true },
+  { id: "3", location: "header", label: "Ventures", label_bn: "ভেঞ্চার", href: "/ventures", badge: "13 Active", sort_order: 3, is_published: true },
+  { id: "4", location: "header", label: "Services", label_bn: "সার্ভিস", href: "/services", sort_order: 4, is_published: true },
+  { id: "5", location: "header", label: "Industries", label_bn: "ইন্ডাস্ট্রি", href: "/industries", sort_order: 5, is_published: true },
+  { id: "6", location: "header", label: "Insights", label_bn: "ইনসাইট", href: "/insights", badge: "Research", sort_order: 6, is_published: true },
+  { id: "7", location: "header", label: "Careers", label_bn: "ক্যারিয়ার", href: "/careers", badge: "Hiring", sort_order: 7, is_published: true },
+  { id: "8", location: "header", label: "Contact", label_bn: "যোগাযোগ", href: "/contact", sort_order: 8, is_published: true },
+];
+
+const DEFAULT_FOOTER_MENUS: CmsMenuItem[] = [
+  { id: "f1", location: "footer", label: "Board of Directors", label_bn: "পরিচালনা পর্ষদ", href: "/about/leadership", sort_order: 1, is_published: true },
+  { id: "f2", location: "footer", label: "Impact & Sustainability", label_bn: "টেকসই প্রভাব", href: "/about/standards", sort_order: 2, is_published: true },
+  { id: "f3", location: "footer", label: "Annual Reports & Awards", label_bn: "বার্ষিক প্রতিবেদন ও সম্মাননা", href: "/about/awards", sort_order: 3, is_published: true },
+  { id: "f4", location: "footer", label: "Careers at YESS", label_bn: "ইয়েস-এ ক্যারিয়ার", href: "/careers", sort_order: 4, is_published: true },
+  { id: "f5", location: "footer", label: "Privacy Policy", label_bn: "গোপনীয়তা নীতি", href: "/privacy", sort_order: 5, is_published: true },
+  { id: "f6", location: "footer", label: "Terms of Service", label_bn: "ব্যবহারের শর্তাবলী", href: "/terms", sort_order: 6, is_published: true },
+];
+
+/**
+ * Fetch navigation menu items for header or footer with resilient fallback.
+ */
+export async function getMenuItems(location: "header" | "footer" = "header"): Promise<CmsMenuItem[]> {
+  try {
+    const { data, error } = await supabase
+      .from("cms_menu_items")
+      .select("*")
+      .eq("location", location)
+      .eq("is_published", true)
+      .order("sort_order", { ascending: true });
+
+    if (error || !data || data.length === 0) {
+      return location === "header" ? DEFAULT_HEADER_MENUS : DEFAULT_FOOTER_MENUS;
+    }
+
+    return data as CmsMenuItem[];
+  } catch (err) {
+    console.warn(`⚠️ getMenuItems(${location}) fallback triggered:`, err);
+    return location === "header" ? DEFAULT_HEADER_MENUS : DEFAULT_FOOTER_MENUS;
+  }
+}
+
+// ── Global Company Settings ─────────────────────────────────────────────────
+
+export type CompanySettings = {
+  branding: {
+    companyName: string;
+    companyNameBn?: string;
+    legalName: string;
+    registrationNo?: string;
+    logoUrl?: string;
+    letterheadUrl?: string;
+    faviconUrl?: string;
+  };
+  contact: {
+    phone: string;
+    email: string;
+    investEmail?: string;
+    careersEmail?: string;
+    whatsapp?: string;
+    address: string;
+    addressBn?: string;
+  };
+  offices: {
+    motijheel: {
+      name: string;
+      nameBn?: string;
+      address: string;
+      badge?: string;
+      hours?: string;
+      lat?: number;
+      lng?: number;
+    };
+    gulshan: {
+      name: string;
+      nameBn?: string;
+      address: string;
+      badge?: string;
+      hours?: string;
+      lat?: number;
+      lng?: number;
+    };
+  };
+  socials: {
+    twitter?: string;
+    youtube?: string;
+    facebook?: string;
+    linkedin?: string;
+  };
+};
+
+const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
+  branding: {
+    companyName: "YESS Bangladesh",
+    companyNameBn: "ইয়েস বাংলাদেশ",
+    legalName: (companyContact as any).legalName || "Yess Bangla Private Limited",
+    registrationNo: "C-184920",
+    logoUrl: "/assets/yess-bangla-logo.png",
+    faviconUrl: "/favicon.png",
+  },
+  contact: {
+    phone: (companyContact as any).phone?.display || "+880 1805-464343",
+    email: (companyContact as any).email || "yessbangla.bd@gmail.com",
+    investEmail: "invest@yessbgd.com",
+    careersEmail: "careers@yessbgd.com",
+    whatsapp: "+880 1805-464343",
+    address: (companyContact as any).office || "Block-A, Road-3, House-127 (Green View), 1st Floor, Mirpur-12, Dhaka-1216",
+    addressBn: "ব্লক-এ, রোড-৩, হাউজ-১২৭ (গ্রিন ভিউ), ১ম তলা, মিরপুর-১২, ঢাকা-১২১৬",
+  },
+  offices: {
+    motijheel: {
+      name: "Corporate Headquarters",
+      nameBn: "কর্পোরেট হেডকোয়ার্টার",
+      address: "Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000",
+      badge: "Statutory & Board",
+      hours: "BST 09:00 - 18:00 (Sun - Thu)",
+      lat: 23.7289,
+      lng: 90.4184,
+    },
+    gulshan: {
+      name: "Regional Innovation Lab",
+      nameBn: "ইনোভেশন ও ডেলিভারি ল্যাব",
+      address: "House 42, Road 11, Gulshan-2, Dhaka-1212",
+      badge: "NOC / SRE Hub",
+      hours: "24/7 Operations",
+      lat: 23.7925,
+      lng: 90.4078,
+    },
+  },
+  socials: {
+    twitter: "https://x.com/yessbangla",
+    youtube: "https://youtube.com/@yessbangla",
+    facebook: "https://facebook.com/yessbangla",
+    linkedin: "https://linkedin.com/company/yessbangla",
+  },
+};
+
+/**
+ * Fetch consolidated company settings (branding, contact, offices, socials) with fallback.
+ */
+export async function getCompanySettings(): Promise<CompanySettings> {
+  try {
+    const { data, error } = await supabase
+      .from("cms_settings")
+      .select("key, value");
+
+    if (error || !data || data.length === 0) {
+      return DEFAULT_COMPANY_SETTINGS;
+    }
+
+    const brand = data.find((s) => s.key === "branding")?.value || {};
+    const contact = data.find((s) => s.key === "contact")?.value || {};
+    const offices = data.find((s) => s.key === "offices")?.value || {};
+    const socials = data.find((s) => s.key === "socials")?.value || {};
+
+    return {
+      branding: {
+        ...DEFAULT_COMPANY_SETTINGS.branding,
+        ...brand,
+      },
+      contact: {
+        ...DEFAULT_COMPANY_SETTINGS.contact,
+        ...contact,
+      },
+      offices: {
+        motijheel: {
+          ...DEFAULT_COMPANY_SETTINGS.offices.motijheel,
+          ...(offices.motijheel || {}),
+        },
+        gulshan: {
+          ...DEFAULT_COMPANY_SETTINGS.offices.gulshan,
+          ...(offices.gulshan || {}),
+        },
+      },
+      socials: {
+        ...DEFAULT_COMPANY_SETTINGS.socials,
+        ...socials,
+      },
+    };
+  } catch (err) {
+    console.warn("⚠️ getCompanySettings fallback triggered:", err);
+    return DEFAULT_COMPANY_SETTINGS;
+  }
+}
+
+/**
+ * Fetch a site page by path or slug (supports both core routes and custom /p/[slug] routes).
+ */
+export async function getPageByPathOrSlug(slugOrPath: string): Promise<CmsSitePage | null> {
+  try {
+    const cleanSlug = slugOrPath.replace(/^\/p\//, "").replace(/^\//, "");
+    const possiblePaths = [`/p/${cleanSlug}`, `/${cleanSlug}`, cleanSlug];
+
+    const { data, error } = await supabase
+      .from("cms_site_pages")
+      .select("*")
+      .or(`page.eq.${cleanSlug},path.in.(${possiblePaths.map((p) => `"${p}"`).join(",")})`)
+      .eq("is_published", true)
+      .maybeSingle();
+
+    if (error || !data) return null;
+    return data as CmsSitePage;
+  } catch (err) {
+    return null;
+  }
+}
+

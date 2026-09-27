@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getSitePage } from "@/lib/cms";
 import {
   ShieldCheck,
   Calendar,
@@ -12,11 +13,15 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | YESS Bangladesh",
-  description:
-    "How YESS Bangladesh collects, processes, retains, and protects personal data — adhering to GDPR, CCPA, and Bangladesh Data Protection principles.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("privacy");
+  return {
+    title: page?.seo_title || "Privacy Policy | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "How YESS Bangladesh collects, processes, retains, and protects personal data — adhering to GDPR, CCPA, and Bangladesh Data Protection principles.",
+  };
+}
 
 const privacySections = [
   {
@@ -91,7 +96,10 @@ const privacySections = [
   },
 ];
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const sitePage = await getSitePage("privacy");
+  const sections = (sitePage?.data?.sections as any[]) || privacySections;
+
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
@@ -117,22 +125,25 @@ export default function PrivacyPage() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— DATA PROTECTION &amp; PRIVACY ARCHITECTURE —</span>
+              <span>{sitePage?.hero_eyebrow || "— DATA PROTECTION & PRIVACY ARCHITECTURE —"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight mb-6 leading-tight">
-              Privacy{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Policy &amp; Data Covenant
-              </span>
-              .
+              {sitePage?.hero_title || (
+                <>
+                  Privacy{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Policy &amp; Data Covenant
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              Our commitments around data collection, sovereign cloud residency, retention schedules, and
-              candidate privacy rights across all YESS Bangladesh ventures.
+              {sitePage?.hero_subtitle || "Our commitments around data collection, sovereign cloud residency, retention schedules, and candidate privacy rights across all YESS Bangladesh ventures."}
             </p>
           </div>
 
@@ -191,16 +202,16 @@ export default function PrivacyPage() {
           <aside className="lg:col-span-4 sticky top-28 hidden lg:block">
             <div className="glass-card rounded-2xl p-6 border border-border space-y-4">
               <h2 className="text-xs font-extrabold uppercase tracking-wider text-primary pb-2 border-b border-border">
-                Privacy Framework (10 Sections)
+                Privacy Framework ({sections.length} Sections)
               </h2>
               <nav className="space-y-1.5 text-xs">
-                {privacySections.map((s) => (
+                {sections.map((s: any) => (
                   <a
-                    key={s.id}
-                    href={`#${s.id}`}
+                    key={s.id || s.title}
+                    href={`#${s.id || s.title}`}
                     className="flex items-center gap-2 py-1.5 px-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-muted transition-colors truncate"
                   >
-                    <span className="font-mono text-[10px] text-foreground/40 w-4">{s.num}.</span>
+                    <span className="font-mono text-[10px] text-foreground/40 w-4">{s.num || "•"}.</span>
                     <span className="truncate">{s.title}</span>
                   </a>
                 ))}
@@ -220,15 +231,15 @@ export default function PrivacyPage() {
 
           {/* Content Body (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
-            {privacySections.map((s) => (
+            {sections.map((s: any) => (
               <section
-                key={s.id}
-                id={s.id}
+                key={s.id || s.title}
+                id={s.id || s.title}
                 className="glass-card rounded-2xl p-7 border border-border hover:border-primary/40 transition-all space-y-3"
               >
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary font-mono font-bold text-xs flex items-center justify-center shrink-0">
-                    {s.num}
+                    {s.num || "§"}
                   </span>
                   <h2 className="text-base sm:text-lg font-display font-bold text-foreground">
                     {s.title}

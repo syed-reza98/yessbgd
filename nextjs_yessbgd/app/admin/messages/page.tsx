@@ -58,10 +58,13 @@ export default function MessagesInboxPage() {
   };
 
   const filtered = messages.filter((m) => {
+    const leadName = (m.name || m.full_name || "").toLowerCase();
+    const queryLower = query.toLowerCase();
     const matchesQuery =
-      m.name?.toLowerCase().includes(query.toLowerCase()) ||
-      m.email?.toLowerCase().includes(query.toLowerCase()) ||
-      (m.subject && m.subject.toLowerCase().includes(query.toLowerCase()));
+      leadName.includes(queryLower) ||
+      m.email?.toLowerCase().includes(queryLower) ||
+      (m.organization && m.organization.toLowerCase().includes(queryLower)) ||
+      (m.subject && m.subject.toLowerCase().includes(queryLower));
     const matchesFilter = statusFilter === "all" || m.status === statusFilter;
     return matchesQuery && matchesFilter;
   });
@@ -138,7 +141,14 @@ export default function MessagesInboxPage() {
                     }`}
                   >
                     <div>
-                      <div className="font-bold text-sm text-slate-900">{msg.name}</div>
+                      <div className="font-bold text-sm text-slate-900">
+                        {msg.name || msg.full_name || "Anonymous Lead"}
+                      </div>
+                      {msg.organization && (
+                        <div className="text-[11px] text-slate-500 font-medium">
+                          {msg.organization}
+                        </div>
+                      )}
                       <div className="text-xs text-amber-700 font-medium mt-0.5 truncate max-w-[200px]">
                         {msg.subject || msg.practice_area || "General Inquiry"}
                       </div>
@@ -171,8 +181,21 @@ export default function MessagesInboxPage() {
                   <h2 className="text-xl font-extrabold text-slate-900">
                     {selectedMsg.subject || selectedMsg.practice_area || "Inbound Contact Brief"}
                   </h2>
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 mt-2">
-                    <span className="font-semibold text-slate-900">{selectedMsg.name}</span>
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 mt-2">
+                    <span className="font-semibold text-slate-900">
+                      {selectedMsg.name || selectedMsg.full_name || "Anonymous Lead"}
+                    </span>
+                    {selectedMsg.organization && (
+                      <span className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px] font-medium">
+                        {selectedMsg.organization}
+                      </span>
+                    )}
+                    {selectedMsg.request_nda && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-bold">
+                        <ShieldCheck className="w-3 h-3 text-amber-600" />
+                        Bilateral NDA Requested
+                      </span>
+                    )}
                     <span className="flex items-center gap-1.5 font-mono">
                       <Mail className="w-3.5 h-3.5 text-amber-600" />
                       <a href={`mailto:${selectedMsg.email}`} className="hover:underline text-slate-800">{selectedMsg.email}</a>

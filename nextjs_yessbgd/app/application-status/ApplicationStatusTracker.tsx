@@ -38,7 +38,21 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 
-export function ApplicationStatusTracker() {
+interface ApplicationStatusTrackerProps {
+  initialSitePage?: {
+    hero_eyebrow?: string | null;
+    hero_title?: string | null;
+    hero_subtitle?: string | null;
+  } | null;
+  settings?: {
+    contact?: {
+      phone?: string;
+      email?: string;
+    };
+  } | null;
+}
+
+export function ApplicationStatusTracker({ initialSitePage, settings }: ApplicationStatusTrackerProps = {}) {
   const searchParams = useSearchParams();
   const queryRef = searchParams.get("ref");
   const queryEmail = searchParams.get("email");
@@ -125,7 +139,7 @@ export function ApplicationStatusTracker() {
             </span>
             <span className="hidden xl:inline text-foreground/20">|</span>
             <span className="hidden xl:inline text-foreground/70 text-[11px]">
-              Recruitment Hotline: <strong className="text-foreground font-semibold">+880 9638-445566</strong>
+              Recruitment Hotline: <strong className="text-foreground font-semibold">{settings?.contact?.phone || "+880 9638-445566"}</strong>
             </span>
           </div>
 
@@ -152,20 +166,26 @@ export function ApplicationStatusTracker() {
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
           </span>
           <span className="text-[11px] font-bold uppercase tracking-wider">
-            Recruitment Pipeline &amp; Candidate Telemetry
+            {initialSitePage?.hero_eyebrow || "Recruitment Pipeline & Candidate Telemetry"}
           </span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-foreground mb-4 tracking-tight">
-          Track Your{" "}
-          <span className="text-primary">
-            Application Status
-          </span>
+          {initialSitePage?.hero_title ? (
+            initialSitePage.hero_title
+          ) : (
+            <>
+              Track Your{" "}
+              <span className="text-primary">
+                Application Status
+              </span>
+            </>
+          )}
         </h1>
 
         <p className="text-xs sm:text-sm text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-          Real-time candidate telemetry for engineering, product, and consulting roles across YESS Bangladesh
-          ventures. Enter your tracking reference number and registered email to check status.
+          {initialSitePage?.hero_subtitle ||
+            "Real-time candidate telemetry for engineering, product, and consulting roles across YESS Bangladesh ventures. Enter your tracking reference number and registered email to check status."}
         </p>
       </section>
 

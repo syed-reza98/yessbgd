@@ -327,3 +327,22 @@ export async function updateMessageStatusAction(id: string, status: string, note
   await recordAudit(supabase, "UPDATE_STATUS", "contact_messages", id, { status, note });
   return { success: true };
 }
+
+// ── 10. Public Newsletter Subscription ─────────────────────────────────────
+export async function subscribeNewsletterAction(email: string, source: string = "footer") {
+  if (!email || !email.includes("@")) {
+    throw new Error("Please provide a valid corporate email address.");
+  }
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("newsletter_subscribers")
+    .upsert({ email: email.trim().toLowerCase(), source }, { onConflict: "email" });
+
+  if (error) {
+    console.warn("Newsletter subscription note:", error.message);
+  }
+
+  return { success: true };
+}
+

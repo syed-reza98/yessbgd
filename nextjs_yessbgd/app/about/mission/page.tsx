@@ -16,12 +16,19 @@ import {
   Sparkles,
 } from "lucide-react";
 import { aboutPillars } from "@/data/about";
+import { getSitePage } from "@/lib/cms";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Strategic Mission & Purpose | YESS Bangladesh",
-  description:
-    "Our mission is to empower organisations across Bangladesh with strategic consulting, sovereign technology, and measurable enterprise growth.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("about-mission");
+  return {
+    title: page?.seo_title || "Strategic Mission & Purpose | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      page?.hero_subtitle ||
+      "Our mission is to empower organisations across Bangladesh with strategic consulting, sovereign technology, and measurable enterprise growth.",
+  };
+}
 
 const missionMetrics = [
   {
@@ -58,8 +65,11 @@ const missionMetrics = [
   },
 ];
 
-export default function MissionPage() {
+export default async function MissionPage() {
+  const sitePage = await getSitePage("about-mission");
   const pillar = aboutPillars.find((p) => p.slug === "mission")!;
+  const activeMetrics = (sitePage?.data?.metrics as typeof missionMetrics) || missionMetrics;
+  const charter = sitePage?.data?.charter || {};
 
   return (
     <div className="flex flex-col w-full">
@@ -90,38 +100,45 @@ export default function MissionPage() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— STRATEGIC FOUNDATION &amp; PURPOSE —</span>
+              <span>{sitePage?.hero_eyebrow || "— STRATEGIC FOUNDATION & PURPOSE —"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6 leading-tight">
-              Our Sovereign Mission:{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Empowering Bangladesh&apos;s Enterprise Future
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Our Sovereign Mission:{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Empowering Bangladesh&apos;s Enterprise Future
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-3xl mb-10">
-              Empowering organizations across Bangladesh with strategic consulting, sovereign technology, and measurable enterprise growth that drives operational autonomy and institutional resilience.
+              {sitePage?.hero_subtitle ||
+                "Empowering organizations across Bangladesh with strategic consulting, sovereign technology, and measurable enterprise growth that drives operational autonomy and institutional resilience."}
             </p>
           </div>
 
           {/* 4 Metric Cards Strip (Identical to About / Ventures standard) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/10">
-            {missionMetrics.map((metric) => {
-              const Icon = metric.icon;
+            {activeMetrics.map((metric: any) => {
+              const Icon = typeof metric.icon === "string" ? Compass : (metric.icon || Compass);
               return (
                 <div
                   key={metric.label}
                   className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#35b0aa]/50 transition-all duration-200 group"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.color} group-hover:scale-105 transition-transform`}>
+                    <span className={`text-3xl sm:text-4xl font-extrabold ${metric.color || "text-[#35b0aa]"} group-hover:scale-105 transition-transform`}>
                       {metric.value}
                     </span>
-                    <Icon className={`w-6 h-6 ${metric.glow}`} />
+                    <Icon className={`w-6 h-6 ${metric.glow || "text-[#35b0aa]"}`} />
                   </div>
                   <div className="text-sm font-bold text-white mb-1">{metric.label}</div>
                   <p className="text-xs text-slate-400 leading-relaxed">{metric.desc}</p>
@@ -142,17 +159,18 @@ export default function MissionPage() {
               <Target className="h-7 w-7" />
             </div>
             <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-2">
-              OPERATING CHARTER & CORE MANDATE
+              {charter.tag || "OPERATING CHARTER & CORE MANDATE"}
             </span>
             <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground mb-4">
-              Translating Executive Strategy into Measurable Enterprise Power
+              {charter.title || "Translating Executive Strategy into Measurable Enterprise Power"}
             </h2>
             <blockquote className="text-base sm:text-lg leading-relaxed text-foreground/80 italic border-l-4 border-primary pl-4 my-6">
-              “Our mission is to be the most accountable consulting and technology partner for ambitious Bangladeshi organisations. We translate strategy into shipped product, measure outcomes in your operating metrics, and stay engaged long after launch. Every engagement is anchored in three commitments: clarity of scope, transparency of progress and ownership of outcomes.”
+              {charter.quote ||
+                "“Our mission is to be the most accountable consulting and technology partner for ambitious Bangladeshi organisations. We translate strategy into shipped product, measure outcomes in your operating metrics, and stay engaged long after launch. Every engagement is anchored in three commitments: clarity of scope, transparency of progress and ownership of outcomes.”"}
             </blockquote>
             <div className="flex items-center gap-3 pt-2 text-xs font-semibold text-foreground/70">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              <span>MANDATE PROTOCOL V4.2 — YESS Sovereign Holding Committee</span>
+              <span>{charter.footnote || "MANDATE PROTOCOL V4.2 — YESS Sovereign Holding Committee"}</span>
             </div>
           </div>
 

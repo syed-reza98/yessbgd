@@ -80,7 +80,17 @@ const FEATURED_VENTURES = [
   },
 ];
 
-export function Header() {
+import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
+
+export function Header({
+  headerMenus,
+  settings,
+  ventures,
+}: {
+  headerMenus?: CmsMenuItem[];
+  settings?: CompanySettings;
+  ventures?: any[];
+}) {
   const { language, setLanguage, t } = useLanguage();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -116,16 +126,49 @@ export function Header() {
     }, 180);
   };
 
-  const navLinks = [
-    { href: "/", label: t("nav.home", "Home") },
-    { href: "/about", label: t("nav.about", "About") },
-    { href: "/services", label: t("nav.services", "Services") },
-    // Ventures has its own dropdown slot
-    { href: "/industries", label: t("nav.industries", "Industries") },
-    { href: "/insights", label: t("nav.insights", "Insights") },
-    { href: "/careers", label: t("nav.careers", "Careers") },
-    { href: "/contact", label: t("nav.contact", "Contact") },
+  // Dynamic Navigation from CMS with fallback
+  const rawNavLinks = headerMenus && headerMenus.length > 0 ? headerMenus : [
+    { id: "1", href: "/", label: "Home", label_bn: "হোম" },
+    { id: "2", href: "/about", label: "About", label_bn: "আমাদের সম্পর্কে" },
+    { id: "3", href: "/services", label: "Services", label_bn: "সার্ভিস" },
+    { id: "4", href: "/ventures", label: "Ventures", label_bn: "ভেঞ্চার", badge: "13 Active" },
+    { id: "5", href: "/industries", label: "Industries", label_bn: "ইন্ডাস্ট্রি" },
+    { id: "6", href: "/insights", label: "Insights", label_bn: "ইনসাইট" },
+    { id: "7", href: "/careers", label: "Careers", label_bn: "ক্যারিয়ার", badge: "Hiring" },
+    { id: "8", href: "/contact", label: "Contact", label_bn: "যোগাযোগ" },
   ];
+
+  const getLabel = (item: { label: string; label_bn?: string | null }) => {
+    return language === "bn" && item.label_bn ? item.label_bn : item.label;
+  };
+
+  // Active ventures to display in mega-menu
+  const displayVentures = ventures && ventures.length > 0
+    ? ventures.slice(0, 6).map((v: any) => ({
+        slug: v.slug,
+        title: v.title,
+        category: v.category,
+        icon: Wrench,
+        logoUrl: v.logoUrl || v.image || `/coins/${v.slug}.png`,
+        href: `/ventures/${v.slug}`,
+      }))
+    : FEATURED_VENTURES;
+
+  // Contact & Brand settings
+  const phoneDisplay = settings?.contact?.phone || "+880 1805-464343";
+  const phoneTel = phoneDisplay.replace(/[^0-9+]/g, "");
+  const regNumber = settings?.branding?.registrationNo || "C-184920";
+  const logoUrl = settings?.branding?.logoUrl || "/assets/yess-bangla-logo.png";
+  const brandName = settings?.branding?.legalName || "Yess Bangla Private Limited";
+
+  const preVenturesLinks = rawNavLinks.filter((l) => ["/", "/about", "/services"].includes(l.href));
+  const postVenturesLinks = rawNavLinks.filter((l) => !["/", "/about", "/services", "/ventures"].includes(l.href));
+  const venturesItem = rawNavLinks.find((l) => l.href === "/ventures") || {
+    label: "Ventures",
+    label_bn: "ভেঞ্চার",
+    badge: `${ventures?.length || 13} Active`,
+  };
+
 
   return (
     <>
@@ -137,22 +180,22 @@ export function Header() {
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Dhaka BST Operational</span>
               <span className="text-white/40">|</span>
-              <span>Motijheel HQ & Gulshan Innovation Wing</span>
+              <span>{settings?.offices?.motijheel?.name || "Motijheel HQ"} & {settings?.offices?.gulshan?.name || "Gulshan Innovation Wing"}</span>
             </span>
             <span className="hidden md:inline text-white/40">•</span>
             <span className="hidden md:flex items-center gap-1.5">
               <ShieldCheck className="h-3.5 w-3.5 text-[#d4a359]" />
-              <span>Statutory RJSC Reg: C-184920</span>
+              <span>Statutory RJSC Reg: {regNumber}</span>
             </span>
           </div>
 
           <div className="flex items-center gap-4">
             <a
-              href="tel:+8801805464343"
+              href={`tel:${phoneTel}`}
               className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
               <Phone className="h-3 w-3 text-[#d4a359]" />
-              <span>+880 1805-464343</span>
+              <span>{phoneDisplay}</span>
             </a>
             <span className="text-white/30">|</span>
             <Link
@@ -191,8 +234,8 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative flex items-center justify-center transition-transform group-hover:scale-105">
               <Image
-                src="/assets/yess-bangla-logo.png"
-                alt="Yess Bangla Private Limited"
+                src={logoUrl}
+                alt={brandName}
                 width={130}
                 height={40}
                 className="h-8 sm:h-9 w-auto object-contain"
@@ -201,7 +244,7 @@ export function Header() {
             </div>
             <div className="hidden sm:flex flex-col pl-3 border-l border-slate-200 text-left">
               <span className="font-display font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 leading-tight">
-                Yess Bangla Private Limited
+                {brandName}
               </span>
               <span className="text-[10px] text-slate-500 font-medium tracking-wide mt-0.5">
                 Where Solution Begins
@@ -211,41 +254,27 @@ export function Header() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 relative">
-            {/* Home */}
-            <Link
-              href="/"
-              className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
-                pathname === "/"
-                  ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
-              }`}
-            >
-              {t("nav.home", "Home")}
-            </Link>
-
-            {/* About */}
-            <Link
-              href="/about"
-              className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
-                pathname === "/about" || pathname.startsWith("/about/")
-                  ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
-              }`}
-            >
-              {t("nav.about", "About")}
-            </Link>
-
-            {/* Services */}
-            <Link
-              href="/services"
-              className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
-                pathname === "/services" || pathname.startsWith("/services/")
-                  ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
-              }`}
-            >
-              {t("nav.services", "Services")}
-            </Link>
+            {preVenturesLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
+              return (
+                <Link
+                  key={link.id || link.href}
+                  href={link.href}
+                  className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
+                    isActive
+                      ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+                  }`}
+                >
+                  <span>{getLabel(link)}</span>
+                  {link.badge && (
+                    <span className="ml-1 px-1.5 py-0.2 rounded-full text-[9px] bg-emerald-100 text-emerald-800 font-bold">
+                      {link.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
 
             {/* Ventures Dropdown Trigger & Panel */}
             <div
@@ -264,7 +293,12 @@ export function Header() {
                 aria-expanded={venturesDropdownOpen}
                 aria-haspopup="true"
               >
-                <span>{t("nav.ventures", "Ventures")}</span>
+                <span>{getLabel(venturesItem)}</span>
+                {venturesItem.badge && (
+                  <span className="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-100 text-amber-900 font-bold">
+                    {venturesItem.badge}
+                  </span>
+                )}
                 <ChevronDown
                   className={`h-3.5 w-3.5 transition-transform duration-200 ${
                     venturesDropdownOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
@@ -285,18 +319,18 @@ export function Header() {
                       <span>Our Flagship Subsidiaries</span>
                     </span>
                     <span className="text-[11px] font-semibold text-slate-400">
-                      13 Sovereign Assets
+                      {ventures?.length || 13} Sovereign Assets
                     </span>
                   </div>
 
                   {/* 2-Column Grid matching reference UI */}
                   <div className="grid grid-cols-2 gap-2.5">
-                    {FEATURED_VENTURES.map((v) => {
-                      const Icon = v.icon;
+                    {displayVentures.map((v) => {
+                      const Icon = (v as any).icon || Wrench;
                       return (
                         <Link
                           key={v.slug}
-                          href={v.href}
+                          href={v.href || `/ventures/${v.slug}`}
                           className="group p-2.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all flex items-center gap-3 text-left"
                         >
                           <div className="relative w-11 h-11 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center p-1.5 group-hover:scale-105 group-hover:shadow-sm transition-all shrink-0">
@@ -334,7 +368,7 @@ export function Header() {
                       href="/ventures"
                       className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group"
                     >
-                      <span>Explore all 13 ventures</span>
+                      <span>Explore all {ventures?.length || 13} ventures</span>
                       <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -343,13 +377,11 @@ export function Header() {
             </div>
 
             {/* Remaining Nav Links */}
-            {navLinks.slice(3).map((link) => {
-              const isActive =
-                pathname === link.href || pathname.startsWith(link.href + "/");
-
+            {postVenturesLinks.map((link) => {
+              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
               return (
                 <Link
-                  key={link.href}
+                  key={link.id || link.href}
                   href={link.href}
                   className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all ${
                     isActive
@@ -357,11 +389,17 @@ export function Header() {
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
                   }`}
                 >
-                  {link.label}
+                  <span>{getLabel(link)}</span>
+                  {link.badge && (
+                    <span className="ml-1 px-1.5 py-0.2 rounded-full text-[9px] bg-emerald-100 text-emerald-800 font-bold">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}
           </nav>
+
 
           {/* Right Action Area */}
           <div className="hidden sm:flex items-center gap-3">
@@ -404,36 +442,25 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="fixed inset-x-3 top-[72px] max-h-[85vh] z-40 bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 overflow-y-auto flex flex-col gap-5 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200">
           <nav className="flex flex-col gap-1.5">
-            <Link
-              href="/"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/"
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.home", "Home")}
-            </Link>
-            <Link
-              href="/about"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/about" || pathname.startsWith("/about/")
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.about", "About")}
-            </Link>
-            <Link
-              href="/services"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/services" || pathname.startsWith("/services/")
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.services", "Services")}
-            </Link>
+            {preVenturesLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
+              return (
+                <Link
+                  key={link.id || link.href}
+                  href={link.href}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center justify-between ${
+                    isActive ? "bg-emerald-50 text-emerald-700" : "text-slate-700 hover:bg-slate-100"
+                  }`}
+                >
+                  <span>{getLabel(link)}</span>
+                  {link.badge && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                      {link.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
 
             {/* Mobile Ventures Accordion */}
             <div className="rounded-xl border border-slate-200/80 overflow-hidden my-1">
@@ -442,7 +469,7 @@ export function Header() {
                 onClick={() => setMobileVenturesOpen(!mobileVenturesOpen)}
                 className="w-full px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 bg-slate-50/70"
               >
-                <span>{t("nav.ventures", "Ventures")} (13 Subsidiaries)</span>
+                <span>{getLabel(venturesItem)} ({ventures?.length || 13} Subsidiaries)</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                     mobileVenturesOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
@@ -451,10 +478,10 @@ export function Header() {
               </button>
               {mobileVenturesOpen && (
                 <div className="p-3 bg-white space-y-1.5 border-t border-slate-200/80">
-                  {FEATURED_VENTURES.map((v) => (
+                  {displayVentures.map((v) => (
                     <Link
                       key={v.slug}
-                      href={v.href}
+                      href={v.href || `/ventures/${v.slug}`}
                       className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 text-xs font-semibold text-slate-800"
                     >
                       <span>{v.title}</span>
@@ -465,52 +492,32 @@ export function Header() {
                     href="/ventures"
                     className="block pt-2 text-center text-xs font-bold text-emerald-700 hover:underline"
                   >
-                    View All 13 Ventures →
+                    View All {ventures?.length || 13} Ventures →
                   </Link>
                 </div>
               )}
             </div>
 
-            <Link
-              href="/industries"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/industries" || pathname.startsWith("/industries/")
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.industries", "Industries")}
-            </Link>
-            <Link
-              href="/insights"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/insights" || pathname.startsWith("/insights/")
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.insights", "Insights")}
-            </Link>
-            <Link
-              href="/careers"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/careers" || pathname.startsWith("/careers/")
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.careers", "Careers")}
-            </Link>
-            <Link
-              href="/contact"
-              className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                pathname === "/contact"
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t("nav.contact", "Contact")}
-            </Link>
+            {postVenturesLinks.map((link) => {
+              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+              return (
+                <Link
+                  key={link.id || link.href}
+                  href={link.href}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center justify-between ${
+                    isActive ? "bg-emerald-50 text-emerald-700" : "text-slate-700 hover:bg-slate-100"
+                  }`}
+                >
+                  <span>{getLabel(link)}</span>
+                  {link.badge && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                      {link.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+
             <Link
               href="/application-status"
               className="px-4 py-2.5 rounded-xl text-sm font-bold text-emerald-700 bg-emerald-50/70 border border-emerald-200 mt-2 flex items-center justify-between"
@@ -527,20 +534,21 @@ export function Header() {
               Direct Corporate Desks
             </p>
             <a
-              href="tel:+8801805464343"
+              href={`tel:${phoneTel}`}
               className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 text-slate-700 text-xs font-semibold"
             >
               <Phone className="h-3.5 w-3.5 text-emerald-700" />
-              <span>+880 1805-464343 (Dhaka HQ)</span>
+              <span>{phoneDisplay} (Direct)</span>
             </a>
             <a
-              href="mailto:yessbangla.bd@gmail.com"
+              href={`mailto:${settings?.contact?.email || "yessbangla.bd@gmail.com"}`}
               className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 text-slate-700 text-xs font-semibold"
             >
               <Mail className="h-3.5 w-3.5 text-emerald-700" />
-              <span>yessbangla.bd@gmail.com</span>
+              <span>{settings?.contact?.email || "yessbangla.bd@gmail.com"}</span>
             </a>
           </div>
+
 
           <div className="pt-2">
             <Link

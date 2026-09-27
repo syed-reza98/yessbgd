@@ -10,11 +10,15 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Ventures Directory | YESS Bangladesh (yessbgd)",
-  description:
-    "Explore the 13 sovereign subsidiaries of YESS Bangladesh spanning enterprise cloud, media streaming, agritech IoT, and logistics.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("ventures");
+  return {
+    title: page?.seo_title || "Ventures Directory | YESS Bangladesh (yessbgd)",
+    description:
+      page?.seo_description ||
+      "Explore the sovereign subsidiaries of YESS Bangladesh spanning enterprise cloud, media streaming, agritech IoT, and logistics.",
+  };
+}
 
 const metrics = [
   {
@@ -56,6 +60,28 @@ export default async function VenturesPage() {
     getVentures(),
     getSitePage("ventures"),
   ]);
+
+  const dynamicMetrics = [
+    {
+      ...metrics[0],
+      value: String(venturesData && venturesData.length > 0 ? venturesData.length : 13),
+    },
+    ...metrics.slice(1),
+  ];
+
+  const activeMetrics = Array.isArray(sitePage?.data?.metrics) && sitePage.data.metrics.length > 0
+    ? sitePage.data.metrics.map((m: any, i: number) => {
+        const fallback = dynamicMetrics[i % dynamicMetrics.length];
+        return {
+          value: m.value || fallback.value,
+          label: m.label || fallback.label,
+          desc: m.desc || fallback.desc,
+          icon: fallback.icon,
+          color: m.color || fallback.color,
+          glow: m.glow || fallback.glow,
+        };
+      })
+    : dynamicMetrics;
 
   return (
     <div className="flex flex-col w-full">
@@ -103,7 +129,7 @@ export default async function VenturesPage() {
 
           {/* 4 Metric Cards Strip */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            {metrics.map((metric) => {
+            {activeMetrics.map((metric: any) => {
               const Icon = metric.icon;
               return (
                 <div
@@ -127,7 +153,15 @@ export default async function VenturesPage() {
 
       {/* 2. Directory Section with Filters & Interactive Fleet */}
       <section className="py-12 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          {sitePage?.body && (
+            <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
+
           <VenturesDirectory initialVentures={venturesData} />
         </div>
       </section>

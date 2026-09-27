@@ -1,11 +1,76 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, ShieldCheck, ArrowUpRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
+import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
+import { subscribeNewsletterAction } from "@/app/admin/actions";
 
-export function Footer() {
-  const { t } = useLanguage();
+export function Footer({
+  footerMenus,
+  settings,
+  ventures,
+}: {
+  footerMenus?: CmsMenuItem[];
+  settings?: CompanySettings;
+  ventures?: any[];
+}) {
+  const { t, language } = useLanguage();
+  const [subEmail, setSubEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
+  const [subSuccess, setSubSuccess] = useState(false);
+  const [subError, setSubError] = useState<string | null>(null);
+
+  const handleSubscribe = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!subEmail || !subEmail.includes("@")) return;
+
+    setSubscribing(true);
+    setSubError(null);
+    try {
+      await subscribeNewsletterAction(subEmail, "footer");
+      setSubSuccess(true);
+      setSubEmail("");
+      setTimeout(() => setSubSuccess(false), 5000);
+    } catch (err: any) {
+      setSubError(err.message || "Failed to subscribe.");
+    } finally {
+      setSubscribing(false);
+    }
+  };
+
+  const phoneDisplay = settings?.contact?.phone || "+880 1805-464343";
+  const phoneTel = phoneDisplay.replace(/[^0-9+]/g, "");
+  const emailDisplay = settings?.contact?.email || "yessbangla.bd@gmail.com";
+  const hqAddress = settings?.offices?.motijheel?.address || settings?.contact?.address || "Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000";
+  const labAddress = settings?.offices?.gulshan?.address || "Gulshan-2, Dhaka-1212, Bangladesh";
+  const regNumber = settings?.branding?.registrationNo || "C-184920";
+  const logoUrl = settings?.branding?.logoUrl || "/assets/yess-bangla-logo.png";
+  const brandName = settings?.branding?.companyName || "YESS Bangladesh";
+  const legalName = settings?.branding?.legalName || "Yess Bangla Private Limited";
+
+  const displayVentures = ventures && ventures.length > 0 ? ventures.slice(0, 6) : [
+    { slug: "yess-soft", title: "Yess Soft (ERP)" },
+    { slug: "shondhaan", title: "Shondhaan Search" },
+    { slug: "yess-organic-haat", title: "Organic Haat Agro" },
+    { slug: "akash-ott", title: "Akash OTT Media" },
+    { slug: "yess-fincorp", title: "Yess FinCorp" },
+    { slug: "deshlogix", title: "DeshLogix Express" },
+  ];
+
+  const defaultGovLinks = [
+    { href: "/about/leadership", label: "Board of Directors", label_bn: "পরিচালনা পর্ষদ" },
+    { href: "/about/standards", label: "Impact & Sustainability", label_bn: "টেকসই প্রভাব" },
+    { href: "/about/awards", label: "Annual Reports & Awards", label_bn: "বার্ষিক প্রতিবেদন ও সম্মাননা" },
+    { href: "/careers", label: "Careers at YESS", label_bn: "ইয়েস-এ ক্যারিয়ার" },
+    { href: "/privacy", label: "Privacy Policy", label_bn: "গোপনীয়তা নীতি" },
+    { href: "/terms", label: "Terms of Service", label_bn: "ব্যবহারের শর্তাবলী" },
+  ];
+
+  const govLinks = footerMenus && footerMenus.length > 0 ? footerMenus : defaultGovLinks;
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer data-public-footer="true" className="bg-[#061a1b] text-white/90 border-t border-white/10 pt-16 pb-24 lg:pb-12 relative z-10">
@@ -16,8 +81,8 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3">
               <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-white shadow-sm border border-white/20">
                 <img
-                  src="/assets/yess-bangla-logo.png"
-                  alt="YESS Bangladesh"
+                  src={logoUrl}
+                  alt={brandName}
                   className="h-8 w-auto object-contain"
                 />
               </div>
@@ -39,34 +104,38 @@ export function Footer() {
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-[#d4a359] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-white block">Dhaka Corporate HQ:</span>
-                  <span>Suite 804, City Center Tower, Motijheel C/A, Dhaka-1000</span>
+                  <span className="font-semibold text-white block">
+                    {settings?.offices?.motijheel?.name || "Dhaka Corporate HQ"}:
+                  </span>
+                  <span>{hqAddress}</span>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-[#35b0aa] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-white block">Regional Innovation Lab:</span>
-                  <span>Gulshan-2, Dhaka-1212, Bangladesh</span>
+                  <span className="font-semibold text-white block">
+                    {settings?.offices?.gulshan?.name || "Regional Innovation Lab"}:
+                  </span>
+                  <span>{labAddress}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2.5 pt-1">
                 <Phone className="h-4 w-4 text-[#d4a359] shrink-0" />
-                <a href="tel:+8801805464343" className="hover:text-white transition-colors">
-                  +880 1805-464343
+                <a href={`tel:${phoneTel}`} className="hover:text-white transition-colors">
+                  {phoneDisplay}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-[#35b0aa] shrink-0" />
-                <a href="mailto:yessbangla.bd@gmail.com" className="hover:text-white transition-colors">
-                  yessbangla.bd@gmail.com
+                <a href={`mailto:${emailDisplay}`} className="hover:text-white transition-colors">
+                  {emailDisplay}
                 </a>
               </div>
             </div>
 
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 w-fit text-xs text-white/60 mt-1">
               <ShieldCheck className="h-4 w-4 text-emerald-400" />
-              <span>Registration: RJSC GovBD / C-184920 • Founded in Dhaka</span>
+              <span>Registration: RJSC GovBD / {regNumber} • Founded in Dhaka</span>
             </div>
           </div>
 
@@ -76,41 +145,20 @@ export function Footer() {
               Ventures
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>
-                <Link href="/ventures/yess-soft" className="hover:text-[#d4a359] transition-colors flex items-center justify-between group">
-                  <span>Yess Soft (ERP)</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
-                  Shondhaan Search
-                </Link>
-              </li>
-              <li>
-                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
-                  Organic Haat Agro
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/akash-ott" className="hover:text-[#d4a359] transition-colors flex items-center justify-between group">
-                  <span>Akash OTT Media</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
-                  Yess FinCorp
-                </Link>
-              </li>
-              <li>
-                <Link href="/ventures" className="hover:text-[#d4a359] transition-colors">
-                  DeshLogix Express
-                </Link>
-              </li>
+              {displayVentures.map((v: any) => (
+                <li key={v.slug}>
+                  <Link
+                    href={`/ventures/${v.slug}`}
+                    className="hover:text-[#d4a359] transition-colors flex items-center justify-between group"
+                  >
+                    <span>{v.title}</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/ventures" className="text-emerald-400 font-semibold hover:underline block pt-1">
-                  All 13 Subsidiaries →
+                  All {ventures?.length || 13} Subsidiaries →
                 </Link>
               </li>
             </ul>
@@ -122,36 +170,13 @@ export function Footer() {
               Governance
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>
-                <Link href="/about/leadership" className="hover:text-[#d4a359] transition-colors">
-                  Board of Directors
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/standards" className="hover:text-[#d4a359] transition-colors">
-                  Impact & Sustainability
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/awards" className="hover:text-[#d4a359] transition-colors">
-                  Annual Reports
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-[#d4a359] transition-colors">
-                  Careers at YESS
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-[#d4a359] transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-[#d4a359] transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
+              {govLinks.map((link: any) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-[#d4a359] transition-colors">
+                    {language === "bn" && link.label_bn ? link.label_bn : link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -163,8 +188,9 @@ export function Footer() {
             <p className="text-xs text-white/70 leading-relaxed">
               Quarterly macro research, policy briefings, and sovereign technology dispatches delivered to institutional partners.
             </p>
-            {/* Inline Newsletter Subscribe Box */}
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2 mt-1">
+
+            {/* Newsletter Subscribe Box with Real DB Action */}
+            <form onSubmit={handleSubscribe} className="flex flex-col gap-2 mt-1">
               <label htmlFor="footer-sub-email" className="text-[11px] text-white/60">
                 Executive Briefing & Sector Reports
               </label>
@@ -172,17 +198,32 @@ export function Footer() {
                 <input
                   id="footer-sub-email"
                   type="email"
+                  required
+                  value={subEmail}
+                  onChange={(e) => setSubEmail(e.target.value)}
                   placeholder="corporate.email@domain.com"
                   className="bg-white/10 border border-white/20 rounded-xl px-3.5 py-2 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#35b0aa] w-full"
                 />
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-[#008744] hover:bg-[#059669] text-white font-bold text-xs shadow-sm transition-all whitespace-nowrap active:scale-95"
+                  disabled={subscribing}
+                  className="px-4 py-2 rounded-xl bg-[#008744] hover:bg-[#059669] text-white font-bold text-xs shadow-sm transition-all whitespace-nowrap active:scale-95 disabled:opacity-50 flex items-center gap-1.5"
                 >
-                  Subscribe
+                  {subscribing && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                  <span>{subscribing ? "Joining..." : "Subscribe"}</span>
                 </button>
               </div>
+              {subSuccess && (
+                <div className="flex items-center gap-1.5 text-xs text-emerald-400 mt-1 animate-in fade-in">
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                  <span>Subscribed to YESS Institutional Intelligence!</span>
+                </div>
+              )}
+              {subError && (
+                <span className="text-xs text-rose-400 mt-1">{subError}</span>
+              )}
             </form>
+
             <div className="pt-2">
               <Link
                 href="/application-status"
@@ -198,7 +239,7 @@ export function Footer() {
         {/* Bottom Copyright & Compliance Bar */}
         <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-xs text-white/60 gap-4">
           <div>
-            © 2025 YESS Bangladesh (yessbgd). All rights reserved. Pioneering institutional venture building.
+            © {currentYear} {brandName} ({legalName}). All rights reserved.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs">
             <Link className="hover:text-[#d4a359] transition-colors" href="/ventures">
@@ -225,3 +266,4 @@ export function Footer() {
     </footer>
   );
 }
+

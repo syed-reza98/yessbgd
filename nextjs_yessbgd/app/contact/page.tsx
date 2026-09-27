@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactFormAndLocator } from "@/components/ContactFormAndLocator";
+import { getSitePage, getCompanySettings } from "@/lib/cms";
 import {
   Clock,
   Building,
@@ -13,11 +14,15 @@ import {
   GitBranch,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Contact & Dual-Office Locator | YESS Bangladesh",
-  description:
-    "Connect directly with managing partners, venture leads, and engineering directors. Dual-campus innovation labs in Motijheel HQ and Gulshan-2, Dhaka.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("contact");
+  return {
+    title: page?.seo_title || "Contact & Dual-Office Locator | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "Connect directly with managing partners, venture leads, and engineering directors. Dual-campus innovation labs in Motijheel HQ and Gulshan-2, Dhaka.",
+  };
+}
 
 const telemetryBadges = [
   {
@@ -80,7 +85,39 @@ const faqCards = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [sitePage, settings] = await Promise.all([
+    getSitePage("contact"),
+    getCompanySettings(),
+  ]);
+
+  const activeBadges = Array.isArray(sitePage?.data?.badges) && sitePage.data.badges.length > 0
+    ? sitePage.data.badges.map((badge: any, index: number) => {
+        const fallback = telemetryBadges[index % telemetryBadges.length];
+        return {
+          icon: fallback.icon,
+          title: badge.title || badge.value || fallback.title,
+          desc: badge.desc || badge.label || fallback.desc,
+          color: badge.color || fallback.color,
+          glow: badge.glow || fallback.glow,
+        };
+      })
+    : telemetryBadges;
+
+  const activeFaqs = Array.isArray(sitePage?.data?.faqs) && sitePage.data.faqs.length > 0
+    ? sitePage.data.faqs.map((faq: any, index: number) => {
+        const fallback = faqCards[index % faqCards.length];
+        return {
+          icon: fallback.icon,
+          question: faq.question || faq.q || fallback.question,
+          answer: faq.answer || faq.a || fallback.answer,
+          action: faq.action || fallback.action,
+          href: faq.href || fallback.href,
+          download: typeof faq.download === "boolean" ? faq.download : fallback.download,
+        };
+      })
+    : faqCards;
+
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
@@ -106,29 +143,31 @@ export default function ContactPage() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— DIRECT INSTITUTIONAL CHANNELS —</span>
+              <span>{sitePage?.hero_eyebrow || "— DIRECT INSTITUTIONAL CHANNELS —"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight mb-6 leading-tight">
-              Connect With Bangladesh&apos;s{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Venture Ecosystem
-              </span>
-              .
+              {sitePage?.hero_title || (
+                <>
+                  Connect With Bangladesh&apos;s{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Venture Ecosystem
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              Engage our managing partners, venture leads, and engineering directors directly. Guaranteed
-              executive response within one business day for institutional inquiries and sovereign tech
-              partnerships.
+              {sitePage?.hero_subtitle || "Engage our managing partners, venture leads, and engineering directors directly. Guaranteed executive response within one business day for institutional inquiries and sovereign tech partnerships."}
             </p>
           </div>
 
           {/* Telemetry Metric Cards Strip (4 Glass Cards) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            {telemetryBadges.map((badge) => {
+            {activeBadges.map((badge: any) => {
               const Icon = badge.icon;
               return (
                 <div
@@ -153,8 +192,16 @@ export default function ContactPage() {
 
       {/* Main Dual-Column Engagement Section */}
       <main className="py-16 sm:py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ContactFormAndLocator />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {sitePage?.body && (
+            <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
+
+          <ContactFormAndLocator settings={settings} />
         </div>
       </main>
 
@@ -173,7 +220,7 @@ export default function ContactPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {faqCards.map((faq) => {
+            {activeFaqs.map((faq: any) => {
               const Icon = faq.icon;
               return (
                 <div

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -18,11 +19,15 @@ import { PageHero } from "@/components/PageHero";
 import { getServices, getSitePage } from "@/lib/cms";
 import { services as fallbackServices } from "@/data/services";
 
-export const metadata = {
-  title: "Services & Solutions | YESS Bangladesh",
-  description:
-    "Enterprise cloud engineering, OTT media platforms, bespoke software, and agritech systems with transparent pricing and SLA guarantees.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("services");
+  return {
+    title: page?.seo_title || "Services & Solutions | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "Enterprise cloud engineering, OTT media platforms, bespoke software, and agritech systems with transparent pricing and SLA guarantees.",
+  };
+}
 
 const engagementModels = [
   {
@@ -73,6 +78,9 @@ export default async function ServicesPage() {
   ]);
 
   const serviceList = allServices && allServices.length > 0 ? allServices : fallbackServices;
+  const activeEngagementModels = Array.isArray(sitePage?.data?.engagementModels) && sitePage.data.engagementModels.length > 0
+    ? sitePage.data.engagementModels
+    : engagementModels;
 
   return (
     <div className="flex flex-col w-full">
@@ -126,7 +134,7 @@ export default async function ServicesPage() {
                 <Server className="h-5 w-5 text-emerald-400" />
               </div>
               <div className="font-display text-3xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
-                6
+                {serviceList.length}
               </div>
               <div className="text-xs text-slate-300/80 font-medium">Core Practice Disciplines</div>
             </div>
@@ -170,6 +178,14 @@ export default async function ServicesPage() {
       {/* 1. Practice Areas Grid */}
       <section className="py-20 bg-background">
         <div className="container-tight">
+          {sitePage?.body && (
+            <div className="max-w-4xl mx-auto mb-14 p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
+
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs font-bold text-primary uppercase tracking-widest">
               CAPABILITIES DIRECTORY
@@ -242,7 +258,7 @@ export default async function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {engagementModels.map((model) => (
+            {activeEngagementModels.map((model: any) => (
               <div
                 key={model.name}
                 className={`rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 relative ${
@@ -273,7 +289,7 @@ export default async function ServicesPage() {
                   </p>
 
                   <ul className="mt-6 space-y-2.5 border-t border-border pt-5">
-                    {model.features.map((f) => (
+                    {model.features?.map((f: any) => (
                       <li key={f} className="flex items-start gap-2.5 text-xs text-foreground/80 font-medium">
                         <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                         <span>{f}</span>

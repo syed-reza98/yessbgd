@@ -28,11 +28,15 @@ import {
   Search,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Careers Hub & Talent Portal | YESS Bangladesh",
-  description:
-    "Join an institutional ecosystem of 500+ engineers, product architects, and operations leaders building sovereign technologies and market champions across Bangladesh.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("careers");
+  return {
+    title: page?.seo_title || "Careers Hub & Talent Portal | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "Join an institutional ecosystem of 500+ engineers, product architects, and operations leaders building sovereign technologies and market champions across Bangladesh.",
+  };
+}
 
 const culturePillars = [
   {
@@ -136,6 +140,32 @@ export default async function CareersPage() {
     getSitePage("careers"),
   ]);
 
+  const openRolesCount = allOpenings && allOpenings.length > 0 ? allOpenings.length : 12;
+
+  const activePillars = Array.isArray(sitePage?.data?.culture) && sitePage.data.culture.length > 0
+    ? sitePage.data.culture.map((p: any, i: number) => ({
+        icon: culturePillars[i % culturePillars.length]?.icon || Terminal,
+        title: p.title || "",
+        desc: p.desc || "",
+      }))
+    : culturePillars;
+
+  const activePerks = Array.isArray(sitePage?.data?.perks) && sitePage.data.perks.length > 0
+    ? sitePage.data.perks.map((p: any, i: number) => ({
+        icon: perks[i % perks.length]?.icon || Shield,
+        title: p.title || "",
+        desc: p.desc || "",
+      }))
+    : perks;
+
+  const activeTestimonials = Array.isArray(sitePage?.data?.testimonials) && sitePage.data.testimonials.length > 0
+    ? sitePage.data.testimonials
+    : testimonials;
+
+  const activeFaqs = Array.isArray(sitePage?.data?.faqs) && sitePage.data.faqs.length > 0
+    ? sitePage.data.faqs
+    : hiringFaqs;
+
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
@@ -194,7 +224,7 @@ export default async function CareersPage() {
                 href="#open-roles"
                 className="inline-flex items-center gap-2 bg-[#0d6e6e] hover:bg-[#0d6e6e]/90 text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg border border-[#35b0aa]/50 transition-all active:scale-95 cursor-pointer"
               >
-                <span>Explore 12 Open Roles</span>
+                <span>Explore {openRolesCount} Open Roles</span>
                 <ArrowRight className="w-4 h-4 text-[#f6c87a]" />
               </a>
 
@@ -259,6 +289,16 @@ export default async function CareersPage() {
 
       {/* Main Careers Content */}
       <main className="py-16 sm:py-20 space-y-20 bg-background">
+        {sitePage?.body && (
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Institutional Values & Culture */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -277,7 +317,7 @@ export default async function CareersPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {culturePillars.map((p) => {
+          {activePillars.map((p: any) => {
             const Icon = p.icon;
             return (
               <div
@@ -312,7 +352,7 @@ export default async function CareersPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {perks.map((perk) => {
+            {activePerks.map((perk: any) => {
               const Icon = perk.icon;
               return (
                 <div
@@ -465,7 +505,7 @@ export default async function CareersPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t) => (
+          {activeTestimonials.map((t: any) => (
             <div key={t.name} className="glass-card rounded-2xl p-7 border border-border flex flex-col justify-between">
               <p className="text-xs sm:text-sm text-foreground/75 italic leading-relaxed mb-6">
                 &ldquo;{t.quote}&rdquo;
@@ -482,7 +522,7 @@ export default async function CareersPage() {
       {/* Hiring FAQs Accordion */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ServiceFaqDrawer
-          faqs={hiringFaqs}
+          faqs={activeFaqs}
           title="Frequently Asked Hiring Questions"
           subtitle="Answers to common candidate queries regarding visas, probationary timelines, equity vesting, and technology stack standards."
         />

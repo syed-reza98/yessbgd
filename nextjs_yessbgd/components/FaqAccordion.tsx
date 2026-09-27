@@ -15,7 +15,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-type FaqItem = {
+export type FaqItem = {
   id: string;
   category: string;
   question: string;
@@ -23,7 +23,8 @@ type FaqItem = {
   tags: string[];
 };
 
-const faqData: FaqItem[] = [
+export const defaultFaqData: FaqItem[] = [
+
   {
     id: "ip-ownership",
     category: "Ventures & IP",
@@ -107,10 +108,12 @@ const categories = [
   "Ventures & IP",
 ];
 
-export function FaqAccordion() {
+export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
   const [selectedCategory, setSelectedCategory] = useState("All Questions");
   const [searchQuery, setSearchQuery] = useState("");
   const [openIds, setOpenIds] = useState<string[]>(["ip-ownership", "pricing-models"]);
+
+  const effectiveFaqs = initialFaqs && initialFaqs.length > 0 ? initialFaqs : defaultFaqData;
 
   const toggleOpen = (id: string) => {
     setOpenIds((prev) =>
@@ -119,7 +122,7 @@ export function FaqAccordion() {
   };
 
   const filteredFaqs = useMemo(() => {
-    return faqData.filter((item) => {
+    return effectiveFaqs.filter((item) => {
       const matchCategory =
         selectedCategory === "All Questions" || item.category === selectedCategory;
       const matchSearch =
@@ -127,6 +130,7 @@ export function FaqAccordion() {
         item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+
 
       return matchCategory && matchSearch;
     });
@@ -178,8 +182,8 @@ export function FaqAccordion() {
         {categories.map((cat) => {
           const count =
             cat === "All Questions"
-              ? faqData.length
-              : faqData.filter((f) => f.category === cat).length;
+              ? effectiveFaqs.length
+              : effectiveFaqs.filter((f) => f.category === cat).length;
           const active = selectedCategory === cat;
 
           return (

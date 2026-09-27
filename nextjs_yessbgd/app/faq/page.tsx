@@ -14,44 +14,65 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Corporate FAQ & Knowledge Base | YESS Bangladesh",
-  description:
-    "Everything you need to know about our engagement models, sovereign technology architectures, delivery timelines, pricing, and national operations across Bangladesh.",
-};
+import { getSitePage } from "@/lib/cms";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("faq");
+  return {
+    title: page?.seo_title || "Corporate FAQ & Knowledge Base | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "Everything you need to know about our engagement models, sovereign technology architectures, delivery timelines, pricing, and national operations across Bangladesh.",
+  };
+}
 
 const trustMetrics = [
   {
+    title: "100% IP",
+    desc: "Foreground IP fully assigned to client upon milestone settlement.",
     icon: Code,
-    title: "100% IP Handover",
-    desc: "Clear client code & schema ownership",
-    color: "text-white",
+    color: "text-[#35b0aa]",
     glow: "text-[#35b0aa]",
   },
   {
+    title: "24/7 SLA",
+    desc: "Continuous SRE monitoring & guaranteed support response.",
     icon: Headphones,
-    title: "24/7 Tier-3 SLA",
-    desc: "Guaranteed enterprise response & uptime",
     color: "text-[#d4a359]",
     glow: "text-[#f6c87a]",
   },
   {
+    title: "Dual HQ",
+    desc: "Motijheel commercial center and Gulshan tech hub.",
     icon: MapPin,
-    title: "64 Districts",
-    desc: "Nationwide operational reach & field ops",
     color: "text-white",
-    glow: "text-[#35b0aa]",
+    glow: "text-emerald-400",
   },
   {
+    title: "NDA Guard",
+    desc: "Bilateral non-disclosure executed before technical deep-dive.",
     icon: Lock,
-    title: "Bilateral NDA First",
-    desc: "Guaranteed institutional confidentiality",
-    color: "text-[#d4a359]",
-    glow: "text-[#f6c87a]",
+    color: "text-[#f6c87a]",
+    glow: "text-[#d4a359]",
   },
 ];
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const sitePage = await getSitePage("faq");
+
+  const activeMetrics = Array.isArray(sitePage?.data?.metrics) && sitePage.data.metrics.length > 0
+    ? sitePage.data.metrics.map((m: any, i: number) => {
+        const fallback = trustMetrics[i % trustMetrics.length];
+        return {
+          title: m.title || m.label || fallback.title,
+          desc: m.desc || fallback.desc,
+          icon: fallback.icon,
+          color: m.color || fallback.color,
+          glow: m.glow || fallback.glow,
+        };
+      })
+    : trustMetrics;
+
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
@@ -81,28 +102,31 @@ export default function FaqPage() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— KNOWLEDGE BASE &amp; CLIENT ADVISORY —</span>
+              <span>{sitePage?.hero_eyebrow || "— KNOWLEDGE BASE & CLIENT ADVISORY —"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight mb-6 leading-tight">
-              Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Questions
-              </span>
-              .
+              {sitePage?.hero_title || (
+                <>
+                  Frequently Asked{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Questions
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              Everything you need to know about our engagement models, sovereign technology architectures,
-              delivery timelines, pricing, and national operations across Bangladesh.
+              {sitePage?.hero_subtitle || "Everything you need to know about our engagement models, sovereign technology architectures, delivery timelines, pricing, and national operations across Bangladesh."}
             </p>
           </div>
 
           {/* Quick Trust Strip (4 Glass Cards) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            {trustMetrics.map((item) => {
+            {activeMetrics.map((item: any) => {
               const Icon = item.icon;
               return (
                 <div
@@ -125,27 +149,35 @@ export default function FaqPage() {
 
       {/* Main FAQ Accordion with Categorized Tabs */}
       <main className="py-16 sm:py-20 bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FaqAccordion />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {sitePage?.body && (
+            <div className="p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
 
-        {/* Still Have Questions CTA */}
-        <div className="mt-16 p-8 rounded-3xl bg-card border border-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-          <div className="space-y-1">
-            <h3 className="font-display font-bold text-xl text-foreground">
-              Still have questions about institutional partnerships?
-            </h3>
-            <p className="text-sm text-foreground/70">
-              Connect with our advisory directors for bilateral discussions under strict NDA.
-            </p>
+          <FaqAccordion initialFaqs={sitePage?.data?.faqs} />
+
+          {/* Still Have Questions CTA */}
+          <div className="mt-16 p-8 rounded-3xl bg-card border border-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div className="space-y-1">
+              <h3 className="font-display font-bold text-xl text-foreground">
+                Still have questions about institutional partnerships?
+              </h3>
+              <p className="text-sm text-foreground/70">
+                Connect with our advisory directors for bilateral discussions under strict NDA.
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 shrink-0"
+            >
+              <span>Speak With Partners</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 shrink-0"
-          >
-            <span>Speak With Partners</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
         </div>
       </main>
     </div>

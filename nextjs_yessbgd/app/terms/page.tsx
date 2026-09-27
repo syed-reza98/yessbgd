@@ -11,12 +11,18 @@ import {
   ChevronRight,
   Sparkles,
 } from "lucide-react";
+import { getSitePage } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | YESS Bangladesh",
-  description:
-    "The master institutional agreement governing enterprise software deliverables, Statements of Work (SOW), foreground intellectual property transfer, and binding dispute resolution with YESS Bangladesh.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("terms");
+  return {
+    title: page?.seo_title || "Terms of Service | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      page?.hero_subtitle ||
+      "The master institutional agreement governing enterprise software deliverables, Statements of Work (SOW), foreground intellectual property transfer, and binding dispute resolution with YESS Bangladesh.",
+  };
+}
 
 const clauses = [
   {
@@ -119,7 +125,11 @@ const clauses = [
   },
 ];
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const sitePage = await getSitePage("terms");
+  const activeClauses = (sitePage?.data?.clauses as typeof clauses) || clauses;
+  const meta = sitePage?.data?.meta || {};
+
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
@@ -145,23 +155,28 @@ export default function TermsPage() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#35b0aa]/40 text-[#f6c87a] text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-inner">
               <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
-              <span>— STATUTORY CORPORATE GOVERNANCE &amp; LEGAL FRAMEWORK —</span>
+              <span>{sitePage?.hero_eyebrow || "— STATUTORY CORPORATE GOVERNANCE & LEGAL FRAMEWORK —"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight mb-6 leading-tight">
-              Terms of{" "}
-              <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
-                Institutional Service
-              </span>
-              .
+              {sitePage?.hero_title ? (
+                sitePage.hero_title
+              ) : (
+                <>
+                  Terms of{" "}
+                  <span className="bg-gradient-to-r from-[#35b0aa] via-[#84d4d3] to-[#d4a359] bg-clip-text text-transparent">
+                    Institutional Service
+                  </span>
+                  .
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl leading-relaxed mb-10">
-              The master institutional agreement governing enterprise software deliverables, Statements of
-              Work (SOW), foreground intellectual property transfer, statutory withholding tax, sovereign
-              data residency, and binding dispute resolution with YESS Bangladesh.
+              {sitePage?.hero_subtitle ||
+                "The master institutional agreement governing enterprise software deliverables, Statements of Work (SOW), foreground intellectual property transfer, statutory withholding tax, sovereign data residency, and binding dispute resolution with YESS Bangladesh."}
             </p>
           </div>
 
@@ -176,7 +191,7 @@ export default function TermsPage() {
                   Document Release
                 </span>
                 <span className="text-xs font-bold text-white mt-0.5 block">
-                  Version 2.4 (Statutory Revision)
+                  {meta.releaseVersion || "Version 2.4 (Statutory Revision)"}
                 </span>
               </div>
             </div>
@@ -190,7 +205,7 @@ export default function TermsPage() {
                   Effective Date
                 </span>
                 <span className="text-xs font-bold text-white mt-0.5 block">
-                  September 2026 (Operational)
+                  {meta.effectiveDate || "September 2026 (Operational)"}
                 </span>
               </div>
             </div>
@@ -204,7 +219,7 @@ export default function TermsPage() {
                   Legal Jurisdiction
                 </span>
                 <span className="text-xs font-bold text-white mt-0.5 block">
-                  Courts of Dhaka, Bangladesh (RJSC C-184920)
+                  {meta.jurisdiction || "Courts of Dhaka, Bangladesh (RJSC C-184920)"}
                 </span>
               </div>
             </div>
@@ -223,7 +238,7 @@ export default function TermsPage() {
                 Table of Contents (14 Clauses)
               </h2>
               <nav className="space-y-1.5 text-xs">
-                {clauses.map((c) => (
+                {activeClauses.map((c) => (
                   <a
                     key={c.id}
                     href={`#${c.id}`}
@@ -249,7 +264,7 @@ export default function TermsPage() {
 
           {/* Clause Content Body (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
-            {clauses.map((c) => (
+            {activeClauses.map((c) => (
               <section
                 key={c.id}
                 id={c.id}

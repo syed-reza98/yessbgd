@@ -5,11 +5,15 @@ import { NewsletterSubscription } from "@/components/NewsletterSubscription";
 import { BookOpen, Users, BarChart3, ShieldCheck, Sparkles } from "lucide-react";
 import { getInsights, getSitePage } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Insights & Thought Leadership Hub | YESS Bangladesh",
-  description:
-    "Proprietary research, macroeconomic analysis, and engineering whitepapers published by YESS venture architects and sector specialists.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getSitePage("insights");
+  return {
+    title: page?.seo_title || "Insights & Thought Leadership Hub | YESS Bangladesh",
+    description:
+      page?.seo_description ||
+      "Proprietary research, macroeconomic analysis, and engineering whitepapers published by YESS venture architects and sector specialists.",
+  };
+}
 
 const editorialMetrics = [
   {
@@ -51,6 +55,28 @@ export default async function InsightsPage() {
     getInsights(),
     getSitePage("insights"),
   ]);
+
+  const dynamicMetrics = [
+    {
+      ...editorialMetrics[0],
+      val: `${allInsights.length || 24}+`,
+    },
+    ...editorialMetrics.slice(1),
+  ];
+
+  const activeMetrics = Array.isArray(sitePage?.data?.metrics) && sitePage.data.metrics.length > 0
+    ? sitePage.data.metrics.map((m: any, i: number) => {
+        const fallback = dynamicMetrics[i % dynamicMetrics.length];
+        return {
+          val: m.val || m.value || fallback.val,
+          title: m.title || m.label || fallback.title,
+          desc: m.desc || fallback.desc,
+          icon: fallback.icon,
+          valColor: m.valColor || m.color || fallback.valColor,
+          glow: m.glow || fallback.glow,
+        };
+      })
+    : dynamicMetrics;
 
   return (
     <div className="flex flex-col w-full">
@@ -101,7 +127,7 @@ export default async function InsightsPage() {
 
           {/* Editorial Telemetry Metric Strip (4 Cards) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-            {editorialMetrics.map((m) => {
+            {activeMetrics.map((m: any) => {
               const Icon = m.icon;
               return (
                 <div
@@ -132,6 +158,14 @@ export default async function InsightsPage() {
       {/* Main Content Area */}
       <main className="py-16 sm:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          {sitePage?.body && (
+            <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-border">
+              <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-foreground/80 leading-relaxed whitespace-pre-line">
+                {sitePage.body}
+              </div>
+            </div>
+          )}
+
           <InsightsDirectory initialInsights={allInsights} />
 
           {/* Institutional Intelligence Dispatch Newsletter */}
