@@ -1,125 +1,33 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
-  Code2,
-  Tv,
-  LayoutGrid,
   ArrowRight,
-  ArrowUpRight,
-  CheckCircle2,
-  Download,
-  Building2,
-  ShieldCheck,
-  Cpu,
-  Phone,
-  Radio,
-  Briefcase,
-  Globe,
-  Sparkles,
-  Server,
-  PlayCircle,
-  Leaf,
-  Plane,
-  Scale,
-  ShoppingBasket,
-  Newspaper,
-  Cloud,
-  Flag,
-  Users,
-  MapPin,
   Play,
-  Star,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { ventures as defaultVentures } from "@/data/ventures";
-import { HomeVenturesFilter } from "@/components/home/HomeVenturesFilter";
+import { useLanguage } from "@/components/LanguageProvider";
 
+interface HomeClientProps {
+  sitePage?: unknown;
+  initialVentures?: unknown[];
+}
 
-
-
-const defaultHomeImpactMetrics = [
-  {
-    value: "৳250M+",
-    label: "Sovereign Capital Deployed",
-    desc: "Across 13 wholly-owned and partnered subsidiaries",
-    color: "text-amber-700",
-  },
-  {
-    value: "500+",
-    label: "Engineers & Specialists",
-    desc: "Distributed across 64 administrative districts",
-    color: "text-[#35b0aa]",
-  },
-  {
-    value: "99.8%",
-    label: "Enterprise Core SLA & Uptime",
-    desc: "Governed under zero-trust operational protocols",
-    color: "text-emerald-400",
-  },
-  {
-    value: "13",
-    label: "Scaled Subsidiaries",
-    desc: "Covering ERP, media, agri-tech, fintech and trade",
-    color: "text-amber-700",
-  },
-];
-
-export function HomeClient({
-  sitePage,
-  initialVentures,
-}: {
-  sitePage?: any;
-  initialVentures?: any[];
-}) {
-  const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : defaultVentures;
-  const effectiveImpactMetrics = (sitePage?.data?.metrics as typeof defaultHomeImpactMetrics) || defaultHomeImpactMetrics;
-
-  const effectiveTrustCredentials = (sitePage?.data?.trust_credentials as any[]) || [
-    { label: "ISO-grade standards" },
-    { label: "11+ years expertise" },
-    { label: "98% client retention" },
-    { label: "RJSC C-184920" },
-  ];
-
-  const effectiveHeroCoins = (sitePage?.data?.hero_coins as any[]) || [
-    {
-      slug: "yess-soft",
-      title: "Yess Soft",
-      subtitle: "Enterprise Cloud & AI",
-      badge: "Tier-1 Cloud Ready",
-      href: "/ventures/yess-soft",
-      image: "/coins/yess-soft.png",
-    },
-    {
-      slug: "shondhaan",
-      title: "Shondhaan",
-      subtitle: "National Discovery",
-      badge: "National Engine",
-      href: "/ventures",
-      image: "/coins/shondhaan.png",
-    },
-    {
-      slug: "yess-organic-haat",
-      title: "Organic Haat",
-      subtitle: "Farm-to-Fork AgriTech",
-      badge: "10,000+ Growers",
-      href: "/ventures",
-      image: "/coins/yess-organic-haat.png",
-    },
-    {
-      slug: "akash-ott",
-      title: "Akash OTT",
-      subtitle: "Streaming & Media",
-      badge: "HD Streaming",
-      href: "/services/akash-ott",
-      image: "/coins/akash-ott.png",
-    },
-  ];
-
+export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentures }: HomeClientProps) {
+  const { language } = useLanguage();
   const [isStoryVideoOpen, setIsStoryVideoOpen] = useState(false);
+
+  // Counter animations using IntersectionObserver
+  const [counts, setCounts] = useState({
+    years: 0,
+    team: 0,
+    districts: 0,
+  });
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsAnimated, setStatsAnimated] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -131,365 +39,1115 @@ export function HomeClient({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isStoryVideoOpen]);
 
-  const heroVentures = [
-    // Left column (3 cards)
-    {
-      name: "Shondhaan",
-      category: "Service Marketplace",
-      href: "/ventures",
-      icon: Leaf,
-      iconBg: "bg-emerald-500",
-      hoverColor: "group-hover:text-emerald-600",
-    },
-    {
-      name: "Organic Haat",
-      category: "Fresh & Healthy Food",
-      href: "/ventures",
-      icon: ShoppingBasket,
-      iconBg: "bg-amber-500",
-      hoverColor: "group-hover:text-amber-600",
-    },
-    {
-      name: "Yess Soft",
-      category: "IT Solutions",
-      href: "/ventures/yess-soft",
-      icon: Code2,
-      iconBg: "bg-blue-600",
-      hoverColor: "group-hover:text-blue-600",
-    },
-    // Right column (4 cards)
-    {
-      name: "The Daily Akash",
-      category: "News & Media",
-      href: "/services",
-      icon: Newspaper,
-      iconBg: "bg-orange-500",
-      hoverColor: "group-hover:text-orange-600",
-    },
-    {
-      name: "Akash TV",
-      category: "Television",
-      href: "/services",
-      icon: Tv,
-      iconBg: "bg-rose-500",
-      hoverColor: "group-hover:text-rose-600",
-    },
-    {
-      name: "Akash OTT",
-      category: "Entertainment",
-      href: "/services/akash-ott",
-      icon: PlayCircle,
-      iconBg: "bg-purple-600",
-      hoverColor: "group-hover:text-purple-600",
-    },
-    {
-      name: "Yess Host",
-      category: "Hosting & Cloud",
-      href: "/services",
-      icon: Cloud,
-      iconBg: "bg-sky-600",
-      hoverColor: "group-hover:text-sky-600",
-    },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !statsAnimated) {
+            setStatsAnimated(true);
+            const duration = 1200; // ms
+            const startTime = performance.now();
 
-  const heroMetrics = [
-    {
-      value: "11+",
-      label: "Years of Journey",
-      icon: Flag,
-      iconBg: "bg-emerald-50 text-[#10754A] border-emerald-100",
-    },
-    {
-      value: "500+",
-      label: "Team Members",
-      icon: Users,
-      iconBg: "bg-amber-50 text-amber-600 border-amber-100",
-    },
-    {
-      value: "Millions",
-      label: "People Reached",
-      icon: Globe,
-      iconBg: "bg-purple-50 text-purple-600 border-purple-100",
-    },
-    {
-      value: "64+",
-      label: "Districts Presence",
-      icon: MapPin,
-      iconBg: "bg-sky-50 text-sky-600 border-sky-100",
-    },
-  ];
+            const targets = { years: 11, team: 500, districts: 64 };
 
-  const effectiveCtaBanner = sitePage?.data?.cta_banner || {
-    eyebrow: "NATIONAL IMPACT",
-    title: "Architecting the Sovereign Digital Future of Bangladesh",
-    desc: "Partner with our Dhaka headquarters for bespoke enterprise engineering, venture building, and technology consultation.",
-    primary_btn_text: "Schedule Strategic Consultation",
-    primary_btn_href: "/contact",
-    secondary_btn_text: "Candidate Status Portal",
-    secondary_btn_href: "/application-status",
-  };
+            const step = (now: number) => {
+              const progress = Math.min((now - startTime) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+
+              setCounts({
+                years: Math.floor(eased * targets.years),
+                team: Math.floor(eased * targets.team),
+                districts: Math.floor(eased * targets.districts),
+              });
+
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                setCounts(targets);
+              }
+            };
+            requestAnimationFrame(step);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [statsAnimated]);
 
   return (
-    <div className="flex flex-col w-full">
-      {/* 1. Canonical Corporate Hero Section (Stitch 2026 Sovereign Architecture) */}
-      <section className="relative w-full min-h-[auto] lg:min-h-[640px] xl:min-h-[680px] overflow-hidden flex flex-col justify-between pt-24 pb-6 sm:pt-26 sm:pb-8 lg:pt-28 lg:pb-8 border-b border-slate-200/80">
-        {/* Authentic Bangladesh Sunset & National Monument Photography Backdrop */}
-        <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
-          <Image
-            src="/assets/heroes/hero-bg-bangladesh-sunset.jpg"
-            alt="Bangladesh Sunset Horizon"
-            fill
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            className="object-cover object-center pointer-events-none select-none"
+    <div className="w-full bg-white text-[#0D1E2D]">
+      {/* ======================================================== */}
+      {/* 2. HERO SECTION                                          */}
+      {/* ======================================================== */}
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px]">
+        {/* Hero Background Image (Full on mobile with vertical fade, Right 72% on desktop with horizontal fade) */}
+        <div className="absolute inset-0 lg:left-auto lg:right-0 lg:w-[72%] z-0 pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/Hero_Background.jpeg"
+            alt="Yess Bangla Modern Workspace"
+            className="w-full h-full object-cover object-[28%_bottom] sm:object-[28%_center] lg:object-left"
           />
+          {/* Mobile Vertical Gradient Overlay: Solid white on text & avatars, smooth fade over mid-section */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white via-[52%] to-transparent to-[76%] lg:hidden" />
+          {/* Desktop Progressive Horizontal Gradient Overlay */}
+          <div
+            className="hidden lg:block absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 8%, rgba(255,255,255,0.50) 18%, rgba(255,255,255,0.18) 28%, rgba(255,255,255,0) 36%)",
+            }}
+          />
+          {/* Subtle Bottom soft fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white/80 to-transparent" />
         </div>
 
-        {/* Soft Translucent Ambient Wash: preserves full visibility of the office backdrop while ensuring clean text contrast */}
-        <div
-          className="absolute inset-0 z-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.68) 28%, rgba(255, 255, 255, 0.30) 55%, transparent 85%)",
-          }}
-        />
-
-        {/* Main Content Grid */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex items-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
-            {/* ================= LEFT HERO CONTENT COLUMN ================= */}
-            <div className="lg:col-span-6 xl:col-span-6 pt-1 lg:pt-0">
-              {/* Eyebrow Pill Tag */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-emerald-300 bg-emerald-50/90 text-[#10754A] text-[11px] font-bold tracking-widest uppercase mb-4 shadow-xs w-fit">
-                <span className="w-2 h-2 rounded-full bg-[#10754A] animate-pulse inline-block" />
-                <span>{sitePage?.hero_eyebrow?.trim() || "A SMARTER BANGLADESH TOGETHER"}</span>
-              </div>
-
-              {/* Headline */}
-              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] tracking-tight leading-[1.12] mb-4 text-slate-900">
-                Your Ecosystem for{" "}
-                <span className="text-[#10754A] block sm:inline">Smart Solutions</span>
-              </h1>
-
-              {/* Subtitle Description */}
-              <p className="text-slate-800 text-sm sm:text-base leading-relaxed max-w-xl mb-6 sm:mb-7 font-medium">
-                {sitePage?.hero_subtitle || "At YESS Bangladesh, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
-              </p>
-
-              {/* Dual Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-6 sm:mb-7">
-                <Link
-                  href="#ventures"
-                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-[#10754A] hover:bg-[#0d5d3b] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95 group"
-                >
-                  <span>Explore Our Brands</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setIsStoryVideoOpen(true)}
-                  className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full bg-white/95 backdrop-blur-xs border border-slate-200 text-slate-800 font-bold text-xs sm:text-sm shadow-xs hover:bg-white hover:border-slate-300 transition-all transform active:scale-95 group cursor-pointer"
-                >
-                  <span className="w-5 h-5 rounded-full bg-slate-900 text-white flex items-center justify-center transition-transform group-hover:scale-105">
-                    <Play className="h-2.5 w-2.5 fill-current translate-x-[1px]" />
-                  </span>
-                  <span>Watch Our Story</span>
-                </button>
-              </div>
-
-              {/* Social Proof Row */}
-              <div className="flex items-center gap-3.5 pt-1">
-                {/* Overlapping Circular Team Avatars */}
-                <div className="flex items-center -space-x-2.5 shrink-0">
-                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
-                    <Image
-                      src="/assets/teams/NI_Tushar.png"
-                      alt="Team portrait"
-                      fill
-                      sizes="36px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
-                    <Image
-                      src="/assets/teams/hiya.png"
-                      alt="Team portrait"
-                      fill
-                      sizes="36px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
-                    <Image
-                      src="/assets/teams/ovijit.jpeg"
-                      alt="Team portrait"
-                      fill
-                      sizes="36px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
-                    <Image
-                      src="/assets/teams/tanvi.png"
-                      alt="Team portrait"
-                      fill
-                      sizes="36px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                {/* Rating & Trust Text */}
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1.5 text-xs">
-                    <div className="flex items-center gap-0.5 text-amber-500">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <span className="font-bold text-slate-900 text-xs sm:text-sm">4.9/5</span>
-                  </div>
-                  <p className="text-slate-700 font-semibold text-[11px] sm:text-xs">
-                    Trusted by thousands across Bangladesh
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* ================= RIGHT HERO VISUAL OVERLAY ================= */}
-            <div className="lg:col-span-6 xl:col-span-6 relative flex flex-col items-end justify-center">
-              {/* Glowing Cursive Script above monitors */}
-              <div className="w-full flex justify-end pr-2 sm:pr-4 mb-2">
-                <span
-                  className="text-xl sm:text-2xl tracking-wide transform -rotate-3 select-none"
-                  style={{
-                    fontFamily: "var(--font-script), 'Caveat', cursive",
-                    color: "#35b0aa",
-                    textShadow: "0 0 14px rgba(53, 176, 170, 0.85), 0 0 28px rgba(53, 176, 170, 0.5)",
-                  }}
-                >
-                  A Smarter Bangladesh Together
+        {/* Hero Content Container */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 sm:px-6 pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
+          <div className="flex flex-col lg:flex-row items-start justify-between">
+            {/* Left Column: Typography, Tagline, CTAs, Social Proof */}
+            <div className="w-full lg:w-[420px] pt-1 sm:pt-2">
+              {/* Tagline Pill */}
+              <div className="inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-emerald-100 px-3 py-1 rounded-full shadow-xs mb-4 sm:mb-5">
+                <span className="w-2 h-2 rounded-full bg-[#0E8A44]" />
+                <span className="text-[#0E8A44] text-[10.5px] sm:text-[11px] font-bold tracking-wider uppercase">
+                  {language === "bn"
+                    ? "স্মার্ট বাংলাদেশ বিনির্মাণে একসাথে"
+                    : "A Smarter Bangladesh Together"}
                 </span>
               </div>
 
-              {/* Staggered Floating 3D Frosted Glass Venture Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 w-full max-w-lg">
-                {/* Left Column (3 cards) */}
-                <div className="flex flex-col gap-2.5 sm:gap-3 sm:translate-y-2">
-                  {heroVentures.slice(0, 3).map((v, i) => {
-                    const IconComponent = v.icon;
-                    return (
-                      <Link
-                        key={i}
-                        href={v.href}
-                        className="rounded-[16px] p-2.5 sm:p-3 flex items-center justify-between cursor-pointer group bg-white/90 backdrop-blur-md border border-white/95 shadow-[0_8px_20px_-6px_rgba(15,31,32,0.1)] hover:shadow-[0_16px_28px_-6px_rgba(16,117,74,0.18)] hover:-translate-y-0.5 hover:bg-white transition-all duration-200"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full ${v.iconBg} text-white flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform`}>
-                            <IconComponent className="h-4 w-4" />
-                          </div>
-                          <div>
-                            <h3 className="font-display font-bold text-slate-900 text-xs sm:text-sm leading-snug">
-                              {v.name}
-                            </h3>
-                            <p className="text-slate-500 text-[11px] font-normal">{v.category}</p>
-                          </div>
-                        </div>
-                        <ArrowUpRight className={`h-3.5 w-3.5 text-slate-400 ${v.hoverColor} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all`} />
-                      </Link>
-                    );
-                  })}
-                </div>
+              {/* Main Bold Headline: 4 Stacked Words */}
+              <h1 className="text-[38px] sm:text-[48px] lg:text-[52px] font-black leading-[1.06] tracking-tight mb-4 sm:mb-5">
+                <span className="block text-[#0D1E2D]">
+                  {language === "bn" ? "আইডিয়া।" : "Ideas."}
+                </span>
+                <span className="block text-[#0D1E2D]">
+                  {language === "bn" ? "প্রযুক্তি।" : "Technology."}
+                </span>
+                <span className="block text-[#0D1E2D]">
+                  {language === "bn" ? "মানুষ।" : "People."}
+                </span>
+                <span className="block text-[#0E8A44]">
+                  {language === "bn" ? "বাস্তব প্রভাব।" : "Real Impact."}
+                </span>
+              </h1>
 
-                {/* Right Column (4 cards) */}
-                <div className="flex flex-col gap-2.5 sm:gap-3 sm:-translate-y-1">
-                  {heroVentures.slice(3, 7).map((v, i) => {
-                    const IconComponent = v.icon;
-                    return (
-                      <Link
-                        key={i}
-                        href={v.href}
-                        className="rounded-[16px] p-2.5 sm:p-3 flex items-center justify-between cursor-pointer group bg-white/90 backdrop-blur-md border border-white/95 shadow-[0_8px_20px_-6px_rgba(15,31,32,0.1)] hover:shadow-[0_16px_28px_-6px_rgba(16,117,74,0.18)] hover:-translate-y-0.5 hover:bg-white transition-all duration-200"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full ${v.iconBg} text-white flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform`}>
-                            <IconComponent className="h-4 w-4" />
-                          </div>
-                          <div>
-                            <h3 className="font-display font-bold text-slate-900 text-xs sm:text-sm leading-snug">
-                              {v.name}
-                            </h3>
-                            <p className="text-slate-500 text-[11px] font-normal">{v.category}</p>
-                          </div>
-                        </div>
-                        <ArrowUpRight className={`h-3.5 w-3.5 text-slate-400 ${v.hoverColor} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all`} />
-                      </Link>
-                    );
-                  })}
-                </div>
+              {/* Description Paragraph */}
+              <p className="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-[#475569] mb-6 sm:mb-8 max-w-[390px]">
+                {language === "bn"
+                  ? "ইয়েস বাংলায় আমরা এমন ব্যবসা গড়ে তুলি যা মানুষের জীবনে বাস্তব ইতিবাচক পরিবর্তন আনে — পরিষেবা, তাজা খাবার, প্রযুক্তি, সংবাদ ও বিনোদনের মাধ্যমে।"
+                  : "At YESS Bangla, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
+              </p>
+
+              {/* Action Buttons (Responsive row on mobile) */}
+              <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-9 flex-wrap gap-y-2.5">
+                {/* Primary Button */}
+                <a
+                  href="#brands"
+                  className="inline-flex items-center space-x-2 bg-[#0E8A44] hover:bg-[#0a7539] text-white text-[12.5px] sm:text-[13.5px] font-semibold px-4.5 py-2.5 sm:px-6 sm:py-3 rounded-full shadow-sm hover:shadow transition-all"
+                >
+                  <span>
+                    {language === "bn" ? "আমাদের ব্র্যান্ডসমূহ" : "Explore Our Brands"}
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                </a>
+
+                {/* Secondary Button: Watch Story with dark play circle */}
+                <button
+                  type="button"
+                  onClick={() => setIsStoryVideoOpen(true)}
+                  className="inline-flex items-center space-x-2.5 bg-white/90 hover:bg-white border border-gray-300 hover:border-gray-400 text-[#0D1E2D] text-[12.5px] sm:text-[13.5px] font-semibold px-4 py-2.5 sm:px-5 sm:py-3 rounded-full shadow-xs transition-all cursor-pointer"
+                >
+                  <span>
+                    {language === "bn" ? "আমাদের গল্প শুনুন" : "Watch Our Story"}
+                  </span>
+                  <div className="w-5 h-5 rounded-full bg-[#0D1E2D] flex items-center justify-center">
+                    <Play className="w-2.5 h-2.5 text-white fill-current ml-0.5" />
+                  </div>
+                </button>
+              </div>
+
+              {/* Social Proof Avatars & Trust Text */}
+              <div className="flex items-center space-x-3.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/hero_avatars.jpg"
+                  alt="Trusted customer avatars"
+                  className="h-7 w-auto object-contain rounded-full"
+                />
+                <p className="text-[11.5px] sm:text-[12px] leading-tight text-[#64748B]">
+                  {language === "bn" ? (
+                    <>
+                      হাজারো মানুষের আস্থায়
+                      <br />
+                      <span className="font-medium text-[#475569]">
+                        সমগ্র বাংলাদেশে
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      Trusted by thousands
+                      <br />
+                      <span className="font-medium text-[#475569]">
+                        across Bangladesh
+                      </span>
+                    </>
+                  )}
+                </p>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* ================= FLOATING BOTTOM METRICS CAPSULE DOCK ================= */}
-        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10">
-          <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-md rounded-xl sm:rounded-full px-5 sm:px-8 py-3 sm:py-3.5 shadow-lg border border-slate-100/90">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 items-center">
-              {heroMetrics.map((m, idx) => {
-                const Icon = m.icon;
-                return (
-                  <div key={idx} className="flex items-center gap-3 justify-start md:justify-center">
-                    <div className={`w-9 h-9 rounded-full ${m.iconBg} flex items-center justify-center shrink-0 border shadow-xs`}>
-                      <Icon className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-extrabold text-lg sm:text-xl text-slate-900 leading-none">
-                        {m.value}
-                      </div>
-                      <div className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
-                        {m.label}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            {/* Center & Right: Floating Brand Badges over Hero Image */}
+            <div className="relative w-full h-[290px] sm:h-[320px] lg:h-[450px] lg:flex-1 mt-6 lg:mt-0 pointer-events-none">
+              {/* 1. Shondhaan */}
+              <div className="float-card-1 absolute top-[4%] left-[2%] sm:left-[4%] lg:top-[12%] lg:left-[28%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#0E8A44] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    Shondhaan
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    Service Marketplace
+                  </p>
+                </div>
+              </div>
+
+              {/* 2. Organic Haat */}
+              <div className="float-card-2 absolute top-[34%] left-[3%] sm:left-[5%] lg:top-[36%] lg:left-[30%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EAB308] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    Organic Haat
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    Fresh &amp; Healthy Food
+                  </p>
+                </div>
+              </div>
+
+              {/* 3. Yess Soft */}
+              <div className="float-card-3 absolute top-[64%] left-[1%] sm:left-[3%] lg:top-[60%] lg:left-[28%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <span className="text-white font-mono font-bold text-[12px] sm:text-[13px] leading-none">
+                    &lt;/&gt;
+                  </span>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    Yess Soft
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    IT Solutions
+                  </p>
+                </div>
+              </div>
+
+              {/* 4. The Daily Akash */}
+              <div className="float-card-4 absolute top-[0%] right-[1%] sm:right-[3%] lg:top-[8%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-3 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EA580C] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    The Daily Akash
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    News &amp; Media
+                  </p>
+                </div>
+              </div>
+
+              {/* 5. Akash TV */}
+              <div className="float-card-5 absolute top-[26%] right-[2%] sm:right-[4%] lg:top-[30%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#DB2777] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23 7l-7 5 7 5V7z" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    Akash TV
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    Television
+                  </p>
+                </div>
+              </div>
+
+              {/* 6. Akash OTT */}
+              <div className="float-card-6 absolute top-[52%] right-[2%] sm:right-[4%] lg:top-[52%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#8B5CF6] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <polygon points="6 3 20 12 6 21 6 3" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    Akash OTT
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    Entertainment
+                  </p>
+                </div>
+              </div>
+
+              {/* 7. Yess Host */}
+              <div className="float-card-7 absolute top-[76%] right-[1%] sm:right-[3%] lg:top-[74%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                    Yess Host
+                  </h4>
+                  <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
+                    Hosting &amp; Cloud
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Video Modal */}
+      {/* ======================================================== */}
+      {/* 3. FLOATING STATS BAR CARD                               */}
+      {/* ======================================================== */}
+      <section
+        ref={statsRef}
+        className="relative z-30 max-w-[1200px] mx-auto px-6 -mt-8 sm:-mt-10 lg:-mt-12"
+      >
+        <div className="bg-white rounded-[24px] shadow-[0_12px_40px_rgba(0,0,0,0.07)] border border-gray-100/90 py-4 px-6 sm:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
+            {/* Metric 1: 11+ Years of Journey */}
+            <div className="flex items-center space-x-4 md:pr-6 md:border-r border-gray-100">
+              <div className="w-12 h-12 rounded-full bg-[#E8F8EE] flex items-center justify-center shrink-0">
+                <svg
+                  className="w-6 h-6 text-[#0E8A44]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-[22px] sm:text-[24px] font-extrabold text-[#0D1E2D] tracking-tight leading-none">
+                  <span>{counts.years}</span>+
+                </div>
+                <div className="text-[12px] text-[#64748B] font-normal leading-tight mt-1">
+                  {language === "bn" ? "বছরের পথচলা" : "Years of Journey"}
+                </div>
+              </div>
+            </div>
+
+            {/* Metric 2: 500+ Team Members */}
+            <div className="flex items-center space-x-4 md:px-6 md:border-r border-gray-100">
+              <div className="w-12 h-12 rounded-full bg-[#FFF2EB] flex items-center justify-center shrink-0">
+                <svg
+                  className="w-6 h-6 text-[#F15A24]"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-[22px] sm:text-[24px] font-extrabold text-[#0D1E2D] tracking-tight leading-none">
+                  <span>{counts.team}</span>+
+                </div>
+                <div className="text-[12px] text-[#64748B] font-normal leading-tight mt-1">
+                  {language === "bn" ? "কর্মী সদস্য" : "Team Members"}
+                </div>
+              </div>
+            </div>
+
+            {/* Metric 3: Millions People Reached */}
+            <div className="flex items-center space-x-4 md:px-6 md:border-r border-gray-100">
+              <div className="w-12 h-12 rounded-full bg-[#F3E8FF] flex items-center justify-center shrink-0">
+                <svg
+                  className="w-6 h-6 text-[#9333EA]"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <rect x="4" y="10" width="3.5" height="11" rx="1.5" />
+                  <rect x="10.25" y="5" width="3.5" height="16" rx="1.5" />
+                  <rect x="16.5" y="13" width="3.5" height="8" rx="1.5" />
+                  <circle cx="12" cy="2" r="1.5" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-[22px] sm:text-[24px] font-extrabold text-[#0D1E2D] tracking-tight leading-none">
+                  {language === "bn" ? "লাখো" : "Millions"}
+                </div>
+                <div className="text-[12px] text-[#64748B] font-normal leading-tight mt-1">
+                  {language === "bn" ? "মানুষের সেবা" : "People Reached"}
+                </div>
+              </div>
+            </div>
+
+            {/* Metric 4: 64+ Districts Presence */}
+            <div className="flex items-center space-x-4 md:pl-6">
+              <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center shrink-0">
+                <svg
+                  className="w-6 h-6 text-[#2563EB]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-[22px] sm:text-[24px] font-extrabold text-[#0D1E2D] tracking-tight leading-none">
+                  <span>{counts.districts}</span>+
+                </div>
+                <div className="text-[12px] text-[#64748B] font-normal leading-tight mt-1">
+                  {language === "bn" ? "জেলায় উপস্থিতি" : "Districts Presence"}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 4. OUR BRANDS SECTION                                    */}
+      {/* ======================================================== */}
+      <section id="brands" className="pt-16 pb-20 max-w-[1200px] mx-auto px-6">
+        {/* Section Header Row */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div>
+            <div className="flex items-center space-x-2.5 mb-2.5">
+              <span className="w-6 h-[2.5px] bg-[#0E8A44] rounded-full" />
+              <span className="text-[#0E8A44] text-[11px] font-bold tracking-widest uppercase">
+                {language === "bn" ? "আমাদের ব্র্যান্ডসমূহ" : "Our Brands"}
+              </span>
+            </div>
+            <h2 className="text-[32px] sm:text-[38px] font-extrabold text-[#0D1E2D] leading-[1.12] tracking-tight">
+              {language === "bn" ? (
+                <>
+                  সাতটি শক্তিশালী ব্র্যান্ড।
+                  <br />
+                  একটি অভিন্ন লক্ষ্য।
+                </>
+              ) : (
+                <>
+                  Seven Powerful Brands.
+                  <br />
+                  One Shared Vision.
+                </>
+              )}
+            </h2>
+          </div>
+
+          {/* Right Description & Navigation Arrows */}
+          <div className="flex items-end space-x-6">
+            <p className="text-[14px] text-[#475569] leading-relaxed max-w-[460px]">
+              {language === "bn"
+                ? "প্রয়োজনীয় পরিষেবা থেকে তাজা খাবার, সফটওয়্যার, ক্লাউড হোস্টিং, সংবাদ ও বিনোদন — আমাদের ব্র্যান্ডগুলো একসাথে কাজ করে একটি স্মার্ট বাংলাদেশ বিনির্মাণে।"
+                : "From essential services to fresh food, software, hosting, news and entertainment — our brands work together to create opportunities and a smarter, more connected Bangladesh."}
+            </p>
+            <div className="hidden sm:flex items-center space-x-2 shrink-0">
+              <button
+                className="w-9 h-9 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600 transition-colors cursor-pointer"
+                aria-label="Previous brand"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                className="w-9 h-9 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600 transition-colors cursor-pointer"
+                aria-label="Next brand"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ROW 1: 4 Cards (Shondhaan, Organic Haat, Yess Soft, Yess Host) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
+          {/* Card 1: Shondhaan */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              {/* Photo Banner with rounded top */}
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_shondhaan_pure.jpg"
+                  alt="Shondhaan Service Marketplace App"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                {/* Overlapping Icon Circle with White Ring */}
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#0E8A44] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                </div>
+              </div>
+              {/* Card Body */}
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  Shondhaan
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  Service Marketplace
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "আপনার আশেপাশের বিশ্বস্ত পরিষেবা ও দক্ষ পেশাদারদের সহজে খুঁজে নিন।"
+                    : "Find trusted services, professionals and solutions around you."}
+                </p>
+              </div>
+            </div>
+            {/* Card Button */}
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/ventures/yess-service"
+                className="inline-flex items-center space-x-1.5 border border-[#0E8A44] hover:bg-[#0E8A44] text-[#0E8A44] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore Shondhaan</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2: Organic Haat */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_organichaat_pure.jpg"
+                  alt="Organic Haat Fresh Produce"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#16A34A] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  Organic Haat
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  AgriTech &amp; Fresh Food
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "কৃষকের মাঠ থেকে সরাসরি নিরাপদ, পুষ্টিকর ও তাজা খাদ্য আপনার খাবার টেবিলে।"
+                    : "Bringing fresh, healthy and safe food from farmers to your table."}
+                </p>
+              </div>
+            </div>
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/ventures/yess-organic-haat"
+                className="inline-flex items-center space-x-1.5 border border-[#16A34A] hover:bg-[#16A34A] text-[#16A34A] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore Organic Haat</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 3: Yess Soft */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_yesssoft_pure.jpg"
+                  alt="Yess Soft Software & IT Solutions"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#2563EB] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-4.5 h-4.5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="4" cy="4" r="2.5" />
+                    <circle cx="12" cy="4" r="2.5" />
+                    <circle cx="20" cy="4" r="2.5" />
+                    <circle cx="4" cy="12" r="2.5" />
+                    <circle cx="12" cy="12" r="2.5" />
+                    <circle cx="20" cy="12" r="2.5" />
+                    <circle cx="4" cy="20" r="2.5" />
+                    <circle cx="12" cy="20" r="2.5" />
+                    <circle cx="20" cy="20" r="2.5" />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  Yess Soft
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  Software &amp; IT Solutions
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "ব্যবসায়িক অগ্রযাত্রায় আধুনিক কাস্টম সফটওয়্যার, ক্লাউড ও এন্টারপ্রাইজ সল্যুশন।"
+                    : "Custom software, digital solutions and technology services for businesses."}
+                </p>
+              </div>
+            </div>
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/ventures/yess-soft"
+                className="inline-flex items-center space-x-1.5 border border-[#2563EB] hover:bg-[#2563EB] text-[#2563EB] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore Yess Soft</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 4: Yess Host */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_yesshost_pure.jpg"
+                  alt="Yess Host Cloud & Hosting Services"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#7C3AED] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  Yess Host
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  Hosting &amp; Cloud Services
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "উচ্চগতির হোস্টিং, ডোমেন ও নিরাপদ ক্লাউড ইনফ্রাস্ট্রাকচার আপনার ডিজিটাল উপস্থিতির জন্য।"
+                    : "Reliable hosting, domains and cloud solutions for your digital journey."}
+                </p>
+              </div>
+            </div>
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/ventures/yess-host"
+                className="inline-flex items-center space-x-1.5 border border-[#7C3AED] hover:bg-[#7C3AED] text-[#7C3AED] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore Yess Host</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ROW 2: 3 Cards (The Daily Akash, Akash TV, Akash OTT) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Card 5: The Daily Akash */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_dailyakash_pure.jpg"
+                  alt="The Daily Akash Journalism & Media"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#EA580C] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                    <line x1="7" y1="8" x2="17" y2="8" />
+                    <line x1="7" y1="12" x2="17" y2="12" />
+                    <line x1="7" y1="16" x2="13" y2="16" />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  The Daily Akash
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  News &amp; Media
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "বস্তুনিষ্ঠ সংবাদ, গভীর বিশ্লেষণ এবং বাংলাদেশের ইতিবাচক পরিবর্তনের খবর।"
+                    : "Reliable news, insights and stories that matter to Bangladesh."}
+                </p>
+              </div>
+            </div>
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/services/akash-news"
+                className="inline-flex items-center space-x-1.5 border border-[#EA580C] hover:bg-[#EA580C] text-[#EA580C] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore The Daily Akash</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 6: Akash TV */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_akashtv_pure.jpg"
+                  alt="Akash TV Broadcast Studio"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#DB2777] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23 7l-7 5 7 5V7z" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  Akash TV
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  Television
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "তথ্যবহুল, শিক্ষণীয় ও মানুষের কথা নিয়ে অনুষ্ঠানমালা একটি উজ্জ্বল আগামীর জন্য।"
+                    : "Informative, engaging and people-focused programs for a brighter Bangladesh."}
+                </p>
+              </div>
+            </div>
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/ventures/akash-tv"
+                className="inline-flex items-center space-x-1.5 border border-[#DB2777] hover:bg-[#DB2777] text-[#DB2777] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore Akash TV</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 7: Akash OTT */}
+          <div className="brand-interactive-card bg-white rounded-[20px] border border-gray-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="relative overflow-visible h-[116px] bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/card_akashott_pure.jpg"
+                  alt="Akash OTT Streaming Platform"
+                  className="card-visual w-full h-full object-cover object-center"
+                />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#8B5CF6] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <polygon points="6 3 20 12 6 21 6 3" />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-7 px-5 pb-3">
+                <h3 className="text-[16px] font-bold text-[#0D1E2D] leading-tight">
+                  Akash OTT
+                </h3>
+                <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5 mb-2.5">
+                  Entertainment
+                </p>
+                <p className="text-[12.5px] leading-relaxed text-[#475569]">
+                  {language === "bn"
+                    ? "সিনেমা, নাটক, ডকুমেন্টারি এবং বিনোদন — যেকোনো স্থানে, যেকোনো সময়ে।"
+                    : "Movies, dramas, documentaries and more — anytime, anywhere on Akash OTT."}
+                </p>
+              </div>
+            </div>
+            <div className="px-5 pb-5 pt-2">
+              <Link
+                href="/services/akash-ott"
+                className="inline-flex items-center space-x-1.5 border border-[#8B5CF6] hover:bg-[#8B5CF6] text-[#8B5CF6] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
+              >
+                <span>Explore Akash OTT</span>
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 5. OUR IMPACT SECTION BANNER                             */}
+      {/* ======================================================== */}
+      <section id="impact" className="max-w-[1200px] mx-auto px-6 mb-7">
+        <div className="relative rounded-[26px] overflow-hidden shadow-md bg-[#052419]">
+          {/* City Skyline Background Image covering right side */}
+          <div className="absolute right-0 top-0 bottom-0 w-full md:w-[62%] z-0 pointer-events-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/impact_bg_perfect.jpg"
+              alt="Dhaka City Skyline Panorama"
+              className="w-full h-full object-cover object-right"
+            />
+            {/* Dark Green Gradient Overlay on the left */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#052419] via-[#052419]/90 to-transparent w-full md:w-[45%]" />
+          </div>
+
+          {/* Impact Content Container */}
+          <div className="relative z-10 px-8 py-10 lg:px-12 lg:py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+            {/* Left Side: Header, Description & White Solid Pill Button */}
+            <div className="w-full md:w-[48%]">
+              <div className="flex items-center space-x-2.5 mb-2.5">
+                <span className="w-6 h-[2px] bg-[#22C55E] rounded-full" />
+                <span className="text-[#22C55E] text-[10.5px] font-bold tracking-widest uppercase">
+                  {language === "bn" ? "আমাদের প্রভাব" : "Our Impact"}
+                </span>
+              </div>
+
+              <h2 className="text-[28px] sm:text-[34px] font-extrabold text-white leading-[1.15] tracking-tight mb-3">
+                {language === "bn" ? (
+                  <>
+                    মানুষকে ক্ষমতায়ন।
+                    <br />
+                    সমাজকে <span className="text-[#22C55E]">সুদৃঢ়করণ।</span>
+                  </>
+                ) : (
+                  <>
+                    Empowering People.
+                    <br />
+                    Strengthening <span className="text-[#22C55E]">Communities.</span>
+                  </>
+                )}
+              </h2>
+
+              <p className="text-[13.5px] leading-relaxed text-white/80 mb-6 max-w-[420px]">
+                {language === "bn"
+                  ? "প্রযুক্তি, দৈনন্দিন পরিষেবা, বিশুদ্ধ খাবার, তথ্য ও সুস্থ বিনোদনের মাধ্যমে আমরা সুযোগ তৈরি করি এবং গড়ে তুলি এক স্বনির্ভর, স্মার্ট বাংলাদেশ।"
+                  : "Through technology, services, fresh food, media and entertainment, we create opportunities and help build a smarter, more inclusive Bangladesh."}
+              </p>
+
+              <Link
+                href="/about/standards"
+                className="inline-flex items-center space-x-2 bg-white hover:bg-gray-100 text-[#0D1E2D] text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm transition-colors"
+              >
+                <span>{language === "bn" ? "বিস্তারিত প্রভাব দেখুন" : "See Our Impact"}</span>
+                <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+              </Link>
+            </div>
+
+            {/* Right Side: 2x2 Grid of Floating White Stat Cards */}
+            <div className="w-full md:w-[48%] grid grid-cols-2 gap-3.5">
+              {/* Stat 1: Millions */}
+              <div className="bg-white rounded-[16px] shadow-md px-4 py-3 flex items-center space-x-3">
+                <div className="w-9 h-9 rounded-full bg-[#E8F8EE] flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-5 h-5 text-[#0E8A44]"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[16px] font-extrabold text-[#0D1E2D] leading-tight">
+                    {language === "bn" ? "লাখো" : "Millions"}
+                  </div>
+                  <div className="text-[10.5px] text-[#64748B] leading-tight mt-0.5">
+                    {language === "bn" ? "মানুষের সেবা" : "People Reached"}
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 2: 500+ */}
+              <div className="bg-white rounded-[16px] shadow-md px-4 py-3 flex items-center space-x-3">
+                <div className="w-9 h-9 rounded-full bg-[#FFF2EB] flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-5 h-5 text-[#F15A24]"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[16px] font-extrabold text-[#0D1E2D] leading-tight">
+                    500+
+                  </div>
+                  <div className="text-[10.5px] text-[#64748B] leading-tight mt-0.5">
+                    {language === "bn" ? "কর্মী সদস্য" : "Team Members"}
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 3: 11+ */}
+              <div className="bg-white rounded-[16px] shadow-md px-4 py-3 flex items-center space-x-3">
+                <div className="w-9 h-9 rounded-full bg-[#F3E8FF] flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-5 h-5 text-[#9333EA]"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect x="4" y="10" width="3.5" height="11" rx="1.5" />
+                    <rect x="10.25" y="5" width="3.5" height="16" rx="1.5" />
+                    <rect x="16.5" y="13" width="3.5" height="8" rx="1.5" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[16px] font-extrabold text-[#0D1E2D] leading-tight">
+                    11+
+                  </div>
+                  <div className="text-[10.5px] text-[#64748B] leading-tight mt-0.5">
+                    {language === "bn" ? "বছরের পথচলা" : "Years of Journey"}
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 4: 64+ */}
+              <div className="bg-white rounded-[16px] shadow-md px-4 py-3 flex items-center space-x-3">
+                <div className="w-9 h-9 rounded-full bg-[#EFF6FF] flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-5 h-5 text-[#2563EB]"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[16px] font-extrabold text-[#0D1E2D] leading-tight">
+                    64+
+                  </div>
+                  <div className="text-[10.5px] text-[#64748B] leading-tight mt-0.5">
+                    {language === "bn" ? "জেলায় উপস্থিতি" : "Districts Presence"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 6. CALL TO ACTION (CTA) BANNER SECTION                   */}
+      {/* ======================================================== */}
+      <section className="max-w-[1200px] mx-auto px-6 mb-12">
+        <div className="relative rounded-[26px] overflow-hidden shadow-md bg-[#052419]">
+          {/* Right Side Panoramic Photo: Dhaka sunset with the man in the green Yess Bangla polo */}
+          <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[62%] lg:w-[60%] overflow-hidden pointer-events-none z-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/cta_right_half.jpg"
+              alt="Be a Part of A Smarter Bangladesh"
+              className="w-full h-full object-cover object-center"
+            />
+            {/* Dark Green Gradient Overlay on left side of image for seamless blend */}
+            <div className="absolute inset-y-0 left-0 w-24 sm:w-36 lg:w-44 bg-gradient-to-r from-[#052419] via-[#052419]/90 to-transparent" />
+          </div>
+
+          {/* CTA Text Content Container */}
+          <div className="relative z-10 px-8 py-9 lg:px-12 lg:py-10 flex flex-col md:flex-row items-center justify-between">
+            {/* Left Side Content */}
+            <div className="w-full md:w-[50%]">
+              <div className="flex items-center space-x-2.5 mb-2">
+                <span className="w-6 h-[2px] bg-[#22C55E] rounded-full" />
+                <span className="text-[#22C55E] text-[10.5px] font-bold tracking-widest uppercase">
+                  {language === "bn" ? "চলুন একসাথে গড়ি" : "Let's Build Together"}
+                </span>
+              </div>
+
+              <h2 className="text-[26px] sm:text-[32px] font-extrabold text-white leading-[1.18] tracking-tight mb-2.5">
+                {language === "bn" ? (
+                  <>
+                    স্মার্ট বাংলাদেশ বিনির্মাণে
+                    <br />
+                    <span className="text-[#22C55E]">আমাদের অংশীদার হোন।</span>
+                  </>
+                ) : (
+                  <>
+                    Be a Part of
+                    <br />
+                    <span className="text-[#22C55E]">A Smarter Bangladesh.</span>
+                  </>
+                )}
+              </h2>
+
+              <p className="text-[13px] leading-relaxed text-white/80 mb-5 max-w-[420px]">
+                {language === "bn"
+                  ? "গ্রাহক, অংশীদার, বিনিয়োগকারী কিংবা মেধাবী কর্মী — আসুন আমরা একসাথে ইতিবাচক পরিবর্তন সৃষ্টি করি।"
+                  : "Whether you're a customer, partner, investor or talent — let's create real impact together."}
+              </p>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center space-x-2 bg-white hover:bg-gray-100 text-[#0D1E2D] text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm transition-colors"
+              >
+                <span>{language === "bn" ? "যোগাযোগ করুন" : "Get in Touch"}</span>
+                <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+              </Link>
+            </div>
+
+            {/* Right Side: spacer so the man and sunset script shine through */}
+            <div className="hidden md:block w-[45%] h-24 pointer-events-none" />
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* STORY VIDEO MODAL DIALOG                                 */}
+      {/* ======================================================== */}
       {isStoryVideoOpen && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4 sm:p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setIsStoryVideoOpen(false)}
         >
           <div
-            className="relative w-full max-w-4xl bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-800"
+            className="relative w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 text-white">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="font-bold text-sm tracking-wide">YESS Bangladesh — Our Story</span>
-              </div>
+            <div className="flex items-center justify-between p-4 px-6 border-b border-white/10 bg-slate-950/60">
+              <span className="text-sm font-bold text-white flex items-center gap-2">
+                <Play className="h-4 w-4 text-[#22C55E]" />
+                {language === "bn"
+                  ? "ইয়েস বাংলা — আমাদের সাফল্যের গল্প"
+                  : "Yess Bangla — Our Story"}
+              </span>
               <button
                 type="button"
                 onClick={() => setIsStoryVideoOpen(false)}
-                aria-label="Close video"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                className="text-white/70 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10 cursor-pointer"
+                aria-label="Close story video modal"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
+
             <div className="relative aspect-video w-full bg-black">
               <iframe
-                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="YESS Bangladesh Story"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="Yess Bangla Corporate Journey"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full border-0"
@@ -498,449 +1156,6 @@ export function HomeClient({
           </div>
         </div>
       )}
-
-      {/* 2. Direct Engagement Action Cards ('READY WHEN YOU ARE') */}
-      <section className="py-16 bg-slate-50/80 border-b border-slate-200">
-        <div className="container-tight">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">
-              DIRECT ENGAGEMENT
-            </span>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground mt-1">
-              READY WHEN YOU ARE — Let’s build what’s next, together.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Card 1: Direct Inquiry */}
-            <div className="glass-card rounded-2xl p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-300">
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
-                  <span className="h-2 w-2 rounded-full bg-primary animate-ping" />
-                  <span>Reply guaranteed within 1 business day</span>
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">
-                  Institutional Advisory & Inquiries
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Connect directly with our investment committee and technical architects in Dhaka. From corporate software buildouts to turnkey technology joint ventures, receive a scoped proposal within 72 hours.
-                </p>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-border flex flex-wrap items-center justify-between gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-sm"
-                >
-                  <span>Contact Us Today</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <div className="text-xs font-semibold text-foreground/70 flex items-center gap-1.5">
-                  <Phone className="h-4 w-4 text-amber-700" />
-                  <span>Hotline: +880 1805-464343</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Bilingual Corporate Profiles */}
-            <div className="glass-card rounded-2xl p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-300">
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d4a359]/15 text-[#7e5713] text-xs font-bold mb-3">
-                  <Download className="h-3.5 w-3.5" />
-                  <span>Corporate Kit 2026 Edition</span>
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">
-                  Capability Brief & Practice Overview
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Examine our conglomerate structure, audited metrics, enterprise engineering blueprints, and case studies across all 13 subsidiaries in English and Bengali.
-                </p>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-border flex flex-wrap items-center gap-3">
-                <a
-                  href="/yess-bangla-company-profile.pdf"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-border text-foreground hover:text-primary text-xs font-bold transition-all shadow-sm"
-                >
-                  <Download className="h-3.5 w-3.5 text-primary" />
-                  <span>Brochure (English PDF)</span>
-                </a>
-                <a
-                  href="/yess-bangla-company-profile-bn.pdf"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-border text-foreground hover:text-primary text-xs font-bold transition-all shadow-sm"
-                >
-                  <Download className="h-3.5 w-3.5 text-primary" />
-                  <span>ব্রোশিওর (বাংলা PDF)</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Social Proof Partner Banner: Infinite Scrolling Marquee (Light Theme) */}
-      <section className="py-10 bg-slate-50 border-y border-slate-200 overflow-hidden">
-        <div className="container-tight mb-6 text-center">
-          <p className="text-xs uppercase tracking-widest text-emerald-800 font-bold">
-            TRUSTED BY INSTITUTIONAL LEADERS &amp; ENTERPRISE PARTNERS IN BANGLADESH
-          </p>
-        </div>
-        <div className="relative overflow-hidden w-full">
-          <div className="animate-marquee flex items-center gap-14 text-slate-600 font-bold tracking-wider text-xs sm:text-sm">
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-emerald-600" /> ICT DIVISION BANGLADESH
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Code2 className="h-4 w-4 text-amber-600" /> BASIS BANGLADESH
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Radio className="h-4 w-4 text-emerald-600" /> ROBI AXIATA PLC
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Briefcase className="h-4 w-4 text-amber-600" /> BEXIMCO GROUP
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Cpu className="h-4 w-4 text-emerald-600" /> WALTON HI-TECH
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-amber-600" /> BRAC ENTERPRISES
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Globe className="h-4 w-4 text-emerald-600" /> GRAMEEN TELECOM
-            </span>
-
-            {/* Duplicated set for seamless loop */}
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-emerald-600" /> ICT DIVISION BANGLADESH
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Code2 className="h-4 w-4 text-amber-600" /> BASIS BANGLADESH
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Radio className="h-4 w-4 text-emerald-600" /> ROBI AXIATA PLC
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Briefcase className="h-4 w-4 text-amber-600" /> BEXIMCO GROUP
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Cpu className="h-4 w-4 text-emerald-600" /> WALTON HI-TECH
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-amber-600" /> BRAC ENTERPRISES
-            </span>
-            <span className="hover:text-emerald-700 transition-colors flex items-center gap-2">
-              <Globe className="h-4 w-4 text-emerald-600" /> GRAMEEN TELECOM
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Core Solutions & Disciplines (6-Card Grid) */}
-      <section id="services" className="py-20 bg-background">
-        <div className="container-tight">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">
-              ENGINEERING & VENTURE CAPABILITIES
-            </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
-              Institutional Practice Areas
-            </h2>
-            <p className="text-sm sm:text-base text-foreground/70 mt-3">
-              Sovereign enterprise architecture, high-concurrency streaming pipelines, and AI-driven automation built to institutional-grade resilience.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Discipline 1: Enterprise Software & Cloud */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
-              <div>
-                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <Server className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Enterprise Software & Cloud Systems
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Zero-trust microservices, sovereign cloud mesh topologies, and high-concurrency database architectures hosting critical workloads.
-                </p>
-                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Zero-trust microservices & mesh architecture</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Bare-metal Kubernetes domestic edge nodes</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>ISO 27001 compliant security governance</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/services/yess-one-stop" className="hover:underline flex items-center justify-between w-full">
-                  <span>Explore Practice Dossier</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Discipline 2: Venture Incubation */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
-              <div>
-                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <Code2 className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Venture Incubation & Capital Architecture
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Turnkey venture building, capitalization advisory, equity structuring, and operational governance for early-to-growth enterprises.
-                </p>
-                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>100% Foreground IP retention guarantee</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>Dhaka Innovation Lab co-residency</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>Milestone-based seed tranches</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
-                  <span>Explore Practice Dossier</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Discipline 3: Digital Media & Streaming */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
-              <div>
-                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <PlayCircle className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Digital Media Streaming & Content Delivery
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Sub-second latency video ingestion, adaptive HLS/DASH streaming, DRM content protection, and edge CDN distribution for millions of viewers.
-                </p>
-                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Sub-second low latency HLS/DASH packaging</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Multi-DRM cryptographic studio security</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Telecom carrier billing API integration</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/services/akash-ott" className="hover:underline flex items-center justify-between w-full">
-                  <span>Explore Practice Dossier</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Discipline 4: AgriTech & IoT */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
-              <div>
-                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <Leaf className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Sustainable Agribusiness & Cold-Chain IoT
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Sensor-driven logistics, temperature-controlled farm-to-table traceability, and direct market access for 10,000+ organic growers.
-                </p>
-                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>LoRaWAN farm IoT telemetry nodes</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>Traceable harvest QR passport registries</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>Direct farmer digital liquidity rails</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
-                  <span>Explore Practice Dossier</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Discipline 5: Freight & Logistics */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
-              <div>
-                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <Plane className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Cross-Border Freight & Customs Automation
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  Cross-border cargo visibility, port logistics automated scheduling, and warehouse fleet management across major economic corridors.
-                </p>
-                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Chittagong Port customs clearance bridge</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>Multimodal fleet automated dispatch</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
-                    <span>EDI/AS4 statutory customs integration</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
-                  <span>Explore Practice Dossier</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Discipline 6: Regulatory Technology */}
-            <div className="glass-card rounded-2xl p-7 hover:border-primary/50 transition-all duration-300 group flex flex-col justify-between">
-              <div>
-                <div className="h-12 w-12 rounded-xl bg-[#d4a359]/15 text-[#7e5713] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <Scale className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-                  Regulatory Technology & Sovereign Advisory
-                </h3>
-                <p className="text-sm text-foreground/70 mt-2 leading-relaxed">
-                  RJSC corporate registration, cross-border intellectual property structuring, bilateral joint venture agreements, and NBR tax compliance.
-                </p>
-                <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>Bilateral JV structuring & statutory governance</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>NBR tax & statutory regulatory compliance</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
-                    <span>RJSC statutory filing & IP ownership</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
-                <Link href="/services" className="hover:underline flex items-center justify-between w-full">
-                  <span>Explore Practice Dossier</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Impact Metric Counters (Light Theme) */}
-      <section className="py-16 bg-gradient-to-r from-emerald-50 via-teal-50/40 to-slate-50 border-y border-emerald-100/80 text-slate-900" id="impact">
-        <div className="container-tight">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            {effectiveImpactMetrics.map((m: any, idx: number) => (
-              <div key={idx} className="flex flex-col items-center">
-                <span className={`font-display font-extrabold text-4xl sm:text-5xl ${idx % 2 === 0 ? "text-emerald-700" : "text-amber-600"}`}>
-                  {m.value}
-                </span>
-                <span className="text-sm font-bold text-slate-900 mt-2">
-                  {m.label}
-                </span>
-                <span className="text-xs text-slate-600 mt-1">
-                  {m.desc}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Subsidiaries Directory Preview (All 13 Ventures) */}
-      <section id="ventures" className="py-20 bg-slate-50/60">
-        <div className="container-tight">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">
-              THE CONGLOMERATE CANVAS
-            </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mt-2">
-              13 Sovereign Subsidiaries
-            </h2>
-            <p className="text-sm sm:text-base text-foreground/70 mt-2">
-              From enterprise ERP to pan-district logistics and digital television, YESS Bangladesh incubates and scales self-sustaining institutional assets.
-            </p>
-
-            {/* Interactive Leaf Component: Filter Tabs & Subsidiaries Grid */}
-            <HomeVenturesFilter ventures={effectiveVentures} />
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Strategic Consultation CTA Banner (Light Theme) */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 via-teal-50/40 to-amber-50/20 text-slate-900 relative overflow-hidden border-t border-slate-200">
-        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="container-tight text-center max-w-3xl mx-auto relative z-10">
-          <span className="text-xs font-bold text-amber-700 uppercase tracking-widest">
-            {effectiveCtaBanner.eyebrow || "NATIONAL IMPACT"}
-          </span>
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 mt-3 leading-tight">
-            {effectiveCtaBanner.title || "Architecting the Sovereign Digital Future of Bangladesh"}
-          </h2>
-          <p className="text-base text-slate-600 mt-4 leading-relaxed">
-            {effectiveCtaBanner.desc || "Partner with our Dhaka headquarters for bespoke enterprise engineering, venture building, and technology consultation."}
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-            <Link
-              href={effectiveCtaBanner.primary_btn_href || "/contact"}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white font-bold text-sm shadow-md transition-all active:scale-95"
-            >
-              <span>{effectiveCtaBanner.primary_btn_text || "Schedule Strategic Consultation"}</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={effectiveCtaBanner.secondary_btn_href || "/application-status"}
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-sm shadow-xs transition-all"
-            >
-              <span>{effectiveCtaBanner.secondary_btn_text || "Candidate Status Portal"}</span>
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

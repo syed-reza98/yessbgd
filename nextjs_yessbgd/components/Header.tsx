@@ -5,24 +5,24 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import {
-  Menu,
-  X,
-  ChevronDown,
-  Phone,
-  Mail,
   Globe,
+  Search,
+  Menu as MenuIcon,
+  X,
   ArrowRight,
-  ShieldCheck,
-  Code2,
-  Tv,
-  PlayCircle,
-  Newspaper,
-  Leaf,
-  Wrench,
-  Server,
+  ChevronDown,
   Sparkles,
+  Layers,
+  Wrench,
+  Leaf,
+  Server,
+  PlayCircle,
+  Code2,
+  Newspaper,
+  Tv,
 } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
+import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
 
 const FEATURED_VENTURES = [
   {
@@ -31,34 +31,17 @@ const FEATURED_VENTURES = [
     category: "Home & Professional Services",
     icon: Wrench,
     logoUrl: "/coins/shondhaan.png",
-    color: "from-blue-500/10 to-indigo-500/10 text-indigo-700",
-    href: "/ventures",
+    color: "text-emerald-700 bg-emerald-50",
+    href: "/ventures/yess-service",
   },
   {
     slug: "yess-organic-haat",
     title: "Organic Haat",
-    category: "Organic Marketplace",
+    category: "AgriTech & Fresh Food",
     icon: Leaf,
     logoUrl: "/coins/yess-organic-haat.png",
-    color: "from-emerald-500/10 to-green-500/10 text-emerald-700",
-    href: "/ventures",
-  },
-  {
-    slug: "yess-host",
-    title: "Yess Host",
-    category: "Hosting & Cloud Infrastructure",
-    icon: Server,
-    color: "from-teal-500/10 to-cyan-500/10 text-teal-700",
-    href: "/ventures",
-  },
-  {
-    slug: "akash-ott",
-    title: "Akash OTT",
-    category: "Streaming Platform",
-    icon: PlayCircle,
-    logoUrl: "/coins/akash-ott.png",
-    color: "from-sky-500/10 to-blue-500/10 text-sky-700",
-    href: "/services/akash-ott",
+    color: "text-amber-700 bg-amber-50",
+    href: "/ventures/yess-organic-haat",
   },
   {
     slug: "yess-soft",
@@ -66,71 +49,71 @@ const FEATURED_VENTURES = [
     category: "Software & IT Solutions",
     icon: Code2,
     logoUrl: "/coins/yess-soft.png",
-    color: "from-emerald-500/10 to-teal-500/10 text-emerald-700",
+    color: "text-blue-700 bg-blue-50",
     href: "/ventures/yess-soft",
   },
   {
-    slug: "the-daily-akash",
+    slug: "yess-host",
+    title: "Yess Host",
+    category: "Hosting & Cloud Infrastructure",
+    icon: Server,
+    color: "text-purple-700 bg-purple-50",
+    href: "/ventures/yess-host",
+  },
+  {
+    slug: "akash-news",
     title: "The Daily Akash",
-    category: "Digital Newspaper",
+    category: "Digital Newspaper & Media",
     icon: Newspaper,
     logoUrl: "/coins/the-daily-akash.png",
-    color: "from-amber-500/10 to-orange-500/10 text-amber-700",
-    href: "/ventures",
+    color: "text-orange-700 bg-orange-50",
+    href: "/services/akash-news",
+  },
+  {
+    slug: "akash-tv",
+    title: "Akash TV",
+    category: "Broadcast Television",
+    icon: Tv,
+    color: "text-pink-700 bg-pink-50",
+    href: "/ventures/akash-tv",
+  },
+  {
+    slug: "akash-ott",
+    title: "Akash OTT",
+    category: "Streaming & Entertainment",
+    icon: PlayCircle,
+    logoUrl: "/coins/akash-ott.png",
+    color: "text-violet-700 bg-violet-50",
+    href: "/services/akash-ott",
   },
 ];
-
-import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
 
 export function Header({
   headerMenus,
   settings,
-  ventures,
+  ventures: _ventures,
 }: {
   headerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
-  ventures?: any[];
+  ventures?: unknown[];
 }) {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileVenturesOpen, setMobileVenturesOpen] = useState(false);
   const [venturesDropdownOpen, setVenturesDropdownOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Close menus on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setVenturesDropdownOpen(false);
-  }, [pathname]);
-
-  // Lock body scroll and handle Escape key when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setMobileMenuOpen(false);
-        }
-      };
-      window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = originalOverflow;
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    }
-  }, [mobileMenuOpen]);
 
   const handleMouseEnterVentures = () => {
     if (dropdownTimeoutRef.current) {
@@ -145,7 +128,7 @@ export function Header({
     }, 180);
   };
 
-  // Dynamic Navigation from CMS with fallback
+  // Dynamic Navigation from CMS with complete legacy Next.js fallback links
   const rawNavLinks = headerMenus && headerMenus.length > 0 ? headerMenus : [
     { id: "1", href: "/", label: "Home", label_bn: "হোম" },
     { id: "2", href: "/about", label: "About", label_bn: "আমাদের সম্পর্কে" },
@@ -161,120 +144,55 @@ export function Header({
     return language === "bn" && item.label_bn ? item.label_bn : item.label;
   };
 
-  // Active ventures to display in mega-menu
-  const displayVentures = ventures && ventures.length > 0
-    ? ventures.slice(0, 6).map((v: any) => ({
-        slug: v.slug,
-        title: v.title,
-        category: v.category,
-        icon: Wrench,
-        logoUrl: v.logoUrl || v.image || `/coins/${v.slug}.png`,
-        href: `/ventures/${v.slug}`,
-      }))
-    : FEATURED_VENTURES;
+  const isLinkActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
-  // Contact & Brand settings
-  const phoneDisplay = settings?.contact?.phone || "+880 1805-464343";
-  const phoneTel = phoneDisplay.replace(/[^0-9+]/g, "");
-  const regNumber = settings?.branding?.registrationNo || "C-184920";
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+    setMobileVenturesOpen(false);
+    setVenturesDropdownOpen(false);
+    setSearchOpen(false);
+  };
+
   const logoUrl = settings?.branding?.logoUrl || "/assets/yess-bangla-logo.png";
-  const brandName = settings?.branding?.legalName || "Yess Bangla Private Limited";
-
-  const isVenturesLink = (link: { href: string }) =>
-    link.href === "/ventures" || link.href.startsWith("/ventures");
-
+  const brandName = settings?.branding?.companyName || "Yess Bangla";
 
   return (
     <>
-      {/* 1. Top Utility Ribbon */}
-      <div className="bg-emerald-50/90 text-emerald-900 text-[11px] py-1.5 px-4 border-b border-emerald-200/80 hidden sm:block relative z-50">
-        <div className="container-tight flex items-center justify-between">
-          <div className="flex items-center gap-4 text-emerald-900/90 font-medium">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
-              <span>
-                {language === "bn" && settings?.header?.ribbonTextBn
-                  ? settings.header.ribbonTextBn
-                  : settings?.header?.ribbonTextEn || "Dhaka BST Operational"}
-              </span>
-              <span className="text-emerald-300">|</span>
-              <span>{language === "bn" ? "ঢাকা কর্পোরেট হেডকোয়ার্টার" : (settings?.offices?.headquarters?.name || "Dhaka Corporate Headquarters")}</span>
-            </span>
-            <span className="hidden md:inline text-emerald-300">•</span>
-            <span className="hidden md:flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-amber-700" />
-              <span>Statutory RJSC Reg: {regNumber}</span>
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <a
-              href={`tel:${phoneTel}`}
-              className="flex items-center gap-1.5 hover:text-emerald-700 transition-colors text-emerald-900 font-medium"
-            >
-              <Phone className="h-3 w-3 text-amber-700" />
-              <span>{phoneDisplay}</span>
-            </a>
-            <span className="text-emerald-300">|</span>
-            <Link
-              href={settings?.header?.trackStatusHref || "/application-status"}
-              className="hover:text-emerald-700 font-medium transition-colors text-emerald-900"
-            >
-              {language === "bn" && settings?.header?.trackStatusTextBn
-                ? settings.header.trackStatusTextBn
-                : settings?.header?.trackStatusTextEn || "Track Application"}
-            </Link>
-            <span className="text-emerald-300">|</span>
-            {/* Language Switcher Pill */}
-            <button
-              onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 hover:bg-emerald-200/80 text-emerald-900 font-semibold transition-all border border-emerald-300/80 active:scale-95 cursor-pointer"
-              aria-label={`Toggle Language (${language === "en" ? "বাংলা" : "EN"})`}
-            >
-              <Globe className="h-3 w-3 text-amber-700" />
-              <span>{language === "en" ? "বাংলা" : "EN"}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Main Floating Island Header */}
       <header
-        data-public-header="true"
-        className="sticky top-0 z-40 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-2.5 -mb-[64px] sm:-mb-[92px]"
+        className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-200 ${
+          scrolled ? "shadow-sm border-gray-200/80" : ""
+        }`}
       >
-        <div
-          className={`max-w-7xl mx-auto rounded-2xl lg:rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg shadow-slate-900/5 px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between transition-all duration-300 pointer-events-auto ${
-            scrolled ? "shadow-2xl shadow-slate-950/15 border-slate-300/90 bg-white" : ""
-          }`}
-        >
-          {/* Brand Logo & Corporate Moniker */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
-            <div className="relative flex items-center justify-center transition-transform group-hover:scale-105 h-5 sm:h-5.5 lg:h-6 shrink-0">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-4">
+          {/* Brand Logo: Original Yess Bangla Logo */}
+          <Link
+            href="/"
+            onClick={handleLinkClick}
+            className="flex items-center gap-2 group focus:outline-none shrink-0"
+            aria-label="Yess Bangla Home"
+          >
+            <div className="relative h-8 sm:h-9 md:h-10 w-auto flex items-center justify-center transition-transform group-hover:scale-105">
               <Image
                 src={logoUrl}
                 alt={brandName}
-                width={65}
-                height={22}
+                width={120}
+                height={42}
                 className="h-full w-auto object-contain max-h-full"
-                style={{ width: "auto", height: "auto" }}
                 priority
               />
             </div>
-            <div className="hidden sm:flex flex-col pl-2 sm:pl-2.5 border-l border-slate-200 text-left">
-              <span className="font-display font-extrabold text-[11px] sm:text-xs xl:text-sm tracking-tight text-slate-900 leading-tight whitespace-nowrap">
-                {brandName}
-              </span>
-              <span className="text-[9px] sm:text-[10px] text-slate-500 font-medium tracking-wide mt-0.5 whitespace-nowrap">
-                Where Solution Begins
-              </span>
-            </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 relative shrink-0">
+          {/* Main Navigation Menu (All original Next.js links) */}
+          <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-[13px] xl:text-[14px]">
             {rawNavLinks.map((link) => {
-              if (isVenturesLink(link)) {
+              const active = isLinkActive(link.href);
+              const isVentures = link.href === "/ventures";
+
+              if (isVentures) {
                 return (
                   <div
                     key={link.id || link.href}
@@ -282,116 +200,94 @@ export function Header({
                     onMouseEnter={handleMouseEnterVentures}
                     onMouseLeave={handleMouseLeaveVentures}
                   >
-                    <button
-                      type="button"
-                      onClick={() => setVenturesDropdownOpen(!venturesDropdownOpen)}
-                      className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                        pathname === "/ventures" || pathname.startsWith("/ventures/") || venturesDropdownOpen
-                          ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+                    <Link
+                      href="/ventures"
+                      onClick={handleLinkClick}
+                      className={`inline-flex items-center gap-1.5 py-1 transition-colors ${
+                        active || venturesDropdownOpen
+                          ? "nav-link-active"
+                          : "text-[#475569] hover:text-[#0E8A44]"
                       }`}
-                      aria-expanded={venturesDropdownOpen}
-                      aria-haspopup="true"
                     >
                       <span>{getLabel(link)}</span>
                       {link.badge && (
-                        <span className="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-100 text-amber-900 font-bold">
+                        <span className="text-[9.5px] px-1.5 py-0.2 rounded-full bg-emerald-50 text-[#0E8A44] font-semibold border border-emerald-100">
                           {link.badge}
                         </span>
                       )}
                       <ChevronDown
-                        className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                          venturesDropdownOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          venturesDropdownOpen ? "rotate-180 text-[#0E8A44]" : "text-gray-400"
                         }`}
                       />
-                    </button>
+                    </Link>
 
                     {/* Mega Menu Dropdown */}
                     {venturesDropdownOpen && (
                       <div
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] xl:w-[620px] bg-white/98 backdrop-blur-2xl rounded-3xl border border-slate-200/90 shadow-2xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[540px] xl:w-[600px] bg-white rounded-2xl border border-gray-100 shadow-[0_16px_40px_rgba(0,0,0,0.1)] p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
                         onMouseEnter={handleMouseEnterVentures}
                         onMouseLeave={handleMouseLeaveVentures}
                       >
-                        <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
-                          <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider flex items-center gap-1.5">
-                            <Sparkles className="h-3.5 w-3.5 text-[#d4a359]" />
+                        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-gray-100">
+                          <span className="text-[11px] font-bold text-[#0E8A44] uppercase tracking-wider flex items-center gap-1.5">
+                            <Sparkles className="h-3.5 w-3.5 text-amber-500" />
                             <span>Our Flagship Subsidiaries</span>
                           </span>
-                          <span className="text-[11px] font-semibold text-slate-400">
-                            {ventures?.length || 13} Sovereign Assets
-                          </span>
+                          <Link
+                            href="/ventures"
+                            onClick={handleLinkClick}
+                            className="text-[11px] font-semibold text-gray-500 hover:text-[#0E8A44] transition-colors"
+                          >
+                            View All 13 Ventures &rarr;
+                          </Link>
                         </div>
 
-                        {/* 2-Column Grid matching reference UI */}
-                        <div className="grid grid-cols-2 gap-2.5">
-                          {displayVentures.map((v) => {
-                            const Icon = (v as any).icon || Wrench;
+                        <div className="grid grid-cols-2 gap-2">
+                          {FEATURED_VENTURES.map((v) => {
+                            const Icon = v.icon;
                             return (
                               <Link
                                 key={v.slug}
-                                href={v.href || `/ventures/${v.slug}`}
-                                className="group p-2.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all flex items-center gap-3 text-left"
+                                href={v.href}
+                                onClick={handleLinkClick}
+                                className="group p-2 rounded-xl hover:bg-gray-50 transition-all flex items-center gap-2.5 text-left"
                               >
-                                <div className="relative w-11 h-11 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center p-1.5 group-hover:scale-105 group-hover:shadow-sm transition-all shrink-0">
-                                  {v.logoUrl ? (
-                                    <Image
-                                      src={v.logoUrl}
-                                      alt={v.title}
-                                      width={36}
-                                      height={36}
-                                      className="w-full h-full object-contain"
-                                    />
-                                  ) : (
-                                    <Icon className="w-5 h-5 text-teal-700" />
-                                  )}
+                                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0E8A44] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                  <Icon className="w-4 h-4" />
                                 </div>
-                                <div className="flex flex-col truncate">
-                                  <span className="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition-colors truncate">
+                                <div className="truncate">
+                                  <div className="font-bold text-[12.5px] text-[#0D1E2D] group-hover:text-[#0E8A44] transition-colors truncate">
                                     {v.title}
-                                  </span>
-                                  <span className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                                  </div>
+                                  <div className="text-[10px] text-gray-400 truncate">
                                     {v.category}
-                                  </span>
+                                  </div>
                                 </div>
                               </Link>
                             );
                           })}
                         </div>
-
-                        {/* Dropdown Footer Link */}
-                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                          <span className="text-slate-500">
-                            Looking for custom enterprise partnerships?
-                          </span>
-                          <Link
-                            href="/ventures"
-                            className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group"
-                          >
-                            <span>Explore all {ventures?.length || 13} ventures</span>
-                            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                          </Link>
-                        </div>
                       </div>
                     )}
                   </div>
                 );
               }
 
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
               return (
                 <Link
                   key={link.id || link.href}
                   href={link.href}
-                  className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-semibold whitespace-nowrap transition-all ${
-                    isActive
-                      ? "text-emerald-700 bg-emerald-50 shadow-xs font-bold"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
+                  onClick={handleLinkClick}
+                  className={`inline-flex items-center gap-1.5 py-1 transition-colors ${
+                    active
+                      ? "nav-link-active"
+                      : "text-[#475569] hover:text-[#0E8A44]"
                   }`}
                 >
                   <span>{getLabel(link)}</span>
                   {link.badge && (
-                    <span className="ml-1 px-1.5 py-0.2 rounded-full text-[9px] bg-emerald-100 text-emerald-800 font-bold">
+                    <span className="text-[9.5px] px-1.5 py-0.2 rounded-full bg-emerald-50 text-[#0E8A44] font-semibold border border-emerald-100">
                       {link.badge}
                     </span>
                   )}
@@ -400,174 +296,202 @@ export function Header({
             })}
           </nav>
 
-
-          {/* Right Action Area */}
-          <div className="hidden sm:flex items-center gap-2 xl:gap-2.5 shrink-0">
-            <Link
-              href={settings?.header?.trackStatusHref || "/application-status"}
-              className="text-xs font-semibold px-2.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all hidden 2xl:flex items-center gap-1.5 whitespace-nowrap shrink-0"
-            >
-              <span>
-                {language === "bn" && settings?.header?.trackStatusTextBn
-                  ? settings.header.trackStatusTextBn
-                  : settings?.header?.trackStatusTextEn || "Track Status"}
-              </span>
-            </Link>
-
-            <Link
-              href={settings?.header?.ribbonCtaHref || "/contact"}
-              className="text-xs sm:text-xs xl:text-sm font-bold uppercase tracking-wider px-3.5 py-2 sm:px-4.5 sm:py-2 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white shadow-md shadow-emerald-900/20 hover:shadow-emerald-900/30 transition-all flex items-center gap-1.5 active:scale-95 group whitespace-nowrap shrink-0"
-            >
-              <span>
-                {language === "bn" && settings?.header?.ribbonCtaTextBn
-                  ? settings.header.ribbonCtaTextBn
-                  : settings?.header?.ribbonCtaTextEn || "Let's Talk"}
-              </span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          </div>
-
-          {/* Mobile Right Bar: Language Toggle + Hamburger */}
-          <div className="flex lg:hidden items-center gap-2">
+          {/* Right Utility Actions */}
+          <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
+            {/* Language Selector */}
             <button
+              type="button"
               onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-              className="min-h-[44px] px-3.5 py-2 text-xs rounded-full border border-slate-200 bg-slate-100 font-bold text-slate-700 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
-              aria-label={`Toggle language (${language === "en" ? "বাংলা" : "EN"})`}
+              className="flex items-center space-x-1.5 text-[#0D1E2D] hover:text-[#0E8A44] transition-colors text-[13px] font-medium cursor-pointer"
+              aria-label="Select Language"
             >
-              {language === "en" ? "বাংলা" : "EN"}
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="min-w-[48px] min-h-[48px] p-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors cursor-pointer"
-              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* 3. Mobile Backdrop Scrim */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[55] lg:hidden transition-opacity animate-in fade-in duration-200"
-          onClick={() => setMobileMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* 4. Mobile Slide-Down Drawer */}
-      {mobileMenuOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile Navigation Menu"
-          className="fixed inset-x-3 top-[72px] max-h-[calc(100dvh-92px)] z-[60] bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 pb-12 overflow-y-auto flex flex-col gap-5 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200"
-        >
-          <nav className="flex flex-col gap-1.5">
-            {rawNavLinks.map((link) => {
-              if (isVenturesLink(link)) {
-                return (
-                  <div key={link.id || link.href} className="rounded-xl border border-slate-200/80 overflow-hidden my-1">
-                    <button
-                      type="button"
-                      onClick={() => setMobileVenturesOpen(!mobileVenturesOpen)}
-                      className="w-full px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 bg-slate-50/70"
-                    >
-                      <span>{getLabel(link)} ({ventures?.length || 13} Subsidiaries)</span>
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          mobileVenturesOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
-                        }`}
-                      />
-                    </button>
-                    {mobileVenturesOpen && (
-                      <div className="p-3 bg-white space-y-1.5 border-t border-slate-200/80">
-                        {displayVentures.map((v) => (
-                          <Link
-                            key={v.slug}
-                            href={v.href || `/ventures/${v.slug}`}
-                            className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 text-xs font-semibold text-slate-800"
-                          >
-                            <span>{v.title}</span>
-                            <span className="text-[10px] text-slate-500">{v.category}</span>
-                          </Link>
-                        ))}
-                        <Link
-                          href="/ventures"
-                          className="block pt-2 text-center text-xs font-bold text-emerald-700 hover:underline"
-                        >
-                          View All {ventures?.length || 13} Ventures →
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
-              return (
-                <Link
-                  key={link.id || link.href}
-                  href={link.href}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center justify-between ${
-                    isActive ? "bg-emerald-50 text-emerald-700" : "text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  <span>{getLabel(link)}</span>
-                  {link.badge && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
-                      {link.badge}
-                    </span>
-                  )}
-                </Link>
-              );
-            })}
-
-            <Link
-              href="/application-status"
-              className="px-4 py-2.5 rounded-xl text-sm font-bold text-emerald-700 bg-emerald-50/70 border border-emerald-200 mt-2 flex items-center justify-between"
-            >
-              <span>Track Application Status</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 font-bold">
-                Portal
+              <Globe className="w-4 h-4 text-[#0D1E2D]" strokeWidth={1.8} />
+              <span className="text-[13px] font-semibold">
+                {language === "en" ? "EN" : "বাং"}
               </span>
-            </Link>
-          </nav>
+              <ChevronDown className="w-3 h-3 text-gray-500" strokeWidth={2.5} />
+            </button>
 
-          <div className="pt-4 border-t border-slate-200 flex flex-col gap-2">
-            <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-              Direct Corporate Desks
-            </p>
-            <a
-              href={`tel:${phoneTel}`}
-              className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 text-slate-700 text-xs font-semibold"
+            {/* Search Icon Button */}
+            <button
+              type="button"
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="text-[#0D1E2D] hover:text-[#0E8A44] transition-colors p-1 cursor-pointer"
+              aria-label="Search"
             >
-              <Phone className="h-3.5 w-3.5 text-emerald-700" />
-              <span>{phoneDisplay} (Direct)</span>
-            </a>
-            <a
-              href={`mailto:${settings?.contact?.email || "yessbangla.bd@gmail.com"}`}
-              className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 text-slate-700 text-xs font-semibold"
+              <Search className="w-4 h-4" strokeWidth={2.2} />
+            </button>
+
+            {/* Mobile Menu Toggle Button (Hamburger) */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden text-[#0D1E2D] hover:text-[#0E8A44] transition-colors p-1 ml-1 cursor-pointer"
+              aria-label="Toggle Navigation Menu"
             >
-              <Mail className="h-3.5 w-3.5 text-emerald-700" />
-              <span>{settings?.contact?.email || "yessbangla.bd@gmail.com"}</span>
-            </a>
-          </div>
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" strokeWidth={2.4} />
+              ) : (
+                <MenuIcon className="w-5 h-5" strokeWidth={2.4} />
+              )}
+            </button>
 
-
-          <div className="pt-2 pb-2">
+            {/* Primary CTA Button (Desktop) */}
             <Link
               href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white font-bold text-sm block shadow-md shadow-emerald-900/20 active:scale-95 transition-transform"
+              onClick={handleLinkClick}
+              className="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-[#0E8A44] to-[#0a7539] hover:from-[#0a7539] hover:to-[#075f2e] text-white text-[13px] font-semibold px-4.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
             >
-              Let's Talk — Schedule Consultation
+              <span>{language === "bn" ? "যোগাযোগ করুন" : "Get in Touch"}</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
             </Link>
           </div>
         </div>
-      )}
+
+        {/* Search Bar Dropdown */}
+        {searchOpen && (
+          <div className="border-t border-gray-100 bg-white/98 backdrop-blur-md px-6 py-3 transition-all animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="max-w-[1240px] mx-auto flex items-center gap-3">
+              <Search className="w-4 h-4 text-gray-400 shrink-0" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={
+                  language === "bn"
+                    ? "ব্র্যান্ড, পরিষেবা বা তথ্য অনুসন্ধান করুন..."
+                    : "Search brands, services, or information..."
+                }
+                className="w-full text-sm text-[#0D1E2D] placeholder-gray-400 bg-transparent focus:outline-none"
+                autoFocus
+              />
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                className="text-gray-400 hover:text-gray-600 text-xs px-2 py-1 rounded cursor-pointer"
+              >
+                ESC
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-gray-100 bg-white px-6 py-5 space-y-4 shadow-lg animate-in fade-in slide-in-from-top-3 duration-200 max-h-[calc(100vh-68px)] overflow-y-auto">
+            <nav className="flex flex-col space-y-2 text-[14.5px] font-medium">
+              {rawNavLinks.map((link) => {
+                const isVentures = link.href === "/ventures";
+                if (isVentures) {
+                  return (
+                    <div key={link.id || link.href} className="flex flex-col">
+                      <div className="flex items-center justify-between py-1.5">
+                        <Link
+                          href="/ventures"
+                          onClick={handleLinkClick}
+                          className={`flex items-center gap-2 ${
+                            isLinkActive(link.href)
+                              ? "text-[#0E8A44] font-bold"
+                              : "text-[#475569] hover:text-[#0E8A44]"
+                          }`}
+                        >
+                          <Layers className="w-4 h-4" />
+                          <span>{getLabel(link)}</span>
+                          {link.badge && (
+                            <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-50 text-[#0E8A44] font-semibold border border-emerald-100">
+                              {link.badge}
+                            </span>
+                          )}
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => setMobileVenturesOpen(!mobileVenturesOpen)}
+                          className="p-1 text-gray-500 hover:text-[#0E8A44]"
+                          aria-label="Toggle ventures list"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform ${
+                              mobileVenturesOpen ? "rotate-180 text-[#0E8A44]" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      {/* Expandable Ventures List */}
+                      {mobileVenturesOpen && (
+                        <div className="pl-6 py-2 space-y-2 border-l-2 border-emerald-100 ml-2">
+                          {FEATURED_VENTURES.map((v) => (
+                            <Link
+                              key={v.slug}
+                              href={v.href}
+                              onClick={handleLinkClick}
+                              className="block py-1 text-[13px] text-[#475569] hover:text-[#0E8A44]"
+                            >
+                              <div className="font-semibold">{v.title}</div>
+                              <div className="text-[10px] text-gray-400">{v.category}</div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={link.id || link.href}
+                    href={link.href}
+                    onClick={handleLinkClick}
+                    className={`py-1.5 transition-colors flex items-center justify-between ${
+                      isLinkActive(link.href)
+                        ? "text-[#0E8A44] font-bold"
+                        : "text-[#475569] hover:text-[#0E8A44]"
+                    }`}
+                  >
+                    <span>{getLabel(link)}</span>
+                    {link.badge && (
+                      <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-50 text-[#0E8A44] font-semibold border border-emerald-100">
+                        {link.badge}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+
+              {/* Track Application Status Portal */}
+              <Link
+                href="/application-status"
+                onClick={handleLinkClick}
+                className="py-1.5 text-emerald-800 font-semibold flex items-center justify-between border-t border-gray-100 pt-2"
+              >
+                <span>{language === "bn" ? "আবেদন ট্র্যাকিং পোর্টাল" : "Track Application Status"}</span>
+                <span className="text-[9.5px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                  Portal
+                </span>
+              </Link>
+            </nav>
+
+            <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => setLanguage(language === "en" ? "bn" : "en")}
+                className="flex items-center space-x-2 text-sm font-semibold text-[#0D1E2D]"
+              >
+                <Globe className="w-4 h-4 text-[#0E8A44]" />
+                <span>{language === "en" ? "বাংলা সংস্করণ" : "English Version"}</span>
+              </button>
+              <Link
+                href="/contact"
+                onClick={handleLinkClick}
+                className="inline-flex items-center space-x-1.5 bg-[#0E8A44] text-white text-[13px] font-semibold px-4 py-2 rounded-full shadow-sm"
+              >
+                <span>{language === "bn" ? "যোগাযোগ" : "Get in Touch"}</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+        )}
+      </header>
     </>
   );
 }

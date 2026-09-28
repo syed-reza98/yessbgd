@@ -12,7 +12,7 @@ interface PublicChromeProps {
   headerMenus?: CmsMenuItem[];
   footerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
-  ventures?: any[];
+  ventures?: unknown[];
 }
 
 function HeaderWrapper({
@@ -22,7 +22,7 @@ function HeaderWrapper({
 }: {
   headerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
-  ventures?: any[];
+  ventures?: unknown[];
 }) {
   const pathname = usePathname();
   if (pathname?.startsWith("/admin")) return null;
@@ -36,14 +36,14 @@ function FooterWrapper({
 }: {
   footerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
-  ventures?: any[];
+  ventures?: unknown[];
 }) {
   const pathname = usePathname();
   if (pathname?.startsWith("/admin")) return null;
   return (
     <>
       <Footer footerMenus={footerMenus} settings={settings} ventures={ventures} />
-      <MobileTabBar />
+      {pathname !== "/" && <MobileTabBar />}
     </>
   );
 }

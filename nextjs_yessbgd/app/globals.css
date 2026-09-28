@@ -262,4 +262,92 @@ body {
   background-color: #f8fafc;
 }
 
+/* ── Yess Bangla Core Design Tokens & Animations ───────────────────── */
+:root {
+  --primary-green: #0E8A44;
+  --primary-green-hover: #0a7338;
+  --brand-orange: #F15A24;
+  --navy-dark: #0D1E2D;
+  --text-muted: #64748B;
+  --footer-bg: #042017;
+  --footer-divider: rgba(255, 255, 255, 0.08);
+}
+
+/* Floating Badges Keyframes */
+@keyframes gentleFloat1 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes gentleFloat2 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes gentleFloat3 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-9px); }
+}
+
+.float-card-1 { animation: gentleFloat1 3.5s ease-in-out infinite; }
+.float-card-2 { animation: gentleFloat2 4s ease-in-out infinite 0.5s; }
+.float-card-3 { animation: gentleFloat3 4.5s ease-in-out infinite 1s; }
+.float-card-4 { animation: gentleFloat1 3.8s ease-in-out infinite 0.2s; }
+.float-card-5 { animation: gentleFloat2 4.2s ease-in-out infinite 0.8s; }
+.float-card-6 { animation: gentleFloat3 3.6s ease-in-out infinite 1.2s; }
+.float-card-7 { animation: gentleFloat1 4.4s ease-in-out infinite 0.4s; }
+
+/* Scroll Reveal System */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Hover Lift & Shadow */
+.brand-interactive-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brand-interactive-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12);
+}
+.brand-interactive-card .card-visual {
+  transition: transform 0.4s ease;
+}
+.brand-interactive-card:hover .card-visual {
+  transform: scale(1.04);
+}
+
+/* Nav Link Active Underline */
+.nav-link-active {
+  position: relative;
+  color: #0D1E2D;
+  font-weight: 600;
+}
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--primary-green);
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-card-1, .float-card-2, .float-card-3, .float-card-4, .float-card-5, .float-card-6, .float-card-7 {
+    animation: none !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+
 
