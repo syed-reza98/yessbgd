@@ -1,12 +1,38 @@
+"use client";
+
 import { type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Sparkles, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export interface BreadcrumbItem {
   label: string;
   href?: string;
 }
+
+const BREADCRUMB_BN: Record<string, string> = {
+  Home: "হোম",
+  "About Us": "আমাদের সম্পর্কে",
+  About: "আমাদের সম্পর্কে",
+  Ventures: "ভেঞ্চার",
+  Services: "সেবা",
+  Industries: "ইন্ডাস্ট্রি",
+  Insights: "ইনসাইট",
+  Careers: "ক্যারিয়ার",
+  Contact: "যোগাযোগ",
+  FAQ: "প্রশ্নোত্তর",
+  Awards: "স্বীকৃতি",
+  Leadership: "নেতৃত্ব",
+  Methodology: "পদ্ধতি",
+  Standards: "মানদণ্ড",
+  Mission: "মিশন",
+  "Terms of Service": "সেবার শর্তাবলী",
+  Terms: "সেবার শর্তাবলী",
+  "Privacy Policy": "গোপনীয়তা নীতি",
+  Privacy: "গোপনীয়তা নীতি",
+  "Application Status": "আবেদনের অবস্থা",
+};
 
 export function PageHero({
   eyebrow,
@@ -27,7 +53,14 @@ export function PageHero({
   breadcrumbs?: BreadcrumbItem[];
   align?: "center" | "left";
 }) {
+  const { language } = useLanguage();
+  const isBn = language === "bn";
   const isCenter = align === "center";
+
+  const translateCrumb = (label: string) => {
+    if (!isBn) return label;
+    return BREADCRUMB_BN[label] || label;
+  };
 
   return (
     <section className="relative overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80 min-h-[auto] sm:min-h-[460px] lg:min-h-[520px] flex flex-col justify-center">
@@ -68,17 +101,17 @@ export function PageHero({
             }`}
           >
             <Link href="/" className="hover:text-emerald-700 transition-colors">
-              Home
+              {isBn ? "হোম" : "Home"}
             </Link>
             {breadcrumbs.map((crumb, idx) => (
               <span key={idx} className="flex items-center gap-1.5">
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 {crumb.href ? (
                   <Link href={crumb.href} className="hover:text-emerald-700 transition-colors">
-                    {crumb.label}
+                    {translateCrumb(crumb.label)}
                   </Link>
                 ) : (
-                  <span className="text-emerald-800 font-bold">{crumb.label}</span>
+                  <span className="text-emerald-800 font-bold">{translateCrumb(crumb.label)}</span>
                 )}
               </span>
             ))}

@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# cPanel build artifacts
+/dist-cpanel/
+deploy-cpanel.zip
+deploy-cpanel.tar.gz

@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileTabBar } from "@/components/MobileTabBar";
+import { AutoTranslator } from "@/components/AutoTranslator";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
 
 interface PublicChromeProps {
@@ -64,6 +66,8 @@ export function PublicChrome({
 }: PublicChromeProps) {
   return (
     <>
+      <AutoTranslator />
+      <ScrollToTop />
       <Suspense fallback={null}>
         <HeaderWrapper
           headerMenus={headerMenus}

@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent } from "react";
 import {
-  Send,
   Loader2,
   CheckCircle2,
   AlertCircle,
@@ -10,25 +9,24 @@ import {
   Building2,
   MapPin,
   Phone,
-  Mail,
   Clock,
   ExternalLink,
   Shield,
   Lock,
   ArrowRight,
-  Check,
-  Radio,
   FileCheck,
   MessageSquare,
-  BadgeAlert,
-  Sparkles,
   Car,
 } from "lucide-react";
 
 import { submitContactMessageAction } from "@/app/actions/contact";
 import type { CompanySettings } from "@/lib/cms";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function ContactFormAndLocator({ settings }: { settings?: CompanySettings }) {
+  const { language } = useLanguage();
+  const isBn = language === "bn";
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -46,7 +44,11 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
     setError(null);
 
     if (!fullName.trim() || !email.trim() || !message.trim()) {
-      setError("Please fill in your name, corporate email address, and project requirements.");
+      setError(
+        isBn
+          ? "অনুগ্রহ করে আপনার নাম, কর্পোরেট ইমেইল এবং প্রকল্পের বিবরণ পূরণ করুন।"
+          : "Please fill in your name, corporate email address, and project requirements."
+      );
       return;
     }
 
@@ -68,7 +70,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
       }
 
       setSubmitted(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.warn("Contact submission error:", err);
       setSubmitted(true);
     } finally {
@@ -85,15 +87,17 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           <div className="flex items-center justify-between pb-6 border-b border-border mb-6">
             <div>
               <h2 className="text-xl sm:text-2xl font-display font-extrabold text-foreground tracking-tight">
-                Submit Institutional Inquiry
+                {isBn ? "প্রাতিষ্ঠানিক অনুসন্ধান জমা দিন" : "Submit Institutional Inquiry"}
               </h2>
               <p className="text-xs sm:text-sm text-foreground/70 mt-1">
-                Direct encrypted intake reviewed by Venture Principals and Solutions Architects.
+                {isBn
+                  ? "ভেঞ্চার প্রিন্সিপাল এবং সলিউশন আর্কিটেক্টদের সরাসরি পর্যালোচনা।"
+                  : "Direct encrypted intake reviewed by Venture Principals and Solutions Architects."}
               </p>
             </div>
             <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-semibold">
               <Shield className="w-3.5 h-3.5 text-primary" />
-              <span>Fiduciary Pledge</span>
+              <span>{isBn ? "আস্থা ও নিরাপত্তা" : "Fiduciary Pledge"}</span>
             </div>
           </div>
 
@@ -103,11 +107,15 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-display font-bold text-foreground">
-                Inquiry Dispatched to Executive Desk
+                {isBn ? "অনুসন্ধান সফলভাবে জমা হয়েছে" : "Inquiry Dispatched to Executive Desk"}
               </h3>
               <p className="text-xs text-foreground/70 max-w-sm mx-auto leading-relaxed">
-                Thank you, <strong>{fullName}</strong>. Your message regarding &ldquo;{practiceArea}&rdquo; has been logged.
-                {requestNda && " A standard bilateral NDA will be counter-signed prior to our introductory call."}
+                {isBn ? (
+                  <>ধন্যবাদ, <strong>{fullName}</strong>। আপনার বার্তাটি সফলভাবে সংরক্ষিত হয়েছে।</>
+                ) : (
+                  <>Thank you, <strong>{fullName}</strong>. Your message regarding &ldquo;{practiceArea}&rdquo; has been logged.</>
+                )}
+                {requestNda && (isBn ? " আলোচনার পূর্বে দ্বিপাক্ষিক NDA সম্পাদন করা হবে।" : " A standard bilateral NDA will be counter-signed prior to our introductory call.")}
               </p>
               <button
                 onClick={() => {
@@ -116,7 +124,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                 }}
                 className="mt-4 px-5 py-2.5 rounded-xl bg-muted text-foreground text-xs font-semibold hover:bg-muted/80 transition-colors"
               >
-                Send Another Inquiry
+                {isBn ? "আরেকটি অনুসন্ধান পাঠান" : "Send Another Inquiry"}
               </button>
             </div>
           ) : (
@@ -132,7 +140,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="contact-full-name" className="block text-xs font-semibold text-foreground mb-1.5">
-                    Full Name *
+                    {isBn ? "পূর্ণ নাম *" : "Full Name *"}
                   </label>
                   <input
                     id="contact-full-name"
@@ -140,13 +148,13 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Engr. Tanvir Ahmed Chowdhury"
+                    placeholder={isBn ? "যেমন: প্রকৌশলী তানভীর আহমেদ" : "e.g. Engr. Tanvir Ahmed Chowdhury"}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
                 <div>
                   <label htmlFor="contact-email" className="block text-xs font-semibold text-foreground mb-1.5">
-                    Corporate Email (.com / .bd) *
+                    {isBn ? "কর্পোরেট ইমেইল (.com / .bd) *" : "Corporate Email (.com / .bd) *"}
                   </label>
                   <input
                     id="contact-email"
@@ -154,7 +162,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. tanvir@conglomerate.com.bd"
+                    placeholder={isBn ? "যেমন: tanvir@conglomerate.com.bd" : "e.g. tanvir@conglomerate.com.bd"}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
@@ -164,7 +172,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="contact-phone" className="block text-xs font-semibold text-foreground mb-1.5">
-                    Phone / WhatsApp Number *
+                    {isBn ? "ফোন / হোয়াটসঅ্যাপ নম্বর *" : "Phone / WhatsApp Number *"}
                   </label>
                   <input
                     id="contact-phone"
@@ -172,13 +180,13 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="e.g. +880 1711-000000"
+                    placeholder={isBn ? "যেমন: +৮৮০ ১৭১১-০০০০০০" : "e.g. +880 1711-000000"}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
                 <div>
                   <label htmlFor="contact-organization" className="block text-xs font-semibold text-foreground mb-1.5">
-                    Enterprise / Organization *
+                    {isBn ? "প্রতিষ্ঠান / সংস্থা *" : "Enterprise / Organization *"}
                   </label>
                   <input
                     id="contact-organization"
@@ -186,7 +194,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                     required
                     value={organization}
                     onChange={(e) => setOrganization(e.target.value)}
-                    placeholder="e.g. Apex Group / Ministry of ICT"
+                    placeholder={isBn ? "যেমন: এপেক্স গ্রুপ / আইসিটি মন্ত্রণালয়" : "e.g. Apex Group / Ministry of ICT"}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
@@ -195,7 +203,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               {/* Inquiry Type Dropdown */}
               <div>
                 <label htmlFor="contact-practice-area" className="block text-xs font-semibold text-foreground mb-1.5">
-                  Inquiry Type / Practice Area *
+                  {isBn ? "অনুসন্ধানের ধরন / সেবা ক্ষেত্র *" : "Inquiry Type / Practice Area *"}
                 </label>
                 <select
                   id="contact-practice-area"
@@ -203,20 +211,20 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                   onChange={(e) => setPracticeArea(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 >
-                  <option value="Venture Co-Building & Equity Structuring">Venture Co-Building & Equity Structuring</option>
-                  <option value="Enterprise Cloud & Sovereign Software Architectures">Enterprise Cloud & Sovereign Software Architectures</option>
-                  <option value="Agritech & National Cold-Chain Logistics (Organic Haat)">Agritech & National Cold-Chain Logistics (Organic Haat)</option>
-                  <option value="FinTech & Alternative Capital Structuring">FinTech & Alternative Capital Structuring</option>
-                  <option value="GovTech & Public Digital Infrastructure (DPI)">GovTech & Public Digital Infrastructure (DPI)</option>
-                  <option value="Institutional Careers & Executive Fellowships">Institutional Careers & Executive Fellowships</option>
-                  <option value="Media, Press & Regulatory Disclosures">Media, Press & Regulatory Disclosures</option>
+                  <option value="Venture Co-Building & Equity Structuring">{isBn ? "ভেঞ্চার কো-বিল্ডিং ও ইক্যুইটি স্ট্রাকচারিং" : "Venture Co-Building & Equity Structuring"}</option>
+                  <option value="Enterprise Cloud & Sovereign Software Architectures">{isBn ? "এন্টারপ্রাইজ ক্লাউড ও সফটওয়্যার আর্কিটেকচার" : "Enterprise Cloud & Sovereign Software Architectures"}</option>
+                  <option value="Agritech & National Cold-Chain Logistics (Organic Haat)">{isBn ? "এগ্রিটেক ও ন্যাশনাল কোল্ড-চেইন লজিস্টিকস (অর্গানিক হাট)" : "Agritech & National Cold-Chain Logistics (Organic Haat)"}</option>
+                  <option value="FinTech & Alternative Capital Structuring">{isBn ? "ফিনটেক ও অল্টারনেটিভ ক্যাপিটাল স্ট্রাকচারিং" : "FinTech & Alternative Capital Structuring"}</option>
+                  <option value="GovTech & Public Digital Infrastructure (DPI)">{isBn ? "গভটেক ও পাবলিক ডিজিটাল অবকাঠামো (ডিপিআই)" : "GovTech & Public Digital Infrastructure (DPI)"}</option>
+                  <option value="Institutional Careers & Executive Fellowships">{isBn ? "প্রাতিষ্ঠানিক ক্যারিয়ার ও ফেলোশিপ" : "Institutional Careers & Executive Fellowships"}</option>
+                  <option value="Media, Press & Regulatory Disclosures">{isBn ? "মিডিয়া, প্রেস ও প্রকাশনা" : "Media, Press & Regulatory Disclosures"}</option>
                 </select>
               </div>
 
               {/* Project Scope Textarea */}
               <div>
                 <label htmlFor="contact-message" className="block text-xs font-semibold text-foreground mb-1.5">
-                  Project Scope & Architectural Requirements
+                  {isBn ? "প্রকল্পের বিবরণ ও আর্কিটেকচারাল প্রয়োজনীয়তা" : "Project Scope & Architectural Requirements"}
                 </label>
                 <textarea
                   id="contact-message"
@@ -224,7 +232,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Detail your enterprise requirements, anticipated capital expenditure tier, strategic timeline, or security clearance specifications..."
+                  placeholder={isBn ? "আপনার প্রকল্পের প্রযুক্তিগত প্রয়োজনীয়তা বা সময়সীমার বিবরণ লিখুন..." : "Detail your enterprise requirements, anticipated capital expenditure tier, strategic timeline, or security clearance specifications..."}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-xs text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 />
               </div>
@@ -241,10 +249,12 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                 <label htmlFor="ndaConsent" className="text-xs text-foreground cursor-pointer select-none">
                   <span className="font-semibold text-primary inline-flex items-center gap-1">
                     <Shield className="w-3.5 h-3.5" />
-                    Mandate Mutual Non-Disclosure Agreement (NDA)
+                    {isBn ? "দ্বিপাক্ষিক গোপনীয়তা চুক্তি (NDA) বাধ্যতামূলক করুন" : "Mandate Mutual Non-Disclosure Agreement (NDA)"}
                   </span>
                   <span className="block text-foreground/60 text-[11px] mt-0.5">
-                    Require bilateral confidentiality documentation prior to technical architecture exchange.
+                    {isBn
+                      ? "প্রযুক্তিগত আর্কিটেকচার আলোচনার পূর্বে দ্বিপাক্ষিক গোপনীয়তা দলিল সম্পাদন করা হবে।"
+                      : "Require bilateral confidentiality documentation prior to technical architecture exchange."}
                   </span>
                 </label>
               </div>
@@ -259,18 +269,18 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Submitting Inquiry...</span>
+                      <span>{isBn ? "জমা দেওয়া হচ্ছে..." : "Submitting Inquiry..."}</span>
                     </>
                   ) : (
                     <>
-                      <span>Submit Enterprise Inquiry</span>
+                      <span>{isBn ? "অনুসন্ধান জমা দিন" : "Submit Enterprise Inquiry"}</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}
                 </button>
                 <span className="text-foreground/60 text-xs flex items-center gap-1.5">
                   <Lock className="w-3.5 h-3.5 text-primary" />
-                  <span>1-Business-Day Contract SLA Guarantee</span>
+                  <span>{isBn ? "১ কার্যদিবসের মধ্যে রেসপন্স এসএলএ গ্যারান্টি" : "1-Business-Day Contract SLA Guarantee"}</span>
                 </span>
               </div>
             </form>

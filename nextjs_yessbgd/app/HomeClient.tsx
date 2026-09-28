@@ -6,8 +6,6 @@ import {
   ArrowRight,
   Play,
   X,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -172,35 +170,6 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     <Play className="w-2.5 h-2.5 text-white fill-current ml-0.5" />
                   </div>
                 </button>
-              </div>
-
-              {/* Social Proof Avatars & Trust Text */}
-              <div className="flex items-center space-x-3.5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/hero_avatars.jpg"
-                  alt="Trusted customer avatars"
-                  className="h-7 w-auto object-contain rounded-full"
-                />
-                <p className="text-[11.5px] sm:text-[12px] leading-tight text-[#64748B]">
-                  {language === "bn" ? (
-                    <>
-                      হাজারো মানুষের আস্থায়
-                      <br />
-                      <span className="font-medium text-[#475569]">
-                        সমগ্র বাংলাদেশে
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      Trusted by thousands
-                      <br />
-                      <span className="font-medium text-[#475569]">
-                        across Bangladesh
-                      </span>
-                    </>
-                  )}
-                </p>
               </div>
             </div>
 
@@ -517,19 +486,14 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                 ? "প্রয়োজনীয় পরিষেবা থেকে তাজা খাবার, সফটওয়্যার, ক্লাউড হোস্টিং, সংবাদ ও বিনোদন — আমাদের ব্র্যান্ডগুলো একসাথে কাজ করে একটি স্মার্ট বাংলাদেশ বিনির্মাণে।"
                 : "From essential services to fresh food, software, hosting, news and entertainment — our brands work together to create opportunities and a smarter, more connected Bangladesh."}
             </p>
-            <div className="hidden sm:flex items-center space-x-2 shrink-0">
-              <button
-                className="w-9 h-9 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600 transition-colors cursor-pointer"
-                aria-label="Previous brand"
+            <div className="hidden sm:flex items-center shrink-0">
+              <Link
+                href="/ventures"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white hover:from-[#0B7339] hover:via-[#047857] hover:to-[#0A5A5A] text-[13px] font-bold shadow-md shadow-emerald-900/15 hover:shadow-lg hover:shadow-emerald-900/25 hover:scale-[1.03] active:scale-95 transition-all duration-200 group cursor-pointer"
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                className="w-9 h-9 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600 transition-colors cursor-pointer"
-                aria-label="Next brand"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+                <span>{language === "bn" ? "আরও লোড হচ্ছে..." : "Loading More..."}</span>
+                <ArrowRight className="w-4 h-4 text-white/90 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
             </div>
           </div>
         </div>

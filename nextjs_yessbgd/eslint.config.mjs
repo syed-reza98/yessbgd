@@ -11,6 +11,9 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "dist-cpanel/**",
+    "server.js",
+    "ecosystem.config.cjs",
     "next-env.d.ts",
   ]),
 ]);

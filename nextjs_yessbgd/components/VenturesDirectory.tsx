@@ -4,19 +4,14 @@ import Link from "next/link";
 import { useState, useMemo, useEffect } from "react";
 import {
   Search,
-  X,
   ArrowRight,
   LayoutGrid,
   Table as TableIcon,
   ChevronDown,
   Sparkles,
   Server,
-  Radar,
   Leaf,
   Tv,
-  ExternalLink,
-  ShieldCheck,
-  TrendingUp,
   Code2,
   PlayCircle,
   Newspaper,
@@ -28,8 +23,9 @@ import {
   Building2,
 } from "lucide-react";
 import { ventures, type Venture } from "@/data/ventures";
+import { useLanguage } from "@/components/LanguageProvider";
 
-const VENTURE_ICONS: Record<string, any> = {
+const VENTURE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   "yess-soft": Code2,
   "akash-tv": Tv,
   "akash-ott": PlayCircle,
@@ -99,9 +95,12 @@ export function VenturesDirectory({
   initialVentures,
   defaultSort = "valuation",
 }: {
-  initialVentures?: (Omit<Venture, "icon"> & { icon?: any })[];
+  initialVentures?: (Omit<Venture, "icon"> & { icon?: React.ComponentType<{ className?: string }> | string })[];
   defaultSort?: "founded" | "valuation" | "alpha";
 } = {}) {
+  const { language } = useLanguage();
+  const isBn = language === "bn";
+
   const [query, setQuery] = useState("");
   const [selectedCluster, setSelectedCluster] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
@@ -122,12 +121,12 @@ export function VenturesDirectory({
   const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : ventures;
 
   const clusters = [
-    { id: "all", label: `All Ventures (${effectiveVentures.length})` },
-    { id: "Technology & AI", label: "Technology & AI" },
-    { id: "Agritech & Food Systems", label: "Agritech & Food Systems" },
-    { id: "Media & Entertainment", label: "Media & Entertainment" },
-    { id: "Supply Chain & Logistics", label: "Supply Chain & Logistics" },
-    { id: "Financial Infrastructure", label: "Financial Infrastructure" },
+    { id: "all", label: isBn ? `সকল ভেঞ্চার (${effectiveVentures.length})` : `All Ventures (${effectiveVentures.length})` },
+    { id: "Technology & AI", label: isBn ? "প্রযুক্তি ও এআই" : "Technology & AI" },
+    { id: "Agritech & Food Systems", label: isBn ? "এগ্রিটেক ও খাদ্য ব্যবস্থা" : "Agritech & Food Systems" },
+    { id: "Media & Entertainment", label: isBn ? "মিডিয়া ও বিনোদন" : "Media & Entertainment" },
+    { id: "Supply Chain & Logistics", label: isBn ? "লজিস্টিকস ও সাপ্লাই চেইন" : "Supply Chain & Logistics" },
+    { id: "Financial Infrastructure", label: isBn ? "আর্থিক ও আইনি সেবা" : "Financial Infrastructure" },
   ];
 
   const filteredAndSorted = useMemo(() => {
@@ -146,8 +145,8 @@ export function VenturesDirectory({
 
     if (sortBy === "valuation") {
       result.sort((a, b) => {
-        const valA = (a as any).valuation ?? (VENTURE_VALUATIONS[a.slug] ?? 0);
-        const valB = (b as any).valuation ?? (VENTURE_VALUATIONS[b.slug] ?? 0);
+        const valA = (a as unknown as { valuation?: number }).valuation ?? (VENTURE_VALUATIONS[a.slug] ?? 0);
+        const valB = (b as unknown as { valuation?: number }).valuation ?? (VENTURE_VALUATIONS[b.slug] ?? 0);
         return valB - valA;
       });
     } else if (sortBy === "alpha") {
@@ -171,8 +170,8 @@ export function VenturesDirectory({
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search ventures by name, sector, or capability..."
-              aria-label="Search ventures by name, sector, or capability"
+              placeholder={isBn ? "নাম বা খাত দিয়ে ভেঞ্চার খুঁজুন..." : "Search ventures by name, sector, or capability..."}
+              aria-label={isBn ? "নাম বা খাত দিয়ে ভেঞ্চার খুঁজুন" : "Search ventures by name, sector, or capability"}
               className="w-full pl-10 pr-12 py-2.5 bg-background text-foreground rounded-xl text-xs sm:text-sm border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-foreground/40"
             />
             <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-muted text-foreground/70 rounded border border-border">
@@ -215,13 +214,13 @@ export function VenturesDirectory({
               <select
                 id="ventures-sort-select"
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
+                onChange={(e) => setSortBy(e.target.value as "founded" | "valuation" | "alpha")}
                 aria-label="Sort ventures"
                 className="appearance-none bg-background text-foreground font-semibold text-xs py-2.5 pl-3 pr-8 rounded-xl border border-border focus:border-primary outline-none cursor-pointer"
               >
-                <option value="valuation">Sort by: Enterprise Valuation</option>
-                <option value="founded">Sort by: Founding Year (Newest)</option>
-                <option value="alpha">Sort by: Alphabetical (A-Z)</option>
+                <option value="valuation">{isBn ? "বাছাই: প্রাতিষ্ঠানিক মূল্যায়ন" : "Sort by: Enterprise Valuation"}</option>
+                <option value="founded">{isBn ? "বাছাই: প্রতিষ্ঠার বছর (নতুন)" : "Sort by: Founding Year (Newest)"}</option>
+                <option value="alpha">{isBn ? "বাছাই: বর্ণানুক্রমিক (A-Z)" : "Sort by: Alphabetical (A-Z)"}</option>
               </select>
               <ChevronDown className="w-4 h-4 absolute right-2.5 top-1/2 -translate-y-1/2 text-foreground/40 pointer-events-none" />
             </div>

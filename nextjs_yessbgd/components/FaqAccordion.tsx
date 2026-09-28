@@ -3,17 +3,10 @@
 import { useState, useMemo } from "react";
 import {
   Search,
-  SlidersHorizontal,
   ChevronDown,
-  Layers,
-  Shield,
-  Clock,
-  Sparkles,
-  FileCheck,
-  CreditCard,
-  Building,
   HelpCircle,
 } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export type FaqItem = {
   id: string;
@@ -108,7 +101,28 @@ const categories = [
   "Ventures & IP",
 ];
 
+const CATEGORY_NAMES_BN: Record<string, string> = {
+  "All Questions": "সকল প্রশ্ন",
+  "General & National Reach": "সাধারণ ও দেশব্যাপী উপস্থিতি",
+  "Engagement & Pricing": "এনগেজমেন্ট ও প্রাইসিং",
+  "Delivery, SLA & Support": "ডেলিভারি, এসএলএ ও সাপোর্ট",
+  "Security & Governance": "নিরাপত্তা ও সুশাসন",
+  "Ventures & IP": "ভেঞ্চার ও আইপি",
+};
+
+const TAG_NAMES_BN: Record<string, string> = {
+  All: "সকল",
+  "Pricing & SPV": "প্রাইসিং ও এসপিভি",
+  "IP Ownership": "আইপি স্বত্ব",
+  SLAs: "এসএলএ",
+  "64 Districts": "৬৪ জেলা",
+  "Legacy Audit": "অডিট ও সিকিউরিটি",
+};
+
 export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
+  const { language } = useLanguage();
+  const isBn = language === "bn";
+
   const [selectedCategory, setSelectedCategory] = useState("All Questions");
   const [searchQuery, setSearchQuery] = useState("");
   const [openIds, setOpenIds] = useState<string[]>(["ip-ownership", "pricing-models"]);
@@ -131,10 +145,9 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
         item.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
 
-
       return matchCategory && matchSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [effectiveFaqs, selectedCategory, searchQuery]);
 
   return (
     <div className="space-y-8">
@@ -147,7 +160,11 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search questions by topic, e.g. pricing, NDA, OTT, SLA, cloud residency..."
+            placeholder={
+              isBn
+                ? "বিষয় দিয়ে প্রশ্ন খুঁজুন, যেমন: প্রাইসিং, এনডিএ, এসএলএ, ক্লাউড..."
+                : "Search questions by topic, e.g. pricing, NDA, OTT, SLA, cloud residency..."
+            }
             aria-label="Search questions by topic, pricing, SLA, or cloud residency"
             className="w-full bg-background border border-border rounded-xl pl-12 pr-4 py-3 text-sm text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
@@ -155,7 +172,9 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
 
         {/* Quick Topic Tags */}
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
-          <span className="text-foreground/60 font-medium mr-1">Quick Search Topics:</span>
+          <span className="text-foreground/60 font-medium mr-1">
+            {isBn ? "জনপ্রিয় বিষয়সমূহ:" : "Quick Search Topics:"}
+          </span>
           {["All", "Pricing & SPV", "IP Ownership", "SLAs", "64 Districts", "Legacy Audit"].map(
             (tag) => {
               const active = searchQuery === (tag === "All" ? "" : tag);
@@ -169,7 +188,7 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
                       : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
                   }`}
                 >
-                  {tag}
+                  {isBn && TAG_NAMES_BN[tag] ? TAG_NAMES_BN[tag] : tag}
                 </button>
               );
             }
@@ -197,7 +216,7 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
                     : "bg-muted text-foreground/70 hover:bg-muted/80 border border-border"
                 }`}
               >
-                {cat} ({count})
+                {isBn && CATEGORY_NAMES_BN[cat] ? CATEGORY_NAMES_BN[cat] : cat} ({count})
               </button>
             );
           })}
