@@ -110,7 +110,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 sm:px-6 pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
           <div className="flex flex-col lg:flex-row items-start justify-between">
             {/* Left Column: Typography, Tagline, CTAs, Social Proof */}
-            <div className="w-full lg:w-[420px] pt-1 sm:pt-2">
+            <div className="w-full lg:w-[460px] pt-1 sm:pt-2">
               {/* Tagline Pill */}
               <div className="inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-emerald-100 px-3 py-1 rounded-full shadow-xs mb-4 sm:mb-5">
                 <span className="w-2 h-2 rounded-full bg-[#0E8A44]" />
@@ -121,20 +121,19 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                 </span>
               </div>
 
-              {/* Main Bold Headline: 4 Stacked Words */}
-              <h1 className="text-[38px] sm:text-[48px] lg:text-[52px] font-black leading-[1.06] tracking-tight mb-4 sm:mb-5">
-                <span className="block text-[#0D1E2D]">
-                  {language === "bn" ? "আইডিয়া।" : "Ideas."}
-                </span>
-                <span className="block text-[#0D1E2D]">
-                  {language === "bn" ? "প্রযুক্তি।" : "Technology."}
-                </span>
-                <span className="block text-[#0D1E2D]">
-                  {language === "bn" ? "মানুষ।" : "People."}
-                </span>
-                <span className="block text-[#0E8A44]">
-                  {language === "bn" ? "বাস্তব প্রভাব।" : "Real Impact."}
-                </span>
+              {/* Main Bold Headline */}
+              <h1 className="text-[34px] sm:text-[42px] lg:text-[46px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5">
+                {language === "bn" ? (
+                  <>
+                    <span className="block text-[#0D1E2D]">স্মার্ট সমাধানের জন্য</span>
+                    <span className="block text-[#0E8A44]">আপনার ইকোসিস্টেম</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="block text-[#0D1E2D]">Your Ecosystem for</span>
+                    <span className="block text-[#0E8A44]">Smart Solutions</span>
+                  </>
+                )}
               </h1>
 
               {/* Description Paragraph */}
