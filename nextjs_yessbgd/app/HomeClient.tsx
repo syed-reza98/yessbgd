@@ -267,11 +267,9 @@ export function HomeClient({
               </div>
 
               {/* Headline */}
-              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] tracking-tight leading-[1.08] mb-4">
-                <span className="text-slate-900 block">Ideas.</span>
-                <span className="text-slate-900 block">Technology.</span>
-                <span className="text-slate-900 block">People.</span>
-                <span className="text-[#10754A] block">Real Impact.</span>
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] tracking-tight leading-[1.12] mb-4 text-slate-900">
+                Your Ecosystem for{" "}
+                <span className="text-[#10754A] block sm:inline">Smart Solutions</span>
               </h1>
 
               {/* Subtitle Description */}
