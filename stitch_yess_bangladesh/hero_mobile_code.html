@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0" name="viewport"/>
+<title>YESS Bangladesh - Canonical Mobile Viewport</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "primary-container": "#0d6e6e",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e6e9e8",
+            "inverse-primary": "#84d4d3",
+            "secondary-fixed-dim": "#f2be71",
+            "secondary-container": "#fec97b",
+            "inverse-surface": "#2d3131",
+            "secondary-fixed": "#ffddb1",
+            "brand-navy": "#061a1b",
+            "outline": "#6e7979",
+            "brand-gold-glow": "#f6c87a",
+            "on-background": "#181c1c",
+            "tertiary-fixed": "#ffdbcb",
+            "surface-dim": "#f0f4f4",
+            "on-primary-container": "#9dedec",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "surface-container-low": "#f1f4f3",
+            "inverse-on-surface": "#eef1f0",
+            "surface-tint": "#016a6a",
+            "on-tertiary-fixed-variant": "#6f3819",
+            "on-surface": "#181c1c",
+            "on-primary-fixed": "#002020",
+            "primary-fixed-dim": "#84d4d3",
+            "on-secondary-fixed": "#291800",
+            "surface-variant": "#e0e3e2",
+            "brand-teal-glow": "#35b0aa",
+            "on-tertiary-container": "#ffd8c6",
+            "surface-bright": "#ffffff",
+            "on-secondary-fixed-variant": "#614000",
+            "surface-container-highest": "#e0e3e2",
+            "primary-fixed": "#a0f0f0",
+            "on-error-container": "#93000a",
+            "secondary": "#7e5713",
+            "outline-variant": "#bec9c8",
+            "surface-container": "#eaf2f2",
+            "on-primary-fixed-variant": "#004f50",
+            "background": "#f7faf9",
+            "on-surface-variant": "#3e4948",
+            "tertiary-fixed-dim": "#ffb692",
+            "on-secondary-container": "#78520e",
+            "primary": "#005454",
+            "brand-teal": "#0d6e6e",
+            "on-tertiary-fixed": "#341100",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "surface": "#f7faf9",
+            "tertiary-container": "#915332",
+            "on-error": "#ffffff",
+            "tertiary": "#743c1d",
+            "brand-gold": "#d4a359"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-md": ["Plus Jakarta Sans"],
+            "handwriting": ["Caveat", "cursive"]
+          },
+          "fontSize": {
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-md": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glowing-script {
+      text-shadow: 0 0 10px rgba(53, 176, 170, 0.45), 0 0 20px rgba(53, 176, 170, 0.2);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased flex justify-center">
+<main class="w-full max-w-[390px] min-h-screen bg-surface relative shadow-2xl flex flex-col pb-28 overflow-x-hidden">
+<!-- 1. TOP COMPACT MOBILE HEADER -->
+<header class="sticky top-0 z-40 w-full h-14 bg-surface-bright/85 backdrop-blur-md px-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-md text-headline-md font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-[13px] font-bold text-primary tracking-tight leading-none">YESS BANGLADESH</span>
+<span class="font-label-md text-[9px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded-full font-semibold">yessbgd</span>
+</div>
+<span class="font-label-md text-[10px] text-outline leading-tight">Conglomerate &amp; Innovation</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<button aria-label="Search" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</button>
+<div class="h-6 px-2 rounded-full bg-surface-container text-primary flex items-center gap-1 font-label-md text-[11px] font-bold">
+<span>EN</span>
+<span class="text-outline-variant">|</span>
+<span class="text-on-surface-variant font-medium">বাংলা</span>
+</div>
+<button aria-label="Open navigation menu" class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-surface-container active:scale-95 transition-all duration-150">
+<span class="material-symbols-outlined text-[22px]" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- 2. HERO SECTION WITH EXACT PHOTOGRAPHIC BACKGROUND -->
+<section class="relative w-full bg-cover bg-no-repeat overflow-hidden" data-alt="A cinematic photographic background showing a high-tech modern developer workstation with triple glowing monitors overlooking the vibrant sunset silhouette of the Savar National Monument in Bangladesh. The atmosphere combines deep teal and golden hour amber tones with authentic architectural depth." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFpGjqOmi-Pg6zAQnozNC3Or35vvt77SXWWuq66Y04vKsMuRVcEBgQJ8NaQaXotXkVv7b7-AR2F0pzTh_FJ7ThoZXhr_73_sloQDTRB1oF8Vj8Oa1V-HOyYeWK6mxyYjKxxlWArtRLQ6UScRTs26i0UaWGFiBrqsOuQ8V8TD_OSSkmZly2HDWAKIcEfjaYKkYDQkmkIl67y4XAqdCUmdOQRm7DZiNnTAJ5Bpk2lCoMN1sWURHVAzbRfCsaMXVSkYMG8pBdVMyqSboT'); background-position: center right;">
+<!-- Multi-stop tonal gradient overlay ensuring readability while keeping background visual elements alive -->
+<div class="w-full h-full bg-gradient-to-b from-[#ffffff]/95 via-[#ffffff]/85 to-[#ffffff]/60 pt-5 pb-6 px-4 flex flex-col">
+<!-- 3. MOBILE HERO COPY & ACTIONS -->
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 self-start bg-surface-container-lowest/90 backdrop-blur-sm border border-brand-teal/25 rounded-full px-3 py-1 shadow-sm mb-4">
+<span class="w-2 h-2 rounded-full bg-brand-teal animate-pulse"></span>
+<span class="font-label-md text-[11px] tracking-widest font-bold text-brand-teal uppercase">A SMARTER BANGLADESH TOGETHER</span>
+</div>
+<!-- 4-Line Headline -->
+<h1 class="font-display-md text-[38px] leading-[42px] tracking-tight font-extrabold text-on-surface mb-3">
+<span class="block text-inverse-surface">Ideas.</span>
+<span class="block text-inverse-surface">Technology.</span>
+<span class="block text-inverse-surface">People.</span>
+<span class="block text-primary-container">Real Impact.</span>
+</h1>
+<!-- Descriptive Subtitle -->
+<p class="font-body-md text-body-md text-on-surface-variant font-medium leading-relaxed mb-5 max-w-[340px]">
+          At YESS Bangladesh, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment.
+        </p>
+<!-- Dual Pill Actions -->
+<div class="flex flex-col gap-2.5 mb-6">
+<a class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary rounded-full font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all duration-150" href="#ventures">
+<span>Explore Our Brands</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<button class="w-full h-12 bg-surface-bright/90 backdrop-blur-md border border-outline-variant/60 text-on-surface hover:bg-surface-container rounded-full font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2.5 shadow-sm active:scale-95 transition-all duration-150">
+<span class="w-6 h-6 rounded-full bg-brand-gold/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+<span>Watch Our Story</span>
+</button>
+</div>
+<!-- Social Proof Section -->
+<div class="flex items-center gap-3 bg-surface-bright/80 backdrop-blur-md p-2.5 rounded-xl border border-white/60 shadow-sm mb-6">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A portrait of a cheerful young Bangladeshi female entrepreneur in corporate attire smiling directly at the camera with modern office glass reflections in the background, warm natural lighting and teal accents." height="32" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS4tIdZQGNvtDWgtZcLhRhJfbFDl5R_T02VAYZ17WKXNkzGIJ88wdgG-IyNokCo23d3tyE3ZLxNatHgokk1Se0uDjGW2EGIBzmbjeg8AYxRUqKMzz_QCd1XSfndG4Ud3yGYwPpGUeSwxje5xVmtazIBktgpRt7co9LWt26pzO6NpJFSNl5hKz5kZvNwJ5IhbBxPO6mUz3AvB6Ru7poJZK68c182xTuK5Nfooxw-tnHfAapL-pU6o5ZcjBQcXCHSCwmSC3fPQo9rBqd" width="32"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A confident young South Asian male software developer in a smart casual polo against soft bokeh ambient monitor light, expressing focus and authentic reliability." height="32" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFH0YaJ-RRWCtBL5PhjMyXggDGUnWh7aIcfHf7RiXlkPxeruvKOLr4rImehtFsEbb7Z41fHBAKgRLnaiDpTohhqRupBzydihAC_MAj6zyR_4874zHlNBNnujeXB4bZ-9tQxQ9sXM6plsG4uWUpkXzGmPJqa4gw9-qHvRgJyB2KmsAmZ6HCJHp9klhuwya0lZuaGHa-Yw7PRSaNIZxJFra_cCY9w_Uj_DcqVOOCQ2VwipWBZNwntD_F_Tpwv5IdrHszWjBAtlhzAvUA" width="32"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="An accomplished Bangladeshi agricultural innovator smiling outdoors on an eco-farm under bright clean sunlight, representing sustainable enterprise." height="32" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFrtrKjewAB7Fz16h4gTMTe8whCzZU-txRyUG9qIuZxIzHPfP5EMZhrtTMYnpl8h5-nuaQB1AxY0JT18m-XLvyGPUdbZvj-E3L9a7sUl0QkecqfAKTfjIdDlqIcVqBHlK95FRbpOa-rr0FlSQydh-EinphNZG5QNqRIE0-DdhylDJt48Ayf1lqYQnC_eWqfHmD3LmWgDYXWR_hCyc45tv0UKgCvaR2L6TwFOsE411M-2K54E3ledGvFq57h-gYjZAG6HQ0Ft12bOLe" width="32"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-container text-on-primary flex items-center justify-center text-[10px] font-bold">
+              +10k
+            </div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center text-brand-gold text-[13px]">
+<span class="material-symbols-outlined text-[15px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[15px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[15px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[15px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[15px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-[11px] text-on-surface font-bold ml-1">4.9/5</span>
+</div>
+<span class="font-label-md text-[11px] text-on-surface-variant font-medium">Trusted by thousands across Bangladesh</span>
+</div>
+</div>
+<!-- 4. GLOWING SCRIPT & FLOATING VENTURE CARDS -->
+<div class="mb-4">
+<div class="flex items-center justify-between mb-2">
+<div>
+<p class="font-handwriting text-brand-teal text-[24px] leading-tight font-bold glowing-script">
+                A Smarter Bangladesh Together
+              </p>
+<h2 class="font-headline-md text-[17px] font-bold text-on-surface">Our 7 Flagship Ventures</h2>
+</div>
+<span class="font-label-md text-[11px] text-outline flex items-center gap-0.5">
+              Swipe <span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</span>
+</div>
+<!-- Horizontal Carousel of Glassmorphic Cards -->
+<div class="flex gap-3 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 snap-x">
+<!-- 1. Shondhaan -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="eco">eco</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Shondhaan</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">Service Marketplace</p>
+</div>
+</div>
+<!-- 2. Organic Haat -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-amber-50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Organic Haat</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">Fresh &amp; Healthy Food</p>
+</div>
+</div>
+<!-- 3. Yess Soft -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Yess Soft</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">IT Solutions</p>
+</div>
+</div>
+<!-- 4. The Daily Akash -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-orange-50 text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="newspaper">newspaper</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">The Daily Akash</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">News &amp; Media</p>
+</div>
+</div>
+<!-- 5. Akash TV -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="live_tv">live_tv</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Akash TV</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">Television</p>
+</div>
+</div>
+<!-- 6. Akash OTT -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="movie">movie</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Akash OTT</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">Entertainment</p>
+</div>
+</div>
+<!-- 7. Yess Host -->
+<div class="min-w-[170px] snap-start bg-white/85 backdrop-blur-[14px] border border-white/95 rounded-2xl p-3.5 shadow-lg flex flex-col justify-between transition-transform duration-150 active:scale-95">
+<div class="flex items-start justify-between mb-2">
+<div class="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="cloud">cloud</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="north_east">north_east</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Yess Host</h3>
+<p class="font-body-md text-[11px] text-on-surface-variant">Hosting &amp; Cloud</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. FLOATING COMPACT METRICS GRID -->
+<div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 border border-surface-container-high shadow-sm my-3">
+<div class="grid grid-cols-2 gap-3">
+<div class="flex items-center gap-2.5 p-2 rounded-xl bg-surface-container-low">
+<div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="flag">flag</span>
+</div>
+<div>
+<p class="font-headline-md text-[16px] font-bold text-on-surface leading-tight">11+ Years</p>
+<p class="font-label-md text-[10px] text-on-surface-variant font-medium">Of Journey</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 p-2 rounded-xl bg-surface-container-low">
+<div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="groups">groups</span>
+</div>
+<div>
+<p class="font-headline-md text-[16px] font-bold text-on-surface leading-tight">500+</p>
+<p class="font-label-md text-[10px] text-on-surface-variant font-medium">Team Members</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 p-2 rounded-xl bg-surface-container-low">
+<div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="public">public</span>
+</div>
+<div>
+<p class="font-headline-md text-[16px] font-bold text-on-surface leading-tight">Millions</p>
+<p class="font-label-md text-[10px] text-on-surface-variant font-medium">People Reached</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 p-2 rounded-xl bg-surface-container-low">
+<div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="font-headline-md text-[16px] font-bold text-on-surface leading-tight">64+ Districts</p>
+<p class="font-label-md text-[10px] text-on-surface-variant font-medium">Pan-Bangladesh</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. ACCREDITATION BADGES ROW -->
+<div class="w-full bg-surface-container/60 rounded-xl p-2.5 border border-outline-variant/30 flex items-center justify-between text-outline text-[10px] font-semibold tracking-tight">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="verified_user">verified_user</span>
+<span>RJSC C-184920</span>
+</div>
+<span class="text-outline-variant">|</span>
+<span>BASIS #A-941</span>
+<span class="text-outline-variant">|</span>
+<span>DCCI</span>
+<span class="text-outline-variant">|</span>
+<span>ISO 9001 &amp; 27001</span>
+</div>
+</div>
+</section>
+<!-- FOOTER (FROM SHARED BLUEPRINT) -->
+<footer class="flex flex-col items-center gap-3 px-6 pt-6 pb-6 text-center max-w-[390px] mx-auto bg-surface-container-highest">
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-1">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Sovereign Subsidiaries</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Client Marquee</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Bilingual Profile</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<p class="font-body-md text-[11px] text-outline">
+        © 2024 YESS Bangladesh. All rights reserved. Dhaka HQ.
+      </p>
+</footer>
+<!-- 7. DOCKED MOBILE BOTTOM NAVIGATION TAB BAR (MATCHING JSON STRICTLY) -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[390px] mx-auto z-50 bg-surface-bright/95 backdrop-blur-lg flex justify-around items-center px-2 py-2 rounded-t-xl shadow-[0_-4px_16px_rgba(1,106,106,0.12)]">
+<!-- Item 1: Home (ACTIVE - Closest match for Homepage) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative after:content-[''] after:w-8 after:h-1 after:bg-brand-teal-glow after:rounded-full after:mt-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-[10px]">Home</span>
+</a>
+<!-- Item 2: Ventures -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="domain">domain</span>
+<span class="font-label-md text-[10px]">Ventures</span>
+</a>
+<!-- Item 3: Services -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="corporate_fare">corporate_fare</span>
+<span class="font-label-md text-[10px]">Services</span>
+</a>
+<!-- Item 4: Insights -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="article">article</span>
+<span class="font-label-md text-[10px]">Insights</span>
+</a>
+<!-- Item 5: Contact -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="call">call</span>
+<span class="font-label-md text-[10px]">Contact</span>
+</a>
+</nav>
+</main>
+</body></html>

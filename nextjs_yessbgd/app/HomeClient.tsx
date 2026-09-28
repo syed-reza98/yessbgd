@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -5,6 +8,7 @@ import {
   Tv,
   LayoutGrid,
   ArrowRight,
+  ArrowUpRight,
   CheckCircle2,
   Download,
   Building2,
@@ -20,6 +24,15 @@ import {
   Leaf,
   Plane,
   Scale,
+  ShoppingBasket,
+  Newspaper,
+  Cloud,
+  Flag,
+  Users,
+  MapPin,
+  Play,
+  Star,
+  X,
 } from "lucide-react";
 import { ventures as defaultVentures } from "@/data/ventures";
 import { HomeVenturesFilter } from "@/components/home/HomeVenturesFilter";
@@ -106,6 +119,106 @@ export function HomeClient({
     },
   ];
 
+  const [isStoryVideoOpen, setIsStoryVideoOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsStoryVideoOpen(false);
+    };
+    if (isStoryVideoOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isStoryVideoOpen]);
+
+  const heroVentures = [
+    // Left column (3 cards)
+    {
+      name: "Shondhaan",
+      category: "Service Marketplace",
+      href: "/ventures",
+      icon: Leaf,
+      iconBg: "bg-emerald-500",
+      hoverColor: "group-hover:text-emerald-600",
+    },
+    {
+      name: "Organic Haat",
+      category: "Fresh & Healthy Food",
+      href: "/ventures",
+      icon: ShoppingBasket,
+      iconBg: "bg-amber-500",
+      hoverColor: "group-hover:text-amber-600",
+    },
+    {
+      name: "Yess Soft",
+      category: "IT Solutions",
+      href: "/ventures/yess-soft",
+      icon: Code2,
+      iconBg: "bg-blue-600",
+      hoverColor: "group-hover:text-blue-600",
+    },
+    // Right column (4 cards)
+    {
+      name: "The Daily Akash",
+      category: "News & Media",
+      href: "/services",
+      icon: Newspaper,
+      iconBg: "bg-orange-500",
+      hoverColor: "group-hover:text-orange-600",
+    },
+    {
+      name: "Akash TV",
+      category: "Television",
+      href: "/services",
+      icon: Tv,
+      iconBg: "bg-rose-500",
+      hoverColor: "group-hover:text-rose-600",
+    },
+    {
+      name: "Akash OTT",
+      category: "Entertainment",
+      href: "/services/akash-ott",
+      icon: PlayCircle,
+      iconBg: "bg-purple-600",
+      hoverColor: "group-hover:text-purple-600",
+    },
+    {
+      name: "Yess Host",
+      category: "Hosting & Cloud",
+      href: "/services",
+      icon: Cloud,
+      iconBg: "bg-sky-600",
+      hoverColor: "group-hover:text-sky-600",
+    },
+  ];
+
+  const heroMetrics = [
+    {
+      value: "11+",
+      label: "Years of Journey",
+      icon: Flag,
+      iconBg: "bg-emerald-50 text-[#10754A] border-emerald-100",
+    },
+    {
+      value: "500+",
+      label: "Team Members",
+      icon: Users,
+      iconBg: "bg-amber-50 text-amber-600 border-amber-100",
+    },
+    {
+      value: "Millions",
+      label: "People Reached",
+      icon: Globe,
+      iconBg: "bg-purple-50 text-purple-600 border-purple-100",
+    },
+    {
+      value: "64+",
+      label: "Districts Presence",
+      icon: MapPin,
+      iconBg: "bg-sky-50 text-sky-600 border-sky-100",
+    },
+  ];
+
   const effectiveCtaBanner = sitePage?.data?.cta_banner || {
     eyebrow: "NATIONAL IMPACT",
     title: "Architecting the Sovereign Digital Future of Bangladesh",
@@ -118,13 +231,13 @@ export function HomeClient({
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. Canonical Corporate Hero Section with Flagship Ventures Cockpit Card */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80 min-h-[auto] sm:min-h-[580px] lg:min-h-[640px] flex flex-col justify-center">
-        {/* Authentic Office Photography Backdrop (Optimized for Browser Preload Scanner) */}
-        <div className="absolute inset-0 z-0 opacity-28 sm:opacity-30 pointer-events-none mix-blend-multiply overflow-hidden">
+      {/* 1. Canonical Corporate Hero Section (Stitch 2026 Sovereign Architecture) */}
+      <section className="relative w-full min-h-[auto] lg:min-h-[640px] xl:min-h-[680px] overflow-hidden flex flex-col justify-between pt-24 pb-6 sm:pt-26 sm:pb-8 lg:pt-28 lg:pb-8 border-b border-slate-200/80">
+        {/* Authentic Bangladesh Sunset & National Monument Photography Backdrop */}
+        <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
           <Image
-            src="/assets/heroes/hero_6a8951c6b7346.webp"
-            alt=""
+            src="/assets/heroes/hero-bg-bangladesh-sunset.jpg"
+            alt="Bangladesh Sunset Horizon"
             fill
             priority
             fetchPriority="high"
@@ -132,165 +245,261 @@ export function HomeClient({
             className="object-cover object-center pointer-events-none select-none"
           />
         </div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/80 to-white/60 pointer-events-none" />
 
-        {/* Ambient Brand Mesh & Strategic Glows */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Soft Translucent Ambient Wash: preserves full visibility of the office backdrop while ensuring clean text contrast */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.68) 28%, rgba(255, 255, 255, 0.30) 55%, transparent 85%)",
+          }}
+        />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Hero Column */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              {/* Eyebrow Badge (Only rendered if configured in CMS / not blank) */}
-              {sitePage?.hero_eyebrow && sitePage.hero_eyebrow.trim() !== "" ? (
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-2xs w-fit">
-                  <Sparkles className="h-3.5 w-3.5 text-teal-600" />
-                  <span>{sitePage.hero_eyebrow.trim()}</span>
-                </div>
-              ) : null}
-
-              {/* Display Headline */}
-              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight mb-6">
-                {sitePage?.hero_title ? (
-                  sitePage.hero_title
-                ) : (
-                  <>
-                    Youth Entrepreneurship for{" "}
-                    <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700 bg-clip-text text-transparent">
-                      smart success
-                    </span>{" "}
-                    with{" "}
-                    <span className="bg-gradient-to-r from-amber-600 via-rose-600 to-amber-700 bg-clip-text text-transparent">
-                      excellence
-                    </span>{" "}
-                    &amp; solutions.
-                  </>
-                )}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl leading-relaxed mb-8">
-                {sitePage?.hero_subtitle || "Catalyzing next-generation enterprises across sovereign software engineering, sustainable agribusiness, digital media streaming, and logistics in Bangladesh and global high-growth corridors."}
-              </p>
-
-              {/* Dual CTAs */}
-              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-8 sm:mb-10">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] hover:from-[#006A4E] hover:to-[#085252] text-white font-bold shadow-md shadow-emerald-900/20 transition-all duration-200 active:scale-95 group text-xs sm:text-sm"
-                >
-                  <span>Start a project</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href="/services"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold shadow-xs transition-all duration-200 active:scale-95 text-xs sm:text-sm"
-                >
-                  <LayoutGrid className="h-4 w-4 text-emerald-700" />
-                  <span>Explore services</span>
-                </Link>
+        {/* Main Content Grid */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
+            {/* ================= LEFT HERO CONTENT COLUMN ================= */}
+            <div className="lg:col-span-6 xl:col-span-6 pt-1 lg:pt-0">
+              {/* Eyebrow Pill Tag */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-emerald-300 bg-emerald-50/90 text-[#10754A] text-[11px] font-bold tracking-widest uppercase mb-4 shadow-xs w-fit">
+                <span className="w-2 h-2 rounded-full bg-[#10754A] animate-pulse inline-block" />
+                <span>{sitePage?.hero_eyebrow?.trim() || "A SMARTER BANGLADESH TOGETHER"}</span>
               </div>
 
-              {/* Trust Credentials Bar */}
-              <div className="pt-6 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
-                {effectiveTrustCredentials.map((cred: any, idx: number) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                    <span className="truncate">{cred.label}</span>
+              {/* Headline */}
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] tracking-tight leading-[1.08] mb-4">
+                <span className="text-slate-900 block">Ideas.</span>
+                <span className="text-slate-900 block">Technology.</span>
+                <span className="text-slate-900 block">People.</span>
+                <span className="text-[#10754A] block">Real Impact.</span>
+              </h1>
+
+              {/* Subtitle Description */}
+              <p className="text-slate-800 text-sm sm:text-base leading-relaxed max-w-xl mb-6 sm:mb-7 font-medium">
+                {sitePage?.hero_subtitle || "At YESS Bangladesh, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
+              </p>
+
+              {/* Dual Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-6 sm:mb-7">
+                <Link
+                  href="#ventures"
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-[#10754A] hover:bg-[#0d5d3b] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95 group"
+                >
+                  <span>Explore Our Brands</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setIsStoryVideoOpen(true)}
+                  className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full bg-white/95 backdrop-blur-xs border border-slate-200 text-slate-800 font-bold text-xs sm:text-sm shadow-xs hover:bg-white hover:border-slate-300 transition-all transform active:scale-95 group cursor-pointer"
+                >
+                  <span className="w-5 h-5 rounded-full bg-slate-900 text-white flex items-center justify-center transition-transform group-hover:scale-105">
+                    <Play className="h-2.5 w-2.5 fill-current translate-x-[1px]" />
+                  </span>
+                  <span>Watch Our Story</span>
+                </button>
+              </div>
+
+              {/* Social Proof Row */}
+              <div className="flex items-center gap-3.5 pt-1">
+                {/* Overlapping Circular Team Avatars */}
+                <div className="flex items-center -space-x-2.5 shrink-0">
+                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
+                    <Image
+                      src="/assets/teams/NI_Tushar.png"
+                      alt="Team portrait"
+                      fill
+                      sizes="36px"
+                      className="object-cover object-top"
+                    />
                   </div>
-                ))}
+                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
+                    <Image
+                      src="/assets/teams/hiya.png"
+                      alt="Team portrait"
+                      fill
+                      sizes="36px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
+                    <Image
+                      src="/assets/teams/ovijit.jpeg"
+                      alt="Team portrait"
+                      fill
+                      sizes="36px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white shadow-xs bg-slate-100">
+                    <Image
+                      src="/assets/teams/tanvi.png"
+                      alt="Team portrait"
+                      fill
+                      sizes="36px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                </div>
+
+                {/* Rating & Trust Text */}
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1.5 text-xs">
+                    <div className="flex items-center gap-0.5 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="font-bold text-slate-900 text-xs sm:text-sm">4.9/5</span>
+                  </div>
+                  <p className="text-slate-700 font-semibold text-[11px] sm:text-xs">
+                    Trusted by thousands across Bangladesh
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Right Hero Column: Sleek Cockpit Executive Portfolio Card (Light Theme) */}
-            <div className="lg:col-span-5 w-full">
-              <div className="relative rounded-3xl p-5 sm:p-6 bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl shadow-slate-900/5 ring-1 ring-slate-900/5 overflow-hidden">
-                {/* Ambient glow in card background */}
-                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-40 h-40 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
+            {/* ================= RIGHT HERO VISUAL OVERLAY ================= */}
+            <div className="lg:col-span-6 xl:col-span-6 relative flex flex-col items-end justify-center">
+              {/* Glowing Cursive Script above monitors */}
+              <div className="w-full flex justify-end pr-2 sm:pr-4 mb-2">
+                <span
+                  className="text-xl sm:text-2xl tracking-wide transform -rotate-3 select-none"
+                  style={{
+                    fontFamily: "var(--font-script), 'Caveat', cursive",
+                    color: "#35b0aa",
+                    textShadow: "0 0 14px rgba(53, 176, 170, 0.85), 0 0 28px rgba(53, 176, 170, 0.5)",
+                  }}
+                >
+                  A Smarter Bangladesh Together
+                </span>
+              </div>
 
-                <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-100 relative z-10">
-                  <div>
-                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider block flex items-center gap-1.5">
-                      <Sparkles className="w-3 h-3 text-amber-600" />
-                      <span>OUR FLAGSHIP VENTURES</span>
-                    </span>
-                    <span className="font-display text-base sm:text-lg font-bold text-slate-900">
-                      Pioneering Portfolio
-                    </span>
-                  </div>
-                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5 shadow-xs">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-                    <span>13 Sovereign Assets</span>
-                  </span>
-                </div>
-
-                {/* Dynamic Illuminated Venture Cards with Pure White Logo Pedestals */}
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 relative z-10">
-                  {effectiveHeroCoins.slice(0, 4).map((coin: any, idx: number) => {
-                    const coinBorderColors = [
-                      "hover:border-emerald-400 hover:shadow-emerald-900/10",
-                      "hover:border-rose-400 hover:shadow-rose-900/10",
-                      "hover:border-emerald-400 hover:shadow-emerald-900/10",
-                      "hover:border-amber-400 hover:shadow-amber-900/10",
-                    ];
-                    const glowColors = [
-                      "bg-emerald-400/20",
-                      "bg-indigo-500/20",
-                      "bg-emerald-500/20",
-                      "bg-sky-500/20",
-                    ];
-                    const badgeStyles = [
-                      "text-emerald-800 bg-emerald-100 border-emerald-200",
-                      "text-rose-800 bg-rose-100 border-rose-200",
-                      "text-emerald-800 bg-emerald-100 border-emerald-200",
-                      "text-amber-800 bg-amber-100 border-amber-200",
-                    ];
-
+              {/* Staggered Floating 3D Frosted Glass Venture Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 w-full max-w-lg">
+                {/* Left Column (3 cards) */}
+                <div className="flex flex-col gap-2.5 sm:gap-3 sm:translate-y-2">
+                  {heroVentures.slice(0, 3).map((v, i) => {
+                    const IconComponent = v.icon;
                     return (
                       <Link
-                        key={coin.slug || idx}
-                        href={coin.href || "/ventures"}
-                        className={`group relative p-3.5 sm:p-4 rounded-2xl bg-slate-50/80 hover:bg-white border border-slate-200/80 ${coinBorderColors[idx % 4]} shadow-xs hover:shadow-md transition-all duration-300 flex flex-col items-center text-center cursor-pointer overflow-hidden`}
+                        key={i}
+                        href={v.href}
+                        className="rounded-[16px] p-2.5 sm:p-3 flex items-center justify-between cursor-pointer group bg-white/90 backdrop-blur-md border border-white/95 shadow-[0_8px_20px_-6px_rgba(15,31,32,0.1)] hover:shadow-[0_16px_28px_-6px_rgba(16,117,74,0.18)] hover:-translate-y-0.5 hover:bg-white transition-all duration-200"
                       >
-                        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-xs border border-slate-200 p-2 flex items-center justify-center mb-2.5 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md ring-2 ring-slate-100 shrink-0">
-                          <div className={`absolute -inset-1 rounded-2xl ${glowColors[idx % 4]} blur-sm opacity-0 group-hover:opacity-100 transition-opacity`} />
-                          <Image
-                            src={coin.image || `/coins/${coin.slug}.png`}
-                            alt={`${coin.title} Logo`}
-                            width={60}
-                            height={60}
-                            className="w-full h-full object-contain relative z-10"
-                            sizes="60px"
-                            priority={idx < 2}
-                          />
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full ${v.iconBg} text-white flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform`}>
+                            <IconComponent className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <h3 className="font-display font-bold text-slate-900 text-xs sm:text-sm leading-snug">
+                              {v.name}
+                            </h3>
+                            <p className="text-slate-500 text-[11px] font-normal">{v.category}</p>
+                          </div>
                         </div>
-                        <span className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
-                          {coin.title}
-                        </span>
-                        <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-1">{coin.subtitle}</p>
-                        <span className={`mt-2 text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${badgeStyles[idx % 4]}`}>
-                          {coin.badge}
-                        </span>
+                        <ArrowUpRight className={`h-3.5 w-3.5 text-slate-400 ${v.hoverColor} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all`} />
                       </Link>
                     );
                   })}
                 </div>
 
-                <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs relative z-10">
-                  <span className="flex items-center gap-1.5 font-medium text-slate-600">
-                    <ShieldCheck className="h-4 w-4 text-emerald-600" />
-                    <span>Audited Portfolio Valuation</span>
-                  </span>
-                  <span className="text-emerald-700 font-bold tracking-tight text-sm">$50M+ Cumulative Base</span>
+                {/* Right Column (4 cards) */}
+                <div className="flex flex-col gap-2.5 sm:gap-3 sm:-translate-y-1">
+                  {heroVentures.slice(3, 7).map((v, i) => {
+                    const IconComponent = v.icon;
+                    return (
+                      <Link
+                        key={i}
+                        href={v.href}
+                        className="rounded-[16px] p-2.5 sm:p-3 flex items-center justify-between cursor-pointer group bg-white/90 backdrop-blur-md border border-white/95 shadow-[0_8px_20px_-6px_rgba(15,31,32,0.1)] hover:shadow-[0_16px_28px_-6px_rgba(16,117,74,0.18)] hover:-translate-y-0.5 hover:bg-white transition-all duration-200"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full ${v.iconBg} text-white flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform`}>
+                            <IconComponent className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <h3 className="font-display font-bold text-slate-900 text-xs sm:text-sm leading-snug">
+                              {v.name}
+                            </h3>
+                            <p className="text-slate-500 text-[11px] font-normal">{v.category}</p>
+                          </div>
+                        </div>
+                        <ArrowUpRight className={`h-3.5 w-3.5 text-slate-400 ${v.hoverColor} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all`} />
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* ================= FLOATING BOTTOM METRICS CAPSULE DOCK ================= */}
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10">
+          <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-md rounded-xl sm:rounded-full px-5 sm:px-8 py-3 sm:py-3.5 shadow-lg border border-slate-100/90">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 items-center">
+              {heroMetrics.map((m, idx) => {
+                const Icon = m.icon;
+                return (
+                  <div key={idx} className="flex items-center gap-3 justify-start md:justify-center">
+                    <div className={`w-9 h-9 rounded-full ${m.iconBg} flex items-center justify-center shrink-0 border shadow-xs`}>
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="font-display font-extrabold text-lg sm:text-xl text-slate-900 leading-none">
+                        {m.value}
+                      </div>
+                      <div className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
+                        {m.label}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </section>
+
+      {/* Video Modal */}
+      {isStoryVideoOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4 sm:p-6"
+          onClick={() => setIsStoryVideoOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-800"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 text-white">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                <span className="font-bold text-sm tracking-wide">YESS Bangladesh — Our Story</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsStoryVideoOpen(false)}
+                aria-label="Close video"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="relative aspect-video w-full bg-black">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="YESS Bangladesh Story"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full border-0"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 2. Direct Engagement Action Cards ('READY WHEN YOU ARE') */}
       <section className="py-16 bg-slate-50/80 border-b border-slate-200">

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YESS Bangladesh - Standalone Hero Section</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            headline: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            script: ['Caveat', 'cursive'],
+          },
+          colors: {
+            primary: '#10754A',
+            'primary-dark': '#0d5d3b',
+          }
+        }
+      }
+    }
+  </script>
+<style>.hero-bg-container {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD9tJCq075eFgk8--U6m1A55sMEPS94yxMSVYPlK7awI8-J-XpWRjmcuT9ri880eRFxeZtQbTCV12ueH52ZueZR0ePhz--Fq1ld6KJ4i2Q1RwvJWmCvcZkzEqHBdEVaEpp3CqWoHNdXxtF49kRa4IuZOLGzeS1_tnOpBcxhQ4967aUXViFwsAto6O6X6DTHnP1q-PglC_kohkmVi-w0vdxJYn_ub-iqNhO4QLmTJvh2W6yIzb_JTS-PDVe1cvRuum3oN7vBbIKAhnSJ);
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat
+    }
+.hero-feather-gradient {
+    background: linear-gradient(to right, #fff 0%, #fff 38%, rgba(255, 255, 255, 0.92) 48%, rgba(255, 255, 255, 0.65) 60%, rgba(255, 255, 255, 0.15) 75%, rgba(255, 255, 255, 0) 100%)
+    }
+.glass-card {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 14px 34px -8px rgba(15, 31, 32, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1)
+    }
+.glass-card:hover {
+    transform: translatey(-3px) scale(1.015);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 20px 40px -10px rgba(16, 117, 74, 0.2), 0 4px 12px rgba(0, 0, 0, 0.06)
+    }
+.glowing-script {
+    font-family: "Caveat", cursive;
+    color: #35b0aa;
+    text-shadow: 0 0 14px rgba(53, 176, 170, 0.85), 0 0 28px rgba(53, 176, 170, 0.5)
+    }
+@keyframes pulseDot {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        } 50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+        }
+    }
+.animate-pulse-dot {
+    animation: pulseDot 2s infinite ease-in-out
+    }</style>
+</head>
+<body class="bg-white text-slate-800 antialiased font-body min-h-screen flex flex-col justify-center">
+<!-- STANDALONE HERO SECTION ONLY (No navbar above, no subsequent sections below) -->
+<section class="relative w-full min-h-[920px] hero-bg-container overflow-hidden flex flex-col justify-between py-12 lg:py-16" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBySzcUQCTwetct9gsIbNyvrbET6WPGjLQjZOKc9xXIEANVa6zJyEfFBPEkcOJerpJ83xqBjwmMzbsL-DcKH8nr5WtvoySsUUbTkUOHwb0WWLkxCUGSSvfxVA0BUFFcJlA2_ix3yEkphaukfHjOi2W5l5y05NmeEvza9JGvd6il-IRSYLB8MGOOXl6osXm73-0j2YFT8SyjnaC2RstVOvv3P9IhEklGF2OnQDSD76urM18aXfWu7qpk24VbTLMCcvyVHLpg_us9UN6i'); background-size: cover; background-position: center right; background-repeat: no-repeat;">
+<!-- Left-to-Right Feathering Gradient Overlay -->
+<div class="absolute inset-0 hero-feather-gradient pointer-events-none z-0" style="background: linear-gradient(to right, #ffffff 0%, #ffffff 42%, rgba(255, 255, 255, 0.85) 58%, rgba(255, 255, 255, 0.2) 78%, transparent 100%);"></div>
+<!-- Main Hero Content Container -->
+<div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full flex-grow flex items-center">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
+<!-- ================= LEFT HERO CONTENT COLUMN ================= -->
+<div class="lg:col-span-6 xl:col-span-6 pt-4 lg:pt-0">
+<!-- Eyebrow Pill Tag -->
+<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-emerald-300 bg-emerald-50/90 text-[#10754A] text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-[#10754A] animate-pulse-dot inline-block"></span>
+<span>A SMARTER BANGLADESH TOGETHER</span>
+</div>
+<!-- Headline -->
+<h1 class="font-headline font-extrabold text-[46px] sm:text-[56px] xl:text-[64px] tracking-tight leading-[1.08] mb-6">
+<span class="text-[#0f1f20] block">Ideas.</span>
+<span class="text-[#0f1f20] block">Technology.</span>
+<span class="text-[#0f1f20] block">People.</span>
+<span class="text-[#10754A] block">Real Impact.</span>
+</h1>
+<!-- Subtitle Description -->
+<p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl mb-9 font-normal">
+            At YESS Bangladesh, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment.
+          </p>
+<!-- Dual Pill Buttons -->
+<div class="flex flex-wrap items-center gap-4 sm:gap-5 mb-10">
+<!-- Primary Button -->
+<a class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#10754A] hover:bg-[#0d5d3b] text-white font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all transform active:scale-95 group" href="#ventures">
+<span>Explore Our Brands</span>
+<span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+<!-- Secondary Button -->
+<button class="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-white border border-slate-300 text-slate-800 font-bold text-sm sm:text-base shadow-sm hover:bg-slate-50 transition-all transform active:scale-95 group" type="button">
+<span class="w-6 h-6 rounded-full bg-[#0f1f20] text-white flex items-center justify-center transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[13px] translate-x-[1px]">play_arrow</span>
+</span>
+<span>Watch Our Story</span>
+</button>
+</div>
+<!-- Social Proof Row -->
+<div class="flex items-center gap-4 pt-1">
+<!-- Overlapping Circular Team Avatars -->
+<div class="flex items-center -space-x-2.5"><img alt="Executive Portrait" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUGL5A15A-q1j1S2j59ySH-lk0xt3XLiFxiUmkVbvbIyJQO0n1i8_WmoxgROpcHU3uGS5Lor022T2UCl_xoofQb78c7qOcztKB2O2KYyvEPjBwi3FNiOxDED_AEgvx4zPXmwgoajAxhnOuVk4LkA8GTPTv5Pl5FTAT-nmvhc2Hl-9rU6Em9ea_mYhAvREsAP8C31ARE3IsEwlNKRpwSK5qJiCn7_Kwup_QqZDAdAue7MxZP8nOzSvDYXRx0Kd-X1gJ_OfluIb2GH0M"/><img alt="Engineer Portrait" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbKBU8hHTGTIjthLR9sAgXZeExibvojpA317rb1HGhntll3MS9U1OoDkMjDO8yHHhbVWZC80QCdbw1cGANxWrPlc9YQkr55Rm07iX405ielQ_KNqTtHd2BQYFIyud1MNW3D6vN-M3n-3-xuiqZ3eId0YqxdZWvx0X13nEdt7X5iQlFB-l9rES59wI-j2inPiRosPTVEaeIYnsQoQG_Q59K5MzEwj9vaJyO5iVGCcv4ivmToW39OTzqjOL402PHlIneJXVLVC2G0snU"/><img alt="Venture Director" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD74_VrCI9LEc4zXbYBQQ6n8nOqc-ntdwBHwkknQHQmoIJz_4wJ-G5fYv3F6zf38_Jfj0GVaHLBv5OOxootISbqYpgtRkM7KZhaQ9Dk2s0vR9nksz_5qZK4BqDesqAbLDwwNd1UE8Wmp6Yj_7TpSfSgBmUUezlnk_4Z1QOFBVCCgQrdglHFMV_dO87oGQqIw98_nDGIOIkaGEnNkU2vx_UD5O_uur__RPE5BnrT2u6jC57-nnJgXXmG4i0J9R-5JTKbd0zRcBOQYjoA"/><div class="w-10 h-10 rounded-full border-2 border-white bg-[#0d6e6e] text-white flex items-center justify-center text-xs font-bold shadow-sm">+10k</div></div>
+<!-- Star Rating & Trust Text -->
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-amber-400 text-xs">
+<span class="material-symbols-outlined text-[15px] fill-current">star</span>
+<span class="material-symbols-outlined text-[15px] fill-current">star</span>
+<span class="material-symbols-outlined text-[15px] fill-current">star</span>
+<span class="material-symbols-outlined text-[15px] fill-current">star</span>
+<span class="material-symbols-outlined text-[15px] fill-current">star</span>
+<span class="font-bold text-slate-700 ml-1 text-xs">4.9/5</span>
+</div>
+<p class="text-slate-500 font-medium text-xs sm:text-sm">
+                Trusted by thousands across Bangladesh
+              </p>
+</div>
+</div>
+</div>
+<!-- ================= RIGHT HERO VISUAL OVERLAY ================= -->
+<div class="lg:col-span-6 xl:col-span-6 relative flex flex-col items-end justify-center min-h-[460px]">
+<!-- Glowing Cursive Script in the sky area above the monitors -->
+<div class="w-full flex justify-end pr-4 sm:pr-8 mb-4">
+<span class="glowing-script text-2xl sm:text-3xl font-script tracking-wide transform -rotate-3 select-none">
+              A Smarter Bangladesh Together
+            </span>
+</div>
+<!-- Staggered Floating 3D Frosted Glass Venture Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full max-w-lg">
+<!-- Left Column (3 cards) -->
+<div class="flex flex-col gap-3 sm:gap-4 sm:translate-y-4">
+<!-- 1. Shondhaan -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">eco</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">Shondhaan</h3>
+<p class="text-slate-500 text-xs font-normal">Service Marketplace</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+<!-- 2. Organic Haat -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">shopping_basket</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">Organic Haat</h3>
+<p class="text-slate-500 text-xs font-normal">Fresh &amp; Healthy Food</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-amber-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+<!-- 3. Yess Soft -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">apps</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">Yess Soft</h3>
+<p class="text-slate-500 text-xs font-normal">IT Solutions</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+</div>
+<!-- Right Column (4 cards) -->
+<div class="flex flex-col gap-3 sm:gap-4 sm:-translate-y-2">
+<!-- 4. The Daily Akash -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">newspaper</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">The Daily Akash</h3>
+<p class="text-slate-500 text-xs font-normal">News &amp; Media</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-orange-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+<!-- 5. Akash TV -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">live_tv</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">Akash TV</h3>
+<p class="text-slate-500 text-xs font-normal">Television</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-rose-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+<!-- 6. Akash OTT -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">play_circle</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">Akash OTT</h3>
+<p class="text-slate-500 text-xs font-normal">Entertainment</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-purple-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+<!-- 7. Yess Host -->
+<div class="glass-card rounded-[18px] p-3.5 sm:p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-sky-600 text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-xl">cloud_queue</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-slate-900 text-sm sm:text-base leading-snug">Yess Host</h3>
+<p class="text-slate-500 text-xs font-normal">Hosting &amp; Cloud</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">arrow_outward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= FLOATING BOTTOM METRICS CAPSULE DOCK ================= -->
+<div class="relative z-10 w-full px-6 sm:px-8 mt-12 lg:mt-16">
+<div class="max-w-5xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-full px-6 sm:px-10 py-4 sm:py-5 shadow-xl border border-slate-100/80">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 items-center">
+<!-- Metric 1: 11+ Years -->
+<div class="flex items-center gap-3.5 justify-start md:justify-center">
+<div class="w-11 h-11 rounded-full bg-emerald-50 text-[#10754A] flex items-center justify-center flex-shrink-0 border border-emerald-100 shadow-sm">
+<span class="material-symbols-outlined text-xl">flag</span>
+</div>
+<div>
+<div class="font-headline font-extrabold text-xl sm:text-2xl text-[#0f1f20] leading-none">11+</div>
+<div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Years of Journey</div>
+</div>
+</div>
+<!-- Metric 2: 500+ Team Members -->
+<div class="flex items-center gap-3.5 justify-start md:justify-center">
+<div class="w-11 h-11 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 border border-amber-100 shadow-sm">
+<span class="material-symbols-outlined text-xl">groups</span>
+</div>
+<div>
+<div class="font-headline font-extrabold text-xl sm:text-2xl text-[#0f1f20] leading-none">500+</div>
+<div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Team Members</div>
+</div>
+</div>
+<!-- Metric 3: Millions People Reached -->
+<div class="flex items-center gap-3.5 justify-start md:justify-center">
+<div class="w-11 h-11 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 border border-purple-100 shadow-sm">
+<span class="material-symbols-outlined text-xl">public</span>
+</div>
+<div>
+<div class="font-headline font-extrabold text-xl sm:text-2xl text-[#0f1f20] leading-none">Millions</div>
+<div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">People Reached</div>
+</div>
+</div>
+<!-- Metric 4: 64+ Districts Presence -->
+<div class="flex items-center gap-3.5 justify-start md:justify-center">
+<div class="w-11 h-11 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center flex-shrink-0 border border-sky-100 shadow-sm">
+<span class="material-symbols-outlined text-xl">location_on</span>
+</div>
+<div>
+<div class="font-headline font-extrabold text-xl sm:text-2xl text-[#0f1f20] leading-none">64+</div>
+<div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Districts Presence</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>
