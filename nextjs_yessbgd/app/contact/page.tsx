@@ -17,7 +17,7 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("contact");
   return {
-    title: page?.seo_title || "Contact & Headquarters Locator | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Contact & Headquarters Locator",
     description:
       page?.seo_description ||
       "Connect directly with managing partners, venture leads, and engineering directors at our Dhaka Corporate Headquarters in Mirpur, Dhaka.",
@@ -194,7 +194,7 @@ export default async function ContactPage() {
       </section>
 
       {/* Main Dual-Column Engagement Section */}
-      <main className="py-16 sm:py-20 bg-background">
+      <div className="py-16 sm:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {sitePage?.body && (
             <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-border">
@@ -206,7 +206,7 @@ export default async function ContactPage() {
 
           <ContactFormAndLocator settings={settings} />
         </div>
-      </main>
+      </div>
 
       {/* Frequently Addressed Inquiries Strip */}
       <section className="py-12 bg-muted/20 border-t border-border">

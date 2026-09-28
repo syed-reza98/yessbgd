@@ -1,62 +1,38 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   Code2,
   Tv,
-  PlayCircle,
-  Newspaper,
-  Leaf,
-  Wrench,
-  Server,
-  CalendarHeart,
-  Sparkles,
-  ChefHat,
   LayoutGrid,
-  Plane,
-  Scale,
   ArrowRight,
   CheckCircle2,
   Download,
   Building2,
-  Users,
   ShieldCheck,
-  TrendingUp,
   Cpu,
   Phone,
-  Layers,
-  Search,
-  Globe2,
   Radio,
   Briefcase,
   Globe,
+  Sparkles,
+  Server,
+  PlayCircle,
+  Leaf,
+  Plane,
+  Scale,
 } from "lucide-react";
 import { ventures as defaultVentures } from "@/data/ventures";
+import { HomeVenturesFilter } from "@/components/home/HomeVenturesFilter";
 
-const VENTURE_ICONS: Record<string, any> = {
-  "yess-soft": Code2,
-  "akash-tv": Tv,
-  "akash-ott": PlayCircle,
-  "akash-news": Newspaper,
-  "yess-organic-food": Leaf,
-  "yess-one-stop-engineering": Wrench,
-  "yess-technology": Server,
-  "yess-entertainment": CalendarHeart,
-  "yess-event-management": Sparkles,
-  "yess-restaurant": ChefHat,
-  "yess-interior": LayoutGrid,
-  "yess-overseas": Plane,
-  "yess-law-chamber": Scale,
-};
+
+
 
 const defaultHomeImpactMetrics = [
   {
     value: "৳250M+",
     label: "Sovereign Capital Deployed",
     desc: "Across 13 wholly-owned and partnered subsidiaries",
-    color: "text-[#d4a359]",
+    color: "text-amber-700",
   },
   {
     value: "500+",
@@ -74,7 +50,7 @@ const defaultHomeImpactMetrics = [
     value: "13",
     label: "Scaled Subsidiaries",
     desc: "Covering ERP, media, agri-tech, fintech and trade",
-    color: "text-[#d4a359]",
+    color: "text-amber-700",
   },
 ];
 
@@ -85,8 +61,6 @@ export function HomeClient({
   sitePage?: any;
   initialVentures?: any[];
 }) {
-  const [activeTab, setActiveTab] = useState<string>("all");
-
   const effectiveVentures = initialVentures && initialVentures.length > 0 ? initialVentures : defaultVentures;
   const effectiveImpactMetrics = (sitePage?.data?.metrics as typeof defaultHomeImpactMetrics) || defaultHomeImpactMetrics;
 
@@ -142,32 +116,22 @@ export function HomeClient({
     secondary_btn_href: "/application-status",
   };
 
-  const filteredVentures = effectiveVentures.filter((v: any) => {
-    if (activeTab === "all") return true;
-    if (activeTab === "tech") {
-      return ["Software & IT Solutions", "Hosting & Cloud Infrastructure", "Integrated Business Solutions"].includes(v.category);
-    }
-    if (activeTab === "agri") {
-      return ["Organic Marketplace", "Food & Beverage", "Home & Professional Services"].includes(v.category);
-    }
-    if (activeTab === "media") {
-      return ["Streaming Platform", "Satellite Television", "Digital Newspaper"].includes(v.category);
-    }
-    if (activeTab === "consulting") {
-      return ["Legal Advisory", "Event Management", "Modeling & Talent Agency", "Travel & Tourism"].includes(v.category);
-    }
-    return true;
-  });
-
   return (
     <div className="flex flex-col w-full">
       {/* 1. Canonical Corporate Hero Section with Flagship Ventures Cockpit Card */}
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80 min-h-[auto] sm:min-h-[580px] lg:min-h-[640px] flex flex-col justify-center">
-        {/* Authentic Office Photography Backdrop */}
-        <div
-          className="absolute inset-0 z-0 opacity-28 sm:opacity-30 pointer-events-none bg-cover bg-center mix-blend-multiply"
-          style={{ backgroundImage: "url('/assets/heroes/hero_6a8951c6b7346.png')" }}
-        />
+        {/* Authentic Office Photography Backdrop (Optimized for Browser Preload Scanner) */}
+        <div className="absolute inset-0 z-0 opacity-28 sm:opacity-30 pointer-events-none mix-blend-multiply overflow-hidden">
+          <Image
+            src="/assets/heroes/hero_6a8951c6b7346.webp"
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center pointer-events-none select-none"
+          />
+        </div>
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/80 to-white/60 pointer-events-none" />
 
         {/* Ambient Brand Mesh & Strategic Glows */}
@@ -365,7 +329,7 @@ export function HomeClient({
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <div className="text-xs font-semibold text-foreground/70 flex items-center gap-1.5">
-                  <Phone className="h-4 w-4 text-[#d4a359]" />
+                  <Phone className="h-4 w-4 text-amber-700" />
                   <span>Hotline: +880 1805-464343</span>
                 </div>
               </div>
@@ -531,15 +495,15 @@ export function HomeClient({
                 </p>
                 <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>100% Foreground IP retention guarantee</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>Dhaka Innovation Lab co-residency</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>Milestone-based seed tranches</span>
                   </div>
                 </div>
@@ -601,15 +565,15 @@ export function HomeClient({
                 </p>
                 <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>LoRaWAN farm IoT telemetry nodes</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>Traceable harvest QR passport registries</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>Direct farmer digital liquidity rails</span>
                   </div>
                 </div>
@@ -671,15 +635,15 @@ export function HomeClient({
                 </p>
                 <div className="mt-4 space-y-2 pt-3 border-t border-border text-xs text-foreground/80">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>Bilateral JV structuring & statutory governance</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>NBR tax & statutory regulatory compliance</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#d4a359] shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-700 shrink-0" />
                     <span>RJSC statutory filing & IP ownership</span>
                   </div>
                 </div>
@@ -730,106 +694,8 @@ export function HomeClient({
               From enterprise ERP to pan-district logistics and digital television, YESS Bangladesh incubates and scales self-sustaining institutional assets.
             </p>
 
-            {/* Filter Tabs matching Stitch exactly */}
-            <div className="mt-8 flex flex-wrap justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab("all")}
-                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
-                  activeTab === "all"
-                    ? "bg-primary text-white"
-                    : "bg-white text-foreground/70 hover:text-primary border border-border"
-                }`}
-              >
-                All Ventures (13)
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("tech")}
-                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
-                  activeTab === "tech"
-                    ? "bg-primary text-white"
-                    : "bg-white text-foreground/70 hover:text-primary border border-border"
-                }`}
-              >
-                Technology & AI
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("agri")}
-                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
-                  activeTab === "agri"
-                    ? "bg-primary text-white"
-                    : "bg-white text-foreground/70 hover:text-primary border border-border"
-                }`}
-              >
-                Agri & Commerce
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("media")}
-                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
-                  activeTab === "media"
-                    ? "bg-primary text-white"
-                    : "bg-white text-foreground/70 hover:text-primary border border-border"
-                }`}
-              >
-                Media & Telecom
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("consulting")}
-                className={`px-4 py-2 rounded-full text-xs font-bold shadow-xs transition-all ${
-                  activeTab === "consulting"
-                    ? "bg-primary text-white"
-                    : "bg-white text-foreground/70 hover:text-primary border border-border"
-                }`}
-              >
-                Consulting & Fin
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredVentures.map((venture) => {
-              const Icon = VENTURE_ICONS[venture.slug] || Building2;
-              return (
-                <div
-                  key={venture.slug}
-                  className="glass-card rounded-2xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-start justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-lg group-hover:scale-105 transition-transform">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <span className="px-2.5 py-1 rounded bg-slate-100 text-[11px] font-bold text-slate-700">
-                        Est. 2018
-                      </span>
-                    </div>
-
-                    <span className="text-xs font-bold text-[#d4a359] mt-4 block uppercase tracking-wider">
-                      {venture.category}
-                    </span>
-
-                    <h3 className="font-display font-bold text-xl text-foreground mt-1 group-hover:text-primary transition-colors">
-                      {venture.title}
-                    </h3>
-                    <p className="text-xs text-foreground/70 mt-2 line-clamp-3 leading-relaxed">
-                      {venture.desc}
-                    </p>
-                  </div>
-
-                  <Link
-                    href={`/ventures/${venture.slug}`}
-                    className="mt-5 inline-flex items-center gap-1.5 text-primary font-bold text-xs hover:text-[#35b0aa] transition-colors"
-                  >
-                    <span>View Venture Profile</span>
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              );
-            })}
+            {/* Interactive Leaf Component: Filter Tabs & Subsidiaries Grid */}
+            <HomeVenturesFilter ventures={effectiveVentures} />
           </div>
         </div>
       </section>

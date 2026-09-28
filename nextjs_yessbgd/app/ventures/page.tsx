@@ -13,7 +13,7 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("ventures");
   return {
-    title: page?.seo_title || "Ventures Directory | YESS Bangladesh (yessbgd)",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh.*$/i, "") || "Ventures Directory",
     description:
       page?.seo_description ||
       "Explore the sovereign subsidiaries of YESS Bangladesh spanning enterprise cloud, media streaming, agritech IoT, and logistics.",

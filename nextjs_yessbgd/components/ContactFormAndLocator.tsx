@@ -25,7 +25,7 @@ import {
   Car,
 } from "lucide-react";
 
-import { supabase } from "@/lib/supabase/client";
+import { submitContactMessageAction } from "@/app/actions/contact";
 import type { CompanySettings } from "@/lib/cms";
 
 export function ContactFormAndLocator({ settings }: { settings?: CompanySettings }) {
@@ -52,23 +52,21 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
 
     setLoading(true);
     try {
-      const { error: insertErr } = await supabase.from("contact_messages").insert({
-        name: fullName.trim(),
+      const result = await submitContactMessageAction({
         full_name: fullName.trim(),
         email: email.trim(),
-        phone: phone.trim() || null,
-        organization: organization.trim() || null,
-        subject: practiceArea,
+        phone: phone.trim() || undefined,
+        organization: organization.trim() || undefined,
         practice_area: practiceArea,
         message: message.trim(),
         request_nda: requestNda,
-        is_read: false,
-        is_archived: false,
       });
 
-      if (insertErr) {
-        console.warn("Supabase insert warning:", insertErr.message);
+      if (!result.success) {
+        setError(result.error || "Failed to submit inquiry. Please review your details.");
+        return;
       }
+
       setSubmitted(true);
     } catch (err: any) {
       console.warn("Contact submission error:", err);

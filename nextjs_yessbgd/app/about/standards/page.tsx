@@ -5,7 +5,7 @@ import { StandardsClient } from "./StandardsClient";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("about-standards");
   return {
-    title: page?.seo_title || "Quality Standards & QA | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Quality Standards & QA",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||

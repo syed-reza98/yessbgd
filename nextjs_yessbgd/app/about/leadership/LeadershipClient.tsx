@@ -232,7 +232,7 @@ export function LeadershipClient({ sitePage }: LeadershipClientProps) {
                   </p>
 
                   <div className="mt-4 pt-3 border-t border-border">
-                    <span className="text-[11px] font-bold text-[#d4a359] uppercase tracking-wider block">
+                    <span className="text-[11px] font-bold text-[#7e5713] dark:text-[#f6c87a] uppercase tracking-wider block">
                       Core Portfolio Focus:
                     </span>
                     <span className="text-xs text-foreground/80 font-medium">

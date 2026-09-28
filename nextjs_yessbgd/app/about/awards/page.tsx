@@ -5,7 +5,7 @@ import { AwardsClient } from "./AwardsClient";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("about-awards");
   return {
-    title: page?.seo_title || "Awards & Certifications | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Awards & Certifications",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||

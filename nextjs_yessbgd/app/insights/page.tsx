@@ -8,7 +8,7 @@ import { getInsights, getSitePage } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("insights");
   return {
-    title: page?.seo_title || "Insights & Thought Leadership Hub | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Insights & Thought Leadership Hub",
     description:
       page?.seo_description ||
       "Proprietary research, macroeconomic analysis, and engineering whitepapers published by YESS venture architects and sector specialists.",
@@ -159,7 +159,7 @@ export default async function InsightsPage() {
       </section>
 
       {/* Main Content Area */}
-      <main className="py-16 sm:py-20 bg-background">
+      <div className="py-16 sm:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {sitePage?.body && (
             <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-border">
@@ -191,7 +191,7 @@ export default async function InsightsPage() {
             </div>
           </section>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

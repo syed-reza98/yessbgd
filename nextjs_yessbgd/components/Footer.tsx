@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, ShieldCheck, ArrowUpRight, CheckCircle2, Loader2 } from "lucide-react";
@@ -73,7 +73,10 @@ export function Footer({
 
   const govLinks = footerMenus && footerMenus.length > 0 ? footerMenus : defaultGovLinks;
 
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState(2026);
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer data-public-footer="true" className="bg-slate-50 text-slate-700 border-t border-slate-200/90 pt-16 pb-24 lg:pb-12 relative z-10">

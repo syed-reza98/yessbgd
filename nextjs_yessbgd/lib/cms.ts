@@ -1,4 +1,5 @@
-import { supabase } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
+import { cacheLife, cacheTag } from "next/cache";
 import { ventures as localVentures, type Venture } from "@/data/ventures";
 import { services as localServices, type ServiceItem } from "@/data/services";
 import { industries as localIndustries, type IndustryItem } from "@/data/industries";
@@ -53,7 +54,12 @@ export const CMS_TAGS = {
  * Fetch all published ventures from Supabase with instant local fallback.
  */
 export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.ventures);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_ventures")
       .select("*")
@@ -105,7 +111,12 @@ export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
  * Fetch a single venture by slug with fallback.
  */
 export async function getVentureBySlug(slug: string): Promise<Venture | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.venture(slug));
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_ventures")
       .select("*")
@@ -113,15 +124,17 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
       .eq("is_published", true)
       .maybeSingle();
 
-    const fallback = localVentures.find((v) => v.slug === slug);
-
+    const lookupSlug = slug === "shondhaan" ? "yess-service" : slug;
+    const fallback = localVentures.find((v) => v.slug === slug || v.slug === lookupSlug);
     if (error || !data) {
-      return fallback || null;
+      if (!fallback) return null;
+      const { icon, ...clean } = fallback;
+      return clean as any;
     }
-
+    const { icon, ...cleanFallback } = fallback || localVentures[0];
     const extra = (data.data as any) || {};
     return {
-      ...(fallback || (localVentures[0] as Venture)),
+      ...cleanFallback,
       slug: data.slug,
       title: data.title,
       tagline: data.tagline || fallback?.tagline || "",
@@ -155,7 +168,12 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
  * Fetch all published services with fallback.
  */
 export async function getServices(): Promise<ServiceItem[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.services);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_services")
       .select("*")
@@ -163,15 +181,16 @@ export async function getServices(): Promise<ServiceItem[]> {
       .order("sort_order", { ascending: true });
 
     if (error || !data || data.length === 0) {
-      return localServices;
+      return localServices.map(({ icon, ...rest }) => rest) as any;
     }
 
     return data.map((row) => {
       const fallback = localServices.find((s) => s.slug === row.slug) || localServices[0];
+      const { icon, ...cleanFallback } = fallback;
       const extra = (row.data as any) || {};
 
       return {
-        ...fallback,
+        ...cleanFallback,
         slug: row.slug,
         title: row.title,
         desc: row.description || fallback.desc,
@@ -196,7 +215,12 @@ export async function getServices(): Promise<ServiceItem[]> {
  * Fetch a single service by slug.
  */
 export async function getServiceBySlug(slug: string): Promise<ServiceItem | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.service(slug));
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_services")
       .select("*")
@@ -205,11 +229,15 @@ export async function getServiceBySlug(slug: string): Promise<ServiceItem | null
       .maybeSingle();
 
     const fallback = localServices.find((s) => s.slug === slug);
-    if (error || !data) return fallback || null;
-
+    if (error || !data) {
+      if (!fallback) return null;
+      const { icon, ...clean } = fallback;
+      return clean as any;
+    }
+    const { icon, ...cleanFallback } = fallback || localServices[0];
     const extra = (data.data as any) || {};
     return {
-      ...(fallback || localServices[0]),
+      ...cleanFallback,
       slug: data.slug,
       title: data.title,
       desc: data.description || fallback?.desc || "",
@@ -232,7 +260,12 @@ export async function getServiceBySlug(slug: string): Promise<ServiceItem | null
  * Fetch all published industries with fallback.
  */
 export async function getIndustries(): Promise<IndustryItem[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.industries);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_industries")
       .select("*")
@@ -240,15 +273,16 @@ export async function getIndustries(): Promise<IndustryItem[]> {
       .order("sort_order", { ascending: true });
 
     if (error || !data || data.length === 0) {
-      return localIndustries;
+      return localIndustries.map(({ icon, ...rest }) => rest) as any;
     }
 
     return data.map((row) => {
       const fallback = localIndustries.find((i) => i.slug === row.slug) || localIndustries[0];
+      const { icon, ...cleanFallback } = fallback;
       const extra = (row.data as any) || {};
 
       return {
-        ...fallback,
+        ...cleanFallback,
         slug: row.slug,
         title: row.title,
         desc: row.description || fallback.desc,
@@ -271,7 +305,12 @@ export async function getIndustries(): Promise<IndustryItem[]> {
  * Fetch a single industry by slug.
  */
 export async function getIndustryBySlug(slug: string): Promise<IndustryItem | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.industry(slug));
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_industries")
       .select("*")
@@ -280,11 +319,15 @@ export async function getIndustryBySlug(slug: string): Promise<IndustryItem | nu
       .maybeSingle();
 
     const fallback = localIndustries.find((i) => i.slug === slug);
-    if (error || !data) return fallback || null;
-
+    if (error || !data) {
+      if (!fallback) return null;
+      const { icon, ...clean } = fallback;
+      return clean as any;
+    }
+    const { icon, ...cleanFallback } = fallback || localIndustries[0];
     const extra = (data.data as any) || {};
     return {
-      ...(fallback || localIndustries[0]),
+      ...cleanFallback,
       slug: data.slug,
       title: data.title,
       desc: data.description || fallback?.desc || "",
@@ -306,7 +349,12 @@ export async function getIndustryBySlug(slug: string): Promise<IndustryItem | nu
  * Fetch all published insights with fallback.
  */
 export async function getInsights(): Promise<Insight[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.insights);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_insights")
       .select("*")
@@ -344,7 +392,12 @@ export async function getInsights(): Promise<Insight[]> {
  * Fetch a single insight article by slug.
  */
 export async function getInsightBySlug(slug: string): Promise<Insight | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.insight(slug));
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_insights")
       .select("*")
@@ -378,7 +431,12 @@ export async function getInsightBySlug(slug: string): Promise<Insight | null> {
  * Fetch all published job openings with fallback.
  */
 export async function getOpenings(): Promise<Opening[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.openings);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_openings")
       .select("*")
@@ -409,7 +467,12 @@ export async function getOpenings(): Promise<Opening[]> {
  * Fetch a single job opening by slug.
  */
 export async function getOpeningBySlug(slug: string): Promise<Opening | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.opening(slug));
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_openings")
       .select("*")
@@ -440,7 +503,12 @@ export async function getOpeningBySlug(slug: string): Promise<Opening | null> {
  * Fetch site page metadata and hero blocks.
  */
 export async function getSitePage(pageKey: string): Promise<CmsSitePage | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.page(pageKey));
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_site_pages")
       .select("*")
@@ -458,7 +526,12 @@ export async function getSitePage(pageKey: string): Promise<CmsSitePage | null> 
  * Fetch corporate settings by group or key.
  */
 export async function getSetting<T = any>(key: string): Promise<T | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.settings);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_settings")
       .select("value")
@@ -515,7 +588,12 @@ const DEFAULT_FOOTER_MENUS: CmsMenuItem[] = [
  * Fetch navigation menu items for header or footer with resilient fallback.
  */
 export async function getMenuItems(location: "header" | "footer" = "header"): Promise<CmsMenuItem[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.menus);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_menu_items")
       .select("*")
@@ -689,7 +767,12 @@ const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
  * Fetch consolidated company settings (branding, contact, offices, socials, header, footer) with fallback.
  */
 export async function getCompanySettings(): Promise<CompanySettings> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.settings);
+
   try {
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_settings")
       .select("key, value");
@@ -751,10 +834,15 @@ export async function getCompanySettings(): Promise<CompanySettings> {
  * Fetch a site page by path or slug (supports both core routes and custom /p/[slug] routes).
  */
 export async function getPageByPathOrSlug(slugOrPath: string): Promise<CmsSitePage | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(CMS_TAGS.pages);
+
   try {
     const cleanSlug = slugOrPath.replace(/^\/p\//, "").replace(/^\//, "");
     const possiblePaths = [`/p/${cleanSlug}`, `/${cleanSlug}`, cleanSlug];
 
+    const supabase = await createClient({ useCookies: false });
     const { data, error } = await supabase
       .from("cms_site_pages")
       .select("*")

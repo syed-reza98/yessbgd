@@ -301,7 +301,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
       </section>
 
       {/* 4. Active Application Result Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Executive Application Overview Header Card */}
         <section className="glass-card rounded-3xl p-7 sm:p-8 border border-border shadow-sm">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-border">
@@ -609,28 +609,28 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
                 <span className="text-xs uppercase font-bold text-foreground/60 tracking-wider block">
                   Submitted Documents
                 </span>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-muted/30 border border-border">
-                  <div className="flex items-center gap-2.5">
-                    <FileText className="w-4 h-4 text-primary" />
-                    <div className="text-xs">
-                      <span className="font-semibold text-foreground block">Resume_Syed_Reza_LeadArchitect.pdf</span>
-                      <span className="text-foreground/60 text-[11px]">2.4 MB • Uploaded Sep 12</span>
+                <div className="flex items-center justify-between gap-2 p-3 rounded-xl bg-muted/30 border border-border min-w-0 w-full overflow-hidden">
+                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                    <FileText className="w-4 h-4 text-primary shrink-0" />
+                    <div className="text-xs min-w-0 flex-1">
+                      <span className="font-semibold text-foreground block truncate">Resume_Syed_Reza_LeadArchitect.pdf</span>
+                      <span className="text-foreground/60 text-[11px] block truncate">2.4 MB • Uploaded Sep 12</span>
                     </div>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded">
+                  <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded">
                     Verified
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-muted/30 border border-border">
-                  <div className="flex items-center gap-2.5">
-                    <FileText className="w-4 h-4 text-primary" />
-                    <div className="text-xs">
-                      <span className="font-semibold text-foreground block">Architecture_Portfolio_Mesh.pdf</span>
-                      <span className="text-foreground/60 text-[11px]">8.9 MB • Uploaded Sep 12</span>
+                <div className="flex items-center justify-between gap-2 p-3 rounded-xl bg-muted/30 border border-border min-w-0 w-full overflow-hidden">
+                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                    <FileText className="w-4 h-4 text-primary shrink-0" />
+                    <div className="text-xs min-w-0 flex-1">
+                      <span className="font-semibold text-foreground block truncate">Architecture_Portfolio_Mesh.pdf</span>
+                      <span className="text-foreground/60 text-[11px] block truncate">8.9 MB • Uploaded Sep 12</span>
                     </div>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded">
+                  <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded">
                     Verified
                   </span>
                 </div>
@@ -718,7 +718,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

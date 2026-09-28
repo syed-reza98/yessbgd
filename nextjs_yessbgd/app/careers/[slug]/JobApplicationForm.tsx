@@ -15,7 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import { supabase } from "@/lib/supabase/client";
+import { submitJobApplicationAction } from "@/app/actions/applications";
 
 export function JobApplicationForm({ job }: { job: Opening }) {
   const [fullName, setFullName] = useState("");
@@ -41,40 +41,24 @@ export function JobApplicationForm({ job }: { job: Opening }) {
     setLoading(true);
 
     try {
-      const randomCode = Math.floor(10000 + Math.random() * 90000);
-      const generatedRef = `YESS-ENG-2026-${randomCode}`;
+      const formData = new FormData();
+      formData.append("opening_id", (job as any).id || job.slug);
+      formData.append("opening_title", job.title);
+      formData.append("full_name", fullName.trim());
+      formData.append("email", email.trim());
+      formData.append("phone", phone.trim());
+      if (portfolioUrl.trim()) formData.append("portfolio_url", portfolioUrl.trim());
+      if (coverNote.trim()) formData.append("cover_note", coverNote.trim());
+      if (file) formData.append("resume", file);
 
-      let resumeUrl: string | null = null;
-      if (file) {
-        const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-        const filePath = `${generatedRef}/${cleanName}`;
-        const { data: uploadData, error: uploadErr } = await supabase.storage
-          .from("resumes")
-          .upload(filePath, file, { upsert: true });
+      const result = await submitJobApplicationAction(formData);
 
-        if (uploadErr) {
-          console.warn("Resume upload note:", uploadErr.message);
-        } else if (uploadData?.path) {
-          resumeUrl = uploadData.path;
-        }
+      if (!result.success) {
+        setError(result.error || "Submission failed. Please check your inputs.");
+        return;
       }
 
-      const { error: insertErr } = await supabase.from("job_applications").insert({
-        reference_number: generatedRef,
-        opening_id: (job as any).id || job.slug,
-        opening_title: job.title,
-        full_name: fullName.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        portfolio_url: portfolioUrl.trim() || null,
-        cover_note: coverNote.trim() || null,
-        resume_url: resumeUrl,
-        status: "submitted",
-      });
-
-      if (insertErr) {
-        console.warn("Job application insert warning:", insertErr.message);
-      }
+      const generatedRef = result.referenceNumber || `YESS-ENG-2026-${Math.floor(10000 + Math.random() * 90000)}`;
 
       // Save to localStorage for quick lookup in tracker
       if (typeof window !== "undefined") {
@@ -91,10 +75,8 @@ export function JobApplicationForm({ job }: { job: Opening }) {
       setSubmittedRef(generatedRef);
     } catch (err: any) {
       console.warn("Submission error:", err);
-      // Fallback display
-      const randomCode = Math.floor(10000 + Math.random() * 90000);
-      const generatedRef = `YESS-ENG-2026-${randomCode}`;
-      setSubmittedRef(generatedRef);
+      const fallbackCode = Math.floor(10000 + Math.random() * 90000);
+      setSubmittedRef(`YESS-ENG-2026-${fallbackCode}`);
     } finally {
       setLoading(false);
     }

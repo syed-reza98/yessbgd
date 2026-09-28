@@ -7,7 +7,7 @@ import { getSitePage, getCompanySettings } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("application-status");
   return {
-    title: page?.seo_title || "Application Status Tracker | YESS Bangladesh",
+    title: page?.seo_title || "Application Status Tracker",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||

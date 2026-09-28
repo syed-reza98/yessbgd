@@ -21,7 +21,7 @@ import { getIndustries, getSitePage } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("industries");
   return {
-    title: page?.seo_title || "Industries Overview | YESS Bangladesh",
+    title: page?.seo_title || "Industries Overview",
     description:
       page?.seo_description ||
       "Sector transformation across Media & Broadcasting, Manufacturing & RMG, Logistics, E-commerce, Financial Services, and Healthcare in Bangladesh.",
@@ -181,7 +181,7 @@ export default async function IndustriesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industryList.map((ind) => {
-              const Icon = ind.icon;
+              const Icon = (ind as any).icon || fallbackIndustries.find((i: any) => i.slug === ind.slug)?.icon || Factory;
               return (
                 <Link
                   key={ind.slug}

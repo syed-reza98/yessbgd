@@ -22,7 +22,7 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("about-mission");
   return {
-    title: page?.seo_title || "Strategic Mission & Purpose | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Strategic Mission & Purpose",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||

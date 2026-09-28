@@ -31,10 +31,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await getInsightBySlug(slug);
-  if (!article) return { title: "Insight Not Found | YESS Bangladesh" };
+  if (!article) return { title: "Insight Not Found" };
 
   return {
-    title: `${article.title} | YESS Bangladesh`,
+    title: article.title,
     description: article.excerpt,
   };
 }

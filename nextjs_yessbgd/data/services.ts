@@ -4,7 +4,7 @@ import {
 
 export type ServiceItem = {
   slug: string;
-  icon: typeof Tv;
+  icon?: typeof Tv;
   title: string;
   desc: string;
   bullets: string[];

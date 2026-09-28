@@ -22,7 +22,7 @@ import { services as fallbackServices } from "@/data/services";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("services");
   return {
-    title: page?.seo_title || "Services & Solutions | YESS Bangladesh",
+    title: page?.seo_title || "Services & Solutions",
     description:
       page?.seo_description ||
       "Enterprise cloud engineering, OTT media platforms, bespoke software, and agritech systems with transparent pricing and SLA guarantees.",
@@ -201,7 +201,7 @@ export default async function ServicesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {serviceList.map((item) => {
-              const Icon = item.icon;
+              const Icon = (item as any).icon || fallbackServices.find((s: any) => s.slug === item.slug)?.icon || Code2;
               return (
                 <Link
                   key={item.slug}
@@ -213,7 +213,7 @@ export default async function ServicesPage() {
                       <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="text-xs font-bold text-[#d4a359] px-3 py-1 rounded-full bg-[#d4a359]/10">
+                      <span className="text-xs font-bold text-[#7e5713] dark:text-[#f6c87a] px-3 py-1 rounded-full bg-[#d4a359]/15">
                         {item.pricing.timeline}
                       </span>
                     </div>

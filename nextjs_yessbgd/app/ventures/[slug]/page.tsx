@@ -35,7 +35,7 @@ export async function generateMetadata({
   if (!venture) return { title: "Venture Not Found" };
 
   return {
-    title: `${venture.title} | YESS Bangladesh`,
+    title: venture.title,
     description: venture.desc,
   };
 }
@@ -55,7 +55,7 @@ export default async function SingleVenturePage({
     notFound();
   }
 
-  const Icon = venture.icon;
+  const Icon = (venture as any).icon || ventures.find((v) => v.slug === venture.slug)?.icon || Building2;
   const siblingVentures = allVentures.filter((v) => v.slug !== venture.slug).slice(0, 3);
 
 
@@ -80,11 +80,18 @@ export default async function SingleVenturePage({
     <div className="flex flex-col w-full">
       {/* Venture Hero */}
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-16 sm:pt-32 sm:pb-24 lg:pt-36 overflow-hidden border-b border-slate-200/80">
-        {/* Dynamic Background Image Layer */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('${heroBgImage}')` }}
-        />
+        {/* Dynamic Background Image Layer (Optimized for Browser Preload Scanner) */}
+        <div className="absolute inset-0 opacity-28 mix-blend-multiply pointer-events-none overflow-hidden">
+          <Image
+            src={heroBgImage}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center pointer-events-none select-none"
+          />
+        </div>
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         
         <div className="container-tight relative z-10">

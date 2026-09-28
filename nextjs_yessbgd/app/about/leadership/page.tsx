@@ -5,7 +5,7 @@ import { LeadershipClient } from "./LeadershipClient";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("about-leadership");
   return {
-    title: page?.seo_title || "Leadership & Governance | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Leadership & Governance",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||

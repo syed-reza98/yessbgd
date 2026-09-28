@@ -5,7 +5,7 @@ import { MethodologyClient } from "./MethodologyClient";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("about-methodology");
   return {
-    title: page?.seo_title || "Engineering Methodology | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Engineering Methodology",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||

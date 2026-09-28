@@ -34,7 +34,7 @@ export async function generateMetadata({
   if (!industry) return { title: "Industry Not Found" };
 
   return {
-    title: `${industry.title} | YESS Bangladesh`,
+    title: industry.title,
     description: industry.desc,
   };
 }
@@ -51,7 +51,7 @@ export default async function SingleIndustryPage({
     notFound();
   }
 
-  const Icon = industry.icon;
+  const Icon = (industry as any).icon || industries.find((i: any) => i.slug === industry.slug)?.icon || Building2;
 
   const industryBgMap: Record<string, string> = {
     "manufacturing-rmg": "/assets/general/centricity.png",

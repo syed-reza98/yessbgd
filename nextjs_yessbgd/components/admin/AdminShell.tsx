@@ -112,7 +112,7 @@ export function AdminShell({
     "Governance & Tools": true,
   });
 
-  const nav = useMemo(buildNav, []);
+  const nav = useMemo(() => buildNav(), []);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {

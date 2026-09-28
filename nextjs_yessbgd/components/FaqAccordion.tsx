@@ -227,7 +227,10 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
               >
                 <button
                   type="button"
+                  id={`faq-trigger-${faq.id}`}
                   onClick={() => toggleOpen(faq.id)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${faq.id}`}
                   className="w-full text-left flex items-start justify-between gap-4 select-none cursor-pointer"
                 >
                   <div className="space-y-1">
@@ -249,7 +252,12 @@ export function FaqAccordion({ initialFaqs }: { initialFaqs?: FaqItem[] }) {
                 </button>
 
                 {isOpen && (
-                  <div className="mt-4 pt-4 border-t border-border text-xs sm:text-sm text-foreground/70 leading-relaxed space-y-3">
+                  <div
+                    id={`faq-answer-${faq.id}`}
+                    role="region"
+                    aria-labelledby={`faq-trigger-${faq.id}`}
+                    className="mt-4 pt-4 border-t border-border text-xs sm:text-sm text-foreground/70 leading-relaxed space-y-3"
+                  >
                     <p>{faq.answer}</p>
 
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">

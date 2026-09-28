@@ -31,7 +31,7 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("careers");
   return {
-    title: page?.seo_title || "Careers Hub & Talent Portal | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Careers Hub & Talent Portal",
     description:
       page?.seo_description ||
       "Join an institutional ecosystem of 500+ engineers, product architects, and operations leaders building sovereign technologies and market champions across Bangladesh.",
@@ -291,7 +291,7 @@ export default async function CareersPage() {
       </section>
 
       {/* Main Careers Content */}
-      <main className="py-16 sm:py-20 space-y-20 bg-background">
+      <div className="py-16 sm:py-20 space-y-20 bg-background">
         {sitePage?.body && (
           <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="p-6 sm:p-8 rounded-2xl glass-card border border-border">
@@ -530,7 +530,7 @@ export default async function CareersPage() {
           subtitle="Answers to common candidate queries regarding visas, probationary timelines, equity vesting, and technology stack standards."
         />
       </section>
-    </main>
+    </div>
     </div>
   );
 }

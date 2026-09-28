@@ -28,7 +28,7 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("about");
   return {
-    title: page?.seo_title || "About Us | YESS Bangladesh — Leading Institutional Venture Builder",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh.*$/i, "") || "About Us — Leading Institutional Venture Builder",
     description:
       page?.seo_description ||
       "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech.",
@@ -338,7 +338,7 @@ export default async function AboutPage() {
                     <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors leading-snug">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs font-semibold text-[#d4a359] mt-0.5">{pillar.tagline}</p>
+                    <p className="text-xs font-semibold text-[#7e5713] dark:text-[#f6c87a] mt-0.5">{pillar.tagline}</p>
                     <p className="text-xs sm:text-sm text-foreground/70 mt-2 mb-4 leading-relaxed line-clamp-3">
                       {pillar.desc}
                     </p>

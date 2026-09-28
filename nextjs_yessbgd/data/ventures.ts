@@ -44,7 +44,7 @@ export type Venture = {
   desc: string;
   longDesc: string;
   image: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   /** Optional brand logo image URL. Falls back to the icon monogram. */
   logoUrl?: string;
   /** Optional public domain — the hero coin auto-pulls its live favicon. */

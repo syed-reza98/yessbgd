@@ -16,6 +16,7 @@ import {
   Zap,
   RotateCw,
   Lock,
+  Tv,
 } from "lucide-react";
 import { services } from "@/data/services";
 import { getServices, getServiceBySlug } from "@/lib/cms";
@@ -38,7 +39,7 @@ export async function generateMetadata({
   if (!service) return { title: "Service Not Found" };
 
   return {
-    title: `${service.title} | YESS Bangladesh`,
+    title: service.title,
     description: service.desc,
   };
 }
@@ -83,7 +84,7 @@ export default async function SingleServicePage({
     notFound();
   }
 
-  const Icon = service.icon;
+  const Icon = (service as any).icon || services.find((s: any) => s.slug === service.slug)?.icon || Tv;
 
   return (
     <div className="flex flex-col w-full">

@@ -19,7 +19,7 @@ import { getSitePage } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("faq");
   return {
-    title: page?.seo_title || "Corporate FAQ & Knowledge Base | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Corporate FAQ & Knowledge Base",
     description:
       page?.seo_description ||
       "Everything you need to know about our engagement models, sovereign technology architectures, delivery timelines, pricing, and national operations across Bangladesh.",
@@ -151,7 +151,7 @@ export default async function FaqPage() {
       </section>
 
       {/* Main FAQ Accordion with Categorized Tabs */}
-      <main className="py-16 sm:py-20 bg-background">
+      <div className="py-16 sm:py-20 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {sitePage?.body && (
             <div className="p-6 sm:p-8 rounded-2xl glass-card border border-border">
@@ -182,7 +182,7 @@ export default async function FaqPage() {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("privacy");
   return {
-    title: page?.seo_title || "Privacy Policy | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Privacy Policy",
     description:
       page?.seo_description ||
       "How YESS Bangladesh collects, processes, retains, and protects personal data — adhering to GDPR, CCPA, and Bangladesh Data Protection principles.",
@@ -198,7 +198,7 @@ export default async function PrivacyPage() {
       </section>
 
       {/* Main 2-Column Content Layout */}
-      <main className="py-16 sm:py-20 bg-background">
+      <div className="py-16 sm:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Sticky Table of Contents (4 cols) */}
@@ -269,7 +269,7 @@ export default async function PrivacyPage() {
           </div>
         </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

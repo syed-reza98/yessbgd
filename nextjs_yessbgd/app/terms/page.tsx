@@ -16,7 +16,7 @@ import { getSitePage } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getSitePage("terms");
   return {
-    title: page?.seo_title || "Terms of Service | YESS Bangladesh",
+    title: page?.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || "Terms of Service",
     description:
       page?.seo_description ||
       page?.hero_subtitle ||
@@ -231,7 +231,7 @@ export default async function TermsPage() {
       </section>
 
       {/* Main 2-Column Content Layout */}
-      <main className="py-16 sm:py-20 bg-background">
+      <div className="py-16 sm:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Sticky 14-Clause Table of Contents (4 cols) */}
@@ -302,7 +302,7 @@ export default async function TermsPage() {
           </div>
         </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

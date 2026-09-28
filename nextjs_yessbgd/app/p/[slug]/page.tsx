@@ -5,6 +5,8 @@ import { PageHero } from "@/components/PageHero";
 import { ArrowLeft, FileText, CheckCircle2, Building } from "lucide-react";
 import { getPageByPathOrSlug } from "@/lib/cms";
 
+export const instant = false;
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -19,13 +21,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
     return {
-      title: `${formattedTitle} | YESS Bangladesh`,
+      title: formattedTitle,
       description: `Institutional page for ${formattedTitle} on the YESS Bangladesh platform.`,
     };
   }
 
   return {
-    title: page.seo_title || `${page.name} | YESS Bangladesh`,
+    title: page.seo_title?.replace(/\s*\|\s*YESS Bangladesh$/i, "") || page.name,
     description: page.seo_description || page.hero_subtitle || "Institutional sovereign venture document.",
   };
 }

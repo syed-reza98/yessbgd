@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Sparkles, ChevronRight } from "lucide-react";
 
 export interface BreadcrumbItem {
@@ -12,7 +13,7 @@ export function PageHero({
   title,
   subtitle,
   children,
-  backgroundImage = "/assets/heroes/hero_6a8951c6b7346.png",
+  backgroundImage = "/assets/heroes/hero_6a8951c6b7346.webp",
   imageOpacity = "opacity-30",
   breadcrumbs,
   align = "center",
@@ -30,13 +31,22 @@ export function PageHero({
 
   return (
     <section className="relative overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80 min-h-[auto] sm:min-h-[460px] lg:min-h-[520px] flex flex-col justify-center">
-      {/* Background Image Layer with Light Multiplying Overlay */}
+      {/* Background Image Layer with Light Multiplying Overlay (Optimized for Browser Preload Scanner) */}
       {backgroundImage && (
         <>
           <div
-            className={`absolute inset-0 z-0 bg-cover bg-center pointer-events-none transition-opacity duration-500 mix-blend-multiply ${imageOpacity}`}
-            style={{ backgroundImage: `url('${backgroundImage}')` }}
-          />
+            className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 mix-blend-multiply overflow-hidden ${imageOpacity}`}
+          >
+            <Image
+              src={backgroundImage}
+              alt=""
+              fill
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+              className="object-cover object-center pointer-events-none select-none"
+            />
+          </div>
           {/* Subtle mobile readability gradient veil */}
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70 sm:hidden pointer-events-none" />
         </>
