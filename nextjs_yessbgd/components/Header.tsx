@@ -57,6 +57,7 @@ const FEATURED_VENTURES = [
     title: "Yess Host",
     category: "Hosting & Cloud Infrastructure",
     icon: Server,
+    logoUrl: "/coins/yess-host.png",
     color: "text-purple-700 bg-purple-50",
     href: "/ventures/yess-host",
   },
@@ -74,6 +75,7 @@ const FEATURED_VENTURES = [
     title: "Akash TV",
     category: "Broadcast Television",
     icon: Tv,
+    logoUrl: "/coins/akash-tv.png",
     color: "text-pink-700 bg-pink-50",
     href: "/ventures/akash-tv",
   },
@@ -99,6 +101,7 @@ export function Header({
 }) {
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileVenturesOpen, setMobileVenturesOpen] = useState(false);
   const [venturesDropdownOpen, setVenturesDropdownOpen] = useState(false);
@@ -108,6 +111,7 @@ export function Header({
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -145,6 +149,7 @@ export function Header({
   };
 
   const isLinkActive = (href: string) => {
+    if (!mounted) return false;
     if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(href + "/");
   };
@@ -253,8 +258,18 @@ export function Header({
                                 onClick={handleLinkClick}
                                 className="group p-2 rounded-xl hover:bg-gray-50 transition-all flex items-center gap-2.5 text-left"
                               >
-                                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0E8A44] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                                  <Icon className="w-4 h-4" />
+                                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0E8A44] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform overflow-hidden p-1">
+                                  {v.logoUrl ? (
+                                    <Image
+                                      src={v.logoUrl}
+                                      alt={v.title}
+                                      width={28}
+                                      height={28}
+                                      className="w-full h-full object-contain"
+                                    />
+                                  ) : (
+                                    <Icon className="w-4 h-4" />
+                                  )}
                                 </div>
                                 <div className="truncate">
                                   <div className="font-bold text-[12.5px] text-[#0D1E2D] group-hover:text-[#0E8A44] transition-colors truncate">
@@ -419,16 +434,31 @@ export function Header({
 
                       {/* Expandable Ventures List */}
                       {mobileVenturesOpen && (
-                        <div className="pl-6 py-2 space-y-2 border-l-2 border-emerald-100 ml-2">
+                        <div className="pl-4 py-2 space-y-2 border-l-2 border-emerald-100 ml-2">
                           {FEATURED_VENTURES.map((v) => (
                             <Link
                               key={v.slug}
                               href={v.href}
                               onClick={handleLinkClick}
-                              className="block py-1 text-[13px] text-[#475569] hover:text-[#0E8A44]"
+                              className="flex items-center gap-2.5 py-1 text-[13px] text-[#475569] hover:text-[#0E8A44]"
                             >
-                              <div className="font-semibold">{v.title}</div>
-                              <div className="text-[10px] text-gray-400">{v.category}</div>
+                              <div className="w-6 h-6 rounded bg-emerald-50 text-[#0E8A44] flex items-center justify-center shrink-0 overflow-hidden p-0.5">
+                                {v.logoUrl ? (
+                                  <Image
+                                    src={v.logoUrl}
+                                    alt={v.title}
+                                    width={20}
+                                    height={20}
+                                    className="w-full h-full object-contain"
+                                  />
+                                ) : (
+                                  <v.icon className="w-3.5 h-3.5" />
+                                )}
+                              </div>
+                              <div className="truncate">
+                                <div className="font-semibold leading-tight truncate">{v.title}</div>
+                                <div className="text-[10px] text-gray-400 truncate">{v.category}</div>
+                              </div>
                             </Link>
                           ))}
                         </div>
