@@ -254,7 +254,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
                   <Image
-                    src="/coins/the-daily-akash.png"
+                    src="/coins/the-daily-akash-logo.png"
                     alt="The Daily Akash"
                     width={36}
                     height={36}
@@ -262,7 +262,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                   />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#EA580C] transition-colors leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#0891B2] transition-colors leading-tight">
                     The Daily Akash
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">

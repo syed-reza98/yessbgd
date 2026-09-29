@@ -66,8 +66,8 @@ const FEATURED_VENTURES = [
     title: "The Daily Akash",
     category: "Digital Newspaper & Media",
     icon: Newspaper,
-    logoUrl: "/coins/the-daily-akash.png",
-    color: "text-orange-700 bg-orange-50",
+    logoUrl: "/coins/the-daily-akash-logo.png",
+    color: "text-cyan-700 bg-cyan-50",
     href: "/services/akash-news",
   },
   {

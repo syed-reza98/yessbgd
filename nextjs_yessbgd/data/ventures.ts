@@ -245,7 +245,7 @@ export const ventures: Venture[] = [
     title: "The Daily Akash",
     status: "active",
     domain: "akash.news",
-    logoUrl: "/coins/the-daily-akash.png",
+    logoUrl: "/coins/the-daily-akash-logo.png",
     category: "Digital Newspaper",
     tagline: "Trusted journalism for a modern Bangladesh.",
     desc: "A digital-first newspaper delivering breaking news, in-depth analysis, business, sports and lifestyle stories that matter — every day.",
