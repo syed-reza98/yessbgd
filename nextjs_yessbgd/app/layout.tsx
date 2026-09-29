@@ -44,15 +44,39 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "YESS Bangla Private Limited" }],
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     alternateLocale: ["bn_BD"],
+    url: "https://yessbd.com",
     siteName: "YESS Bangladesh",
     title: "YESS Bangladesh — Sovereign Enterprise Studio",
     description: "Sovereign enterprise technology, cloud platforms, and venture studios across Bangladesh.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "YESS Bangladesh — Sovereign Venture Studio & Holding Company",
+        type: "image/jpeg",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "YESS Bangladesh — Sovereign Enterprise Studio",
+    description: "Sovereign enterprise technology, cloud platforms, and venture studios across Bangladesh.",
+    images: ["/og-image.jpg"],
   },
 };
 
