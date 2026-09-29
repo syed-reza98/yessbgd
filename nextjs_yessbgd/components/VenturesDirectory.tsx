@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useMemo, useEffect } from "react";
 import {
   Search,
@@ -285,8 +286,18 @@ export function VenturesDirectory({
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform overflow-hidden p-1.5">
+                      {venture.logoUrl ? (
+                        <Image
+                          src={venture.logoUrl}
+                          alt={venture.title}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-contain"
+                        />
+                      ) : (
+                        <Icon className="w-6 h-6" />
+                      )}
                     </div>
                     <div className="text-right">
                       <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/20">
@@ -360,7 +371,20 @@ export function VenturesDirectory({
                   return (
                     <tr key={v.slug} className="hover:bg-muted/40 transition-colors">
                       <td className="p-4 font-bold text-foreground">
-                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2 py-1">
+                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2.5 py-1">
+                          <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 overflow-hidden p-0.5">
+                            {v.logoUrl ? (
+                              <Image
+                                src={v.logoUrl}
+                                alt={v.title}
+                                width={20}
+                                height={20}
+                                className="w-full h-full object-contain"
+                              />
+                            ) : (
+                              <Building2 className="w-3.5 h-3.5 text-primary" />
+                            )}
+                          </div>
                           <span>{v.title}</span>
                         </Link>
                       </td>

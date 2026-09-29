@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, type ReactNode } from "react";
+import { Suspense, useState, useEffect, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -41,11 +41,17 @@ function FooterWrapper({
   ventures?: unknown[];
 }) {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   if (pathname?.startsWith("/admin")) return null;
   return (
     <>
       <Footer footerMenus={footerMenus} settings={settings} ventures={ventures} />
-      {pathname !== "/" && <MobileTabBar />}
+      {mounted && pathname !== "/" && <MobileTabBar />}
     </>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Play,
@@ -84,22 +85,22 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
       {/* 2. HERO SECTION                                          */}
       {/* ======================================================== */}
       <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px]">
-        {/* Hero Background Image (Full on mobile with vertical fade, Right 72% on desktop with horizontal fade) */}
-        <div className="absolute inset-0 lg:left-auto lg:right-0 lg:w-[72%] z-0 pointer-events-none">
+        {/* Hero Background Image (Full width across hero section) */}
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/Hero_Background.jpeg"
             alt="Yess Bangla Modern Workspace"
-            className="w-full h-full object-cover object-[28%_bottom] sm:object-[28%_center] lg:object-left"
+            className="w-full h-full object-cover object-center"
           />
-          {/* Mobile Vertical Gradient Overlay: Solid white on text & avatars, smooth fade over mid-section */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white via-[52%] to-transparent to-[76%] lg:hidden" />
-          {/* Desktop Progressive Horizontal Gradient Overlay */}
+          {/* Mobile Vertical Gradient Overlay: Solid white on text, smooth fade downwards */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 via-[48%] to-transparent to-[75%] lg:hidden" />
+          {/* Desktop Progressive Horizontal Gradient Overlay for text contrast */}
           <div
             className="hidden lg:block absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 8%, rgba(255,255,255,0.50) 18%, rgba(255,255,255,0.18) 28%, rgba(255,255,255,0) 36%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 32%, rgba(255,255,255,0.50) 48%, rgba(255,255,255,0.15) 64%, rgba(255,255,255,0) 80%)",
             }}
           />
           {/* Subtle Bottom soft fade */}
@@ -175,168 +176,172 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             {/* Center & Right: Floating Brand Badges over Hero Image */}
             <div className="relative w-full h-[290px] sm:h-[320px] lg:h-[450px] lg:flex-1 mt-6 lg:mt-0 pointer-events-none">
               {/* 1. Shondhaan */}
-              <div className="float-card-1 absolute top-[4%] left-[2%] sm:left-[4%] lg:top-[12%] lg:left-[28%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#0E8A44] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
+              <Link
+                href="/ventures/yess-service"
+                className="float-card-1 absolute top-[4%] left-[2%] sm:left-[4%] lg:top-[12%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/shondhaan-logo.png"
+                    alt="Shondhaan"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#0E8A44] transition-colors leading-tight">
                     Shondhaan
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     Service Marketplace
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* 2. Organic Haat */}
-              <div className="float-card-2 absolute top-[34%] left-[3%] sm:left-[5%] lg:top-[36%] lg:left-[30%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EAB308] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"
-                    />
-                  </svg>
+              <Link
+                href="/ventures/yess-organic-haat"
+                className="float-card-2 absolute top-[34%] left-[3%] sm:left-[5%] lg:top-[36%] lg:left-[30%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/organic-haat-logo.png"
+                    alt="Organic Haat"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#CA8A04] transition-colors leading-tight">
                     Organic Haat
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     Fresh &amp; Healthy Food
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* 3. Yess Soft */}
-              <div className="float-card-3 absolute top-[64%] left-[1%] sm:left-[3%] lg:top-[60%] lg:left-[28%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <span className="text-white font-mono font-bold text-[12px] sm:text-[13px] leading-none">
-                    &lt;/&gt;
-                  </span>
+              <Link
+                href="/ventures/yess-soft"
+                className="float-card-3 absolute top-[64%] left-[1%] sm:left-[3%] lg:top-[60%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/yess-soft.png"
+                    alt="Yess Soft"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#2563EB] transition-colors leading-tight">
                     Yess Soft
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     IT Solutions
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* 4. The Daily Akash */}
-              <div className="float-card-4 absolute top-[0%] right-[1%] sm:right-[3%] lg:top-[8%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-3 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EA580C] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" />
-                  </svg>
+              <Link
+                href="/ventures/the-daily-akash"
+                className="float-card-4 absolute top-[0%] right-[1%] sm:right-[3%] lg:top-[8%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-3 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/the-daily-akash-logo.png"
+                    alt="The Daily Akash"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#0891B2] transition-colors leading-tight">
                     The Daily Akash
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     News &amp; Media
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* 5. Akash TV */}
-              <div className="float-card-5 absolute top-[26%] right-[2%] sm:right-[4%] lg:top-[30%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#DB2777] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M23 7l-7 5 7 5V7z" />
-                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                  </svg>
+              <Link
+                href="/ventures/akash-tv"
+                className="float-card-5 absolute top-[26%] right-[2%] sm:right-[4%] lg:top-[30%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/akash-tv.png"
+                    alt="Akash TV"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#DB2777] transition-colors leading-tight">
                     Akash TV
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     Television
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* 6. Akash OTT */}
-              <div className="float-card-6 absolute top-[52%] right-[2%] sm:right-[4%] lg:top-[52%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#8B5CF6] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <polygon points="6 3 20 12 6 21 6 3" />
-                  </svg>
+              <Link
+                href="/ventures/akash-ott"
+                className="float-card-6 absolute top-[52%] right-[2%] sm:right-[4%] lg:top-[52%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/akash-ott.png"
+                    alt="Akash OTT"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#8B5CF6] transition-colors leading-tight">
                     Akash OTT
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     Entertainment
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* 7. Yess Host */}
-              <div className="float-card-7 absolute top-[76%] right-[1%] sm:right-[3%] lg:top-[74%] lg:right-[1.5%] z-20 bg-white/95 backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100/80 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    viewBox="0 0 24 24"
-                  >
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
+              <Link
+                href="/ventures/yess-host"
+                className="float-card-7 absolute top-[76%] right-[1%] sm:right-[3%] lg:top-[74%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
+              >
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
+                  <Image
+                    src="/coins/yess-host.png"
+                    alt="Yess Host"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] leading-tight">
+                  <h4 className="text-[11.5px] sm:text-[12.5px] font-bold text-[#0D1E2D] group-hover:text-[#2563EB] transition-colors leading-tight">
                     Yess Host
                   </h4>
                   <p className="text-[9.5px] sm:text-[10px] text-[#64748B] leading-tight mt-0.5">
                     Hosting &amp; Cloud
                   </p>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

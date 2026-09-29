@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Briefcase, Layers, Building2, Mail } from "lucide-react";
@@ -24,6 +25,11 @@ const tabs: Tab[] = [
 export function MobileTabBar() {
   const { t } = useLanguage();
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <nav
@@ -35,9 +41,9 @@ export function MobileTabBar() {
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const matches = tab.match ?? [tab.href];
-            const isActive = tab.exact
+            const isActive = mounted && (tab.exact
               ? pathname === tab.href
-              : matches.some((m) => pathname === m || pathname.startsWith(m + "/"));
+              : matches.some((m) => pathname === m || pathname.startsWith(m + "/")));
 
             return (
               <li key={tab.href} className="flex-1">
