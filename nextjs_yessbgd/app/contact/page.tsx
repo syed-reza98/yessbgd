@@ -124,9 +124,11 @@ export default async function ContactPage() {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80">
         {/* Background Image Layer */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/contact-welcome-bd.jpg')` }}
+          className="absolute inset-0 bg-cover bg-right lg:bg-[position:95%_center] opacity-45 pointer-events-none"
+          style={{ backgroundImage: `url('/assets/contact-hero.jpg')` }}
         />
+        {/* Soft horizontal gradient to preserve text contrast on the left while showcasing the team and logo on the right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/85 sm:via-slate-50/70 to-transparent pointer-events-none" />
         {/* Subtle Decorative Grid Glow & Brand Ambience */}
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
