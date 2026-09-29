@@ -110,18 +110,18 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             fetchPriority="high"
             decoding="sync"
           />
-          {/* Mobile Vertical Gradient Overlay: Solid white on text, smooth fade downwards */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 via-[48%] to-transparent to-[75%] lg:hidden" />
-          {/* Desktop Progressive Horizontal Gradient Overlay for text contrast */}
+          {/* Mobile Vertical Gradient Overlay: Soft transparent fade for background image visibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/35 via-[42%] to-transparent to-[75%] lg:hidden" />
+          {/* Desktop Progressive Horizontal Gradient Overlay: Light transparent feather for image visibility */}
           <div
             className="hidden lg:block absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 32%, rgba(255,255,255,0.50) 48%, rgba(255,255,255,0.15) 64%, rgba(255,255,255,0) 80%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.60) 0%, rgba(255,255,255,0.40) 28%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%)",
             }}
           />
           {/* Subtle Bottom soft fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white/80 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white/40 to-transparent" />
         </div>
 
         {/* Hero Content Container */}
@@ -155,7 +155,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               </h1>
 
               {/* Description Paragraph */}
-              <p className="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-[#475569] mb-6 sm:mb-8 max-w-[390px]">
+              <p className="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-[#0F172A] font-medium mb-6 sm:mb-8 max-w-[390px]">
                 {language === "bn"
                   ? "ইয়েস বাংলায় আমরা এমন ব্যবসা গড়ে তুলি যা মানুষের জীবনে বাস্তব ইতিবাচক পরিবর্তন আনে — পরিষেবা, তাজা খাবার, প্রযুক্তি, সংবাদ ও বিনোদনের মাধ্যমে।"
                   : "At YESS Bangla, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}

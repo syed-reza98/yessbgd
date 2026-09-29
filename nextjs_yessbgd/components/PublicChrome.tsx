@@ -51,7 +51,7 @@ function FooterWrapper({
   return (
     <>
       <Footer footerMenus={footerMenus} settings={settings} ventures={ventures} />
-      {mounted && pathname !== "/" && <MobileTabBar />}
+      {mounted && <MobileTabBar />}
     </>
   );
 }

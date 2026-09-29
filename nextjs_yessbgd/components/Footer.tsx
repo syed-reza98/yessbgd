@@ -97,7 +97,7 @@ export function Footer({
   return (
     <footer
       id="contact"
-      className="bg-[#042017] text-white pt-14 pb-8 border-t border-[#093526]"
+      className="bg-[#042017] text-white pt-14 pb-20 lg:pb-8 border-t border-[#093526]"
     >
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
         {/* 5-Column Grid with Vertical Dividers */}
