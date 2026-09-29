@@ -12,12 +12,26 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 interface HomeClientProps {
   sitePage?: unknown;
-  initialVentures?: unknown[];
+  initialVentures?: any[];
 }
 
-export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentures }: HomeClientProps) {
+export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientProps) {
   const { language } = useLanguage();
   const [isStoryVideoOpen, setIsStoryVideoOpen] = useState(false);
+
+  const venturesList = (initialVentures as any[]) || [];
+  const getVentureHref = (identifier: string, fallbackSlug: string) => {
+    const cleanId = identifier.toLowerCase();
+    const found = venturesList.find(
+      (v) =>
+        v.slug?.toLowerCase() === cleanId ||
+        v.title?.toLowerCase() === cleanId ||
+        v.title?.toLowerCase().includes(cleanId) ||
+        (cleanId === "shondhaan" && (v.slug === "yess-service" || v.slug === "shondhaan")) ||
+        (cleanId === "yess-service" && (v.slug === "shondhaan" || v.slug === "yess-service"))
+    );
+    return found ? `/ventures/${found.slug}` : `/ventures/${fallbackSlug}`;
+  };
 
   // Counter animations using IntersectionObserver
   const [counts, setCounts] = useState({
@@ -177,7 +191,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             <div className="relative w-full h-[290px] sm:h-[320px] lg:h-[450px] lg:flex-1 mt-6 lg:mt-0 pointer-events-none">
               {/* 1. Shondhaan */}
               <Link
-                href="/ventures/yess-service"
+                href={getVentureHref("shondhaan", "shondhaan")}
                 className="float-card-1 absolute top-[4%] left-[2%] sm:left-[4%] lg:top-[12%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -201,7 +215,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 2. Organic Haat */}
               <Link
-                href="/ventures/yess-organic-haat"
+                href={getVentureHref("yess-organic-haat", "yess-organic-haat")}
                 className="float-card-2 absolute top-[34%] left-[3%] sm:left-[5%] lg:top-[36%] lg:left-[30%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -225,7 +239,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 3. Yess Soft */}
               <Link
-                href="/ventures/yess-soft"
+                href={getVentureHref("yess-soft", "yess-soft")}
                 className="float-card-3 absolute top-[64%] left-[1%] sm:left-[3%] lg:top-[60%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -249,7 +263,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 4. The Daily Akash */}
               <Link
-                href="/ventures/the-daily-akash"
+                href={getVentureHref("the-daily-akash", "the-daily-akash")}
                 className="float-card-4 absolute top-[0%] right-[1%] sm:right-[3%] lg:top-[8%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-3 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -273,7 +287,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 5. Akash TV */}
               <Link
-                href="/ventures/akash-tv"
+                href={getVentureHref("akash-tv", "akash-tv")}
                 className="float-card-5 absolute top-[26%] right-[2%] sm:right-[4%] lg:top-[30%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -297,7 +311,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 6. Akash OTT */}
               <Link
-                href="/ventures/akash-ott"
+                href={getVentureHref("akash-ott", "akash-ott")}
                 className="float-card-6 absolute top-[52%] right-[2%] sm:right-[4%] lg:top-[52%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -321,7 +335,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 7. Yess Host */}
               <Link
-                href="/ventures/yess-host"
+                href={getVentureHref("yess-host", "yess-host")}
                 className="float-card-7 absolute top-[76%] right-[1%] sm:right-[3%] lg:top-[74%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -547,7 +561,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             {/* Card Button */}
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-service"
+                href={getVentureHref("shondhaan", "shondhaan")}
                 className="inline-flex items-center space-x-1.5 border border-[#0E8A44] hover:bg-[#0E8A44] text-[#0E8A44] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Shondhaan</span>
@@ -603,7 +617,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-organic-haat"
+                href={getVentureHref("yess-organic-haat", "yess-organic-haat")}
                 className="inline-flex items-center space-x-1.5 border border-[#16A34A] hover:bg-[#16A34A] text-[#16A34A] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Organic Haat</span>
@@ -656,7 +670,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-soft"
+                href={getVentureHref("yess-soft", "yess-soft")}
                 className="inline-flex items-center space-x-1.5 border border-[#2563EB] hover:bg-[#2563EB] text-[#2563EB] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Yess Soft</span>
@@ -703,7 +717,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-host"
+                href={getVentureHref("yess-host", "yess-host")}
                 className="inline-flex items-center space-x-1.5 border border-[#7C3AED] hover:bg-[#7C3AED] text-[#7C3AED] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Yess Host</span>
@@ -804,7 +818,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/akash-tv"
+                href={getVentureHref("akash-tv", "akash-tv")}
                 className="inline-flex items-center space-x-1.5 border border-[#DB2777] hover:bg-[#DB2777] text-[#DB2777] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Akash TV</span>

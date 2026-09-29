@@ -71,7 +71,14 @@ export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
     }
 
     return data.map((row) => {
-      const fallback = localVentures.find((v) => v.slug === row.slug) || localVentures[0];
+      const fallback =
+        localVentures.find(
+          (v) =>
+            v.slug === row.slug ||
+            (row.slug === "shondhaan" && v.slug === "yess-service") ||
+            (row.slug === "yess-service" && v.slug === "shondhaan") ||
+            v.title.toLowerCase() === row.title?.toLowerCase()
+        ) || localVentures[0];
       const { icon, ...cleanFallback } = fallback;
       const extra = (row.data as any) || {};
 
@@ -117,15 +124,33 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
 
   try {
     const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
+    let { data, error } = await supabase
       .from("cms_ventures")
       .select("*")
       .eq("slug", slug)
       .eq("is_published", true)
       .maybeSingle();
 
-    const lookupSlug = slug === "shondhaan" ? "yess-service" : slug;
-    const fallback = localVentures.find((v) => v.slug === slug || v.slug === lookupSlug);
+    if (!data && (slug === "yess-service" || slug === "shondhaan")) {
+      const altSlug = slug === "yess-service" ? "shondhaan" : "yess-service";
+      const altRes = await supabase
+        .from("cms_ventures")
+        .select("*")
+        .eq("slug", altSlug)
+        .eq("is_published", true)
+        .maybeSingle();
+      if (altRes.data) {
+        data = altRes.data;
+        error = null;
+      }
+    }
+
+    const fallback = localVentures.find(
+      (v) =>
+        v.slug === slug ||
+        (slug === "shondhaan" && v.slug === "yess-service") ||
+        (slug === "yess-service" && v.slug === "shondhaan")
+    );
     if (error || !data) {
       if (!fallback) return null;
       const { icon, ...clean } = fallback;

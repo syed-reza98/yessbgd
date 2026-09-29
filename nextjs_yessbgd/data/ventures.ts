@@ -414,7 +414,7 @@ export const ventures: Venture[] = [
     },
   },
   {
-    slug: "yess-service",
+    slug: "shondhaan",
     title: "Shondhaan",
     status: "active",
     domain: "shondhaan.com",

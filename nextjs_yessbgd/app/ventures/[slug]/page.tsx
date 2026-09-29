@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,6 +18,8 @@ import { ventures } from "@/data/ventures";
 import { getVentures, getVentureBySlug } from "@/lib/cms";
 import { PageHero } from "@/components/PageHero";
 
+export const instant = false;
+
 export async function generateStaticParams() {
   const all = await getVentures();
   return all.map((v) => ({
@@ -31,6 +33,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === "yess-service") {
+    return { title: "Shondhaan — YESS Bangladesh" };
+  }
   const venture = await getVentureBySlug(slug);
   if (!venture) return { title: "Venture Not Found" };
 
@@ -46,12 +51,25 @@ export default async function SingleVenturePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === "yess-service") {
+    redirect("/ventures/shondhaan");
+  }
+
   const [venture, allVentures] = await Promise.all([
     getVentureBySlug(slug),
     getVentures(),
   ]);
 
   if (!venture) {
+    // Check if slug was legacy or alternative for an existing venture
+    const matchedVenture = allVentures.find(
+      (v) =>
+        (slug === "yess-service" && (v.slug === "shondhaan" || v.title.toLowerCase() === "shondhaan")) ||
+        v.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug
+    );
+    if (matchedVenture && matchedVenture.slug !== slug) {
+      redirect(`/ventures/${matchedVenture.slug}`);
+    }
     notFound();
   }
 
@@ -60,6 +78,8 @@ export default async function SingleVenturePage({
 
 
   const heroBgMap: Record<string, string> = {
+    "shondhaan": "/assets/ventures/yess-service.jpg",
+    "yess-service": "/assets/ventures/yess-service.jpg",
     "yess-organic-food": "/assets/heroes/hero_6a89646fd72ff.jpg",
     "yess-soft": "/assets/services-tech-bd.jpg",
     "yess-technology": "/assets/heroes/hero_6a896e39e25bd.jpg",

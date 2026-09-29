@@ -72,8 +72,12 @@ export function PublicChrome({
 }: PublicChromeProps) {
   return (
     <>
-      <AutoTranslator />
-      <ScrollToTop />
+      <Suspense fallback={null}>
+        <AutoTranslator />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
       <Suspense fallback={null}>
         <HeaderWrapper
           headerMenus={headerMenus}

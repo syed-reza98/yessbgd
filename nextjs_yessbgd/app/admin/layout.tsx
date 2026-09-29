@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { AdminLayoutClient } from "./AdminLayoutClient";
 import { createClient } from "@/lib/supabase/server";
 
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 async function AdminAuthWrapper({ children }: { children: React.ReactNode }) {
+  await connection();
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 

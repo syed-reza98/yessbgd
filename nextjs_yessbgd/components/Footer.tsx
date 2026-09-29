@@ -21,7 +21,7 @@ import { subscribeNewsletterAction } from "@/app/admin/actions";
 export function Footer({
   footerMenus,
   settings,
-  ventures: _ventures,
+  ventures,
 }: {
   footerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
@@ -70,14 +70,18 @@ export function Footer({
     "Yess Bangla Private Limited";
 
   const defaultVentures = [
-    { slug: "yess-service", title: "Shondhaan Service", category: "Marketplace" },
+    { slug: "shondhaan", title: "Shondhaan", category: "Home & Professional Services" },
     { slug: "yess-organic-haat", title: "Organic Haat", category: "AgriTech & Food" },
     { slug: "yess-soft", title: "Yess Soft", category: "Enterprise Software" },
     { slug: "yess-host", title: "Yess Host", category: "Cloud & Hosting" },
-    { slug: "akash-news", title: "The Daily Akash", category: "News & Media" },
+    { slug: "the-daily-akash", title: "The Daily Akash", category: "News & Media" },
     { slug: "akash-tv", title: "Akash TV", category: "Television" },
     { slug: "akash-ott", title: "Akash OTT", category: "Streaming" },
   ];
+
+  const displayedVentures = (ventures && Array.isArray(ventures) && ventures.length > 0)
+    ? (ventures as any[]).slice(0, 7)
+    : defaultVentures;
 
   const govLinks = [
     { href: "/about", label: "About YESS Bangla", label_bn: "আমাদের সম্পর্কে" },
@@ -223,7 +227,7 @@ export function Footer({
               {language === "bn" ? "আমাদের ভেঞ্চারসমূহ" : "Sovereign Ventures"}
             </h4>
             <ul className="space-y-2.5 text-[12.5px] text-gray-300/80">
-              {defaultVentures.map((item) => (
+              {displayedVentures.map((item) => (
                 <li key={item.slug}>
                   <Link
                     href={`/ventures/${item.slug}`}

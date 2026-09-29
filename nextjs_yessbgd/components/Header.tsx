@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   Globe,
   Search,
@@ -24,15 +24,28 @@ import {
 import { useLanguage } from "@/components/LanguageProvider";
 import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
 
-const FEATURED_VENTURES = [
+const VENTURE_META_MAP: Record<string, { icon: typeof Wrench; color: string; defaultLogo?: string; hrefOverride?: string }> = {
+  "shondhaan": { icon: Wrench, color: "text-emerald-700 bg-emerald-50", defaultLogo: "/coins/shondhaan-logo.png" },
+  "yess-service": { icon: Wrench, color: "text-emerald-700 bg-emerald-50", defaultLogo: "/coins/shondhaan-logo.png" },
+  "yess-organic-haat": { icon: Leaf, color: "text-amber-700 bg-amber-50", defaultLogo: "/coins/organic-haat-logo.png" },
+  "organic-haat": { icon: Leaf, color: "text-amber-700 bg-amber-50", defaultLogo: "/coins/organic-haat-logo.png" },
+  "yess-soft": { icon: Code2, color: "text-blue-700 bg-blue-50", defaultLogo: "/coins/yess-soft.png" },
+  "yess-host": { icon: Server, color: "text-purple-700 bg-purple-50", defaultLogo: "/coins/yess-host.png" },
+  "the-daily-akash": { icon: Newspaper, color: "text-cyan-700 bg-cyan-50", defaultLogo: "/coins/the-daily-akash-logo.png" },
+  "akash-news": { icon: Newspaper, color: "text-cyan-700 bg-cyan-50", defaultLogo: "/coins/the-daily-akash-logo.png", hrefOverride: "/services/akash-news" },
+  "akash-tv": { icon: Tv, color: "text-pink-700 bg-pink-50", defaultLogo: "/coins/akash-tv.png" },
+  "akash-ott": { icon: PlayCircle, color: "text-violet-700 bg-violet-50", defaultLogo: "/coins/akash-ott.png" },
+};
+
+const DEFAULT_FEATURED_VENTURES = [
   {
-    slug: "yess-service",
+    slug: "shondhaan",
     title: "Shondhaan",
     category: "Home & Professional Services",
     icon: Wrench,
     logoUrl: "/coins/shondhaan-logo.png",
     color: "text-emerald-700 bg-emerald-50",
-    href: "/ventures/yess-service",
+    href: "/ventures/shondhaan",
   },
   {
     slug: "yess-organic-haat",
@@ -62,13 +75,13 @@ const FEATURED_VENTURES = [
     href: "/ventures/yess-host",
   },
   {
-    slug: "akash-news",
+    slug: "the-daily-akash",
     title: "The Daily Akash",
     category: "Digital Newspaper & Media",
     icon: Newspaper,
     logoUrl: "/coins/the-daily-akash-logo.png",
     color: "text-cyan-700 bg-cyan-50",
-    href: "/services/akash-news",
+    href: "/ventures/the-daily-akash",
   },
   {
     slug: "akash-tv",
@@ -86,19 +99,41 @@ const FEATURED_VENTURES = [
     icon: PlayCircle,
     logoUrl: "/coins/akash-ott.png",
     color: "text-violet-700 bg-violet-50",
-    href: "/services/akash-ott",
+    href: "/ventures/akash-ott",
   },
 ];
 
 export function Header({
   headerMenus,
   settings,
-  ventures: _ventures,
+  ventures,
 }: {
   headerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
-  ventures?: unknown[];
+  ventures?: any[];
 }) {
+  const featuredVentures = useMemo(() => {
+    if (ventures && Array.isArray(ventures) && ventures.length > 0) {
+      return (ventures as any[]).slice(0, 7).map((v) => {
+        const meta =
+          VENTURE_META_MAP[v.slug] ||
+          VENTURE_META_MAP[v.slug?.replace(/^yess-/, "")] || {
+            icon: Wrench,
+            color: "text-emerald-700 bg-emerald-50",
+          };
+        return {
+          slug: v.slug,
+          title: v.title,
+          category: v.category || "Venture",
+          icon: meta.icon,
+          logoUrl: v.logoUrl || meta.defaultLogo,
+          color: meta.color,
+          href: meta.hrefOverride || `/ventures/${v.slug}`,
+        };
+      });
+    }
+    return DEFAULT_FEATURED_VENTURES;
+  }, [ventures]);
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
@@ -249,7 +284,7 @@ export function Header({
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
-                          {FEATURED_VENTURES.map((v) => {
+                          {featuredVentures.map((v) => {
                             const Icon = v.icon;
                             return (
                               <Link
@@ -435,7 +470,7 @@ export function Header({
                       {/* Expandable Ventures List */}
                       {mobileVenturesOpen && (
                         <div className="pl-4 py-2 space-y-2 border-l-2 border-emerald-100 ml-2">
-                          {FEATURED_VENTURES.map((v) => (
+                          {featuredVentures.map((v) => (
                             <Link
                               key={v.slug}
                               href={v.href}

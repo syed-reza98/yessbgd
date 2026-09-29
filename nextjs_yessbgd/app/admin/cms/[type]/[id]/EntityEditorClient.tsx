@@ -60,21 +60,22 @@ export function EntityEditorClient({
     setSavedSuccess(false);
 
     try {
+      const prevSlug = isNew ? undefined : id;
       if (type === "ventures") {
-        await saveVentureAction(formData.slug, formData);
+        await saveVentureAction(formData.slug, formData, prevSlug);
       } else if (type === "services") {
-        await saveServiceAction(formData.slug, formData);
+        await saveServiceAction(formData.slug, formData, prevSlug);
       } else if (type === "industries") {
-        await saveIndustryAction(formData.slug, formData);
+        await saveIndustryAction(formData.slug, formData, prevSlug);
       } else if (type === "insights") {
-        await saveInsightAction(formData.slug, formData);
+        await saveInsightAction(formData.slug, formData, prevSlug);
       } else if (type === "openings") {
-        await saveOpeningAction(formData.slug, formData);
+        await saveOpeningAction(formData.slug, formData, prevSlug);
       }
 
       setSavedSuccess(true);
       router.refresh();
-      if (isNew) {
+      if (isNew || formData.slug !== id) {
         router.push(`/admin/cms/${type}/${formData.slug}`);
       }
       setTimeout(() => setSavedSuccess(false), 3000);
@@ -178,7 +179,6 @@ export function EntityEditorClient({
                 <input
                   type="text"
                   required
-                  disabled={!isNew}
                   value={formData.slug || ""}
                   onChange={(e) =>
                     setFormData({
@@ -187,8 +187,13 @@ export function EntityEditorClient({
                     })
                   }
                   placeholder="e.g. yess-soft"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 disabled:opacity-60 disabled:bg-slate-100"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
                 />
+                {!isNew && (
+                  <p className="text-[11px] text-amber-600 mt-1.5 flex items-center gap-1">
+                    <span>⚠️ Changing the slug updates the public URL for this {type.replace(/s$/, "")}.</span>
+                  </p>
+                )}
               </div>
             </div>
 
