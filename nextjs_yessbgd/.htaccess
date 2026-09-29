@@ -14,12 +14,17 @@
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# 2. Gzip & Deflate Compression
+# 2. Gzip & Deflate Compression (Apache & LiteSpeed)
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
-    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
-    AddOutputFilterByType DEFLATE application/json application/xml
-    AddOutputFilterByType DEFLATE image/svg+xml font/woff2 font/woff
+    SetOutputFilter DEFLATE
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml font/woff2 font/woff font/ttf font/eot
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule .* - [E=no-gzip:0]
 </IfModule>
 
 # 3. Browser Caching for Next.js Static Assets

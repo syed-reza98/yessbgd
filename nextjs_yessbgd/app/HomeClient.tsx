@@ -103,9 +103,12 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/Hero_Background.jpeg"
+            src="/assets/Hero_Background.webp"
             alt="Yess Bangla Modern Workspace"
             className="w-full h-full object-cover object-center"
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
           />
           {/* Mobile Vertical Gradient Overlay: Solid white on text, smooth fade downwards */}
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 via-[48%] to-transparent to-[75%] lg:hidden" />
