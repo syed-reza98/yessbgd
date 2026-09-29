@@ -106,60 +106,56 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             src="/assets/Hero_Background.webp"
             alt="Yess Bangla Modern Workspace"
             className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
             loading="eager"
             fetchPriority="high"
             decoding="sync"
           />
-          {/* Mobile Vertical Gradient Overlay: Soft transparent fade for background image visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/35 via-[42%] to-transparent to-[75%] lg:hidden" />
-          {/* Desktop Progressive Horizontal Gradient Overlay: Light transparent feather for image visibility */}
-          <div
-            className="hidden lg:block absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(255,255,255,0.60) 0%, rgba(255,255,255,0.40) 28%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%)",
-            }}
-          />
-          {/* Subtle Bottom soft fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white/40 to-transparent" />
         </div>
 
         {/* Hero Content Container */}
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 sm:px-6 pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
           <div className="flex flex-col lg:flex-row items-start justify-between">
-            {/* Left Column: Typography, Tagline, CTAs, Social Proof */}
-            <div className="w-full lg:w-[460px] pt-1 sm:pt-2">
+            {/* Left Column: Typography, Tagline, CTAs - NO card box behind text */}
+            <div className="w-full lg:w-[485px] pt-1 sm:pt-2 relative">
               {/* Tagline Pill */}
-              <div className="inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-emerald-100 px-3 py-1 rounded-full shadow-xs mb-4 sm:mb-5">
-                <span className="w-2 h-2 rounded-full bg-[#0E8A44]" />
-                <span className="text-[#0E8A44] text-[10.5px] sm:text-[11px] font-bold tracking-wider uppercase">
+              <div className="inline-flex items-center space-x-2 bg-white/95 backdrop-blur-sm border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" />
+                <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
                   {language === "bn"
                     ? "স্মার্ট বাংলাদেশ বিনির্মাণে একসাথে"
                     : "A Smarter Bangladesh Together"}
                 </span>
               </div>
 
-              {/* Main Bold Headline */}
-              <h1 className="text-[34px] sm:text-[42px] lg:text-[46px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5">
+              {/* Main Bold Headline with enhanced contrast & crisp text-shadow */}
+              <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5">
                 {language === "bn" ? (
                   <>
-                    <span className="block text-[#0D1E2D]">স্মার্ট সমাধানের জন্য</span>
-                    <span className="block text-[#0E8A44]">আপনার ইকোসিস্টেম</span>
+                    <span className="block text-[#030D18] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">স্মার্ট সমাধানের জন্য</span>
+                    <span className="block text-[#026E4D] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">আপনার ইকোসিস্টেম</span>
                   </>
                 ) : (
                   <>
-                    <span className="block text-[#0D1E2D]">Your Ecosystem for</span>
-                    <span className="block text-[#0E8A44]">Smart Solutions</span>
+                    <span className="block text-[#030D18] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">Your Ecosystem for</span>
+                    <span className="block text-[#026E4D] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">Smart Solutions</span>
                   </>
                 )}
               </h1>
 
-              {/* Description Paragraph */}
-              <p className="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-[#0F172A] font-medium mb-6 sm:mb-8 max-w-[390px]">
-                {language === "bn"
-                  ? "ইয়েস বাংলায় আমরা এমন ব্যবসা গড়ে তুলি যা মানুষের জীবনে বাস্তব ইতিবাচক পরিবর্তন আনে — পরিষেবা, তাজা খাবার, প্রযুক্তি, সংবাদ ও বিনোদনের মাধ্যমে।"
-                  : "At YESS Bangla, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
-              </p>
+              {/* Description Paragraph with high-contrast text, left accent, and crisp legibility */}
+              <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px]">
+                <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                  {language === "bn"
+                    ? "ইয়েস বাংলায় আমরা এমন ব্যবসা গড়ে তুলি যা মানুষের জীবনে বাস্তব ইতিবাচক পরিবর্তন আনে — পরিষেবা, তাজা খাবার, প্রযুক্তি, সংবাদ ও বিনোদনের মাধ্যমে।"
+                    : "At YESS Bangla, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
+                </p>
+              </div>
 
               {/* Action Buttons (Responsive row on mobile) */}
               <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-9 flex-wrap gap-y-2.5">
