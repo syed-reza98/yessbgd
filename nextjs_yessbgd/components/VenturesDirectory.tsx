@@ -347,6 +347,7 @@ export function VenturesDirectory({
                   <div className="pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
                     <Link
                       href={`/ventures/${venture.slug}`}
+                      prefetch={false}
                       className="inline-flex items-center gap-1.5 hover:underline group-hover:translate-x-0.5 transition-transform min-h-[44px] py-2"
                     >
                       <span>Explore Venture Profile</span>
@@ -385,7 +386,7 @@ export function VenturesDirectory({
                   return (
                     <tr key={v.slug} className="hover:bg-muted/40 transition-colors">
                       <td className="p-4 font-bold text-foreground">
-                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2.5 py-1">
+                        <Link href={`/ventures/${v.slug}`} prefetch={false} className="hover:text-primary flex items-center gap-2.5 py-1">
                           <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 overflow-hidden p-0.5">
                             {v.logoUrl ? (
                               <Image
@@ -409,6 +410,7 @@ export function VenturesDirectory({
                       <td className="p-4 text-right">
                         <Link
                           href={`/ventures/${v.slug}`}
+                          prefetch={false}
                           className="inline-flex items-center gap-1 font-bold text-primary hover:underline min-h-[44px] py-2"
                         >
                           <span>View Profile</span>

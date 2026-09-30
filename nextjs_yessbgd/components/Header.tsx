@@ -202,6 +202,7 @@ export function Header({
   return (
     <>
       <header
+        data-public-header="true"
         className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-200 ${
           scrolled ? "shadow-sm border-gray-200/80" : ""
         }`}
@@ -210,6 +211,7 @@ export function Header({
           {/* Brand Logo: Original Yess Bangla Logo */}
           <Link
             href="/"
+            prefetch={false}
             onClick={handleLinkClick}
             className="flex items-center gap-2 group focus:outline-none shrink-0"
             aria-label="Yess Bangla Home"
@@ -242,6 +244,7 @@ export function Header({
                   >
                     <Link
                       href="/ventures"
+                      prefetch={false}
                       onClick={handleLinkClick}
                       className={`inline-flex items-center gap-1.5 py-1 transition-colors ${
                         active || venturesDropdownOpen
@@ -276,6 +279,7 @@ export function Header({
                           </span>
                           <Link
                             href="/ventures"
+                            prefetch={false}
                             onClick={handleLinkClick}
                             className="text-[11px] font-semibold text-gray-500 hover:text-[#0E8A44] transition-colors"
                           >
@@ -290,6 +294,7 @@ export function Header({
                               <Link
                                 key={v.slug}
                                 href={v.href}
+                                prefetch={false}
                                 onClick={handleLinkClick}
                                 className="group p-2 rounded-xl hover:bg-gray-50 transition-all flex items-center gap-2.5 text-left"
                               >
@@ -328,6 +333,7 @@ export function Header({
                 <Link
                   key={link.id || link.href}
                   href={link.href}
+                  prefetch={false}
                   onClick={handleLinkClick}
                   className={`inline-flex items-center gap-1.5 py-1 transition-colors ${
                     active
@@ -389,6 +395,7 @@ export function Header({
             {/* Primary CTA Button (Desktop) */}
             <Link
               href="/contact"
+              prefetch={false}
               onClick={handleLinkClick}
               className="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-[#0E8A44] to-[#0a7539] hover:from-[#0a7539] hover:to-[#075f2e] text-white text-[13px] font-semibold px-4.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
             >
@@ -438,6 +445,7 @@ export function Header({
                       <div className="flex items-center justify-between py-1.5">
                         <Link
                           href="/ventures"
+                          prefetch={false}
                           onClick={handleLinkClick}
                           className={`flex items-center gap-2 ${
                             isLinkActive(link.href)
@@ -474,6 +482,7 @@ export function Header({
                             <Link
                               key={v.slug}
                               href={v.href}
+                              prefetch={false}
                               onClick={handleLinkClick}
                               className="flex items-center gap-2.5 py-1 text-[13px] text-[#475569] hover:text-[#0E8A44]"
                             >
@@ -506,6 +515,7 @@ export function Header({
                   <Link
                     key={link.id || link.href}
                     href={link.href}
+                    prefetch={false}
                     onClick={handleLinkClick}
                     className={`py-1.5 transition-colors flex items-center justify-between ${
                       isLinkActive(link.href)
@@ -526,6 +536,7 @@ export function Header({
               {/* Track Application Status Portal */}
               <Link
                 href="/application-status"
+                prefetch={false}
                 onClick={handleLinkClick}
                 className="py-1.5 text-emerald-800 font-semibold flex items-center justify-between border-t border-gray-100 pt-2"
               >
@@ -547,6 +558,7 @@ export function Header({
               </button>
               <Link
                 href="/contact"
+                prefetch={false}
                 onClick={handleLinkClick}
                 className="inline-flex items-center space-x-1.5 bg-[#0E8A44] text-white text-[13px] font-semibold px-4 py-2 rounded-full shadow-sm"
               >

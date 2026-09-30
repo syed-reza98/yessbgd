@@ -92,7 +92,7 @@ export default async function SingleServicePage({
       <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/general/centricity.png')` }}
+          style={{ backgroundImage: `url('/assets/general/centricity.webp')` }}
         />
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         
@@ -100,9 +100,9 @@ export default async function SingleServicePage({
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-              <li><Link href="/" className="hover:text-teal-700 transition-colors">Home</Link></li>
+              <li><Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">Home</Link></li>
               <li>/</li>
-              <li><Link href="/services" className="hover:text-teal-700 transition-colors">Services</Link></li>
+              <li><Link href="/services" prefetch={false} className="hover:text-teal-700 transition-colors">Services</Link></li>
               <li>/</li>
               <li className="text-teal-700 font-bold">{service.title}</li>
             </ol>
@@ -327,12 +327,14 @@ export default async function SingleServicePage({
                 <div className="mt-6 space-y-3">
                   <Link
                     href="/contact"
+                    prefetch={false}
                     className="w-full text-center py-3.5 rounded-xl bg-primary text-white font-bold text-xs block shadow-sm hover:bg-primary/90 transition-all cursor-pointer"
                   >
                     Request Technical Proposal
                   </Link>
                   <Link
                     href="/about/methodology"
+                    prefetch={false}
                     className="w-full text-center py-2.5 rounded-xl bg-secondary text-foreground font-semibold text-xs block border border-border hover:bg-secondary/80 transition-all"
                   >
                     Explore Delivery Methodology →

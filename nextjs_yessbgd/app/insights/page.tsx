@@ -85,7 +85,7 @@ export default async function InsightsPage() {
         {/* Background Image Layer */}
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/heroes/global-network-bg.jpg')` }}
+          style={{ backgroundImage: `url('/assets/heroes/global-network-bg.webp')` }}
         />
         {/* Subtle Decorative Grid Glow & Brand Ambience */}
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
@@ -95,7 +95,7 @@ export default async function InsightsPage() {
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-teal-700 transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">
               Home
             </Link>
             <span className="text-slate-300">/</span>

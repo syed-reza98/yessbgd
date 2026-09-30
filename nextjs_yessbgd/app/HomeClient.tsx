@@ -191,6 +191,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 1. Shondhaan */}
               <Link
                 href={getVentureHref("shondhaan", "shondhaan")}
+                prefetch={false}
                 className="float-card-1 absolute top-[4%] left-[2%] sm:left-[4%] lg:top-[12%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -216,6 +217,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 2. Organic Haat */}
               <Link
                 href={getVentureHref("yess-organic-haat", "yess-organic-haat")}
+                prefetch={false}
                 className="float-card-2 absolute top-[34%] left-[3%] sm:left-[5%] lg:top-[36%] lg:left-[30%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -241,6 +243,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 3. Yess Soft */}
               <Link
                 href={getVentureHref("yess-soft", "yess-soft")}
+                prefetch={false}
                 className="float-card-3 absolute top-[64%] left-[1%] sm:left-[3%] lg:top-[60%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -266,6 +269,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 4. The Daily Akash */}
               <Link
                 href={getVentureHref("the-daily-akash", "the-daily-akash")}
+                prefetch={false}
                 className="float-card-4 absolute top-[0%] right-[1%] sm:right-[3%] lg:top-[8%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-3 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -291,6 +295,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 5. Akash TV */}
               <Link
                 href={getVentureHref("akash-tv", "akash-tv")}
+                prefetch={false}
                 className="float-card-5 absolute top-[26%] right-[2%] sm:right-[4%] lg:top-[30%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -316,6 +321,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 6. Akash OTT */}
               <Link
                 href={getVentureHref("akash-ott", "akash-ott")}
+                prefetch={false}
                 className="float-card-6 absolute top-[52%] right-[2%] sm:right-[4%] lg:top-[52%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -341,6 +347,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               {/* 7. Yess Host */}
               <Link
                 href={getVentureHref("yess-host", "yess-host")}
+                prefetch={false}
                 className="float-card-7 absolute top-[76%] right-[1%] sm:right-[3%] lg:top-[74%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -513,6 +520,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="hidden sm:flex items-center shrink-0">
               <Link
                 href="/ventures"
+                prefetch={false}
                 className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white hover:from-[#0B7339] hover:via-[#047857] hover:to-[#0A5A5A] text-[13px] font-bold shadow-md shadow-emerald-900/15 hover:shadow-lg hover:shadow-emerald-900/25 hover:scale-[1.03] active:scale-95 transition-all duration-200 group cursor-pointer"
               >
                 <span>{language === "bn" ? "আরও লোড হচ্ছে..." : "Loading More..."}</span>
@@ -570,6 +578,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href={getVentureHref("shondhaan", "shondhaan")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#0E8A44] hover:bg-[#0E8A44] text-[#0E8A44] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Shondhaan</span>
@@ -628,6 +637,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href={getVentureHref("yess-organic-haat", "yess-organic-haat")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#16A34A] hover:bg-[#16A34A] text-[#16A34A] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Organic Haat</span>
@@ -683,6 +693,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href={getVentureHref("yess-soft", "yess-soft")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#2563EB] hover:bg-[#2563EB] text-[#2563EB] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Yess Soft</span>
@@ -732,6 +743,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href={getVentureHref("yess-host", "yess-host")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#7C3AED] hover:bg-[#7C3AED] text-[#7C3AED] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Yess Host</span>
@@ -787,6 +799,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href="/services/akash-news"
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#EA580C] hover:bg-[#EA580C] text-[#EA580C] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore The Daily Akash</span>
@@ -837,6 +850,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href={getVentureHref("akash-tv", "akash-tv")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#DB2777] hover:bg-[#DB2777] text-[#DB2777] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Akash TV</span>
@@ -884,6 +898,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             <div className="px-5 pb-5 pt-2">
               <Link
                 href="/services/akash-ott"
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#8B5CF6] hover:bg-[#8B5CF6] text-[#8B5CF6] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Akash OTT</span>
@@ -948,6 +963,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
 
               <Link
                 href="/about/standards"
+                prefetch={false}
                 className="inline-flex items-center space-x-2 bg-white hover:bg-gray-100 text-[#0D1E2D] text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm transition-colors"
               >
                 <span>{language === "bn" ? "বিস্তারিত প্রভাব দেখুন" : "See Our Impact"}</span>
@@ -1106,6 +1122,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
 
               <Link
                 href="/contact"
+                prefetch={false}
                 className="inline-flex items-center space-x-2 bg-white hover:bg-gray-100 text-[#0D1E2D] text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm transition-colors"
               >
                 <span>{language === "bn" ? "যোগাযোগ করুন" : "Get in Touch"}</span>

@@ -88,10 +88,10 @@ export default async function SingleVenturePage({
     "akash-news": "/assets/heroes/hero_6a8975c2b742a.jpg",
     "yess-entertainment": "/assets/heroes/hero_6a8975c2b742a.jpg",
     "yess-event-management": "/assets/heroes/hero_6a8975c2b742a.jpg",
-    "yess-one-stop-engineering": "/assets/general/centricity.png",
-    "yess-interior": "/assets/general/centricity.png",
-    "yess-overseas": "/assets/general/delivery.png",
-    "yess-restaurant": "/assets/general/retail-pos.jpg",
+    "yess-one-stop-engineering": "/assets/general/centricity.webp",
+    "yess-interior": "/assets/general/centricity.webp",
+    "yess-overseas": "/assets/general/delivery.webp",
+    "yess-restaurant": "/assets/general/retail-pos.webp",
     "yess-law-chamber": "/assets/trust-handshake-bd.jpg",
   };
   const heroBgImage = heroBgMap[venture.slug] || "/assets/ventures-dhaka-bd.jpg";
@@ -117,11 +117,11 @@ export default async function SingleVenturePage({
         <div className="container-tight relative z-10">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-teal-700 transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">
               Home
             </Link>
             <span className="text-slate-300">/</span>
-            <Link href="/ventures" className="hover:text-teal-700 transition-colors">
+            <Link href="/ventures" prefetch={false} className="hover:text-teal-700 transition-colors">
               Ventures
             </Link>
             <span className="text-slate-300">/</span>
@@ -300,6 +300,7 @@ export default async function SingleVenturePage({
                 <div className="mt-6 pt-4 border-t border-border">
                   <Link
                     href="/contact"
+                    prefetch={false}
                     className="w-full text-center py-3 rounded-xl bg-primary text-white font-bold text-sm block shadow-sm hover:bg-primary/90 transition-all"
                   >
                     Engage {venture.title}
@@ -317,6 +318,7 @@ export default async function SingleVenturePage({
                     <Link
                       key={s.slug}
                       href={`/ventures/${s.slug}`}
+                      prefetch={false}
                       className="flex items-center justify-between p-3 rounded-xl bg-secondary/50 hover:bg-secondary border border-border text-sm font-semibold text-foreground group transition-colors"
                     >
                       <span>{s.title}</span>

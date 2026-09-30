@@ -114,7 +114,7 @@ export function MethodologyClient({ sitePage }: MethodologyClientProps) {
         {/* Background Image Layer */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-30"
-          style={{ backgroundImage: "url('/assets/general/centricity.png')" }}
+          style={{ backgroundImage: "url('/assets/general/centricity.webp')" }}
         />
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 pointer-events-none" />
 
@@ -124,11 +124,11 @@ export function MethodologyClient({ sitePage }: MethodologyClientProps) {
 
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-emerald-700 transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-emerald-700 transition-colors">
               Home
             </Link>
             <span className="text-slate-300">/</span>
-            <Link href="/about" className="hover:text-emerald-700 transition-colors">
+            <Link href="/about" prefetch={false} className="hover:text-emerald-700 transition-colors">
               About Us
             </Link>
             <span className="text-slate-300">/</span>

@@ -167,6 +167,7 @@ export function HomeVenturesFilter({ ventures }: { ventures: any[] }) {
 
               <Link
                 href={`/ventures/${venture.slug}`}
+                prefetch={false}
                 className="mt-5 inline-flex items-center gap-1.5 text-primary font-bold text-xs hover:text-[#35b0aa] transition-colors"
               >
                 <span>View Venture Profile</span>

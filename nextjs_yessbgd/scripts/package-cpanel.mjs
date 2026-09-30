@@ -32,8 +32,48 @@ function runCommand(cmd, cwd = rootDir) {
   execSync(cmd, { stdio: "inherit", cwd });
 }
 
+const EXCLUDED_PATTERNS = [
+  /[\\/]public[\\/]test-evidence($|[\\/])/,
+  /[\\/]public[\\/]assets[\\/]demos($|[\\/])/,
+  /[\\/]public[\\/]assets[\\/]projects($|[\\/])/,
+  /[\\/]public[\\/]assets[\\/]logos[\\/]logo_6a89/,
+  /\.DS_Store$/,
+  /\.git($|[\\/])/,
+  /\.map$/, // Exclude source maps from production bundle
+  // Superseded heavy raw assets in heroes/ & general/
+  /[\\/]public[\\/]assets[\\/]heroes[\\/]hero_6a8951c6b7346\.png$/,
+  /[\\/]public[\\/]assets[\\/]heroes[\\/]hero_6a89616e974f4\.png$/,
+  /[\\/]public[\\/]assets[\\/]heroes[\\/]yess_bangla_hero_bg\.png$/,
+  /[\\/]public[\\/]assets[\\/]heroes[\\/]hero-bg\.jpg$/,
+  /[\\/]public[\\/]assets[\\/]heroes[\\/]global-network-bg\.jpg$/,
+  /[\\/]public[\\/]assets[\\/]general[\\/]centricity\.png$/,
+  /[\\/]public[\\/]assets[\\/]general[\\/]delivery\.png$/,
+  /[\\/]public[\\/]assets[\\/]general[\\/]IT_Services\.png$/,
+  /[\\/]public[\\/]assets[\\/]general[\\/]retail-pos\.jpg$/,
+  // Duplicate unoptimized PNGs in ventures/ that have WebP equivalents
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]about2\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]akash\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]akash-tv\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]centricity\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]delivery\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]IT_Services\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]organic-haat\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]organic\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]shondhaan-full\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]shondhaan\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]yesssoft\.png$/,
+  /[\\/]public[\\/]assets[\\/]ventures[\\/]1786630550_uV9KMcmNWxyi\.png$/,
+];
+
+function shouldExclude(filePath) {
+  return EXCLUDED_PATTERNS.some((pattern) => pattern.test(filePath));
+}
+
 function copyRecursive(src, dest) {
   if (!fs.existsSync(src)) return;
+  if (shouldExclude(src)) {
+    return;
+  }
   const stat = fs.statSync(src);
   if (stat.isDirectory()) {
     fs.mkdirSync(dest, { recursive: true });
