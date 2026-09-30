@@ -16,15 +16,9 @@
 
 # 2. Gzip & Deflate Compression (Apache & LiteSpeed)
 <IfModule mod_deflate.c>
-    SetOutputFilter DEFLATE
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
     AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml application/rss+xml
     AddOutputFilterByType DEFLATE image/svg+xml font/woff2 font/woff font/ttf font/eot
-</IfModule>
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteRule .* - [E=no-gzip:0]
 </IfModule>
 
 # 3. Browser Caching for Next.js Static Assets
@@ -54,14 +48,17 @@
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Serve physical files directly if they exist in public_html
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
+    # 1. Direct High-Speed Serve for Next.js Static Chunks (Bypasses Node.js completely)
+    RewriteCond %{DOCUMENT_ROOT}/.next/static/$1 -f
+    RewriteRule ^_next/static/(.*)$ .next/static/$1 [L]
 
-    # If running with Reverse Proxy / PM2 on localhost:3000
-    # Uncomment the following rules if NOT using cPanel's built-in "Setup Node.js App"
-    # RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
+    # 2. Direct High-Speed Serve for Public Directory Assets (Bypasses Node.js completely)
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # 3. Serve physical files directly if they exist
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
 </IfModule>
 
 <IfModule mod_proxy.c>

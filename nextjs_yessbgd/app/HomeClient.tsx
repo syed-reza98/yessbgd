@@ -199,6 +199,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="Shondhaan"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -223,6 +224,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="Organic Haat"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -247,6 +249,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="Yess Soft"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -271,6 +274,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="The Daily Akash"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -295,6 +299,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="Akash TV"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -319,6 +324,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="Akash OTT"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -343,6 +349,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
                     alt="Yess Host"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -524,8 +531,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_shondhaan_pure.jpg"
+                  src="/assets/card_shondhaan_pure.webp"
                   alt="Shondhaan Service Marketplace App"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 {/* Overlapping Icon Circle with White Ring */}
@@ -575,8 +584,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_organichaat_pure.jpg"
+                  src="/assets/card_organichaat_pure.webp"
                   alt="Organic Haat Fresh Produce"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#16A34A] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -631,8 +642,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_yesssoft_pure.jpg"
+                  src="/assets/card_yesssoft_pure.webp"
                   alt="Yess Soft Software & IT Solutions"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#2563EB] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -684,8 +697,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_yesshost_pure.jpg"
+                  src="/assets/card_yesshost_pure.webp"
                   alt="Yess Host Cloud & Hosting Services"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#7C3AED] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -734,8 +749,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_dailyakash_pure.jpg"
+                  src="/assets/card_dailyakash_pure.webp"
                   alt="The Daily Akash Journalism & Media"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#EA580C] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -784,8 +801,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_akashtv_pure.jpg"
+                  src="/assets/card_akashtv_pure.webp"
                   alt="Akash TV Broadcast Studio"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#DB2777] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -832,8 +851,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_akashott_pure.jpg"
+                  src="/assets/card_akashott_pure.webp"
                   alt="Akash OTT Streaming Platform"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#8B5CF6] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -882,8 +903,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
           <div className="absolute right-0 top-0 bottom-0 w-full md:w-[62%] z-0 pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/impact_bg_perfect.jpg"
+              src="/assets/impact_bg_perfect.webp"
               alt="Dhaka City Skyline Panorama"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-right"
             />
             {/* Dark Green Gradient Overlay on the left */}
@@ -1038,8 +1061,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
           <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[62%] lg:w-[60%] overflow-hidden pointer-events-none z-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/cta_right_half.jpg"
+              src="/assets/cta_right_half.webp"
               alt="Be a Part of A Smarter Bangladesh"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
             {/* Dark Green Gradient Overlay on left side of image for seamless blend */}
