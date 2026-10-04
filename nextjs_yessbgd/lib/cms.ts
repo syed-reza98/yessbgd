@@ -1,4 +1,15 @@
-import { createClient } from "@/lib/supabase/server";
+import { db } from "@/lib/db";
+import {
+  cmsVentures,
+  cmsServices,
+  cmsIndustries,
+  cmsInsights,
+  cmsOpenings,
+  cmsSitePages,
+  cmsSettings,
+  cmsMenuItems,
+} from "@/lib/db/schema";
+import { eq, asc, or, inArray } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 import { ventures as localVentures, type Venture } from "@/data/ventures";
 import { services as localServices, type ServiceItem } from "@/data/services";
@@ -51,7 +62,7 @@ export const CMS_TAGS = {
 // ── Resilient Data Fetchers (Dynamic-with-Fallback) ─────────────────────────
 
 /**
- * Fetch all published ventures from Supabase with instant local fallback.
+ * Fetch all published ventures from cPanel PostgreSQL with instant local fallback.
  */
 export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
   "use cache";
@@ -59,14 +70,13 @@ export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
   cacheTag(CMS_TAGS.ventures);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_ventures")
-      .select("*")
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const data = await db
+      .select()
+      .from(cmsVentures)
+      .where(eq(cmsVentures.isPublished, true))
+      .orderBy(asc(cmsVentures.sortOrder));
 
-    if (error || !data || data.length === 0) {
+    if (!data || data.length === 0) {
       return localVentures.map(({ icon, ...rest }) => rest);
     }
 
@@ -90,7 +100,7 @@ export async function getVentures(): Promise<Omit<Venture, "icon">[]> {
         desc: row.description || fallback.desc,
         category: row.category || fallback.category,
         status: (row.status as any) || fallback.status || "active",
-        image: row.image_path || fallback.image,
+        image: row.imagePath || fallback.image,
         longDesc: extra.longDesc || fallback.longDesc,
         highlights: extra.highlights || fallback.highlights,
         services: extra.services || fallback.services,
@@ -123,25 +133,21 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
   cacheTag(CMS_TAGS.venture(slug));
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    let { data, error } = await supabase
-      .from("cms_ventures")
-      .select("*")
-      .eq("slug", slug)
-      .eq("is_published", true)
-      .maybeSingle();
+    let [data] = await db
+      .select()
+      .from(cmsVentures)
+      .where(eq(cmsVentures.slug, slug))
+      .limit(1);
 
     if (!data && (slug === "yess-service" || slug === "shondhaan")) {
       const altSlug = slug === "yess-service" ? "shondhaan" : "yess-service";
-      const altRes = await supabase
-        .from("cms_ventures")
-        .select("*")
-        .eq("slug", altSlug)
-        .eq("is_published", true)
-        .maybeSingle();
-      if (altRes.data) {
-        data = altRes.data;
-        error = null;
+      const [altRes] = await db
+        .select()
+        .from(cmsVentures)
+        .where(eq(cmsVentures.slug, altSlug))
+        .limit(1);
+      if (altRes) {
+        data = altRes;
       }
     }
 
@@ -151,7 +157,7 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
         (slug === "shondhaan" && v.slug === "yess-service") ||
         (slug === "yess-service" && v.slug === "shondhaan")
     );
-    if (error || !data) {
+    if (!data) {
       if (!fallback) return null;
       const { icon, ...clean } = fallback;
       return clean as any;
@@ -166,7 +172,7 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
       desc: data.description || fallback?.desc || "",
       category: data.category || fallback?.category || "",
       status: (data.status as any) || fallback?.status || "active",
-      image: data.image_path || fallback?.image || "",
+      image: data.imagePath || fallback?.image || "",
       longDesc: extra.longDesc || fallback?.longDesc || "",
       highlights: extra.highlights || fallback?.highlights || [],
       services: extra.services || fallback?.services || [],
@@ -185,7 +191,15 @@ export async function getVentureBySlug(slug: string): Promise<Venture | null> {
     };
   } catch (err) {
     console.warn(`⚠️ getVentureBySlug(${slug}) fallback triggered:`, err);
-    return localVentures.find((v) => v.slug === slug) || null;
+    const fallback = localVentures.find(
+      (v) =>
+        v.slug === slug ||
+        (slug === "shondhaan" && v.slug === "yess-service") ||
+        (slug === "yess-service" && v.slug === "shondhaan")
+    );
+    if (!fallback) return null;
+    const { icon, ...clean } = fallback;
+    return clean as any;
   }
 }
 
@@ -198,14 +212,13 @@ export async function getServices(): Promise<ServiceItem[]> {
   cacheTag(CMS_TAGS.services);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_services")
-      .select("*")
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const data = await db
+      .select()
+      .from(cmsServices)
+      .where(eq(cmsServices.isPublished, true))
+      .orderBy(asc(cmsServices.sortOrder));
 
-    if (error || !data || data.length === 0) {
+    if (!data || data.length === 0) {
       return localServices.map(({ icon, ...rest }) => rest) as any;
     }
 
@@ -232,7 +245,7 @@ export async function getServices(): Promise<ServiceItem[]> {
     });
   } catch (err) {
     console.warn("⚠️ getServices fallback triggered:", err);
-    return localServices;
+    return localServices.map(({ icon, ...rest }) => rest) as any;
   }
 }
 
@@ -245,16 +258,14 @@ export async function getServiceBySlug(slug: string): Promise<ServiceItem | null
   cacheTag(CMS_TAGS.service(slug));
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_services")
-      .select("*")
-      .eq("slug", slug)
-      .eq("is_published", true)
-      .maybeSingle();
+    const [data] = await db
+      .select()
+      .from(cmsServices)
+      .where(eq(cmsServices.slug, slug))
+      .limit(1);
 
     const fallback = localServices.find((s) => s.slug === slug);
-    if (error || !data) {
+    if (!data) {
       if (!fallback) return null;
       const { icon, ...clean } = fallback;
       return clean as any;
@@ -267,17 +278,21 @@ export async function getServiceBySlug(slug: string): Promise<ServiceItem | null
       title: data.title,
       desc: data.description || fallback?.desc || "",
       bullets: (data.bullets as any) || fallback?.bullets || [],
-      pricing: (data.pricing as any) || fallback?.pricing || { from: "", model: "", timeline: "" },
-      intro: extra.intro || fallback?.intro || "",
-      cta: extra.cta || fallback?.cta || { label: "Contact Us", sub: "" },
-      capabilities: extra.capabilities || fallback?.capabilities || [],
-      deliverables: extra.deliverables || fallback?.deliverables || [],
-      techStack: extra.techStack || fallback?.techStack || [],
-      process: extra.process || fallback?.process || [],
-      faqs: extra.faqs || fallback?.faqs || [],
+      pricing: (data.pricing as any) || fallback?.pricing || {},
+      intro: extra.intro || fallback?.intro,
+      cta: extra.cta || fallback?.cta,
+      capabilities: extra.capabilities || fallback?.capabilities,
+      deliverables: extra.deliverables || fallback?.deliverables,
+      techStack: extra.techStack || fallback?.techStack,
+      process: extra.process || fallback?.process,
+      faqs: extra.faqs || fallback?.faqs,
     };
   } catch (err) {
-    return localServices.find((s) => s.slug === slug) || null;
+    console.warn(`⚠️ getServiceBySlug(${slug}) fallback triggered:`, err);
+    const fallback = localServices.find((s) => s.slug === slug);
+    if (!fallback) return null;
+    const { icon, ...clean } = fallback;
+    return clean as any;
   }
 }
 
@@ -290,14 +305,13 @@ export async function getIndustries(): Promise<IndustryItem[]> {
   cacheTag(CMS_TAGS.industries);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_industries")
-      .select("*")
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const data = await db
+      .select()
+      .from(cmsIndustries)
+      .where(eq(cmsIndustries.isPublished, true))
+      .orderBy(asc(cmsIndustries.sortOrder));
 
-    if (error || !data || data.length === 0) {
+    if (!data || data.length === 0) {
       return localIndustries.map(({ icon, ...rest }) => rest) as any;
     }
 
@@ -322,7 +336,8 @@ export async function getIndustries(): Promise<IndustryItem[]> {
       };
     });
   } catch (err) {
-    return localIndustries;
+    console.warn("⚠️ getIndustries fallback triggered:", err);
+    return localIndustries.map(({ icon, ...rest }) => rest) as any;
   }
 }
 
@@ -335,16 +350,14 @@ export async function getIndustryBySlug(slug: string): Promise<IndustryItem | nu
   cacheTag(CMS_TAGS.industry(slug));
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_industries")
-      .select("*")
-      .eq("slug", slug)
-      .eq("is_published", true)
-      .maybeSingle();
+    const [data] = await db
+      .select()
+      .from(cmsIndustries)
+      .where(eq(cmsIndustries.slug, slug))
+      .limit(1);
 
     const fallback = localIndustries.find((i) => i.slug === slug);
-    if (error || !data) {
+    if (!data) {
       if (!fallback) return null;
       const { icon, ...clean } = fallback;
       return clean as any;
@@ -366,7 +379,11 @@ export async function getIndustryBySlug(slug: string): Promise<IndustryItem | nu
       faqs: extra.faqs || fallback?.faqs || [],
     };
   } catch (err) {
-    return localIndustries.find((i) => i.slug === slug) || null;
+    console.warn(`⚠️ getIndustryBySlug(${slug}) fallback triggered:`, err);
+    const fallback = localIndustries.find((i) => i.slug === slug);
+    if (!fallback) return null;
+    const { icon, ...clean } = fallback;
+    return clean as any;
   }
 }
 
@@ -379,14 +396,13 @@ export async function getInsights(): Promise<Insight[]> {
   cacheTag(CMS_TAGS.insights);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_insights")
-      .select("*")
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const data = await db
+      .select()
+      .from(cmsInsights)
+      .where(eq(cmsInsights.isPublished, true))
+      .orderBy(asc(cmsInsights.sortOrder));
 
-    if (error || !data || data.length === 0) {
+    if (!data || data.length === 0) {
       return localInsights;
     }
 
@@ -409,12 +425,13 @@ export async function getInsights(): Promise<Insight[]> {
       };
     });
   } catch (err) {
+    console.warn("⚠️ getInsights fallback triggered:", err);
     return localInsights;
   }
 }
 
 /**
- * Fetch a single insight article by slug.
+ * Fetch a single insight by slug.
  */
 export async function getInsightBySlug(slug: string): Promise<Insight | null> {
   "use cache";
@@ -422,16 +439,14 @@ export async function getInsightBySlug(slug: string): Promise<Insight | null> {
   cacheTag(CMS_TAGS.insight(slug));
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_insights")
-      .select("*")
-      .eq("slug", slug)
-      .eq("is_published", true)
-      .maybeSingle();
+    const [data] = await db
+      .select()
+      .from(cmsInsights)
+      .where(eq(cmsInsights.slug, slug))
+      .limit(1);
 
-    const fallback = localInsights.find((i) => i.slug === slug);
-    if (error || !data) return fallback || null;
+    const fallback = localInsights.find((ins) => ins.slug === slug);
+    if (!data) return fallback || null;
 
     const extra = (data.data as any) || {};
     return {
@@ -445,15 +460,15 @@ export async function getInsightBySlug(slug: string): Promise<Insight | null> {
         name: data.author ? data.author.split("(")[0].trim() : fallback?.author.name || "YESS Research",
         role: data.author ? data.author.replace(/^[^(]*\(|\)[^)]*$/g, "") : fallback?.author.role || "Editorial Board",
       },
-      content: extra.content || fallback?.content || [{ body: data.body_md || "" }],
+      content: extra.content || fallback?.content || [{ body: data.bodyMd || "" }],
     };
   } catch (err) {
-    return localInsights.find((i) => i.slug === slug) || null;
+    return localInsights.find((ins) => ins.slug === slug) || null;
   }
 }
 
 /**
- * Fetch all published job openings with fallback.
+ * Fetch all published openings with fallback.
  */
 export async function getOpenings(): Promise<Opening[]> {
   "use cache";
@@ -461,23 +476,20 @@ export async function getOpenings(): Promise<Opening[]> {
   cacheTag(CMS_TAGS.openings);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_openings")
-      .select("*")
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const data = await db
+      .select()
+      .from(cmsOpenings)
+      .where(eq(cmsOpenings.isPublished, true))
+      .orderBy(asc(cmsOpenings.sortOrder));
 
-    if (error || !data || data.length === 0) {
-      return localOpenings;
-    }
+    if (!data || data.length === 0) return localOpenings;
 
     return data.map((row) => ({
       slug: row.slug,
       title: row.title,
       dept: row.department,
       location: row.location,
-      type: row.job_type || "Full-time",
+      type: row.jobType || "Full-time",
       level: (row.level as any) || "Mid",
       summary: row.summary || "",
       responsibilities: (row.responsibilities as any) || [],
@@ -489,7 +501,7 @@ export async function getOpenings(): Promise<Opening[]> {
 }
 
 /**
- * Fetch a single job opening by slug.
+ * Fetch a single opening by slug.
  */
 export async function getOpeningBySlug(slug: string): Promise<Opening | null> {
   "use cache";
@@ -497,23 +509,21 @@ export async function getOpeningBySlug(slug: string): Promise<Opening | null> {
   cacheTag(CMS_TAGS.opening(slug));
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_openings")
-      .select("*")
-      .eq("slug", slug)
-      .eq("is_published", true)
-      .maybeSingle();
+    const [data] = await db
+      .select()
+      .from(cmsOpenings)
+      .where(eq(cmsOpenings.slug, slug))
+      .limit(1);
 
     const fallback = localOpenings.find((o) => o.slug === slug);
-    if (error || !data) return fallback || null;
+    if (!data) return fallback || null;
 
     return {
       slug: data.slug,
       title: data.title,
       dept: data.department,
       location: data.location,
-      type: data.job_type || "Full-time",
+      type: data.jobType || "Full-time",
       level: (data.level as any) || "Mid",
       summary: data.summary || "",
       responsibilities: (data.responsibilities as any) || [],
@@ -533,15 +543,38 @@ export async function getSitePage(pageKey: string): Promise<CmsSitePage | null> 
   cacheTag(CMS_TAGS.page(pageKey));
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_site_pages")
-      .select("*")
-      .eq("page", pageKey)
-      .maybeSingle();
+    const [data] = await db
+      .select()
+      .from(cmsSitePages)
+      .where(eq(cmsSitePages.page, pageKey))
+      .limit(1);
 
-    if (error || !data) return null;
-    return data as CmsSitePage;
+    if (!data) return null;
+    return {
+      id: data.id,
+      page: data.page,
+      path: data.path,
+      name: data.name,
+      name_bn: data.nameBn,
+      hero_eyebrow: data.heroEyebrow,
+      hero_eyebrow_bn: data.heroEyebrowBn,
+      hero_title: data.heroTitle,
+      hero_title_bn: data.heroTitleBn,
+      hero_subtitle: data.heroSubtitle,
+      hero_subtitle_bn: data.heroSubtitleBn,
+      hero_image: data.heroImage,
+      body: data.body,
+      body_bn: data.bodyBn,
+      seo_title: data.seoTitle,
+      seo_title_bn: data.seoTitleBn,
+      seo_description: data.seoDescription,
+      seo_description_bn: data.seoDescriptionBn,
+      og_image: data.ogImage,
+      is_custom: data.isCustom ?? false,
+      is_published: data.isPublished ?? true,
+      sort_order: data.sortOrder ?? 0,
+      data: data.data,
+    } as any;
   } catch (err) {
     return null;
   }
@@ -556,14 +589,13 @@ export async function getSetting<T = any>(key: string): Promise<T | null> {
   cacheTag(CMS_TAGS.settings);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_settings")
-      .select("value")
-      .eq("key", key)
-      .maybeSingle();
+    const [data] = await db
+      .select({ value: cmsSettings.value })
+      .from(cmsSettings)
+      .where(eq(cmsSettings.key, key))
+      .limit(1);
 
-    if (error || !data) return null;
+    if (!data) return null;
     return data.value as T;
   } catch (err) {
     return null;
@@ -618,19 +650,32 @@ export async function getMenuItems(location: "header" | "footer" = "header"): Pr
   cacheTag(CMS_TAGS.menus);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_menu_items")
-      .select("*")
-      .eq("location", location)
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const data = await db
+      .select()
+      .from(cmsMenuItems)
+      .where(eq(cmsMenuItems.location, location))
+      .orderBy(asc(cmsMenuItems.sortOrder));
 
-    if (error || !data || data.length === 0) {
+    if (!data || data.length === 0) {
       return location === "header" ? DEFAULT_HEADER_MENUS : DEFAULT_FOOTER_MENUS;
     }
 
-    return data as CmsMenuItem[];
+    return data.map((item) => ({
+      id: item.id,
+      location: item.location,
+      parent_id: item.parentId,
+      depth: item.depth,
+      label: item.label,
+      label_bn: item.labelBn,
+      href: item.href,
+      group_label: item.groupLabel,
+      badge: item.badge,
+      badge_bn: item.badgeBn,
+      icon: item.icon,
+      sort_order: item.sortOrder ?? 0,
+      is_external: item.isExternal ?? false,
+      is_published: item.isPublished ?? true,
+    }));
   } catch (err) {
     console.warn(`⚠️ getMenuItems(${location}) fallback triggered:`, err);
     return location === "header" ? DEFAULT_HEADER_MENUS : DEFAULT_FOOTER_MENUS;
@@ -797,12 +842,11 @@ export async function getCompanySettings(): Promise<CompanySettings> {
   cacheTag(CMS_TAGS.settings);
 
   try {
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_settings")
-      .select("key, value");
+    const data = await db
+      .select({ key: cmsSettings.key, value: cmsSettings.value })
+      .from(cmsSettings);
 
-    if (error || !data || data.length === 0) {
+    if (!data || data.length === 0) {
       return DEFAULT_COMPANY_SETTINGS;
     }
 
@@ -824,15 +868,15 @@ export async function getCompanySettings(): Promise<CompanySettings> {
       },
       offices: {
         headquarters: {
-          ...DEFAULT_COMPANY_SETTINGS.offices.headquarters,
+          ...DEFAULT_COMPANY_SETTINGS.offices?.headquarters,
           ...(offices.headquarters || offices.motijheel || {}),
         },
         motijheel: {
-          ...DEFAULT_COMPANY_SETTINGS.offices.headquarters,
+          ...DEFAULT_COMPANY_SETTINGS.offices?.headquarters,
           ...(offices.headquarters || offices.motijheel || {}),
         },
         gulshan: {
-          ...DEFAULT_COMPANY_SETTINGS.offices.headquarters,
+          ...DEFAULT_COMPANY_SETTINGS.offices?.headquarters,
           ...(offices.headquarters || offices.gulshan || {}),
         },
       },
@@ -867,18 +911,44 @@ export async function getPageByPathOrSlug(slugOrPath: string): Promise<CmsSitePa
     const cleanSlug = slugOrPath.replace(/^\/p\//, "").replace(/^\//, "");
     const possiblePaths = [`/p/${cleanSlug}`, `/${cleanSlug}`, cleanSlug];
 
-    const supabase = await createClient({ useCookies: false });
-    const { data, error } = await supabase
-      .from("cms_site_pages")
-      .select("*")
-      .or(`page.eq.${cleanSlug},path.in.(${possiblePaths.map((p) => `"${p}"`).join(",")})`)
-      .eq("is_published", true)
-      .maybeSingle();
+    const [data] = await db
+      .select()
+      .from(cmsSitePages)
+      .where(
+        or(
+          eq(cmsSitePages.page, cleanSlug),
+          inArray(cmsSitePages.path, possiblePaths)
+        )
+      )
+      .limit(1);
 
-    if (error || !data) return null;
-    return data as CmsSitePage;
+    if (!data) return null;
+    return {
+      id: data.id,
+      page: data.page,
+      path: data.path,
+      name: data.name,
+      name_bn: data.nameBn,
+      hero_eyebrow: data.heroEyebrow,
+      hero_eyebrow_bn: data.heroEyebrowBn,
+      hero_title: data.heroTitle,
+      hero_title_bn: data.heroTitleBn,
+      hero_subtitle: data.heroSubtitle,
+      hero_subtitle_bn: data.heroSubtitleBn,
+      hero_image: data.heroImage,
+      body: data.body,
+      body_bn: data.bodyBn,
+      seo_title: data.seoTitle,
+      seo_title_bn: data.seoTitleBn,
+      seo_description: data.seoDescription,
+      seo_description_bn: data.seoDescriptionBn,
+      og_image: data.ogImage,
+      is_custom: data.isCustom ?? false,
+      is_published: data.isPublished ?? true,
+      sort_order: data.sortOrder ?? 0,
+      data: data.data,
+    } as any;
   } catch (err) {
     return null;
   }
 }
-

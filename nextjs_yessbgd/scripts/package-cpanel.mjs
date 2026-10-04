@@ -137,6 +137,16 @@ if (fs.existsSync(envExamplePath)) {
   fs.copyFileSync(envExamplePath, path.join(distDir, ".env.production.sample"));
 }
 
+// Ensure storage and upload directories exist in distribution bundle
+fs.mkdirSync(path.join(distDir, "storage", "resumes"), { recursive: true });
+fs.mkdirSync(path.join(distDir, "public", "uploads", "media"), { recursive: true });
+
+// Copy standalone cpanel-database-setup.sql into dist package for easy import
+const dbSqlPath = path.join(rootDir, "cpanel-database-setup.sql");
+if (fs.existsSync(dbSqlPath)) {
+  fs.copyFileSync(dbSqlPath, path.join(distDir, "cpanel-database-setup.sql"));
+}
+
 // Ensure dist-cpanel/server.js exists and is cPanel ready
 const distServerJs = path.join(distDir, "server.js");
 if (!fs.existsSync(distServerJs)) {

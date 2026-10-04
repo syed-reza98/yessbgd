@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
-import { updateMessageStatusAction } from "@/app/admin/actions";
+import {
+  updateMessageStatusAction,
+  getAdminMessagesAction,
+} from "@/app/admin/actions";
 import {
   Mail,
   Search,
@@ -24,14 +26,15 @@ export default function MessagesInboxPage() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const loadMessages = async () => {
-    const { data } = await supabase
-      .from("contact_messages")
-      .select("*")
-      .order("created_at", { ascending: false });
-    setMessages(data || []);
-    if (data && data.length > 0 && !selectedMsg) {
-      setSelectedMsg(data[0]);
-      setReplyNote(data[0].status_note || "");
+    try {
+      const data = await getAdminMessagesAction();
+      setMessages(data || []);
+      if (data && data.length > 0 && !selectedMsg) {
+        setSelectedMsg(data[0]);
+        setReplyNote(data[0].status_note || "");
+      }
+    } catch (err) {
+      console.error("Failed to load messages:", err);
     }
   };
 

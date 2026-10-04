@@ -36,7 +36,7 @@ import {
   Lock,
   GitBranch,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase/client";
+import { lookupApplicationAction } from "@/app/admin/actions";
 
 interface ApplicationStatusTrackerProps {
   initialSitePage?: {
@@ -73,16 +73,10 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
     setIsRefreshing(true);
     setStatusMessage(null);
     try {
-      const { data, error } = await supabase.rpc("lookup_application", {
-        _email: targetEmail.trim(),
-        _ref: targetRef.trim(),
-      });
+      const data = await lookupApplicationAction(targetEmail.trim(), targetRef.trim());
 
-      if (error) {
-        console.warn("Telemetry lookup warning:", error.message);
-        setStatusMessage("Showing benchmark candidate telemetry (Offline mode active).");
-      } else if (data && data.length > 0) {
-        setLiveApp(data[0]);
+      if (data) {
+        setLiveApp(data);
         setStatusMessage("Candidate telemetry synchronized with live sovereign recruitment ledger.");
       } else {
         setLiveApp(null);

@@ -1,8 +1,24 @@
 import { connection } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { db } from "@/lib/db";
+import {
+  cmsVentures,
+  cmsServices,
+  cmsIndustries,
+  cmsInsights,
+  cmsOpenings,
+} from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { EntityEditorClient } from "./EntityEditorClient";
 
 export const instant = false;
+
+const tableMap: Record<string, any> = {
+  ventures: cmsVentures,
+  services: cmsServices,
+  industries: cmsIndustries,
+  insights: cmsInsights,
+  openings: cmsOpenings,
+};
 
 export default async function EntityEditorPage({
   params,
@@ -16,15 +32,14 @@ export default async function EntityEditorPage({
   let initialData: any = null;
 
   if (!isNew) {
-    const tableName = `cms_${type}`;
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from(tableName)
-      .select("*")
-      .eq("slug", id)
-      .maybeSingle();
+    const table = tableMap[type] || cmsVentures;
+    const [data] = await db
+      .select()
+      .from(table)
+      .where(eq(table.slug, id))
+      .limit(1);
 
-    initialData = data;
+    initialData = data || null;
   }
 
   return <EntityEditorClient type={type} id={id} initialData={initialData} />;

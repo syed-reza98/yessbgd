@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
-import { updateApplicationStatusAction } from "@/app/admin/actions";
+import {
+  updateApplicationStatusAction,
+  getAdminApplicationsAction,
+} from "@/app/admin/actions";
 import {
   Users,
   Search,
@@ -16,6 +18,7 @@ import {
   ShieldCheck,
   Mail,
   Phone,
+  Download,
 } from "lucide-react";
 
 const STAGES = ["Submitted", "Under review", "Interview", "Offer", "Hired", "Rejected"] as const;
@@ -29,14 +32,15 @@ export default function ApplicationsAtsPage() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const loadApps = async () => {
-    const { data } = await supabase
-      .from("job_applications")
-      .select("*")
-      .order("created_at", { ascending: false });
-    setApplications(data || []);
-    if (data && data.length > 0 && !selectedApp) {
-      setSelectedApp(data[0]);
-      setStatusNote(data[0].status_note || "");
+    try {
+      const data = await getAdminApplicationsAction();
+      setApplications(data || []);
+      if (data && data.length > 0 && !selectedApp) {
+        setSelectedApp(data[0]);
+        setStatusNote(data[0].status_note || "");
+      }
+    } catch (err) {
+      console.error("Failed to load applications:", err);
     }
   };
 
@@ -265,9 +269,20 @@ export default function ApplicationsAtsPage() {
                       </div>
                     </div>
                   </div>
-                  <span className="text-xs text-slate-500 font-mono">
-                    Stored in: resumes/{selectedApp.resume_path}
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-slate-500 font-mono hidden sm:inline">
+                      {selectedApp.reference_number || "Document"}
+                    </span>
+                    <a
+                      href={`/api/admin/resumes/${selectedApp.id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-800 hover:bg-teal-100 text-xs font-bold transition-all shadow-xs"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Download / View</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </>

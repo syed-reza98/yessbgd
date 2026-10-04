@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase/client";
-import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle, Sparkles } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -19,21 +19,20 @@ export default function AdminLoginPage() {
     setErrorMsg(null);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const res = await signIn("credentials", {
         email: email.trim(),
         password: password,
+        redirect: false,
       });
 
-      if (error) {
-        throw error;
-      }
-
-      if (data.session) {
+      if (res?.error) {
+        setErrorMsg("Invalid administrative credentials. Please check email and password.");
+      } else {
         router.push("/admin");
         router.refresh();
       }
     } catch (err: any) {
-      setErrorMsg(err.message || "Invalid administrative credentials.");
+      setErrorMsg(err.message || "Failed to authenticate.");
     } finally {
       setLoading(false);
     }

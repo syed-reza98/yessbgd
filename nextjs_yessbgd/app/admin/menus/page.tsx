@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
 import {
   saveMenuItemAction,
   deleteMenuItemAction,
   reorderMenuItemsAction,
+  getAdminMenuItemsAction,
 } from "@/app/admin/actions";
 import {
   ListTree,
@@ -60,12 +60,7 @@ export default function MenusManagerPage() {
 
   const loadItems = async () => {
     try {
-      const { data, error } = await supabase
-        .from("cms_menu_items")
-        .select("*")
-        .order("sort_order", { ascending: true });
-
-      if (error) throw error;
+      const data = await getAdminMenuItemsAction();
       setItems((data as MenuItem[]) || []);
     } catch (err: any) {
       console.error("Error loading menu items:", err);

@@ -1,178 +1,141 @@
-# Deploying YESS Bangla Next.js to cPanel Cloud Hosting
+# Deploying YESS Bangla Next.js to cPanel Cloud Hosting (PostgreSQL + Auth.js + Local Uploads)
 
-This comprehensive guide details how to deploy this Next.js 16 application to any cPanel hosting environment (Shared Cloud, Reseller, CloudLinux, or cPanel VPS).
+This comprehensive guide details how to deploy this Next.js 16 application to your cPanel hosting environment using **Option B: Full Migration to cPanel (cPanel Node.js + cPanel PostgreSQL + Local Uploads)**.
 
 ---
 
 ## Architecture Overview
 
-This project is configured with Next.js **Standalone Output** (`output: "standalone"`).
-- **Lightweight Package**: Compiles only the necessary runtime code and dependencies, bypassing the heavy ~800MB development `node_modules` (no TypeScript, Puppeteer, or PostCSS compilers needed on the server).
-- **Zero Server Build Crashes**: Eliminates the common cPanel `Out of Memory / Killed` errors that occur when running `next build` on limited RAM hosting accounts.
-- **Embedded Static Assets**: Bundles `public/` and `_next/static/` into the distribution so images, fonts, and CSS chunks never return 404.
-- **Universal Server Runner**: Includes a cPanel-compatible `server.js` that automatically detects dynamic Passenger ports, sockets, and PM2 environments.
+- **Database**: cPanel PostgreSQL (`yessban1_yessbd`) managed with **Drizzle ORM** (zero external cloud dependencies).
+- **Authentication**: **Auth.js (NextAuth v5)** with local database users table & bcrypt hashed credentials.
+- **File Storage**: Local filesystem:
+  - Public CMS Media: `public/uploads/media/`
+  - Protected Job Resumes: `storage/resumes/` (served via authenticated streaming route `/api/admin/resumes/[id]`).
+- **Next.js Standalone Runtime**: Lightweight distribution (`output: "standalone"`) bypassing heavy server build dependencies on cPanel.
 
 ---
 
-## Method 1: The Automated Package Method (Recommended)
-
-This is the fastest, cleanest, and most reliable deployment method.
+## Step-by-Step Deployment Guide
 
 ### Step 1: Package the Project Locally
 
-Run the automated cPanel packager on your local machine:
+Run the automated packager on your local machine:
 
 ```bash
 npm run package:cpanel
 ```
 
 This script:
-1. Runs an optimized production build.
-2. Creates a clean `dist-cpanel/` folder with `server.js`, standalone runtime, static assets, and `.htaccess`.
-3. Creates a ready-to-upload archive: **`deploy-cpanel.zip`** (and `deploy-cpanel.tar.gz`).
+1. Runs `npm run build` with standalone bundling.
+2. Assembles `dist-cpanel/` with `server.js`, standalone runtime, static assets, upload folders, and `cpanel-database-setup.sql`.
+3. Creates **`deploy-cpanel.zip`** ready for upload.
 
 ---
 
-### Step 2: Upload to cPanel
+### Step 2: Import the Database into cPanel PostgreSQL
+
+Your cPanel PostgreSQL database is already created:
+- **Database**: `yessban1_yessbd`
+- **Username**: `yessban1`
+
+#### Option A: Via phpPgAdmin (Recommended UI Method)
+1. In cPanel, navigate to the **Databases** section and open **phpPgAdmin**.
+2. Select database **`yessban1_yessbd`** on the left menu.
+3. Click the **SQL** tab at the top.
+4. Open the generated file [`cpanel-database-setup.sql`](file:///home/syed/Workspace/yessbgd/nextjs_yessbgd/cpanel-database-setup.sql) in any text editor, copy its entire contents, paste it into the SQL query box, and click **Execute**.
+   *(Alternatively, use the **Import** / **Upload** button to upload `cpanel-database-setup.sql`).*
+5. All 16 tables, indexes, seed CMS records, and the initial Admin account are now created!
+
+#### Option B: Via cPanel Terminal / SSH
+If you have SSH or cPanel Terminal enabled:
+```bash
+psql -U yessban1 -d yessban1_yessbd -f cpanel-database-setup.sql
+```
+
+---
+
+### Step 3: Upload the Application to cPanel
 
 1. Log into your **cPanel** dashboard.
 2. Open **File Manager**.
-3. Create a folder in your home root (outside `public_html` for maximum security), for example:
+3. Create a folder in your home root (outside `public_html` for maximum security):
    ```
-   /home/username/yessbgd
+   /home/yessban1/yessbgd
    ```
-   *(Note: Keeping application source outside `public_html` prevents sensitive files like `.env` from being accessed via web browser).*
-4. Open the `/home/username/yessbgd` folder and click **Upload**.
+4. Open `/home/yessban1/yessbgd` and click **Upload**.
 5. Upload **`deploy-cpanel.zip`**.
 6. Right-click `deploy-cpanel.zip` and select **Extract** -> **Extract Files**.
 7. Delete the `.zip` file after extraction.
 
 ---
 
-### Step 3: Configure "Setup Node.js App" in cPanel
+### Step 4: Configure "Setup Node.js App" in cPanel
 
 1. In cPanel, navigate to the **Software** section and click **Setup Node.js App** (or *Node.js Selector*).
 2. Click **Create Application**.
-3. Fill in the configuration fields:
-   - **Node.js version**: Select **20.x** (or 18.x / 22.x).
+3. Configure the fields:
+   - **Node.js version**: Select **20.x** (or 22.x).
    - **Application mode**: Select **Production**.
    - **Application root**: Enter `yessbgd` (the directory name where you extracted files).
-   - **Application URL**: Select your domain or subdomain (e.g., `yessbangla.com` or `www.yessbangla.com`).
+   - **Application URL**: Select your domain or subdomain (e.g. `yessbangla.com` or `www.yessbangla.com`).
    - **Application startup file**: Enter `server.js`.
 4. Click **Create**.
 
 ---
 
-### Step 4: Configure Environment Variables
+### Step 5: Configure Environment Variables
 
-Under the **Environment variables** section of your Node.js application in cPanel:
+Under the **Environment variables** section of your Node.js application in cPanel, add the following variables:
 
-Click **Add Variable** for each required key:
+| Variable Name | Value | Description |
+| :--- | :--- | :--- |
+| `NODE_ENV` | `production` | Production mode |
+| `DATABASE_URL` | `postgres://yessban1:24QZdDkg4%219S%40v@127.0.0.1:5432/yessban1_yessbd` | Connection string to your local cPanel PostgreSQL |
+| `AUTH_SECRET` | *(Random 32-character hex or string)* | Secret for signing Auth.js session cookies |
+| `NEXTAUTH_URL` | `https://yourdomain.com` | Your canonical production domain |
+| `NEXT_PUBLIC_SITE_URL` | `https://yourdomain.com` | Your public domain |
 
-| Variable Name | Value / Description |
-| :--- | :--- |
-| `NODE_ENV` | `production` |
-| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL (e.g. `https://vhffmxoqirbczmcpoqtx.supabase.co`) |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anonymous key |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Your Supabase publishable key |
-| `NEXT_PUBLIC_SITE_URL` | Your production website URL (e.g. `https://yessbangla.com`) |
-
-*(Alternatively, you can create a `.env.production` file directly inside `/home/username/yessbgd` containing these variables).*
+> [!NOTE]
+> In the `DATABASE_URL`, special characters in passwords must be URL-encoded (`!` = `%21`, `@` = `%40`). The string above already has `24QZdDkg4!9S@v` properly encoded!
 
 ---
 
-### Step 5: Start the Application
+### Step 6: Verify Permissions for Upload Directories
+
+Ensure that the Node.js application user has write permissions to the storage directories:
+- `/home/yessban1/yessbgd/public/uploads/media/` (Permissions `755`)
+- `/home/yessban1/yessbgd/storage/resumes/` (Permissions `750` or `755`)
+
+---
+
+### Step 7: Start / Restart the Application
 
 1. At the top of the cPanel Node.js App manager, click **Restart** (or **Start App**).
-2. Visit your domain in the browser. Your Next.js application is now live!
+2. Visit your domain in the browser.
 
 ---
 
-## Method 2: Terminal / SSH + PM2 (For Cloud VPS & SSH Users)
+## Admin Panel Access
 
-If your cPanel account has Terminal access or SSH enabled, PM2 offers maximum resilience and background auto-restart:
+- **Admin Login URL**: `https://yourdomain.com/admin/login`
+- **Default Superadmin Username**: `admin@yessbgd.com`
+- **Default Password**: `Admin@YessBgd2026!`
 
-1. Connect to your server via SSH:
-   ```bash
-   ssh username@your-server-ip
-   ```
-2. Navigate to your application directory:
-   ```bash
-   cd ~/yessbgd
-   ```
-3. Install PM2 globally (if not already installed):
-   ```bash
-   npm install -g pm2
-   ```
-4. Start the application using the included PM2 configuration:
-   ```bash
-   pm2 start ecosystem.config.cjs
-   ```
-5. Save the PM2 process list so it restarts automatically on server reboots:
-   ```bash
-   pm2 save
-   ```
-6. Check live status and logs:
-   ```bash
-   pm2 status
-   pm2 logs yess-nextjs
-   ```
+*(You can change the email and password at any time in the Admin panel under **Settings** or directly in the `users` table).*
 
 ---
 
-## Method 3: Apache Reverse Proxy Setup (If Not Using Passenger)
+## Method: Terminal / SSH + PM2 (Alternative)
 
-If your cPanel host does not have CloudLinux Passenger ("Setup Node.js App"), you can run the app with PM2 on port `3000` and use Apache as a reverse proxy via `.htaccess`.
+If using PM2 on a VPS or SSH:
 
-1. In your domain's `public_html` folder, edit or create `.htaccess`:
-   ```apache
-   <IfModule mod_rewrite.c>
-       RewriteEngine On
-       RewriteBase /
+```bash
+cd ~/yessbgd
+pm2 start ecosystem.config.cjs
+pm2 save
+```
 
-       # 1. Force HTTPS
-       RewriteCond %{HTTPS} off
-       RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-       # 2. Serve static files directly if present in public_html
-       RewriteCond %{REQUEST_FILENAME} -f [OR]
-       RewriteCond %{REQUEST_FILENAME} -d
-       RewriteRule ^ - [L]
-
-       # 3. Reverse proxy all other requests to Next.js on port 3000
-       RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
-   </IfModule>
-
-   <IfModule mod_proxy.c>
-       ProxyPreserveHost On
-       ProxyPassReverse / http://127.0.0.1:3000/
-       RequestHeader set X-Forwarded-Proto "https" env=HTTPS
-   </IfModule>
-   ```
-
----
-
-## Troubleshooting FAQ
-
-### 1. "503 Service Unavailable" or Passenger error
-- **Cause**: Node.js version mismatch or application crashed on boot.
-- **Solution**:
-  - In cPanel "Setup Node.js App", check that the Node.js version is **20.x** or higher.
-  - Review the error log located at `/home/username/yessbgd/stderr.log` or inside the cPanel File Manager.
-  - Check that all Supabase environment variables are properly set.
-
-### 2. Images or fonts return 404
-- **Cause**: Static assets were omitted from the standalone distribution.
-- **Solution**:
-  - Always use `npm run package:cpanel`. The packager automatically copies both `public/` and `.next/static/` into the standalone bundle.
-
-### 3. "Cannot find module 'next'" or node_modules errors
-- **Cause**: Application directory was uploaded without the standalone dependencies.
-- **Solution**:
-  - The `dist-cpanel/` bundle already includes the pre-packaged standalone `node_modules`. Ensure you extracted the full contents of `deploy-cpanel.zip`.
-
-### 4. Updating the Website
-Whenever you push changes or update your website:
-1. Run `npm run package:cpanel` locally.
-2. Upload and extract `deploy-cpanel.zip` to `/home/username/yessbgd` (overwrite existing files).
-3. In cPanel -> **Setup Node.js App**, click **Restart**.
+Logs can be viewed anytime with:
+```bash
+pm2 logs yess-nextjs
+```

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase/client";
+import { getAdminSitePagesAction } from "../actions";
 import { FileText, Edit, Globe, CheckCircle2, XCircle, ArrowUpRight, Search } from "lucide-react";
 
 export default function SitePagesDirectoryPage() {
@@ -11,14 +11,10 @@ export default function SitePagesDirectoryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase
-      .from("cms_site_pages")
-      .select("*")
-      .order("sort_order", { ascending: true })
-      .then(({ data }) => {
-        setPages(data || []);
-        setLoading(false);
-      });
+    getAdminSitePagesAction().then((data) => {
+      setPages(data || []);
+      setLoading(false);
+    });
   }, []);
 
   const filtered = pages.filter(

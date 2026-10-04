@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import { getAdminAuditLogsAction } from "@/app/admin/actions";
 import {
   History,
   Search,
@@ -21,14 +21,14 @@ export default function AuditTrailPage() {
 
   const loadLogs = async () => {
     setLoading(true);
-    const { data } = await supabase
-      .from("audit_logs")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(100);
-
-    setLogs(data || []);
-    setLoading(false);
+    try {
+      const data = await getAdminAuditLogsAction();
+      setLogs(data || []);
+    } catch (err) {
+      console.error("Failed to load audit logs:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

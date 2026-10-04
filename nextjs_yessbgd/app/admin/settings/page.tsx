@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
-import { saveSettingAction } from "@/app/admin/actions";
+import { saveSettingAction, getAdminSettingsAction } from "@/app/admin/actions";
 import {
   Settings,
   Save,
@@ -98,26 +97,23 @@ export default function SiteSettingsPage() {
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   useEffect(() => {
-    supabase
-      .from("cms_settings")
-      .select("*")
-      .then(({ data }) => {
-        if (data) {
-          const brand = data.find((s) => s.key === "branding");
-          const cont = data.find((s) => s.key === "contact");
-          const off = data.find((s) => s.key === "offices");
-          const soc = data.find((s) => s.key === "socials");
-          const hdr = data.find((s) => s.key === "header");
-          const ftr = data.find((s) => s.key === "footer");
+    getAdminSettingsAction().then((data) => {
+      if (data) {
+        const brand = data.find((s) => s.key === "branding");
+        const cont = data.find((s) => s.key === "contact");
+        const off = data.find((s) => s.key === "offices");
+        const soc = data.find((s) => s.key === "socials");
+        const hdr = data.find((s) => s.key === "header");
+        const ftr = data.find((s) => s.key === "footer");
 
-          if (brand) setBranding((prev: any) => ({ ...prev, ...brand.value }));
-          if (cont) setContact((prev: any) => ({ ...prev, ...cont.value }));
-          if (off) setOffices((prev: any) => ({ ...prev, ...off.value }));
-          if (soc) setSocials((prev: any) => ({ ...prev, ...soc.value }));
-          if (hdr) setHeader((prev: any) => ({ ...prev, ...hdr.value }));
-          if (ftr) setFooter((prev: any) => ({ ...prev, ...ftr.value }));
-        }
-      });
+        if (brand) setBranding((prev: any) => ({ ...prev, ...brand.value }));
+        if (cont) setContact((prev: any) => ({ ...prev, ...cont.value }));
+        if (off) setOffices((prev: any) => ({ ...prev, ...off.value }));
+        if (soc) setSocials((prev: any) => ({ ...prev, ...soc.value }));
+        if (hdr) setHeader((prev: any) => ({ ...prev, ...hdr.value }));
+        if (ftr) setFooter((prev: any) => ({ ...prev, ...ftr.value }));
+      }
+    });
   }, []);
 
   const handleSave = async (e: React.FormEvent) => {

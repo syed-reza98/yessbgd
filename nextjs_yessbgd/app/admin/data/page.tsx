@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import { exportAllAdminDataAction, exportTableDataAction } from "@/app/admin/actions";
 import {
   Database,
   Download,
@@ -23,47 +23,7 @@ export default function DatabaseToolsPage() {
     setExporting(true);
     setMessage(null);
     try {
-      const [
-        { data: pages },
-        { data: ventures },
-        { data: services },
-        { data: industries },
-        { data: insights },
-        { data: openings },
-        { data: settings },
-        { data: menus },
-        { data: apps },
-        { data: msgs },
-      ] = await Promise.all([
-        supabase.from("cms_site_pages").select("*"),
-        supabase.from("cms_ventures").select("*"),
-        supabase.from("cms_services").select("*"),
-        supabase.from("cms_industries").select("*"),
-        supabase.from("cms_insights").select("*"),
-        supabase.from("cms_openings").select("*"),
-        supabase.from("cms_settings").select("*"),
-        supabase.from("cms_menu_items").select("*"),
-        supabase.from("job_applications").select("*"),
-        supabase.from("contact_messages").select("*"),
-      ]);
-
-      const dump = {
-        exportedAt: new Date().toISOString(),
-        instance: "vhffmxoqirbczmcpoqtx",
-        schema: "PostgreSQL 17.6",
-        tables: {
-          cms_site_pages: pages || [],
-          cms_ventures: ventures || [],
-          cms_services: services || [],
-          cms_industries: industries || [],
-          cms_insights: insights || [],
-          cms_openings: openings || [],
-          cms_settings: settings || [],
-          cms_menu_items: menus || [],
-          job_applications: apps || [],
-          contact_messages: msgs || [],
-        },
-      };
+      const dump = await exportAllAdminDataAction();
 
       const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
@@ -82,8 +42,7 @@ export default function DatabaseToolsPage() {
 
   const handleExportCsv = async (tableName: string) => {
     try {
-      const { data, error } = await supabase.from(tableName).select("*");
-      if (error) throw error;
+      const data = await exportTableDataAction(tableName);
       if (!data || data.length === 0) {
         alert("No records to export.");
         return;

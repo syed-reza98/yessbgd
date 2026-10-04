@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase/client";
+import { getAdminDashboardStatsAction } from "./actions";
 import {
   Briefcase,
   Layers,
@@ -38,38 +38,27 @@ export default function AdminDashboardPage() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [
-        { count: venturesCount },
-        { count: servicesCount },
-        { count: industriesCount },
-        { count: insightsCount },
-        { data: apps, count: appsCount },
-        { data: msgs, count: msgsCount },
-      ] = await Promise.all([
-        supabase.from("cms_ventures").select("*", { count: "exact", head: true }),
-        supabase.from("cms_services").select("*", { count: "exact", head: true }),
-        supabase.from("cms_industries").select("*", { count: "exact", head: true }),
-        supabase.from("cms_insights").select("*", { count: "exact", head: true }),
-        supabase.from("job_applications").select("*").order("created_at", { ascending: false }).limit(5),
-        supabase.from("contact_messages").select("*").order("created_at", { ascending: false }).limit(5),
-      ]);
-
-      const newApps = (apps || []).filter((a) => a.status === "Submitted" || a.status === "New").length;
-      const newMsgs = (msgs || []).filter((m) => m.status === "new").length;
+      const data = await getAdminDashboardStatsAction();
+      const newApps = (data.recentApplications || []).filter(
+        (a: any) => a.status === "Submitted" || a.status === "New"
+      ).length;
+      const newMsgs = (data.recentMessages || []).filter(
+        (m: any) => m.status === "new"
+      ).length;
 
       setStats({
-        ventures: venturesCount || 13,
-        services: servicesCount || 6,
-        industries: industriesCount || 8,
-        insights: insightsCount || 7,
-        applications: appsCount || (apps || []).length,
+        ventures: data.counts.ventures || 13,
+        services: data.counts.services || 6,
+        industries: data.counts.industries || 8,
+        insights: data.counts.insights || 7,
+        applications: data.counts.ventures ? data.recentApplications.length : 0,
         newApplications: newApps,
-        messages: msgsCount || (msgs || []).length,
+        messages: data.recentMessages.length,
         newMessages: newMsgs,
       });
 
-      setRecentApplications(apps || []);
-      setRecentMessages(msgs || []);
+      setRecentApplications(data.recentApplications || []);
+      setRecentMessages(data.recentMessages || []);
     } catch (err) {
       console.warn("Could not fetch live dashboard telemetry:", err);
     } finally {

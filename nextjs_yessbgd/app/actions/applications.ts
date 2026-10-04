@@ -1,7 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
+import { db } from "@/lib/db";
+import { jobApplications } from "@/lib/db/schema";
+import { saveResumeFile } from "@/lib/storage";
 
 const ApplicationSchema = z.object({
   opening_id: z.string().min(1, "Opening reference is required"),
@@ -46,44 +48,40 @@ export async function submitJobApplicationAction(
     const randomCode = Math.floor(10000 + Math.random() * 90000);
     const generatedRef = `YESS-ENG-2026-${randomCode}`;
 
-    const supabase = await createClient();
+    let savedResume: {
+      filePath: string;
+      fileName: string;
+      sizeBytes: number;
+      mimeType: string;
+    } | null = null;
 
-    let resumeUrl: string | null = null;
     const resumeFile = formData.get("resume") as File | null;
     if (resumeFile && typeof resumeFile === "object" && resumeFile.size > 0) {
-      const cleanName = resumeFile.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const filePath = `${generatedRef}/${cleanName}`;
       try {
-        const { data: uploadData, error: uploadErr } = await supabase.storage
-          .from("resumes")
-          .upload(filePath, resumeFile, { upsert: true });
-
-        if (uploadErr) {
-          console.warn("Resume upload note:", uploadErr.message);
-        } else if (uploadData?.path) {
-          resumeUrl = uploadData.path;
-        }
+        savedResume = await saveResumeFile(resumeFile, generatedRef);
       } catch (uploadException) {
         console.warn("Resume upload exception:", uploadException);
       }
     }
 
-    const { error: insertErr } = await supabase.from("job_applications").insert({
-      reference_number: generatedRef,
-      opening_id,
-      opening_title,
-      full_name,
+    await db.insert(jobApplications).values({
+      referenceNumber: generatedRef,
+      openingId: opening_id,
+      openingTitle: opening_title,
+      jobSlug: opening_id,
+      jobTitle: opening_title,
+      fullName: full_name,
       email,
       phone,
-      portfolio_url: portfolio_url || null,
-      cover_note: cover_note || null,
-      resume_url: resumeUrl,
-      status: "submitted",
+      portfolioUrl: portfolio_url || null,
+      coverNote: cover_note || null,
+      resumePath: savedResume?.filePath || null,
+      resumeName: savedResume?.fileName || null,
+      resumeSize: savedResume?.sizeBytes || null,
+      resumeType: savedResume?.mimeType || null,
+      resumeUrl: savedResume?.filePath || null,
+      status: "Submitted",
     });
-
-    if (insertErr) {
-      console.warn("Job application insert warning:", insertErr.message);
-    }
 
     return {
       success: true,

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useMemo, type ReactNode } from "react";
-import { supabase } from "@/lib/supabase/client";
+import { signOut } from "next-auth/react";
 import {
   LayoutDashboard,
   Briefcase,
@@ -115,15 +115,11 @@ export function AdminShell({
   const nav = useMemo(() => buildNav(), []);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data?.user?.email) setUserEmail(data.user.email);
-    });
-  }, []);
+    if (initialUserEmail) setUserEmail(initialUserEmail);
+  }, [initialUserEmail]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/admin/login");
-    router.refresh();
+    await signOut({ callbackUrl: "/admin/login" });
   };
 
   const isLeafActive = (to: string) => {

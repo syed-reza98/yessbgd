@@ -1,7 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
+import { db } from "@/lib/db";
+import { contactMessages } from "@/lib/db/schema";
 
 const ContactSchema = z.object({
   full_name: z.string().trim().min(2, "Full name must be at least 2 characters"),
@@ -39,25 +40,20 @@ export async function submitContactMessageAction(
     }
 
     const data = parsed.data;
-    const supabase = await createClient();
 
-    const { error: insertErr } = await supabase.from("contact_messages").insert({
+    await db.insert(contactMessages).values({
       name: data.full_name,
-      full_name: data.full_name,
+      fullName: data.full_name,
       email: data.email,
       phone: data.phone || null,
       organization: data.organization || null,
       subject: data.practice_area,
-      practice_area: data.practice_area,
+      practiceArea: data.practice_area,
       message: data.message,
-      request_nda: data.request_nda,
-      is_read: false,
-      is_archived: false,
+      requestNda: data.request_nda,
+      isRead: false,
+      isArchived: false,
     });
-
-    if (insertErr) {
-      console.warn("Supabase contact_messages insert warning:", insertErr.message);
-    }
 
     return { success: true };
   } catch (err: any) {

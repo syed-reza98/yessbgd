@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { AdminLayoutClient } from "./AdminLayoutClient";
-import { createClient } from "@/lib/supabase/server";
+import { auth } from "@/auth";
 
 export const instant = false;
 
@@ -14,21 +14,21 @@ export const metadata: Metadata = {
 
 async function AdminAuthWrapper({ children }: { children: React.ReactNode }) {
   await connection();
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  let role: string | null = null;
-  if (user) {
-    const { data: roleData } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", user.id)
-      .maybeSingle();
-    role = roleData?.role || null;
-  }
+  const session = await auth();
+  const user = session?.user;
 
   return (
-    <AdminLayoutClient initialUser={user ? { id: user.id, email: user.email, role } : null}>
+    <AdminLayoutClient
+      initialUser={
+        user
+          ? {
+              id: (user as any).id || "admin",
+              email: user.email || undefined,
+              role: (user as any).role || "admin",
+            }
+          : null
+      }
+    >
       {children}
     </AdminLayoutClient>
   );
@@ -51,4 +51,3 @@ export default function AdminRootLayout({
     </Suspense>
   );
 }
-
