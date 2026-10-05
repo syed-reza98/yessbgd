@@ -54,14 +54,14 @@ export default async function SingleIndustryPage({
   const Icon = (industry as any).icon || industries.find((i: any) => i.slug === industry.slug)?.icon || Building2;
 
   const industryBgMap: Record<string, string> = {
-    "manufacturing-rmg": "/assets/general/centricity.png",
+    "manufacturing-rmg": "/assets/general/centricity.webp",
     "media-broadcasting": "/assets/heroes/hero_6a8975c2b742a.jpg",
-    "logistics-supply-chain": "/assets/general/delivery.png",
-    "ecommerce-retail": "/assets/general/retail-pos.jpg",
+    "logistics-supply-chain": "/assets/general/delivery.webp",
+    "ecommerce-retail": "/assets/general/retail-pos.webp",
     "financial-services": "/assets/general/design.jpg",
     "healthcare-pharma": "/assets/heroes/hero_6a89646fd72ff.jpg",
   };
-  const heroBgImage = industryBgMap[industry.slug] || "/assets/general/delivery.png";
+  const heroBgImage = industryBgMap[industry.slug] || "/assets/general/delivery.webp";
 
   return (
     <div className="flex flex-col w-full">
@@ -78,11 +78,11 @@ export default async function SingleIndustryPage({
         <div className="container-tight relative z-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-teal-700 transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">
               Home
             </Link>
             <span className="text-slate-300">/</span>
-            <Link href="/industries" className="hover:text-teal-700 transition-colors">
+            <Link href="/industries" prefetch={false} className="hover:text-teal-700 transition-colors">
               Industries
             </Link>
             <span className="text-slate-300">/</span>
@@ -257,12 +257,14 @@ export default async function SingleIndustryPage({
                 <div className="space-y-3">
                   <Link
                     href="/contact"
+                    prefetch={false}
                     className="w-full text-center py-3.5 rounded-xl bg-primary text-white font-bold text-xs block shadow-sm hover:bg-primary/90 transition-all cursor-pointer"
                   >
                     Schedule Industry Consultation
                   </Link>
                   <Link
                     href="/industries"
+                    prefetch={false}
                     className="w-full text-center py-2.5 rounded-xl bg-secondary text-foreground font-semibold text-xs block border border-border hover:bg-secondary/80 transition-all"
                   >
                     ← All Industry Verticals

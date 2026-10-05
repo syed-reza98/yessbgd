@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,6 +18,8 @@ import { ventures } from "@/data/ventures";
 import { getVentures, getVentureBySlug } from "@/lib/cms";
 import { PageHero } from "@/components/PageHero";
 
+export const instant = false;
+
 export async function generateStaticParams() {
   const all = await getVentures();
   return all.map((v) => ({
@@ -31,6 +33,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === "yess-service") {
+    return { title: "Shondhaan — YESS Bangladesh" };
+  }
   const venture = await getVentureBySlug(slug);
   if (!venture) return { title: "Venture Not Found" };
 
@@ -46,12 +51,25 @@ export default async function SingleVenturePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === "yess-service") {
+    redirect("/ventures/shondhaan");
+  }
+
   const [venture, allVentures] = await Promise.all([
     getVentureBySlug(slug),
     getVentures(),
   ]);
 
   if (!venture) {
+    // Check if slug was legacy or alternative for an existing venture
+    const matchedVenture = allVentures.find(
+      (v) =>
+        (slug === "yess-service" && (v.slug === "shondhaan" || v.title.toLowerCase() === "shondhaan")) ||
+        v.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug
+    );
+    if (matchedVenture && matchedVenture.slug !== slug) {
+      redirect(`/ventures/${matchedVenture.slug}`);
+    }
     notFound();
   }
 
@@ -60,6 +78,8 @@ export default async function SingleVenturePage({
 
 
   const heroBgMap: Record<string, string> = {
+    "shondhaan": "/assets/ventures/yess-service.jpg",
+    "yess-service": "/assets/ventures/yess-service.jpg",
     "yess-organic-food": "/assets/heroes/hero_6a89646fd72ff.jpg",
     "yess-soft": "/assets/services-tech-bd.jpg",
     "yess-technology": "/assets/heroes/hero_6a896e39e25bd.jpg",
@@ -68,10 +88,10 @@ export default async function SingleVenturePage({
     "akash-news": "/assets/heroes/hero_6a8975c2b742a.jpg",
     "yess-entertainment": "/assets/heroes/hero_6a8975c2b742a.jpg",
     "yess-event-management": "/assets/heroes/hero_6a8975c2b742a.jpg",
-    "yess-one-stop-engineering": "/assets/general/centricity.png",
-    "yess-interior": "/assets/general/centricity.png",
-    "yess-overseas": "/assets/general/delivery.png",
-    "yess-restaurant": "/assets/general/retail-pos.jpg",
+    "yess-one-stop-engineering": "/assets/general/centricity.webp",
+    "yess-interior": "/assets/general/centricity.webp",
+    "yess-overseas": "/assets/general/delivery.webp",
+    "yess-restaurant": "/assets/general/retail-pos.webp",
     "yess-law-chamber": "/assets/trust-handshake-bd.jpg",
   };
   const heroBgImage = heroBgMap[venture.slug] || "/assets/ventures-dhaka-bd.jpg";
@@ -97,11 +117,11 @@ export default async function SingleVenturePage({
         <div className="container-tight relative z-10">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-teal-700 transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">
               Home
             </Link>
             <span className="text-slate-300">/</span>
-            <Link href="/ventures" className="hover:text-teal-700 transition-colors">
+            <Link href="/ventures" prefetch={false} className="hover:text-teal-700 transition-colors">
               Ventures
             </Link>
             <span className="text-slate-300">/</span>
@@ -280,6 +300,7 @@ export default async function SingleVenturePage({
                 <div className="mt-6 pt-4 border-t border-border">
                   <Link
                     href="/contact"
+                    prefetch={false}
                     className="w-full text-center py-3 rounded-xl bg-primary text-white font-bold text-sm block shadow-sm hover:bg-primary/90 transition-all"
                   >
                     Engage {venture.title}
@@ -297,6 +318,7 @@ export default async function SingleVenturePage({
                     <Link
                       key={s.slug}
                       href={`/ventures/${s.slug}`}
+                      prefetch={false}
                       className="flex items-center justify-between p-3 rounded-xl bg-secondary/50 hover:bg-secondary border border-border text-sm font-semibold text-foreground group transition-colors"
                     >
                       <span>{s.title}</span>

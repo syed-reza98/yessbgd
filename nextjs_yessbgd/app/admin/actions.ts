@@ -1,7 +1,21 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-const purgeTag = (tag: string) => (revalidateTag as any)(tag);
+import { revalidateTag, updateTag } from "next/cache";
+const purgeTag = (tag: string) => {
+  try {
+    if (typeof updateTag === "function") {
+      updateTag(tag);
+    } else {
+      (revalidateTag as any)(tag, "max");
+    }
+  } catch {
+    try {
+      (revalidateTag as any)(tag, "max");
+    } catch {
+      (revalidateTag as any)(tag);
+    }
+  }
+};
 import { createClient } from "@/lib/supabase/server";
 import { CMS_TAGS } from "@/lib/cms";
 
@@ -69,17 +83,98 @@ export async function updateSitePageAction(pageKey: string, payload: any) {
   return { success: true };
 }
 
-// ── 2. Venture Actions ─────────────────────────────────────────────────────
-export async function saveVentureAction(slug: string, payload: any) {
+// ── Generic CMS Entity Upsert Helper (Supports Slug Renaming) ─────────────
+async function saveCmsEntity({
+  tableName,
+  slug,
+  previousSlug,
+  payload,
+  row,
+  tagSingle,
+  tagCollection,
+}: {
+  tableName: string;
+  slug: string;
+  previousSlug?: string;
+  payload: any;
+  row: any;
+  tagSingle: (s: string) => string;
+  tagCollection: string;
+}) {
   const supabase = await createClient();
+  const lookupSlug = previousSlug || slug;
 
-  const { data: existing } = await supabase
-    .from("cms_ventures")
-    .select("*")
-    .eq("slug", slug)
-    .maybeSingle();
+  let existing: any = null;
+  if (payload.id) {
+    const { data } = await supabase
+      .from(tableName)
+      .select("*")
+      .eq("id", payload.id)
+      .maybeSingle();
+    existing = data;
+  } else if (lookupSlug) {
+    const { data } = await supabase
+      .from(tableName)
+      .select("*")
+      .eq("slug", lookupSlug)
+      .maybeSingle();
+    existing = data;
+  }
 
-  const isNew = !existing;
+  if (existing) {
+    // If slug changed, ensure new slug doesn't conflict with another record
+    if (existing.slug !== slug) {
+      const { data: conflict } = await supabase
+        .from(tableName)
+        .select("id")
+        .eq("slug", slug)
+        .neq("id", existing.id)
+        .maybeSingle();
+
+      if (conflict) {
+        throw new Error(`The slug "${slug}" is already in use by another record.`);
+      }
+    }
+
+    const { error } = await supabase
+      .from(tableName)
+      .update(row)
+      .eq("id", existing.id);
+
+    if (error) throw new Error(error.message);
+
+    await recordAudit(supabase, "UPDATE", tableName, slug, row, existing);
+    if (existing.slug !== slug) {
+      purgeTag(tagSingle(existing.slug));
+    }
+  } else {
+    // Check if new slug conflicts
+    const { data: conflict } = await supabase
+      .from(tableName)
+      .select("id")
+      .eq("slug", slug)
+      .maybeSingle();
+
+    if (conflict) {
+      throw new Error(`A record with slug "${slug}" already exists.`);
+    }
+
+    const { error } = await supabase
+      .from(tableName)
+      .insert(row);
+
+    if (error) throw new Error(error.message);
+
+    await recordAudit(supabase, "INSERT", tableName, slug, row, null);
+  }
+
+  purgeTag(tagSingle(slug));
+  purgeTag(tagCollection);
+  return { success: true };
+}
+
+// ── 2. Venture Actions ─────────────────────────────────────────────────────
+export async function saveVentureAction(slug: string, payload: any, previousSlug?: string) {
   const ventureRow = {
     slug,
     title: payload.title,
@@ -94,16 +189,15 @@ export async function saveVentureAction(slug: string, payload: any) {
     updated_at: new Date().toISOString(),
   };
 
-  const { error } = await supabase
-    .from("cms_ventures")
-    .upsert(ventureRow, { onConflict: "slug" });
-
-  if (error) throw new Error(error.message);
-
-  await recordAudit(supabase, isNew ? "INSERT" : "UPDATE", "cms_ventures", slug, ventureRow, existing);
-  purgeTag(CMS_TAGS.venture(slug));
-  purgeTag(CMS_TAGS.ventures);
-  return { success: true };
+  return saveCmsEntity({
+    tableName: "cms_ventures",
+    slug,
+    previousSlug,
+    payload,
+    row: ventureRow,
+    tagSingle: CMS_TAGS.venture,
+    tagCollection: CMS_TAGS.ventures,
+  });
 }
 
 export async function deleteVentureAction(slug: string) {
@@ -125,9 +219,7 @@ export async function deleteVentureAction(slug: string) {
 }
 
 // ── 3. Service Actions ─────────────────────────────────────────────────────
-export async function saveServiceAction(slug: string, payload: any) {
-  const supabase = await createClient();
-
+export async function saveServiceAction(slug: string, payload: any, previousSlug?: string) {
   const serviceRow = {
     slug,
     title: payload.title,
@@ -140,22 +232,19 @@ export async function saveServiceAction(slug: string, payload: any) {
     updated_at: new Date().toISOString(),
   };
 
-  const { error } = await supabase
-    .from("cms_services")
-    .upsert(serviceRow, { onConflict: "slug" });
-
-  if (error) throw new Error(error.message);
-
-  await recordAudit(supabase, "UPSERT", "cms_services", slug, serviceRow);
-  purgeTag(CMS_TAGS.service(slug));
-  purgeTag(CMS_TAGS.services);
-  return { success: true };
+  return saveCmsEntity({
+    tableName: "cms_services",
+    slug,
+    previousSlug,
+    payload,
+    row: serviceRow,
+    tagSingle: CMS_TAGS.service,
+    tagCollection: CMS_TAGS.services,
+  });
 }
 
 // ── 4. Industry Actions ────────────────────────────────────────────────────
-export async function saveIndustryAction(slug: string, payload: any) {
-  const supabase = await createClient();
-
+export async function saveIndustryAction(slug: string, payload: any, previousSlug?: string) {
   const industryRow = {
     slug,
     title: payload.title,
@@ -167,22 +256,19 @@ export async function saveIndustryAction(slug: string, payload: any) {
     updated_at: new Date().toISOString(),
   };
 
-  const { error } = await supabase
-    .from("cms_industries")
-    .upsert(industryRow, { onConflict: "slug" });
-
-  if (error) throw new Error(error.message);
-
-  await recordAudit(supabase, "UPSERT", "cms_industries", slug, industryRow);
-  purgeTag(CMS_TAGS.industry(slug));
-  purgeTag(CMS_TAGS.industries);
-  return { success: true };
+  return saveCmsEntity({
+    tableName: "cms_industries",
+    slug,
+    previousSlug,
+    payload,
+    row: industryRow,
+    tagSingle: CMS_TAGS.industry,
+    tagCollection: CMS_TAGS.industries,
+  });
 }
 
 // ── 5. Insight Actions ─────────────────────────────────────────────────────
-export async function saveInsightAction(slug: string, payload: any) {
-  const supabase = await createClient();
-
+export async function saveInsightAction(slug: string, payload: any, previousSlug?: string) {
   const insightRow = {
     slug,
     title: payload.title,
@@ -197,22 +283,19 @@ export async function saveInsightAction(slug: string, payload: any) {
     updated_at: new Date().toISOString(),
   };
 
-  const { error } = await supabase
-    .from("cms_insights")
-    .upsert(insightRow, { onConflict: "slug" });
-
-  if (error) throw new Error(error.message);
-
-  await recordAudit(supabase, "UPSERT", "cms_insights", slug, insightRow);
-  purgeTag(CMS_TAGS.insight(slug));
-  purgeTag(CMS_TAGS.insights);
-  return { success: true };
+  return saveCmsEntity({
+    tableName: "cms_insights",
+    slug,
+    previousSlug,
+    payload,
+    row: insightRow,
+    tagSingle: CMS_TAGS.insight,
+    tagCollection: CMS_TAGS.insights,
+  });
 }
 
 // ── 6. Job Opening Actions ─────────────────────────────────────────────────
-export async function saveOpeningAction(slug: string, payload: any) {
-  const supabase = await createClient();
-
+export async function saveOpeningAction(slug: string, payload: any, previousSlug?: string) {
   const openingRow = {
     slug,
     title: payload.title,
@@ -229,16 +312,15 @@ export async function saveOpeningAction(slug: string, payload: any) {
     updated_at: new Date().toISOString(),
   };
 
-  const { error } = await supabase
-    .from("cms_openings")
-    .upsert(openingRow, { onConflict: "slug" });
-
-  if (error) throw new Error(error.message);
-
-  await recordAudit(supabase, "UPSERT", "cms_openings", slug, openingRow);
-  purgeTag(CMS_TAGS.opening(slug));
-  purgeTag(CMS_TAGS.openings);
-  return { success: true };
+  return saveCmsEntity({
+    tableName: "cms_openings",
+    slug,
+    previousSlug,
+    payload,
+    row: openingRow,
+    tagSingle: CMS_TAGS.opening,
+    tagCollection: CMS_TAGS.openings,
+  });
 }
 
 // ── 7. Settings Actions ────────────────────────────────────────────────────

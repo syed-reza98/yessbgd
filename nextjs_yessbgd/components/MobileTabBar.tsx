@@ -49,6 +49,7 @@ export function MobileTabBar() {
               <li key={tab.href} className="flex-1">
                 <Link
                   href={tab.href}
+                  prefetch={false}
                   aria-label={t(`nav.${tab.key}`)}
                   aria-current={isActive ? "page" : undefined}
                   className={`relative flex flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-1.5 min-h-[48px] text-[11px] font-semibold tracking-tight transition-all active:scale-95 ${

@@ -325,7 +325,7 @@ export function PageEditorClient({ initialPage }: { initialPage: any }) {
                 type="text"
                 value={pageData.hero_image || ""}
                 onChange={(e) => setPageData({ ...pageData, hero_image: e.target.value })}
-                placeholder="/assets/heroes/yess_bangla_hero_bg.png"
+                placeholder="/assets/heroes/yess_bangla_hero_bg.webp"
                 className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 transition-all shadow-xs"
               />
             </div>

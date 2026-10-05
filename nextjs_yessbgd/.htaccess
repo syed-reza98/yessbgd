@@ -1,9 +1,11 @@
 # ====================================================================
-# cPanel Apache Configuration for Next.js (YESS Bangla)
-# Supports:
-# 1. cPanel "Setup Node.js App" (Phusion Passenger / CloudLinux)
-# 2. Apache Reverse Proxy to Node/PM2 (port 3000 or custom)
-# 3. Static Asset Direct Delivery & Aggressive Caching
+# cPanel Apache & LiteSpeed Configuration for Next.js (YESS Bangla)
+# High-Performance Optimization:
+# 1. Direct Static Asset Delivery (Bypasses Node.js for _next/static, public, and prerendered HTML)
+# 2. Aggressive 1-Year Immutable Caching for Static Chunks & Media Caching
+# 3. Gzip/Brotli/Deflate Compression
+# 4. HTTPS Redirection & Security Headers
+# 5. Phusion Passenger / Reverse Proxy fall-through for RSC & Dynamic APIs
 # ====================================================================
 
 # 1. Security Headers
@@ -14,33 +16,39 @@
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# 2. Gzip & Deflate Compression
+# 2. Compression (Apache mod_deflate & LiteSpeed)
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
-    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
-    AddOutputFilterByType DEFLATE application/json application/xml
-    AddOutputFilterByType DEFLATE image/svg+xml font/woff2 font/woff
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml font/woff2 font/woff font/ttf font/eot
 </IfModule>
 
-# 3. Browser Caching for Next.js Static Assets
+# 3. Browser Caching & Cache-Control Headers
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
 
-    # Immutable Next.js static chunks (cache 1 year)
-    <FilesMatch "\.(js|css|woff2|woff|ttf)$">
-        ExpiresDefault "access plus 1 year"
-        Header set Cache-Control "public, max-age=31536000, immutable"
-    </FilesMatch>
+    # Static assets (fonts, scripts, styles) - 1 year
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
 
-    # Images & Media
-    <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico)$">
-        ExpiresDefault "access plus 1 month"
-        Header set Cache-Control "public, max-age=2592000"
-    </FilesMatch>
+    # Images & Media - 1 month
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/avif "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+
+    # HTML documents - must always revalidate
+    ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
-# 4. Routing & Reverse Proxy Configuration
+# 4. High-Performance Static Delivery & Routing
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
@@ -49,19 +57,66 @@
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Serve physical files directly if they exist in public_html
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
+    # Tag _next/static requests for immutable caching
+    RewriteRule ^_next/static/ - [E=IMMUTABLE_ASSET:1]
+
+    # Rule 1: Direct High-Speed Serve for Next.js Static Chunks (Bypasses Node.js completely)
+    RewriteCond %{DOCUMENT_ROOT}/.next/static/$1 -f
+    RewriteRule ^_next/static/(.*)$ .next/static/$1 [L]
+
+    # Rule 2: Direct High-Speed Serve for Public Directory Assets (Bypasses Node.js completely)
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Rule 3: Serve existing physical files directly
+    RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # If running with Reverse Proxy / PM2 on localhost:3000
-    # Uncomment the following rules if NOT using cPanel's built-in "Setup Node.js App"
-    # RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
+    # Rule 4: Direct High-Speed Serve for Prerendered Static HTML Pages
+    # LiteSpeed serves static HTML in <15ms without waking Node.js worker pool.
+    # Excludes: RSC requests (?_rsc=... or RSC: 1 header), /admin routes, and /api routes.
+    RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+    RewriteCond %{QUERY_STRING} !.*_rsc.*
+    RewriteCond %{HTTP:RSC} ^$
+
+    # 4a. Homepage: GET / -> .next/server/app/index.html
+    RewriteCond %{DOCUMENT_ROOT}/.next/server/app/index.html -f
+    RewriteRule ^$ .next/server/app/index.html [L]
+
+    # 4b. Single-level routes: GET /about -> .next/server/app/about.html
+    RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+    RewriteCond %{REQUEST_URI} !^/(admin|api)
+    RewriteCond %{QUERY_STRING} !.*_rsc.*
+    RewriteCond %{HTTP:RSC} ^$
+    RewriteCond %{DOCUMENT_ROOT}/.next/server/app/$1.html -f
+    RewriteRule ^([^/]+)/?$ .next/server/app/$1.html [L]
+
+    # 4c. Nested routes: GET /about/leadership -> .next/server/app/about/leadership.html
+    RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+    RewriteCond %{REQUEST_URI} !^/(admin|api)
+    RewriteCond %{QUERY_STRING} !.*_rsc.*
+    RewriteCond %{HTTP:RSC} ^$
+    RewriteCond %{DOCUMENT_ROOT}/.next/server/app/$1.html -f
+    RewriteRule ^(.+)/?$ .next/server/app/$1.html [L]
+</IfModule>
+
+# Cache-Control Headers enforcement
+<IfModule mod_headers.c>
+    # 1-year immutable caching for static chunks
+    Header always set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE_ASSET
+
+    # Public image caching (1 month)
+    <FilesMatch "\.(webp|avif|jpg|jpeg|png|svg|ico)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+
+    # Prerendered HTML caching (revalidate for instant updates)
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
 </IfModule>
 
 <IfModule mod_proxy.c>
     ProxyPreserveHost On
-    # Uncomment if using Reverse Proxy mode:
-    # ProxyPassReverse / http://127.0.0.1:3000/
     RequestHeader set X-Forwarded-Proto "https" env=HTTPS
 </IfModule>

@@ -54,12 +54,13 @@ export default async function DynamicCMSPage({ params }: Props) {
         eyebrow={page.hero_eyebrow || "INSTITUTIONAL DOCUMENTATION"}
         title={formattedTitle}
         subtitle={page.hero_subtitle || "Sovereign Venture Ecosystem & Practice Capabilities"}
-        backgroundImage="/assets/heroes/global-network-bg.jpg"
+        backgroundImage="/assets/heroes/global-network-bg.webp"
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         <Link
           href="/"
+          prefetch={false}
           className="inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
         >
           <ArrowLeft className="w-4 h-4" />

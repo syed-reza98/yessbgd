@@ -137,6 +137,7 @@ export function InsightsDirectory({
               <div className="flex items-center gap-3 flex-wrap">
                 <Link
                   href={`/insights/${featured.slug}`}
+                  prefetch={false}
                   className="px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-xs sm:text-sm hover:bg-primary/90 transition-all shadow-md active:scale-95 inline-flex items-center gap-1.5 cursor-pointer"
                 >
                   <span>Read Full Whitepaper</span>
@@ -144,6 +145,7 @@ export function InsightsDirectory({
                 </Link>
                 <Link
                   href={`/insights/${featured.slug}`}
+                  prefetch={false}
                   className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold transition-all inline-flex items-center gap-1"
                 >
                   <Download className="w-4 h-4 text-amber-600" />
@@ -308,6 +310,7 @@ export function InsightsDirectory({
 
                   <Link
                     href={`/insights/${article.slug}`}
+                    prefetch={false}
                     className="inline-flex items-center gap-1 text-xs font-bold text-primary group-hover:translate-x-1 transition-transform"
                   >
                     <span>Read</span>

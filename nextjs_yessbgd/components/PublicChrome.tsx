@@ -51,7 +51,7 @@ function FooterWrapper({
   return (
     <>
       <Footer footerMenus={footerMenus} settings={settings} ventures={ventures} />
-      {mounted && pathname !== "/" && <MobileTabBar />}
+      {mounted && <MobileTabBar />}
     </>
   );
 }
@@ -72,8 +72,12 @@ export function PublicChrome({
 }: PublicChromeProps) {
   return (
     <>
-      <AutoTranslator />
-      <ScrollToTop />
+      <Suspense fallback={null}>
+        <AutoTranslator />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
       <Suspense fallback={null}>
         <HeaderWrapper
           headerMenus={headerMenus}

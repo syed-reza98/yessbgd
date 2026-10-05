@@ -59,7 +59,7 @@ export default async function InsightArticlePage({ params }: Props) {
       <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-14 sm:pt-32 sm:pb-18 lg:pt-36 overflow-hidden border-b border-slate-200/80">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/heroes/global-network-bg.jpg')` }}
+          style={{ backgroundImage: `url('/assets/heroes/global-network-bg.webp')` }}
         />
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
         <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -68,6 +68,7 @@ export default async function InsightArticlePage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <Link
             href="/insights"
+            prefetch={false}
             className="inline-flex items-center gap-2 text-xs font-semibold text-teal-700 hover:underline mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -198,6 +199,7 @@ export default async function InsightArticlePage({ params }: Props) {
               <Link
                 key={item.slug}
                 href={`/insights/${item.slug}`}
+                prefetch={false}
                 className="glass-card rounded-2xl p-6 border border-border hover:border-primary/40 transition-all group flex flex-col justify-between"
               >
                 <div className="space-y-2">

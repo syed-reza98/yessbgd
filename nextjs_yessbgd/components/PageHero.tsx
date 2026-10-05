@@ -100,14 +100,14 @@ export function PageHero({
               isCenter ? "justify-center" : ""
             }`}
           >
-            <Link href="/" className="hover:text-emerald-700 transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-emerald-700 transition-colors">
               {isBn ? "হোম" : "Home"}
             </Link>
             {breadcrumbs.map((crumb, idx) => (
               <span key={idx} className="flex items-center gap-1.5">
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-emerald-700 transition-colors">
+                  <Link href={crumb.href} prefetch={false} className="hover:text-emerald-700 transition-colors">
                     {translateCrumb(crumb.label)}
                   </Link>
                 ) : (

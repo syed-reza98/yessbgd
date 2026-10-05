@@ -27,7 +27,12 @@ import { ventures, type Venture } from "@/data/ventures";
 import { useLanguage } from "@/components/LanguageProvider";
 
 const VENTURE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  "shondhaan": Wrench,
+  "yess-service": Wrench,
   "yess-soft": Code2,
+  "yess-host": Server,
+  "yess-organic-haat": Leaf,
+  "the-daily-akash": Newspaper,
   "akash-tv": Tv,
   "akash-ott": PlayCircle,
   "akash-news": Newspaper,
@@ -36,14 +41,23 @@ const VENTURE_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   "yess-technology": Server,
   "yess-entertainment": CalendarHeart,
   "yess-event-management": Sparkles,
+  "yess-event": Sparkles,
   "yess-restaurant": ChefHat,
+  "yess-food": ChefHat,
   "yess-interior": LayoutGrid,
   "yess-overseas": Plane,
+  "yess-tourism": Plane,
   "yess-law-chamber": Scale,
+  "yess-legal-advice": Scale,
 };
 
 const ventureMetrics: Record<string, { label1: string; val1: string; label2: string; val2: string }> = {
+  "shondhaan": { label1: "Verified Pros", val1: "1,200+ Vetted", label2: "Satisfaction", val2: "99.4% Rated" },
+  "yess-service": { label1: "Verified Pros", val1: "1,200+ Vetted", label2: "Satisfaction", val2: "99.4% Rated" },
   "yess-soft": { label1: "Daily Volume", val1: "1M+ Core Txns", label2: "Reliability", val2: "99.98% SLA" },
+  "yess-host": { label1: "Uptime SLA", val1: "99.99% Cloud", label2: "Speed", val2: "<20ms Latency" },
+  "yess-organic-haat": { label1: "Agrarian Base", val1: "2,500+ Farmers", label2: "Pure Products", val2: "100% Certified" },
+  "the-daily-akash": { label1: "Daily Readers", val1: "500K+ Pageviews", label2: "Verified Desk", val2: "100% Fact-Checked" },
   "akash-tv": { label1: "Network Reach", val1: "4.8M Viewers", label2: "Broadcast Grid", val2: "64 Districts" },
   "akash-ott": { label1: "Subscribers", val1: "350K+ Active", label2: "Architecture", val2: "Zero-Buffer CDN" },
   "akash-news": { label1: "Daily Readers", val1: "500K+ Pageviews", label2: "Verified Desk", val2: "100% Fact-Checked" },
@@ -333,6 +347,7 @@ export function VenturesDirectory({
                   <div className="pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-primary">
                     <Link
                       href={`/ventures/${venture.slug}`}
+                      prefetch={false}
                       className="inline-flex items-center gap-1.5 hover:underline group-hover:translate-x-0.5 transition-transform min-h-[44px] py-2"
                     >
                       <span>Explore Venture Profile</span>
@@ -371,7 +386,7 @@ export function VenturesDirectory({
                   return (
                     <tr key={v.slug} className="hover:bg-muted/40 transition-colors">
                       <td className="p-4 font-bold text-foreground">
-                        <Link href={`/ventures/${v.slug}`} className="hover:text-primary flex items-center gap-2.5 py-1">
+                        <Link href={`/ventures/${v.slug}`} prefetch={false} className="hover:text-primary flex items-center gap-2.5 py-1">
                           <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 overflow-hidden p-0.5">
                             {v.logoUrl ? (
                               <Image
@@ -395,6 +410,7 @@ export function VenturesDirectory({
                       <td className="p-4 text-right">
                         <Link
                           href={`/ventures/${v.slug}`}
+                          prefetch={false}
                           className="inline-flex items-center gap-1 font-bold text-primary hover:underline min-h-[44px] py-2"
                         >
                           <span>View Profile</span>

@@ -37,6 +37,14 @@ export async function createClient(options?: { useCookies?: boolean }) {
           }
         },
       },
+      global: {
+        fetch: (url, options = {}) => {
+          return fetch(url, {
+            ...options,
+            signal: options.signal || AbortSignal.timeout(1200),
+          });
+        },
+      },
     }
   );
 }

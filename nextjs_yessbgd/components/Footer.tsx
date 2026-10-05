@@ -21,7 +21,7 @@ import { subscribeNewsletterAction } from "@/app/admin/actions";
 export function Footer({
   footerMenus,
   settings,
-  ventures: _ventures,
+  ventures,
 }: {
   footerMenus?: CmsMenuItem[];
   settings?: CompanySettings;
@@ -70,14 +70,18 @@ export function Footer({
     "Yess Bangla Private Limited";
 
   const defaultVentures = [
-    { slug: "yess-service", title: "Shondhaan Service", category: "Marketplace" },
+    { slug: "shondhaan", title: "Shondhaan", category: "Home & Professional Services" },
     { slug: "yess-organic-haat", title: "Organic Haat", category: "AgriTech & Food" },
     { slug: "yess-soft", title: "Yess Soft", category: "Enterprise Software" },
     { slug: "yess-host", title: "Yess Host", category: "Cloud & Hosting" },
-    { slug: "akash-news", title: "The Daily Akash", category: "News & Media" },
+    { slug: "the-daily-akash", title: "The Daily Akash", category: "News & Media" },
     { slug: "akash-tv", title: "Akash TV", category: "Television" },
     { slug: "akash-ott", title: "Akash OTT", category: "Streaming" },
   ];
+
+  const displayedVentures = (ventures && Array.isArray(ventures) && ventures.length > 0)
+    ? (ventures as any[]).slice(0, 7)
+    : defaultVentures;
 
   const govLinks = [
     { href: "/about", label: "About YESS Bangla", label_bn: "আমাদের সম্পর্কে" },
@@ -93,7 +97,8 @@ export function Footer({
   return (
     <footer
       id="contact"
-      className="bg-[#042017] text-white pt-14 pb-8 border-t border-[#093526]"
+      data-public-footer="true"
+      className="bg-[#042017] text-white pt-14 pb-20 lg:pb-8 border-t border-[#093526]"
     >
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
         {/* 5-Column Grid with Vertical Dividers */}
@@ -102,7 +107,7 @@ export function Footer({
           <div className="lg:pr-8 lg:border-r border-[#0E3D30] flex flex-col justify-between">
             <div>
               {/* Original Corporate Logo with light pill for contrast */}
-              <Link href="/" className="inline-block mb-3.5 group">
+              <Link href="/" prefetch={false} className="inline-block mb-3.5 group">
                 <div className="bg-white/95 hover:bg-white rounded-xl px-3 py-1.5 inline-flex items-center transition-transform group-hover:scale-105 shadow-sm">
                   <Image
                     src={logoUrl}
@@ -207,6 +212,7 @@ export function Footer({
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    prefetch={false}
                     className="hover:text-white transition-colors flex items-center justify-between group"
                   >
                     <span>{language === "bn" && item.label_bn ? item.label_bn : item.label}</span>
@@ -223,10 +229,11 @@ export function Footer({
               {language === "bn" ? "আমাদের ভেঞ্চারসমূহ" : "Sovereign Ventures"}
             </h4>
             <ul className="space-y-2.5 text-[12.5px] text-gray-300/80">
-              {defaultVentures.map((item) => (
+              {displayedVentures.map((item) => (
                 <li key={item.slug}>
                   <Link
                     href={`/ventures/${item.slug}`}
+                    prefetch={false}
                     className="hover:text-white transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
@@ -237,6 +244,7 @@ export function Footer({
               <li className="pt-1.5 border-t border-[#0E3D30]">
                 <Link
                   href="/ventures"
+                  prefetch={false}
                   className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors flex items-center gap-1"
                 >
                   <span>{language === "bn" ? "সকল ১৩টি ভেঞ্চার দেখুন" : "View All 13 Ventures"}</span>
@@ -290,6 +298,7 @@ export function Footer({
             <div className="mt-4 pt-3 border-t border-[#0E3D30]">
               <Link
                 href="/application-status"
+                prefetch={false}
                 className="inline-flex items-center gap-1.5 text-[11.5px] text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
@@ -360,6 +369,7 @@ export function Footer({
               footerMenus.map((link) => (
                 <Link
                   key={link.id || link.href}
+                  prefetch={false}
                   className="hover:text-white transition-colors"
                   href={link.href}
                 >
@@ -368,27 +378,27 @@ export function Footer({
               ))
             ) : (
               <>
-                <Link href="/ventures" className="hover:text-white transition-colors">
+                <Link href="/ventures" prefetch={false} className="hover:text-white transition-colors">
                   {language === "bn" ? "ভেঞ্চার পোর্টফোলিও" : "Ventures"}
                 </Link>
                 <span className="text-gray-600">|</span>
-                <Link href="/about/leadership" className="hover:text-white transition-colors">
+                <Link href="/about/leadership" prefetch={false} className="hover:text-white transition-colors">
                   {language === "bn" ? "পরিচালনা" : "Governance"}
                 </Link>
                 <span className="text-gray-600">|</span>
-                <Link href="/about/standards" className="hover:text-white transition-colors">
+                <Link href="/about/standards" prefetch={false} className="hover:text-white transition-colors">
                   {language === "bn" ? "টেকসই নীতি" : "Sustainability"}
                 </Link>
                 <span className="text-gray-600">|</span>
-                <Link href="/terms" className="hover:text-white transition-colors">
+                <Link href="/terms" prefetch={false} className="hover:text-white transition-colors">
                   {language === "bn" ? "ব্যবহারের শর্তাবলী" : "Terms & Conditions"}
                 </Link>
                 <span className="text-gray-600">|</span>
-                <Link href="/privacy" className="hover:text-white transition-colors">
+                <Link href="/privacy" prefetch={false} className="hover:text-white transition-colors">
                   {language === "bn" ? "গোপনীয়তা নীতি" : "Privacy Policy"}
                 </Link>
                 <span className="text-gray-600">|</span>
-                <Link href="/sitemap.xml" className="hover:text-white transition-colors">
+                <Link href="/sitemap.xml" prefetch={false} className="hover:text-white transition-colors">
                   {language === "bn" ? "সাইটম্যাপ" : "Sitemap"}
                 </Link>
               </>

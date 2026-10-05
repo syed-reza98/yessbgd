@@ -12,12 +12,26 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 interface HomeClientProps {
   sitePage?: unknown;
-  initialVentures?: unknown[];
+  initialVentures?: any[];
 }
 
-export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentures }: HomeClientProps) {
+export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientProps) {
   const { language } = useLanguage();
   const [isStoryVideoOpen, setIsStoryVideoOpen] = useState(false);
+
+  const venturesList = (initialVentures as any[]) || [];
+  const getVentureHref = (identifier: string, fallbackSlug: string) => {
+    const cleanId = identifier.toLowerCase();
+    const found = venturesList.find(
+      (v) =>
+        v.slug?.toLowerCase() === cleanId ||
+        v.title?.toLowerCase() === cleanId ||
+        v.title?.toLowerCase().includes(cleanId) ||
+        (cleanId === "shondhaan" && (v.slug === "yess-service" || v.slug === "shondhaan")) ||
+        (cleanId === "yess-service" && (v.slug === "shondhaan" || v.slug === "yess-service"))
+    );
+    return found ? `/ventures/${found.slug}` : `/ventures/${fallbackSlug}`;
+  };
 
   // Counter animations using IntersectionObserver
   const [counts, setCounts] = useState({
@@ -89,60 +103,59 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/Hero_Background.jpeg"
+            src="/assets/Hero_Background.webp"
             alt="Yess Bangla Modern Workspace"
             className="w-full h-full object-cover object-center"
-          />
-          {/* Mobile Vertical Gradient Overlay: Solid white on text, smooth fade downwards */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 via-[48%] to-transparent to-[75%] lg:hidden" />
-          {/* Desktop Progressive Horizontal Gradient Overlay for text contrast */}
-          <div
-            className="hidden lg:block absolute inset-0"
             style={{
-              background:
-                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 32%, rgba(255,255,255,0.50) 48%, rgba(255,255,255,0.15) 64%, rgba(255,255,255,0) 80%)",
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
             }}
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
           />
-          {/* Subtle Bottom soft fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white/80 to-transparent" />
         </div>
 
         {/* Hero Content Container */}
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 sm:px-6 pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
           <div className="flex flex-col lg:flex-row items-start justify-between">
-            {/* Left Column: Typography, Tagline, CTAs, Social Proof */}
-            <div className="w-full lg:w-[460px] pt-1 sm:pt-2">
+            {/* Left Column: Typography, Tagline, CTAs - NO card box behind text */}
+            <div className="w-full lg:w-[485px] pt-1 sm:pt-2 relative">
               {/* Tagline Pill */}
-              <div className="inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-emerald-100 px-3 py-1 rounded-full shadow-xs mb-4 sm:mb-5">
-                <span className="w-2 h-2 rounded-full bg-[#0E8A44]" />
-                <span className="text-[#0E8A44] text-[10.5px] sm:text-[11px] font-bold tracking-wider uppercase">
+              <div className="inline-flex items-center space-x-2 bg-white/95 backdrop-blur-sm border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" />
+                <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
                   {language === "bn"
                     ? "স্মার্ট বাংলাদেশ বিনির্মাণে একসাথে"
                     : "A Smarter Bangladesh Together"}
                 </span>
               </div>
 
-              {/* Main Bold Headline */}
-              <h1 className="text-[34px] sm:text-[42px] lg:text-[46px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5">
+              {/* Main Bold Headline with enhanced contrast & crisp text-shadow */}
+              <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5">
                 {language === "bn" ? (
                   <>
-                    <span className="block text-[#0D1E2D]">স্মার্ট সমাধানের জন্য</span>
-                    <span className="block text-[#0E8A44]">আপনার ইকোসিস্টেম</span>
+                    <span className="block text-[#030D18] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">স্মার্ট সমাধানের জন্য</span>
+                    <span className="block text-[#026E4D] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">আপনার ইকোসিস্টেম</span>
                   </>
                 ) : (
                   <>
-                    <span className="block text-[#0D1E2D]">Your Ecosystem for</span>
-                    <span className="block text-[#0E8A44]">Smart Solutions</span>
+                    <span className="block text-[#030D18] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">Your Ecosystem for</span>
+                    <span className="block text-[#026E4D] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">Smart Solutions</span>
                   </>
                 )}
               </h1>
 
-              {/* Description Paragraph */}
-              <p className="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-[#475569] mb-6 sm:mb-8 max-w-[390px]">
-                {language === "bn"
-                  ? "ইয়েস বাংলায় আমরা এমন ব্যবসা গড়ে তুলি যা মানুষের জীবনে বাস্তব ইতিবাচক পরিবর্তন আনে — পরিষেবা, তাজা খাবার, প্রযুক্তি, সংবাদ ও বিনোদনের মাধ্যমে।"
-                  : "At YESS Bangla, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
-              </p>
+              {/* Description Paragraph with high-contrast text, left accent, and crisp legibility */}
+              <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px]">
+                <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                  {language === "bn"
+                    ? "ইয়েস বাংলায় আমরা এমন ব্যবসা গড়ে তুলি যা মানুষের জীবনে বাস্তব ইতিবাচক পরিবর্তন আনে — পরিষেবা, তাজা খাবার, প্রযুক্তি, সংবাদ ও বিনোদনের মাধ্যমে।"
+                    : "At YESS Bangla, we build and grow businesses that bring real value to people — through services, fresh food, technology, news and entertainment."}
+                </p>
+              </div>
 
               {/* Action Buttons (Responsive row on mobile) */}
               <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-9 flex-wrap gap-y-2.5">
@@ -177,7 +190,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             <div className="relative w-full h-[290px] sm:h-[320px] lg:h-[450px] lg:flex-1 mt-6 lg:mt-0 pointer-events-none">
               {/* 1. Shondhaan */}
               <Link
-                href="/ventures/yess-service"
+                href={getVentureHref("shondhaan", "shondhaan")}
+                prefetch={false}
                 className="float-card-1 absolute top-[4%] left-[2%] sm:left-[4%] lg:top-[12%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -186,6 +200,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="Shondhaan"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -201,7 +216,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 2. Organic Haat */}
               <Link
-                href="/ventures/yess-organic-haat"
+                href={getVentureHref("yess-organic-haat", "yess-organic-haat")}
+                prefetch={false}
                 className="float-card-2 absolute top-[34%] left-[3%] sm:left-[5%] lg:top-[36%] lg:left-[30%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -210,6 +226,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="Organic Haat"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -225,7 +242,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 3. Yess Soft */}
               <Link
-                href="/ventures/yess-soft"
+                href={getVentureHref("yess-soft", "yess-soft")}
+                prefetch={false}
                 className="float-card-3 absolute top-[64%] left-[1%] sm:left-[3%] lg:top-[60%] lg:left-[28%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-2 lg:rotate-0 scale-[0.84] sm:scale-100 origin-left transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -234,6 +252,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="Yess Soft"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -249,7 +268,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 4. The Daily Akash */}
               <Link
-                href="/ventures/the-daily-akash"
+                href={getVentureHref("the-daily-akash", "the-daily-akash")}
+                prefetch={false}
                 className="float-card-4 absolute top-[0%] right-[1%] sm:right-[3%] lg:top-[8%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-3 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -258,6 +278,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="The Daily Akash"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -273,7 +294,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 5. Akash TV */}
               <Link
-                href="/ventures/akash-tv"
+                href={getVentureHref("akash-tv", "akash-tv")}
+                prefetch={false}
                 className="float-card-5 absolute top-[26%] right-[2%] sm:right-[4%] lg:top-[30%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -282,6 +304,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="Akash TV"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -297,7 +320,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 6. Akash OTT */}
               <Link
-                href="/ventures/akash-ott"
+                href={getVentureHref("akash-ott", "akash-ott")}
+                prefetch={false}
                 className="float-card-6 absolute top-[52%] right-[2%] sm:right-[4%] lg:top-[52%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto -rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -306,6 +330,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="Akash OTT"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -321,7 +346,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               {/* 7. Yess Host */}
               <Link
-                href="/ventures/yess-host"
+                href={getVentureHref("yess-host", "yess-host")}
+                prefetch={false}
                 className="float-card-7 absolute top-[76%] right-[1%] sm:right-[3%] lg:top-[74%] lg:right-[1.5%] z-20 bg-white/95 hover:bg-white backdrop-blur-sm rounded-[12px] sm:rounded-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-gray-100/80 hover:border-gray-200 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto rotate-1 lg:rotate-0 scale-[0.84] sm:scale-100 origin-right transition-all cursor-pointer group"
               >
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform overflow-hidden">
@@ -330,6 +356,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
                     alt="Yess Host"
                     width={36}
                     height={36}
+                    unoptimized
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -493,6 +520,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             <div className="hidden sm:flex items-center shrink-0">
               <Link
                 href="/ventures"
+                prefetch={false}
                 className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white hover:from-[#0B7339] hover:via-[#047857] hover:to-[#0A5A5A] text-[13px] font-bold shadow-md shadow-emerald-900/15 hover:shadow-lg hover:shadow-emerald-900/25 hover:scale-[1.03] active:scale-95 transition-all duration-200 group cursor-pointer"
               >
                 <span>{language === "bn" ? "আরও লোড হচ্ছে..." : "Loading More..."}</span>
@@ -511,8 +539,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_shondhaan_pure.jpg"
+                  src="/assets/card_shondhaan_pure.webp"
                   alt="Shondhaan Service Marketplace App"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 {/* Overlapping Icon Circle with White Ring */}
@@ -547,7 +577,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             {/* Card Button */}
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-service"
+                href={getVentureHref("shondhaan", "shondhaan")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#0E8A44] hover:bg-[#0E8A44] text-[#0E8A44] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Shondhaan</span>
@@ -562,8 +593,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_organichaat_pure.jpg"
+                  src="/assets/card_organichaat_pure.webp"
                   alt="Organic Haat Fresh Produce"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#16A34A] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -603,7 +636,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-organic-haat"
+                href={getVentureHref("yess-organic-haat", "yess-organic-haat")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#16A34A] hover:bg-[#16A34A] text-[#16A34A] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Organic Haat</span>
@@ -618,8 +652,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_yesssoft_pure.jpg"
+                  src="/assets/card_yesssoft_pure.webp"
                   alt="Yess Soft Software & IT Solutions"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#2563EB] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -656,7 +692,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-soft"
+                href={getVentureHref("yess-soft", "yess-soft")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#2563EB] hover:bg-[#2563EB] text-[#2563EB] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Yess Soft</span>
@@ -671,8 +708,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_yesshost_pure.jpg"
+                  src="/assets/card_yesshost_pure.webp"
                   alt="Yess Host Cloud & Hosting Services"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#7C3AED] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -703,7 +742,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/yess-host"
+                href={getVentureHref("yess-host", "yess-host")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#7C3AED] hover:bg-[#7C3AED] text-[#7C3AED] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Yess Host</span>
@@ -721,8 +761,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_dailyakash_pure.jpg"
+                  src="/assets/card_dailyakash_pure.webp"
                   alt="The Daily Akash Journalism & Media"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#EA580C] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -757,6 +799,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             <div className="px-5 pb-5 pt-2">
               <Link
                 href="/services/akash-news"
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#EA580C] hover:bg-[#EA580C] text-[#EA580C] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore The Daily Akash</span>
@@ -771,8 +814,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_akashtv_pure.jpg"
+                  src="/assets/card_akashtv_pure.webp"
                   alt="Akash TV Broadcast Studio"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#DB2777] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -804,7 +849,8 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             </div>
             <div className="px-5 pb-5 pt-2">
               <Link
-                href="/ventures/akash-tv"
+                href={getVentureHref("akash-tv", "akash-tv")}
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#DB2777] hover:bg-[#DB2777] text-[#DB2777] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Akash TV</span>
@@ -819,8 +865,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
               <div className="relative overflow-visible h-[116px] bg-gray-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/card_akashott_pure.jpg"
+                  src="/assets/card_akashott_pure.webp"
                   alt="Akash OTT Streaming Platform"
+                  loading="lazy"
+                  decoding="async"
                   className="card-visual w-full h-full object-cover object-center"
                 />
                 <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-full bg-[#8B5CF6] ring-4 ring-white shadow-md flex items-center justify-center text-white z-10">
@@ -850,6 +898,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
             <div className="px-5 pb-5 pt-2">
               <Link
                 href="/services/akash-ott"
+                prefetch={false}
                 className="inline-flex items-center space-x-1.5 border border-[#8B5CF6] hover:bg-[#8B5CF6] text-[#8B5CF6] hover:text-white text-[12px] font-semibold px-4 py-1.5 rounded-full transition-colors"
               >
                 <span>Explore Akash OTT</span>
@@ -869,8 +918,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
           <div className="absolute right-0 top-0 bottom-0 w-full md:w-[62%] z-0 pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/impact_bg_perfect.jpg"
+              src="/assets/impact_bg_perfect.webp"
               alt="Dhaka City Skyline Panorama"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-right"
             />
             {/* Dark Green Gradient Overlay on the left */}
@@ -912,6 +963,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               <Link
                 href="/about/standards"
+                prefetch={false}
                 className="inline-flex items-center space-x-2 bg-white hover:bg-gray-100 text-[#0D1E2D] text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm transition-colors"
               >
                 <span>{language === "bn" ? "বিস্তারিত প্রভাব দেখুন" : "See Our Impact"}</span>
@@ -1025,8 +1077,10 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
           <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[62%] lg:w-[60%] overflow-hidden pointer-events-none z-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/cta_right_half.jpg"
+              src="/assets/cta_right_half.webp"
               alt="Be a Part of A Smarter Bangladesh"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
             {/* Dark Green Gradient Overlay on left side of image for seamless blend */}
@@ -1068,6 +1122,7 @@ export function HomeClient({ sitePage: _sitePage, initialVentures: _initialVentu
 
               <Link
                 href="/contact"
+                prefetch={false}
                 className="inline-flex items-center space-x-2 bg-white hover:bg-gray-100 text-[#0D1E2D] text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm transition-colors"
               >
                 <span>{language === "bn" ? "যোগাযোগ করুন" : "Get in Touch"}</span>
