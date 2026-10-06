@@ -851,11 +851,53 @@ export async function getCompanySettings(): Promise<CompanySettings> {
     }
 
     const brand = data.find((s) => s.key === "branding")?.value || {};
-    const contact = data.find((s) => s.key === "contact")?.value || {};
+    const contactRaw = (data.find((s) => s.key === "contact")?.value || {}) as any;
     const offices = data.find((s) => s.key === "offices")?.value || {};
     const socials = data.find((s) => s.key === "socials")?.value || {};
     const header = data.find((s) => s.key === "header")?.value || {};
     const footer = data.find((s) => s.key === "footer")?.value || {};
+
+    // Normalize contact fields: ensure phone & whatsapp are strings, not objects
+    const normalizedPhone =
+      typeof contactRaw.phone === "object" && contactRaw.phone !== null
+        ? String(contactRaw.phone.display || contactRaw.phone.tel || DEFAULT_COMPANY_SETTINGS.contact.phone)
+        : (typeof contactRaw.phone === "string" && contactRaw.phone.trim() ? contactRaw.phone : DEFAULT_COMPANY_SETTINGS.contact.phone);
+
+    const normalizedWhatsapp =
+      typeof contactRaw.whatsapp === "object" && contactRaw.whatsapp !== null
+        ? String(contactRaw.whatsapp.display || contactRaw.whatsapp.tel || DEFAULT_COMPANY_SETTINGS.contact.whatsapp)
+        : (typeof contactRaw.whatsapp === "string" && contactRaw.whatsapp.trim() ? contactRaw.whatsapp : (DEFAULT_COMPANY_SETTINGS.contact.whatsapp || normalizedPhone));
+
+    const normalizedEmail =
+      typeof contactRaw.email === "string" && contactRaw.email.trim()
+        ? contactRaw.email
+        : DEFAULT_COMPANY_SETTINGS.contact.email;
+
+    const normalizedAddress =
+      typeof contactRaw.address === "string" && contactRaw.address.trim()
+        ? contactRaw.address
+        : (typeof contactRaw.combinedAddress === "string" && contactRaw.combinedAddress.trim()
+            ? contactRaw.combinedAddress
+            : (typeof contactRaw.office === "string" && contactRaw.office.trim()
+                ? contactRaw.office
+                : DEFAULT_COMPANY_SETTINGS.contact.address));
+
+    // Auto-heal DB record if phone was stored as a nested object
+    if (typeof contactRaw.phone === "object" && contactRaw.phone !== null) {
+      db.update(cmsSettings)
+        .set({
+          value: {
+            ...contactRaw,
+            phone: normalizedPhone,
+            whatsapp: normalizedWhatsapp,
+            email: normalizedEmail,
+            address: normalizedAddress,
+          },
+          updatedAt: new Date(),
+        })
+        .where(eq(cmsSettings.key, "contact"))
+        .catch((e) => console.warn("Notice: background settings auto-heal skipped:", e?.message));
+    }
 
     return {
       branding: {
@@ -864,7 +906,11 @@ export async function getCompanySettings(): Promise<CompanySettings> {
       },
       contact: {
         ...DEFAULT_COMPANY_SETTINGS.contact,
-        ...contact,
+        ...contactRaw,
+        phone: normalizedPhone,
+        whatsapp: normalizedWhatsapp,
+        email: normalizedEmail,
+        address: normalizedAddress,
       },
       offices: {
         headquarters: {

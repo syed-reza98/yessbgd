@@ -54,8 +54,16 @@ export function Footer({
     }
   };
 
-  const phoneDisplay = settings?.contact?.phone || "+880 1805-464343";
-  const phoneTel = phoneDisplay.replace(/[^0-9+]/g, "");
+  const rawPhone = settings?.contact?.phone;
+  const phoneDisplay =
+    (typeof rawPhone === "string"
+      ? rawPhone
+      : typeof (rawPhone as any)?.display === "string"
+      ? (rawPhone as any).display
+      : typeof (rawPhone as any)?.tel === "string"
+      ? (rawPhone as any).tel
+      : "") || "+880 1805-464343";
+  const phoneTel = String(phoneDisplay).replace(/[^0-9+]/g, "");
   const emailDisplay = settings?.contact?.email || "yessbangla.bd@gmail.com";
   const addressDisplay =
     (language === "bn" ? settings?.contact?.addressBn : settings?.contact?.address) ||

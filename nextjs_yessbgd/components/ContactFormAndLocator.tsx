@@ -27,6 +27,26 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
   const { language } = useLanguage();
   const isBn = language === "bn";
 
+  const rawPhone = settings?.contact?.phone;
+  const phoneDisplay =
+    (typeof rawPhone === "string"
+      ? rawPhone
+      : typeof (rawPhone as any)?.display === "string"
+      ? (rawPhone as any).display
+      : typeof (rawPhone as any)?.tel === "string"
+      ? (rawPhone as any).tel
+      : "") || "+880 1805-464343";
+
+  const rawWhatsapp = settings?.contact?.whatsapp;
+  const whatsappDisplay =
+    (typeof rawWhatsapp === "string"
+      ? rawWhatsapp
+      : typeof (rawWhatsapp as any)?.display === "string"
+      ? (rawWhatsapp as any).display
+      : typeof (rawWhatsapp as any)?.tel === "string"
+      ? (rawWhatsapp as any).tel
+      : "") || phoneDisplay;
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -294,13 +314,13 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
           </p>
           <div className="flex flex-wrap gap-2.5 text-xs">
             <a
-              href={`https://wa.me/${(settings?.contact?.whatsapp || "+880 1805-464343").replace(/[^0-9]/g, "")}`}
+              href={`https://wa.me/${whatsappDisplay.replace(/[^0-9]/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
               <MessageSquare className="w-3.5 h-3.5 text-primary" />
-              <span>WhatsApp: {settings?.contact?.whatsapp || "+880 1805-464343"}</span>
+              <span>WhatsApp: {whatsappDisplay}</span>
             </a>
             <a
               href={`mailto:${settings?.contact?.investEmail || "invest@yessbgd.com"}`}
@@ -430,7 +450,7 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               <div>
                 <strong className="text-foreground block font-semibold">Direct Telephony Lines</strong>
                 <span>
-                  Primary: {settings?.contact?.phone || "+880 1805-464343"} | WhatsApp: {settings?.contact?.whatsapp || "+880 1805-464343"}
+                  Primary: {phoneDisplay} | WhatsApp: {whatsappDisplay}
                 </span>
               </div>
             </div>

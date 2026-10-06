@@ -485,10 +485,18 @@ WHERE NOT EXISTS (
 
   // 9. Company Settings
   sqlStatements.push(`\n-- ── 9. Corporate Settings ────────────────────────────────`);
+  const contactPhone = typeof (companyContact as any).phone === "object"
+    ? ((companyContact as any).phone.display || (companyContact as any).phone.tel || "+880 1805-464343")
+    : ((companyContact as any).phone || "+880 1805-464343");
   const settingsEntries = [
     { key: "branding", label: "Corporate Identity", group: "general", value: { companyName: "YESS Bangladesh", companyNameBn: "ইয়েস বাংলাদেশ", legalName: "YESS Strategic Holdings Ltd.", registrationNo: "C-184920", tagline: "Sovereign Digital Platforms & Venture Studio" } },
-    { key: "contact", label: "Executive Contact", group: "contact", value: companyContact },
-    { key: "socials", label: "Official Social Accounts", group: "socials", value: companyContact.socials },
+    { key: "contact", label: "Executive Contact", group: "contact", value: { ...companyContact, phone: contactPhone, whatsapp: "+880 1805-464343" } },
+    { key: "socials", label: "Official Social Accounts", group: "socials", value: (companyContact as any).socials || {
+      twitter: "https://x.com/yessbangla",
+      youtube: "https://youtube.com/@yessbangla",
+      facebook: "https://facebook.com/yessbangla",
+      linkedin: "https://linkedin.com/company/yessbangla",
+    } },
   ];
   for (const s of settingsEntries) {
     sqlStatements.push(`

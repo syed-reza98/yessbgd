@@ -1,7 +1,7 @@
 -- ========================================================
 -- YESS BANGLADESH: cPanel PostgreSQL Complete Setup
 -- Database: yessban1_yessbd
--- Generated At: 2026-10-04T12:33:42.014Z
+-- Generated At: 2026-10-06T14:26:38.856Z
 -- ========================================================
 
 DROP TABLE IF EXISTS "audit_logs" CASCADE;
@@ -292,7 +292,7 @@ INSERT INTO users (id, email, password, name, role, created_at, updated_at)
 VALUES (
   '321ad97d-ba98-4c96-a6b4-bc6f106c06e8',
   'admin@yessbgd.com',
-  '$2b$10$RkHYJIRXrPhg59QLM7PoaeSZvryF2TV.4BkXeXCn2FeD3GOSex4.O',
+  '$2b$10$X79vtTQcmYaCdcD1Ycp.Y.I7doq0PBEba0qMxWQ3gVqorGaIUUGfi',
   'Executive Administrator',
   'admin',
   NOW(),
@@ -1763,9 +1763,9 @@ VALUES ('branding', 'Corporate Identity', 'general', '{"companyName":"YESS Bangl
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
 
 INSERT INTO cms_settings (key, label, "group", value, sort_order)
-VALUES ('contact', 'Executive Contact', 'contact', '{"_comment":"Single source of truth for Yess Bangla contact details. Mirrors src/lib/companyContact.ts. Keep both files in sync; the Python letterhead/profile generators read this JSON.","legalName":"Yess Bangla Private Limited","shortName":"YESS Bangla","phone":{"display":"+880 1805-464343","tel":"+8801805464343"},"email":"yessbangla.bd@gmail.com","web":"www.yessbd.com","webUrl":"https://www.yessbd.com","office":"Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)","corporateOffice":"Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)","combinedAddress":"Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)"}'::jsonb, 1)
+VALUES ('contact', 'Executive Contact', 'contact', '{"_comment":"Single source of truth for Yess Bangla contact details. Mirrors src/lib/companyContact.ts. Keep both files in sync; the Python letterhead/profile generators read this JSON.","legalName":"Yess Bangla Private Limited","shortName":"YESS Bangla","phone":"+880 1805-464343","email":"yessbangla.bd@gmail.com","web":"www.yessbd.com","webUrl":"https://www.yessbd.com","office":"Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)","corporateOffice":"Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)","combinedAddress":"Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)","whatsapp":"+880 1805-464343"}'::jsonb, 1)
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
 
 INSERT INTO cms_settings (key, label, "group", value, sort_order)
-VALUES ('socials', 'Official Social Accounts', 'socials', NULL, 1)
+VALUES ('socials', 'Official Social Accounts', 'socials', '{"twitter":"https://x.com/yessbangla","youtube":"https://youtube.com/@yessbangla","facebook":"https://facebook.com/yessbangla","linkedin":"https://linkedin.com/company/yessbangla"}'::jsonb, 1)
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();

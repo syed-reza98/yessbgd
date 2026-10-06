@@ -133,7 +133,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
             </span>
             <span className="hidden xl:inline text-foreground/20">|</span>
             <span className="hidden xl:inline text-foreground/70 text-[11px]">
-              Recruitment Hotline: <strong className="text-foreground font-semibold">{settings?.contact?.phone || "+880 9638-445566"}</strong>
+              Recruitment Hotline: <strong className="text-foreground font-semibold">{typeof settings?.contact?.phone === "string" ? settings.contact.phone : (settings?.contact?.phone as any)?.display || "+880 9638-445566"}</strong>
             </span>
           </div>
 

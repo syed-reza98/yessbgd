@@ -17,7 +17,7 @@ CPANEL_HOST = "https://yessbd.com:2083"
 USERNAME = "yessban1"
 PASSWORD = "24QZdDkg4!9S@v"
 TARGET_DIR = "/home/yessban1/yessbd.com"
-ZIP_FILE = "deploy-cpanel.zip"
+ZIP_FILE = sys.argv[1] if len(sys.argv) > 1 else ("deploy-update.zip" if os.path.exists("deploy-update.zip") else "deploy-cpanel.zip")
 
 def main():
     if not os.path.exists(ZIP_FILE):
