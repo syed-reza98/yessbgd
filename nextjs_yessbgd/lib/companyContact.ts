@@ -39,7 +39,7 @@ export const COMPANY_CONTACT: CompanyContact = {
   legalName: "Yess Bangla Private Limited",
   shortName: "YESS Bangla",
   phone: { display: PHONE_DISPLAY, tel: PHONE_TEL },
-  email: "yessbangla.bd@gmail.com",
+  email: "info@yessbd.com",
   web: "www.yessbd.com",
   webUrl: "https://www.yessbd.com",
   office:

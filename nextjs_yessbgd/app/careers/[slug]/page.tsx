@@ -51,16 +51,27 @@ export default async function JobDetailPage({ params }: Props) {
   return (
     <div className="space-y-12 pb-20">
       {/* Top Banner (Signature Light Corporate Hero) */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-14 sm:pt-32 sm:pb-18 lg:pt-36 overflow-hidden border-b border-slate-200/80">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/about-team-bd.jpg')` }}
-        />
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-14 sm:pt-10 lg:pt-14">
+        {/* Backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/about-team-bd.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
           <Link
             href="/careers"
             className="inline-flex items-center gap-2 text-xs font-semibold text-teal-700 hover:underline mb-6"
@@ -81,11 +92,11 @@ export default async function JobDetailPage({ params }: Props) {
             </span>
           </div>
 
-          <h1 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+          <h1 className="font-black text-[30px] sm:text-[38px] lg:text-[44px] text-[#030D18] tracking-tight leading-[1.15] mb-4 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
             {job.title}
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl leading-relaxed mb-6">
+          <p className="text-[14.5px] sm:text-[15.5px] text-[#051321] font-bold max-w-3xl leading-[1.7] mb-6 [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
             {job.summary}
           </p>
 

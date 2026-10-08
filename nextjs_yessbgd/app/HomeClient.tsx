@@ -53,6 +53,12 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
   }, [isStoryVideoOpen]);
 
   useEffect(() => {
+    const targets = { years: 11, team: 500, districts: 64 };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setCounts(targets);
+      setStatsAnimated(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -61,7 +67,6 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
             const duration = 1200; // ms
             const startTime = performance.now();
 
-            const targets = { years: 11, team: 500, districts: 64 };
 
             const step = (now: number) => {
               const progress = Math.min((now - startTime) / duration, 1);
@@ -521,9 +526,9 @@ export function HomeClient({ sitePage: _sitePage, initialVentures }: HomeClientP
               <Link
                 href="/ventures"
                 prefetch={false}
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white hover:from-[#0B7339] hover:via-[#047857] hover:to-[#0A5A5A] text-[13px] font-bold shadow-md shadow-emerald-900/15 hover:shadow-lg hover:shadow-emerald-900/25 hover:scale-[1.03] active:scale-95 transition-all duration-200 group cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0E8A44] hover:bg-[#0a7539] text-white text-[13px] font-bold shadow-sm hover:shadow transition-all duration-200 group cursor-pointer"
               >
-                <span>{language === "bn" ? "আরও লোড হচ্ছে..." : "Loading More..."}</span>
+                <span>{language === "bn" ? "সব ভেঞ্চার দেখুন" : "View All Ventures"}</span>
                 <ArrowRight className="w-4 h-4 text-white/90 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
             </div>

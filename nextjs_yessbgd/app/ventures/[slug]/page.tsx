@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { ventures } from "@/data/ventures";
 import { getVentures, getVentureBySlug } from "@/lib/cms";
-import { PageHero } from "@/components/PageHero";
 
 export const instant = false;
 
@@ -99,35 +98,26 @@ export default async function SingleVenturePage({
   return (
     <div className="flex flex-col w-full">
       {/* Venture Hero */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-16 sm:pt-32 sm:pb-24 lg:pt-36 overflow-hidden border-b border-slate-200/80">
-        {/* Dynamic Background Image Layer (Optimized for Browser Preload Scanner) */}
-        <div className="absolute inset-0 opacity-28 mix-blend-multiply pointer-events-none overflow-hidden">
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-16 sm:pt-10 sm:pb-24 lg:pt-14">
+        {/* Dynamic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none overflow-hidden">
           <Image
             src={heroBgImage}
             alt=""
             fill
             priority
-            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center pointer-events-none select-none"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
           />
         </div>
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        
-        <div className="container-tight relative z-10">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-300">/</span>
-            <Link href="/ventures" prefetch={false} className="hover:text-teal-700 transition-colors">
-              Ventures
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-teal-700">{venture.title}</span>
-          </div>
 
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             {/* Minted Medallion Coin */}
             <div className="relative shrink-0">
@@ -159,13 +149,13 @@ export default async function SingleVenturePage({
                   </span>
                 )}
               </div>
-              <h1 className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight">
+              <h1 className="font-black text-[34px] sm:text-[42px] lg:text-[47px] text-[#030D18] tracking-tight leading-[1.12] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
                 {venture.title}
               </h1>
-              <p className="text-base sm:text-xl text-amber-700 font-semibold max-w-2xl">
+              <p className="text-base sm:text-xl text-[#026E4D] font-semibold max-w-2xl [text-shadow:_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
                 {venture.tagline}
               </p>
-              <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+              <p className="text-[14.5px] sm:text-[15.5px] text-[#051321] font-bold max-w-2xl leading-[1.7] [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
                 {venture.desc}
               </p>
             </div>

@@ -17,7 +17,6 @@ import {
   KeyRound,
   TrendingUp,
   FileCheck,
-  Sparkles,
 } from "lucide-react";
 import type { CmsSitePage } from "@/lib/cms";
 
@@ -120,67 +119,64 @@ export function StandardsClient({ sitePage }: StandardsClientProps) {
   return (
     <div className="flex flex-col w-full">
       {/* 1. Page Hero & Standards Telemetry (Modern Light Theme) */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 overflow-hidden border-b border-slate-200/80">
-        {/* Background Image Layer */}
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-30"
-          style={{ backgroundImage: "url('/assets/heroes/hero_6a896e39e25bd.jpg')" }}
-        />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
+        {/* Photographic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/heroes/hero_6a896e39e25bd.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-emerald-700 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-300">/</span>
-            <Link href="/about" className="hover:text-emerald-700 transition-colors">
-              About Us
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-emerald-800 font-bold">Quality Standards &amp; QA</span>
-          </nav>
-
+        <div className="relative w-full max-w-[1200px] mx-auto px-5 sm:px-6 z-10">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-              <span>{sitePage?.hero_eyebrow || "— THE YESS QUALITY ASSURANCE COMPACT —"}</span>
+            <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+              <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
+                {sitePage?.hero_eyebrow || "The YESS quality assurance compact"}
+              </span>
             </div>
 
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-6 leading-tight">
+            <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
               {sitePage?.hero_title ? (
-                sitePage.hero_title
+                <span className="block text-[#030D18]">{sitePage.hero_title}</span>
               ) : (
                 <>
-                  Engineering Standards &amp;{" "}
-                  <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
-                    Quality Benchmarks
-                  </span>
-                  .
+                  <span className="block text-[#030D18]">Engineering Standards &amp;</span>
+                  <span className="block text-[#026E4D]">Quality Benchmarks</span>
                 </>
               )}
             </h1>
 
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed max-w-3xl mb-10">
-              {sitePage?.hero_subtitle ||
-                "Six institutional quality commitments that govern every line of code, infrastructure terraform blueprint, and SLA handover across all YESS subsidiaries."}
-            </p>
+            <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px]">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                {sitePage?.hero_subtitle ||
+                  "Six institutional quality commitments that govern every line of code, infrastructure terraform blueprint, and SLA handover across all YESS subsidiaries."}
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
             {metrics.map((metric: any) => {
               const Icon = typeof metric.icon === "string" ? ShieldCheck : (metric.icon || ShieldCheck);
               return (
                 <div
                   key={metric.label}
-                  className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl p-6 hover:border-emerald-500/50 hover:shadow-md transition-all duration-200 group shadow-xs"
+                  className="bg-white/95 border border-gray-100/80 rounded-[14px] p-6 shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-shadow duration-200 group"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-emerald-700 group-hover:scale-105 transition-transform">
+                    <span className="text-3xl sm:text-4xl font-extrabold text-[#0D1E2D] group-hover:text-[#0E8A44] transition-colors">
                       {metric.value}
                     </span>
                     <Icon className="w-6 h-6 text-emerald-600" />

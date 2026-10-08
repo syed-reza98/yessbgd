@@ -779,9 +779,9 @@ const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
   },
   contact: {
     phone: (companyContact as any).phone?.display || "+880 1805-464343",
-    email: (companyContact as any).email || "yessbangla.bd@gmail.com",
-    investEmail: "invest@yessbgd.com",
-    careersEmail: "careers@yessbgd.com",
+    email: (companyContact as any).email || "info@yessbd.com",
+    investEmail: "info@yessbd.com",
+    careersEmail: "info@yessbangla.com",
     whatsapp: "+880 1805-464343",
     address: "Section-11, Block-A, Main Road-3, Plot-10, Mirpur, Pallabi, Dhaka-1216 (Metro Rail Pillar -312)",
     addressBn: "সেকশন-১১, ব্লক-এ, মেইন রোড-৩, প্লট-১০, মিরপুর, পল্লবী, ঢাকা-১২১৬ (মেট্রোরেল পিলার -৩১২)",

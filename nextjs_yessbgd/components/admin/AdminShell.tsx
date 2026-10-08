@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   Briefcase,
   Mail,
-  ShieldCheck,
   Database,
   Layers,
   FileText,
@@ -20,9 +19,6 @@ import {
   ListTree,
   Image as ImageIcon,
   Settings,
-  Search,
-  Bell,
-  Sparkles,
   Users,
   ExternalLink,
   Sliders,
@@ -247,14 +243,6 @@ export function AdminShell({
 
         {/* Footer Quick Links & Profile */}
         <div className="p-3 border-t border-slate-200 space-y-2 bg-slate-50/70">
-          <Link
-            href="/"
-            target="_blank"
-            className="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
-          >
-            <ExternalLink className="w-4 h-4 text-teal-700" />
-            {!collapsed && <span>View Public Site</span>}
-          </Link>
           <div className="flex items-center justify-between px-3 py-2 bg-white rounded-xl border border-slate-200 shadow-xs">
             <div className="flex items-center gap-2.5 truncate">
               <div className="h-7 w-7 rounded-lg bg-[#0d6e6e] text-white flex items-center justify-center font-bold text-xs shrink-0">

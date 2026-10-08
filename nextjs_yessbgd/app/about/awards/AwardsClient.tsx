@@ -18,7 +18,6 @@ import {
   Lock,
   Landmark,
   BadgeCheck,
-  Sparkles,
 } from "lucide-react";
 import type { CmsSitePage } from "@/lib/cms";
 
@@ -100,72 +99,69 @@ export function AwardsClient({ sitePage }: AwardsClientProps) {
   return (
     <div className="flex flex-col w-full">
       {/* Section 1: Hero & Trust Pills (Modern Light Theme) */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 overflow-hidden border-b border-slate-200/80">
-        {/* Background Image Layer */}
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-30"
-          style={{ backgroundImage: "url('/assets/heroes/hero_6a8975c2b742a.jpg')" }}
-        />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
+        {/* Photographic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/heroes/hero_6a8975c2b742a.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-emerald-700 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-300">/</span>
-            <Link href="/about" className="hover:text-emerald-700 transition-colors">
-              About Us
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-emerald-800 font-bold">Awards &amp; Recognition</span>
-          </nav>
-
+        <div className="relative w-full max-w-[1200px] mx-auto px-5 sm:px-6 z-10">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-              <span>{sitePage?.hero_eyebrow || "— RECOGNITION, ACCREDITATIONS & ALLIANCES —"}</span>
+            <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+              <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
+                {sitePage?.hero_eyebrow || "Recognition, accreditations & alliances"}
+              </span>
             </div>
 
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-6 leading-tight">
+            <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
               {sitePage?.hero_title ? (
-                sitePage.hero_title
+                <span className="block text-[#030D18]">{sitePage.hero_title}</span>
               ) : (
                 <>
-                  Awards, Accreditations &amp;{" "}
-                  <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
-                    Global Certifications
-                  </span>
-                  .
+                  <span className="block text-[#030D18]">Awards, Accreditations &amp;</span>
+                  <span className="block text-[#026E4D]">Global Certifications</span>
                 </>
               )}
             </h1>
 
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed max-w-3xl mb-10">
-              {sitePage?.hero_subtitle ||
-                "A verifiable track record of statutory compliance, industry memberships, international engineering standards, and institutional delivery excellence."}
-            </p>
+            <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px]">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                {sitePage?.hero_subtitle ||
+                  "A verifiable track record of statutory compliance, industry memberships, international engineering standards, and institutional delivery excellence."}
+              </p>
+            </div>
           </div>
 
-          {/* Trust Badges Strip (Light Theme) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 pt-6 border-t border-slate-200">
+          {/* Trust Badges Strip (home card style) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 pt-4">
             {trustBadges.map((badge: any, i: number) => {
               const Icon = typeof badge.icon === "string" ? BadgeCheck : (badge.icon || BadgeCheck);
               return (
                 <div
                   key={i}
-                  className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl p-4 flex items-center gap-3.5 hover:border-emerald-500/50 hover:shadow-md transition-all group shadow-xs"
+                  className="bg-white/95 border border-gray-100/80 rounded-[14px] p-4 flex items-center gap-3.5 shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-shadow group"
                 >
-                  <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-700 shrink-0 group-hover:scale-105 transition-transform">
+                  <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-700 shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-slate-900 block">{badge.title}</span>
-                    <span className="text-[11px] text-slate-500 block">{badge.subtitle}</span>
+                    <span className="text-xs font-bold text-[#0D1E2D] block">{badge.title}</span>
+                    <span className="text-[11px] text-[#64748B] block">{badge.subtitle}</span>
                   </div>
                 </div>
               );

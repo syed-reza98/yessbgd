@@ -323,18 +323,18 @@ export function ContactFormAndLocator({ settings }: { settings?: CompanySettings
               <span>WhatsApp: {whatsappDisplay}</span>
             </a>
             <a
-              href={`mailto:${settings?.contact?.investEmail || "invest@yessbgd.com"}`}
+              href={`mailto:${settings?.contact?.investEmail || "info@yessbd.com"}`}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
               <Building2 className="w-3.5 h-3.5 text-primary" />
-              <span>{settings?.contact?.investEmail || "invest@yessbgd.com"}</span>
+              <span>{settings?.contact?.investEmail || "info@yessbd.com"}</span>
             </a>
             <a
-              href={`mailto:${settings?.contact?.careersEmail || "careers@yessbgd.com"}`}
+              href={`mailto:${settings?.contact?.careersEmail || "info@yessbangla.com"}`}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground border border-border transition-colors font-medium"
             >
               <FileCheck className="w-3.5 h-3.5 text-primary" />
-              <span>{settings?.contact?.careersEmail || "careers@yessbgd.com"}</span>
+              <span>{settings?.contact?.careersEmail || "info@yessbangla.com"}</span>
             </a>
           </div>
         </div>

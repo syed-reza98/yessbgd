@@ -6,4 +6,18 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
+## Commands
+
+- `npm run dev`: run the development task
+- `npm run build`: build the project
+
+## Code Map
+
+- `app`: application source
+
+## Conventions
+
+- Use ESM `import` and `export` syntax.
+- Use `.tsx` file extensions.
+
 <!-- END:nextjs-agent-rules -->

@@ -153,37 +153,45 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
       </aside>
 
       {/* 2. Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-18 lg:pt-36 border-b border-slate-200/80 mb-6">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/general/design.jpg')` }}
-        />
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200/80 mb-4 shadow-2xs">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-600 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600" />
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider">
-              {initialSitePage?.hero_eyebrow || "Recruitment Pipeline & Candidate Telemetry"}
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-14 sm:pt-10 lg:pt-14 mb-6">
+        {/* Backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/general/design.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+            <span className="text-[#047857] text-[11px] font-extrabold uppercase tracking-wider">
+              {initialSitePage?.hero_eyebrow || "Recruitment pipeline & candidate telemetry"}
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 mb-4 tracking-tight">
+          <h1 className="text-[30px] sm:text-[38px] lg:text-[44px] font-black text-[#030D18] mb-4 tracking-tight leading-[1.15] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
             {initialSitePage?.hero_title ? (
               initialSitePage.hero_title
             ) : (
               <>
-                Track Your{" "}
-                <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700 bg-clip-text text-transparent">
-                  Application Status
-                </span>
+                <span className="block">Track Your</span>
+                <span className="block text-[#026E4D]">Application Status</span>
               </>
             )}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[13px] sm:text-[14.5px] text-[#051321] font-bold max-w-2xl mx-auto leading-[1.7] [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
             {initialSitePage?.hero_subtitle ||
               "Real-time candidate telemetry for engineering, product, and consulting roles across YESS Bangladesh ventures. Enter your tracking reference number and registered email to check status."}
           </p>
@@ -658,7 +666,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
                     <span className="text-[11px] text-foreground/60">Senior Partner, Executive Search</span>
                   </div>
                   <a
-                    href="mailto:careers@yessbgd.com?subject=Inquiry regarding YESS-ENG-2026-89412"
+                    href="mailto:info@yessbangla.com?subject=Inquiry regarding YESS-ENG-2026-89412"
                     className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold transition-colors"
                   >
                     Direct Ping
@@ -704,7 +712,7 @@ export function ApplicationStatusTracker({ initialSitePage, settings }: Applicat
               </a>
               <a
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold shadow-sm transition-all"
-                href="mailto:careers@yessbgd.com"
+                href="mailto:info@yessbangla.com"
               >
                 <Mail className="w-3.5 h-3.5" />
                 <span>Email Talent Acquisition Team</span>

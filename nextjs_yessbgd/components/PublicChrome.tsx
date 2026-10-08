@@ -70,14 +70,20 @@ export function PublicChrome({
   settings,
   ventures,
 }: PublicChromeProps) {
+  const pathname = usePathname();
+  const isAdmin = pathname?.startsWith("/admin");
   return (
     <>
-      <Suspense fallback={null}>
-        <AutoTranslator />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ScrollToTop />
-      </Suspense>
+      {!isAdmin && (
+        <Suspense fallback={null}>
+          <AutoTranslator />
+        </Suspense>
+      )}
+      {!isAdmin && (
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
+      )}
       <Suspense fallback={null}>
         <HeaderWrapper
           headerMenus={headerMenus}
@@ -85,7 +91,7 @@ export function PublicChrome({
           ventures={ventures}
         />
       </Suspense>
-      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         {children}
       </main>
       <Suspense fallback={null}>

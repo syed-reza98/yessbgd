@@ -4,7 +4,7 @@ export default function CareerDetailLoading() {
   return (
     <div className="space-y-12 pb-20 animate-pulse">
       {/* Top Banner Skeleton */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 py-14 sm:py-18 overflow-hidden border-b border-slate-200/80">
+      <section className="relative w-full bg-white py-14 sm:py-18 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-4 w-36 bg-slate-200 rounded-full mb-6" />
           <div className="flex gap-2 mb-4">

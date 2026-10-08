@@ -7,7 +7,6 @@ import {
   Building,
   Users,
   ShieldCheck,
-  Sparkles,
   Download,
   Gavel,
   Globe2,
@@ -121,53 +120,52 @@ export default async function ContactPage() {
   return (
     <div className="flex flex-col w-full pb-20">
       {/* 1. Signature Corporate Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80">
-        {/* Background Image Layer */}
-        <div 
-          className="absolute inset-0 bg-cover bg-right lg:bg-[position:95%_center] opacity-45 pointer-events-none"
-          style={{ backgroundImage: `url('/assets/contact-hero.jpg')` }}
-        />
-        {/* Soft horizontal gradient to preserve text contrast on the left while showcasing the team and logo on the right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/85 sm:via-slate-50/70 to-transparent pointer-events-none" />
-        {/* Subtle Decorative Grid Glow & Brand Ambience */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28">
+        {/* Photographic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/contact-hero.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-teal-700 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-teal-700">Contact Us</span>
-          </nav>
-
+        <div className="relative w-full max-w-[1200px] mx-auto px-5 sm:px-6 z-10">
           <div className="max-w-4xl">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
-              <span>{sitePage?.hero_eyebrow || "— DIRECT INSTITUTIONAL CHANNELS —"}</span>
+            {/* Eyebrow pill (home style) */}
+            <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+              <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
+                {sitePage?.hero_eyebrow || "Direct institutional channels"}
+              </span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 tracking-tight mb-6 leading-tight">
+            {/* Headline (home scale, solid two-tone) */}
+            <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
               {sitePage?.hero_title || (
                 <>
-                  Connect With Bangladesh&apos;s{" "}
-                  <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700 bg-clip-text text-transparent">
-                    Venture Ecosystem
-                  </span>
-                  .
+                  <span className="block text-[#030D18]">Connect With Bangladesh&apos;s</span>
+                  <span className="block text-[#026E4D]">Venture Ecosystem</span>
                 </>
               )}
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl leading-relaxed mb-10">
-              {sitePage?.hero_subtitle || "Engage our managing partners, venture leads, and engineering directors directly. Guaranteed executive response within one business day for institutional inquiries and sovereign tech partnerships."}
-            </p>
+            {/* Lede (home description) */}
+            <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px]">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                {sitePage?.hero_subtitle || "Engage our managing partners, venture leads, and engineering directors directly. Guaranteed executive response within one business day for institutional inquiries and sovereign tech partnerships."}
+              </p>
+            </div>
           </div>
 
           {/* Telemetry Metric Cards Strip (4 Glass Cards) */}
@@ -177,11 +175,11 @@ export default async function ContactPage() {
               return (
                 <div
                   key={badge.title}
-                  className="p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs hover:border-teal-500/40 hover:shadow-md transition-all duration-200 group"
+                  className="p-6 rounded-[14px] bg-white/95 border border-gray-100/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-shadow duration-200 group"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span
-                      className="text-2xl sm:text-3xl font-extrabold text-slate-900 group-hover:text-teal-800 group-hover:scale-105 transition-all"
+                      className="text-2xl sm:text-3xl font-extrabold text-[#0D1E2D] group-hover:text-[#0E8A44] transition-colors"
                     >
                       {badge.title}
                     </span>

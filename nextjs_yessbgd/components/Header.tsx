@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
+import { selectFeaturedVentures, getVentureTotal } from "@/lib/ventures";
 
 const VENTURE_META_MAP: Record<string, { icon: typeof Wrench; color: string; defaultLogo?: string; hrefOverride?: string }> = {
   "shondhaan": { icon: Wrench, color: "text-emerald-700 bg-emerald-50", defaultLogo: "/coins/shondhaan-logo.png" },
@@ -112,9 +113,11 @@ export function Header({
   settings?: CompanySettings;
   ventures?: any[];
 }) {
+  const ventureTotal = getVentureTotal(ventures);
   const featuredVentures = useMemo(() => {
+    const source = selectFeaturedVentures<any>(ventures, DEFAULT_FEATURED_VENTURES);
     if (ventures && Array.isArray(ventures) && ventures.length > 0) {
-      return (ventures as any[]).slice(0, 7).map((v) => {
+      return source.map((v) => {
         const meta =
           VENTURE_META_MAP[v.slug] ||
           VENTURE_META_MAP[v.slug?.replace(/^yess-/, "")] || {
@@ -132,7 +135,7 @@ export function Header({
         };
       });
     }
-    return DEFAULT_FEATURED_VENTURES;
+    return source;
   }, [ventures]);
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
@@ -144,6 +147,7 @@ export function Header({
   const [searchQuery, setSearchQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const venturesTriggerRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -172,7 +176,7 @@ export function Header({
     { id: "1", href: "/", label: "Home", label_bn: "হোম" },
     { id: "2", href: "/about", label: "About", label_bn: "আমাদের সম্পর্কে" },
     { id: "3", href: "/services", label: "Services", label_bn: "সার্ভিস" },
-    { id: "4", href: "/ventures", label: "Ventures", label_bn: "ভেঞ্চার", badge: "13 Active" },
+    { id: "4", href: "/ventures", label: "Ventures", label_bn: "ভেঞ্চার", badge: `${ventureTotal} Active` },
     { id: "5", href: "/industries", label: "Industries", label_bn: "ইন্ডাস্ট্রি" },
     { id: "6", href: "/insights", label: "Insights", label_bn: "ইনসাইট" },
     { id: "7", href: "/careers", label: "Careers", label_bn: "ক্যারিয়ার", badge: "Hiring" },
@@ -213,7 +217,7 @@ export function Header({
             href="/"
             prefetch={false}
             onClick={handleLinkClick}
-            className="flex items-center gap-2 group focus:outline-none shrink-0"
+            className="flex items-center gap-2 group shrink-0"
             aria-label="Yess Bangla Home"
           >
             <div className="relative h-8 sm:h-9 md:h-10 w-auto flex items-center justify-center transition-transform group-hover:scale-105">
@@ -241,10 +245,25 @@ export function Header({
                     className="relative"
                     onMouseEnter={handleMouseEnterVentures}
                     onMouseLeave={handleMouseLeaveVentures}
+                    onFocus={() => setVenturesDropdownOpen(true)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                        setVenturesDropdownOpen(false);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        setVenturesDropdownOpen(false);
+                        venturesTriggerRef.current?.focus();
+                      }
+                    }}
                   >
                     <Link
                       href="/ventures"
                       prefetch={false}
+                      ref={venturesTriggerRef}
+                      aria-expanded={venturesDropdownOpen}
+                      aria-haspopup="true"
                       onClick={handleLinkClick}
                       className={`inline-flex items-center gap-1.5 py-1 transition-colors ${
                         active || venturesDropdownOpen
@@ -283,7 +302,7 @@ export function Header({
                             onClick={handleLinkClick}
                             className="text-[11px] font-semibold text-gray-500 hover:text-[#0E8A44] transition-colors"
                           >
-                            View All 13 Ventures &rarr;
+                            View All {ventureTotal} Ventures &rarr;
                           </Link>
                         </div>
 

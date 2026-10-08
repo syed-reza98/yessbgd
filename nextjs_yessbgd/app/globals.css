@@ -51,7 +51,6 @@
 
   --font-display: var(--font-jakarta), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-script: cursive;
 }
 
 :root {
@@ -123,6 +122,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Glassmorphism utility classes */
 .glass-card {
   background: var(--glass-bg);
@@ -189,11 +194,18 @@ body {
 }
 
 .container-tight {
-  max-width: 80rem;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Visible keyboard focus for links, buttons and badges (home hero + cards). */
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+  outline: 2px solid var(--primary-green, #0e8a44);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 @media (min-width: 640px) {
@@ -235,6 +247,12 @@ body {
   animation-play-state: paused;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
 /* ── Phase 3 Admin Scope Console Styles (Light Theme) ────────────────── */
 .admin-scope {
   --background: #f8fafc;
@@ -263,6 +281,8 @@ body {
 }
 
 /* ── Yess Bangla Core Design Tokens & Animations ───────────────────── */
+/* Home-canonical greens: interactive #0E8A44, ink #030D18 / #026E4D.
+   --color-brand-green (#008744) is retained only for coin gradients. */
 :root {
   --primary-green: #0E8A44;
   --primary-green-hover: #0a7338;
@@ -346,6 +366,16 @@ body {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+  .brand-interactive-card,
+  .brand-interactive-card .card-visual {
+    transition: none !important;
+  }
+  .brand-interactive-card:hover {
+    transform: none !important;
+  }
+  .brand-interactive-card:hover .card-visual {
+    transform: none !important;
   }
 }
 

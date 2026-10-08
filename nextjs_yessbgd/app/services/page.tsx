@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  Sparkles,
   TrendingUp,
   Clock,
   DollarSign,
@@ -15,7 +14,6 @@ import {
   Plane,
   Scale,
 } from "lucide-react";
-import { PageHero } from "@/components/PageHero";
 import { getServices, getSitePage } from "@/lib/cms";
 import { services as fallbackServices } from "@/data/services";
 
@@ -85,49 +83,52 @@ export default async function ServicesPage() {
   return (
     <div className="flex flex-col w-full">
       {/* Canonical Stitch Hero Section: Full-Lifecycle Engineering */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-20 sm:pt-32 lg:pt-36 overflow-hidden border-b border-slate-200/80 min-h-[auto] sm:min-h-[540px] lg:min-h-[600px] flex flex-col justify-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/services-tech-bd.jpg')` }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-teal-500/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28 flex flex-col justify-center">
+        {/* Photographic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/services-tech-bd.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="container-tight relative z-10">
-          {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-teal-700 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-teal-700">Services &amp; Solutions</span>
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 relative z-10">
+          {/* Eyebrow pill (home style) */}
+          <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+            <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
+              {sitePage?.hero_eyebrow || "Enterprise services & capabilities"}
+            </span>
           </div>
 
-          {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold tracking-widest uppercase mb-6 shadow-2xs">
-            <Sparkles className="h-3.5 w-3.5 text-teal-600" />
-            <span>{sitePage?.hero_eyebrow || "— ENTERPRISE SERVICES & STRATEGIC CAPABILITIES —"}</span>
-          </div>
-
-          {/* Main Heading & Subtitle */}
+          {/* Main Heading & Lede (home scale, solid two-tone) */}
           <div className="max-w-4xl mb-12">
-            <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 mb-6 leading-tight tracking-tight">
+            <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
               {sitePage?.hero_title ? (
-                sitePage.hero_title
+                <span className="block text-[#030D18]">{sitePage.hero_title}</span>
               ) : (
                 <>
-                  Full-Lifecycle Engineering, Capital Advisory &amp;{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-700">
-                    Sovereign Transformation
-                  </span>
-                  .
+                  <span className="block text-[#030D18]">Full-Lifecycle Engineering &amp; Capital Advisory</span>
+                  <span className="block text-[#026E4D]">Sovereign Transformation</span>
                 </>
               )}
             </h1>
-            <p className="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
-              {sitePage?.hero_subtitle || "From tier-3 cloud architectures to national cold-chain logistics, we deliver institutional capabilities designed for domestic sovereignty and international scale."}
-            </p>
+            <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 max-w-[450px]">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                {sitePage?.hero_subtitle || "From tier-3 cloud architectures to national cold-chain logistics, we deliver institutional capabilities designed for domestic sovereignty and international scale."}
+              </p>
+            </div>
           </div>
 
           {/* Key Telemetry Stats Strip (4 Glass Metric Containers) */}

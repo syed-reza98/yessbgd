@@ -89,36 +89,40 @@ export default async function SingleServicePage({
   return (
     <div className="flex flex-col w-full">
       {/* 1. Service Hero with Live Edge Node Telemetry Card */}
-      <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/general/centricity.webp')` }}
-        />
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        
-        <div className="container-tight relative z-10">
-          {/* Breadcrumb Navigation */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-              <li><Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">Home</Link></li>
-              <li>/</li>
-              <li><Link href="/services" prefetch={false} className="hover:text-teal-700 transition-colors">Services</Link></li>
-              <li>/</li>
-              <li className="text-teal-700 font-bold">{service.title}</li>
-            </ol>
-          </nav>
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-16 sm:pt-10 sm:pb-20 lg:pt-14 lg:pb-24">
+        {/* Backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/general/centricity.webp"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Hero Details */}
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold tracking-widest uppercase shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
-                <span>ENTERPRISE PRACTICE</span>
+              <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+                <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
+                  Enterprise practice
+                </span>
               </div>
-              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-tight">
+              <h1 className="font-black text-[34px] sm:text-[42px] lg:text-[47px] text-[#030D18] tracking-tight leading-[1.12] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
                 {service.title}
               </h1>
-              <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+              <p className="text-[14.5px] sm:text-[15.5px] text-[#051321] font-bold max-w-2xl leading-[1.7] [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
                 {service.intro}
               </p>
 

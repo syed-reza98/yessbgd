@@ -17,6 +17,7 @@ import {
 import { useLanguage } from "@/components/LanguageProvider";
 import type { CmsMenuItem, CompanySettings } from "@/lib/cms";
 import { subscribeNewsletterAction } from "@/app/admin/actions";
+import { selectFeaturedVentures, getVentureTotal, toBnDigits } from "@/lib/ventures";
 
 export function Footer({
   footerMenus,
@@ -36,7 +37,15 @@ export function Footer({
 
   const handleSubscribe = async (e: FormEvent) => {
     e.preventDefault();
-    if (!subEmail || !subEmail.includes("@")) return;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(subEmail.trim())) {
+      setSubError(
+        language === "bn"
+          ? "সঠিক ইমেইল ঠিকানা দিন।"
+          : "Please enter a valid email address."
+      );
+      return;
+    }
 
     setSubscribing(true);
     setSubError(null);
@@ -64,7 +73,7 @@ export function Footer({
       ? (rawPhone as any).tel
       : "") || "+880 1805-464343";
   const phoneTel = String(phoneDisplay).replace(/[^0-9+]/g, "");
-  const emailDisplay = settings?.contact?.email || "yessbangla.bd@gmail.com";
+  const emailDisplay = settings?.contact?.email || "info@yessbd.com";
   const addressDisplay =
     (language === "bn" ? settings?.contact?.addressBn : settings?.contact?.address) ||
     settings?.offices?.headquarters?.address ||
@@ -87,9 +96,8 @@ export function Footer({
     { slug: "akash-ott", title: "Akash OTT", category: "Streaming" },
   ];
 
-  const displayedVentures = (ventures && Array.isArray(ventures) && ventures.length > 0)
-    ? (ventures as any[]).slice(0, 7)
-    : defaultVentures;
+  const displayedVentures = selectFeaturedVentures<any>(ventures, defaultVentures);
+  const ventureTotal = getVentureTotal(ventures);
 
   const govLinks = [
     { href: "/about", label: "About YESS Bangla", label_bn: "আমাদের সম্পর্কে" },
@@ -104,7 +112,7 @@ export function Footer({
 
   return (
     <footer
-      id="contact"
+      id="site-footer"
       data-public-footer="true"
       className="bg-[#042017] text-white pt-14 pb-20 lg:pb-8 border-t border-[#093526]"
     >
@@ -255,7 +263,7 @@ export function Footer({
                   prefetch={false}
                   className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors flex items-center gap-1"
                 >
-                  <span>{language === "bn" ? "সকল ১৩টি ভেঞ্চার দেখুন" : "View All 13 Ventures"}</span>
+                  <span>{language === "bn" ? `সকল ${toBnDigits(ventureTotal)}টি ভেঞ্চার দেখুন` : `View All ${ventureTotal} Ventures`}</span>
                   <ArrowRight className="w-3 h-3" />
                 </Link>
               </li>
@@ -364,7 +372,7 @@ export function Footer({
               </p>
             )}
             {subError && (
-              <p className="text-[11px] text-rose-400 mt-2">{subError}</p>
+              <p role="status" className="text-[11px] text-rose-400 mt-2">{subError}</p>
             )}
           </div>
         </div>

@@ -56,16 +56,27 @@ export default async function InsightArticlePage({ params }: Props) {
   return (
     <div className="space-y-12 pb-24">
       {/* Top Banner & Article Header (Signature Light Corporate Hero) */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-14 sm:pt-32 sm:pb-18 lg:pt-36 overflow-hidden border-b border-slate-200/80">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('/assets/heroes/global-network-bg.webp')` }}
-        />
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-14 sm:pt-10 lg:pt-14">
+        {/* Backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/heroes/global-network-bg.webp"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 relative z-10">
           <Link
             href="/insights"
             prefetch={false}
@@ -98,17 +109,17 @@ export default async function InsightArticlePage({ params }: Props) {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+          <h1 className="text-[30px] sm:text-[38px] lg:text-[44px] font-black text-[#030D18] tracking-tight leading-[1.15] mb-6 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
             {article.title}
           </h1>
 
           {/* Editorial Excerpt */}
-          <p className="text-sm sm:text-lg text-slate-700 font-normal leading-relaxed border-l-4 border-teal-600 pl-5 italic mb-8 bg-teal-50/50 py-3 rounded-r-xl">
+          <p className="text-[14.5px] sm:text-[16px] text-[#051321] font-bold leading-[1.7] border-l-3 border-[#0E8A44] pl-4 py-1 mb-8 [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
             {article.excerpt}
           </p>
 
           {/* Author Byline Card */}
-          <div className="p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="p-5 rounded-[14px] bg-white/95 border border-gray-100/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-700 to-teal-500 flex items-center justify-center text-white font-bold text-sm tracking-wider border-2 border-amber-400/50 shadow-sm">
@@ -176,8 +187,8 @@ export default async function InsightArticlePage({ params }: Props) {
           <p className="text-xs text-foreground/70 leading-relaxed">
             All whitepapers and architectural blueprints published by YESS Bangladesh undergo peer review
             by our Executive Architecture Board. For licensing, reprinting, or strategic advisory, contact{" "}
-            <a href="mailto:yessbangla.bd@gmail.com" className="text-primary underline">
-              yessbangla.bd@gmail.com
+            <a href="mailto:info@yessbd.com" className="text-primary underline">
+              info@yessbd.com
             </a>
             .
           </p>

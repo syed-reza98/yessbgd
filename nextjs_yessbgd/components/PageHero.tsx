@@ -1,48 +1,22 @@
 "use client";
 
 import { type ReactNode } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, ChevronRight } from "lucide-react";
-import { useLanguage } from "@/components/LanguageProvider";
 
-export interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
-const BREADCRUMB_BN: Record<string, string> = {
-  Home: "হোম",
-  "About Us": "আমাদের সম্পর্কে",
-  About: "আমাদের সম্পর্কে",
-  Ventures: "ভেঞ্চার",
-  Services: "সেবা",
-  Industries: "ইন্ডাস্ট্রি",
-  Insights: "ইনসাইট",
-  Careers: "ক্যারিয়ার",
-  Contact: "যোগাযোগ",
-  FAQ: "প্রশ্নোত্তর",
-  Awards: "স্বীকৃতি",
-  Leadership: "নেতৃত্ব",
-  Methodology: "পদ্ধতি",
-  Standards: "মানদণ্ড",
-  Mission: "মিশন",
-  "Terms of Service": "সেবার শর্তাবলী",
-  Terms: "সেবার শর্তাবলী",
-  "Privacy Policy": "গোপনীয়তা নীতি",
-  Privacy: "গোপনীয়তা নীতি",
-  "Application Status": "আবেদনের অবস্থা",
-};
-
+/**
+ * Home-contract page hero: white photographic backdrop with a 90deg
+ * readability mask, left-aligned eyebrow pill + two-tone headline +
+ * accented lede. Mirrors app/HomeClient.tsx so every route shares
+ * one hero language (container, type scale, pill, halo).
+ */
 export function PageHero({
   eyebrow,
   title,
   subtitle,
   children,
-  backgroundImage = "/assets/heroes/hero_6a8951c6b7346.webp",
-  imageOpacity = "opacity-30",
-  breadcrumbs,
-  align = "center",
+  backgroundImage = "/assets/Hero_Background.webp",
+  imageOpacity = "opacity-100",
+  align = "left",
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -50,103 +24,70 @@ export function PageHero({
   children?: ReactNode;
   backgroundImage?: string;
   imageOpacity?: string;
-  breadcrumbs?: BreadcrumbItem[];
   align?: "center" | "left";
 }) {
-  const { language } = useLanguage();
-  const isBn = language === "bn";
   const isCenter = align === "center";
 
-  const translateCrumb = (label: string) => {
-    if (!isBn) return label;
-    return BREADCRUMB_BN[label] || label;
-  };
-
   return (
-    <section className="relative overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 border-b border-slate-200/80 min-h-[auto] sm:min-h-[460px] lg:min-h-[520px] flex flex-col justify-center">
-      {/* Background Image Layer with Light Multiplying Overlay (Optimized for Browser Preload Scanner) */}
+    <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px]">
+      {/* Photographic backdrop with home 90deg readability mask */}
       {backgroundImage && (
-        <>
-          <div
-            className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 mix-blend-multiply overflow-hidden ${imageOpacity}`}
-          >
-            <Image
-              src={backgroundImage}
-              alt=""
-              fill
-              priority
-              fetchPriority="high"
-              sizes="100vw"
-              className="object-cover object-center pointer-events-none select-none"
-            />
-          </div>
-          {/* Subtle mobile readability gradient veil */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70 sm:hidden pointer-events-none" />
-        </>
+        <div className={`absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none ${imageOpacity}`}>
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center select-none"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+          />
+        </div>
       )}
 
-      {/* Ambient Light Theme Glows & Dot Matrix */}
-      <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px]" />
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-48 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className={`container-tight relative z-10 max-w-5xl ${isCenter ? "text-center mx-auto" : ""}`}>
-        {/* Optional Breadcrumbs */}
-        {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav
-            aria-label="Breadcrumb"
-            className={`flex items-center gap-1.5 text-xs font-semibold text-slate-500 mb-6 flex-wrap ${
-              isCenter ? "justify-center" : ""
-            }`}
-          >
-            <Link href="/" prefetch={false} className="hover:text-emerald-700 transition-colors">
-              {isBn ? "হোম" : "Home"}
-            </Link>
-            {breadcrumbs.map((crumb, idx) => (
-              <span key={idx} className="flex items-center gap-1.5">
-                <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-                {crumb.href ? (
-                  <Link href={crumb.href} prefetch={false} className="hover:text-emerald-700 transition-colors">
-                    {translateCrumb(crumb.label)}
-                  </Link>
-                ) : (
-                  <span className="text-emerald-800 font-bold">{translateCrumb(crumb.label)}</span>
-                )}
-              </span>
-            ))}
-          </nav>
-        )}
-
-        {/* Eyebrow Badge */}
+      <div
+        className={`relative z-10 max-w-[1200px] mx-auto px-5 sm:px-6 pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28 ${
+          isCenter ? "text-center" : ""
+        }`}
+      >
+        {/* Eyebrow pill (home style: white/95, green dot) */}
         {eyebrow && (
           <div
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/80 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-5 shadow-xs backdrop-blur-xs ${
+            className={`inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5 ${
               isCenter ? "mx-auto" : ""
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>{eyebrow}</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+            <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
+              {eyebrow}
+            </span>
           </div>
         )}
 
-        {/* Display Title */}
-        <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight text-balance">
+        {/* Headline (home scale: 34/42/47, tight, halo for photo legibility) */}
+        <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5 text-balance [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
           {title}
         </h1>
 
-        {/* Subtitle */}
+        {/* Lede (home description: accented, bold ink, halo) */}
         {subtitle && (
-          <p
-            className={`mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal text-pretty ${
-              isCenter ? "max-w-2xl mx-auto" : "max-w-3xl"
+          <div
+            className={`border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px] ${
+              isCenter ? "mx-auto text-left" : ""
             }`}
           >
-            {subtitle}
-          </p>
+            <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+              {subtitle}
+            </p>
+          </div>
         )}
 
-        {/* Children (e.g. CTA buttons, search bar, metrics) */}
+        {/* Children (CTAs, metric cards, search) */}
         {children && <div className={`mt-8 ${isCenter ? "flex justify-center" : ""}`}>{children}</div>}
       </div>
     </section>

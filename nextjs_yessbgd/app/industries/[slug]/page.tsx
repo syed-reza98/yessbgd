@@ -7,14 +7,12 @@ import {
   TrendingUp,
   ShieldCheck,
   Building2,
-  Sparkles,
   Lock,
   Scale,
   FileCheck,
 } from "lucide-react";
 import { industries } from "@/data/industries";
 import { getIndustries, getIndustryBySlug } from "@/lib/cms";
-import { PageHero } from "@/components/PageHero";
 import { ServiceFaqDrawer } from "@/components/ServiceFaqDrawer";
 
 export async function generateStaticParams() {
@@ -66,29 +64,27 @@ export default async function SingleIndustryPage({
   return (
     <div className="flex flex-col w-full">
       {/* Industry Sub-Page Light Hero */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 overflow-hidden border-b border-slate-200/80">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-28 mix-blend-multiply pointer-events-none"
-          style={{ backgroundImage: `url('${heroBgImage}')` }}
-        />
-        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0d6e6e_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="absolute -right-32 -top-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-16 sm:pt-10 sm:pb-20 lg:pt-14 lg:pb-24">
+        {/* Dynamic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={heroBgImage}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="container-tight relative z-10">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" prefetch={false} className="hover:text-teal-700 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-300">/</span>
-            <Link href="/industries" prefetch={false} className="hover:text-teal-700 transition-colors">
-              Industries
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-teal-700">{industry.title}</span>
-          </nav>
-
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
             {/* Medallion Icon */}
             <div className="relative shrink-0">
@@ -101,32 +97,32 @@ export default async function SingleIndustryPage({
 
             <div className="flex flex-col space-y-3 text-center md:text-left max-w-3xl">
               <div className="inline-flex items-center justify-center md:justify-start gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-bold uppercase tracking-wider shadow-2xs">
-                  <Sparkles className="w-3.5 h-3.5 text-teal-600" />
-                  <span>VERTICAL EXCELLENCE</span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-emerald-300/90 text-[#047857] text-xs font-extrabold uppercase tracking-wider shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-[#047857]" aria-hidden="true" />
+                  <span>Vertical excellence</span>
                 </span>
               </div>
-              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight">
+              <h1 className="font-black text-[34px] sm:text-[42px] lg:text-[47px] text-[#030D18] tracking-tight leading-[1.12] [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
                 {industry.title}
               </h1>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-[14.5px] sm:text-[15.5px] text-[#051321] font-bold leading-[1.7] [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_1px_2px_#ffffff]">
                 {industry.intro}
               </p>
             </div>
           </div>
 
-          {/* Key Metrics Strip */}
+          {/* Key Metrics Strip (home card style) */}
           {industry.keyMetrics && industry.keyMetrics.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-slate-200/80">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8">
               {industry.keyMetrics.map((km) => (
                 <div
                   key={km.label}
-                  className="p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs hover:border-teal-500/40 hover:shadow-md transition-all text-center"
+                  className="p-5 rounded-[14px] bg-white/95 border border-gray-100/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-shadow text-center"
                 >
-                  <span className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 block mb-1">
+                  <span className="font-extrabold text-2xl sm:text-3xl text-[#0D1E2D] block mb-1">
                     {km.value}
                   </span>
-                  <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                  <span className="text-xs uppercase tracking-wider text-[#64748B] font-semibold">
                     {km.label}
                   </span>
                 </div>

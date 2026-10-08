@@ -222,75 +222,72 @@ export function AboutClient({ sitePage }: AboutClientProps) {
   return (
     <div className="flex flex-col w-full">
       {/* 1. Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/60 text-slate-900 pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 overflow-hidden border-b border-slate-200/80 min-h-[auto] sm:min-h-[540px] lg:min-h-[600px] flex flex-col justify-center">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none mix-blend-multiply opacity-30"
-          style={{ backgroundImage: "url('/assets/about-team-bd.jpg')" }}
-        />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 pointer-events-none" />
+      <section className="relative w-full bg-white overflow-hidden min-h-[500px] lg:min-h-[550px] pt-7 pb-20 sm:pt-10 sm:pb-24 lg:pt-14 lg:pb-28 flex flex-col justify-center">
+        {/* Photographic backdrop with home 90deg readability mask */}
+        <div className="absolute inset-x-0 top-0 z-0 h-[500px] lg:h-[550px] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/about-team-bd.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.70) 25%, rgba(0,0,0,0.90) 45%, rgba(0,0,0,1) 60%)",
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-emerald-700 transition-colors">
-              {isBn ? "হোম" : "Home"}
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-emerald-800 font-bold">{isBn ? "আমাদের সম্পর্কে" : "About Us"}</span>
-          </nav>
-
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
-            <span>
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 relative z-10">
+          <div className="inline-flex items-center space-x-2 bg-white/95 border border-emerald-300/90 px-3.5 py-1.5 rounded-full shadow-xs mb-4 sm:mb-5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#047857]" aria-hidden="true" />
+            <span className="text-[#047857] text-[11px] sm:text-[11.5px] font-extrabold tracking-wider uppercase">
               {isBn
-                ? "— প্রাতিষ্ঠানিক ম্যান্ডেট ও ঐতিহ্য —"
-                : sitePage?.hero_eyebrow || "— INSTITUTIONAL MANDATE & HERITAGE —"}
+                ? "প্রাতিষ্ঠানিক ম্যান্ডেট ও ঐতিহ্য"
+                : sitePage?.hero_eyebrow || "Institutional mandate & heritage"}
             </span>
           </div>
 
           <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+            <h1 className="text-[34px] sm:text-[42px] lg:text-[47px] font-black leading-[1.12] tracking-tight mb-4 sm:mb-5 [text-shadow:_0_0_20px_#ffffff,_0_0_10px_#ffffff,_0_1px_2px_#ffffff]">
               {isBn ? (
                 <>
-                  বাংলাদেশে টেকসই ভেঞ্চার আর্কিটেকচার এবং{" "}
-                  <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
-                    সার্বভৌম প্রযুক্তির
-                  </span>{" "}
-                  অগ্রদূত।
+                  <span className="block text-[#030D18]">বাংলাদেশে টেকসই ভেঞ্চার আর্কিটেকচার এবং</span>
+                  <span className="block text-[#026E4D]">সার্বভৌম প্রযুক্তির অগ্রদূত।</span>
                 </>
               ) : sitePage?.hero_title ? (
-                sitePage.hero_title
+                <span className="block text-[#030D18]">{sitePage.hero_title}</span>
               ) : (
                 <>
-                  Pioneering Sustainable Venture Architecture &amp;{" "}
-                  <span className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 bg-clip-text text-transparent">
-                    Sovereign Tech
-                  </span>{" "}
-                  in Bangladesh.
+                  <span className="block text-[#030D18]">Pioneering Sustainable Venture Architecture</span>
+                  <span className="block text-[#026E4D]">&amp; Sovereign Tech in Bangladesh.</span>
                 </>
               )}
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed mb-12">
-              {isBn
-                ? "বাংলাদেশের দ্রুত বর্ধনশীল জনমিতিক সম্ভাবনাকে আন্তর্জাতিক প্রকৌশল মানের সাথে সংযুক্ত করতে প্রতিষ্ঠিত — যা ক্লাউড, এগ্রিটেক ও ফিনটেক খাতে সার্বভৌম এন্টারপ্রাইজ তৈরিতে গতি সঞ্চার করছে।"
-                : sitePage?.hero_subtitle ||
-                  "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech."}
-            </p>
+            <div className="border-l-3 border-[#0E8A44] pl-3.5 py-0.5 mb-6 sm:mb-8 max-w-[450px]">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-[1.7] text-[#051321] font-bold [text-shadow:_0_0_24px_#ffffff,_0_0_16px_#ffffff,_0_0_8px_#ffffff,_0_1px_2px_#ffffff]">
+                {isBn
+                  ? "বাংলাদেশের দ্রুত বর্ধনশীল জনমিতিক সম্ভাবনাকে আন্তর্জাতিক প্রকৌশল মানের সাথে সংযুক্ত করতে প্রতিষ্ঠিত — যা ক্লাউড, এগ্রিটেক ও ফিনটেক খাতে সার্বভৌম এন্টারপ্রাইজ তৈরিতে গতি সঞ্চার করছে।"
+                  : sitePage?.hero_subtitle ||
+                    "Founded to bridge international engineering standards with Bangladesh's high-growth demographic dividend, accelerating sovereign enterprises across cloud, agritech, and fintech."}
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
             {metrics.map((metric) => {
               const Icon = metric.icon;
               return (
                 <div
                   key={metric.label}
-                  className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl p-6 hover:border-emerald-500/50 hover:shadow-md transition-all group shadow-xs"
+                  className="bg-white/95 border border-gray-100/80 rounded-[14px] p-6 shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-shadow group"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-emerald-700 group-hover:scale-105 transition-transform">
+                    <span className="text-3xl sm:text-4xl font-extrabold text-[#0D1E2D] group-hover:text-[#0E8A44] transition-colors">
                       {metric.value}
                     </span>
                     <Icon className="w-6 h-6 text-emerald-600" />
@@ -442,9 +439,8 @@ export function AboutClient({ sitePage }: AboutClientProps) {
       </section>
 
       {/* 4. Leadership Keynote */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-emerald-50/20 to-amber-50/20 text-slate-900 relative overflow-hidden border-b border-slate-200">
-        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#008744_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
           <div className="bg-white/95 border border-slate-200/90 rounded-3xl p-8 sm:p-12 shadow-xl shadow-slate-900/5 relative space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-6 pb-8 border-b border-slate-100">
               <div className="flex items-center gap-4">
@@ -480,7 +476,7 @@ export function AboutClient({ sitePage }: AboutClientProps) {
               </div>
               <Link
                 href="/about/leadership"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#008744] via-[#059669] to-[#0d6e6e] text-white text-xs font-bold transition-all shadow-sm hover:shadow-md"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0E8A44] hover:bg-[#0a7539] text-white text-xs font-bold transition-all shadow-sm hover:shadow"
               >
                 <span>{isBn ? "পরিচালনা পর্ষদ দেখুন" : "View Full Executive Board"}</span>
                 <ArrowRight className="w-4 h-4" />
